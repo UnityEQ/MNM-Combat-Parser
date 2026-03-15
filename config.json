@@ -1,0 +1,21 @@
+{
+  "player_name": "",
+  "server_name": "Beta PvP",
+  "process_name": "mnm.exe",
+  "interface_ip": "auto",
+  "connection_refresh_seconds": 5,
+  "log_level": "INFO",
+  "log_hex_dump": true,
+  "position_range_min": -10000.0,
+  "position_range_max": 10000.0,
+  "magnitude_threshold": 1.0,
+  "protocol_analysis_interval": 60,
+  "capture_filter": {
+    "protocols": ["UDP", "TCP"],
+    "exclude_ports": [80, 443, 53]
+  },
+  "api_url": "https://mnm.example.com/api/submit.php",
+  "api_key": "your-secret-key-here",
+  "api_batch_interval": 15,
+  "api_enabled": false
+}

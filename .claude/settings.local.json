@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir /b \"E:\\\\MNM-Network\")",
+      "Bash(dir:*)",
+      "Bash(python -c:*)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:fish-networking.gitbook.io)",
+      "WebFetch(domain:fish-networking.com)",
+      "Bash(ls:*)",
+      "Bash(xargs:*)",
+      "Bash(python:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(gh release view:*)",
+      "WebFetch(domain:api.github.com)",
+      "Bash(curl:*)",
+      "Bash(\"E:\\\\MNM-Network\\\\tools\\\\Il2CppDumper\\\\Il2CppDumper.exe\" \"C:\\\\memories\\\\mnm\\\\GameAssembly.dll\" \"C:\\\\memories\\\\mnm\\\\mnm_Data\\\\il2cpp_data\\\\Metadata\\\\global-metadata.dat\" \"E:\\\\MNM-Network\\\\tools\\\\dump_output\")",
+      "Bash(E:)",
+      "Bash(cd:*)",
+      "Bash(powershell:*)",
+      "Bash(wc:*)",
+      "Bash(findstr:*)",
+      "Bash(find:*)",
+      "Bash(php:*)",
+      "Bash(grep:*)",
+      "Bash(sort:*)",
+      "Bash(del:*)"
+    ]
+  }
+}
