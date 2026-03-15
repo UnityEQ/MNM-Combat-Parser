@@ -13,6 +13,7 @@ Usage:
 
 import csv
 import ctypes
+import json
 import re
 import ctypes.wintypes as wt
 import hashlib
@@ -27,6 +28,7 @@ import sys
 import threading
 import time
 import tkinter as tk
+import winsound
 from tkinter import filedialog, ttk
 from collections import defaultdict
 from datetime import datetime
@@ -685,7 +687,12 @@ def parse_combat_event(msg_id, body, direction):
             event["type"] = "ChatCombat"
             event["text"], off = _r_str(body, off)
         else:
-            return None  # ignore non-combat chat
+            event["type"] = "ChatMessage"
+            event["channel"] = channel
+            try:
+                event["text"], off = _r_str(body, off)
+            except Exception:
+                return None
 
     elif msg_id == 0x0056:  # EndCasting
         event["type"] = "EndCasting"
@@ -1857,6 +1864,17 @@ class CaptureBackend:
         self._item_drops = []      # list of {hid, name, quantity, timestamp, npc_name}
         self._item_lock = threading.Lock()
 
+        # Trigger tracking
+        self._triggers = []              # list of {"pattern": str, "sound": path|None, "sound_label": str}
+        self._trigger_counts = {}        # pattern (lower) -> int
+        self._trigger_lock = threading.Lock()
+        self._trigger_sound_queue = queue.Queue(maxsize=100)
+        self._init_triggers()
+
+        # Chat logging
+        self._chat_queue = queue.Queue(maxsize=10000)  # chat msgs -> GUI
+        self.chat_log_enabled = False  # toggled by GUI button
+
         # Stats
         self.stats = {
             "packets_captured": 0, "packets_matched": 0,
@@ -2166,6 +2184,16 @@ class CaptureBackend:
                     _plog.debug(f"  PARSE_FAIL 0x{msg_id:04X} {msg_name} body={body[:32].hex()}")
                     continue
 
+                # Chat messages (non-combat channels) — queue for chat log
+                if event.get("type") == "ChatMessage":
+                    self._check_triggers(event.get("text", ""))
+                    if self.chat_log_enabled:
+                        try:
+                            self._chat_queue.put_nowait(event)
+                        except queue.Full:
+                            pass
+                    continue
+
                 self.stats["combat_events"] += 1
                 _plog.debug(f"  PARSED type={event.get('type')} eid={event.get('entity_id')} target={event.get('target_id')}")
 
@@ -2185,6 +2213,7 @@ class CaptureBackend:
 
                 if etype == "Die":
                     event["_display"] = self._format_event(event)
+                    self._check_triggers(event.get("_display", ""))
                     try:
                         self._event_queue.put_nowait(event)
                     except queue.Full:
@@ -2193,6 +2222,7 @@ class CaptureBackend:
                 elif etype == "EndCasting":
                     text = event.get("text", "")
                     if text:
+                        self._check_triggers(text)
                         display = self._format_event(event)
                         if display:
                             event["_display"] = display
@@ -2206,6 +2236,8 @@ class CaptureBackend:
                 elif etype == "ChatCombat":
                     text = event.get("text", "")
                     if text:
+                        self._check_triggers(text)
+                        self._check_chat_loot(text)
                         event["_display"] = text
                         event["type"] = "EndCasting"  # reuse same feed tag color
                         try:
@@ -2321,6 +2353,37 @@ class CaptureBackend:
                 if self._api:
                     self._api.queue_item(item_rec)
 
+    # Regex for loot text: "[item|hid|Name]" and "from NPC's corpse"
+    _LOOT_ITEM_RE = re.compile(
+        r'\[item\|([^|]+)\|([^\]]+)\]')
+    _LOOT_FROM_RE = re.compile(
+        r"from (.+?)(?:'s)? corpse", re.IGNORECASE)
+
+    def _check_chat_loot(self, text):
+        """Parse [item|hid|Name] from ChatCombat loot text and store as item drop."""
+        m = self._LOOT_ITEM_RE.search(text)
+        if not m:
+            return
+        item_hid = m.group(1)
+        item_name = m.group(2)
+
+        # Extract NPC name from "from X's corpse"
+        npc_name = None
+        fm = self._LOOT_FROM_RE.search(text)
+        if fm:
+            npc_name = fm.group(1)
+
+        with self._item_lock:
+            self._item_drops.append({
+                "hid": item_hid,
+                "name": item_name,
+                "quantity": 1,
+                "timestamp": time.time(),
+                "npc_name": npc_name,
+            })
+
+        _plog.debug(f"LOOT_CHAT item={item_name} hid={item_hid} npc={npc_name}")
+
     def _format_item_stats(self, item):
         """Format an ItemRecord dict into a compact stats summary string."""
         parts = []
@@ -2413,6 +2476,66 @@ class CaptureBackend:
         with self._item_lock:
             self._items.clear()
             self._item_drops.clear()
+
+    # --- Triggers ---
+
+    def _init_triggers(self):
+        """Load triggers from disk on startup."""
+        saved = _load_triggers()
+        for t in saved:
+            pat = t.get("pattern", "")
+            if pat:
+                self._triggers.append({
+                    "pattern": pat,
+                    "sound": t.get("sound"),
+                    "sound_label": t.get("sound_label", "(none)"),
+                })
+                self._trigger_counts[pat.lower()] = 0
+
+    def add_trigger(self, pattern, sound_path, sound_label):
+        """Thread-safe add trigger, dedup by pattern (case-insensitive). Saves to disk."""
+        key = pattern.lower()
+        with self._trigger_lock:
+            for t in self._triggers:
+                if t["pattern"].lower() == key:
+                    return  # duplicate
+            self._triggers.append({
+                "pattern": pattern,
+                "sound": sound_path,
+                "sound_label": sound_label,
+            })
+            self._trigger_counts[key] = 0
+            _save_triggers(self._triggers)
+
+    def remove_trigger(self, pattern):
+        """Thread-safe remove trigger by pattern. Saves to disk."""
+        key = pattern.lower()
+        with self._trigger_lock:
+            self._triggers = [t for t in self._triggers if t["pattern"].lower() != key]
+            self._trigger_counts.pop(key, None)
+            _save_triggers(self._triggers)
+
+    def get_trigger_snapshot(self):
+        """Return [(pattern, sound_label, count), ...] copy."""
+        with self._trigger_lock:
+            return [(t["pattern"], t["sound_label"], self._trigger_counts.get(t["pattern"].lower(), 0))
+                    for t in self._triggers]
+
+    def _check_triggers(self, text):
+        """Check text against all triggers. Increment counts and queue sounds."""
+        if not text:
+            return
+        text_lower = text.lower()
+        with self._trigger_lock:
+            for t in self._triggers:
+                if t["pattern"].lower() in text_lower:
+                    self._trigger_counts[t["pattern"].lower()] = \
+                        self._trigger_counts.get(t["pattern"].lower(), 0) + 1
+                    if t["sound"]:
+                        try:
+                            self._trigger_sound_queue.put_nowait(t["sound"])
+                        except queue.Full:
+                            pass
 
     def _api_queue_kill(self, event):
         """Queue a kill event to the API from a Die message."""
@@ -2523,6 +2646,43 @@ EVENT_TAG_COLORS = {
     'ItemInformation':   'fg_dim',
 }
 
+TRIGGERS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "triggers.json")
+
+TRIGGER_SOUNDS = [
+    ("(none)", None),
+    ("Ding", r"C:\Windows\Media\Windows Ding.wav"),
+    ("Notify", r"C:\Windows\Media\Windows Notify System Generic.wav"),
+    ("Chimes", r"C:\Windows\Media\chimes.wav"),
+    ("Chord", r"C:\Windows\Media\chord.wav"),
+    ("Tada", r"C:\Windows\Media\tada.wav"),
+    ("Notify Email", r"C:\Windows\Media\Windows Notify Email.wav"),
+    ("Exclamation", r"C:\Windows\Media\Windows Exclamation.wav"),
+    ("Critical Stop", r"C:\Windows\Media\Windows Critical Stop.wav"),
+    ("Alarm", r"C:\Windows\Media\Alarm01.wav"),
+    ("Ring", r"C:\Windows\Media\Ring05.wav"),
+]
+
+
+def _load_triggers():
+    """Read triggers from triggers.json. Returns list of dicts."""
+    try:
+        with open(TRIGGERS_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        if isinstance(data, list):
+            return data
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        pass
+    return []
+
+
+def _save_triggers(triggers):
+    """Write triggers list to triggers.json."""
+    try:
+        with open(TRIGGERS_FILE, "w", encoding="utf-8") as f:
+            json.dump(triggers, f, indent=2)
+    except OSError:
+        pass
+
 
 class CombatApp(tk.Tk):
     MAX_FEED_LINES = 2000
@@ -2542,6 +2702,10 @@ class CombatApp(tk.Tk):
         self._paused = False
         self._pending_events = []
         self._combat_log = []  # [(timestamp, type, text), ...] for CSV export
+
+        # Chat log
+        self._chat_log_file = None   # open file handle when logging
+        self._chat_log_path = None   # path for status display
 
         self._build_ui()
 
@@ -2573,6 +2737,7 @@ class CombatApp(tk.Tk):
         self._poll_id = self.after(80, self._poll_queue)
         self._meter_id = self.after(1000, self._refresh_meter)
         self._item_id = self.after(1000, self._refresh_items)
+        self._trigger_id = self.after(500, self._refresh_triggers)
         self._stats_id = self.after(3000, self._refresh_stats)
 
         self.protocol("WM_DELETE_WINDOW", self._on_close)
@@ -2583,6 +2748,8 @@ class CombatApp(tk.Tk):
         style.configure('Dark.TFrame', background=COLORS['bg'])
         style.configure('Dark.TButton', background=COLORS['surface'], foreground=COLORS['fg'])
         style.map('Dark.TButton', background=[('active', COLORS['border'])])
+        style.configure('ActiveTab.TButton', background=COLORS['border'], foreground=COLORS['fg'])
+        style.map('ActiveTab.TButton', background=[('active', COLORS['border'])])
 
         # Top status bar
         top = tk.Frame(self, bg=COLORS['bg_darker'], height=28)
@@ -2624,11 +2791,25 @@ class CombatApp(tk.Tk):
 
         header_left = tk.Frame(left, bg=COLORS['bg'])
         header_left.pack(fill=tk.X)
-        self._left_title = tk.Label(
-            header_left, text="Combat Feed", bg=COLORS['bg'], fg=COLORS['fg'],
-            font=('Segoe UI', 10, 'bold'))
-        self._left_title.pack(side=tk.LEFT, padx=4, pady=2)
+        self._header_left = header_left
 
+        # Tab buttons (left side)
+        self._tab_feed_btn = ttk.Button(
+            header_left, text="Feed", style='ActiveTab.TButton',
+            command=lambda: self._switch_left_tab("feed"))
+        self._tab_feed_btn.pack(side=tk.LEFT, padx=(4, 1), pady=2)
+
+        self._tab_items_btn = ttk.Button(
+            header_left, text="Items", style='Dark.TButton',
+            command=lambda: self._switch_left_tab("items"))
+        self._tab_items_btn.pack(side=tk.LEFT, padx=1, pady=2)
+
+        self._tab_triggers_btn = ttk.Button(
+            header_left, text="Triggers", style='Dark.TButton',
+            command=lambda: self._switch_left_tab("triggers"))
+        self._tab_triggers_btn.pack(side=tk.LEFT, padx=1, pady=2)
+
+        # Right side buttons
         self._pause_var = tk.BooleanVar(value=False)
         self._pause_chk = tk.Checkbutton(
             header_left, text="Pause", variable=self._pause_var,
@@ -2638,10 +2819,14 @@ class CombatApp(tk.Tk):
         )
         self._pause_chk.pack(side=tk.RIGHT, padx=4)
 
-        self._items_toggle_btn = ttk.Button(
-            header_left, text="Items", style='Dark.TButton',
-            command=self._toggle_left_view)
-        self._items_toggle_btn.pack(side=tk.RIGHT, padx=4)
+        self._chatlog_var = tk.BooleanVar(value=False)
+        self._chatlog_chk = tk.Checkbutton(
+            header_left, text="Chat Log", variable=self._chatlog_var,
+            bg=COLORS['bg'], fg=COLORS['fg'], selectcolor=COLORS['surface'],
+            activebackground=COLORS['bg'], activeforeground=COLORS['fg'],
+            font=('Segoe UI', 9), command=self._toggle_chat_log,
+        )
+        self._chatlog_chk.pack(side=tk.RIGHT, padx=4)
 
         self._export_csv_btn = ttk.Button(
             header_left, text="Export CSV", style='Dark.TButton',
@@ -2697,11 +2882,62 @@ class CombatApp(tk.Tk):
         self._item_view.tag_configure('npc_name', foreground=COLORS['blue'])
         self._item_view.tag_configure('compact_stats', foreground=COLORS['fg_dim'])
 
+        # Triggers view (created but not packed)
+        self._trigger_add_frame = tk.Frame(left, bg=COLORS['bg_darker'])
+
+        tk.Label(self._trigger_add_frame, text="Pattern:",
+                 bg=COLORS['bg_darker'], fg=COLORS['fg'],
+                 font=('Segoe UI', 9)).pack(side=tk.LEFT, padx=(4, 2))
+        self._trigger_pattern_entry = tk.Entry(
+            self._trigger_add_frame, bg=COLORS['surface'], fg=COLORS['fg'],
+            insertbackground=COLORS['fg'], font=('Consolas', 9),
+            relief=tk.FLAT, width=20)
+        self._trigger_pattern_entry.pack(side=tk.LEFT, padx=2, fill=tk.X, expand=True)
+
+        tk.Label(self._trigger_add_frame, text="Sound:",
+                 bg=COLORS['bg_darker'], fg=COLORS['fg'],
+                 font=('Segoe UI', 9)).pack(side=tk.LEFT, padx=(6, 2))
+        self._trigger_sound_var = tk.StringVar(value="(none)")
+        sound_names = [s[0] for s in TRIGGER_SOUNDS]
+        self._trigger_sound_menu = ttk.Combobox(
+            self._trigger_add_frame, textvariable=self._trigger_sound_var,
+            values=sound_names, state="readonly", width=14,
+            font=('Segoe UI', 8))
+        self._trigger_sound_menu.pack(side=tk.LEFT, padx=2)
+
+        self._trigger_preview_btn = ttk.Button(
+            self._trigger_add_frame, text="\u25B6", style='Dark.TButton',
+            command=self._preview_trigger_sound, width=2)
+        self._trigger_preview_btn.pack(side=tk.LEFT, padx=2)
+
+        self._trigger_add_btn = ttk.Button(
+            self._trigger_add_frame, text="Add", style='Dark.TButton',
+            command=self._add_trigger)
+        self._trigger_add_btn.pack(side=tk.LEFT, padx=(2, 4))
+
+        self._trigger_view = tk.Text(left, bg=COLORS['bg_darker'], fg=COLORS['fg'],
+                                     font=('Consolas', 9), wrap=tk.NONE, state=tk.DISABLED,
+                                     borderwidth=0, highlightthickness=0, padx=4, pady=4,
+                                     cursor="arrow")
+        self._trigger_scroll_y = tk.Scrollbar(left, orient=tk.VERTICAL,
+                                              command=self._trigger_view.yview)
+        self._trigger_view.configure(yscrollcommand=self._trigger_scroll_y.set)
+
+        # Trigger view tags
+        self._trigger_view.tag_configure('pattern', foreground=COLORS['yellow'])
+        self._trigger_view.tag_configure('count', foreground=COLORS['green'],
+                                         font=('Consolas', 9, 'bold'))
+        self._trigger_view.tag_configure('sound', foreground=COLORS['fg_dim'])
+        self._trigger_view.tag_configure('header_line', foreground=COLORS['fg_dim'])
+        self._trigger_view.tag_configure('help_text', foreground=COLORS['fg_dim'])
+
         # Left view state
-        self._left_view = "feed"          # "feed", "items", "item_detail"
+        self._left_view = "feed"          # "feed", "items", "item_detail", "triggers"
         self._item_selected_name = None   # selected item name for detail
         self._item_fingerprint = None     # skip-redraw optimization
         self._item_buttons = []           # embedded widgets in item list
+        self._trigger_buttons = []        # embedded widgets in trigger list
+        self._trigger_fingerprint = None  # skip-redraw optimization
 
         # Right: encounter meter
         right = tk.Frame(main, bg=COLORS['bg'])
@@ -2792,43 +3028,57 @@ class CombatApp(tk.Tk):
             self._status_label.configure(text=f"Export failed: {e}")
 
     def _poll_queue(self):
-        # Update status
         try:
-            while True:
-                msg = self._status_queue.get_nowait()
-                self._status_label.configure(text=msg)
-                if "Live" in msg or "Keys" in msg:
-                    self._status_dot.configure(fg=COLORS['green'])
-                elif "Waiting" in msg or "exited" in msg:
-                    self._status_dot.configure(fg=COLORS['yellow'])
-                elif "failed" in msg:
-                    self._status_dot.configure(fg=COLORS['red'])
-        except queue.Empty:
-            pass
+            # Update status
+            try:
+                while True:
+                    msg = self._status_queue.get_nowait()
+                    self._status_label.configure(text=msg)
+                    if "Live" in msg or "Keys" in msg:
+                        self._status_dot.configure(fg=COLORS['green'])
+                    elif "Waiting" in msg or "exited" in msg:
+                        self._status_dot.configure(fg=COLORS['yellow'])
+                    elif "failed" in msg:
+                        self._status_dot.configure(fg=COLORS['red'])
+            except queue.Empty:
+                pass
 
-        # Process combat events
-        batch = 0
-        try:
-            while batch < 200:
-                event = self._event_queue.get_nowait()
-                batch += 1
+            # Process combat events
+            batch = 0
+            try:
+                while batch < 200:
+                    event = self._event_queue.get_nowait()
+                    batch += 1
 
-                text = event.get("_display", "???")
-                tag = event.get("type", "")
-                self._combat_log.append((
-                    datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                    tag,
-                    text,
-                ))
+                    text = event.get("_display", "???")
+                    tag = event.get("type", "")
+                    self._combat_log.append((
+                        datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                        tag,
+                        text,
+                    ))
 
-                if self._paused:
-                    self._pending_events.append((text, tag, None))
-                    if len(self._pending_events) > 5000:
-                        self._pending_events = self._pending_events[-3000:]
-                else:
-                    self._append_feed_line(text, tag, None)
-        except queue.Empty:
-            pass
+                    if self._paused:
+                        self._pending_events.append((text, tag, None))
+                        if len(self._pending_events) > 5000:
+                            self._pending_events = self._pending_events[-3000:]
+                    else:
+                        self._append_feed_line(text, tag, None)
+            except queue.Empty:
+                pass
+
+            # Drain chat log queue → file
+            if self._chat_log_file:
+                try:
+                    while True:
+                        cev = self._backend._chat_queue.get_nowait()
+                        ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                        ch = cev.get("channel", "?")
+                        txt = cev.get("text", "")
+                        self._chat_log_file.write(f"[{ts}] [ch:{ch}] {txt}\n")
+                        self._chat_log_file.flush()
+                except queue.Empty:
+                    pass
         finally:
             self._poll_id = self.after(80, self._poll_queue)
 
@@ -3356,53 +3606,85 @@ class CombatApp(tk.Tk):
             self.title(title)
         self._stats_id = self.after(3000, self._refresh_stats)
 
-    # --- Item Tracker ---
+    # --- Left Panel Tab Switching ---
 
-    def _toggle_left_view(self):
-        """Toggle between combat feed and item tracker."""
-        if self._left_view == "feed":
-            # Switch to items view
+    def _hide_left_view(self):
+        """Pack-forget all widgets for the current left view."""
+        v = self._left_view
+        if v == "feed":
             self._feed.pack_forget()
             self._feed_sy.pack_forget()
             self._feed_sx.pack_forget()
-            self._pause_chk.pack_forget()
             self._export_csv_btn.pack_forget()
-
-            self._item_scroll_y.pack(side=tk.RIGHT, fill=tk.Y)
-            self._item_scroll_x.pack(side=tk.BOTTOM, fill=tk.X)
-            self._item_view.pack(fill=tk.BOTH, expand=True)
-
-            self._left_view = "items"
-            self._left_title.configure(text="Item Tracker")
-            self._items_toggle_btn.configure(text="Feed")
-            self._item_fingerprint = None  # force redraw
-        else:
-            # Switch back to feed (from items or item_detail)
+        elif v in ("items", "item_detail"):
             self._item_back_btn.pack_forget()
             self._item_view.pack_forget()
             self._item_scroll_y.pack_forget()
             self._item_scroll_x.pack_forget()
-
-            # Destroy embedded item buttons
             for w in self._item_buttons:
                 w.destroy()
             self._item_buttons.clear()
+        elif v == "triggers":
+            self._trigger_add_frame.pack_forget()
+            self._trigger_view.pack_forget()
+            self._trigger_scroll_y.pack_forget()
+            for w in self._trigger_buttons:
+                w.destroy()
+            self._trigger_buttons.clear()
 
+    def _switch_left_tab(self, target):
+        """Switch to target view: 'feed', 'items', or 'triggers'."""
+        if target == self._left_view:
+            return
+        if target == "items" and self._left_view == "item_detail":
+            return  # already in items sub-view
+        self._hide_left_view()
+
+        if target == "feed":
             self._feed_sy.pack(side=tk.RIGHT, fill=tk.Y)
             self._feed_sx.pack(side=tk.BOTTOM, fill=tk.X)
             self._feed.pack(fill=tk.BOTH, expand=True)
-            self._pause_chk.pack(side=tk.RIGHT, padx=4)
-            self._export_csv_btn.pack(side=tk.RIGHT, padx=4)
-
+            self._export_csv_btn.pack(side=tk.RIGHT, padx=4, before=self._chatlog_btn)
             self._left_view = "feed"
-            self._left_title.configure(text="Combat Feed")
-            self._items_toggle_btn.configure(text="Items")
             self._item_selected_name = None
             self._item_fingerprint = None
+        elif target == "items":
+            self._item_scroll_y.pack(side=tk.RIGHT, fill=tk.Y)
+            self._item_scroll_x.pack(side=tk.BOTTOM, fill=tk.X)
+            self._item_view.pack(fill=tk.BOTH, expand=True)
+            self._left_view = "items"
+            self._item_selected_name = None
+            self._item_fingerprint = None  # force redraw
+        elif target == "triggers":
+            self._trigger_add_frame.pack(fill=tk.X, pady=(2, 0))
+            self._trigger_scroll_y.pack(side=tk.RIGHT, fill=tk.Y)
+            self._trigger_view.pack(fill=tk.BOTH, expand=True)
+            self._left_view = "triggers"
+            self._trigger_fingerprint = None  # force redraw
+
+        self._update_tab_styles()
+
+    def _update_tab_styles(self):
+        """Highlight the active tab button, dim the others."""
+        tabs = {
+            "feed": self._tab_feed_btn,
+            "items": self._tab_items_btn,
+            "triggers": self._tab_triggers_btn,
+        }
+        active_key = self._left_view
+        if active_key == "item_detail":
+            active_key = "items"
+        for key, btn in tabs.items():
+            if key == active_key:
+                btn.configure(style='ActiveTab.TButton')
+            else:
+                btn.configure(style='Dark.TButton')
+
+    # --- Item Tracker ---
 
     def _refresh_items(self):
         """Periodic refresh for item tracker view (1s interval)."""
-        if self._left_view != "feed":
+        if self._left_view in ("items", "item_detail"):
             summary = self._backend.get_item_summary()
             fp = tuple((s["name"], s["count"]) for s in summary)
             if self._left_view == "item_detail":
@@ -3525,12 +3807,20 @@ class CombatApp(tk.Tk):
         self._item_view.insert(tk.END,
             "  " + "\u2500" * 40 + "\n", 'header_line')
 
+        # Show HID from item record or from drops
+        hid_val = None
         if rec:
-            # HID
-            hid = rec.get("hid", "")
-            if hid:
-                self._item_view.insert(tk.END, "  HID: ", 'stat_label')
-                self._item_view.insert(tk.END, f"{hid}\n", 'stat_value')
+            hid_val = rec.get("hid", "")
+        if not hid_val:
+            for d in drops:
+                if d.get("hid"):
+                    hid_val = d["hid"]
+                    break
+        if hid_val:
+            self._item_view.insert(tk.END, "  HID: ", 'stat_label')
+            self._item_view.insert(tk.END, f"{hid_val}\n", 'stat_value')
+
+        if rec:
 
             # Type / Slot / Level
             meta_parts = []
@@ -3681,8 +3971,7 @@ class CombatApp(tk.Tk):
         """Handle clicking an item row — switch to detail view."""
         self._item_selected_name = name
         self._left_view = "item_detail"
-        self._item_back_btn.pack(side=tk.LEFT, padx=4)
-        self._left_title.configure(text=name)
+        self._item_back_btn.pack(side=tk.LEFT, padx=4, after=self._tab_triggers_btn)
         self._item_fingerprint = None  # force redraw
         self._render_item_detail()
 
@@ -3691,13 +3980,156 @@ class CombatApp(tk.Tk):
         self._item_back_btn.pack_forget()
         self._left_view = "items"
         self._item_selected_name = None
-        self._left_title.configure(text="Item Tracker")
         self._item_fingerprint = None  # force redraw
         self._render_item_list()
+
+    # --- Triggers ---
+
+    def _refresh_triggers(self):
+        """500ms timer: drain sound queue (always), redraw trigger list (if viewing)."""
+        # Drain sound queue regardless of which view is active
+        while True:
+            try:
+                path = self._backend._trigger_sound_queue.get_nowait()
+            except queue.Empty:
+                break
+            try:
+                winsound.PlaySound(path, winsound.SND_FILENAME | winsound.SND_ASYNC)
+            except Exception:
+                pass
+
+        # Redraw trigger list if on triggers tab
+        if self._left_view == "triggers":
+            snapshot = self._backend.get_trigger_snapshot()
+            fp = tuple((p, c) for p, _, c in snapshot)
+            if fp != self._trigger_fingerprint:
+                self._trigger_fingerprint = fp
+                self._render_trigger_list(snapshot)
+
+        self._trigger_id = self.after(500, self._refresh_triggers)
+
+    def _render_trigger_list(self, snapshot=None):
+        """Render the trigger list in the trigger view."""
+        if snapshot is None:
+            snapshot = self._backend.get_trigger_snapshot()
+
+        # Destroy old embedded widgets
+        for w in self._trigger_buttons:
+            w.destroy()
+        self._trigger_buttons.clear()
+
+        self._trigger_view.configure(state=tk.NORMAL)
+        self._trigger_view.delete("1.0", tk.END)
+
+        if not snapshot:
+            self._trigger_view.insert(tk.END, "\n  Triggers match text patterns in real-time\n", 'help_text')
+            self._trigger_view.insert(tk.END, "  and play audio alerts when matched.\n\n", 'help_text')
+            self._trigger_view.insert(tk.END, "  Add a pattern above to get started.\n", 'help_text')
+            self._trigger_view.insert(tk.END, "  Matching is case-insensitive.\n\n", 'help_text')
+            self._trigger_view.insert(tk.END, "  Examples:\n", 'help_text')
+            self._trigger_view.insert(tk.END, '    "tells you"       — whisper alert\n', 'help_text')
+            self._trigger_view.insert(tk.END, '    "has been slain"   — kill alert\n', 'help_text')
+            self._trigger_view.insert(tk.END, '    "resisted"         — resist tracking\n', 'help_text')
+            self._trigger_view.configure(state=tk.DISABLED)
+            return
+
+        for pattern, sound_label, count in snapshot:
+            # Remove button (✖)
+            btn = tk.Button(
+                self._trigger_view, text="\u2716", fg=COLORS['red'],
+                bg=COLORS['bg_darker'], activebackground=COLORS['surface'],
+                activeforeground=COLORS['red'], relief=tk.FLAT,
+                font=('Consolas', 9), cursor="hand2", bd=0,
+                command=lambda p=pattern: self._remove_trigger(p))
+            self._trigger_buttons.append(btn)
+            self._trigger_view.window_create(tk.END, window=btn)
+
+            self._trigger_view.insert(tk.END, "  ")
+            self._trigger_view.insert(tk.END, f'"{pattern}"', 'pattern')
+
+            count_str = f"  x{count}" if count > 0 else ""
+            if count_str:
+                self._trigger_view.insert(tk.END, f"  x{count}", 'count')
+
+            if sound_label and sound_label != "(none)":
+                self._trigger_view.insert(tk.END, f"  [{sound_label}]", 'sound')
+
+            self._trigger_view.insert(tk.END, "\n")
+
+        self._trigger_view.configure(state=tk.DISABLED)
+
+    def _add_trigger(self):
+        """Add a trigger from the entry fields."""
+        pattern = self._trigger_pattern_entry.get().strip()
+        if not pattern:
+            return
+        sound_label = self._trigger_sound_var.get()
+        sound_path = None
+        for name, path in TRIGGER_SOUNDS:
+            if name == sound_label:
+                sound_path = path
+                break
+        self._backend.add_trigger(pattern, sound_path, sound_label)
+        self._trigger_pattern_entry.delete(0, tk.END)
+        self._trigger_fingerprint = None  # force redraw
+
+    def _remove_trigger(self, pattern):
+        """Remove a trigger by pattern."""
+        self._backend.remove_trigger(pattern)
+        self._trigger_fingerprint = None  # force redraw
+
+    def _preview_trigger_sound(self):
+        """Play the currently selected sound from the combobox."""
+        sound_label = self._trigger_sound_var.get()
+        for name, path in TRIGGER_SOUNDS:
+            if name == sound_label and path:
+                try:
+                    winsound.PlaySound(path, winsound.SND_FILENAME | winsound.SND_ASYNC)
+                except Exception:
+                    pass
+                return
+
+    # --- Chat log ---
+
+    def _toggle_chat_log(self):
+        """Toggle chat logging to a text file on/off."""
+        if not self._chatlog_var.get():
+            # Turn off
+            self._backend.chat_log_enabled = False
+            try:
+                if self._chat_log_file:
+                    self._chat_log_file.close()
+            except Exception:
+                pass
+            self._chat_log_file = None
+            self._status_label.configure(
+                text=f"Chat log saved: {os.path.basename(self._chat_log_path)}")
+        else:
+            # Turn on — create file in parser/logs/
+            log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
+            os.makedirs(log_dir, exist_ok=True)
+            ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+            self._chat_log_path = os.path.join(log_dir, f"chat_{ts}.txt")
+            try:
+                self._chat_log_file = open(self._chat_log_path, "a", encoding="utf-8")
+                self._chat_log_file.write(f"# Chat log started {datetime.now().isoformat()}\n")
+                self._chat_log_file.flush()
+            except Exception as e:
+                self._status_label.configure(text=f"Chat log failed: {e}")
+                self._chatlog_var.set(False)
+                return
+            self._backend.chat_log_enabled = True
+            self._status_label.configure(
+                text=f"Chat logging to {os.path.basename(self._chat_log_path)}")
 
     # --- Cleanup ---
 
     def _on_close(self):
+        if self._chat_log_file:
+            try:
+                self._chat_log_file.close()
+            except Exception:
+                pass
         self._backend.stop()
         if self._poll_id:
             self.after_cancel(self._poll_id)
@@ -3705,6 +4137,8 @@ class CombatApp(tk.Tk):
             self.after_cancel(self._meter_id)
         if self._item_id:
             self.after_cancel(self._item_id)
+        if self._trigger_id:
+            self.after_cancel(self._trigger_id)
         if self._stats_id:
             self.after_cancel(self._stats_id)
         self.destroy()
@@ -3727,9 +4161,23 @@ def main():
         print("Right-click and 'Run as administrator', or use an elevated shell.")
         sys.exit(1)
 
-    app = CombatApp()
-    app.mainloop()
+    try:
+        app = CombatApp()
+        app.mainloop()
+    except Exception:
+        import traceback
+        traceback.print_exc()
+        crash_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "crash.log")
+        with open(crash_path, "w") as f:
+            traceback.print_exc(file=f)
+        print(f"\nCrash log written to {crash_path}")
+        input("Press Enter to exit...")
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except Exception:
+        import traceback
+        traceback.print_exc()
+        input("Press Enter to exit...")
