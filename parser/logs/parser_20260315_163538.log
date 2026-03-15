@@ -1,0 +1,1609 @@
+16:35:38 [INFO ] Parser debug log started — E:\MNM-Network\MNM-Combat-Parser\parser\logs\parser_20260315_163538.log
+16:35:38 [DEBUG] MSG_UNKNOWN_NEW 0x0010 dir=OUT len=43 body=00 00 00 00 00 00 00 00 00 00 00 00 5d fc a7 44 b2 e1 8d 42 44 ef 20 45 b3 63 db 42 00 00 00 00
+16:35:38 [DEBUG] MSG_UNKNOWN_NEW 0x0210 dir=IN len=41 body=cd 02 00 00 54 54 0f 00 21 48 28 b2 44 a2 78 96 42 f4 ed 0a 45 a5 55 48 3b a0 59 c0 a2 b2 44 75
+16:35:38 [DEBUG] MSG_UNKNOWN_NEW 0x001E dir=IN len=8 body=f7 e6 fe 02 00 00 00 00
+16:35:38 [DEBUG] MSG_UNKNOWN_NEW 0x001F dir=OUT len=8 body=f7 e6 fe 02 00 00 00 00
+16:35:38 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:35:38 [DEBUG]   PARSED type=AddBuffIcon eid=6134 target=None
+16:35:40 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:40 [DEBUG]   PARSED type=UpdateHealth eid=6554 target=None
+16:35:40 [DEBUG] HP_INIT #6554(#6554) HP:86/100 (no previous HP, no delta)
+16:35:40 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:40 [DEBUG]   PARSED type=UpdateHealth eid=6043 target=None
+16:35:40 [DEBUG] HP_INIT #6043(#6043) HP:455/840 (no previous HP, no delta)
+16:35:40 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:40 [DEBUG]   PARSED type=UpdateMana eid=6043 target=None
+16:35:40 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:40 [DEBUG]   PARSED type=UpdateHealth eid=6246 target=None
+16:35:40 [DEBUG] HP_INIT #6246(#6246) HP:1022/1204 (no previous HP, no delta)
+16:35:40 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:40 [DEBUG]   PARSED type=UpdateMana eid=6246 target=None
+16:35:41 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:41 [DEBUG]   PARSED type=UpdateHealth eid=7466 target=None
+16:35:41 [DEBUG] HP_INIT #7466(#7466) HP:94/100 (no previous HP, no delta)
+16:35:41 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:35:41 [DEBUG]   PARSED type=RemoveBuffIcon eid=6554 target=None
+16:35:42 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:42 [DEBUG]   PARSED type=UpdateHealth eid=6056 target=None
+16:35:42 [DEBUG] HP_INIT #6056(#6056) HP:701/725 (no previous HP, no delta)
+16:35:42 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:42 [DEBUG]   PARSED type=UpdateMana eid=6056 target=None
+16:35:42 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:42 [DEBUG]   PARSED type=UpdateMana eid=6477 target=None
+16:35:42 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:35:42 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:35:42 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=147
+16:35:42 [DEBUG]   PARSED type=AddBuffIcon eid=7466 target=None
+16:35:42 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+16:35:42 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:42 [DEBUG] CHATCOMBAT text="You feel well rested.Z"
+16:35:43 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=147
+16:35:43 [DEBUG]   PARSED type=AddBuffIcon eid=6056 target=None
+16:35:43 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=147
+16:35:43 [DEBUG]   PARSED type=AddBuffIcon eid=6134 target=None
+16:35:44 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+16:35:44 [DEBUG]   PARSED type=AddBuffIcon eid=6477 target=None
+16:35:44 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=147
+16:35:44 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:35:44 [DEBUG] MSG_UNKNOWN_NEW 0x0228 dir=IN len=9 body=66 18 00 00 18 1b 00 00 00
+16:35:44 [DEBUG] MSG_UNKNOWN_NEW 0x002C dir=IN len=13 body=04 00 6f 66 66 9b 00 05 00 00 00 9b 00
+16:35:44 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=147
+16:35:44 [DEBUG]   PARSED type=AddBuffIcon eid=6043 target=None
+16:35:44 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:35:44 [DEBUG]   PARSED type=AddBuffIcon eid=6134 target=None
+16:35:45 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=82
+16:35:45 [DEBUG]   PARSED type=AddBuffIcon eid=6477 target=None
+16:35:46 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:46 [DEBUG]   PARSED type=UpdateHealth eid=6554 target=None
+16:35:46 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:46 [DEBUG]   PARSED type=UpdateHealth eid=6043 target=None
+16:35:46 [DEBUG] HEAL #6043(#6043) 455->463/840 delta=+8 last_attacker=None(None)
+16:35:46 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:46 [DEBUG]   PARSED type=UpdateMana eid=6043 target=None
+16:35:46 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:46 [DEBUG]   PARSED type=UpdateHealth eid=6246 target=None
+16:35:46 [DEBUG] HEAL #6246(#6246) 1022->1023/1204 delta=+1 last_attacker=None(None)
+16:35:46 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:46 [DEBUG]   PARSED type=UpdateMana eid=6246 target=None
+16:35:46 [DEBUG] MSG_UNKNOWN_NEW 0x1011 dir=IN len=8 body=a8 17 00 00 5b 1d 00 00
+16:35:47 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:47 [DEBUG]   PARSED type=UpdateHealth eid=7466 target=None
+16:35:47 [DEBUG] HEAL #7466(#7466) 94->95/100 delta=+1 last_attacker=None(None)
+16:35:47 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=147
+16:35:47 [DEBUG]   PARSED type=AddBuffIcon eid=6554 target=None
+16:35:47 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=128
+16:35:47 [DEBUG]   PARSED type=BeginCasting eid=6477 target=6043
+16:35:47 [DEBUG] ATTRIB BeginCasting caster=#6477(#6477) -> target=#6043(#6043) ability="Lesser Heal"
+16:35:47 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+16:35:47 [DEBUG]   PARSED type=DespawnEntity eid=7397 target=None
+16:35:47 [DEBUG] DESPAWN #7397
+16:35:47 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+16:35:47 [DEBUG]   PARSED type=AddBuffIcon eid=6554 target=None
+16:35:48 [DEBUG] MSG_UNKNOWN_NEW 0x0015 dir=IN len=5 body=f6 17 00 00 00
+16:35:48 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:35:48 [DEBUG]   PARSED type=RemoveBuffIcon eid=6134 target=None
+16:35:48 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:35:48 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:35:49 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:49 [DEBUG]   PARSED type=UpdateHealth eid=6056 target=None
+16:35:49 [DEBUG] HEAL #6056(#6056) 701->709/725 delta=+8 last_attacker=None(None)
+16:35:49 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:49 [DEBUG]   PARSED type=UpdateMana eid=6056 target=None
+16:35:49 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:49 [DEBUG]   PARSED type=UpdateMana eid=6477 target=None
+16:35:49 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:49 [DEBUG]   PARSED type=UpdateMana eid=6477 target=None
+16:35:49 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:49 [DEBUG]   PARSED type=UpdateHealth eid=6043 target=None
+16:35:49 [DEBUG] HEAL #6043(#6043) 463->488/840 delta=+25 last_attacker=#6477(6477)
+16:35:49 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=102
+16:35:49 [DEBUG]   PARSED type=EndCasting eid=6477 target=6043
+16:35:49 [DEBUG] ENDCAST caster=#6477 target=#6043 text="Eyebrow's Lesser Heal heals Pitborn for 25 Health.""
+16:35:49 [DEBUG]   -> HEAL healer=Eyebrow(#6477) -> target=Pitborn(#6043)
+16:35:49 [DEBUG]   -> HEAL_CLEAR cleared attacker for #6043 (was healer #6477)
+16:35:50 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=82
+16:35:50 [DEBUG]   PARSED type=AddBuffIcon eid=6554 target=None
+16:35:51 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=44
+16:35:51 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:51 [DEBUG] CHATCOMBAT text="a tomb burrower's armor breaks.N"
+16:35:51 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=42
+16:35:51 [DEBUG]   PARSED type=EndCasting eid=6134 target=7515
+16:35:51 [DEBUG] ENDCAST caster=#6134 target=#7515 text=""
+16:35:51 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:51 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:51 [DEBUG] HP_INIT #7515(#7515) HP:99/100 (no previous HP, no delta)
+16:35:51 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=82
+16:35:51 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:51 [DEBUG] CHATCOMBAT text="Ladonte's Damage Shield hits a tomb burrower for 12 points of damage.+"
+16:35:51 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +12dmg by "Ladonte"(unresolved) text_total=12
+16:35:51 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:51 [DEBUG]   PARSED type=UpdateHealth eid=6134 target=None
+16:35:51 [DEBUG] HP_INIT #6134(#6134) HP:1198/1246 (no previous HP, no delta)
+16:35:51 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+16:35:51 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:51 [DEBUG] CHATCOMBAT text="a tomb burrower bites Ladonte for 48 points of damage."
+16:35:51 [DEBUG]   CHATCOMBAT_DMG "Ladonte"(#6134) +48dmg by a tomb burrower(#7515) text_total=48
+16:35:51 [DEBUG] MSG_UNKNOWN_NEW 0x644B dir=IN len=23 body=5b 1d 00 00 34 06 00 70 75 6e 63 68 f6 17 00 00 2a 05 00 6f 75 63 68
+16:35:51 [DEBUG] MSG_UNKNOWN_NEW 0x001C dir=IN len=5 body=9a 19 00 00 01
+16:35:51 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:35:51 [DEBUG]   PARSED type=AddBuffIcon eid=6477 target=None
+16:35:51 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=105
+16:35:51 [DEBUG]   PARSED type=BeginCasting eid=6043 target=7515
+16:35:51 [DEBUG] ATTRIB BeginCasting caster=Pitborn(#6043) -> target=a tomb burrower(#7515) ability="Fatigue"
+16:35:52 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:52 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:52 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=83
+16:35:52 [DEBUG]   PARSED type=EndCasting eid=6134 target=7515
+16:35:52 [DEBUG] ENDCAST caster=#6134 target=#7515 text="a tomb burrower looks angry at Ladonte.&"
+16:35:52 [DEBUG]   -> NO_MATCH (not dmg or heal pattern)
+16:35:52 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=OUT body_len=4
+16:35:52 [DEBUG]   PARSED type=ChangeTarget eid=None target=7515
+16:35:52 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:35:52 [DEBUG]   PARSED type=RemoveBuffIcon eid=6246 target=None
+16:35:52 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:35:52 [DEBUG]   PARSED type=RemoveBuffIcon eid=6554 target=None
+16:35:52 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=51
+16:35:52 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:52 [DEBUG] CHATCOMBAT text="The warmth of the campfire leaves you.D"
+16:35:52 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:52 [DEBUG]   PARSED type=UpdateHealth eid=6554 target=None
+16:35:52 [DEBUG] HEAL #6554(#6554) 86->87/100 delta=+1 last_attacker=None(None)
+16:35:52 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:52 [DEBUG]   PARSED type=UpdateHealth eid=6043 target=None
+16:35:52 [DEBUG] HEAL Pitborn(#6043) 488->494/840 delta=+6 last_attacker=None(None)
+16:35:52 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:52 [DEBUG]   PARSED type=UpdateMana eid=6043 target=None
+16:35:52 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:52 [DEBUG]   PARSED type=UpdateHealth eid=6134 target=None
+16:35:52 [DEBUG] HEAL Ladonte(#6134) 1198->1204/1246 delta=+6 last_attacker=None(None)
+16:35:52 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:52 [DEBUG]   PARSED type=UpdateHealth eid=6246 target=None
+16:35:52 [DEBUG] HEAL #6246(#6246) 1023->1024/1204 delta=+1 last_attacker=None(None)
+16:35:52 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:52 [DEBUG]   PARSED type=UpdateMana eid=6246 target=None
+16:35:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:53 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:53 [DEBUG] DMG  a tomb burrower(#7515) type=None 99->98/100 amt=1 attacker=Pitborn(6043)
+16:35:53 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Pitborn(6043) total=1
+16:35:53 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+16:35:53 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:53 [DEBUG] CHATCOMBAT text="Nickels bites a tomb burrower for 12 points of damage."
+16:35:53 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +12dmg by "Nickels"(unresolved) text_total=24
+16:35:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:35:53 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:35:53 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=128
+16:35:53 [DEBUG]   PARSED type=BeginCasting eid=6477 target=6043
+16:35:53 [DEBUG] ATTRIB BeginCasting caster=Eyebrow(#6477) -> target=Pitborn(#6043) ability="Lesser Heal"
+16:35:53 [DEBUG] MSG_IN 0x0012 Autoattack dir=OUT body_len=1
+16:35:53 [DEBUG]   PARSED type=Autoattack eid=None target=None
+16:35:53 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:35:53 [DEBUG]   PARSED type=RemoveBuffIcon eid=7466 target=None
+16:35:53 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=66
+16:35:53 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:53 [DEBUG] CHATCOMBAT text="a tomb burrower is no longer susceptible to ailments.Q"
+16:35:53 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=62
+16:35:53 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:53 [DEBUG] CHATCOMBAT text="You try to attack, but you must face your target."
+16:35:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:53 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:53 [DEBUG] DMG  a tomb burrower(#7515) type=None 98->97/100 amt=1 attacker=Pitborn(6043)
+16:35:53 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Pitborn(6043) total=2
+16:35:53 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=82
+16:35:53 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:53 [DEBUG] CHATCOMBAT text="Ladonte's Damage Shield hits a tomb burrower for 12 points of damage.+"
+16:35:53 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +12dmg by Ladonte(#6134) text_total=36
+16:35:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:53 [DEBUG]   PARSED type=UpdateHealth eid=6134 target=None
+16:35:53 [DEBUG] DMG  Ladonte(#6134) type=None 1204->1174/1246 amt=30 attacker=None(None)
+16:35:53 [DEBUG]   ENC_SKIP type=None no_enc=no_atk #6134 amt=30
+16:35:53 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+16:35:53 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:53 [DEBUG] CHATCOMBAT text="a tomb burrower bites Ladonte for 30 points of damage."
+16:35:53 [DEBUG]   CHATCOMBAT_DMG "Ladonte"(#6134) +30dmg by a tomb burrower(#7515) text_total=78
+16:35:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:53 [DEBUG]   PARSED type=UpdateHealth eid=7466 target=None
+16:35:53 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+16:35:53 [DEBUG]   PARSED type=CastAbility eid=None target=7515
+16:35:53 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+16:35:53 [DEBUG]   PARSED type=CastAbility eid=None target=7515
+16:35:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:53 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:53 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=97
+16:35:53 [DEBUG]   PARSED type=EndCasting eid=6554 target=7515
+16:35:53 [DEBUG] ENDCAST caster=#6554 target=#7515 text="Nickels's Bite hits a tomb burrower for 10 points of damage.&"
+16:35:53 [DEBUG]   -> DMG_HIT attacker=Nickels(#6554) -> victim=a tomb burrower(#7515)
+16:35:53 [DEBUG]   TEXT_DMG "a tomb burrower"(#7515) +10dmg by Nickels(#6554) text_total=46
+16:35:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:53 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:53 [DEBUG] DMG  a tomb burrower(#7515) type=None 97->93/100 amt=4 attacker=Nickels(6554)
+16:35:53 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +4dmg by Nickels(6554) total=6
+16:35:53 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=56
+16:35:53 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:53 [DEBUG] CHATCOMBAT text="You try to slash a tomb burrower, but miss!"
+16:35:53 [DEBUG] MSG_IN 0x002A UpdateHostileState dir=IN body_len=5
+16:35:53 [DEBUG]   PARSED type=UpdateHostileState eid=7515 target=None
+16:35:53 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=63
+16:35:53 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:53 [DEBUG] CHATCOMBAT text="You slash a tomb burrower for 43 points of damage."
+16:35:53 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +43dmg by "None"(unresolved) text_total=89
+16:35:53 [DEBUG] MSG_UNKNOWN_NEW 0x0058 dir=IN len=40 body=01 00 00 00 05 00 6b 69 63 6b 10 27 00 00 00 00 00 00 01 00 00 00 05 00 6b 69 63 6b 10 27 00 00
+16:35:53 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=58
+16:35:53 [DEBUG]   PARSED type=EndCasting eid=6246 target=7515
+16:35:53 [DEBUG] ENDCAST caster=#6246 target=#7515 text="You kick a tomb burrower.#"
+16:35:53 [DEBUG]   FLUSH_PENDING "a tomb burrower"(#7515) +43dmg by Entity#6246(#6246)
+16:35:53 [DEBUG]   -> DMG_LOCAL_MELEE caster=#6246 -> victim=a tomb burrower(#7515)
+16:35:54 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:54 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:54 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:54 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:54 [DEBUG] DMG  a tomb burrower(#7515) type=None 93->92/100 amt=1 attacker=#6246(6246)
+16:35:54 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Entity#6246(6246) total=7
+16:35:54 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:54 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:54 [DEBUG] DMG  a tomb burrower(#7515) type=None 92->91/100 amt=1 attacker=#6246(6246)
+16:35:54 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Entity#6246(6246) total=8
+16:35:54 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=116
+16:35:54 [DEBUG]   PARSED type=EndCasting eid=6246 target=7515
+16:35:54 [DEBUG] ENDCAST caster=#6246 target=#7515 text="Your Restorative Smite hits a tomb burrower for 39 points of damage.#"
+16:35:54 [DEBUG]   -> DMG_LOCAL_SPELL caster=#6246 -> victim=a tomb burrower(#7515)
+16:35:54 [DEBUG]   TEXT_DMG "a tomb burrower"(#7515) +39dmg by Entity#6246(#6246) text_total=128
+16:35:54 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:35:54 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:35:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=156
+16:35:54 [DEBUG]   PARSED type=SpawnEntity eid=652 target=None
+16:35:54 [DEBUG] SPAWN #652 type=1 "a deepwater crocodile" HP:1000/1000 class=crc lvl=0
+16:35:54 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:54 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:54 [DEBUG] DMG  a tomb burrower(#7515) type=None 91->88/100 amt=3 attacker=#6246(6246)
+16:35:54 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +3dmg by Entity#6246(6246) total=11
+16:35:54 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=80
+16:35:54 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:54 [DEBUG] CHATCOMBAT text="Ladonte slashes a tomb burrower for 37 points of damage. (Critical)"
+16:35:54 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +37dmg by Ladonte(#6134) text_total=165
+16:35:54 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:54 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:54 [DEBUG] DMG  a tomb burrower(#7515) type=None 88->85/100 amt=3 attacker=#6246(6246)
+16:35:54 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +3dmg by Entity#6246(6246) total=14
+16:35:54 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=80
+16:35:54 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:54 [DEBUG] CHATCOMBAT text="Ladonte slashes a tomb burrower for 45 points of damage. (Critical)"
+16:35:54 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +45dmg by Ladonte(#6134) text_total=210
+16:35:54 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:54 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:54 [DEBUG] DMG  a tomb burrower(#7515) type=None 85->84/100 amt=1 attacker=#6246(6246)
+16:35:54 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Entity#6246(6246) total=15
+16:35:54 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=87
+16:35:54 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:54 [DEBUG] CHATCOMBAT text="Ladonte pierces a tomb burrower with their offhand for 9 points of damage."
+16:35:54 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +9dmg by Ladonte(#6134) text_total=219
+16:35:54 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:54 [DEBUG]   PARSED type=UpdateMana eid=6043 target=None
+16:35:54 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=44
+16:35:54 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:54 [DEBUG] CHATCOMBAT text="a tomb burrower looks fatigued.N"
+16:35:54 [DEBUG] MSG_UNKNOWN_NEW 0x00A0 dir=IN len=28 body=5b 1d 00 00 0d 00 62 75 66 66 5f 46 61 74 69 67 75 65 09 00 53 6c 6f 77 42 75 66 66
+16:35:54 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=52
+16:35:54 [DEBUG]   PARSED type=EndCasting eid=6043 target=7515
+16:35:54 [DEBUG] ENDCAST caster=#6043 target=#7515 text=""
+16:35:55 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:55 [DEBUG]   PARSED type=UpdateHealth eid=6056 target=None
+16:35:55 [DEBUG] HEAL #6056(#6056) 709->717/725 delta=+8 last_attacker=None(None)
+16:35:55 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:55 [DEBUG]   PARSED type=UpdateMana eid=6056 target=None
+16:35:55 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:55 [DEBUG]   PARSED type=UpdateMana eid=6477 target=None
+16:35:55 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:35:55 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:35:55 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:55 [DEBUG]   PARSED type=UpdateMana eid=6477 target=None
+16:35:55 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:55 [DEBUG]   PARSED type=UpdateHealth eid=6043 target=None
+16:35:55 [DEBUG] HEAL Pitborn(#6043) 494->519/840 delta=+25 last_attacker=Eyebrow(6477)
+16:35:55 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=102
+16:35:55 [DEBUG]   PARSED type=EndCasting eid=6477 target=6043
+16:35:55 [DEBUG] ENDCAST caster=#6477 target=#6043 text="Eyebrow's Lesser Heal heals Pitborn for 25 Health.""
+16:35:55 [DEBUG]   -> HEAL healer=Eyebrow(#6477) -> target=Pitborn(#6043)
+16:35:55 [DEBUG]   -> HEAL_CLEAR cleared attacker for #6043 (was healer #6477)
+16:35:55 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:55 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:55 [DEBUG] DMG  a tomb burrower(#7515) type=None 84->81/100 amt=3 attacker=#6246(6246)
+16:35:55 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +3dmg by Entity#6246(6246) total=18
+16:35:55 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=75
+16:35:55 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:55 [DEBUG] CHATCOMBAT text="a tomb burrower bites a tomb burrower for 39 points of damage."
+16:35:55 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +39dmg by a tomb burrower(#7515) text_total=258
+16:35:55 [DEBUG] MSG_UNKNOWN_NEW 0x0019 dir=OUT len=5 body=f6 17 00 00 00
+16:35:55 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+16:35:55 [DEBUG]   PARSED type=CastAbility eid=None target=7515
+16:35:55 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=IN body_len=4
+16:35:55 [DEBUG]   PARSED type=ChangeTarget eid=None target=7515
+16:35:55 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=137
+16:35:55 [DEBUG]   PARSED type=BeginCasting eid=6246 target=6246
+16:35:55 [DEBUG] ATTRIB BeginCasting caster=#6246(#6246) -> target=#6246(#6246) ability="Supplication II"
+16:35:55 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=47
+16:35:55 [DEBUG]   PARSED type=EndCasting eid=6246 target=6246
+16:35:55 [DEBUG] ENDCAST caster=#6246 target=#6246 text="Your spell fizzles!,"
+16:35:55 [DEBUG]   -> NO_MATCH (not dmg or heal pattern)
+16:35:55 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:55 [DEBUG]   PARSED type=UpdateMana eid=6246 target=None
+16:35:55 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=73
+16:35:55 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:55 [DEBUG] CHATCOMBAT text="Ladonte's Frenzy hits a tomb burrower for 1 point of damage.&"
+16:35:55 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +1dmg by Ladonte(#6134) text_total=259
+16:35:55 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=73
+16:35:55 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:55 [DEBUG] CHATCOMBAT text="Ladonte's Frenzy hits a tomb burrower for 1 point of damage.&"
+16:35:55 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +1dmg by Ladonte(#6134) text_total=260
+16:35:55 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=74
+16:35:55 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:55 [DEBUG] CHATCOMBAT text="Ladonte's Frenzy hits a tomb burrower for 8 points of damage.&"
+16:35:55 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +8dmg by Ladonte(#6134) text_total=268
+16:35:55 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=74
+16:35:55 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:55 [DEBUG] CHATCOMBAT text="Ladonte's Frenzy hits a tomb burrower for 6 points of damage.&"
+16:35:55 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +6dmg by Ladonte(#6134) text_total=274
+16:35:55 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=75
+16:35:55 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:55 [DEBUG] CHATCOMBAT text="Ladonte's Frenzy hits a tomb burrower for 13 points of damage.&"
+16:35:55 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +13dmg by Ladonte(#6134) text_total=287
+16:35:55 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=120
+16:35:55 [DEBUG]   PARSED type=AddBuffIcon eid=6134 target=None
+16:35:55 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:55 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:55 [DEBUG] DMG  a tomb burrower(#7515) type=None 81->80/100 amt=1 attacker=#6246(6246)
+16:35:55 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Entity#6246(6246) total=19
+16:35:55 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:55 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:55 [DEBUG] DMG  a tomb burrower(#7515) type=None 80->79/100 amt=1 attacker=#6246(6246)
+16:35:55 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Entity#6246(6246) total=20
+16:35:55 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=33
+16:35:55 [DEBUG]   PARSED type=EndCasting eid=6134 target=7515
+16:35:55 [DEBUG] ENDCAST caster=#6134 target=#7515 text=""
+16:35:55 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:35:55 [DEBUG]   PARSED type=RemoveBuffIcon eid=6134 target=None
+16:35:55 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+16:35:55 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:55 [DEBUG] CHATCOMBAT text="Ladonte's skin cools.E"
+16:35:56 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:56 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:56 [DEBUG] DMG  a tomb burrower(#7515) type=None 79->78/100 amt=1 attacker=#6246(6246)
+16:35:56 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Entity#6246(6246) total=21
+16:35:56 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=69
+16:35:56 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:56 [DEBUG] CHATCOMBAT text="Ladonte slashes a tomb burrower for 20 points of damage."
+16:35:56 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +20dmg by Ladonte(#6134) text_total=307
+16:35:56 [DEBUG] MSG_UNKNOWN_NEW 0x0059 dir=IN len=8 body=00 00 01 04 00 6d 65 6c
+16:35:56 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+16:35:56 [DEBUG]   PARSED type=CastAbility eid=None target=7515
+16:35:56 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:35:56 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:35:56 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:56 [DEBUG]   PARSED type=UpdateHealth eid=6134 target=None
+16:35:56 [DEBUG] DMG  Ladonte(#6134) type=None 1174->1111/1246 amt=63 attacker=None(None)
+16:35:56 [DEBUG]   ENC_SKIP type=None no_enc=no_atk #6134 amt=63
+16:35:56 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+16:35:56 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:56 [DEBUG] CHATCOMBAT text="a tomb burrower bites Ladonte for 63 points of damage."
+16:35:56 [DEBUG]   CHATCOMBAT_DMG "Ladonte"(#6134) +63dmg by a tomb burrower(#7515) text_total=141
+16:35:56 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=137
+16:35:56 [DEBUG]   PARSED type=BeginCasting eid=6246 target=6246
+16:35:56 [DEBUG] ATTRIB BeginCasting caster=#6246(#6246) -> target=#6246(#6246) ability="Supplication II"
+16:35:56 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=IN body_len=4
+16:35:56 [DEBUG]   PARSED type=ChangeTarget eid=None target=7515
+16:35:56 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+16:35:56 [DEBUG]   PARSED type=CastAbility eid=None target=7515
+16:35:56 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=47
+16:35:56 [DEBUG]   PARSED type=EndCasting eid=6246 target=6246
+16:35:56 [DEBUG] ENDCAST caster=#6246 target=#6246 text="Your spell fizzles!,"
+16:35:56 [DEBUG]   -> NO_MATCH (not dmg or heal pattern)
+16:35:56 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:56 [DEBUG]   PARSED type=UpdateMana eid=6246 target=None
+16:35:56 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=137
+16:35:56 [DEBUG]   PARSED type=BeginCasting eid=6246 target=6246
+16:35:56 [DEBUG] ATTRIB BeginCasting caster=#6246(#6246) -> target=#6246(#6246) ability="Supplication II"
+16:35:56 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+16:35:56 [DEBUG]   PARSED type=CastAbility eid=None target=7515
+16:35:56 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+16:35:56 [DEBUG]   PARSED type=DespawnEntity eid=7519 target=None
+16:35:56 [DEBUG] DESPAWN #7519
+16:35:56 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=55
+16:35:56 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:56 [DEBUG] CHATCOMBAT text="You are already casting another ability..."
+16:35:56 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+16:35:56 [DEBUG]   PARSED type=CastAbility eid=None target=7515
+16:35:57 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+16:35:57 [DEBUG]   PARSED type=CastAbility eid=None target=7515
+16:35:57 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=55
+16:35:57 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:57 [DEBUG] CHATCOMBAT text="You are already casting another ability..."
+16:35:57 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=55
+16:35:57 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:57 [DEBUG] CHATCOMBAT text="You cry out in prayer for divine strength.@"
+16:35:57 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=58
+16:35:57 [DEBUG]   PARSED type=EndCasting eid=6246 target=6246
+16:35:57 [DEBUG] ENDCAST caster=#6246 target=#6246 text=""
+16:35:57 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:57 [DEBUG]   PARSED type=UpdateMana eid=6246 target=None
+16:35:57 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=327
+16:35:57 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:35:57 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=53
+16:35:57 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:57 [DEBUG] CHATCOMBAT text="This ability is not available right now."
+16:35:57 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:57 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:57 [DEBUG] DMG  a tomb burrower(#7515) type=None 78->77/100 amt=1 attacker=#6246(6246)
+16:35:57 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Entity#6246(6246) total=22
+16:35:57 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+16:35:57 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:57 [DEBUG] CHATCOMBAT text="Nickels bites a tomb burrower for 10 points of damage."
+16:35:57 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +10dmg by Nickels(#6554) text_total=317
+16:35:57 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:35:57 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:35:57 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:35:57 [DEBUG]   PARSED type=RemoveBuffIcon eid=6056 target=None
+16:35:57 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=IN body_len=4
+16:35:57 [DEBUG]   PARSED type=ChangeTarget eid=None target=7515
+16:35:57 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=80
+16:35:57 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:57 [DEBUG] CHATCOMBAT text="Ladonte tries to slash a tomb burrower, but a tomb burrower dodges!"
+16:35:57 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=128
+16:35:57 [DEBUG]   PARSED type=BeginCasting eid=6477 target=6043
+16:35:57 [DEBUG] ATTRIB BeginCasting caster=Eyebrow(#6477) -> target=Pitborn(#6043) ability="Lesser Heal"
+16:35:57 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:35:57 [DEBUG]   PARSED type=AddBuffIcon eid=6477 target=None
+16:35:57 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:57 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:57 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=87
+16:35:57 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:57 [DEBUG] CHATCOMBAT text="Ladonte pierces a tomb burrower with their offhand for 4 points of damage."
+16:35:57 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +4dmg by Ladonte(#6134) text_total=321
+16:35:58 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:58 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:58 [DEBUG] DMG  a tomb burrower(#7515) type=None 77->76/100 amt=1 attacker=#6246(6246)
+16:35:58 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Entity#6246(6246) total=23
+16:35:58 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=74
+16:35:58 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:58 [DEBUG] CHATCOMBAT text="a tomb burrower bites a tomb burrower for 6 points of damage."
+16:35:58 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +6dmg by a tomb burrower(#7515) text_total=327
+16:35:58 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:58 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:58 [DEBUG] HEAL a tomb burrower(#7515) 76->77/100 delta=+1 last_attacker=#6246(6246)
+16:35:58 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:58 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:58 [DEBUG] DMG  a tomb burrower(#7515) type=None 77->75/100 amt=2 attacker=#6246(6246)
+16:35:58 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +2dmg by Entity#6246(6246) total=25
+16:35:58 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:58 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:58 [DEBUG] DMG  a tomb burrower(#7515) type=None 75->74/100 amt=1 attacker=#6246(6246)
+16:35:58 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Entity#6246(6246) total=26
+16:35:58 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=93
+16:35:58 [DEBUG]   PARSED type=EndCasting eid=6134 target=7515
+16:35:58 [DEBUG] ENDCAST caster=#6134 target=#7515 text="Ladonte's Rend hits a tomb burrower for 39 points of damage.&"
+16:35:58 [DEBUG]   -> DMG_HIT attacker=Ladonte(#6134) -> victim=a tomb burrower(#7515)
+16:35:58 [DEBUG]   TEXT_DMG "a tomb burrower"(#7515) +39dmg by Ladonte(#6134) text_total=366
+16:35:58 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:35:58 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:35:58 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:58 [DEBUG]   PARSED type=UpdateHealth eid=6554 target=None
+16:35:58 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:58 [DEBUG]   PARSED type=UpdateHealth eid=6043 target=None
+16:35:58 [DEBUG] HEAL Pitborn(#6043) 519->527/840 delta=+8 last_attacker=Eyebrow(6477)
+16:35:58 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:58 [DEBUG]   PARSED type=UpdateMana eid=6043 target=None
+16:35:58 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:58 [DEBUG]   PARSED type=UpdateHealth eid=6134 target=None
+16:35:58 [DEBUG] HEAL Ladonte(#6134) 1111->1117/1246 delta=+6 last_attacker=None(None)
+16:35:58 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:58 [DEBUG]   PARSED type=UpdateHealth eid=6246 target=None
+16:35:58 [DEBUG] HEAL #6246(#6246) 1024->1025/1204 delta=+1 last_attacker=#6246(6246)
+16:35:58 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:58 [DEBUG]   PARSED type=UpdateMana eid=6246 target=None
+16:35:59 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=63
+16:35:59 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:59 [DEBUG] CHATCOMBAT text="You slash a tomb burrower for 66 points of damage."
+16:35:59 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +66dmg by Entity#6246(#6246) text_total=432
+16:35:59 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=58
+16:35:59 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:59 [DEBUG] CHATCOMBAT text="You feel spiritually connected to the divine.@"
+16:35:59 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=38
+16:35:59 [DEBUG]   PARSED type=EndCasting eid=6246 target=6246
+16:35:59 [DEBUG] ENDCAST caster=#6246 target=#6246 text=""
+16:35:59 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=63
+16:35:59 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:59 [DEBUG] CHATCOMBAT text="You slash a tomb burrower for 51 points of damage."
+16:35:59 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +51dmg by Entity#6246(#6246) text_total=483
+16:35:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:59 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:59 [DEBUG] DMG  a tomb burrower(#7515) type=None 74->69/100 amt=5 attacker=Ladonte(6134)
+16:35:59 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +5dmg by Ladonte(6134) total=31
+16:35:59 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=84
+16:35:59 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:35:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:59 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:59 [DEBUG] DMG  a tomb burrower(#7515) type=None 69->65/100 amt=4 attacker=Ladonte(6134)
+16:35:59 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +4dmg by Ladonte(6134) total=35
+16:35:59 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:35:59 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:35:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:59 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:35:59 [DEBUG] DMG  a tomb burrower(#7515) type=None 65->64/100 amt=1 attacker=Ladonte(6134)
+16:35:59 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Ladonte(6134) total=36
+16:35:59 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=88
+16:35:59 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:59 [DEBUG] CHATCOMBAT text="Ladonte pierces a tomb burrower with their offhand for 19 points of damage."
+16:35:59 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +19dmg by Ladonte(#6134) text_total=502
+16:35:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:59 [DEBUG]   PARSED type=UpdateHealth eid=6134 target=None
+16:35:59 [DEBUG] DMG  Ladonte(#6134) type=None 1117->1054/1246 amt=63 attacker=None(None)
+16:35:59 [DEBUG]   ENC_SKIP type=None no_enc=no_atk #6134 amt=63
+16:35:59 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+16:35:59 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:35:59 [DEBUG] CHATCOMBAT text="a tomb burrower bites Ladonte for 63 points of damage."
+16:35:59 [DEBUG]   CHATCOMBAT_DMG "Ladonte"(#6134) +63dmg by a tomb burrower(#7515) text_total=204
+16:35:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:59 [DEBUG]   PARSED type=UpdateHealth eid=7466 target=None
+16:35:59 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:35:59 [DEBUG]   PARSED type=UpdateMana eid=6477 target=None
+16:35:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:35:59 [DEBUG]   PARSED type=UpdateHealth eid=6043 target=None
+16:35:59 [DEBUG] HEAL Pitborn(#6043) 527->552/840 delta=+25 last_attacker=Eyebrow(6477)
+16:35:59 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=102
+16:35:59 [DEBUG]   PARSED type=EndCasting eid=6477 target=6043
+16:35:59 [DEBUG] ENDCAST caster=#6477 target=#6043 text="Eyebrow's Lesser Heal heals Pitborn for 25 Health.""
+16:35:59 [DEBUG]   -> HEAL healer=Eyebrow(#6477) -> target=Pitborn(#6043)
+16:35:59 [DEBUG]   -> HEAL_CLEAR cleared attacker for #6043 (was healer #6477)
+16:36:00 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:00 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:00 [DEBUG] MSG_ITEM 0x0083 UpdateEquipment dir=IN len=81 body=5b 1d 00 00 00 00 00 00 00 01 00 00 00 01 07 00 53 6b 69 6e 30 30 0e 00 42 72 6f 6e 7a 65 4d 65 74 61 6c 30 32 0c 00 52 75 62 79 4d 65 74 61 6c 30 31 0e 00 42 72 6f 6e 7a 65 4d 65 74 61 6c 30
+16:36:00 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+16:36:00 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:00 [DEBUG] CHATCOMBAT text="a tomb burrower has been disarmed.N"
+16:36:00 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=67
+16:36:00 [DEBUG]   PARSED type=EndCasting eid=6134 target=7515
+16:36:00 [DEBUG] ENDCAST caster=#6134 target=#7515 text="Ladonte's disarms a tomb burrower.&"
+16:36:00 [DEBUG]   -> NO_MATCH (not dmg or heal pattern)
+16:36:00 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:00 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:00 [DEBUG] DMG  a tomb burrower(#7515) type=None 64->63/100 amt=1 attacker=Ladonte(6134)
+16:36:00 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Ladonte(6134) total=37
+16:36:00 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=75
+16:36:00 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:00 [DEBUG] CHATCOMBAT text="a tomb burrower bites a tomb burrower for 13 points of damage."
+16:36:00 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +13dmg by a tomb burrower(#7515) text_total=515
+16:36:00 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:00 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:00 [DEBUG] DMG  a tomb burrower(#7515) type=None 63->62/100 amt=1 attacker=Ladonte(6134)
+16:36:00 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Ladonte(6134) total=38
+16:36:00 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=69
+16:36:00 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:00 [DEBUG] CHATCOMBAT text="Ladonte slashes a tomb burrower for 13 points of damage."
+16:36:00 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +13dmg by Ladonte(#6134) text_total=528
+16:36:01 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=100
+16:36:01 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:01 [DEBUG] CHATCOMBAT text="Ladonte tries to pierce a tomb burrower with their offhand, but a tomb burrower "
+16:36:01 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:01 [DEBUG]   PARSED type=UpdateHealth eid=6056 target=None
+16:36:01 [DEBUG] HEAL #6056(#6056) 717->725/725 delta=+8 last_attacker=None(None)
+16:36:01 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:01 [DEBUG]   PARSED type=UpdateMana eid=6056 target=None
+16:36:01 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:01 [DEBUG]   PARSED type=UpdateMana eid=6477 target=None
+16:36:01 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:01 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:01 [DEBUG] DMG  a tomb burrower(#7515) type=None 62->61/100 amt=1 attacker=Ladonte(6134)
+16:36:01 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Ladonte(6134) total=39
+16:36:01 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+16:36:01 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:01 [DEBUG] CHATCOMBAT text="Nickels bites a tomb burrower for 13 points of damage."
+16:36:01 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +13dmg by Nickels(#6554) text_total=541
+16:36:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:01 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:02 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:02 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:02 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:02 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:02 [DEBUG] DMG  a tomb burrower(#7515) type=None 61->59/100 amt=2 attacker=Ladonte(6134)
+16:36:02 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +2dmg by Ladonte(6134) total=41
+16:36:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=69
+16:36:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:02 [DEBUG] CHATCOMBAT text="Ladonte slashes a tomb burrower for 29 points of damage."
+16:36:02 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +29dmg by Ladonte(#6134) text_total=570
+16:36:02 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:02 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=68
+16:36:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:02 [DEBUG] CHATCOMBAT text="Ladonte slashes a tomb burrower for 2 points of damage."
+16:36:02 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +2dmg by Ladonte(#6134) text_total=572
+16:36:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=44
+16:36:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:02 [DEBUG] CHATCOMBAT text="a tomb burrower's armor breaks.N"
+16:36:02 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=42
+16:36:02 [DEBUG]   PARSED type=EndCasting eid=6134 target=7515
+16:36:02 [DEBUG] ENDCAST caster=#6134 target=#7515 text=""
+16:36:02 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=128
+16:36:02 [DEBUG]   PARSED type=BeginCasting eid=6477 target=6043
+16:36:02 [DEBUG] ATTRIB BeginCasting caster=Eyebrow(#6477) -> target=Pitborn(#6043) ability="Lesser Heal"
+16:36:02 [DEBUG] MSG_UNKNOWN_NEW 0x0220 dir=OUT len=4 body=0c 02 00 00
+16:36:02 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:02 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:02 [DEBUG] DMG  a tomb burrower(#7515) type=None 59->58/100 amt=1 attacker=Ladonte(6134)
+16:36:02 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Ladonte(6134) total=42
+16:36:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=88
+16:36:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:02 [DEBUG] CHATCOMBAT text="Ladonte pierces a tomb burrower with their offhand for 10 points of damage."
+16:36:02 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +10dmg by Ladonte(#6134) text_total=582
+16:36:03 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:03 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:03 [DEBUG] DMG  a tomb burrower(#7515) type=None 58->56/100 amt=2 attacker=Ladonte(6134)
+16:36:03 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +2dmg by Ladonte(6134) total=44
+16:36:03 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=75
+16:36:03 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:03 [DEBUG] CHATCOMBAT text="a tomb burrower bites a tomb burrower for 28 points of damage."
+16:36:03 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +28dmg by a tomb burrower(#7515) text_total=610
+16:36:03 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:03 [DEBUG]   PARSED type=UpdateHealth eid=6134 target=None
+16:36:03 [DEBUG] DMG  Ladonte(#6134) type=None 1054->997/1246 amt=57 attacker=None(None)
+16:36:03 [DEBUG]   ENC_SKIP type=None no_enc=no_atk #6134 amt=57
+16:36:03 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+16:36:03 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:03 [DEBUG] CHATCOMBAT text="a tomb burrower bites Ladonte for 57 points of damage."
+16:36:03 [DEBUG]   CHATCOMBAT_DMG "Ladonte"(#6134) +57dmg by a tomb burrower(#7515) text_total=261
+16:36:03 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:03 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:03 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=65
+16:36:03 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:03 [DEBUG] CHATCOMBAT text="Nickels bites a tomb burrower for 1 point of damage."
+16:36:03 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +1dmg by Nickels(#6554) text_total=611
+16:36:03 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:03 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:03 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=83
+16:36:03 [DEBUG]   PARSED type=EndCasting eid=6134 target=7515
+16:36:03 [DEBUG] ENDCAST caster=#6134 target=#7515 text="a tomb burrower looks angry at Ladonte.&"
+16:36:03 [DEBUG]   -> NO_MATCH (not dmg or heal pattern)
+16:36:03 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:03 [DEBUG]   PARSED type=AddBuffIcon eid=6477 target=None
+16:36:04 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:04 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:04 [DEBUG] HEAL a tomb burrower(#7515) 56->57/100 delta=+1 last_attacker=Ladonte(6134)
+16:36:04 [DEBUG] MSG_UNKNOWN_NEW 0x001B dir=IN len=18 body=6e 1b 00 00 09 00 53 65 74 53 74 61 74 65 01 00 00 00
+16:36:04 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=40
+16:36:04 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:04 [DEBUG] CHATCOMBAT text="The campfire begins to dim.Z"
+16:36:04 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:04 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:04 [DEBUG] DMG  a tomb burrower(#7515) type=None 57->52/100 amt=5 attacker=Ladonte(6134)
+16:36:04 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +5dmg by Ladonte(6134) total=49
+16:36:04 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:04 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:04 [DEBUG] DMG  a tomb burrower(#7515) type=None 52->49/100 amt=3 attacker=Ladonte(6134)
+16:36:04 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +3dmg by Ladonte(6134) total=52
+16:36:04 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=63
+16:36:04 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:04 [DEBUG] CHATCOMBAT text="You slash a tomb burrower for 62 points of damage."
+16:36:04 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +62dmg by Entity#6246(#6246) text_total=673
+16:36:04 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=63
+16:36:04 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:04 [DEBUG] CHATCOMBAT text="You slash a tomb burrower for 40 points of damage."
+16:36:04 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +40dmg by Entity#6246(#6246) text_total=713
+16:36:04 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:04 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:04 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=68
+16:36:04 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:04 [DEBUG] CHATCOMBAT text="Ladonte slashes a tomb burrower for 3 points of damage."
+16:36:04 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +3dmg by Ladonte(#6134) text_total=716
+16:36:04 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc'}
+16:36:04 [INFO ] TOTALS_DEBUG tracker.levels={652: 0}
+16:36:04 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:04 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:04 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:04 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:04 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:04 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:04 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:04 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:04 [DEBUG] DMG  a tomb burrower(#7515) type=None 49->48/100 amt=1 attacker=Ladonte(6134)
+16:36:04 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Ladonte(6134) total=53
+16:36:04 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=97
+16:36:04 [DEBUG]   PARSED type=EndCasting eid=6554 target=7515
+16:36:04 [DEBUG] ENDCAST caster=#6554 target=#7515 text="Nickels's Bite hits a tomb burrower for 10 points of damage.&"
+16:36:04 [DEBUG]   -> DMG_HIT attacker=Nickels(#6554) -> victim=a tomb burrower(#7515)
+16:36:04 [DEBUG]   TEXT_DMG "a tomb burrower"(#7515) +10dmg by Nickels(#6554) text_total=726
+16:36:04 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:04 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:04 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc'}
+16:36:04 [INFO ] TOTALS_DEBUG tracker.levels={652: 0}
+16:36:04 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:04 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:04 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:04 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:04 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:04 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:04 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:04 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:04 [DEBUG] DMG  a tomb burrower(#7515) type=None 48->47/100 amt=1 attacker=Nickels(6554)
+16:36:04 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Nickels(6554) total=54
+16:36:04 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=88
+16:36:04 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:04 [DEBUG] CHATCOMBAT text="Ladonte pierces a tomb burrower with their offhand for 18 points of damage."
+16:36:04 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +18dmg by Ladonte(#6134) text_total=744
+16:36:04 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:04 [DEBUG]   PARSED type=UpdateMana eid=6477 target=None
+16:36:04 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:04 [DEBUG]   PARSED type=UpdateHealth eid=6043 target=None
+16:36:04 [DEBUG] HEAL Pitborn(#6043) 552->577/840 delta=+25 last_attacker=Eyebrow(6477)
+16:36:04 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=102
+16:36:04 [DEBUG]   PARSED type=EndCasting eid=6477 target=6043
+16:36:04 [DEBUG] ENDCAST caster=#6477 target=#6043 text="Eyebrow's Lesser Heal heals Pitborn for 25 Health.""
+16:36:04 [DEBUG]   -> HEAL healer=Eyebrow(#6477) -> target=Pitborn(#6043)
+16:36:04 [DEBUG]   -> HEAL_CLEAR cleared attacker for #6043 (was healer #6477)
+16:36:04 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:04 [DEBUG]   PARSED type=UpdateHealth eid=6554 target=None
+16:36:04 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:04 [DEBUG]   PARSED type=UpdateHealth eid=6043 target=None
+16:36:04 [DEBUG] HEAL Pitborn(#6043) 577->585/840 delta=+8 last_attacker=None(None)
+16:36:04 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:04 [DEBUG]   PARSED type=UpdateMana eid=6043 target=None
+16:36:04 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:04 [DEBUG]   PARSED type=UpdateHealth eid=6134 target=None
+16:36:04 [DEBUG] HEAL Ladonte(#6134) 997->1003/1246 delta=+6 last_attacker=None(None)
+16:36:04 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:04 [DEBUG]   PARSED type=UpdateHealth eid=6246 target=None
+16:36:04 [DEBUG] HEAL #6246(#6246) 1025->1026/1204 delta=+1 last_attacker=#6246(6246)
+16:36:04 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:04 [DEBUG]   PARSED type=UpdateMana eid=6246 target=None
+16:36:05 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:05 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:05 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc'}
+16:36:05 [INFO ] TOTALS_DEBUG tracker.levels={652: 0}
+16:36:05 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:05 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:05 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:05 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:05 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:05 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:05 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:05 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:05 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=68
+16:36:05 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:05 [DEBUG] CHATCOMBAT text="Ladonte slashes a tomb burrower for 6 points of damage."
+16:36:05 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +6dmg by Ladonte(#6134) text_total=750
+16:36:05 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:05 [DEBUG]   PARSED type=UpdateHealth eid=7466 target=None
+16:36:05 [DEBUG] HEAL #7466(#7466) 95->96/100 delta=+1 last_attacker=None(None)
+16:36:06 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:06 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:06 [DEBUG] DMG  a tomb burrower(#7515) type=None 47->45/100 amt=2 attacker=Nickels(6554)
+16:36:06 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +2dmg by Nickels(6554) total=56
+16:36:06 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=88
+16:36:06 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:06 [DEBUG] CHATCOMBAT text="Ladonte pierces a tomb burrower with their offhand for 16 points of damage."
+16:36:06 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +16dmg by Ladonte(#6134) text_total=766
+16:36:06 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:06 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:06 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc'}
+16:36:06 [INFO ] TOTALS_DEBUG tracker.levels={652: 0}
+16:36:06 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:06 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:06 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:06 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:06 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:06 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:06 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+16:36:06 [DEBUG]   PARSED type=SpawnEntity eid=7521 target=None
+16:36:06 [DEBUG] SPAWN #7521 type=1 "a tomb burrower" HP:1000/1000 class=btl lvl=0
+16:36:06 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+16:36:06 [DEBUG]   PARSED type=SpawnEntity eid=7521 target=None
+16:36:06 [DEBUG] SPAWN #7521 type=1 "a tomb burrower" HP:1000/1000 class=btl lvl=0
+16:36:06 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+16:36:06 [DEBUG]   PARSED type=SpawnEntity eid=7522 target=None
+16:36:06 [DEBUG] SPAWN #7522 type=1 "a tomb burrower" HP:1000/1000 class=btl lvl=0
+16:36:06 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+16:36:06 [DEBUG]   PARSED type=SpawnEntity eid=7522 target=None
+16:36:06 [DEBUG] SPAWN #7522 type=1 "a tomb burrower" HP:1000/1000 class=btl lvl=0
+16:36:06 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:06 [DEBUG]   PARSED type=UpdateHealth eid=6134 target=None
+16:36:06 [DEBUG] DMG  Ladonte(#6134) type=None 1003->992/1246 amt=11 attacker=None(None)
+16:36:06 [DEBUG]   ENC_SKIP type=None no_enc=no_atk #6134 amt=11
+16:36:06 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+16:36:06 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:06 [DEBUG] CHATCOMBAT text="a tomb burrower bites Ladonte for 11 points of damage."
+16:36:06 [DEBUG]   CHATCOMBAT_DMG "Ladonte"(#6134) +11dmg by a tomb burrower(#7515) text_total=272
+16:36:07 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=128
+16:36:07 [DEBUG]   PARSED type=BeginCasting eid=6477 target=6043
+16:36:07 [DEBUG] ATTRIB BeginCasting caster=Eyebrow(#6477) -> target=Pitborn(#6043) ability="Lesser Heal"
+16:36:07 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:07 [DEBUG]   PARSED type=UpdateMana eid=6056 target=None
+16:36:07 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:07 [DEBUG]   PARSED type=UpdateMana eid=6477 target=None
+16:36:07 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:07 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:07 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+16:36:07 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:07 [DEBUG] CHATCOMBAT text="Nickels bites a tomb burrower for 12 points of damage."
+16:36:07 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +12dmg by Nickels(#6554) text_total=778
+16:36:07 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=55
+16:36:07 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:07 [DEBUG] CHATCOMBAT text="a tomb burrower begins to bleed profusely.N"
+16:36:07 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=43
+16:36:07 [DEBUG]   PARSED type=EndCasting eid=6554 target=7515
+16:36:07 [DEBUG] ENDCAST caster=#6554 target=#7515 text=""
+16:36:07 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:07 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:07 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc', 7521: 'btl', 7522: 'btl'}
+16:36:07 [INFO ] TOTALS_DEBUG tracker.levels={652: 0, 7521: 0, 7522: 0}
+16:36:07 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:07 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:07 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:07 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:07 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:07 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:07 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+16:36:07 [DEBUG]   PARSED type=DespawnEntity eid=7516 target=None
+16:36:07 [DEBUG] DESPAWN #7516
+16:36:08 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:08 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:08 [DEBUG] DMG  a tomb burrower(#7515) type=None 45->41/100 amt=4 attacker=Nickels(6554)
+16:36:08 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +4dmg by Nickels(6554) total=60
+16:36:08 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=75
+16:36:08 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:08 [DEBUG] CHATCOMBAT text="a tomb burrower bites a tomb burrower for 54 points of damage."
+16:36:08 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +54dmg by a tomb burrower(#7515) text_total=832
+16:36:08 [DEBUG] MSG_ITEM 0x0083 UpdateEquipment dir=IN len=81 body=5b 1d 00 00 00 00 00 00 00 01 00 00 00 01 07 00 53 6b 69 6e 30 30 0e 00 42 72 6f 6e 7a 65 4d 65 74 61 6c 30 32 0c 00 52 75 62 79 4d 65 74 61 6c 30 31 0e 00 42 72 6f 6e 7a 65 4d 65 74 61 6c 30
+16:36:08 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:08 [DEBUG]   PARSED type=RemoveBuffIcon eid=7515 target=None
+16:36:08 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=51
+16:36:08 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:08 [DEBUG] CHATCOMBAT text="a tomb burrower is no longer disarmed.Q"
+16:36:08 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:08 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:08 [DEBUG] DMG  a tomb burrower(#7515) type=None 41->40/100 amt=1 attacker=Nickels(6554)
+16:36:08 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Nickels(6554) total=61
+16:36:08 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:08 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:08 [DEBUG] DMG  a tomb burrower(#7515) type=None 40->38/100 amt=2 attacker=Nickels(6554)
+16:36:08 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +2dmg by Nickels(6554) total=63
+16:36:08 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=93
+16:36:08 [DEBUG]   PARSED type=EndCasting eid=6134 target=7515
+16:36:08 [DEBUG] ENDCAST caster=#6134 target=#7515 text="Ladonte's Rend hits a tomb burrower for 36 points of damage.&"
+16:36:08 [DEBUG]   -> DMG_HIT attacker=Ladonte(#6134) -> victim=a tomb burrower(#7515)
+16:36:08 [DEBUG]   TEXT_DMG "a tomb burrower"(#7515) +36dmg by Ladonte(#6134) text_total=868
+16:36:08 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:08 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:08 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc', 7521: 'btl', 7522: 'btl'}
+16:36:08 [INFO ] TOTALS_DEBUG tracker.levels={652: 0, 7521: 0, 7522: 0}
+16:36:08 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:08 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:08 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:08 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:08 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:08 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:09 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:09 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:09 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=68
+16:36:09 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:09 [DEBUG] CHATCOMBAT text="Ladonte slashes a tomb burrower for 2 points of damage."
+16:36:09 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +2dmg by Ladonte(#6134) text_total=870
+16:36:09 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:09 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:09 [DEBUG] DMG  a tomb burrower(#7515) type=None 38->37/100 amt=1 attacker=Ladonte(6134)
+16:36:09 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Ladonte(6134) total=64
+16:36:09 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=69
+16:36:09 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:09 [DEBUG] CHATCOMBAT text="Ladonte slashes a tomb burrower for 21 points of damage."
+16:36:09 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +21dmg by Ladonte(#6134) text_total=891
+16:36:09 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:09 [DEBUG]   PARSED type=UpdateMana eid=6477 target=None
+16:36:09 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:09 [DEBUG]   PARSED type=UpdateHealth eid=6043 target=None
+16:36:09 [DEBUG] HEAL Pitborn(#6043) 585->610/840 delta=+25 last_attacker=Eyebrow(6477)
+16:36:09 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=102
+16:36:09 [DEBUG]   PARSED type=EndCasting eid=6477 target=6043
+16:36:09 [DEBUG] ENDCAST caster=#6477 target=#6043 text="Eyebrow's Lesser Heal heals Pitborn for 25 Health.""
+16:36:09 [DEBUG]   -> HEAL healer=Eyebrow(#6477) -> target=Pitborn(#6043)
+16:36:09 [DEBUG]   -> HEAL_CLEAR cleared attacker for #6043 (was healer #6477)
+16:36:09 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:09 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:09 [DEBUG] DMG  a tomb burrower(#7515) type=None 37->34/100 amt=3 attacker=Ladonte(6134)
+16:36:09 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +3dmg by Ladonte(6134) total=67
+16:36:09 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=63
+16:36:09 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:09 [DEBUG] CHATCOMBAT text="You slash a tomb burrower for 34 points of damage."
+16:36:09 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +34dmg by Entity#6246(#6246) text_total=925
+16:36:09 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:09 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:09 [DEBUG] DMG  a tomb burrower(#7515) type=None 34->33/100 amt=1 attacker=Ladonte(6134)
+16:36:09 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Ladonte(6134) total=68
+16:36:09 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=88
+16:36:09 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:09 [DEBUG] CHATCOMBAT text="Ladonte pierces a tomb burrower with their offhand for 19 points of damage."
+16:36:09 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +19dmg by Ladonte(#6134) text_total=944
+16:36:09 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:09 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:09 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=65
+16:36:09 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:09 [DEBUG] CHATCOMBAT text="Nickels bites a tomb burrower for 1 point of damage."
+16:36:09 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +1dmg by Nickels(#6554) text_total=945
+16:36:09 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=55
+16:36:09 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:09 [DEBUG] CHATCOMBAT text="a tomb burrower begins to bleed profusely.N"
+16:36:09 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=43
+16:36:09 [DEBUG]   PARSED type=EndCasting eid=6554 target=7515
+16:36:09 [DEBUG] ENDCAST caster=#6554 target=#7515 text=""
+16:36:09 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc', 7521: 'btl', 7522: 'btl'}
+16:36:09 [INFO ] TOTALS_DEBUG tracker.levels={652: 0, 7521: 0, 7522: 0}
+16:36:09 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:09 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:09 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:09 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:09 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:09 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:09 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:09 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:09 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+16:36:09 [DEBUG]   PARSED type=CastAbility eid=None target=7515
+16:36:10 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:10 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:10 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=58
+16:36:10 [DEBUG]   PARSED type=EndCasting eid=6246 target=7515
+16:36:10 [DEBUG] ENDCAST caster=#6246 target=#7515 text="You kick a tomb burrower.#"
+16:36:10 [DEBUG]   -> DMG_LOCAL_MELEE caster=#6246 -> victim=a tomb burrower(#7515)
+16:36:10 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=72
+16:36:10 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:10 [DEBUG] CHATCOMBAT text="a tomb burrower tries to bite Ladonte, but Ladonte parries!"
+16:36:10 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc', 7521: 'btl', 7522: 'btl'}
+16:36:10 [INFO ] TOTALS_DEBUG tracker.levels={652: 0, 7521: 0, 7522: 0}
+16:36:10 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:10 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:10 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:10 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:10 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:10 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:10 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:10 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:10 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:10 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:10 [DEBUG] DMG  a tomb burrower(#7515) type=None 33->28/100 amt=5 attacker=#6246(6246)
+16:36:10 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +5dmg by Entity#6246(6246) total=73
+16:36:10 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=75
+16:36:10 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:10 [DEBUG] CHATCOMBAT text="a tomb burrower bites a tomb burrower for 76 points of damage."
+16:36:10 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +76dmg by a tomb burrower(#7515) text_total=1021
+16:36:10 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:10 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:10 [DEBUG] DMG  a tomb burrower(#7515) type=None 28->25/100 amt=3 attacker=#6246(6246)
+16:36:10 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +3dmg by Entity#6246(6246) total=76
+16:36:10 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=69
+16:36:10 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:10 [DEBUG] CHATCOMBAT text="Ladonte slashes a tomb burrower for 30 points of damage."
+16:36:10 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +30dmg by Ladonte(#6134) text_total=1051
+16:36:10 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:10 [DEBUG]   PARSED type=UpdateHealth eid=6554 target=None
+16:36:10 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:10 [DEBUG]   PARSED type=UpdateHealth eid=6043 target=None
+16:36:10 [DEBUG] HEAL Pitborn(#6043) 610->618/840 delta=+8 last_attacker=None(None)
+16:36:10 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:10 [DEBUG]   PARSED type=UpdateMana eid=6043 target=None
+16:36:10 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:10 [DEBUG]   PARSED type=UpdateHealth eid=6134 target=None
+16:36:10 [DEBUG] HEAL Ladonte(#6134) 992->998/1246 delta=+6 last_attacker=None(None)
+16:36:10 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:10 [DEBUG]   PARSED type=UpdateHealth eid=6246 target=None
+16:36:10 [DEBUG] HEAL #6246(#6246) 1026->1027/1204 delta=+1 last_attacker=#6246(6246)
+16:36:10 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:10 [DEBUG]   PARSED type=UpdateMana eid=6246 target=None
+16:36:11 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:11 [DEBUG]   PARSED type=RemoveBuffIcon eid=6477 target=None
+16:36:11 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:11 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:11 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=66
+16:36:11 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc', 7521: 'btl', 7522: 'btl'}
+16:36:11 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:11 [INFO ] TOTALS_DEBUG tracker.levels={652: 0, 7521: 0, 7522: 0}
+16:36:11 [DEBUG] CHATCOMBAT text="Nickels bites a tomb burrower for 8 points of damage."
+16:36:11 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:11 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +8dmg by Nickels(#6554) text_total=1059
+16:36:11 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:11 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:11 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:11 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:11 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:11 [DEBUG] DMG  a tomb burrower(#7515) type=None 25->23/100 amt=2 attacker=#6246(6246)
+16:36:11 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:11 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +2dmg by Entity#6246(6246) total=78
+16:36:11 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:11 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+16:36:11 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:11 [DEBUG] CHATCOMBAT text="Nickels bites a tomb burrower for 20 points of damage."
+16:36:11 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +20dmg by Nickels(#6554) text_total=1079
+16:36:11 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:11 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:11 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:11 [DEBUG]   PARSED type=RemoveBuffIcon eid=6056 target=None
+16:36:11 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:11 [DEBUG]   PARSED type=UpdateHealth eid=7466 target=None
+16:36:12 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+16:36:12 [DEBUG]   PARSED type=DespawnEntity eid=7489 target=None
+16:36:12 [DEBUG] DESPAWN #7489
+16:36:12 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:12 [DEBUG]   PARSED type=RemoveBuffIcon eid=6043 target=None
+16:36:12 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:12 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:12 [DEBUG] DMG  a tomb burrower(#7515) type=None 23->22/100 amt=1 attacker=#6246(6246)
+16:36:12 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Entity#6246(6246) total=79
+16:36:12 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=69
+16:36:12 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:12 [DEBUG] CHATCOMBAT text="Ladonte slashes a tomb burrower for 26 points of damage."
+16:36:12 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +26dmg by Ladonte(#6134) text_total=1105
+16:36:12 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:12 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:12 [DEBUG] DMG  a tomb burrower(#7515) type=None 22->20/100 amt=2 attacker=#6246(6246)
+16:36:12 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +2dmg by Entity#6246(6246) total=81
+16:36:12 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=69
+16:36:12 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:12 [DEBUG] CHATCOMBAT text="Ladonte slashes a tomb burrower for 22 points of damage."
+16:36:12 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +22dmg by Ladonte(#6134) text_total=1127
+16:36:12 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc', 7521: 'btl', 7522: 'btl'}
+16:36:12 [INFO ] TOTALS_DEBUG tracker.levels={652: 0, 7521: 0, 7522: 0}
+16:36:12 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:12 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:12 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:12 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:12 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:12 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:12 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=229
+16:36:12 [DEBUG]   PARSED type=SpawnEntity eid=756 target=None
+16:36:12 [DEBUG] SPAWN #756 type=1 "a sand dervish" HP:1000/1000 class=drv lvl=0
+16:36:12 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:12 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:12 [DEBUG] MSG_UNKNOWN_NEW 0x0018 dir=IN len=10 body=4d 19 00 00 05 00 6a 75 6d 70
+16:36:12 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:36:12 [DEBUG]   PARSED type=UpdateEndurance eid=6477 target=None
+16:36:13 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:13 [DEBUG]   PARSED type=RemoveBuffIcon eid=6134 target=None
+16:36:13 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:13 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:13 [DEBUG] DMG  a tomb burrower(#7515) type=None 20->19/100 amt=1 attacker=#6246(6246)
+16:36:13 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Entity#6246(6246) total=82
+16:36:13 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=74
+16:36:13 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:13 [DEBUG] CHATCOMBAT text="a tomb burrower bites a tomb burrower for 9 points of damage."
+16:36:13 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +9dmg by a tomb burrower(#7515) text_total=1136
+16:36:13 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:13 [DEBUG]   PARSED type=RemoveBuffIcon eid=7466 target=None
+16:36:13 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:13 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:13 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=72
+16:36:13 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:13 [DEBUG] CHATCOMBAT text="Nickels's Rip hits a tomb burrower for 10 points of damage.J"
+16:36:13 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +10dmg by Nickels(#6554) text_total=1146
+16:36:13 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:13 [DEBUG]   PARSED type=UpdateMana eid=6056 target=None
+16:36:13 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:13 [DEBUG]   PARSED type=UpdateMana eid=6477 target=None
+16:36:13 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:36:13 [DEBUG]   PARSED type=UpdateEndurance eid=6477 target=None
+16:36:13 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:13 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:13 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=65
+16:36:13 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:13 [DEBUG] CHATCOMBAT text="Nickels bites a tomb burrower for 1 point of damage."
+16:36:13 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +1dmg by Nickels(#6554) text_total=1147
+16:36:13 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=55
+16:36:13 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:13 [DEBUG] CHATCOMBAT text="a tomb burrower begins to bleed profusely.N"
+16:36:13 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=43
+16:36:13 [DEBUG]   PARSED type=EndCasting eid=6554 target=7515
+16:36:13 [DEBUG] ENDCAST caster=#6554 target=#7515 text=""
+16:36:13 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:13 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:13 [DEBUG] DMG  a tomb burrower(#7515) type=None 19->17/100 amt=2 attacker=#6246(6246)
+16:36:13 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +2dmg by Entity#6246(6246) total=84
+16:36:13 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+16:36:13 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:13 [DEBUG] CHATCOMBAT text="Nickels bites a tomb burrower for 25 points of damage."
+16:36:13 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +25dmg by Nickels(#6554) text_total=1172
+16:36:13 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:13 [DEBUG]   PARSED type=RemoveBuffIcon eid=6477 target=None
+16:36:13 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:13 [DEBUG]   PARSED type=RemoveBuffIcon eid=6246 target=None
+16:36:13 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:13 [DEBUG]   PARSED type=RemoveBuffIcon eid=6554 target=None
+16:36:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:13 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:14 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=62
+16:36:14 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:14 [DEBUG] CHATCOMBAT text="You try to attack, but you must face your target."
+16:36:14 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:14 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:14 [DEBUG] DMG  a tomb burrower(#7515) type=None 17->15/100 amt=2 attacker=#6246(6246)
+16:36:14 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +2dmg by Entity#6246(6246) total=86
+16:36:14 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=88
+16:36:14 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:14 [DEBUG] CHATCOMBAT text="Ladonte pierces a tomb burrower with their offhand for 19 points of damage."
+16:36:14 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +19dmg by Ladonte(#6134) text_total=1191
+16:36:14 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=44
+16:36:14 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:14 [DEBUG] CHATCOMBAT text="a tomb burrower's armor breaks.N"
+16:36:14 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=42
+16:36:14 [DEBUG]   PARSED type=EndCasting eid=6134 target=7515
+16:36:14 [DEBUG] ENDCAST caster=#6134 target=#7515 text=""
+16:36:14 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:14 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:15 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:15 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:15 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=97
+16:36:15 [DEBUG]   PARSED type=EndCasting eid=6554 target=7515
+16:36:15 [DEBUG] ENDCAST caster=#6554 target=#7515 text="Nickels's Bite hits a tomb burrower for 10 points of damage.&"
+16:36:15 [DEBUG]   -> DMG_HIT attacker=Nickels(#6554) -> victim=a tomb burrower(#7515)
+16:36:15 [DEBUG]   TEXT_DMG "a tomb burrower"(#7515) +10dmg by Nickels(#6554) text_total=1201
+16:36:15 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:15 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:15 [DEBUG] DMG  a tomb burrower(#7515) type=None 15->13/100 amt=2 attacker=Nickels(6554)
+16:36:15 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +2dmg by Nickels(6554) total=88
+16:36:15 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+16:36:15 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:15 [DEBUG] CHATCOMBAT text="Nickels bites a tomb burrower for 22 points of damage."
+16:36:15 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +22dmg by Nickels(#6554) text_total=1223
+16:36:15 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:15 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:15 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=66
+16:36:15 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:15 [DEBUG] CHATCOMBAT text="Nickels bites a tomb burrower for 8 points of damage."
+16:36:15 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +8dmg by Nickels(#6554) text_total=1231
+16:36:15 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:15 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:15 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:15 [DEBUG]   PARSED type=RemoveBuffIcon eid=6056 target=None
+16:36:15 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+16:36:15 [DEBUG]   PARSED type=AddBuffIcon eid=6477 target=None
+16:36:15 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+16:36:15 [DEBUG]   PARSED type=AddBuffIcon eid=6056 target=None
+16:36:16 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:16 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:16 [DEBUG] DMG  a tomb burrower(#7515) type=None 13->12/100 amt=1 attacker=Nickels(6554)
+16:36:16 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Nickels(6554) total=89
+16:36:16 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=63
+16:36:16 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:16 [DEBUG] CHATCOMBAT text="You slash a tomb burrower for 12 points of damage."
+16:36:16 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +12dmg by Entity#6246(#6246) text_total=1243
+16:36:16 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:16 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:16 [DEBUG] MSG_UNKNOWN_NEW 0x0005 dir=IN len=23 body=08 03 74 03 0f 00 00 00 03 00 00 00 60 02 00 00 00 00 00 00 02 02 01
+16:36:16 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:16 [DEBUG]   PARSED type=RemoveBuffIcon eid=6043 target=None
+16:36:16 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:16 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:16 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:16 [DEBUG]   PARSED type=UpdateHealth eid=6554 target=None
+16:36:16 [DEBUG] HEAL Nickels(#6554) 87->88/100 delta=+1 last_attacker=None(None)
+16:36:16 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:16 [DEBUG]   PARSED type=UpdateHealth eid=6043 target=None
+16:36:16 [DEBUG] HEAL Pitborn(#6043) 618->626/840 delta=+8 last_attacker=None(None)
+16:36:16 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:16 [DEBUG]   PARSED type=UpdateMana eid=6043 target=None
+16:36:16 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:16 [DEBUG]   PARSED type=UpdateHealth eid=6134 target=None
+16:36:16 [DEBUG] HEAL Ladonte(#6134) 998->1004/1246 delta=+6 last_attacker=None(None)
+16:36:16 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:16 [DEBUG]   PARSED type=UpdateHealth eid=6246 target=None
+16:36:16 [DEBUG] HEAL #6246(#6246) 1027->1028/1204 delta=+1 last_attacker=#6246(6246)
+16:36:16 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:16 [DEBUG]   PARSED type=UpdateMana eid=6246 target=None
+16:36:16 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:16 [DEBUG]   PARSED type=RemoveBuffIcon eid=6056 target=None
+16:36:17 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+16:36:17 [DEBUG]   PARSED type=CastAbility eid=None target=7515
+16:36:17 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:36:17 [DEBUG]   PARSED type=UpdateEndurance eid=6134 target=None
+16:36:17 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:17 [DEBUG]   PARSED type=RemoveBuffIcon eid=6477 target=None
+16:36:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:17 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:17 [DEBUG] DMG  a tomb burrower(#7515) type=None 12->11/100 amt=1 attacker=Nickels(6554)
+16:36:17 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Nickels(6554) total=90
+16:36:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:17 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:17 [DEBUG] DMG  a tomb burrower(#7515) type=None 11->10/100 amt=1 attacker=Nickels(6554)
+16:36:17 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Nickels(6554) total=91
+16:36:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:17 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:17 [DEBUG] DMG  a tomb burrower(#7515) type=None 10->8/100 amt=2 attacker=Nickels(6554)
+16:36:17 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +2dmg by Nickels(6554) total=93
+16:36:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=41
+16:36:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:17 [DEBUG] CHATCOMBAT text="Target has nothing to purge."
+16:36:17 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=116
+16:36:17 [DEBUG]   PARSED type=EndCasting eid=6246 target=7515
+16:36:17 [DEBUG] ENDCAST caster=#6246 target=#7515 text="Your Restorative Smite hits a tomb burrower for 62 points of damage.#"
+16:36:17 [DEBUG]   -> DMG_LOCAL_SPELL caster=#6246 -> victim=a tomb burrower(#7515)
+16:36:17 [DEBUG]   TEXT_DMG "a tomb burrower"(#7515) +62dmg by Entity#6246(#6246) text_total=1305
+16:36:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:17 [DEBUG]   PARSED type=UpdateHealth eid=6246 target=None
+16:36:17 [DEBUG] HEAL #6246(#6246) 1028->1049/1204 delta=+21 last_attacker=#6246(6246)
+16:36:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:17 [DEBUG]   PARSED type=UpdateHealth eid=6554 target=None
+16:36:17 [DEBUG] HEAL Nickels(#6554) 88->90/100 delta=+2 last_attacker=None(None)
+16:36:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:17 [DEBUG]   PARSED type=UpdateHealth eid=7466 target=None
+16:36:17 [DEBUG] HEAL #7466(#7466) 96->98/100 delta=+2 last_attacker=None(None)
+16:36:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:17 [DEBUG]   PARSED type=UpdateHealth eid=6134 target=None
+16:36:17 [DEBUG] HEAL Ladonte(#6134) 1004->1025/1246 delta=+21 last_attacker=None(None)
+16:36:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:17 [DEBUG]   PARSED type=UpdateHealth eid=6043 target=None
+16:36:17 [DEBUG] HEAL Pitborn(#6043) 626->647/840 delta=+21 last_attacker=None(None)
+16:36:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=60
+16:36:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:17 [DEBUG] CHATCOMBAT text="Your Restorative Smite heals you for 21 Health."
+16:36:17 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=38
+16:36:17 [DEBUG]   PARSED type=EndCasting eid=6246 target=6246
+16:36:17 [DEBUG] ENDCAST caster=#6246 target=#6246 text=""
+16:36:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=64
+16:36:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:17 [DEBUG] CHATCOMBAT text="Your Restorative Smite heals Nickels for 21 Health."
+16:36:17 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=38
+16:36:17 [DEBUG]   PARSED type=EndCasting eid=6246 target=6554
+16:36:17 [DEBUG] ENDCAST caster=#6246 target=#6554 text=""
+16:36:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=72
+16:36:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:17 [DEBUG] CHATCOMBAT text="Your Restorative Smite heals a tomb burrower for 21 Health."
+16:36:17 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=38
+16:36:17 [DEBUG]   PARSED type=EndCasting eid=6246 target=7466
+16:36:17 [DEBUG] ENDCAST caster=#6246 target=#7466 text=""
+16:36:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=64
+16:36:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:17 [DEBUG] CHATCOMBAT text="Your Restorative Smite heals Ladonte for 21 Health."
+16:36:17 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=38
+16:36:17 [DEBUG]   PARSED type=EndCasting eid=6246 target=6134
+16:36:17 [DEBUG] ENDCAST caster=#6246 target=#6134 text=""
+16:36:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=64
+16:36:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:17 [DEBUG] CHATCOMBAT text="Your Restorative Smite heals Pitborn for 21 Health."
+16:36:17 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=38
+16:36:17 [DEBUG]   PARSED type=EndCasting eid=6246 target=6043
+16:36:17 [DEBUG] ENDCAST caster=#6246 target=#6043 text=""
+16:36:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=74
+16:36:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:17 [DEBUG] CHATCOMBAT text="Ladonte's Frenzy hits a tomb burrower for 8 points of damage.&"
+16:36:17 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +8dmg by Ladonte(#6134) text_total=1313
+16:36:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=74
+16:36:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:17 [DEBUG] CHATCOMBAT text="Ladonte's Frenzy hits a tomb burrower for 3 points of damage.&"
+16:36:17 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +3dmg by Ladonte(#6134) text_total=1316
+16:36:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=74
+16:36:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:17 [DEBUG] CHATCOMBAT text="Ladonte's Frenzy hits a tomb burrower for 2 points of damage.&"
+16:36:17 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +2dmg by Ladonte(#6134) text_total=1318
+16:36:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=74
+16:36:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:17 [DEBUG] CHATCOMBAT text="Ladonte's Frenzy hits a tomb burrower for 5 points of damage.&"
+16:36:17 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +5dmg by Ladonte(#6134) text_total=1323
+16:36:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=75
+16:36:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:17 [DEBUG] CHATCOMBAT text="Ladonte's Frenzy hits a tomb burrower for 13 points of damage.&"
+16:36:17 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +13dmg by Ladonte(#6134) text_total=1336
+16:36:17 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=120
+16:36:17 [DEBUG]   PARSED type=AddBuffIcon eid=6134 target=None
+16:36:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:17 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:17 [DEBUG] DMG  a tomb burrower(#7515) type=None 8->6/100 amt=2 attacker=#6246(6246)
+16:36:17 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +2dmg by Entity#6246(6246) total=95
+16:36:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:17 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:17 [DEBUG] DMG  a tomb burrower(#7515) type=None 6->5/100 amt=1 attacker=#6246(6246)
+16:36:17 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Entity#6246(6246) total=96
+16:36:17 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=33
+16:36:17 [DEBUG]   PARSED type=EndCasting eid=6134 target=7515
+16:36:17 [DEBUG] ENDCAST caster=#6134 target=#7515 text=""
+16:36:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:17 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:17 [DEBUG] DMG  a tomb burrower(#7515) type=None 5->4/100 amt=1 attacker=#6246(6246)
+16:36:17 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Entity#6246(6246) total=97
+16:36:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=69
+16:36:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:17 [DEBUG] CHATCOMBAT text="Ladonte slashes a tomb burrower for 10 points of damage."
+16:36:17 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +10dmg by Ladonte(#6134) text_total=1346
+16:36:17 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:17 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:17 [DEBUG]   PARSED type=UpdateHealth eid=7466 target=None
+16:36:18 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:18 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:19 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:19 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=72
+16:36:19 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:19 [DEBUG] CHATCOMBAT text="Nickels's Rip hits a tomb burrower for 10 points of damage.J"
+16:36:19 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +10dmg by Nickels(#6554) text_total=1356
+16:36:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:19 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:19 [DEBUG] DMG  a tomb burrower(#7515) type=None 4->3/100 amt=1 attacker=#6246(6246)
+16:36:19 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Entity#6246(6246) total=98
+16:36:19 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=69
+16:36:19 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:19 [DEBUG] CHATCOMBAT text="Ladonte slashes a tomb burrower for 15 points of damage."
+16:36:19 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +15dmg by Ladonte(#6134) text_total=1371
+16:36:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:19 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:19 [DEBUG] DMG  a tomb burrower(#7515) type=None 3->1/100 amt=2 attacker=#6246(6246)
+16:36:19 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +2dmg by Entity#6246(6246) total=100
+16:36:19 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=69
+16:36:19 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:19 [DEBUG] CHATCOMBAT text="Ladonte slashes a tomb burrower for 22 points of damage."
+16:36:19 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +22dmg by Ladonte(#6134) text_total=1393
+16:36:19 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:19 [DEBUG]   PARSED type=UpdateMana eid=6056 target=None
+16:36:19 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:19 [DEBUG]   PARSED type=UpdateMana eid=6477 target=None
+16:36:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:19 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:19 [DEBUG] DMG  a tomb burrower(#7515) type=None 1->0/100 amt=1 attacker=#6246(6246)
+16:36:19 [DEBUG]   ENC+ "a tomb burrower"(#7515) type=None +1dmg by Entity#6246(6246) total=101
+16:36:19 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+16:36:19 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:19 [DEBUG] CHATCOMBAT text="Nickels bites a tomb burrower for 14 points of damage."
+16:36:19 [DEBUG]   CHATCOMBAT_DMG "a tomb burrower"(#7515) +14dmg by Nickels(#6554) text_total=1407
+16:36:19 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:19 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:19 [DEBUG]   PARSED type=UpdateHealth eid=7515 target=None
+16:36:19 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=93
+16:36:19 [DEBUG]   PARSED type=EndCasting eid=6134 target=7515
+16:36:19 [DEBUG] ENDCAST caster=#6134 target=#7515 text="Ladonte's Rend hits a tomb burrower for 51 points of damage.&"
+16:36:19 [DEBUG]   -> DMG_HIT attacker=Ladonte(#6134) -> victim=a tomb burrower(#7515)
+16:36:19 [DEBUG]   TEXT_DMG "a tomb burrower"(#7515) +51dmg by Ladonte(#6134) text_total=1458
+16:36:20 [DEBUG] MSG_IN 0x0013 Die dir=IN body_len=10
+16:36:20 [DEBUG]   PARSED type=Die eid=7515 target=None
+16:36:20 [DEBUG] DIE #7515 "a tomb burrower" hp_dmg=101 text_dmg=1458 best=1458 players=[6043, 6134, 6554, 6246, 7515]
+16:36:20 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=39
+16:36:20 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:20 [DEBUG] CHATCOMBAT text="You gain party experience!W"
+16:36:20 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:20 [DEBUG]   PARSED type=RemoveBuffIcon eid=7515 target=None
+16:36:20 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:20 [DEBUG]   PARSED type=RemoveBuffIcon eid=7515 target=None
+16:36:20 [DEBUG] MSG_UNKNOWN_NEW 0x00A1 dir=IN len=18 body=5b 1d 00 00 0d 00 62 75 66 66 5f 46 61 74 69 67 75 65
+16:36:20 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:20 [DEBUG]   PARSED type=RemoveBuffIcon eid=7515 target=None
+16:36:20 [DEBUG] MSG_UNKNOWN_NEW 0x0024 dir=IN len=8 body=66 18 00 00 af 1a 00 00
+16:36:20 [DEBUG] MSG_IN 0x0012 Autoattack dir=OUT body_len=1
+16:36:20 [DEBUG]   PARSED type=Autoattack eid=None target=None
+16:36:20 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=OUT body_len=4
+16:36:20 [DEBUG]   PARSED type=ChangeTarget eid=None target=0
+16:36:20 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:20 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:21 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:21 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:22 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc', 7521: 'btl', 7522: 'btl', 756: 'drv'}
+16:36:22 [INFO ] TOTALS_DEBUG tracker.levels={652: 0, 7521: 0, 7522: 0, 756: 0}
+16:36:22 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:22 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:22 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:22 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:22 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:22 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:22 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:22 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:22 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:22 [DEBUG]   PARSED type=UpdateHealth eid=6554 target=None
+16:36:22 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:22 [DEBUG]   PARSED type=UpdateHealth eid=6043 target=None
+16:36:22 [DEBUG] HEAL Pitborn(#6043) 647->655/840 delta=+8 last_attacker=None(None)
+16:36:22 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:22 [DEBUG]   PARSED type=UpdateMana eid=6043 target=None
+16:36:22 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:22 [DEBUG]   PARSED type=UpdateHealth eid=6134 target=None
+16:36:22 [DEBUG] HEAL Ladonte(#6134) 1025->1031/1246 delta=+6 last_attacker=None(None)
+16:36:22 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:36:22 [DEBUG]   PARSED type=UpdateEndurance eid=6134 target=None
+16:36:22 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:22 [DEBUG]   PARSED type=UpdateHealth eid=6246 target=None
+16:36:22 [DEBUG] HEAL #6246(#6246) 1049->1050/1204 delta=+1 last_attacker=#6246(6246)
+16:36:22 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:22 [DEBUG]   PARSED type=UpdateMana eid=6246 target=None
+16:36:23 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+16:36:23 [DEBUG]   PARSED type=DespawnEntity eid=7515 target=None
+16:36:23 [DEBUG] DESPAWN #7515
+16:36:23 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc', 7521: 'btl', 7522: 'btl', 756: 'drv'}
+16:36:23 [INFO ] TOTALS_DEBUG tracker.levels={652: 0, 7521: 0, 7522: 0, 756: 0}
+16:36:23 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:23 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:23 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:23 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:23 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:23 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:23 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:23 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:23 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=82
+16:36:23 [DEBUG]   PARSED type=AddBuffIcon eid=6056 target=None
+16:36:24 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:24 [DEBUG]   PARSED type=UpdateHealth eid=7466 target=None
+16:36:24 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:36:24 [DEBUG]   PARSED type=UpdateEndurance eid=6056 target=None
+16:36:24 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:24 [DEBUG]   PARSED type=RemoveBuffIcon eid=6554 target=None
+16:36:24 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc', 7521: 'btl', 7522: 'btl', 756: 'drv'}
+16:36:24 [INFO ] TOTALS_DEBUG tracker.levels={652: 0, 7521: 0, 7522: 0, 756: 0}
+16:36:24 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:24 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:24 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:24 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:24 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:24 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:24 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=64
+16:36:24 [DEBUG]   PARSED type=BeginCasting eid=6477 target=7517
+16:36:24 [DEBUG] ATTRIB BeginCasting caster=Eyebrow(#6477) -> target=#7517(#7517) ability="Shoot"
+16:36:24 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:24 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:25 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+16:36:25 [DEBUG]   PARSED type=AddBuffIcon eid=6056 target=None
+16:36:25 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:25 [DEBUG]   PARSED type=RemoveBuffIcon eid=6056 target=None
+16:36:25 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:25 [DEBUG]   PARSED type=UpdateMana eid=6056 target=None
+16:36:25 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:36:25 [DEBUG]   PARSED type=UpdateEndurance eid=6056 target=None
+16:36:25 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:25 [DEBUG]   PARSED type=UpdateMana eid=6477 target=None
+16:36:25 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc', 7521: 'btl', 7522: 'btl', 756: 'drv'}
+16:36:25 [INFO ] TOTALS_DEBUG tracker.levels={652: 0, 7521: 0, 7522: 0, 756: 0}
+16:36:25 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:25 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:25 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:25 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:25 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:25 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:25 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:25 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:25 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:36:25 [DEBUG]   PARSED type=UpdateEndurance eid=6134 target=None
+16:36:26 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+16:36:26 [DEBUG]   PARSED type=DespawnEntity eid=7520 target=None
+16:36:26 [DEBUG] DESPAWN #7520
+16:36:26 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=82
+16:36:26 [DEBUG]   PARSED type=AddBuffIcon eid=6134 target=None
+16:36:26 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc', 7521: 'btl', 7522: 'btl', 756: 'drv'}
+16:36:26 [INFO ] TOTALS_DEBUG tracker.levels={652: 0, 7521: 0, 7522: 0, 756: 0}
+16:36:26 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:26 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:26 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:26 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:26 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:26 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:26 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:26 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:27 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:27 [DEBUG]   PARSED type=RemoveBuffIcon eid=6134 target=None
+16:36:27 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc', 7521: 'btl', 7522: 'btl', 756: 'drv'}
+16:36:27 [INFO ] TOTALS_DEBUG tracker.levels={652: 0, 7521: 0, 7522: 0, 756: 0}
+16:36:27 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:27 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:27 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:27 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:27 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:27 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:28 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:28 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:28 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+16:36:28 [DEBUG]   PARSED type=SpawnEntity eid=7523 target=None
+16:36:28 [DEBUG] SPAWN #7523 type=1 "a giant tomb burrower" HP:1000/1000 class=btl lvl=0
+16:36:28 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+16:36:28 [DEBUG]   PARSED type=SpawnEntity eid=7523 target=None
+16:36:28 [DEBUG] SPAWN #7523 type=1 "a giant tomb burrower" HP:1000/1000 class=btl lvl=0
+16:36:28 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=414
+16:36:28 [DEBUG]   PARSED type=SpawnEntity eid=898 target=None
+16:36:28 [DEBUG] SPAWN #898 type=1 "a skeletal giant" HP:1000/1000 class=sgs lvl=0
+16:36:28 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc', 7521: 'btl', 7522: 'btl', 756: 'drv', 7523: 'btl', 898: 'sgs'}
+16:36:28 [INFO ] TOTALS_DEBUG tracker.levels={652: 0, 7521: 0, 7522: 0, 756: 0, 7523: 0, 898: 0}
+16:36:28 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:28 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:28 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:28 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:28 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:28 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:28 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:28 [DEBUG]   PARSED type=UpdateHealth eid=6554 target=None
+16:36:28 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:28 [DEBUG]   PARSED type=UpdateHealth eid=6043 target=None
+16:36:28 [DEBUG] HEAL Pitborn(#6043) 655->663/840 delta=+8 last_attacker=None(None)
+16:36:28 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:28 [DEBUG]   PARSED type=UpdateMana eid=6043 target=None
+16:36:28 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:28 [DEBUG]   PARSED type=UpdateHealth eid=6134 target=None
+16:36:28 [DEBUG] HEAL Ladonte(#6134) 1031->1037/1246 delta=+6 last_attacker=None(None)
+16:36:28 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:36:28 [DEBUG]   PARSED type=UpdateEndurance eid=6134 target=None
+16:36:28 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:28 [DEBUG]   PARSED type=UpdateHealth eid=6246 target=None
+16:36:28 [DEBUG] HEAL #6246(#6246) 1050->1051/1204 delta=+1 last_attacker=#6246(6246)
+16:36:28 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:28 [DEBUG]   PARSED type=UpdateMana eid=6246 target=None
+16:36:29 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:29 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:29 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=147
+16:36:29 [DEBUG]   PARSED type=AddBuffIcon eid=6554 target=None
+16:36:29 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:29 [DEBUG]   PARSED type=RemoveBuffIcon eid=6246 target=None
+16:36:29 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=50
+16:36:29 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:29 [DEBUG] CHATCOMBAT text="Your spiritual connection is severed.D"
+16:36:29 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc', 7521: 'btl', 7522: 'btl', 756: 'drv', 7523: 'btl', 898: 'sgs'}
+16:36:29 [INFO ] TOTALS_DEBUG tracker.levels={652: 0, 7521: 0, 7522: 0, 756: 0, 7523: 0, 898: 0}
+16:36:29 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:29 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:29 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:29 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:29 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:29 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:30 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:30 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:30 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:36:30 [DEBUG]   PARSED type=UpdateHealth eid=7466 target=None
+16:36:30 [DEBUG] HEAL #7466(#7466) 98->99/100 delta=+1 last_attacker=None(None)
+16:36:30 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=90
+16:36:30 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:36:30 [DEBUG] CHATCOMBAT text="Ladonte places some more wood on the campfire. It burns brighter than before."
+16:36:30 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=156
+16:36:30 [DEBUG]   PARSED type=SpawnEntity eid=648 target=None
+16:36:30 [DEBUG] SPAWN #648 type=1 "a saltwater crocodile" HP:1000/1000 class=crc lvl=0
+16:36:30 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc', 7521: 'btl', 7522: 'btl', 756: 'drv', 7523: 'btl', 898: 'sgs', 648: 'crc'}
+16:36:30 [INFO ] TOTALS_DEBUG tracker.levels={652: 0, 7521: 0, 7522: 0, 756: 0, 7523: 0, 898: 0, 648: 0}
+16:36:30 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:30 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:30 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:30 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:30 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:30 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:31 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:31 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:31 [DEBUG] MSG_ITEM 0x0083 UpdateEquipment dir=IN len=1384 body=f6 17 00 00 00 09 00 00 00 0a 00 52 69 67 68 74 48 61 6e 64 10 00 54 6f 6f 6c 5f 53 69 63 6b 6c 65 5f 41 30 30 e6 94 05 00 00 00 00 00 01 01 00 00 00 00 07 00 42 61 73 65 30 30 0f 00 46 41 42
+16:36:31 [DEBUG] MSG_UNKNOWN_NEW 0x5F54 dir=IN len=281 body=57 6f 72 6e 42 72 6f 77 6e 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e ff 00 ff 00 ff 00 ff
+16:36:31 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:31 [DEBUG]   PARSED type=UpdateMana eid=6056 target=None
+16:36:31 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:36:31 [DEBUG]   PARSED type=UpdateMana eid=6477 target=None
+16:36:31 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc', 7521: 'btl', 7522: 'btl', 756: 'drv', 7523: 'btl', 898: 'sgs', 648: 'crc'}
+16:36:31 [INFO ] TOTALS_DEBUG tracker.levels={652: 0, 7521: 0, 7522: 0, 756: 0, 7523: 0, 898: 0, 648: 0}
+16:36:31 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:31 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:31 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:31 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:31 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:31 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:31 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+16:36:31 [DEBUG]   PARSED type=AddBuffIcon eid=6477 target=None
+16:36:31 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+16:36:31 [DEBUG]   PARSED type=DespawnEntity eid=7503 target=None
+16:36:31 [DEBUG] DESPAWN #7503
+16:36:32 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:32 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:32 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+16:36:32 [DEBUG]   PARSED type=SpawnEntity eid=7524 target=None
+16:36:32 [DEBUG] SPAWN #7524 type=1 "a tomb burrower" HP:1000/1000 class=btl lvl=0
+16:36:32 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+16:36:32 [DEBUG]   PARSED type=SpawnEntity eid=7524 target=None
+16:36:32 [DEBUG] SPAWN #7524 type=1 "a tomb burrower" HP:1000/1000 class=btl lvl=0
+16:36:32 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:32 [DEBUG]   PARSED type=AddBuffIcon eid=6134 target=None
+16:36:32 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc', 7521: 'btl', 7522: 'btl', 756: 'drv', 7523: 'btl', 898: 'sgs', 648: 'crc', 7524: 'btl'}
+16:36:32 [INFO ] TOTALS_DEBUG tracker.levels={652: 0, 7521: 0, 7522: 0, 756: 0, 7523: 0, 898: 0, 648: 0, 7524: 0}
+16:36:32 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:32 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:32 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:32 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:32 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:32 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:33 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:33 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None
+16:36:33 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:36:33 [DEBUG]   PARSED type=RemoveBuffIcon eid=6477 target=None
+16:36:33 [INFO ] TOTALS_DEBUG tracker.classes={652: 'crc', 7521: 'btl', 7522: 'btl', 756: 'drv', 7523: 'btl', 898: 'sgs', 648: 'crc', 7524: 'btl'}
+16:36:33 [INFO ] TOTALS_DEBUG tracker.levels={652: 0, 7521: 0, 7522: 0, 756: 0, 7523: 0, 898: 0, 648: 0, 7524: 0}
+16:36:33 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6043 name=Pitborn cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:33 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6134 name=Ladonte cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:33 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6554 name=Nickels cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:33 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=6246 name=Entity#6246 cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:33 [INFO ] TOTALS_DEBUG enc=a tomb burrower player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:33 [INFO ] TOTALS_DEBUG enc=Ladonte player eid=7515 name=a tomb burrower cls='' lvl=None tracker_cls=None tracker_lvl=None
+16:36:34 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:36:34 [DEBUG]   PARSED type=AddBuffIcon eid=6246 target=None

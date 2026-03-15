@@ -34,7 +34,13 @@ from collections import defaultdict
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
 
-from Crypto.Cipher import AES
+try:
+    from Crypto.Cipher import AES
+except ImportError:
+    import subprocess
+    print("pycryptodome not found — installing...")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "pycryptodome"])
+    from Crypto.Cipher import AES
 
 
 # ===================================================================
@@ -534,11 +540,12 @@ def parse_lnl_frame(payload):
 MESSAGE_IDS = {
     0x0011: "ChangeTarget", 0x0012: "Autoattack", 0x0013: "Die",
     0x0014: "Consider", 0x0020: "SpawnEntity", 0x0021: "DespawnEntity",
-    0x0022: "UpdateHealth", 0x0023: "UpdateMana", 0x0027: "UpdateHealthMana",
+    0x0022: "UpdateHealth", 0x0023: "UpdateMana", 0x0025: "UpdateLevel",
+    0x0027: "UpdateHealthMana",
     0x0029: "UpdateStunState", 0x002A: "UpdateHostileState",
     0x0050: "CastAbility", 0x0053: "AddBuffIcon", 0x0054: "RemoveBuffIcon",
     0x0055: "BeginCasting", 0x0056: "EndCasting", 0x005C: "ParticleHit",
-    0x005D: "CancelBuff", 0x0146: "ChannelAbility",
+    0x005D: "CancelBuff", 0x005F: "UpdateClassHID", 0x0146: "ChannelAbility",
     0x022F: "UpdateEndurance",
     # Loot/inventory
     0x0060: "InventoryItemPickup", 0x0063: "AddItemToInventory",
@@ -556,8 +563,8 @@ MESSAGE_IDS = {
 
 COMBAT_MSG_IDS = {
     0x0011, 0x0012, 0x0013, 0x0014, 0x0020, 0x0021, 0x0022, 0x0023,
-    0x0027, 0x0029, 0x002A, 0x0040, 0x0050, 0x0053, 0x0054, 0x0055,
-    0x0056, 0x005C, 0x005D, 0x0146, 0x022F,
+    0x0025, 0x0027, 0x0029, 0x002A, 0x0040, 0x0050, 0x0053, 0x0054,
+    0x0055, 0x0056, 0x005C, 0x005D, 0x005F, 0x0146, 0x022F,
 }
 
 LOOT_MSG_IDS = {0x0063, 0x0065, 0x0080}
@@ -798,6 +805,17 @@ def parse_combat_event(msg_id, body, direction):
         event["entity_id"], off = _r_u32(body, off)
         event["hostile"], off = _r_bool(body, off)
 
+    elif msg_id == 0x0025:  # UpdateLevel
+        event["type"] = "UpdateLevel"
+        event["entity_id"], off = _r_u32(body, off)
+        event["class_hid"], off = _r_str(body, off)
+        event["level"], off = _r_i32(body, off)
+
+    elif msg_id == 0x005F:  # UpdateClassHID
+        event["type"] = "UpdateClassHID"
+        event["entity_id"], off = _r_u32(body, off)
+        event["class_hid"], off = _r_str(body, off)
+
     elif msg_id == 0x005C:  # ParticleHit
         event["type"] = "ParticleHit"
         event["target_id"], off = _r_u32(body, off)
@@ -1027,7 +1045,7 @@ class Encounter:
             self.players[eid] = {
                 'name': name, 'cls': cls, 'level': level,
                 'dealt': 0, 'text_dealt': 0, 'received': 0,
-                'first': None, 'last': None,
+                'first': None, 'last': None, 'abilities': {},
             }
         else:
             # Update name/class/level if we have better info now
@@ -1095,6 +1113,16 @@ class EntityTracker:
         # Prevents ghost encounters from name-lookup hitting the wrong entity.
         self._pending_chat_dmg = []  # [(target_name, text_dmg, timestamp, attacker_eid)]
 
+    def _backfill_player_info(self, eid, cls=None, level=None):
+        """Update class/level on existing encounter player records for this eid."""
+        for enc in self.encounters:
+            if eid in enc.players:
+                p = enc.players[eid]
+                if cls and not p['cls']:
+                    p['cls'] = cls
+                if level is not None and p['level'] is None:
+                    p['level'] = level
+
     def _mark_local_player(self, eid):
         """Mark entity as the local player and assign player_name if available."""
         self.entity_types[eid] = 0
@@ -1119,13 +1147,15 @@ class EntityTracker:
                 atk_name = self.names.get(eid, f"Entity#{eid}")
                 atk_cls = self.classes.get(eid, "")
                 atk_lvl = self.levels.get(eid)
-                for tag, dmg, ts, tgt_name in self._pending_local_dmg:
+                for tag, dmg, ts, tgt_name, *extra in self._pending_local_dmg:
                     tgt_eid = self._resolve_target_eid(None, tgt_name)
                     if tgt_eid is not None:
                         enc = self._encounter_map.get(tgt_eid)
                         if enc:
                             p = enc.get_or_create_player(eid, atk_name, atk_cls, atk_lvl)
                             p['text_dealt'] += dmg
+                            ab = extra[0] if extra else "Melee"
+                            p['abilities'][ab] = p['abilities'].get(ab, 0) + dmg
                             if p['first'] is None:
                                 p['first'] = ts
                             p['last'] = ts
@@ -1174,6 +1204,23 @@ class EntityTracker:
             return "???"
         with self._lock:
             return self.names.get(eid, f"Entity#{eid}")
+
+    @staticmethod
+    def _extract_ability_name(text):
+        """Extract ability or melee verb from combat text for ability breakdown."""
+        # Spell: "X's AbilityName hits Y for N..." or "Your AbilityName hits Y for N..."
+        m = re.match(r"^(?:.+?'s|Your) (.+?) hits .+? for \d+", text)
+        if m:
+            return m.group(1)
+        # Local melee: "You verb ..."
+        m = re.match(r"^You (\w+)", text)
+        if m:
+            return "Melee"
+        # 3P melee: "Name verbs ..."
+        m = re.match(r"^\S+ (\w+?)(?:e?s) ", text)
+        if m:
+            return "Melee"
+        return "Auto-attack"
 
     def _process_chat_combat(self, text):
         """Process a ChatMessage combat text (channel 1 damage lines).
@@ -1240,7 +1287,7 @@ class EntityTracker:
                 # Don't know local player eid yet — queue for later
                 # attribution when _mark_local_player fires
                 attacker_eid = None
-                self._pending_local_dmg.append(("_deferred_", text_dmg, now, target_name))
+                self._pending_local_dmg.append(("_deferred_", text_dmg, now, target_name, self._extract_ability_name(text)))
             else:
                 # Resolve attacker by name
                 attacker_eid = None
@@ -1274,12 +1321,13 @@ class EntityTracker:
             # the entity likely isn't the real target (just a spawned NPC
             # sharing the name).  Queue damage for when UpdateHealth
             # confirms the actual target — prevents ghost encounters.
+            _ability = self._extract_ability_name(text)
             if target_eid is not None and not from_hp_corr and target_eid not in self.hp:
-                self._pending_chat_dmg.append((target_name, text_dmg, now, attacker_eid))
+                self._pending_chat_dmg.append((target_name, text_dmg, now, attacker_eid, _ability))
                 _plog.debug(f"  CHATCOMBAT_QUEUED target=\"{target_name}\"(#{target_eid} no HP) +{text_dmg}dmg (waiting for UpdateHealth)")
                 return
             if target_eid is None:
-                self._pending_chat_dmg.append((target_name, text_dmg, now, attacker_eid))
+                self._pending_chat_dmg.append((target_name, text_dmg, now, attacker_eid, _ability))
                 _plog.debug(f"  CHATCOMBAT_QUEUED target=\"{target_name}\"(unresolved) +{text_dmg}dmg (waiting for UpdateHealth)")
                 return
 
@@ -1294,6 +1342,8 @@ class EntityTracker:
                 atk_lvl = self.levels.get(attacker_eid)
                 p = enc.get_or_create_player(attacker_eid, atk_name, atk_cls, atk_lvl)
                 p['text_dealt'] += text_dmg
+                ability = self._extract_ability_name(text)
+                p['abilities'][ability] = p['abilities'].get(ability, 0) + text_dmg
                 if p['first'] is None:
                     p['first'] = now
                 p['last'] = now
@@ -1332,6 +1382,8 @@ class EntityTracker:
                 level = event.get("level")
                 if level is not None:
                     self.levels[eid] = level
+                if class_hid or level is not None:
+                    self._backfill_player_info(eid, cls=class_hid, level=level)
                 et = event.get("entity_type")
                 if et is not None:
                     self.entity_types[eid] = et
@@ -1350,6 +1402,25 @@ class EntityTracker:
                             _plog.debug(f"ENC_RETIRE #{eid} \"{old_enc.npc_name}\" best_dmg={old_enc.best_damage} (eid reused by \"{new_name}\")")
                 _safe_name = (name or "").encode('ascii', 'replace').decode('ascii')[:60]
                 _plog.debug(f"SPAWN #{eid} type={et} \"{_safe_name}\" HP:{event.get('hp')}/{event.get('max_hp')} class={class_hid} lvl={level}")
+                return None
+
+            if etype == "UpdateClassHID":
+                class_hid = event.get("class_hid")
+                if class_hid:
+                    self.classes[eid] = class_hid
+                    self._backfill_player_info(eid, cls=class_hid)
+                    _plog.debug(f"CLASS_UPDATE #{eid} class={class_hid}")
+                return None
+
+            if etype == "UpdateLevel":
+                class_hid = event.get("class_hid")
+                level = event.get("level")
+                if class_hid:
+                    self.classes[eid] = class_hid
+                if level is not None:
+                    self.levels[eid] = level
+                self._backfill_player_info(eid, cls=class_hid, level=level)
+                _plog.debug(f"LEVEL_UPDATE #{eid} class={class_hid} level={level}")
                 return None
 
             if etype == "DespawnEntity":
@@ -1497,6 +1568,8 @@ class EntityTracker:
                                 atk_lvl = self.levels.get(eid)
                                 p = enc.get_or_create_player(eid, atk_name, atk_cls, atk_lvl)
                                 p['text_dealt'] += text_dmg
+                                ability = self._extract_ability_name(text)
+                                p['abilities'][ability] = p['abilities'].get(ability, 0) + text_dmg
                                 if p['first'] is None:
                                     p['first'] = now
                                 p['last'] = now
@@ -1598,7 +1671,7 @@ class EntityTracker:
                     if eid_name:
                         flush_now = time.time()
                         remaining = []
-                        for tgt_name, txt_dmg, ts, atk_eid in self._pending_chat_dmg:
+                        for tgt_name, txt_dmg, ts, atk_eid, *extra in self._pending_chat_dmg:
                             if tgt_name == eid_name:
                                 enc = self._get_or_create_encounter(eid, ts)
                                 enc.text_damage += txt_dmg
@@ -1612,12 +1685,14 @@ class EntityTracker:
                                     atk_lvl = self.levels.get(atk_eid)
                                     p = enc.get_or_create_player(atk_eid, atk_name, atk_cls, atk_lvl)
                                     p['text_dealt'] += txt_dmg
+                                    ab = extra[0] if extra else "Melee"
+                                    p['abilities'][ab] = p['abilities'].get(ab, 0) + txt_dmg
                                     if p['first'] is None:
                                         p['first'] = ts
                                     p['last'] = ts
                                 _plog.debug(f"  CHATCOMBAT_FLUSH \"{eid_name}\"(#{eid}) +{txt_dmg}txt_dmg atk={atk_eid} (queued {flush_now - ts:.1f}s ago)")
                             elif flush_now - ts < 10.0:
-                                remaining.append((tgt_name, txt_dmg, ts, atk_eid))
+                                remaining.append((tgt_name, txt_dmg, ts, atk_eid, *(extra if extra else [])))
                             else:
                                 _plog.debug(f"  CHATCOMBAT_EXPIRED \"{tgt_name}\" +{txt_dmg}txt_dmg (stale {flush_now - ts:.1f}s)")
                         self._pending_chat_dmg = remaining
@@ -1969,12 +2044,12 @@ class CaptureBackend:
     def _lifecycle_loop(self):
         """Main lifecycle: find process -> start capture -> monitor."""
         # Phase 1: Find mnm.exe
-        self._status("Waiting for mnm.exe...")
+        self._status("Waiting...")
         while not self._stop.is_set():
             pid = find_game_pid()
             if pid:
                 self._pid = pid
-                self._status(f"Found mnm.exe (PID {pid})")
+                self._status("Connecting...")
                 break
             self._stop.wait(2)
 
@@ -1995,13 +2070,13 @@ class CaptureBackend:
         # Phase 3: Monitor process health
         while not self._stop.is_set():
             if not is_process_alive(self._pid):
-                self._status("mnm.exe exited — waiting for restart...")
+                self._status("Game exited")
                 # Keep running, wait for new process
                 while not self._stop.is_set():
                     pid = find_game_pid()
                     if pid:
                         self._pid = pid
-                        self._status(f"Reconnected to mnm.exe (PID {pid})")
+                        self._status("Reconnected")
                         break
                     self._stop.wait(2)
             self._stop.wait(3)
@@ -2033,7 +2108,7 @@ class CaptureBackend:
                             self._hmac_key = keys.get("hmac_key")
                             self._xor_key = keys.get("xor_key")
                         if old != keys["aes_key"]:
-                            self._status(f"PID {self._pid} | Keys acquired | Live")
+                            self._status("Live")
                 except Exception:
                     pass
             self._stop.wait(5)
@@ -2055,7 +2130,7 @@ class CaptureBackend:
             self._sock.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
             self._sock.ioctl(socket.SIO_RCVALL, socket.RCVALL_ON)
         except (PermissionError, OSError) as e:
-            self._status(f"Capture failed: {e} (run as Admin)")
+            self._status("Capture failed (run as Admin)")
             return
 
         while not self._stop.is_set():
@@ -2311,13 +2386,17 @@ class CaptureBackend:
             with self._item_lock:
                 if item_rec and item_hid:
                     self._items[item_hid] = item_rec
-                self._item_drops.append({
-                    "hid": item_hid,
-                    "name": item_name or "?",
-                    "quantity": event.get("quantity", 1),
-                    "timestamp": time.time(),
-                    "npc_name": npc_name,
-                })
+                # Only add drop if we have a real name — ChatCombat loot
+                # text (via _check_chat_loot) already captures drops with
+                # proper names, so skip unknown items to avoid "?" duplicates.
+                if item_name:
+                    self._item_drops.append({
+                        "hid": item_hid,
+                        "name": item_name,
+                        "quantity": event.get("quantity", 1),
+                        "timestamp": time.time(),
+                        "npc_name": npc_name,
+                    })
 
             # Build loot display with full item stats
             player = self.player_name or "You"
@@ -2358,6 +2437,8 @@ class CaptureBackend:
         r'\[item\|([^|]+)\|([^\]]+)\]')
     _LOOT_FROM_RE = re.compile(
         r"from (.+?)(?:'s)? corpse", re.IGNORECASE)
+    _LOOT_WHO_RE = re.compile(
+        r"^--(?:You|([\w]+)) loots? ")
 
     def _check_chat_loot(self, text):
         """Parse [item|hid|Name] from ChatCombat loot text and store as item drop."""
@@ -2373,6 +2454,14 @@ class CaptureBackend:
         if fm:
             npc_name = fm.group(1)
 
+        # Extract looter name: "--You loot" or "--PlayerName loots"
+        looter = None
+        lm = self._LOOT_WHO_RE.match(text)
+        if lm:
+            looter = lm.group(1)  # None means "You" matched -> local player
+            if looter is None:
+                looter = self.player_name or "You"
+
         with self._item_lock:
             self._item_drops.append({
                 "hid": item_hid,
@@ -2380,9 +2469,10 @@ class CaptureBackend:
                 "quantity": 1,
                 "timestamp": time.time(),
                 "npc_name": npc_name,
+                "looter": looter,
             })
 
-        _plog.debug(f"LOOT_CHAT item={item_name} hid={item_hid} npc={npc_name}")
+        _plog.debug(f"LOOT_CHAT item={item_name} hid={item_hid} npc={npc_name} looter={looter}")
 
     def _format_item_stats(self, item):
         """Format an ItemRecord dict into a compact stats summary string."""
@@ -2646,6 +2736,21 @@ EVENT_TAG_COLORS = {
     'ItemInformation':   'fg_dim',
 }
 
+# Class HID → readable name mapping (from ClassIconMapping tooltip in game DLL)
+CLASS_HID_NAMES = {
+    "arc": "Arcanist", "brd": "Bard", "bst": "Beastlord", "clr": "Cleric",
+    "dru": "Druid", "ele": "Elementalist", "enc": "Enchanter", "ftr": "Fighter",
+    "mnk": "Monk", "nec": "Necromancer", "pal": "Paladin", "ran": "Ranger",
+    "rng": "Ranger", "rog": "Rogue", "shd": "Shadow Knight", "shm": "Shaman",
+    "war": "Warrior", "wiz": "Wizard", "alc": "Alchemist", "smn": "Summoner",
+}
+
+def _class_label(hid):
+    """Return human-readable class name for a class HID code, or the raw code."""
+    if not hid:
+        return ""
+    return CLASS_HID_NAMES.get(hid, hid)
+
 TRIGGERS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "triggers.json")
 
 TRIGGER_SOUNDS = [
@@ -2690,9 +2795,9 @@ class CombatApp(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("MNM Combat Parser")
-        self.geometry("1000x650")
+        self.geometry("1000x350")
         self.configure(bg='black')
-        self.minsize(700, 400)
+        self.minsize(700, 250)
         self.attributes('-topmost', True)
         self.attributes('-alpha', 0.85)
 
@@ -2769,20 +2874,26 @@ class CombatApp(tk.Tk):
                                        fg=COLORS['teal'], font=('Consolas', 9))
         self._player_label.pack(side=tk.RIGHT, padx=(0, 8))
 
-        self._stats_label = tk.Label(top, text="", bg=COLORS['bg_darker'],
-                                      fg=COLORS['fg_dim'], font=('Consolas', 8))
-        self._stats_label.pack(side=tk.RIGHT, padx=8)
+        self._left_visible = True
+        self._toggle_left_btn = tk.Button(
+            top, text="\u25C0", bg=COLORS['surface'], fg=COLORS['fg'],
+            activebackground=COLORS['border'], activeforeground=COLORS['fg'],
+            font=('Consolas', 9, 'bold'), relief=tk.RAISED, bd=1, padx=5, pady=1,
+            command=self._toggle_left_panel)
+        self._toggle_left_btn.pack(side=tk.RIGHT, padx=(0, 4))
 
         # Main area — 50/50 grid split
         main = tk.Frame(self, bg=COLORS['bg'])
         main.pack(fill=tk.BOTH, expand=True, padx=6, pady=(3, 0))
+        self._main_frame = main
         main.columnconfigure(0, weight=1, uniform='half')
         main.columnconfigure(1, weight=0)  # divider
         main.columnconfigure(2, weight=1, uniform='half')
         main.rowconfigure(0, weight=1)
 
         # Divider
-        tk.Frame(main, bg=COLORS['border'], width=4).grid(row=0, column=1, sticky='ns')
+        self._divider = tk.Frame(main, bg=COLORS['border'], width=4)
+        self._divider.grid(row=0, column=1, sticky='ns')
 
         # Left: combat feed / item tracker
         left = tk.Frame(main, bg=COLORS['bg'])
@@ -2821,17 +2932,17 @@ class CombatApp(tk.Tk):
 
         self._chatlog_var = tk.BooleanVar(value=False)
         self._chatlog_chk = tk.Checkbutton(
-            header_left, text="Chat Log", variable=self._chatlog_var,
+            header_left, text="Text Log", variable=self._chatlog_var,
             bg=COLORS['bg'], fg=COLORS['fg'], selectcolor=COLORS['surface'],
             activebackground=COLORS['bg'], activeforeground=COLORS['fg'],
             font=('Segoe UI', 9), command=self._toggle_chat_log,
         )
         self._chatlog_chk.pack(side=tk.RIGHT, padx=4)
 
-        self._export_csv_btn = ttk.Button(
-            header_left, text="Export CSV", style='Dark.TButton',
-            command=self._export_csv)
-        self._export_csv_btn.pack(side=tk.RIGHT, padx=4)
+        self._export_left_btn = ttk.Button(
+            header_left, text="Export", style='Dark.TButton',
+            command=self._export_left)
+        self._export_left_btn.pack(side=tk.RIGHT, padx=4)
 
         self._item_back_btn = ttk.Button(
             header_left, text="< Back", style='Dark.TButton',
@@ -2956,10 +3067,10 @@ class CombatApp(tk.Tk):
         self._meter_title.pack(side=tk.LEFT, padx=4, pady=2)
         ttk.Button(header_right, text="Reset", style='Dark.TButton',
                    command=self._reset_meter).pack(side=tk.RIGHT, padx=4)
-        self._export_totals_btn = ttk.Button(
+        self._export_meter_btn = ttk.Button(
             header_right, text="Export", style='Dark.TButton',
-            command=self._export_totals)
-        # Hidden by default — shown in totals view
+            command=self._export_meter)
+        self._export_meter_btn.pack(side=tk.RIGHT, padx=4)
         ttk.Button(header_right, text="Totals", style='Dark.TButton',
                    command=self._on_meter_totals).pack(side=tk.RIGHT, padx=4)
 
@@ -3006,7 +3117,21 @@ class CombatApp(tk.Tk):
                 self._append_feed_line(text, tag, extra)
             self._pending_events.clear()
 
-    def _export_csv(self):
+    # ------------------------------------------------------------------
+    # Unified export — left panel
+    # ------------------------------------------------------------------
+
+    def _export_left(self):
+        """Route export to the correct method for the current left view."""
+        v = self._left_view
+        if v == "feed":
+            self._export_feed_csv()
+        elif v in ("items", "item_detail"):
+            self._export_items_csv()
+        elif v == "triggers":
+            self._export_triggers_csv()
+
+    def _export_feed_csv(self):
         if not self._combat_log:
             return
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -3027,6 +3152,83 @@ class CombatApp(tk.Tk):
         except Exception as e:
             self._status_label.configure(text=f"Export failed: {e}")
 
+    def _export_items_csv(self):
+        summary = self._backend.get_item_summary()
+        if not summary:
+            return
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        path = filedialog.asksaveasfilename(
+            defaultextension=".csv",
+            filetypes=[("CSV files", "*.csv"), ("All files", "*.*")],
+            initialfile=f"items_{ts}.csv",
+            title="Export Items",
+        )
+        if not path:
+            return
+        try:
+            with open(path, "w", newline="", encoding="utf-8") as f:
+                w = csv.writer(f)
+                w.writerow(["item_name", "hid", "count", "looter", "looter_count",
+                            "npc_source", "npc_count"])
+                for item in summary:
+                    name = item["name"]
+                    hid = item["hid"]
+                    count = item["count"]
+                    drops = self._backend.get_item_drops_for(name)
+                    # Aggregate looters
+                    looters = {}
+                    npcs = {}
+                    for d in drops:
+                        who = d.get("looter")
+                        if who:
+                            looters[who] = looters.get(who, 0) + d.get("quantity", 1)
+                        npc = d.get("npc_name")
+                        if npc:
+                            npcs[npc] = npcs.get(npc, 0) + d.get("quantity", 1)
+                    # First row: item summary
+                    first_looter = max(looters, key=looters.get) if looters else ""
+                    first_looter_cnt = looters.get(first_looter, 0) if first_looter else 0
+                    first_npc = max(npcs, key=npcs.get) if npcs else ""
+                    first_npc_cnt = npcs.get(first_npc, 0) if first_npc else 0
+                    w.writerow([name, hid, count, first_looter, first_looter_cnt,
+                                first_npc, first_npc_cnt])
+                    # Sub-rows for remaining looters
+                    for who in sorted(looters, key=looters.get, reverse=True):
+                        if who == first_looter:
+                            continue
+                        w.writerow(["", "", "", who, looters[who], "", ""])
+                    # Sub-rows for remaining NPCs
+                    for npc in sorted(npcs, key=npcs.get, reverse=True):
+                        if npc == first_npc:
+                            continue
+                        w.writerow(["", "", "", "", "", npc, npcs[npc]])
+            self._status_label.configure(text=f"Exported {len(summary)} items to {os.path.basename(path)}")
+        except Exception as e:
+            self._status_label.configure(text=f"Export failed: {e}")
+
+    def _export_triggers_csv(self):
+        snapshot = self._backend.get_trigger_snapshot()
+        if not snapshot:
+            return
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        path = filedialog.asksaveasfilename(
+            defaultextension=".csv",
+            filetypes=[("CSV files", "*.csv"), ("All files", "*.*")],
+            initialfile=f"triggers_{ts}.csv",
+            title="Export Triggers",
+        )
+        if not path:
+            return
+        try:
+            with open(path, "w", newline="", encoding="utf-8") as f:
+                w = csv.writer(f)
+                w.writerow(["pattern", "sound", "match_count"])
+                for pattern, sound_label, count in snapshot:
+                    w.writerow([pattern, sound_label, count])
+            self._status_label.configure(text=f"Exported {len(snapshot)} triggers to {os.path.basename(path)}")
+        except Exception as e:
+            self._status_label.configure(text=f"Export failed: {e}")
+
     def _poll_queue(self):
         try:
             # Update status
@@ -3034,9 +3236,9 @@ class CombatApp(tk.Tk):
                 while True:
                     msg = self._status_queue.get_nowait()
                     self._status_label.configure(text=msg)
-                    if "Live" in msg or "Keys" in msg:
+                    if msg == "Live" or msg == "Reconnected":
                         self._status_dot.configure(fg=COLORS['green'])
-                    elif "Waiting" in msg or "exited" in msg:
+                    elif "Waiting" in msg or "exited" in msg or "Connecting" in msg:
                         self._status_dot.configure(fg=COLORS['yellow'])
                     elif "failed" in msg:
                         self._status_dot.configure(fg=COLORS['red'])
@@ -3135,46 +3337,28 @@ class CombatApp(tk.Tk):
             return (view, hidden, items)
 
     def _refresh_meter(self):
-        fp = self._meter_build_fingerprint()
-        if fp == self._meter_fingerprint:
-            self._meter_id = self.after(1000, self._refresh_meter)
-            return
-        self._meter_fingerprint = fp
-
-        # Log encounter state on every UI update so debug logs
-        # mirror what the user sees in the encounters panel.
-        try:
-            all_enc = self._backend.tracker.get_encounters()
-            if all_enc:
-                visible = [e for e in all_enc if e.npc_eid not in self._hidden_encounters]
-                parts = []
-                for e in visible:
-                    status = "DEAD" if e.is_dead else "LIVE"
-                    p_strs = []
-                    for p in sorted(e.players.values(), key=lambda x: max(x['text_dealt'], x['dealt']), reverse=True):
-                        dealt = max(p['text_dealt'], p['dealt'])
-                        p_strs.append(f"{p['name']}={dealt}")
-                    players_str = ", ".join(p_strs) if p_strs else "no_players"
-                    parts.append(f"\"{e.npc_name}\"(#{e.npc_eid}) {status} best={e.best_damage} hp={e.total_damage} txt={e.text_damage} [{players_str}]")
-                _plog.debug(f"ENCOUNTER_UI [{len(visible)} shown] " + " | ".join(parts))
-        except Exception:
-            pass
-
         scroll_pos = self._meter.yview()[0]
         if self._meter_view == "detail":
-            self._render_encounter_detail()
+            fp = self._meter_build_fingerprint()
+            if fp != self._meter_fingerprint:
+                self._meter_fingerprint = fp
+                self._render_encounter_detail()
+                self._meter.after_idle(lambda: self._meter.yview_moveto(scroll_pos))
         elif self._meter_view == "totals":
-            self._render_encounter_totals()
+            fp = self._meter_build_fingerprint()
+            if fp != self._meter_fingerprint:
+                self._meter_fingerprint = fp
+                self._render_encounter_totals()
+                self._meter.after_idle(lambda: self._meter.yview_moveto(scroll_pos))
         else:
+            # List view: always update (in-place when structure unchanged)
             self._render_encounter_list()
-        # Defer scroll restore until after tkinter lays out embedded widgets
-        self._meter.after_idle(lambda: self._meter.yview_moveto(scroll_pos))
         self._meter_id = self.after(1000, self._refresh_meter)
 
     def _build_encounter_label(self, idx, enc):
         tag_parts = []
         if enc.npc_class:
-            tag_parts.append(enc.npc_class)
+            tag_parts.append(_class_label(enc.npc_class))
         if enc.npc_level is not None and enc.npc_level > 0:
             tag_parts.append(f"L{enc.npc_level}")
         tag_str = f" [{' '.join(tag_parts)}]" if tag_parts else ""
@@ -3195,15 +3379,13 @@ class CombatApp(tk.Tk):
         # In-place update: same encounters in same order with same sections
         if (new_eids == self._encounter_button_eids
                 and len(self._encounter_buttons) == len(ordered)):
-            idx = 0
-            for enc in live:
-                idx += 1
-                row = self._encounter_buttons[idx - 1 + (1 if live else 0)]
-                # offset by section header widgets — headers aren't in _encounter_buttons
-                # Actually buttons are stored without headers, so index directly
-            # Simpler: just iterate all buttons in order
+            # Number within each section: live 1..N, dead 1..M
+            li = 0
             for i, enc in enumerate(ordered):
-                label = self._build_encounter_label(i + 1, enc)
+                if enc.is_dead and li == 0:
+                    li = 0  # reset for dead section
+                li_idx = (i - len(live) + 1) if enc.is_dead else (i + 1)
+                label = self._build_encounter_label(li_idx, enc)
                 row = self._encounter_buttons[i]
                 children = row.winfo_children()
                 if children:
@@ -3266,7 +3448,7 @@ class CombatApp(tk.Tk):
         segs = []
         tag_parts = []
         if enc.npc_class:
-            tag_parts.append(enc.npc_class)
+            tag_parts.append(_class_label(enc.npc_class))
         if enc.npc_level is not None and enc.npc_level > 0:
             tag_parts.append(f"L{enc.npc_level}")
         tag_str = f" [{' '.join(tag_parts)}]" if tag_parts else ""
@@ -3288,16 +3470,19 @@ class CombatApp(tk.Tk):
             return max(p['text_dealt'], p['dealt'])
 
         enc_dur = enc.duration
-        players = sorted(enc.players.values(), key=_best_dealt, reverse=True)
-        for i, p in enumerate(players, 1):
+        tracker = self._backend.tracker
+        players = sorted(enc.players.items(), key=lambda x: _best_dealt(x[1]), reverse=True)
+        for i, (p_eid, p) in enumerate(players, 1):
             dealt = _best_dealt(p)
             p_dps = dealt / enc_dur if enc_dur > 0 else 0.0
 
+            p_cls = tracker.classes.get(p_eid) or p['cls']
+            p_lvl = tracker.levels.get(p_eid) if tracker.levels.get(p_eid) is not None else p['level']
             p_tags = []
-            if p['cls']:
-                p_tags.append(p['cls'])
-            if p['level'] is not None and p['level'] > 0:
-                p_tags.append(f"L{p['level']}")
+            if p_cls:
+                p_tags.append(_class_label(p_cls))
+            if p_lvl is not None and p_lvl > 0:
+                p_tags.append(f"L{p_lvl}")
             p_tag = f" [{' '.join(p_tags)}]" if p_tags else ""
 
             segs.append((f"#{i:<3}", 'rank'))
@@ -3368,7 +3553,6 @@ class CombatApp(tk.Tk):
         self._detail_seg_cache = None
         self._encounter_button_eids = []  # force full list rebuild
         self._meter_back_btn.pack_forget()
-        self._export_totals_btn.pack_forget()
         self._meter_title.configure(text="Encounters")
         self._render_encounter_list()
 
@@ -3383,19 +3567,25 @@ class CombatApp(tk.Tk):
         self._encounter_button_eids = []  # invalidate list cache
         self._meter_back_btn.pack(side=tk.LEFT, padx=(4, 0))
         self._meter_title.configure(text="Totals")
-        self._export_totals_btn.pack(side=tk.RIGHT, padx=4)
         self._render_encounter_totals()
 
     def _render_encounter_totals(self):
-        encounters = self._backend.tracker.get_encounters(top_n=999)
+        tracker = self._backend.tracker
+        encounters = tracker.get_encounters(top_n=999)
 
         # Clear old buttons
         for w in self._encounter_buttons:
             w.destroy()
         self._encounter_buttons.clear()
 
-        # Aggregate by NPC name
+        # Aggregate by NPC name + grand totals + per-player abilities
         npc_agg = {}  # npc_name -> {count, total_dmg, total_dur, players: {name -> {dealt, received, count}}}
+        grand_total_dmg = 0
+        grand_total_dur = 0.0
+        grand_enc_count = 0
+        # player_name -> {cls, level, dealt, received, abilities: {name: dmg}}
+        player_totals = {}
+
         for enc in encounters:
             key = enc.npc_name
             if key not in npc_agg:
@@ -3408,6 +3598,9 @@ class CombatApp(tk.Tk):
             agg['count'] += 1
             agg['total_dmg'] += enc.best_damage
             agg['total_dur'] += enc.duration
+            grand_total_dmg += enc.best_damage
+            grand_total_dur += enc.duration
+            grand_enc_count += 1
             if enc.npc_class and not agg['npc_class']:
                 agg['npc_class'] = enc.npc_class
             if enc.npc_level is not None and agg['npc_level'] is None:
@@ -3415,19 +3608,39 @@ class CombatApp(tk.Tk):
             for p_eid, p in enc.players.items():
                 pname = p['name']
                 p_dealt = max(p['text_dealt'], p['dealt'])
+                # Use live tracker data for class/level (encounter records may be stale)
+                p_cls = tracker.classes.get(p_eid) or p['cls']
+                p_lvl = tracker.levels.get(p_eid) if tracker.levels.get(p_eid) is not None else p['level']
                 if pname not in agg['players']:
                     agg['players'][pname] = {
-                        'cls': p['cls'], 'level': p['level'],
+                        'cls': p_cls, 'level': p_lvl,
                         'dealt': 0, 'received': 0, 'count': 0,
                     }
                 pa = agg['players'][pname]
                 pa['dealt'] += p_dealt
                 pa['received'] += p['received']
                 pa['count'] += 1
-                if p['cls'] and not pa['cls']:
-                    pa['cls'] = p['cls']
-                if p['level'] is not None and pa['level'] is None:
-                    pa['level'] = p['level']
+                if p_cls and not pa['cls']:
+                    pa['cls'] = p_cls
+                if p_lvl is not None and pa['level'] is None:
+                    pa['level'] = p_lvl
+                # Grand player totals + abilities
+                if pname not in player_totals:
+                    player_totals[pname] = {
+                        'cls': p_cls, 'level': p_lvl,
+                        'dealt': 0, 'received': 0, 'active_dur': 0.0,
+                        'abilities': {},
+                    }
+                pt = player_totals[pname]
+                pt['dealt'] += p_dealt
+                pt['received'] += p['received']
+                pt['active_dur'] += enc.duration
+                if p_cls and not pt['cls']:
+                    pt['cls'] = p_cls
+                if p_lvl is not None and pt['level'] is None:
+                    pt['level'] = p_lvl
+                for ab_name, ab_dmg in p.get('abilities', {}).items():
+                    pt['abilities'][ab_name] = pt['abilities'].get(ab_name, 0) + ab_dmg
 
         # Sort by total damage desc
         sorted_npcs = sorted(npc_agg.items(), key=lambda x: x[1]['total_dmg'], reverse=True)
@@ -3435,10 +3648,83 @@ class CombatApp(tk.Tk):
         self._meter.configure(state=tk.NORMAL)
         self._meter.delete('1.0', tk.END)
 
+        # === GRAND TOTAL SECTION ===
+        _box_w = 38
+        if grand_enc_count > 0:
+            grand_dps = grand_total_dmg / grand_total_dur if grand_total_dur > 0 else 0
+            dur_m = int(grand_total_dur) // 60
+            dur_s = int(grand_total_dur) % 60
+
+            self._meter.insert(tk.END, "\u2500" * _box_w + "\n", 'header_line')
+            self._meter.insert(tk.END, " Grand Total", 'name')
+            self._meter.insert(tk.END, f"  x{grand_enc_count}", 'rank')
+            self._meter.insert(tk.END, f"  {dur_m}m {dur_s}s\n", 'duration')
+            self._meter.insert(tk.END, " Damage: ", 'rank')
+            self._meter.insert(tk.END, f"{grand_total_dmg:,}", 'dmg')
+            self._meter.insert(tk.END, "  DPS: ", 'rank')
+            self._meter.insert(tk.END, f"{grand_dps:,.1f}\n", 'dmg')
+            self._meter.insert(tk.END, "\u2500" * _box_w + "\n", 'header_line')
+
+            # DEBUG: dump class/level data to log
+            _plog.info(f"TOTALS_DEBUG tracker.classes={dict(tracker.classes)}")
+            _plog.info(f"TOTALS_DEBUG tracker.levels={dict(tracker.levels)}")
+            for _enc in encounters:
+                for _peid, _p in _enc.players.items():
+                    _plog.info(f"TOTALS_DEBUG enc={_enc.npc_name} player eid={_peid} name={_p['name']} cls={_p['cls']!r} lvl={_p['level']!r} tracker_cls={tracker.classes.get(_peid)!r} tracker_lvl={tracker.levels.get(_peid)!r}")
+
+            # Per-player breakdown with abilities in boxes
+            sorted_pt = sorted(player_totals.items(), key=lambda x: x[1]['dealt'], reverse=True)
+            for pname, pt in sorted_pt:
+                p_tags = []
+                if pt['cls']:
+                    p_tags.append(_class_label(pt['cls']))
+                if pt['level'] is not None and pt['level'] > 0:
+                    p_tags.append(f"L{pt['level']}")
+                p_tag = f" [{' '.join(p_tags)}]" if p_tags else ""
+                pct = (pt['dealt'] / grand_total_dmg * 100) if grand_total_dmg > 0 else 0
+                avg_dps = pt['dealt'] / pt['active_dur'] if pt['active_dur'] > 0 else 0
+
+                # Box top
+                self._meter.insert(tk.END, " \u250C" + "\u2500" * (_box_w - 2) + "\u2510\n", 'header_line')
+                # Player name line
+                self._meter.insert(tk.END, " \u2502 ", 'header_line')
+                self._meter.insert(tk.END, f"{pname[:16]}", 'name')
+                if p_tag:
+                    self._meter.insert(tk.END, p_tag, 'class_tag')
+                self._meter.insert(tk.END, '\n')
+                # Damage + DPS line
+                self._meter.insert(tk.END, " \u2502 ", 'header_line')
+                self._meter.insert(tk.END, f"{pt['dealt']:,}", 'dmg')
+                self._meter.insert(tk.END, f" ({pct:.1f}%)", 'rank')
+                self._meter.insert(tk.END, "  DPS: ", 'rank')
+                self._meter.insert(tk.END, f"{avg_dps:,.1f}", 'heal')
+                if pt['received'] > 0:
+                    self._meter.insert(tk.END, f"  recv {pt['received']:,}", 'duration')
+                self._meter.insert(tk.END, '\n')
+
+                # Ability breakdown
+                if pt['abilities']:
+                    sorted_abs = sorted(pt['abilities'].items(), key=lambda x: x[1], reverse=True)
+                    for ab_name, ab_dmg in sorted_abs:
+                        ab_pct = (ab_dmg / pt['dealt'] * 100) if pt['dealt'] > 0 else 0
+                        self._meter.insert(tk.END, " \u2502   ", 'header_line')
+                        self._meter.insert(tk.END, f"{ab_name[:16]}", 'bar')
+                        self._meter.insert(tk.END, f"  {ab_dmg:,}", 'dmg')
+                        self._meter.insert(tk.END, f" ({ab_pct:.0f}%)\n", 'rank')
+
+                # Box bottom
+                self._meter.insert(tk.END, " \u2514" + "\u2500" * (_box_w - 2) + "\u2518\n", 'header_line')
+
+            self._meter.insert(tk.END, '\n')
+            self._meter.insert(tk.END, "\u2500" * _box_w + "\n", 'header_line')
+            self._meter.insert(tk.END, " Tanking\n", 'name')
+            self._meter.insert(tk.END, "\u2500" * _box_w + "\n", 'header_line')
+
+        # === PER-NPC SECTION ===
         for npc_name, agg in sorted_npcs:
             tag_parts = []
             if agg['npc_class']:
-                tag_parts.append(agg['npc_class'])
+                tag_parts.append(_class_label(agg['npc_class']))
             if agg['npc_level'] is not None and agg['npc_level'] > 0:
                 tag_parts.append(f"L{agg['npc_level']}")
             tag_str = f" [{' '.join(tag_parts)}]" if tag_parts else ""
@@ -3464,7 +3750,7 @@ class CombatApp(tk.Tk):
             for pname, pa in sorted_players:
                 p_tags = []
                 if pa['cls']:
-                    p_tags.append(pa['cls'])
+                    p_tags.append(_class_label(pa['cls']))
                 if pa['level'] is not None and pa['level'] > 0:
                     p_tags.append(f"L{pa['level']}")
                 p_tag = f" [{' '.join(p_tags)}]" if p_tags else ""
@@ -3493,19 +3779,170 @@ class CombatApp(tk.Tk):
         self._meter_fingerprint = None  # force redraw
         self._hidden_encounters.clear()
         self._meter_back_btn.pack_forget()
-        self._export_totals_btn.pack_forget()
         self._meter_title.configure(text="Encounters")
         for w in self._encounter_buttons:
             w.destroy()
         self._encounter_buttons.clear()
 
-    def _export_totals(self):
+    # ------------------------------------------------------------------
+    # Unified export — right panel (encounters)
+    # ------------------------------------------------------------------
+
+    def _export_meter(self):
+        """Route export to the correct method for the current meter view."""
+        v = self._meter_view
+        if v == "list":
+            self._export_encounters_csv()
+        elif v == "detail":
+            self._export_encounter_detail_csv()
+        elif v == "totals":
+            self._export_totals_csv()
+
+    def _export_encounters_csv(self):
+        """Export encounter list with per-player sub-rows."""
         encounters = self._backend.tracker.get_encounters(top_n=999)
         if not encounters:
             return
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        path = filedialog.asksaveasfilename(
+            defaultextension=".csv",
+            filetypes=[("CSV files", "*.csv"), ("All files", "*.*")],
+            initialfile=f"encounters_{ts}.csv",
+            title="Export Encounters",
+        )
+        if not path:
+            return
+        try:
+            with open(path, "w", newline="", encoding="utf-8") as f:
+                w = csv.writer(f)
+                w.writerow(["npc_name", "npc_class", "npc_level", "status",
+                            "total_damage", "duration_s", "dps",
+                            "player_name", "player_class", "player_level",
+                            "player_dealt", "player_dps", "player_received",
+                            "ability", "ability_damage"])
+                for enc in encounters:
+                    if enc.npc_eid in self._hidden_encounters:
+                        continue
+                    status = "DEAD" if enc.is_dead else "LIVE"
+                    dur = round(enc.duration, 1)
+                    dps = round(enc.dps, 1)
+                    players = sorted(enc.players.values(),
+                                     key=lambda p: max(p['text_dealt'], p['dealt']),
+                                     reverse=True)
+                    if players:
+                        for p in players:
+                            dealt = max(p['text_dealt'], p['dealt'])
+                            p_dps = round(dealt / enc.duration, 1) if enc.duration > 0 else 0
+                            abilities = sorted(p.get('abilities', {}).items(),
+                                               key=lambda x: x[1], reverse=True)
+                            if abilities:
+                                for ab_name, ab_dmg in abilities:
+                                    w.writerow([
+                                        enc.npc_name, enc.npc_class or "",
+                                        enc.npc_level or "", status,
+                                        enc.best_damage, dur, dps,
+                                        p['name'], p['cls'] or "",
+                                        p['level'] or "", dealt, p_dps,
+                                        p['received'], ab_name, ab_dmg,
+                                    ])
+                            else:
+                                w.writerow([
+                                    enc.npc_name, enc.npc_class or "",
+                                    enc.npc_level or "", status,
+                                    enc.best_damage, dur, dps,
+                                    p['name'], p['cls'] or "",
+                                    p['level'] or "", dealt, p_dps,
+                                    p['received'], "", "",
+                                ])
+                    else:
+                        w.writerow([
+                            enc.npc_name, enc.npc_class or "",
+                            enc.npc_level or "", status,
+                            enc.best_damage, dur, dps,
+                            "", "", "", 0, 0, 0, "", "",
+                        ])
+            self._status_label.configure(
+                text=f"Exported {len(encounters)} encounters to {os.path.basename(path)}")
+        except Exception as e:
+            self._status_label.configure(text=f"Export failed: {e}")
 
-        # Aggregate by NPC name (same logic as _render_encounter_totals)
+    def _export_encounter_detail_csv(self):
+        """Export the currently selected encounter detail with player + ability rows."""
+        eid = self._meter_selected_eid
+        enc = self._backend.tracker.get_encounter_detail(eid) if eid else None
+        if enc is None:
+            return
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        safe_name = re.sub(r'[^\w]', '_', enc.npc_name)[:20]
+        path = filedialog.asksaveasfilename(
+            defaultextension=".csv",
+            filetypes=[("CSV files", "*.csv"), ("All files", "*.*")],
+            initialfile=f"encounter_{safe_name}_{ts}.csv",
+            title="Export Encounter Detail",
+        )
+        if not path:
+            return
+        try:
+            with open(path, "w", newline="", encoding="utf-8") as f:
+                w = csv.writer(f)
+                w.writerow(["npc_name", "npc_class", "npc_level", "status",
+                            "total_damage", "duration_s", "dps",
+                            "player_name", "player_class", "player_level",
+                            "player_dealt", "player_dps", "player_received",
+                            "ability", "ability_damage"])
+                status = "DEAD" if enc.is_dead else "LIVE"
+                dur = round(enc.duration, 1)
+                dps = round(enc.dps, 1)
+                players = sorted(enc.players.values(),
+                                 key=lambda p: max(p['text_dealt'], p['dealt']),
+                                 reverse=True)
+                if players:
+                    for p in players:
+                        dealt = max(p['text_dealt'], p['dealt'])
+                        p_dps = round(dealt / enc.duration, 1) if enc.duration > 0 else 0
+                        abilities = sorted(p.get('abilities', {}).items(),
+                                           key=lambda x: x[1], reverse=True)
+                        if abilities:
+                            for ab_name, ab_dmg in abilities:
+                                w.writerow([
+                                    enc.npc_name, enc.npc_class or "",
+                                    enc.npc_level or "", status,
+                                    enc.best_damage, dur, dps,
+                                    p['name'], p['cls'] or "",
+                                    p['level'] or "", dealt, p_dps,
+                                    p['received'], ab_name, ab_dmg,
+                                ])
+                        else:
+                            w.writerow([
+                                enc.npc_name, enc.npc_class or "",
+                                enc.npc_level or "", status,
+                                enc.best_damage, dur, dps,
+                                p['name'], p['cls'] or "",
+                                p['level'] or "", dealt, p_dps,
+                                p['received'], "", "",
+                            ])
+                else:
+                    w.writerow([
+                        enc.npc_name, enc.npc_class or "",
+                        enc.npc_level or "", status,
+                        enc.best_damage, dur, dps,
+                        "", "", "", 0, 0, 0, "", "",
+                    ])
+            self._status_label.configure(
+                text=f"Exported {enc.npc_name} detail to {os.path.basename(path)}")
+        except Exception as e:
+            self._status_label.configure(text=f"Export failed: {e}")
+
+    def _export_totals_csv(self):
+        """Export encounter totals with NPC aggregation, player breakdown, and abilities."""
+        tracker = self._backend.tracker
+        encounters = tracker.get_encounters(top_n=999)
+        if not encounters:
+            return
+
+        # Aggregate by NPC name + grand player abilities
         npc_agg = {}
+        player_totals = {}
         for enc in encounters:
             key = enc.npc_name
             if key not in npc_agg:
@@ -3525,19 +3962,35 @@ class CombatApp(tk.Tk):
             for p_eid, p in enc.players.items():
                 pname = p['name']
                 p_dealt = max(p['text_dealt'], p['dealt'])
+                p_cls = tracker.classes.get(p_eid) or p['cls']
+                p_lvl = tracker.levels.get(p_eid) if tracker.levels.get(p_eid) is not None else p['level']
                 if pname not in agg['players']:
                     agg['players'][pname] = {
-                        'cls': p['cls'], 'level': p['level'],
+                        'cls': p_cls, 'level': p_lvl,
                         'dealt': 0, 'received': 0, 'count': 0,
                     }
                 pa = agg['players'][pname]
                 pa['dealt'] += p_dealt
                 pa['received'] += p['received']
                 pa['count'] += 1
-                if p['cls'] and not pa['cls']:
-                    pa['cls'] = p['cls']
-                if p['level'] is not None and pa['level'] is None:
-                    pa['level'] = p['level']
+                if p_cls and not pa['cls']:
+                    pa['cls'] = p_cls
+                if p_lvl is not None and pa['level'] is None:
+                    pa['level'] = p_lvl
+                # Grand player totals + abilities
+                if pname not in player_totals:
+                    player_totals[pname] = {
+                        'cls': p_cls, 'level': p_lvl,
+                        'dealt': 0, 'abilities': {},
+                    }
+                pt = player_totals[pname]
+                pt['dealt'] += p_dealt
+                if p_cls and not pt['cls']:
+                    pt['cls'] = p_cls
+                if p_lvl is not None and pt['level'] is None:
+                    pt['level'] = p_lvl
+                for ab_name, ab_dmg in p.get('abilities', {}).items():
+                    pt['abilities'][ab_name] = pt['abilities'].get(ab_name, 0) + ab_dmg
 
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
         path = filedialog.asksaveasfilename(
@@ -3552,45 +4005,51 @@ class CombatApp(tk.Tk):
         try:
             with open(path, "w", newline="", encoding="utf-8") as f:
                 w = csv.writer(f)
-                w.writerow(["npc_name", "npc_class", "npc_level", "encounters",
-                            "total_damage", "avg_damage", "total_duration",
-                            "player_name", "player_class", "player_level",
-                            "player_dealt", "player_avg_dealt", "player_received"])
+                # Grand totals section
+                w.writerow(["section", "name", "class", "level",
+                            "encounters", "total_damage", "avg_damage",
+                            "total_duration", "ability", "ability_damage"])
+                grand_dmg = sum(a['total_dmg'] for a in npc_agg.values())
+                grand_dur = sum(a['total_dur'] for a in npc_agg.values())
+                grand_cnt = sum(a['count'] for a in npc_agg.values())
+                w.writerow(["GRAND_TOTAL", "", "", "", grand_cnt,
+                            grand_dmg, round(grand_dmg / grand_cnt) if grand_cnt else 0,
+                            round(grand_dur, 1), "", ""])
+                # Grand player breakdown with abilities
+                for pname in sorted(player_totals, key=lambda n: player_totals[n]['dealt'], reverse=True):
+                    pt = player_totals[pname]
+                    abilities = sorted(pt['abilities'].items(), key=lambda x: x[1], reverse=True)
+                    if abilities:
+                        for ab_name, ab_dmg in abilities:
+                            w.writerow(["PLAYER_TOTAL", pname, pt['cls'] or "",
+                                        pt['level'] or "", "", pt['dealt'], "",
+                                        "", ab_name, ab_dmg])
+                    else:
+                        w.writerow(["PLAYER_TOTAL", pname, pt['cls'] or "",
+                                    pt['level'] or "", "", pt['dealt'], "",
+                                    "", "", ""])
+                # Per-NPC section with player sub-rows
                 for npc_name, agg in sorted(npc_agg.items(), key=lambda x: x[1]['total_dmg'], reverse=True):
                     avg_dmg = agg['total_dmg'] / agg['count'] if agg['count'] > 0 else 0
                     sorted_players = sorted(agg['players'].items(), key=lambda x: x[1]['dealt'], reverse=True)
                     if sorted_players:
                         for pname, pa in sorted_players:
                             avg_dealt = pa['dealt'] / pa['count'] if pa['count'] > 0 else 0
-                            w.writerow([
-                                npc_name, agg['npc_class'] or "", agg['npc_level'] or "",
-                                agg['count'], agg['total_dmg'], round(avg_dmg),
-                                round(agg['total_dur'], 1),
-                                pname, pa['cls'] or "", pa['level'] or "",
-                                pa['dealt'], round(avg_dealt), pa['received'],
-                            ])
+                            w.writerow(["BY_NPC", npc_name, agg['npc_class'] or "",
+                                        agg['npc_level'] or "", agg['count'],
+                                        agg['total_dmg'], round(avg_dmg),
+                                        round(agg['total_dur'], 1),
+                                        pname, pa['dealt']])
                     else:
-                        w.writerow([
-                            npc_name, agg['npc_class'] or "", agg['npc_level'] or "",
-                            agg['count'], agg['total_dmg'], round(avg_dmg),
-                            round(agg['total_dur'], 1),
-                            "", "", "", 0, 0, 0,
-                        ])
+                        w.writerow(["BY_NPC", npc_name, agg['npc_class'] or "",
+                                    agg['npc_level'] or "", agg['count'],
+                                    agg['total_dmg'], round(avg_dmg),
+                                    round(agg['total_dur'], 1), "", ""])
             self._status_label.configure(text=f"Exported totals to {os.path.basename(path)}")
         except Exception as e:
             self._status_label.configure(text=f"Export failed: {e}")
 
     def _refresh_stats(self):
-        s = self._backend.stats
-        text = (f"cap:{s['packets_captured']}  "
-                f"match:{s['packets_matched']}  "
-                f"dec:{s['packets_decrypted']}  "
-                f"events:{s['combat_events']}")
-        # Append API status if available
-        api = self._backend._api
-        if api:
-            text += f"  | {api.status}" if api.status else "  | API: idle"
-        self._stats_label.configure(text=text)
         # Sync auto-detected player name from tracker
         tracker_name = self._backend._tracker.player_name
         if tracker_name and tracker_name != self._backend.player_name:
@@ -3606,6 +4065,41 @@ class CombatApp(tk.Tk):
             self.title(title)
         self._stats_id = self.after(3000, self._refresh_stats)
 
+    # --- Left Panel Toggle ---
+
+    def _toggle_left_panel(self):
+        """Hide or show the entire left panel (feed/items/triggers)."""
+        if self._left_visible:
+            # Save current geometry before collapsing
+            w = self.winfo_width()
+            h = self.winfo_height()
+            x = self.winfo_x()
+            y = self.winfo_y()
+            self._saved_geometry = (w, h, x, y)
+            self._left_frame.grid_remove()
+            self._divider.grid_remove()
+            self._main_frame.columnconfigure(0, weight=0, uniform='')
+            self._main_frame.columnconfigure(2, weight=1, uniform='')
+            self._toggle_left_btn.configure(text="\u25B6")
+            self._left_visible = False
+            # Shrink window to roughly half width
+            new_w = max(400, w // 2)
+            self.geometry(f"{new_w}x{h}+{x}+{y}")
+            self.minsize(400, 250)
+        else:
+            self._left_frame.grid()
+            self._divider.grid()
+            self._main_frame.columnconfigure(0, weight=1, uniform='half')
+            self._main_frame.columnconfigure(2, weight=1, uniform='half')
+            self._toggle_left_btn.configure(text="\u25C0")
+            self._left_visible = True
+            # Restore saved geometry
+            if hasattr(self, '_saved_geometry') and self._saved_geometry:
+                w, h, x, y = self._saved_geometry
+                self.geometry(f"{w}x{h}+{x}+{y}")
+                self._saved_geometry = None
+            self.minsize(700, 250)
+
     # --- Left Panel Tab Switching ---
 
     def _hide_left_view(self):
@@ -3615,7 +4109,6 @@ class CombatApp(tk.Tk):
             self._feed.pack_forget()
             self._feed_sy.pack_forget()
             self._feed_sx.pack_forget()
-            self._export_csv_btn.pack_forget()
         elif v in ("items", "item_detail"):
             self._item_back_btn.pack_forget()
             self._item_view.pack_forget()
@@ -3644,7 +4137,6 @@ class CombatApp(tk.Tk):
             self._feed_sy.pack(side=tk.RIGHT, fill=tk.Y)
             self._feed_sx.pack(side=tk.BOTTOM, fill=tk.X)
             self._feed.pack(fill=tk.BOTH, expand=True)
-            self._export_csv_btn.pack(side=tk.RIGHT, padx=4, before=self._chatlog_btn)
             self._left_view = "feed"
             self._item_selected_name = None
             self._item_fingerprint = None
@@ -3946,6 +4438,22 @@ class CombatApp(tk.Tk):
                 for eff in effects:
                     self._item_view.insert(tk.END, f"  Effect: {eff}\n", 'effect')
 
+        # Looted By summary
+        looter_counts = {}
+        for d in drops:
+            who = d.get("looter")
+            if who:
+                looter_counts[who] = looter_counts.get(who, 0) + d.get("quantity", 1)
+        if looter_counts:
+            self._item_view.insert(tk.END, "\n")
+            self._item_view.insert(tk.END,
+                "  " + "\u2500" * 40 + "\n", 'header_line')
+            self._item_view.insert(tk.END, "  Looted By:\n", 'stat_label')
+            sorted_looters = sorted(looter_counts.items(), key=lambda x: x[1], reverse=True)
+            for who, cnt in sorted_looters:
+                self._item_view.insert(tk.END, f"    {who}", 'npc_name')
+                self._item_view.insert(tk.END, f"  x{cnt}\n", 'item_count')
+
         # Drop history
         self._item_view.insert(tk.END, "\n")
         self._item_view.insert(tk.END,
@@ -3956,10 +4464,19 @@ class CombatApp(tk.Tk):
             ts = time.strftime("%H:%M:%S", time.localtime(d["timestamp"]))
             npc = d.get("npc_name")
             qty = d.get("quantity", 1)
+            looter = d.get("looter")
             line = f"    {ts}"
             if qty > 1:
                 line += f" x{qty}"
-            if npc:
+            if looter:
+                self._item_view.insert(tk.END, f"{line} ", 'stat_value')
+                self._item_view.insert(tk.END, f"{looter}", 'npc_name')
+                if npc:
+                    self._item_view.insert(tk.END, f" from ", 'stat_value')
+                    self._item_view.insert(tk.END, f"{npc}\n", 'npc_name')
+                else:
+                    self._item_view.insert(tk.END, "\n")
+            elif npc:
                 self._item_view.insert(tk.END, f"{line} from ", 'stat_value')
                 self._item_view.insert(tk.END, f"{npc}\n", 'npc_name')
             else:
