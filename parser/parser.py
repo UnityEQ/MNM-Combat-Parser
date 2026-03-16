@@ -1188,6 +1188,7 @@ class EntityTracker:
         self.classes = {}      # eid -> class_hid string (e.g. "elf", "wlf")
         self.levels = {}       # eid -> level int
         self.entity_types = {} # eid -> entity_type uint16 from SpawnEntity
+        self.pet_states = {}   # eid -> True if petState was set in SpawnEntity
         self._lock = threading.Lock()
         self.player_name = ""  # set from config, used to name local player entity
         self._local_player_eid = None  # detected from "Your ..." / "You ..." patterns
@@ -1218,6 +1219,9 @@ class EntityTracker:
         # ChatCombat damage waiting for UpdateHealth to confirm the target.
         # Prevents ghost encounters from name-lookup hitting the wrong entity.
         self._pending_chat_dmg = []  # [(target_name, text_dmg, timestamp, attacker_eid)]
+        # CastAbility OUT → BeginCasting IN correlation for local player detection
+        self._pending_cast_target = None  # target_id from most recent outbound CastAbility
+        self._pending_cast_time = 0.0
 
     def _backfill_player_info(self, eid, cls=None, level=None):
         """Update class/level on existing encounter player records for this eid."""
@@ -1229,25 +1233,58 @@ class EntityTracker:
                 if level is not None and p['level'] is None:
                     p['level'] = level
 
+    @staticmethod
+    def _looks_like_npc_name(name):
+        """Return True if the name looks like an NPC name (not a player)."""
+        if not name:
+            return False
+        # NPC names typically start with "a ", "an ", "the " (lowercase article)
+        # Player names start with an uppercase letter and have no spaces/articles
+        if name[0].islower():
+            return True
+        if name.startswith("Entity#"):
+            return True
+        return False
+
     def _mark_local_player(self, eid):
         """Mark entity as the local player and assign player_name if available."""
+        # If _local_player_eid is already set from a reliable source (outbound
+        # packets), don't let a different eid overwrite it.  Only allow re-set
+        # to the same eid (for name refresh) or first-time detection.
+        if (self._local_player_eid is not None
+                and eid != self._local_player_eid):
+            _plog.debug(f"  LOCAL_PLAYER_REJECT eid=#{eid} "
+                        f"(already set to #{self._local_player_eid})")
+            return
         self.entity_types[eid] = 0
-        if self._local_player_eid is None or self._local_player_eid != eid:
-            self._local_player_eid = eid
-            # Auto-detect player name from SpawnEntity if not set in config
-            detected = self.names.get(eid)
-            if not self.player_name and detected and detected.upper() not in ("YOU", "YOUR"):
-                self.player_name = detected
-                _plog.info(f"  LOCAL_PLAYER auto-detected name=\"{self.player_name}\" from eid=#{eid}")
-            if self.player_name and eid not in self.names:
-                self.names[eid] = self.player_name
-                _plog.debug(f"  LOCAL_PLAYER eid=#{eid} name=\"{self.player_name}\"")
-            # Update any encounter player entries that still have "Entity#..." name
-            if self.player_name:
-                old_name = f"Entity#{eid}"
-                for enc in self.encounters:
-                    if eid in enc.players and enc.players[eid]['name'] == old_name:
-                        enc.players[eid]['name'] = self.player_name
+        first_time = self._local_player_eid is None
+        self._local_player_eid = eid
+        # Auto-detect player name — retry on every call since name may
+        # arrive later via SpawnEntity after the eid is first discovered.
+        # "YOU" is a fallback that can be overwritten by a real name.
+        detected = self.names.get(eid)
+        if ((not self.player_name or self.player_name == "YOU")
+                and detected
+                and detected.upper() not in ("YOU", "YOUR")
+                and not self._looks_like_npc_name(detected)):
+            self.player_name = detected
+            _plog.info(f"  LOCAL_PLAYER auto-detected name=\"{self.player_name}\" from eid=#{eid}")
+        # Fallback: use "YOU" if no real name found yet
+        if not self.player_name:
+            self.player_name = "YOU"
+            _plog.debug(f"  LOCAL_PLAYER eid=#{eid} fallback name=\"YOU\"")
+        if self.player_name and eid not in self.names:
+            self.names[eid] = self.player_name
+            _plog.debug(f"  LOCAL_PLAYER eid=#{eid} name=\"{self.player_name}\"")
+        # Update encounter player entries that still have placeholder names
+        if self.player_name:
+            for enc in self.encounters:
+                if eid in enc.players:
+                    cur = enc.players[eid]['name']
+                    if cur.startswith("Entity#") or cur == "YOU" or self._looks_like_npc_name(cur):
+                        if self.player_name != cur:
+                            enc.players[eid]['name'] = self.player_name
+        if first_time:
             # Flush pending "You ..." ChatCombat damage now that we know the player
             if self._pending_local_dmg:
                 atk_name = self.names.get(eid, f"Entity#{eid}")
@@ -1418,6 +1455,18 @@ class EntityTracker:
         now = time.time()
 
         with self._lock:
+            # "X slashes you for N..." or "X's Ability hits you for N..."
+            # → the local player is the TARGET.  Use _local_player_eid if
+            # already known (set by outbound packets); only fall back to
+            # HP-correlation when the eid hasn't been discovered yet.
+            if target_name and target_name.lower() == "you":
+                if self._local_player_eid is None:
+                    if self._last_hp_eid is not None and (now - self._last_hp_time) < 2.0:
+                        self._mark_local_player(self._last_hp_eid)
+                        _plog.debug(f"  CHATCOMBAT_LOCAL_DETECT target=\"you\" hp_corr → local_eid=#{self._last_hp_eid}")
+                # Target is the local player — not an NPC encounter, skip damage tracking
+                return
+
             # Mark local player if detected
             if is_local and self._local_player_eid is not None:
                 attacker_eid = self._local_player_eid
@@ -1498,6 +1547,16 @@ class EntityTracker:
             self._process_chat_combat(event.get("text", ""))
             return None
 
+        # CastAbility OUT has no entity_id — record for BeginCasting correlation
+        if etype == "CastAbility":
+            direction = event.get("direction", "IN")
+            if direction == "OUT":
+                with self._lock:
+                    self._pending_cast_target = event.get("target_id")
+                    self._pending_cast_time = time.time()
+                    _plog.debug(f"CASTABILITY_OUT gem={event.get('gem_id')} target=#{self._pending_cast_target}")
+            return None
+
         # ClientPartyUpdate has no single entity_id — process member list
         if etype == "ClientPartyUpdate":
             with self._lock:
@@ -1511,6 +1570,8 @@ class EntityTracker:
                         continue
                     if m_name:
                         self.names[m_eid] = m_name
+                        if m_eid == self._local_player_eid and not self.player_name:
+                            self._mark_local_player(m_eid)
                     self.entity_types[m_eid] = 0  # party members are players
                     if m_class:
                         self.classes[m_eid] = m_class
@@ -1532,6 +1593,11 @@ class EntityTracker:
                 name = event.get("name")
                 if name:
                     self.names[eid] = name
+                    # If this is the local player and we just learned their
+                    # real name, re-run _mark_local_player to replace all
+                    # "Entity#XXXXX" entries in encounters with the real name.
+                    if eid == self._local_player_eid and not self.player_name:
+                        self._mark_local_player(eid)
                 # Don't use spawn HP as damage baseline — _find_stats often
                 # grabs misaligned bytes producing garbage values (e.g. 3072/49920).
                 # Let the first UpdateHealth set the real baseline instead.
@@ -1548,6 +1614,8 @@ class EntityTracker:
                 et = event.get("entity_type")
                 if et is not None:
                     self.entity_types[eid] = et
+                if event.get("pet_state"):
+                    self.pet_states[eid] = True
                 self.damage.setdefault(eid, 0)
                 self.healing.setdefault(eid, 0)
                 # Retire old encounter only if eid is reused by a DIFFERENT entity.
@@ -1591,6 +1659,8 @@ class EntityTracker:
                 et = event.get("entity_type")
                 if name:
                     self.names[eid] = name
+                    if eid == self._local_player_eid and not self.player_name:
+                        self._mark_local_player(eid)
                 if et is not None:
                     self.entity_types[eid] = et
                 if class_hid:
@@ -1630,6 +1700,15 @@ class EntityTracker:
                     self.last_attacker[target_id] = eid
                     self.last_attack_type[target_id] = "spell"
                     self.last_ability_name[target_id] = ability
+                # CastAbility OUT → BeginCasting IN correlation:
+                # If we recently sent a CastAbility with the same target_id,
+                # the BeginCasting entity_id (eid) is the local player.
+                if (self._pending_cast_target is not None
+                        and target_id == self._pending_cast_target
+                        and (time.time() - self._pending_cast_time) < 2.0):
+                    self._mark_local_player(eid)
+                    self._pending_cast_target = None
+                    _plog.info(f"  CAST_CORRELATE BeginCasting eid=#{eid} matched CastAbility target=#{target_id} → local player")
                 caster_name = self.names.get(eid, f"#{eid}")
                 target_name = self.names.get(target_id, f"#{target_id}") if target_id else "?"
                 _plog.debug(f"ATTRIB BeginCasting caster={caster_name}(#{eid}) -> target={target_name}(#{target_id}) ability=\"{ability}\"")
@@ -1726,6 +1805,10 @@ class EntityTracker:
                             is_dmg = True
                             _plog.debug(f"  -> DMG_3P_MELEE attacker={m_3p_melee.group(1)}(#{eid}) -> victim={_text_target_name}(#{target_id})")
 
+                    # "hits you" / "slashes you" → target_id is the local player
+                    if is_dmg and _text_target_name and _text_target_name.lower() == "you" and target_id is not None:
+                        self._mark_local_player(target_id)
+
                     if is_dmg:
                         if target_id is not None:
                             self.last_attacker[target_id] = eid
@@ -1810,9 +1893,9 @@ class EntityTracker:
                 direction = event.get("direction", "IN")
                 _plog.debug(f"AUTOATTACK active={active} dir={direction} eid=#{eid}")
                 if direction == "OUT":
-                    # Outbound Autoattack entity_id is the local player
-                    if eid and eid > 0:
-                        self._mark_local_player(eid)
+                    # Note: Autoattack only has "active" field, no entity_id
+                    # (eid is always None for outbound). Local player detection
+                    # relies on CastAbility/EndCasting/ChatCombat correlation.
                     if active:
                         self._autoattack_on.add("_local")
                     else:
@@ -1824,9 +1907,9 @@ class EntityTracker:
                 tgt_name = self.names.get(target_id, f"#{target_id}") if target_id else "None"
                 _plog.debug(f"CHANGETARGET target={tgt_name}(#{target_id}) dir={direction} eid=#{eid} autoattack_on={'_local' in self._autoattack_on}")
                 if direction == "OUT" and target_id is not None:
-                    # Outbound ChangeTarget entity_id is the local player
-                    if eid and eid > 0:
-                        self._mark_local_player(eid)
+                    # Note: ChangeTarget only has target_id, no entity_id
+                    # (eid is always None for outbound). Local player detection
+                    # relies on CastAbility/EndCasting/ChatCombat correlation.
                     self.autoattack_target["_local"] = target_id
                     # If autoattack is on, set melee attribution with real eid
                     if "_local" in self._autoattack_on:
@@ -2934,10 +3017,12 @@ CLASS_HID_NAMES = {
     "war": "Warrior", "wiz": "Wizard", "alc": "Alchemist", "smn": "Summoner",
 }
 
-def _class_label(hid):
-    """Return human-readable class name for a class HID code, or the raw code."""
+def _class_label(hid, abbreviate=False):
+    """Return class name for a class HID code. abbreviate=True returns uppercase HID."""
     if not hid:
         return ""
+    if abbreviate:
+        return hid.upper()
     return CLASS_HID_NAMES.get(hid, hid)
 
 TRIGGERS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "triggers.json")
@@ -2984,9 +3069,9 @@ class CombatApp(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("ZekParser")
-        self.geometry("1000x350")
+        self.geometry("425x300")
         self.configure(bg='black')
-        self.minsize(700, 250)
+        self.minsize(350, 220)
         self.attributes('-topmost', True)
         self.attributes('-alpha', 0.85)
 
@@ -3044,6 +3129,22 @@ class CombatApp(tk.Tk):
         style.map('Dark.TButton', background=[('active', COLORS['border'])])
         style.configure('ActiveTab.TButton', background=COLORS['border'], foreground=COLORS['fg'])
         style.map('ActiveTab.TButton', background=[('active', COLORS['border'])])
+        style.configure('Dark.TCombobox',
+                        fieldbackground=COLORS['surface'],
+                        background=COLORS['surface'],
+                        foreground=COLORS['fg'],
+                        arrowcolor=COLORS['fg'],
+                        selectbackground=COLORS['surface'],
+                        selectforeground=COLORS['fg'])
+        style.map('Dark.TCombobox',
+                   fieldbackground=[('readonly', COLORS['surface'])],
+                   selectbackground=[('readonly', COLORS['surface'])],
+                   selectforeground=[('readonly', COLORS['fg'])],
+                   foreground=[('readonly', COLORS['fg'])])
+        self.option_add('*TCombobox*Listbox.background', COLORS['surface'])
+        self.option_add('*TCombobox*Listbox.foreground', COLORS['fg'])
+        self.option_add('*TCombobox*Listbox.selectBackground', COLORS['border'])
+        self.option_add('*TCombobox*Listbox.selectForeground', COLORS['fg'])
 
         # Top status bar
         top = tk.Frame(self, bg=COLORS['bg_darker'], height=28)
@@ -3063,51 +3164,47 @@ class CombatApp(tk.Tk):
                                        fg=COLORS['teal'], font=('Consolas', 9))
         self._player_label.pack(side=tk.RIGHT, padx=(0, 8))
 
-        self._left_visible = True
+        self._left_visible = False
         self._toggle_left_btn = tk.Button(
-            top, text="\u25C0", bg=COLORS['surface'], fg=COLORS['fg'],
+            top, text="\u25B6", bg=COLORS['surface'], fg=COLORS['fg'],
             activebackground=COLORS['border'], activeforeground=COLORS['fg'],
             font=('Consolas', 9, 'bold'), relief=tk.RAISED, bd=1, padx=5, pady=1,
             command=self._toggle_left_panel)
         self._toggle_left_btn.pack(side=tk.RIGHT, padx=(0, 4))
 
-        # Main area — 50/50 grid split
+        # Main area — start with left hidden, right takes full width
         main = tk.Frame(self, bg=COLORS['bg'])
         main.pack(fill=tk.BOTH, expand=True, padx=6, pady=(3, 0))
         self._main_frame = main
-        main.columnconfigure(0, weight=1, uniform='half')
+        main.columnconfigure(0, weight=0, uniform='')
         main.columnconfigure(1, weight=0)  # divider
-        main.columnconfigure(2, weight=1, uniform='half')
+        main.columnconfigure(2, weight=1, uniform='')
         main.rowconfigure(0, weight=1)
 
-        # Divider
+        # Divider (hidden by default)
         self._divider = tk.Frame(main, bg=COLORS['border'], width=4)
         self._divider.grid(row=0, column=1, sticky='ns')
+        self._divider.grid_remove()
 
-        # Left: combat feed / item tracker
+        # Left: combat feed / item tracker (hidden by default)
         left = tk.Frame(main, bg=COLORS['bg'])
         left.grid(row=0, column=0, sticky='nsew')
+        left.grid_remove()
         self._left_frame = left
 
         header_left = tk.Frame(left, bg=COLORS['bg'])
         header_left.pack(fill=tk.X)
         self._header_left = header_left
 
-        # Tab buttons (left side)
-        self._tab_feed_btn = ttk.Button(
-            header_left, text="Feed", style='ActiveTab.TButton',
-            command=lambda: self._switch_left_tab("feed"))
-        self._tab_feed_btn.pack(side=tk.LEFT, padx=(4, 1), pady=2)
-
-        self._tab_items_btn = ttk.Button(
-            header_left, text="Items", style='Dark.TButton',
-            command=lambda: self._switch_left_tab("items"))
-        self._tab_items_btn.pack(side=tk.LEFT, padx=1, pady=2)
-
-        self._tab_triggers_btn = ttk.Button(
-            header_left, text="Triggers", style='Dark.TButton',
-            command=lambda: self._switch_left_tab("triggers"))
-        self._tab_triggers_btn.pack(side=tk.LEFT, padx=1, pady=2)
+        # Tab dropdown (left side)
+        self._left_view_var = tk.StringVar(value="Feed")
+        self._left_combo = ttk.Combobox(
+            header_left, textvariable=self._left_view_var,
+            values=["Feed", "Items", "Triggers"],
+            state='readonly', style='Dark.TCombobox', width=10,
+            font=('Segoe UI', 9))
+        self._left_combo.pack(side=tk.LEFT, padx=4, pady=2)
+        self._left_combo.bind('<<ComboboxSelected>>', self._on_left_view_change)
 
         # Right side buttons
         self._pause_var = tk.BooleanVar(value=False)
@@ -3250,35 +3347,50 @@ class CombatApp(tk.Tk):
             header_right, text="< Back", style='Dark.TButton',
             command=self._on_meter_back)
         # Hidden by default — shown in detail view
-        self._meter_title = tk.Label(
-            header_right, text="Encounters", bg=COLORS['bg'], fg=COLORS['fg'],
-            font=('Segoe UI', 10, 'bold'))
-        self._meter_title.pack(side=tk.LEFT, padx=4, pady=2)
+        self._meter_view_var = tk.StringVar(value="Overview")
+        self._meter_combo = ttk.Combobox(
+            header_right, textvariable=self._meter_view_var,
+            values=["Overview", "Encounters", "Grand Overview"],
+            state='readonly', style='Dark.TCombobox', width=14,
+            font=('Segoe UI', 9))
+        self._meter_combo.pack(side=tk.LEFT, padx=4, pady=2)
+        self._meter_combo.bind('<<ComboboxSelected>>', self._on_meter_view_change)
         ttk.Button(header_right, text="Reset", style='Dark.TButton',
                    command=self._reset_meter).pack(side=tk.RIGHT, padx=4)
         self._export_meter_btn = ttk.Button(
             header_right, text="Export", style='Dark.TButton',
             command=self._export_meter)
         self._export_meter_btn.pack(side=tk.RIGHT, padx=4)
-        ttk.Button(header_right, text="Totals", style='Dark.TButton',
-                   command=self._on_meter_totals).pack(side=tk.RIGHT, padx=4)
+        self._copy_meter_btn = ttk.Button(
+            header_right, text="Copy", style='Dark.TButton',
+            command=self._copy_overview)
+        self._copy_meter_btn.pack(side=tk.RIGHT, padx=4)
 
         # Meter view state
-        self._meter_view = "list"     # "list", "detail", or "totals"
+        self._meter_view = "overview"  # "overview", "encounters", "encounter_detail", "grand_overview"
         self._meter_selected_eid = None
         self._encounter_buttons = []  # widgets embedded in meter
         self._encounter_button_eids = []  # eid order for in-place updates
         self._hidden_encounters = set()  # npc_eids dismissed by user
         self._meter_fingerprint = None  # skip redraw when unchanged
+        self._overview_expanded = set()  # player names expanded in overview
+        self._overview_lines = []        # tag names for in-place text updates
 
         self._meter = tk.Text(right, bg=COLORS['bg_darker'], fg=COLORS['fg'],
                               font=('Consolas', 9), wrap=tk.NONE, state=tk.DISABLED,
                               borderwidth=0, highlightthickness=0, padx=4, pady=4,
-                              cursor="arrow")
+                              cursor="arrow",
+                              selectbackground=COLORS['border'],
+                              selectforeground=COLORS['fg'])
         meter_scroll = tk.Scrollbar(right, orient=tk.VERTICAL, command=self._meter.yview)
         self._meter.configure(yscrollcommand=meter_scroll.set)
         meter_scroll.pack(side=tk.RIGHT, fill=tk.Y)
         self._meter.pack(fill=tk.BOTH, expand=True)
+        # Block all keyboard input except Ctrl+C (copy) and Ctrl+A (select all)
+        self._meter.bind("<Key>", lambda e: "break"
+                         if e.keysym not in ("c", "a", "C", "A")
+                            or not (e.state & 0x4)  # Ctrl
+                         else None)
 
         self._meter.tag_configure('rank', foreground=COLORS['fg_dim'])
         self._meter.tag_configure('name', foreground=COLORS['fg'])
@@ -3502,7 +3614,7 @@ class CombatApp(tk.Tk):
         sel = self._meter_selected_eid
         hidden = frozenset(self._hidden_encounters)
 
-        if view == "detail" and sel is not None:
+        if view == "encounter_detail" and sel is not None:
             enc = t.get_encounter_detail(sel)
             if enc is None:
                 return (view, sel, hidden, None)
@@ -3512,12 +3624,18 @@ class CombatApp(tk.Tk):
             )
             return (view, sel, hidden, enc.best_damage, enc.is_dead,
                     round(enc.duration, 1), players)
-        elif view == "totals":
+        elif view == "grand_overview":
             items = tuple(
                 (e.npc_eid, e.npc_name, e.best_damage, e.is_dead, round(e.duration, 1))
                 for e in encounters
             )
             return (view, hidden, items)
+        elif view == "overview":
+            items = tuple(
+                (e.npc_eid, e.npc_name, e.best_damage, e.is_dead, round(e.duration, 1))
+                for e in encounters
+            )
+            return (view, hidden, frozenset(self._overview_expanded), items)
         else:
             items = tuple(
                 (e.npc_eid, e.best_damage, e.is_dead, round(e.duration, 1))
@@ -3526,21 +3644,41 @@ class CombatApp(tk.Tk):
             return (view, hidden, items)
 
     def _refresh_meter(self):
+        # Periodic GUI state snapshot (every 10 refreshes = ~10s, dev-only)
+        self._meter_refresh_count = getattr(self, '_meter_refresh_count', 0) + 1
+        if self._meter_refresh_count % 10 == 0 and _plog.isEnabledFor(logging.DEBUG):
+            tracker = self._backend.tracker
+            enc_count = len(tracker.encounters)
+            etype_counts = {}
+            for eid, et in tracker.entity_types.items():
+                key = f"type{et}" if et is not None else "unknown"
+                etype_counts[key] = etype_counts.get(key, 0) + 1
+            _plog.debug(f"GUI_STATE view={self._meter_view} encounters={enc_count} "
+                        f"entity_types={etype_counts} names={len(tracker.names)}")
+
         scroll_pos = self._meter.yview()[0]
-        if self._meter_view == "detail":
+        if self._meter_view == "encounter_detail":
             fp = self._meter_build_fingerprint()
             if fp != self._meter_fingerprint:
                 self._meter_fingerprint = fp
-                self._render_encounter_detail()
-                self._meter.after_idle(lambda: self._meter.yview_moveto(scroll_pos))
-        elif self._meter_view == "totals":
+                did_redraw = self._render_encounter_detail()
+                if did_redraw:
+                    self._meter.after_idle(lambda sp=scroll_pos: self._meter.yview_moveto(sp))
+        elif self._meter_view == "grand_overview":
             fp = self._meter_build_fingerprint()
             if fp != self._meter_fingerprint:
                 self._meter_fingerprint = fp
                 self._render_encounter_totals()
-                self._meter.after_idle(lambda: self._meter.yview_moveto(scroll_pos))
+                self._meter.after_idle(lambda sp=scroll_pos: self._meter.yview_moveto(sp))
+        elif self._meter_view == "overview":
+            fp = self._meter_build_fingerprint()
+            if fp != self._meter_fingerprint:
+                self._meter_fingerprint = fp
+                did_redraw = self._render_overview()
+                if did_redraw:
+                    self._meter.after_idle(lambda sp=scroll_pos: self._meter.yview_moveto(sp))
         else:
-            # List view: always update (in-place when structure unchanged)
+            # Encounters list view: always update (in-place when structure unchanged)
             self._render_encounter_list()
         self._meter_id = self.after(1000, self._refresh_meter)
 
@@ -3692,19 +3830,20 @@ class CombatApp(tk.Tk):
         return segs
 
     def _render_encounter_detail(self):
+        """Returns True if a full redraw was performed, False if skipped."""
         eid = self._meter_selected_eid
         enc = self._backend.tracker.get_encounter_detail(eid) if eid else None
         if enc is None:
-            self._meter_view = "list"
+            self._meter_view = "encounters"
             self._on_meter_back()
-            return
+            return False
 
         segs = self._build_detail_segments(enc)
 
         # Skip redraw if content identical to last render
         seg_key = tuple((t, tag) for t, tag in segs)
         if hasattr(self, '_detail_seg_cache') and self._detail_seg_cache == seg_key:
-            return
+            return False
         self._detail_seg_cache = seg_key
 
         self._meter.configure(state=tk.NORMAL)
@@ -3715,6 +3854,7 @@ class CombatApp(tk.Tk):
             else:
                 self._meter.insert(tk.END, text)
         self._meter.configure(state=tk.DISABLED)
+        return True
 
     def _on_encounter_hide(self, npc_eid):
         self._hidden_encounters.add(npc_eid)
@@ -3722,41 +3862,459 @@ class CombatApp(tk.Tk):
         self._encounter_button_eids = []  # force full list rebuild
 
     def _on_encounter_click(self, npc_eid):
-        self._meter_view = "detail"
+        self._meter_view = "encounter_detail"
         self._meter_selected_eid = npc_eid
         self._meter_fingerprint = None  # force redraw
         self._detail_seg_cache = None
         self._encounter_button_eids = []  # invalidate list cache
-        # Show back button, update title
-        enc = self._backend.tracker.get_encounter_detail(npc_eid)
-        title = enc.npc_name if enc else "Encounter"
+        # Show back button, hide dropdown and copy
         self._meter_back_btn.pack(side=tk.LEFT, padx=(4, 0))
-        self._meter_title.configure(text=title)
+        self._copy_meter_btn.pack_forget()
         # Force immediate refresh
         self._render_encounter_detail()
 
     def _on_meter_back(self):
-        self._meter_view = "list"
+        self._meter_view = "encounters"
+        self._meter_view_var.set("Encounters")
         self._meter_selected_eid = None
         self._meter_fingerprint = None  # force redraw
         self._detail_seg_cache = None
         self._encounter_button_eids = []  # force full list rebuild
         self._meter_back_btn.pack_forget()
-        self._meter_title.configure(text="Encounters")
         self._render_encounter_list()
 
-    def _on_meter_totals(self):
-        if self._meter_view == "totals":
-            self._on_meter_back()
-            return
-        self._meter_view = "totals"
+    def _on_meter_view_change(self, event=None):
+        """Handle dropdown view selection."""
+        label = self._meter_view_var.get()
+        view_map = {
+            "Overview": "overview",
+            "Encounters": "encounters",
+            "Grand Overview": "grand_overview",
+        }
+        new_view = view_map.get(label, "overview")
+        self._meter_view = new_view
         self._meter_selected_eid = None
-        self._meter_fingerprint = None  # force redraw
+        self._meter_fingerprint = None
         self._detail_seg_cache = None
-        self._encounter_button_eids = []  # invalidate list cache
-        self._meter_back_btn.pack(side=tk.LEFT, padx=(4, 0))
-        self._meter_title.configure(text="Totals")
-        self._render_encounter_totals()
+        self._encounter_button_eids = []
+        self._overview_structure = None
+        self._overview_lines = []
+        self._meter_back_btn.pack_forget()
+        # Force immediate render
+        for w in self._encounter_buttons:
+            w.destroy()
+        self._encounter_buttons.clear()
+        if new_view == "overview":
+            self._copy_meter_btn.pack(side=tk.RIGHT, padx=4)
+            self._render_overview()
+        else:
+            self._copy_meter_btn.pack_forget()
+            if new_view == "encounters":
+                self._render_encounter_list()
+            elif new_view == "grand_overview":
+                self._render_encounter_totals()
+        # Unfocus the combobox
+        self._meter.focus_set()
+
+    def _toggle_overview_expand(self, player_name):
+        """Toggle expand/collapse of a player in the overview."""
+        if player_name in self._overview_expanded:
+            self._overview_expanded.discard(player_name)
+        else:
+            self._overview_expanded.add(player_name)
+        self._meter_fingerprint = None
+        self._render_overview()
+
+    def _build_overview_data(self):
+        """Aggregate player totals across all encounters for the overview.
+        Shows players and charmed pets only — filters out regular NPCs."""
+        tracker = self._backend.tracker
+        encounters = tracker.get_encounters(top_n=999)
+
+        player_totals = {}
+        grand_total_dmg = 0
+        grand_total_dur = 0.0
+        grand_enc_count = 0
+
+        # Build sets of eids/names that are encounter TARGETS (being fought).
+        # If an entity is a target of any encounter AND it's not a confirmed
+        # player (entity_type==0), it's an NPC — don't show in overview.
+        npc_target_eids = set()
+        npc_target_names = set()
+        for enc in encounters:
+            et = tracker.entity_types.get(enc.npc_eid)
+            if et != 0:  # not confirmed player → NPC or unknown
+                npc_target_eids.add(enc.npc_eid)
+                if enc.npc_name:
+                    npc_target_names.add(enc.npc_name)
+
+        for enc in encounters:
+            grand_total_dmg += enc.best_damage
+            grand_total_dur += enc.duration
+            grand_enc_count += 1
+            for p_eid, p in enc.players.items():
+                pname = p['name']
+                # Resolve bad names from tracker state
+                if (pname.startswith("Entity#")
+                        or EntityTracker._looks_like_npc_name(pname)):
+                    real_name = tracker.names.get(p_eid)
+                    if real_name and not real_name.startswith("Entity#"):
+                        pname = real_name
+                        p['name'] = real_name
+                # Local player fallback: use "YOU" if name is still bad
+                if p_eid == tracker._local_player_eid:
+                    if (pname.startswith("Entity#")
+                            or EntityTracker._looks_like_npc_name(pname)):
+                        pname = tracker.player_name or "YOU"
+                        p['name'] = pname
+                p_dealt = max(p['text_dealt'], p['dealt'])
+                p_cls = tracker.classes.get(p_eid) or p['cls']
+                p_lvl = tracker.levels.get(p_eid) if tracker.levels.get(p_eid) is not None else p['level']
+                p_etype = tracker.entity_types.get(p_eid)  # 0=player, None=unknown, >0=NPC/pet
+                # Filter: only players (0), unknown (None), and charmed pets
+                # Skip regular NPCs that dealt damage but aren't pets
+                is_pet = False
+                if p_etype is not None and p_etype != 0:
+                    is_pet = tracker.pet_states.get(p_eid, False)
+                    if _plog.isEnabledFor(logging.DEBUG):
+                        _plog.debug(f"  OVERVIEW_FILTER enc=\"{enc.npc_name}\" "
+                                    f"attacker=\"{pname}\"(#{p_eid}) entity_type={p_etype} "
+                                    f"pet_state={is_pet} dealt={p_dealt} "
+                                    f"action={'KEEP_PET' if is_pet else 'SKIP_NPC'}")
+                    if not is_pet:
+                        continue  # skip regular NPCs
+                elif p_etype is None:
+                    # Unknown entity_type — use multiple heuristics:
+                    # 1. Name starts lowercase → NPC ("a bodyguard")
+                    # 2. Eid is a target of an encounter → NPC (being fought)
+                    # 3. Name matches an encounter target → NPC (e.g. pet
+                    #    shares name root with the NPC being fought)
+                    skip = False
+                    reason = "KEEP_UNKNOWN"
+                    if EntityTracker._looks_like_npc_name(pname):
+                        skip = True
+                        reason = "SKIP_NPC_NAME"
+                    elif (p_eid in npc_target_eids
+                          and p_eid != tracker._local_player_eid):
+                        skip = True
+                        reason = "SKIP_NPC_TARGET"
+                    elif (pname in npc_target_names
+                          and p_eid != tracker._local_player_eid):
+                        skip = True
+                        reason = "SKIP_NPC_TARGET_NAME"
+                    if _plog.isEnabledFor(logging.DEBUG):
+                        _plog.debug(f"  OVERVIEW_FILTER enc=\"{enc.npc_name}\" "
+                                    f"attacker=\"{pname}\"(#{p_eid}) entity_type=None "
+                                    f"is_enc_target={p_eid in npc_target_eids} "
+                                    f"name_is_target={pname in npc_target_names} "
+                                    f"dealt={p_dealt} action={reason}")
+                    if skip:
+                        continue
+                if pname not in player_totals:
+                    player_totals[pname] = {
+                        'cls': p_cls, 'level': p_lvl,
+                        'dealt': 0, 'active_dur': 0.0,
+                        'abilities': {},
+                        'entity_type': p_etype,
+                        'is_pet': is_pet,
+                    }
+                pt = player_totals[pname]
+                pt['dealt'] += p_dealt
+                pt['active_dur'] += enc.duration
+                if p_cls and not pt['cls']:
+                    pt['cls'] = p_cls
+                if p_lvl is not None and pt['level'] is None:
+                    pt['level'] = p_lvl
+                # Promote entity_type: if any eid for this name is a player (0),
+                # treat the whole entry as player. Otherwise keep the first non-None.
+                if p_etype == 0:
+                    pt['entity_type'] = 0
+                elif pt['entity_type'] is None and p_etype is not None:
+                    pt['entity_type'] = p_etype
+                if is_pet:
+                    pt['is_pet'] = True
+                for ab_name, ab_dmg in p.get('abilities', {}).items():
+                    pt['abilities'][ab_name] = pt['abilities'].get(ab_name, 0) + ab_dmg
+
+        sorted_pt = sorted(player_totals.items(), key=lambda x: x[1]['dealt'], reverse=True)[:20]
+        return grand_enc_count, grand_total_dmg, grand_total_dur, sorted_pt
+
+    def _build_overview_label(self, rank, pname, pt, grand_total_dmg):
+        """Build fixed-width label for one overview player row (paste-friendly)."""
+        pct = (pt['dealt'] / grand_total_dmg * 100) if grand_total_dmg > 0 else 0
+        avg_dps = pt['dealt'] / pt['active_dur'] if pt['active_dur'] > 0 else 0
+        # Build class/level tag
+        p_parts = []
+        etype = pt.get('entity_type')
+        if etype is not None and etype != 0:
+            p_parts.append("PET")
+        if pt['cls']:
+            p_parts.append(_class_label(pt['cls'], abbreviate=True))
+        if pt['level'] is not None and pt['level'] > 0:
+            p_parts.append(str(pt['level']))
+        tag_str = ' '.join(p_parts)
+        is_expanded = pname in self._overview_expanded
+        arrow = "\u25BC" if is_expanded else "\u25B6"
+        # Fixed columns: arrow+rank(5) name(14) tag(10) damage(9) pct(8) dps(10)
+        col_name = pname[:14].ljust(14)
+        col_tag = tag_str[:10].ljust(10)
+        col_dmg = f"{pt['dealt']:,}".rjust(9)
+        col_pct = f"({pct:.1f}%)".rjust(8)
+        col_dps = f"{avg_dps:,.1f}".rjust(8)
+        return f"{arrow} #{rank:<2} {col_name} {col_tag} {col_dmg} {col_pct} {col_dps} dps"
+
+    @staticmethod
+    def _build_overview_ability_line(ab_name, ab_dmg, ab_pct):
+        """Build fixed-width ability breakdown line (paste-friendly)."""
+        col_name = ab_name[:18].ljust(18)
+        col_dmg = f"{ab_dmg:,}".rjust(9)
+        col_pct = f"({ab_pct:.0f}%)".rjust(5)
+        return f"       {col_name} {col_dmg} {col_pct}"
+
+    def _render_overview(self):
+        """Render session leaderboard. Returns True if full redraw, False if in-place."""
+        grand_enc_count, grand_total_dmg, grand_total_dur, sorted_pt = self._build_overview_data()
+
+        # Debug: log overview snapshot (dev-only, _plog is NullHandler in frozen exe)
+        if _plog.isEnabledFor(logging.DEBUG):
+            tracker = self._backend.tracker
+            _plog.debug(f"OVERVIEW_RENDER enc={grand_enc_count} total_dmg={grand_total_dmg} "
+                        f"dur={grand_total_dur:.1f}s entries={len(sorted_pt)} "
+                        f"local_eid={tracker._local_player_eid} "
+                        f"player_name=\"{tracker.player_name}\" "
+                        f"pet_states={dict(tracker.pet_states)} "
+                        f"entity_types_sample={dict(list(tracker.entity_types.items())[:20])}")
+            for rank, (pname, pt) in enumerate(sorted_pt, 1):
+                etype = pt.get('entity_type')
+                is_pet = pt.get('is_pet', False)
+                etype_s = f"player" if etype == 0 else (f"pet({etype})" if is_pet else (f"npc({etype})" if etype is not None else "unknown"))
+                avg_dps = pt['dealt'] / pt['active_dur'] if pt['active_dur'] > 0 else 0
+                top_abs = sorted(pt['abilities'].items(), key=lambda x: x[1], reverse=True)[:3]
+                abs_str = ", ".join(f"{n}={d}" for n, d in top_abs) if top_abs else "none"
+                _plog.debug(f"  OVERVIEW_ROW #{rank} \"{pname}\" type={etype_s} cls={pt['cls']} "
+                            f"lvl={pt['level']} dealt={pt['dealt']} dps={avg_dps:.1f} "
+                            f"abilities=[{abs_str}]")
+
+        # Build a structural key: ordered player names + expanded set
+        # If structure matches, do in-place text updates only (no flicker)
+        new_structure = tuple(
+            (pname, pname in self._overview_expanded,
+             tuple(sorted(pt['abilities'].keys())) if pname in self._overview_expanded else ())
+            for pname, pt in sorted_pt
+        )
+        old_structure = getattr(self, '_overview_structure', None)
+
+        if grand_enc_count > 0 and new_structure == old_structure and self._overview_lines:
+            # In-place update: replace text content of player lines only
+            self._meter.configure(state=tk.NORMAL)
+            for idx, (pname, pt) in enumerate(sorted_pt):
+                tag = f"_ovp_{idx}"
+                click_tag = f"_ovc_{idx}"
+                label = self._build_overview_label(idx + 1, pname, pt, grand_total_dmg)
+                ranges = self._meter.tag_ranges(tag)
+                if len(ranges) >= 2:
+                    self._meter.delete(ranges[0], ranges[1])
+                    self._meter.insert(ranges[0], label, (tag, click_tag))
+            # Leave NORMAL so text is selectable/copyable
+            return False
+
+        # Structural change — full redraw
+        self._overview_structure = new_structure
+        self._overview_lines = []
+
+        for w in self._encounter_buttons:
+            w.destroy()
+        self._encounter_buttons.clear()
+
+        self._meter.configure(state=tk.NORMAL)
+        self._meter.delete('1.0', tk.END)
+
+        # Remove old per-player click tags
+        for tag in self._meter.tag_names():
+            if tag.startswith("_ovp_") or tag.startswith("_ovc_"):
+                self._meter.tag_delete(tag)
+
+        _box_w = 58
+
+        if grand_enc_count == 0:
+            self._meter.insert(tk.END, "  No encounters recorded yet\n", 'rank')
+            self._meter.configure(state=tk.DISABLED)
+            return True
+
+        grand_dps = grand_total_dmg / grand_total_dur if grand_total_dur > 0 else 0
+        dur_m = int(grand_total_dur) // 60
+        dur_s = int(grand_total_dur) % 60
+
+        # Session header
+        self._meter.insert(tk.END, "\u2500" * _box_w + "\n", 'header_line')
+        self._meter.insert(tk.END, f" Session  x{grand_enc_count} enc  {dur_m}m {dur_s}s", 'name')
+        self._meter.insert(tk.END, f"  |  Total: ", 'rank')
+        self._meter.insert(tk.END, f"{grand_total_dmg:,}", 'dmg')
+        self._meter.insert(tk.END, f"  DPS: ", 'rank')
+        self._meter.insert(tk.END, f"{grand_dps:,.1f}\n", 'dmg')
+        self._meter.insert(tk.END, "\u2500" * _box_w + "\n", 'header_line')
+        # Column header
+        self._meter.insert(tk.END,
+            f"  {'#':<3} {'Name':<14} {'Class':<10} {'Damage':>9} {'Pct':>8} {'DPS':>8}\n", 'rank')
+
+        # Top players sorted by damage — plain text with click tags
+        for rank, (pname, pt) in enumerate(sorted_pt, 1):
+            label = self._build_overview_label(rank, pname, pt, grand_total_dmg)
+            tag = f"_ovp_{rank - 1}"        # text content tag for in-place updates
+            click_tag = f"_ovc_{rank - 1}"  # clickable region tag
+
+            self._meter.insert(tk.END, label, (tag, click_tag))
+            self._meter.insert(tk.END, "\n")
+            self._overview_lines.append(tag)
+
+            # Make player line clickable with hand cursor
+            self._meter.tag_configure(click_tag, foreground=COLORS['fg'])
+            self._meter.tag_bind(click_tag, "<Button-1>",
+                                 lambda e, name=pname: self._toggle_overview_expand(name))
+            self._meter.tag_bind(click_tag, "<Enter>",
+                                 lambda e: self._meter.configure(cursor="hand2"))
+            self._meter.tag_bind(click_tag, "<Leave>",
+                                 lambda e: self._meter.configure(cursor="arrow"))
+
+            # Expanded ability breakdown
+            if pname in self._overview_expanded and pt['abilities']:
+                sorted_abs = sorted(pt['abilities'].items(), key=lambda x: x[1], reverse=True)
+                for ab_name, ab_dmg in sorted_abs:
+                    ab_pct = (ab_dmg / pt['dealt'] * 100) if pt['dealt'] > 0 else 0
+                    ab_line = self._build_overview_ability_line(ab_name, ab_dmg, ab_pct)
+                    self._meter.insert(tk.END, ab_line + "\n", 'bar')
+
+        # Leave NORMAL so text is selectable/copyable (keyboard input blocked by binding)
+        return True
+
+    def _copy_overview(self):
+        """Copy the overview table to clipboard (only expanded abilities included)."""
+        if self._meter_view != "overview":
+            return
+        grand_enc_count, grand_total_dmg, grand_total_dur, sorted_pt = self._build_overview_data()
+        if grand_enc_count == 0:
+            return
+
+        lines = []
+        grand_dps = grand_total_dmg / grand_total_dur if grand_total_dur > 0 else 0
+        dur_m = int(grand_total_dur) // 60
+        dur_s = int(grand_total_dur) % 60
+        _box_w = 58
+
+        lines.append("\u2500" * _box_w)
+        lines.append(f" Session  x{grand_enc_count} enc  {dur_m}m {dur_s}s"
+                     f"  |  Total: {grand_total_dmg:,}  DPS: {grand_dps:,.1f}")
+        lines.append("\u2500" * _box_w)
+        lines.append(f"  {'#':<3} {'Name':<14} {'Class':<10} {'Damage':>9} {'Pct':>8} {'DPS':>8}")
+
+        for rank, (pname, pt) in enumerate(sorted_pt, 1):
+            label = self._build_overview_label(rank, pname, pt, grand_total_dmg)
+            lines.append(label)
+
+            if pname in self._overview_expanded and pt['abilities']:
+                sorted_abs = sorted(pt['abilities'].items(), key=lambda x: x[1], reverse=True)
+                for ab_name, ab_dmg in sorted_abs:
+                    ab_pct = (ab_dmg / pt['dealt'] * 100) if pt['dealt'] > 0 else 0
+                    lines.append(self._build_overview_ability_line(ab_name, ab_dmg, ab_pct))
+
+        text = "\n".join(lines)
+        self.clipboard_clear()
+        self.clipboard_append(text)
+        # Brief visual feedback on the button
+        self._copy_meter_btn.configure(text="Copied!")
+        self.after(1500, lambda: self._copy_meter_btn.configure(text="Copy"))
+
+    def _export_overview_csv(self):
+        """Export overview session leaderboard."""
+        tracker = self._backend.tracker
+        encounters = tracker.get_encounters(top_n=999)
+        if not encounters:
+            return
+
+        player_totals = {}
+        # Same NPC target filter as _build_overview_data
+        npc_target_eids = set()
+        npc_target_names = set()
+        for enc in encounters:
+            et = tracker.entity_types.get(enc.npc_eid)
+            if et != 0:
+                npc_target_eids.add(enc.npc_eid)
+                if enc.npc_name:
+                    npc_target_names.add(enc.npc_name)
+        for enc in encounters:
+            for p_eid, p in enc.players.items():
+                pname = p['name']
+                p_dealt = max(p['text_dealt'], p['dealt'])
+                p_cls = tracker.classes.get(p_eid) or p['cls']
+                p_lvl = tracker.levels.get(p_eid) if tracker.levels.get(p_eid) is not None else p['level']
+                p_etype = tracker.entity_types.get(p_eid)
+                # Same filter as _build_overview_data: skip regular NPCs
+                if p_etype is not None and p_etype != 0:
+                    if not tracker.pet_states.get(p_eid, False):
+                        continue
+                elif p_etype is None:
+                    if EntityTracker._looks_like_npc_name(pname):
+                        continue
+                    if (p_eid in npc_target_eids
+                            and p_eid != tracker._local_player_eid):
+                        continue
+                    if (pname in npc_target_names
+                            and p_eid != tracker._local_player_eid):
+                        continue
+                if pname not in player_totals:
+                    player_totals[pname] = {
+                        'cls': p_cls, 'level': p_lvl,
+                        'dealt': 0, 'active_dur': 0.0,
+                        'abilities': {},
+                        'entity_type': p_etype,
+                    }
+                pt = player_totals[pname]
+                pt['dealt'] += p_dealt
+                pt['active_dur'] += enc.duration
+                if p_cls and not pt['cls']:
+                    pt['cls'] = p_cls
+                if p_lvl is not None and pt['level'] is None:
+                    pt['level'] = p_lvl
+                if p_etype == 0:
+                    pt['entity_type'] = 0
+                elif pt['entity_type'] is None and p_etype is not None:
+                    pt['entity_type'] = p_etype
+                for ab_name, ab_dmg in p.get('abilities', {}).items():
+                    pt['abilities'][ab_name] = pt['abilities'].get(ab_name, 0) + ab_dmg
+
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        path = filedialog.asksaveasfilename(
+            defaultextension=".csv",
+            filetypes=[("CSV files", "*.csv"), ("All files", "*.*")],
+            initialfile=f"overview_{ts}.csv",
+            title="Export Overview",
+        )
+        if not path:
+            return
+        try:
+            with open(path, "w", newline="", encoding="utf-8") as f:
+                w = csv.writer(f)
+                w.writerow(["rank", "player", "entity_type", "class", "level",
+                            "total_damage", "avg_dps", "active_duration_s",
+                            "ability", "ability_damage"])
+                sorted_pt = sorted(player_totals.items(), key=lambda x: x[1]['dealt'], reverse=True)
+                for rank, (pname, pt) in enumerate(sorted_pt, 1):
+                    avg_dps = round(pt['dealt'] / pt['active_dur'], 1) if pt['active_dur'] > 0 else 0
+                    dur = round(pt['active_dur'], 1)
+                    etype = pt.get('entity_type')
+                    etype_str = "player" if etype == 0 else ("pet/npc" if etype is not None else "unknown")
+                    abilities = sorted(pt['abilities'].items(), key=lambda x: x[1], reverse=True)
+                    if abilities:
+                        for ab_name, ab_dmg in abilities:
+                            w.writerow([rank, pname, etype_str, pt['cls'] or "", pt['level'] or "",
+                                        pt['dealt'], avg_dps, dur, ab_name, ab_dmg])
+                    else:
+                        w.writerow([rank, pname, etype_str, pt['cls'] or "", pt['level'] or "",
+                                    pt['dealt'], avg_dps, dur, "", ""])
+            self._status_label.configure(
+                text=f"Exported overview to {os.path.basename(path)}")
+        except Exception as e:
+            self._status_label.configure(text=f"Export failed: {e}")
 
     def _render_encounter_totals(self):
         tracker = self._backend.tracker
@@ -3956,12 +4514,16 @@ class CombatApp(tk.Tk):
 
     def _reset_meter(self):
         self._backend.tracker.reset()
-        self._meter_view = "list"
+        self._meter_view = "overview"
+        self._meter_view_var.set("Overview")
         self._meter_selected_eid = None
         self._meter_fingerprint = None  # force redraw
         self._hidden_encounters.clear()
+        self._overview_expanded.clear()
+        self._overview_structure = None
+        self._overview_lines = []
         self._meter_back_btn.pack_forget()
-        self._meter_title.configure(text="Encounters")
+        self._copy_meter_btn.pack(side=tk.RIGHT, padx=4)
         for w in self._encounter_buttons:
             w.destroy()
         self._encounter_buttons.clear()
@@ -3973,12 +4535,14 @@ class CombatApp(tk.Tk):
     def _export_meter(self):
         """Route export to the correct method for the current meter view."""
         v = self._meter_view
-        if v == "list":
+        if v == "encounters":
             self._export_encounters_csv()
-        elif v == "detail":
+        elif v == "encounter_detail":
             self._export_encounter_detail_csv()
-        elif v == "totals":
+        elif v == "grand_overview":
             self._export_totals_csv()
+        elif v == "overview":
+            self._export_overview_csv()
 
     def _export_encounters_csv(self):
         """Export encounter list with per-player sub-rows."""
@@ -4268,7 +4832,7 @@ class CombatApp(tk.Tk):
             new_w = max(400, w // 2)
             new_x = x + (w - new_w)
             self.geometry(f"{new_w}x{h}+{new_x}+{y}")
-            self.minsize(400, 250)
+            self.minsize(350, 220)
         else:
             self._left_frame.grid()
             self._divider.grid()
@@ -4284,7 +4848,18 @@ class CombatApp(tk.Tk):
                 new_x = cur_x + cur_w - w
                 self.geometry(f"{w}x{h}+{new_x}+{y}")
                 self._saved_geometry = None
-            self.minsize(700, 250)
+            else:
+                # First expand — double width, anchor right edge
+                cur_w = self.winfo_width()
+                cur_h = self.winfo_height()
+                cur_x = self.winfo_x()
+                cur_y = self.winfo_y()
+                new_w = max(850, cur_w * 2)
+                new_x = cur_x + cur_w - new_w
+                if new_x < 0:
+                    new_x = 0
+                self.geometry(f"{new_w}x{cur_h}+{new_x}+{cur_y}")
+            self.minsize(600, 220)
 
     # --- Left Panel Tab Switching ---
 
@@ -4316,7 +4891,8 @@ class CombatApp(tk.Tk):
         if target == self._left_view:
             return
         if target == "items" and self._left_view == "item_detail":
-            return  # already in items sub-view
+            self._on_item_back()
+            return
         self._hide_left_view()
 
         if target == "feed":
@@ -4342,21 +4918,22 @@ class CombatApp(tk.Tk):
 
         self._update_tab_styles()
 
+    def _on_left_view_change(self, event=None):
+        """Handle left panel dropdown selection."""
+        label = self._left_view_var.get()
+        view_map = {"Feed": "feed", "Items": "items", "Triggers": "triggers"}
+        target = view_map.get(label, "feed")
+        self._switch_left_tab(target)
+        # Unfocus the combobox
+        try:
+            self._feed.focus_set()
+        except Exception:
+            pass
+
     def _update_tab_styles(self):
-        """Highlight the active tab button, dim the others."""
-        tabs = {
-            "feed": self._tab_feed_btn,
-            "items": self._tab_items_btn,
-            "triggers": self._tab_triggers_btn,
-        }
-        active_key = self._left_view
-        if active_key == "item_detail":
-            active_key = "items"
-        for key, btn in tabs.items():
-            if key == active_key:
-                btn.configure(style='ActiveTab.TButton')
-            else:
-                btn.configure(style='Dark.TButton')
+        """Sync the dropdown to the current left view."""
+        label_map = {"feed": "Feed", "items": "Items", "item_detail": "Items", "triggers": "Triggers"}
+        self._left_view_var.set(label_map.get(self._left_view, "Feed"))
 
     # --- Item Tracker ---
 
@@ -4674,7 +5251,7 @@ class CombatApp(tk.Tk):
         """Handle clicking an item row — switch to detail view."""
         self._item_selected_name = name
         self._left_view = "item_detail"
-        self._item_back_btn.pack(side=tk.LEFT, padx=4, after=self._tab_triggers_btn)
+        self._item_back_btn.pack(side=tk.LEFT, padx=4, after=self._left_combo)
         self._item_fingerprint = None  # force redraw
         self._render_item_detail()
 
