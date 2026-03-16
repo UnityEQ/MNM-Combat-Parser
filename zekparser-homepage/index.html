@@ -180,18 +180,18 @@
 
     <!-- Nav -->
     <header class="site-nav">
-        <a href="/" class="nav-logo">ZekParser</a>
+        <a href="/" class="nav-logo" id="nav-logo">ZekParser</a>
         <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
         <nav class="nav-links">
-            <a href="/saltyvision">SaltyVision</a>
+            <a href="/saltyvision" class="nav-link-saltyvision" id="nav-saltyvision">SaltyVision</a>
             <div class="nav-donate-mobile">
-                <a href="https://cash.app/$thepdxdude" target="_blank" rel="noopener" class="btn-donate">Cash App</a>
-                <a href="https://venmo.com/u/Saltycrackers" target="_blank" rel="noopener" class="btn-donate">Venmo</a>
+                <a href="https://cash.app/$thepdxdude" target="_blank" rel="noopener" class="btn-donate btn-donate-cashapp-mobile" id="nav-cashapp-mobile">Cash App</a>
+                <a href="https://venmo.com/u/Saltycrackers" target="_blank" rel="noopener" class="btn-donate btn-donate-venmo-mobile" id="nav-venmo-mobile">Venmo</a>
             </div>
         </nav>
         <div class="nav-donate">
-            <a href="https://cash.app/$thepdxdude" target="_blank" rel="noopener" class="btn-donate">Cash App</a>
-            <a href="https://venmo.com/u/Saltycrackers" target="_blank" rel="noopener" class="btn-donate">Venmo</a>
+            <a href="https://cash.app/$thepdxdude" target="_blank" rel="noopener" class="btn-donate btn-donate-cashapp" id="nav-cashapp">Cash App</a>
+            <a href="https://venmo.com/u/Saltycrackers" target="_blank" rel="noopener" class="btn-donate btn-donate-venmo" id="nav-venmo">Venmo</a>
         </div>
     </header>
 
@@ -201,7 +201,7 @@
         <h1>Real-Time <span>Combat Parser</span></h1>
         <p>Track DPS, encounters, and loot drops as you play. ZekParser reads combat data live and gives you a clean damage breakdown without touching game files.</p>
         <div class="hero-buttons">
-            <a href="/ZekParser.exe" class="btn-primary">
+            <a href="/ZekParser.exe" class="btn-primary btn-download-hero" id="hero-download">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                 Download ZekParser
             </a>
@@ -378,7 +378,7 @@
         <div class="cta-box">
             <h2>Ready to parse?</h2>
             <p>Download ZekParser and start tracking your combat stats in real time.</p>
-            <a href="/ZekParser.exe" class="btn-primary" id="download-btn">
+            <a href="/ZekParser.exe" class="btn-primary btn-download-cta" id="cta-download">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                 Download ZekParser v1.4.0
             </a>
@@ -389,10 +389,10 @@
     <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-links">
-            <a href="/saltyvision">SaltyVision</a>
-            <a href="/saltyvision#databases">Item Database</a>
+            <a href="/saltyvision" class="footer-link-saltyvision" id="footer-saltyvision">SaltyVision</a>
+            <a href="/saltyvision#databases" class="footer-link-itemdb" id="footer-itemdb">Item Database</a>
         </div>
-        <p>&copy; 2026 <a href="https://joinkle.com" target="_blank" rel="noopener">Joinkle</a></p>
+        <p>&copy; 2026 <a href="https://joinkle.com" target="_blank" rel="noopener" class="footer-link-joinkle" id="footer-joinkle">Joinkle</a></p>
     </footer>
 
     <!-- Mobile nav toggle (close on link click) -->
