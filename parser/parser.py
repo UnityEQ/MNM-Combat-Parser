@@ -570,7 +570,7 @@ MESSAGE_IDS = {
 
 COMBAT_MSG_IDS = {
     0x0011, 0x0012, 0x0013, 0x0014, 0x0020, 0x0021, 0x0022, 0x0023,
-    0x0025, 0x0027, 0x0029, 0x002A, 0x002F, 0x0040, 0x0050, 0x0053, 0x0054,
+    0x0024, 0x0025, 0x0027, 0x0029, 0x002A, 0x002F, 0x0040, 0x0050, 0x0053, 0x0054,
     0x0055, 0x0056, 0x005C, 0x005D, 0x005F, 0x0146, 0x0380, 0x022F,
 }
 
@@ -886,6 +886,11 @@ def parse_combat_event(msg_id, body, direction):
             event["level"], off = _r_i32(body, off)            # int level
         except Exception:
             pass  # Partial parse — classHID may still be available
+
+    elif msg_id == 0x0024:  # UpdateExperience
+        event["type"] = "UpdateExperience"
+        event["entity_id"], off = _r_u32(body, off)
+        event["experience"], off = _r_u32(body, off)
 
     elif msg_id == 0x0025:  # UpdateLevel
         event["type"] = "UpdateLevel"
@@ -1222,6 +1227,10 @@ class EntityTracker:
         # CastAbility OUT → BeginCasting IN correlation for local player detection
         self._pending_cast_target = None  # target_id from most recent outbound CastAbility
         self._pending_cast_time = 0.0
+
+        # Experience tracking
+        self._xp_current = {}     # eid -> last known total XP
+        self._xp_events = []      # list of {timestamp, eid, name, xp_total, xp_gained}
 
     def _backfill_player_info(self, eid, cls=None, level=None):
         """Update class/level on existing encounter player records for this eid."""
@@ -1650,6 +1659,31 @@ class EntityTracker:
                     self.levels[eid] = level
                 self._backfill_player_info(eid, cls=class_hid, level=level)
                 _plog.debug(f"LEVEL_UPDATE #{eid} class={class_hid} level={level}")
+                return None
+
+            if etype == "UpdateExperience":
+                xp_total = event.get("experience", 0)
+                prev = self._xp_current.get(eid)
+                xp_gained = (xp_total - prev) if prev is not None else 0
+                self._xp_current[eid] = xp_total
+                name = self.names.get(eid, f"Entity#{eid}")
+                xp_ev = {
+                    "timestamp": time.time(),
+                    "eid": eid,
+                    "name": name,
+                    "xp_total": xp_total,
+                    "xp_gained": xp_gained,
+                }
+                # Try to tag with the most recent encounter NPC that just died
+                last_kill = None
+                for enc in self.encounters:
+                    if enc.end_time and enc.npc_name:
+                        if last_kill is None or enc.end_time > last_kill.end_time:
+                            last_kill = enc
+                if last_kill and (time.time() - last_kill.end_time) < 5.0:
+                    xp_ev["npc_name"] = last_kill.npc_name
+                self._xp_events.append(xp_ev)
+                _plog.debug(f"XP_UPDATE #{eid} \"{name}\" total={xp_total:,} gained=+{xp_gained:,}")
                 return None
 
             if etype == "UpdateState":
@@ -3117,6 +3151,7 @@ class CombatApp(tk.Tk):
         self._meter_id = self.after(1000, self._refresh_meter)
         self._item_id = self.after(1000, self._refresh_items)
         self._trigger_id = self.after(500, self._refresh_triggers)
+        self._xp_id = self.after(1000, self._refresh_experience)
         self._stats_id = self.after(3000, self._refresh_stats)
 
         self.protocol("WM_DELETE_WINDOW", self._on_close)
@@ -3200,7 +3235,7 @@ class CombatApp(tk.Tk):
         self._left_view_var = tk.StringVar(value="Feed")
         self._left_combo = ttk.Combobox(
             header_left, textvariable=self._left_view_var,
-            values=["Feed", "Items", "Triggers"],
+            values=["Feed", "Items", "Triggers", "Experience"],
             state='readonly', style='Dark.TCombobox', width=10,
             font=('Segoe UI', 9))
         self._left_combo.pack(side=tk.LEFT, padx=4, pady=2)
@@ -3328,13 +3363,37 @@ class CombatApp(tk.Tk):
         self._trigger_view.tag_configure('header_line', foreground=COLORS['fg_dim'])
         self._trigger_view.tag_configure('help_text', foreground=COLORS['fg_dim'])
 
+        # Experience view
+        self._xp_view = tk.Text(left, bg=COLORS['bg_darker'], fg=COLORS['fg'],
+                                font=('Consolas', 9), wrap=tk.NONE, state=tk.DISABLED,
+                                borderwidth=0, highlightthickness=0, padx=4, pady=4,
+                                cursor="arrow")
+        self._xp_scroll_y = tk.Scrollbar(left, orient=tk.VERTICAL,
+                                         command=self._xp_view.yview)
+        self._xp_view.configure(yscrollcommand=self._xp_scroll_y.set)
+
+        # XP view tags
+        self._xp_view.tag_configure('header', foreground=COLORS['mauve'],
+                                    font=('Consolas', 9, 'bold'))
+        self._xp_view.tag_configure('xp_gain', foreground=COLORS['green'],
+                                    font=('Consolas', 9, 'bold'))
+        self._xp_view.tag_configure('xp_total', foreground=COLORS['fg_dim'])
+        self._xp_view.tag_configure('npc_name', foreground=COLORS['peach'])
+        self._xp_view.tag_configure('player_name', foreground=COLORS['blue'])
+        self._xp_view.tag_configure('sep', foreground=COLORS['fg_dim'])
+        self._xp_view.tag_configure('summary_label', foreground=COLORS['fg_dim'])
+        self._xp_view.tag_configure('summary_value', foreground=COLORS['yellow'],
+                                    font=('Consolas', 9, 'bold'))
+        self._xp_view.tag_configure('help_text', foreground=COLORS['fg_dim'])
+
         # Left view state
-        self._left_view = "feed"          # "feed", "items", "item_detail", "triggers"
+        self._left_view = "feed"          # "feed", "items", "item_detail", "triggers", "experience"
         self._item_selected_name = None   # selected item name for detail
         self._item_fingerprint = None     # skip-redraw optimization
         self._item_buttons = []           # embedded widgets in item list
         self._trigger_buttons = []        # embedded widgets in trigger list
         self._trigger_fingerprint = None  # skip-redraw optimization
+        self._xp_fingerprint = None       # skip-redraw optimization
 
         # Right: encounter meter
         right = tk.Frame(main, bg=COLORS['bg'])
@@ -4885,6 +4944,9 @@ class CombatApp(tk.Tk):
             for w in self._trigger_buttons:
                 w.destroy()
             self._trigger_buttons.clear()
+        elif v == "experience":
+            self._xp_view.pack_forget()
+            self._xp_scroll_y.pack_forget()
 
     def _switch_left_tab(self, target):
         """Switch to target view: 'feed', 'items', or 'triggers'."""
@@ -4915,13 +4977,18 @@ class CombatApp(tk.Tk):
             self._trigger_view.pack(fill=tk.BOTH, expand=True)
             self._left_view = "triggers"
             self._trigger_fingerprint = None  # force redraw
+        elif target == "experience":
+            self._xp_scroll_y.pack(side=tk.RIGHT, fill=tk.Y)
+            self._xp_view.pack(fill=tk.BOTH, expand=True)
+            self._left_view = "experience"
+            self._xp_fingerprint = None  # force redraw
 
         self._update_tab_styles()
 
     def _on_left_view_change(self, event=None):
         """Handle left panel dropdown selection."""
         label = self._left_view_var.get()
-        view_map = {"Feed": "feed", "Items": "items", "Triggers": "triggers"}
+        view_map = {"Feed": "feed", "Items": "items", "Triggers": "triggers", "Experience": "experience"}
         target = view_map.get(label, "feed")
         self._switch_left_tab(target)
         # Unfocus the combobox
@@ -4932,7 +4999,7 @@ class CombatApp(tk.Tk):
 
     def _update_tab_styles(self):
         """Sync the dropdown to the current left view."""
-        label_map = {"feed": "Feed", "items": "Items", "item_detail": "Items", "triggers": "Triggers"}
+        label_map = {"feed": "Feed", "items": "Items", "item_detail": "Items", "triggers": "Triggers", "experience": "Experience"}
         self._left_view_var.set(label_map.get(self._left_view, "Feed"))
 
     # --- Item Tracker ---
@@ -5402,6 +5469,87 @@ class CombatApp(tk.Tk):
             self._status_label.configure(
                 text=f"Chat logging to {os.path.basename(self._chat_log_path)}")
 
+    # --- Experience ---
+
+    def _refresh_experience(self):
+        """1s timer: redraw experience view if active and data changed."""
+        if self._left_view == "experience":
+            tracker = self._backend._tracker
+            xp_events = tracker._xp_events
+            fp = len(xp_events)
+            if fp != self._xp_fingerprint:
+                self._xp_fingerprint = fp
+                self._render_experience()
+        self._xp_id = self.after(1000, self._refresh_experience)
+
+    def _render_experience(self):
+        """Render the experience event log in the XP view."""
+        tracker = self._backend._tracker
+        xp_events = list(tracker._xp_events)  # snapshot
+
+        self._xp_view.configure(state=tk.NORMAL)
+        self._xp_view.delete("1.0", tk.END)
+
+        if not xp_events:
+            self._xp_view.insert(tk.END, "\n  No experience data yet.\n\n", 'help_text')
+            self._xp_view.insert(tk.END, "  XP gains will appear here as\n", 'help_text')
+            self._xp_view.insert(tk.END, "  you defeat enemies.\n", 'help_text')
+            self._xp_view.configure(state=tk.DISABLED)
+            return
+
+        # Summary at top
+        total_gained = sum(e["xp_gained"] for e in xp_events if e["xp_gained"] > 0)
+        num_gains = sum(1 for e in xp_events if e["xp_gained"] > 0)
+        latest_total = xp_events[-1]["xp_total"] if xp_events else 0
+
+        # Session duration from first to last XP event
+        if len(xp_events) >= 2:
+            dur = xp_events[-1]["timestamp"] - xp_events[0]["timestamp"]
+            if dur > 0:
+                xp_per_hr = total_gained / (dur / 3600)
+            else:
+                xp_per_hr = 0
+        else:
+            dur = 0
+            xp_per_hr = 0
+
+        self._xp_view.insert(tk.END, " Experience Tracker\n", 'header')
+        self._xp_view.insert(tk.END, " " + "\u2500" * 36 + "\n", 'sep')
+
+        self._xp_view.insert(tk.END, "  Total XP:  ", 'summary_label')
+        self._xp_view.insert(tk.END, f"{latest_total:,}\n", 'summary_value')
+
+        self._xp_view.insert(tk.END, "  Gained:    ", 'summary_label')
+        self._xp_view.insert(tk.END, f"+{total_gained:,}", 'summary_value')
+        self._xp_view.insert(tk.END, f"  ({num_gains} kills)\n", 'xp_total')
+
+        if xp_per_hr > 0:
+            self._xp_view.insert(tk.END, "  XP/hour:   ", 'summary_label')
+            self._xp_view.insert(tk.END, f"{xp_per_hr:,.0f}\n", 'summary_value')
+
+        self._xp_view.insert(tk.END, " " + "\u2500" * 36 + "\n\n", 'sep')
+
+        # Individual XP events (newest first)
+        for ev in reversed(xp_events):
+            ts = time.strftime("%H:%M:%S", time.localtime(ev["timestamp"]))
+            gained = ev["xp_gained"]
+            name = ev["name"]
+            npc = ev.get("npc_name", "")
+
+            if gained > 0:
+                self._xp_view.insert(tk.END, f"  {ts}  ", 'xp_total')
+                self._xp_view.insert(tk.END, f"+{gained:,} XP", 'xp_gain')
+                if npc:
+                    self._xp_view.insert(tk.END, f"  \u2190 ", 'xp_total')
+                    self._xp_view.insert(tk.END, f"{npc}", 'npc_name')
+                self._xp_view.insert(tk.END, "\n")
+            else:
+                # First event (no delta yet) — just show current total
+                self._xp_view.insert(tk.END, f"  {ts}  ", 'xp_total')
+                self._xp_view.insert(tk.END, f"Session start: {ev['xp_total']:,} XP\n", 'xp_total')
+
+        self._xp_view.configure(state=tk.DISABLED)
+
     # --- Cleanup ---
 
     def _on_close(self):
@@ -5419,6 +5567,8 @@ class CombatApp(tk.Tk):
             self.after_cancel(self._item_id)
         if self._trigger_id:
             self.after_cancel(self._trigger_id)
+        if self._xp_id:
+            self.after_cancel(self._xp_id)
         if self._stats_id:
             self.after_cancel(self._stats_id)
         self.destroy()

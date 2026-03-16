@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TJK722NR');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZekParser — Live Combat Log Parser</title>
+    <meta name="description" content="Real-time DPS meter and combat log parser. Track damage, encounters, items, and export session data.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJK722NR"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Nav -->
+    <header class="site-nav">
+        <span class="nav-logo">ZekParser</span>
+        <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
+        <nav class="nav-links">
+            <a href="#screenshots">Screenshots</a>
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#download" class="nav-download">Download</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge">Windows &bull; Free &bull; Open Source</div>
+        <h1>Real-Time <span>Combat Parser</span></h1>
+        <p>Track DPS, encounters, and loot drops as you play. ZekParser reads combat data live and gives you a clean damage breakdown without touching game files.</p>
+        <div class="hero-buttons">
+            <a href="#download" class="btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download ZekParser
+            </a>
+            <a href="https://github.com/MNM-Network" class="btn-secondary" target="_blank" rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub
+            </a>
+        </div>
+        <p class="hero-meta">v1.0.0 &bull; Windows 10/11 &bull; Requires Administrator</p>
+    </section>
+
+    <!-- Screenshots -->
+    <section class="screenshots" id="screenshots">
+        <h2>See It In Action</h2>
+        <p class="section-sub">Live damage tracking with real-time encounter breakdowns.</p>
+        <div class="screenshot-grid">
+            <!-- Replace the placeholder divs below with real images:
+                 <img src="screenshots/overview.png" alt="Overview panel"> -->
+            <div class="screenshot-card screenshot-featured">
+                <div class="screenshot-img-wrap">
+                    <div class="screenshot-placeholder">screenshot: overview panel — replace with screenshots/overview.png</div>
+                </div>
+                <div class="screenshot-caption">
+                    <h3>Session Overview</h3>
+                    <p>Top players ranked by total damage across all encounters, with expandable per-ability breakdowns. Click any player to see their full ability list.</p>
+                </div>
+            </div>
+            <div class="screenshot-card">
+                <div class="screenshot-img-wrap">
+                    <div class="screenshot-placeholder">screenshot: encounter list — replace with screenshots/encounters.png</div>
+                </div>
+                <div class="screenshot-caption">
+                    <h3>Encounter List</h3>
+                    <p>Every fight logged with mob name, total damage dealt, duration, and DPS. Click into any encounter for the full damage breakdown.</p>
+                </div>
+            </div>
+            <div class="screenshot-card">
+                <div class="screenshot-img-wrap">
+                    <div class="screenshot-placeholder">screenshot: encounter detail — replace with screenshots/detail.png</div>
+                </div>
+                <div class="screenshot-caption">
+                    <h3>Encounter Detail</h3>
+                    <p>Per-player damage bars with class tags, individual DPS, and damage percentage. See exactly who contributed what.</p>
+                </div>
+            </div>
+            <div class="screenshot-card">
+                <div class="screenshot-img-wrap">
+                    <div class="screenshot-placeholder">screenshot: item tracker — replace with screenshots/items.png</div>
+                </div>
+                <div class="screenshot-caption">
+                    <h3>Item Tracker</h3>
+                    <p>All loot drops logged with full stats, effects, and which mob dropped them. Never miss a drop again.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <h2>Built for Combat</h2>
+        <p class="section-sub">Everything you need to understand your damage output.</p>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                </div>
+                <h3>Real-Time DPS</h3>
+                <p>Damage per second calculated live as combat happens. No log file parsing after the fact &mdash; see your numbers the moment they land.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                </div>
+                <h3>Session Overview</h3>
+                <p>Aggregated leaderboard across all encounters. See who's top DPS for the whole session with expandable ability breakdowns per player.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <h3>Encounter Logging</h3>
+                <p>Each fight tracked individually with per-player damage, ability usage, and time-in-combat. Drill into any encounter for the full picture.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                </div>
+                <h3>Item Tracking</h3>
+                <p>Loot drops captured with full item stats, effects, and the NPC that dropped them. Tracks drop frequency and timestamps.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </div>
+                <h3>Copy &amp; Share</h3>
+                <p>Select and copy any data from the overview. One-click copy button formats a clean table you can paste directly into Discord or chat.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3>Non-Invasive</h3>
+                <p>Reads network traffic passively. No injection, no memory writing, no file modification. The game doesn't know it's there.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <h2>How It Works</h2>
+        <p class="section-sub">Three steps from download to damage numbers.</p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <h3>Download &amp; Run</h3>
+                    <p>Grab <code>ZekParser.exe</code> from the download link. No install needed &mdash; it's a single portable file. Right-click and run as Administrator (required for network capture).</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <h3>Start Playing</h3>
+                    <p>Launch the game as usual. ZekParser auto-detects the game process, finds the network connection, and starts reading combat data. Your player name is detected automatically.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <h3>Watch the Numbers</h3>
+                    <p>The combat feed scrolls in real time as you fight. The overview panel ranks everyone by total damage. Expand any player to see their ability breakdown. Copy the table to share with your group.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Requirements -->
+    <section class="requirements">
+        <h2>Requirements</h2>
+        <div class="req-list">
+            <div class="req-item">
+                <span class="check">&#10003;</span>
+                Windows 10 or 11
+            </div>
+            <div class="req-item">
+                <span class="check">&#10003;</span>
+                Run as Administrator
+            </div>
+            <div class="req-item">
+                <span class="check">&#10003;</span>
+                Game running on same machine
+            </div>
+            <div class="req-item">
+                <span class="check">&#10003;</span>
+                No dependencies to install
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="download">
+        <div class="cta-box">
+            <h2>Ready to parse?</h2>
+            <p>Download ZekParser and start tracking your combat stats in real time.</p>
+            <a href="#" class="btn-primary" id="download-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download ZekParser v1.0.0
+            </a>
+            <p class="hero-meta" style="margin-top: 1rem;">Single .exe &bull; No install &bull; ~15 MB</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a href="https://github.com/MNM-Network" target="_blank" rel="noopener">GitHub</a>
+            <a href="#">Item Database</a>
+            <a href="#">Combat API</a>
+        </div>
+        <p>&copy; 2026 MNM Network</p>
+    </footer>
+
+    <!-- Mobile nav toggle (close on link click) -->
+    <script>
+    document.querySelectorAll('.nav-links a').forEach(function(a) {
+        a.addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.remove('open');
+        });
+    });
+    </script>
+</body>
+</html>
