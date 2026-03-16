@@ -439,6 +439,18 @@ COMBAT_MSG_IDS = {
     0x0028: "UpdateStats",
     0x0228: "UpdateStat",
     0x0026: "Ding",
+
+    # Party/group info (for /reload analysis)
+    0x0380: "ClientPartyUpdate",
+    0x002F: "UpdateState",
+    0x005F: "UpdateClassHID",
+    0x013F: "UpdateStatus",
+    0x0038: "UpdateRaceSex",
+    0x0083: "UpdateEquipment",
+    0x008A: "UpdateName",
+    0x0084: "UpdateSurname",
+    0x008E: "UpdateGuildInfo",
+    0x0040: "ChatMessage",
 }
 
 

@@ -33,7 +33,7 @@ No test framework exists. Verify changes with `python -c` imports and live captu
 ## Two Entry Points
 
 1. **`mnm.py`** — Headless CLI tool. Captures packets, decrypts, logs combat events to console + rotating log files in `logs/`. Records NPC spawns to `data/npc_database.csv`.
-2. **`parser/parser.py`** — Standalone tkinter GUI named **ZekParser**. Fully self-contained (zero imports from `core/`). Duplicates the entire capture→decrypt→parse pipeline inline. Shows real-time combat feed + damage meter with DPS tracking. Debug logs go to `parser/logs/`.
+2. **`parser/parser.py`** — Standalone tkinter GUI named **ZekParser** (window title: `"ZekParser {APP_VERSION}"`). Fully self-contained (zero imports from `core/`). Duplicates the entire capture→decrypt→parse pipeline inline. Shows real-time combat feed + damage meter with DPS tracking. Debug logs go to `parser/logs/`. `APP_VERSION` constant (e.g. `"V1.0"`) at top of file — bump for each exe release.
 
 Both require Windows Administrator privileges for raw socket capture (`SIO_RCVALL`).
 
@@ -173,9 +173,42 @@ Created when both target and attacker are `entity_type == 0` (both players). PvP
 
 The PvP system gates text damage resolution on encounter existence: `_resolve_target_eid`, the ChatCombat HP-correlation path, and the `_pending_chat_dmg` flush all allow player targets **only if** a PvP encounter already exists in `_encounter_map`. This prevents ambient player HP updates from creating ghost PvP encounters — the encounter must first be established by a confirmed player-on-player `UpdateHealth` damage event (logged as `ENC_PVP`).
 
-## Item Tracker (parser/parser.py)
+## GUI Layout (parser/parser.py)
 
-The left panel toggles between combat feed and item tracker via the "Items" button. Three view states: `"feed"`, `"items"`, `"item_detail"`.
+### Window Sizing (1080p optimized)
+
+- Default (left panel collapsed): `425x300`, minsize `350x220`
+- Expanded (both panels): `850x300`, minsize `600x220`
+- Left panel starts hidden — user clicks expand arrow to show it
+
+### Left Panel Views
+
+Dropdown (`_left_combo`) switches between views. `_left_view` state values:
+
+| Dropdown Label | `_left_view` value | Description |
+|---|---|---|
+| Feed | `"feed"` | Real-time scrolling combat log, color-coded by event type |
+| Items | `"items"` | Clickable item drop list with stats preview |
+| (item click) | `"item_detail"` | Full item stats, effects, drop history |
+| Triggers | `"triggers"` | User-defined text pattern matching with audio alerts (`triggers.json`) |
+| Experience | `"experience"` | XP gain tracking per kill with session summary |
+
+Copy button copies text from whichever view is active. Export button exports to CSV.
+
+### Right Panel Views
+
+Dropdown (`_meter_combo`) switches between views. `_meter_view` state values:
+
+| Dropdown Label | `_meter_view` value | Description |
+|---|---|---|
+| Overview | `"overview"` | Session leaderboard — top players ranked by total damage with expandable ability breakdown |
+| Encounters | `"encounters"` | Live/dead NPC encounter list sorted by recency |
+| (encounter click) | `"encounter_detail"` | Per-player damage breakdown for one encounter |
+| Grand Overview | `"grand_overview"` | Aggregated stats across all encounters |
+
+Overview uses in-place button label updates via `_overview_structure` tracking (prevents flicker). Full redraw only on structural change (new player, expand/collapse, rank reorder). `_overview_expanded` set tracks which players have ability breakdowns expanded.
+
+## Item Tracker (parser/parser.py)
 
 - **Data**: `CaptureBackend` stores `_items` (hid → full ItemRecord dict) and `_item_drops` (list of `{hid, name, quantity, timestamp, npc_name}`). Thread-safe via `_item_lock`.
 - **Item list**: Clickable rows showing item name, count, and compact stats preview (DMG/AC/primary stats). Sorted by drop count descending.
@@ -184,6 +217,16 @@ The left panel toggles between combat feed and item tracker via the "Items" butt
 - **Loot context**: `_last_loot_target` maps entity ID → NPC name so items can be associated with the mob that dropped them.
 
 Items are also queued to the API client when `api_enabled` is true.
+
+## Experience Tracking (parser/parser.py)
+
+`UpdateExperience (0x0024)`: `[u32 entity_id] [u32 experience]` — XP value is **per-level progress** (not lifetime total). Resets to near-zero on level-up.
+
+- **State**: `_xp_current` (eid → last XP), `_xp_events` (list of gain records), `_xp_level_start` (eid → XP at level start), `_xp_level_needed` (eid → XP cap for level), `_xp_player_level` (eid → level)
+- **First event baseline**: First `UpdateExperience` in a session silently records the XP value and returns `None` — no event shown. Second kill onwards computes proper deltas.
+- **Level-up detection**: When `new_xp < prev_xp`, the player leveled up. The old value becomes the level cap (`_xp_level_needed`). XP percentage is computed from this.
+- **NPC correlation**: Each XP event is tagged with the most recently killed NPC (within 5s window from `enc.end_time`).
+- **Display**: Summary shows total gained + kill count + XP/hour. Event rows show timestamp, `+N XP`, percentage if known, and mob name.
 
 ## API Client (parser/api_client.py)
 
@@ -243,109 +286,3 @@ The exe uses `--noconsole` so `print()`/`input()` do nothing. Crashes show a nat
 - `config.json` `player_name` should be empty string `""` — the parser auto-detects it from outbound Autoattack/ChangeTarget packets and "Your..."/"You..." combat text patterns
 - Never use `"_local"` string as a real entity ID — it's a sentinel placeholder for the local player before detection. Always resolve via `_local_player_eid` at consumption points and merge in `_mark_local_player`
 
-## Networking Assessment: Combat Packets (Suggestions for Game Dev Team)
-
-This section documents protocol-level observations from reverse-engineering the combat packet flow. The focus is scalability, bandwidth efficiency, and design oddities that would cause problems as player count grows.
-
-### 1. Damage Delivered as Human-Readable Chat Strings (Critical)
-
-Melee auto-attack damage is not sent as a structured message. Instead, the server composes an English sentence like `"You slash a dunes madman for 52 points of damage."` and sends it inside `ChatMessage (0x0040)` on channel 1. This is the **only** way the client learns the melee damage amount.
-
-There is no structured damage opcode anywhere in the combat packet flow. The companion `0x644B` animation message (see below) carries `attacker_eid`, `target_eid`, and the verb string ("slash", "punch", "stab") — but **not the damage number**. The damage value exists only in the English chat string.
-
-**Why this is a problem:**
-- A structured melee damage message would be ~14 bytes: `[u16 msg_id][u32 attacker][u32 target][u16 amount][u8 type]`. The equivalent chat string is 40-80+ bytes of UTF-8 text, 3-6x the size.
-- The ChatMessage carries **no entity IDs**. The client (or any parser) must regex-match the English text to figure out who hit whom. The 0x644B animation message has the entity IDs but not the damage. The information is split across two messages where one would suffice.
-- If the game is ever localized to another language, every client-side parser breaks.
-- In a 50-player raid where 20 melee attackers each swing once per second, that's 20 chat strings/sec (~1.2 KB/s) broadcast to all nearby players instead of 20 structured messages (~280 bytes/s). The bandwidth gap widens with player count.
-
-**Suggested fix:** Add a `damage_amount` field to the `0x644B` animation message (which already has both entity IDs and the verb), or create a dedicated `MeleeDamage` opcode: `[u32 attacker_eid] [u32 target_eid] [u16 damage] [u8 damage_type] [u8 verb_id]`. Either way, the ChatMessage text can then be composed client-side.
-
-### 2. Duplicate Damage Reporting (UpdateHealth + Text)
-
-Every single combat hit sends **both** an `UpdateHealth` message (with the new HP value) **and** a separate damage text message (EndCasting or ChatMessage). The damage number exists in two places on the wire for every hit.
-
-Worse, for tough NPCs, `UpdateHealth` reports **percentage-based HP** (max_hp=100) while the text message carries the **real damage number** (e.g. "252 points of Fire Damage"). These two systems disagree, forcing the client to maintain two parallel damage tracking systems and pick the higher one.
-
-**Suggested fix:** Either include the raw damage amount as a field in `UpdateHealth`: `[u32 eid] [i32 new_hp] [i32 max_hp] [u16 damage_dealt] [u32 attacker_eid]`, or ensure `UpdateHealth` always sends real HP values (not percentages). Eliminate the need for clients to cross-reference two different messages to figure out the actual damage.
-
-### 3. EndCasting Overloaded as Combat Log + Narrative Channel
-
-`EndCasting (0x0056)` carries everything from spell damage (`"Your Fireball hits X for 200 points of Fire Damage."`) to world flavor text (`"Rainbow pulls you through a shimmering portal."`), crafting results, and buff notifications — all as freeform English strings. There is no type field to distinguish combat from non-combat text.
-
-**Why this is a problem:**
-- The client must pattern-match every EndCasting string against 6+ regex patterns just to determine if damage happened. A non-combat sentence with a coincidentally matching structure creates ghost damage events.
-- The `entity_id` field in EndCasting sometimes points to the caster and sometimes to the player, with no flag indicating which. For melee EndCasting, `target_id` often points to the **player** (entity_type=0) rather than the NPC being hit, making the target ID unreliable.
-- Adding new spell text formats requires updating every client-side parser.
-
-**Suggested fix:** Split EndCasting into typed sub-messages or add a `result_type` enum field: `0=damage, 1=heal, 2=resist, 3=flavor_text, 4=craft_result`. Include `damage_amount`, `damage_type`, and `heal_amount` as structured fields so clients don't need to parse English.
-
-### 4. SpawnEntity is a Variable-Length Parsing Nightmare
-
-`SpawnEntity (0x0020)` is a large, variable-length message with no length-prefixed sections or field count. The HID string fields (classHID, raceHID, sexHID) between the entity name and health stats **don't follow the standard LiteNetLib string format** for NPCs — the sexHID field reads as uint16 LE = 1024, which is an obviously invalid string length. This forces parsers to abandon sequential reading and **brute-force scan** for the health stats block by looking for two plausible consecutive int32 values.
-
-**Specific issues:**
-- Player SpawnEntity and NPC SpawnEntity use different byte layouts for the same opcode with no type flag to distinguish them up front (entity_type comes first, but the HID section layout varies unpredictably).
-- Stats (HP/MP), position (XYZ floats), booleans, model data, and appearance arrays are all packed sequentially with no section headers, so a single off-by-one in any section corrupts everything downstream.
-- HP values from SpawnEntity are frequently wrong (misaligned reads produce values like 3072/49920), making them unusable as damage baselines.
-
-**Suggested fix:** Use a TLV (type-length-value) or protobuf-style encoding for SpawnEntity. At minimum, add a `u16 field_count` or `u16 section_offset` table at the start so parsers can skip to the section they need. Ensure NPC and player spawns either use the same field layout or are split into separate opcodes.
-
-### 5. No Attacker ID on UpdateHealth
-
-`UpdateHealth (0x0022)` is `[u32 entity_id] [i32 new_hp] [i32 max_hp]` — 12 bytes total. It tells you **who lost health** and **how much**, but not **who caused it**. The client must correlate damage attribution from separate `BeginCasting` / `EndCasting` / `ChatMessage` events that may arrive before or after the UpdateHealth, depending on server processing order.
-
-**Why this is a problem at scale:**
-- When multiple players attack the same NPC simultaneously, the client receives interleaved `BeginCasting` from player A, `UpdateHealth` from NPC, `BeginCasting` from player B, `UpdateHealth` from NPC — and must maintain a stateful attacker-attribution model to figure out which HP drop corresponds to which attacker.
-- Damage Shield effects reverse the expected packet order: UpdateHealth for the **player** (reflecting damage) arrives before UpdateHealth for the NPC, breaking temporal correlation assumptions.
-- In a group fight, dropped or out-of-order UDP packets make attribution impossible to reconstruct.
-
-**Suggested fix:** Add `[u32 source_eid]` and `[u16 ability_id]` to UpdateHealth. One message, all the information, no cross-referencing needed.
-
-### 6. Per-Packet AES-256-CBC Encryption Overhead
-
-Every UDP datagram is encrypted with AES-256-CBC using a per-packet random IV. The encryption envelope adds 20 bytes minimum per packet: `[IV(16)] + [CRC32c(4)]`, plus PKCS7 padding rounds the ciphertext up to the next 16-byte block.
-
-**Cost for combat traffic:**
-- An `UpdateHealth` message is 12 bytes of game data + 2 bytes msg_id + 4 bytes LNL header = ~18 bytes payload. After AES-CBC: 16 (IV) + 32 (2 AES blocks with padding) + 4 (CRC) = 52 bytes. The encryption envelope is **2.9x the payload size**.
-- In a 40-player raid with 10 mobs, a busy combat second might produce 50+ UpdateHealth messages. The encryption overhead alone adds ~1.7 KB/s of pure waste per client.
-- The CRC32c provides integrity checking, but AES-CBC already provides authenticated encryption if paired with HMAC (which the protocol supports but currently leaves empty). Running CRC32c on top of AES-CBC is redundant if HMAC is enabled.
-
-**Suggested fix:** Consider AES-GCM (authenticated encryption, no separate HMAC or CRC needed). For combat-heavy traffic, consider batching: collect all combat events from a single server tick into one encrypted payload instead of encrypting each individually. One IV + one CRC for 10 messages instead of 10 of each.
-
-### 7. Merged Packets Don't Batch by Purpose
-
-LiteNetLib's Merged packet type (property 12) batches multiple sub-messages into one UDP datagram — which is good. However, the batching appears to be purely opportunistic (whatever is in the send queue), not organized by message type or priority.
-
-**Combat implication:** A time-critical `UpdateHealth` message can be bundled with a `PositionUpdateNew` for an entity 500 meters away and a `RemoveBuffIcon` for an expired buff. The client must deserialize the entire merged payload before it can process the HP update. In a high-load scenario where the server merges 15+ sub-messages per datagram, combat responsiveness depends on how fast the client can iterate through unrelated messages to find the ones that matter.
-
-**Suggested fix:** Priority-based batching — group combat-critical messages (UpdateHealth, Die, BeginCasting) separately from world-state messages (position updates, buff icons). This allows the client to process combat updates with lower latency.
-
-### 8. Entity IDs are 32-bit with No Namespacing
-
-Entity IDs are `uint32` allocated presumably by the server. When entities despawn and new ones spawn, IDs can be reused. There's no generation counter or epoch to distinguish "entity #17977 the first dunes madman" from "entity #17977 the second dunes madman that spawned 5 minutes later."
-
-**Combat implication:** If a parser or client caches any state by entity ID (HP baselines, encounter records, attacker attribution), a reused ID silently corrupts that state. The parser has to manually detect ID reuse via SpawnEntity and retire old records, which is fragile.
-
-**Suggested fix:** Either use 64-bit entity IDs with a monotonic counter (never reuse), or add a `u16 generation` field to entity-bearing messages so clients can detect stale references.
-
-### 9. Three Separate Opcodes for Resource Updates
-
-Health, mana, and endurance each have their own opcode: `UpdateHealth (0x0022)`, `UpdateMana (0x0023)`, `UpdateHealthMana (0x0027)`, `UpdateEndurance (0x022F)`. When a player gets hit and loses both HP and mana (e.g. mana burn), the server sends two separate messages instead of one.
-
-There's also `UpdateHealthMana` which combines HP and mana into one message — but it's used inconsistently. Sometimes the server sends `UpdateHealth` + `UpdateMana` separately for the same tick, sometimes `UpdateHealthMana`.
-
-**Suggested fix:** Single `UpdateResources` opcode with a bitmask indicating which fields are present: `[u32 eid] [u8 field_mask] [i32 hp?] [i32 max_hp?] [i32 mp?] [i32 max_mp?] [i32 end?] [i32 max_end?]`. One message, one encryption, one LNL frame.
-
-### 10. Summary — Bandwidth Cost Per Melee Hit
-
-A single melee auto-attack currently generates **3 messages** on the wire:
-
-| Message | Game payload | Encrypted wire size |
-|---|---|---|
-| UpdateHealth | ~14 bytes | ~52 bytes |
-| ChatMessage (damage text) | ~60 bytes | ~100 bytes |
-| 0x644B (animation: verb + entity IDs, NO damage) | ~23 bytes | ~56 bytes |
-| **Total** | **~94 bytes** | **~208 bytes** |
-
-A single structured `MeleeDamage` + `UpdateHealth` approach could deliver the same information in 2 messages totaling ~30 bytes of game payload / ~84 bytes encrypted. That's a **60% bandwidth reduction per melee swing** — significant when multiplied across dozens of players in combat.

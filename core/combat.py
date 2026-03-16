@@ -225,6 +225,81 @@ class CombatEvent:
             if name:
                 parts.append(f"[{name}]")
 
+        elif self.event_type == "party_update":
+            count = self.fields.get("member_count", "?")
+            leader = self.fields.get("leader_eid", "?")
+            parts.append(f"members={count} leader=#{leader}")
+            for m in self.fields.get("members", []):
+                eid = m.get("entity_id", "?")
+                name = m.get("name", "?")
+                cls = m.get("class_hid", "?")
+                lvl = m.get("level", "?")
+                zone = m.get("zone", "")
+                parts.append(f"[#{eid} {name} {cls} L{lvl} {zone}]")
+
+        elif self.event_type == "update_state":
+            parts.append(f"Entity#{self.source_id}")
+            cls = self.fields.get("class_hid")
+            if cls:
+                parts.append(f"class={cls}")
+            lvl = self.fields.get("level")
+            if lvl is not None:
+                parts.append(f"L{lvl}")
+            blen = self.fields.get("body_len", 0)
+            parts.append(f"({blen}B)")
+            raw = self.fields.get("raw_hex", "")
+            if raw:
+                parts.append(f"RAW[{raw[:120]}]")
+
+        elif self.event_type == "update_class":
+            parts.append(f"Entity#{self.source_id}")
+            cls = self.fields.get("class_hid", "?")
+            parts.append(f"class={cls}")
+            raw = self.fields.get("raw_hex", "")
+            if raw:
+                parts.append(f"RAW[{raw[:80]}]")
+
+        elif self.event_type == "update_status":
+            parts.append(f"Entity#{self.source_id}")
+            blen = self.fields.get("body_len", 0)
+            parts.append(f"({blen}B)")
+            raw = self.fields.get("raw_hex", "")
+            if raw:
+                parts.append(f"RAW[{raw[:120]}]")
+
+        elif self.event_type == "chat":
+            ch = self.fields.get("channel", "?")
+            text = self.fields.get("text", "")
+            parts.append(f"ch={ch}")
+            if text:
+                parts.append(f'"{text[:200]}"')
+
+        elif self.event_type == "update_race_sex":
+            parts.append(f"Entity#{self.source_id}")
+            race = self.fields.get("race_hid", "?")
+            sex = self.fields.get("sex_hid", "?")
+            parts.append(f"race={race} sex={sex}")
+
+        elif self.event_type == "update_equipment":
+            parts.append(f"Entity#{self.source_id}")
+            blen = self.fields.get("body_len", 0)
+            parts.append(f"({blen}B)")
+
+        elif self.event_type == "update_name":
+            parts.append(f"Entity#{self.source_id}")
+            name = self.fields.get("name", "?")
+            parts.append(f'name="{name}"')
+
+        elif self.event_type == "update_surname":
+            parts.append(f"Entity#{self.source_id}")
+            surname = self.fields.get("surname", "?")
+            parts.append(f'surname="{surname}"')
+
+        elif self.event_type == "update_guild":
+            parts.append(f"Entity#{self.source_id}")
+            guild = self.fields.get("guild_name", "?")
+            parts.append(f'guild="{guild}"')
+
         else:
             parts.append(f"src={self.source_id} tgt={self.target_id}")
             if self.fields:
@@ -664,6 +739,175 @@ def _parse_despawn_entity(body, direction):
     return evt
 
 
+# =========================================================================
+# Group/class/level discovery parsers (for /reload analysis)
+# =========================================================================
+
+def _parse_client_party_update(body, direction):
+    """ClientPartyUpdate (0x0380): Party member list with class/level/zone.
+    Wire format (verified):
+      member_count: u32
+      per member:
+        entity_id:   u32
+        unknown_u32: u32  (secondary id)
+        name:        LNL string
+        class_hid:   LNL string  (e.g. "dru", "pal", "war", "wiz")
+        level:       u8
+        zone:        LNL string
+      leader_eid:    u32  (party leader entity id)
+    """
+    evt = CombatEvent("party_update", 0x0380, direction)
+    off = 0
+    f = evt.fields
+    try:
+        member_count, off = _safe_read(read_uint32, body, off)
+        f["member_count"] = member_count
+        members = []
+        for i in range(min(member_count, 12)):
+            m = {}
+            m["entity_id"], off = _safe_read(read_uint32, body, off)
+            m["unknown_id"], off = _safe_read(read_uint32, body, off)
+            m["name"], off = _safe_read(read_string, body, off)
+            m["class_hid"], off = _safe_read(read_string, body, off)
+            m["level"], off = _safe_read(read_byte, body, off)
+            m["zone"], off = _safe_read(read_string, body, off)
+            members.append(m)
+        f["members"] = members
+        f["leader_eid"], off = _safe_read(read_uint32, body, off)
+    except _ParseStop:
+        f["_parsed_bytes"] = off
+    return evt
+
+
+def _parse_update_state(body, direction):
+    """UpdateState (0x002F): Full player state resync. Dump for analysis."""
+    evt = CombatEvent("update_state", 0x002F, direction)
+    off = 0
+    f = evt.fields
+    try:
+        evt.source_id, off = _safe_read(read_uint32, body, off)
+        # Try reading common fields - structure unknown, dump everything
+        f["class_hid"], off = _safe_read(read_string, body, off)
+        f["level"], off = _safe_read(read_int32, body, off)
+    except _ParseStop:
+        f["_parsed_bytes"] = off
+    f["raw_hex"] = body.hex(' ')
+    f["body_len"] = len(body)
+    return evt
+
+
+def _parse_update_class_hid(body, direction):
+    """UpdateClassHID (0x005F): Class change notification."""
+    evt = CombatEvent("update_class", 0x005F, direction)
+    off = 0
+    f = evt.fields
+    try:
+        evt.source_id, off = _safe_read(read_uint32, body, off)
+        f["class_hid"], off = _safe_read(read_string, body, off)
+    except _ParseStop:
+        f["_parsed_bytes"] = off
+    f["raw_hex"] = body.hex(' ')
+    return evt
+
+
+def _parse_update_status(body, direction):
+    """UpdateStatus (0x013F): Status update. Dump for analysis."""
+    evt = CombatEvent("update_status", 0x013F, direction)
+    off = 0
+    f = evt.fields
+    try:
+        evt.source_id, off = _safe_read(read_uint32, body, off)
+    except _ParseStop:
+        pass
+    f["raw_hex"] = body.hex(' ')
+    f["body_len"] = len(body)
+    return evt
+
+
+def _parse_chat_message(body, direction):
+    """ChatMessage (0x0040): Chat with channel. Log for /reload context."""
+    evt = CombatEvent("chat", 0x0040, direction)
+    off = 0
+    f = evt.fields
+    try:
+        f["channel"], off = _safe_read(read_uint32, body, off)
+        f["text"], off = _safe_read(read_string, body, off)
+    except _ParseStop:
+        f["_parsed_bytes"] = off
+    return evt
+
+
+def _parse_update_race_sex(body, direction):
+    """UpdateRaceSex (0x0038): Race/sex change."""
+    evt = CombatEvent("update_race_sex", 0x0038, direction)
+    off = 0
+    f = evt.fields
+    try:
+        evt.source_id, off = _safe_read(read_uint32, body, off)
+        f["race_hid"], off = _safe_read(read_string, body, off)
+        f["sex_hid"], off = _safe_read(read_string, body, off)
+    except _ParseStop:
+        f["_parsed_bytes"] = off
+    f["raw_hex"] = body.hex(' ')
+    return evt
+
+
+def _parse_update_equipment(body, direction):
+    """UpdateEquipment (0x0083): Equipment update. Dump for analysis."""
+    evt = CombatEvent("update_equipment", 0x0083, direction)
+    off = 0
+    f = evt.fields
+    try:
+        evt.source_id, off = _safe_read(read_uint32, body, off)
+    except _ParseStop:
+        pass
+    f["raw_hex"] = body.hex(' ')
+    f["body_len"] = len(body)
+    return evt
+
+
+def _parse_update_name(body, direction):
+    """UpdateName (0x008A): Name update."""
+    evt = CombatEvent("update_name", 0x008A, direction)
+    off = 0
+    f = evt.fields
+    try:
+        evt.source_id, off = _safe_read(read_uint32, body, off)
+        f["name"], off = _safe_read(read_string, body, off)
+    except _ParseStop:
+        f["_parsed_bytes"] = off
+    f["raw_hex"] = body.hex(' ')
+    return evt
+
+
+def _parse_update_surname(body, direction):
+    """UpdateSurname (0x0084): Surname update."""
+    evt = CombatEvent("update_surname", 0x0084, direction)
+    off = 0
+    f = evt.fields
+    try:
+        evt.source_id, off = _safe_read(read_uint32, body, off)
+        f["surname"], off = _safe_read(read_string, body, off)
+    except _ParseStop:
+        f["_parsed_bytes"] = off
+    f["raw_hex"] = body.hex(' ')
+    return evt
+
+
+def _parse_update_guild_info(body, direction):
+    """UpdateGuildInfo (0x008E): Guild info update."""
+    evt = CombatEvent("update_guild", 0x008E, direction)
+    off = 0
+    f = evt.fields
+    try:
+        evt.source_id, off = _safe_read(read_uint32, body, off)
+        f["guild_name"], off = _safe_read(read_string, body, off)
+    except _ParseStop:
+        f["_parsed_bytes"] = off
+    f["raw_hex"] = body.hex(' ')
+    return evt
+
+
 def _parse_particle_hit(body, direction):
     """ParticleHit: targetId(u32) hitParticleName(str)"""
     evt = CombatEvent("particle_hit", 0x005C, direction)
@@ -705,6 +949,17 @@ _PARSERS = {
     0x0021: _parse_despawn_entity,
     0x005C: _parse_particle_hit,
     0x0146: _parse_channel_ability,
+    # Group/class/level discovery
+    0x0380: _parse_client_party_update,
+    0x002F: _parse_update_state,
+    0x005F: _parse_update_class_hid,
+    0x013F: _parse_update_status,
+    0x0040: _parse_chat_message,
+    0x0038: _parse_update_race_sex,
+    0x0083: _parse_update_equipment,
+    0x008A: _parse_update_name,
+    0x0084: _parse_update_surname,
+    0x008E: _parse_update_guild_info,
 }
 
 

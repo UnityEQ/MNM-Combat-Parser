@@ -1,0 +1,1704 @@
+10:03:05 [DEBUG] MSG_UNKNOWN_NEW 0x0010 dir=OUT len=43 body=00 00 00 00 00 00 00 00 00 00 00 00 4a 5a 82 44 1e e1 0b 43 4e 83 cc 44 0b 05 b5 42 00 00 00 00
+10:03:05 [DEBUG] MSG_UNKNOWN_NEW 0x1011 dir=IN len=8 body=8b 0f 00 00 06 0f 00 00
+10:03:05 [DEBUG] MSG_UNKNOWN_NEW 0x0210 dir=IN len=41 body=38 0a 00 00 ce 78 22 00 01 bb 77 cd c3 45 e9 05 43 51 9a ab 44 f2 d2 52 3d a0 59 f0 24 cf c3 45
+10:03:05 [DEBUG] MSG_UNKNOWN_NEW 0x001E dir=IN len=8 body=12 93 bd 06 00 00 00 00
+10:03:05 [DEBUG] MSG_UNKNOWN_NEW 0x001F dir=OUT len=8 body=12 93 bd 06 00 00 00 00
+10:03:05 [DEBUG] MSG_UNKNOWN_NEW 0x0220 dir=OUT len=4 body=ae 0a 00 00
+10:03:05 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:05 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:03:05 [DEBUG] HP_INIT #3846(#3846) HP:1140/1254 (no previous HP, no delta)
+10:03:05 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:05 [DEBUG]   PARSED type=UpdateMana eid=3846 target=None
+10:03:05 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:05 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:03:05 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:05 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:05 [DEBUG] HP_INIT #3979(#3979) HP:54/100 (no previous HP, no delta)
+10:03:05 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=88
+10:03:05 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:05 [DEBUG] CHATCOMBAT text="Rainbow's Blazing Embers hits a shady poacher for 60 points of Fire Damage.J"
+10:03:05 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +60dmg by "Rainbow"(unresolved) text_total=60
+10:03:06 [DEBUG] OVERVIEW_RENDER enc=0 total_dmg=0 dur=0.0s entries=0 local_eid=None player_name="" pet_states={} entity_types_sample={}
+10:03:06 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:06 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:06 [DEBUG] DMG  a shady poacher(#3979) type=None 54->52/100 amt=2 attacker=None(None)
+10:03:06 [DEBUG]   ENC_SKIP type=None no_enc=no_atk #3979 amt=2
+10:03:06 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=88
+10:03:06 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:06 [DEBUG] CHATCOMBAT text="Rainbow's Locust Swarm hits a shady poacher for 45 points of Poison Damage.J"
+10:03:06 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +45dmg by "Rainbow"(unresolved) text_total=105
+10:03:06 [DEBUG] MSG_UNKNOWN_NEW 0x0221 dir=OUT len=16 body=03 00 00 00 7a 0a 00 00 9a 0a 00 00 98 0b 00 00
+10:03:06 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:06 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:03:06 [DEBUG] DMG  #3846(#3846) type=None 1140->1074/1254 amt=66 attacker=None(None)
+10:03:06 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #3846 amt=66
+10:03:06 [DEBUG] MSG_UNKNOWN_NEW 0x644B dir=IN len=23 body=8b 0f 00 00 34 06 00 70 75 6e 63 68 06 0f 00 00 2a 05 00 6f 75 63 68
+10:03:06 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=78
+10:03:06 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:06 [DEBUG] CHATCOMBAT text="a shady poacher slashes YOU for 66 points of damage (4 absorbed)."
+10:03:06 [DEBUG]   LOCAL_PLAYER eid=#3846 fallback name="YOU"
+10:03:06 [DEBUG]   LOCAL_PLAYER eid=#3846 name="YOU"
+10:03:06 [INFO ]   LOCAL_MERGE merged '_local' sentinel entries into eid=#3846
+10:03:06 [DEBUG]   CHATCOMBAT_LOCAL_DETECT target="you" hp_corr → local_eid=#3846
+10:03:06 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:06 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:06 [DEBUG] DMG  a shady poacher(#3979) type=None 52->51/100 amt=1 attacker=None(None)
+10:03:06 [DEBUG]   ENC_SKIP type=None no_enc=no_atk #3979 amt=1
+10:03:06 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=81
+10:03:06 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:06 [DEBUG] CHATCOMBAT text="a wild bear companion bites a shady poacher for 19 points of damage."
+10:03:06 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +19dmg by "a wild bear companion"(unresolved) text_total=124
+10:03:07 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:07 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:07 [DEBUG] DMG  a shady poacher(#3979) type=None 51->49/100 amt=2 attacker=None(None)
+10:03:07 [DEBUG]   ENC_SKIP type=None no_enc=no_atk #3979 amt=2
+10:03:07 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=63
+10:03:07 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:07 [DEBUG] CHATCOMBAT text="You slash a shady poacher for 27 points of damage."
+10:03:07 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +27dmg by YOU(#3846) text_total=151
+10:03:07 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=151 dur=1.2s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0}
+10:03:07 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=27 dps=23.3 abilities=[Melee=27]
+10:03:07 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:07 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:03:07 [DEBUG] HP_INIT #3898(#3898) HP:68/100 (no previous HP, no delta)
+10:03:08 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:03:08 [DEBUG]   PARSED type=RemoveBuffIcon eid=2839 target=None
+10:03:08 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=151 dur=2.2s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0}
+10:03:08 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=27 dps=12.4 abilities=[Melee=27]
+10:03:08 [DEBUG] MSG_UNKNOWN_NEW 0x0033 dir=IN len=6 body=8b 0f 00 00 00 00
+10:03:08 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:03:08 [DEBUG]   PARSED type=RemoveBuffIcon eid=3979 target=None
+10:03:08 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=53
+10:03:08 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:08 [DEBUG] CHATCOMBAT text="Your Blind wears off of a shady poacher.O"
+10:03:08 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:08 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:03:08 [DEBUG] DMG  YOU(#3846) type=0 1074->1008/1254 amt=66 attacker=None(None)
+10:03:08 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+10:03:08 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=78
+10:03:08 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:08 [DEBUG] CHATCOMBAT text="a shady poacher slashes YOU for 66 points of damage (4 absorbed)."
+10:03:09 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=151 dur=3.2s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0}
+10:03:09 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=27 dps=8.5 abilities=[Melee=27]
+10:03:09 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:09 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:09 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:09 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:09 [DEBUG] DMG  a shady poacher(#3979) type=None 49->48/100 amt=1 attacker=None(None)
+10:03:09 [DEBUG]   ENC_SKIP type=None no_enc=no_atk #3979 amt=1
+10:03:09 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=81
+10:03:09 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:09 [DEBUG] CHATCOMBAT text="a wild bear companion bites a shady poacher for 19 points of damage."
+10:03:09 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +19dmg by "a wild bear companion"(unresolved) text_total=170
+10:03:09 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:09 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:09 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=81
+10:03:09 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:09 [DEBUG] CHATCOMBAT text="a wild bear companion bites a shady poacher for 11 points of damage."
+10:03:09 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +11dmg by "a wild bear companion"(unresolved) text_total=181
+10:03:09 [DEBUG] MSG_UNKNOWN_NEW 0x0005 dir=IN len=23 body=58 ff 15 01 10 00 00 00 03 00 00 00 60 02 00 00 01 00 00 00 02 02 02
+10:03:09 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+10:03:09 [DEBUG]   PARSED type=CastAbility eid=None target=3979
+10:03:09 [DEBUG] CASTABILITY_OUT gem=2 target=#3979
+10:03:10 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=181 dur=4.2s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0}
+10:03:10 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=27 dps=6.5 abilities=[Melee=27]
+10:03:10 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=59
+10:03:10 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:10 [DEBUG] CHATCOMBAT text="You must face your target to use that ability!"
+10:03:11 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=181 dur=5.2s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0}
+10:03:11 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=27 dps=5.2 abilities=[Melee=27]
+10:03:11 [DEBUG] MSG_UNKNOWN_NEW 0x0059 dir=IN len=31 body=01 0e 00 72 65 73 74 6f 72 65 5f 73 6d 69 74 65 01 0c 00 70 61 6c 5f 73 70 65 63 69 61 6c 00
+10:03:11 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:11 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:03:11 [DEBUG] HEAL YOU(#3846) 1008->1009/1254 delta=+1 last_attacker=None(None)
+10:03:11 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:11 [DEBUG]   PARSED type=UpdateMana eid=3846 target=None
+10:03:11 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:11 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:03:11 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=63
+10:03:11 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:11 [DEBUG] CHATCOMBAT text="You slash a shady poacher for 11 points of damage."
+10:03:11 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +11dmg by YOU(#3846) text_total=192
+10:03:11 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=63
+10:03:11 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:11 [DEBUG] CHATCOMBAT text="You slash a shady poacher for 11 points of damage."
+10:03:11 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +11dmg by YOU(#3846) text_total=203
+10:03:11 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:11 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:11 [DEBUG] DMG  a shady poacher(#3979) type=None 48->47/100 amt=1 attacker=None(None)
+10:03:11 [DEBUG]   ENC_SKIP type=None no_enc=no_atk #3979 amt=1
+10:03:11 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:11 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:11 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:11 [DEBUG]   PARSED type=UpdateMana eid=2951 target=None
+10:03:11 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:11 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:11 [DEBUG] DMG  a shady poacher(#3979) type=None 47->44/100 amt=3 attacker=None(None)
+10:03:11 [DEBUG]   ENC_SKIP type=None no_enc=no_atk #3979 amt=3
+10:03:11 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=88
+10:03:11 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:11 [DEBUG] CHATCOMBAT text="Rainbow's Blazing Embers hits a shady poacher for 60 points of Fire Damage.J"
+10:03:11 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +60dmg by "Rainbow"(unresolved) text_total=263
+10:03:11 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:11 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:11 [DEBUG] DMG  a shady poacher(#3979) type=None 44->43/100 amt=1 attacker=None(None)
+10:03:11 [DEBUG]   ENC_SKIP type=None no_enc=no_atk #3979 amt=1
+10:03:11 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=81
+10:03:11 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:11 [DEBUG] CHATCOMBAT text="a wild bear companion bites a shady poacher for 18 points of damage."
+10:03:11 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +18dmg by "a wild bear companion"(unresolved) text_total=281
+10:03:11 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:11 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:11 [DEBUG] DMG  a shady poacher(#3979) type=None 43->42/100 amt=1 attacker=None(None)
+10:03:11 [DEBUG]   ENC_SKIP type=None no_enc=no_atk #3979 amt=1
+10:03:11 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=81
+10:03:11 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:11 [DEBUG] CHATCOMBAT text="a wild bear companion bites a shady poacher for 10 points of damage."
+10:03:11 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +10dmg by "a wild bear companion"(unresolved) text_total=291
+10:03:12 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:12 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:12 [DEBUG] DMG  a shady poacher(#3979) type=None 42->40/100 amt=2 attacker=None(None)
+10:03:12 [DEBUG]   ENC_SKIP type=None no_enc=no_atk #3979 amt=2
+10:03:12 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=88
+10:03:12 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:12 [DEBUG] CHATCOMBAT text="Rainbow's Locust Swarm hits a shady poacher for 45 points of Poison Damage.J"
+10:03:12 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +45dmg by "Rainbow"(unresolved) text_total=336
+10:03:12 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=336 dur=6.2s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0}
+10:03:12 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=49 dps=7.9 abilities=[Melee=49]
+10:03:12 [DEBUG] MSG_UNKNOWN_NEW 0x016F dir=OUT len=0 body=
+10:03:13 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=336 dur=7.2s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0}
+10:03:13 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=49 dps=6.8 abilities=[Melee=49]
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x0003 dir=IN len=1384 body=21 02 00 00 06 0f 00 00 0a 00 44 6f 6f 64 6f 6f 62 75 74 00 00 04 00 5a 65 6b 03 00 00 00 04 00
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x0000 dir=IN len=1384 body=00 00 07 00 01 00 ff ff 00 00 00 00 00 00 00 01 00 00 00 0d 00 64 69 73 65 6e 63 68 61 6e 74 5f
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x0FFF dir=IN len=1384 body=00 00 00 00 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 ff ff 00 04 00 6e 75 6c 00
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x003F dir=IN len=1384 body=00 00 00 00 00 00 00 2f 00 62 6f 6f 74 73 3a 46 38 43 45 32 30 3a 44 42 41 45 30 37 3a 42 30 34
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x6D65 dir=IN len=1384 body=6f 6e 69 61 6c 20 50 6c 61 74 65 64 20 4d 61 6e 74 6c 65 00 00 00 00 44 12 01 00 ff 0f 00 00 00
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x6C6C dir=IN len=1384 body=61 72 20 4b 65 79 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 01 00 00 00
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x0004 dir=IN len=1384 body=61 62 6a 04 00 74 61 72 00 00 00 00 04 00 00 00 04 00 6e 72 6d 00 00 00 ff ff ff ff ff ff ff ff
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x646E dir=IN len=1384 body=65 72 69 6e 67 20 74 68 65 6d 20 75 6e 73 65 65 6e 20 62 79 20 75 6e 64 65 61 64 20 66 6f 72 20
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x6E65 dir=IN len=1384 body=0a 00 63 75 72 65 5f 64 69 73 31 0a 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 40 00 00 a0 41
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x6568 dir=IN len=1384 body=6d 2c 20 72 65 64 75 63 69 6e 67 20 79 6f 75 72 20 50 68 79 73 69 63 61 6c 20 44 61 6d 61 67 65
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x7761 dir=IN len=1384 body=00 0b 00 00 00 00 00 00 00 0c 00 73 68 69 65 6c 64 5f 74 6f 73 73 0c 00 53 68 69 65 6c 64 20 54
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x000E dir=IN len=1384 body=78 48 65 61 6c 30 31 5f 43 53 54 5f 42 00 00 0e 00 78 48 65 61 6c 30 31 5f 49 4d 50 5f 42 10 00
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x3120 dir=IN len=1384 body=20 6d 69 6e 75 74 65 2e 0d 0a 46 75 6c 66 69 6c 6c 6d 65 6e 74 3a 20 59 6f 75 72 20 70 72 61 79
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x2064 dir=IN len=1384 body=69 74 2c 20 69 6e 74 65 72 72 75 70 74 69 6e 67 20 74 68 65 69 72 20 63 61 73 74 69 6e 67 2e 0d
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x6E61 dir=IN len=1384 body=6e 65 6c 69 6e 67 20 73 6b 69 6c 6c 20 69 6e 63 72 65 61 73 65 73 20 32 35 25 20 66 61 73 74 65
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x000F dir=IN len=1384 body=4d 45 54 5f 53 69 6c 76 65 72 57 61 72 6d 0e 00 4c 45 54 5f 57 6f 72 6e 42 72 6f 77 6e 0f 00 4d
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x6874 dir=IN len=1384 body=65 72 65 64 43 6c 6f 74 68 41 0f 00 46 41 42 5f 43 6c 6f 74 68 42 72 6f 77 6e 10 00 46 41 42 5f
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x746F dir=IN len=1384 body=68 42 6c 61 63 6b 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e ff 00 ff 00 ff 00 ff 00 01 00
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x4200 dir=IN len=1384 body=72 6f 77 6e 4c 65 61 74 68 65 72 30 32 0f 00 42 72 6f 77 6e 4c 65 61 74 68 65 72 30 32 ff 00 ff
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x0002 dir=IN len=1384 body=00 00 00 00 e8 03 00 00 e8 03 00 00 00 00 00 00 e8 03 00 00 1f 05 22 00 00 37 aa 84 44 25 86 1b
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x00FF dir=IN len=1384 body=01 00 06 00 00 00 05 00 48 61 69 72 02 00 00 01 00 05 00 46 61 63 65 00 00 00 00 00 09 00 45 79
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x6F72 dir=IN len=1384 body=6e 52 75 73 74 79 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e ff 00 ff 00 ff 00 ff 00 01 00
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x7562 dir=IN len=1384 body=67 47 72 65 65 6e ff 00 ff 00 ff 00 ff 00 01 00 02 10 00 47 65 6e 65 72 69 63 4c 65 61 74 68 65
+10:03:13 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=39
+10:03:13 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:13 [DEBUG] CHATCOMBAT text="You reload your character."
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x0228 dir=IN len=9 body=06 0f 00 00 12 8d 00 00 00
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x0058 dir=IN len=46 body=01 00 00 00 0b 00 61 75 72 61 5f 70 69 6f 75 73 00 00 00 00 00 00 00 00 01 00 00 00 05 00 61 75
+10:03:13 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:03:13 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:13 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:03:13 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=42
+10:03:13 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:13 [DEBUG] CHATCOMBAT text="You lower your weapon shield.D"
+10:03:13 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=50
+10:03:13 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:13 [DEBUG] CHATCOMBAT text="You shield yourself with your weapon.@"
+10:03:13 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=33
+10:03:13 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:03:13 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:03:13 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:03:13 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:13 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:03:13 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:03:13 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:03:13 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x7020 dir=IN len=798 body=6f 61 63 68 65 72 00 00 00 00 00 00 04 00 68 75 6d 02 00 66 02 00 00 00 00 00 00 00 00 00 e8 03
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x0208 dir=IN len=641 body=10 21 02 00 00 00 00 00 00 08 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 05 00 00
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x0089 dir=IN len=84 body=02 00 00 00 0b 00 61 75 72 61 5f 70 69 6f 75 73 00 00 00 00 00 00 00 00 0e 00 77 65 61 70 6f 6e
+10:03:13 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:03:13 [DEBUG]   PARSED type=RemoveBuffIcon eid=3898 target=None
+10:03:13 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:03:13 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x00A1 dir=IN len=28 body=06 0f 00 00 17 00 62 75 66 66 5f 41 75 72 61 20 6f 66 20 74 68 65 20 50 69 6f 75 73
+10:03:13 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:03:13 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x008A dir=IN len=15 body=06 0f 00 00 0a 00 44 6f 6f 64 6f 6f 62 75 74
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=137
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x00A0 dir=IN len=39 body=06 0f 00 00 17 00 62 75 66 66 5f 41 75 72 61 20 6f 66 20 74 68 65 20 50 69 6f 75 73 0a 00 48 6f
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x0099 dir=IN len=16 body=06 0f 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=119
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=137
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=125
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=156
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=147
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=132
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=147
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=132
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=134
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=132
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=327
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=84
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=137
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=119
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=137
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=125
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=156
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=147
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=132
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=147
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=132
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=134
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=132
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=327
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=84
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=137
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:13 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:03:13 [DEBUG] HEAL #3898(#3898) 68->69/100 delta=+1 last_attacker=None(None)
+10:03:13 [DEBUG] MSG_IN 0x0380 ClientPartyUpdate dir=IN body_len=78
+10:03:13 [DEBUG]   PARSED type=ClientPartyUpdate eid=None target=None
+10:03:13 [DEBUG] PARTY_MEMBER #3887 "Rainbow" class=None lvl=0
+10:03:13 [DEBUG] PARTY_MEMBER #628453988 "None" class=None lvl=97
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:03:13 [DEBUG] MSG_IN 0x0380 ClientPartyUpdate dir=IN body_len=78
+10:03:13 [DEBUG]   PARSED type=ClientPartyUpdate eid=None target=None
+10:03:13 [DEBUG] PARTY_MEMBER #3887 "Rainbow" class=None lvl=0
+10:03:13 [DEBUG] PARTY_MEMBER #628453988 "None" class=None lvl=97
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x5432 dir=IN len=4 body=00 00 00 00
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=3933 target=None
+10:03:13 [DEBUG] SPAWN #3933 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=3953 target=None
+10:03:13 [DEBUG] SPAWN #3953 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=207
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=3936 target=None
+10:03:13 [DEBUG] SPAWN #3936 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=3959 target=None
+10:03:13 [DEBUG] SPAWN #3959 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=3955 target=None
+10:03:13 [DEBUG] SPAWN #3955 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=953
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=3092 target=None
+10:03:13 [DEBUG] SPAWN #3092 type=1 "a scouting poacher" HP:1000/1000 class=hum lvl=0
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=736
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=3967 target=None
+10:03:13 [DEBUG] SPAWN #3967 type=1 "a shady poacher" HP:None/None class=None lvl=None
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=764
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=2920 target=None
+10:03:13 [DEBUG] SPAWN #2920 type=1 "a scouting poacher" HP:1000/1000 class=hum lvl=0
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=818
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=3887 target=None
+10:03:13 [DEBUG] SPAWN #3887 type=0 "Rainbow" HP:9472/239104 class=dru lvl=None
+10:03:13 [DEBUG] MSG_IN 0x0025 UpdateLevel dir=IN body_len=13
+10:03:13 [DEBUG]   PARSED type=UpdateLevel eid=3887 target=None
+10:03:13 [DEBUG] LEVEL_UPDATE #3887 class=dru% level=None
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=785
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=3979 target=None
+10:03:13 [DEBUG] SPAWN #3979 type=1 "a shady poacher" HP:402/1000 class=hum lvl=0
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=861
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=3192 target=None
+10:03:13 [DEBUG] SPAWN #3192 type=1 "a scouting poacher" HP:1000/1000 class=hum lvl=0
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=750
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=2838 target=None
+10:03:13 [DEBUG] SPAWN #2838 type=1 "a scouting poacher" HP:1000/1000 class=hum lvl=0
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=662
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=2839 target=None
+10:03:13 [DEBUG] SPAWN #2839 type=1 "a rough poacher" HP:1000/1000 class=hum lvl=0
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=662
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=2840 target=None
+10:03:13 [DEBUG] SPAWN #2840 type=1 "a rough poacher" HP:1000/1000 class=hum lvl=0
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=930
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=2951 target=None
+10:03:13 [DEBUG] SPAWN #2951 type=1 "a scentmasking poacher" HP:1000/1000 class=hum lvl=0
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=662
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=2938 target=None
+10:03:13 [DEBUG] SPAWN #2938 type=1 "a shady poacher" HP:1000/1000 class=hum lvl=0
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=662
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=2947 target=None
+10:03:13 [DEBUG] SPAWN #2947 type=1 "a rough poacher" HP:1000/1000 class=hum lvl=0
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=750
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=2959 target=None
+10:03:13 [DEBUG] SPAWN #2959 type=1 "a scouting poacher" HP:1000/1000 class=hum lvl=0
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=723
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=2957 target=None
+10:03:13 [DEBUG] SPAWN #2957 type=1 "a rough poacher" HP:1000/1000 class=hum lvl=0
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=870
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=3276 target=None
+10:03:13 [DEBUG] SPAWN #3276 type=1 "a scouting poacher" HP:1000/1000 class=hum lvl=0
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=3898 target=None
+10:03:13 [DEBUG] SPAWN #3898 type=1 "a wild bear companion" HP:684/1000 class=wlf lvl=0
+10:03:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=736
+10:03:13 [DEBUG]   PARSED type=SpawnEntity eid=3971 target=None
+10:03:13 [DEBUG] SPAWN #3971 type=1 "a shady poacher" HP:None/None class=None lvl=None
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x0100 dir=IN len=10 body=05 00 6e 6f 6e 65 00 00 80 3f
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x0006 dir=IN len=0 body=
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=119
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=137
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=125
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=156
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=147
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=132
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=147
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=132
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=134
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=132
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=327
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=84
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=137
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:03:13 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:13 [DEBUG] MSG_UNKNOWN_NEW 0x0015 dir=OUT len=5 body=06 0f 00 00 00
+10:03:14 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=336 dur=8.2s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:14 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=49 dps=5.9 abilities=[Melee=49]
+10:03:14 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:03:14 [DEBUG]   PARSED type=SpawnEntity eid=3948 target=None
+10:03:14 [DEBUG] SPAWN #3948 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:03:14 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=204
+10:03:14 [DEBUG]   PARSED type=SpawnEntity eid=3746 target=None
+10:03:14 [DEBUG] SPAWN #3746 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:03:14 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:03:14 [DEBUG]   PARSED type=SpawnEntity eid=3933 target=None
+10:03:14 [DEBUG] SPAWN #3933 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:03:14 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:03:14 [DEBUG]   PARSED type=SpawnEntity eid=3953 target=None
+10:03:14 [DEBUG] SPAWN #3953 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:03:14 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=207
+10:03:14 [DEBUG]   PARSED type=SpawnEntity eid=3936 target=None
+10:03:14 [DEBUG] SPAWN #3936 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+10:03:14 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+10:03:14 [DEBUG]   PARSED type=SpawnEntity eid=3955 target=None
+10:03:14 [DEBUG] SPAWN #3955 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+10:03:14 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=736
+10:03:14 [DEBUG]   PARSED type=SpawnEntity eid=3967 target=None
+10:03:14 [DEBUG] SPAWN #3967 type=1 "a shady poacher" HP:None/None class=None lvl=None
+10:03:15 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:15 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:15 [DEBUG] HP_INIT a shady poacher(#3979) HP:40/100 (no previous HP, no delta)
+10:03:15 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type0': 3, 'type1': 23} names=25
+10:03:15 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=336 dur=9.3s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:15 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=49 dps=5.3 abilities=[Melee=49]
+10:03:15 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:03:15 [DEBUG]   PARSED type=SpawnEntity eid=3948 target=None
+10:03:15 [DEBUG] SPAWN #3948 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:03:15 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=204
+10:03:15 [DEBUG]   PARSED type=SpawnEntity eid=3746 target=None
+10:03:15 [DEBUG] SPAWN #3746 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:03:16 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=336 dur=10.3s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:16 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=49 dps=4.8 abilities=[Melee=49]
+10:03:16 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=OUT body_len=4
+10:03:16 [DEBUG]   PARSED type=ChangeTarget eid=None target=3979
+10:03:17 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:03:17 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:03:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:17 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:17 [DEBUG] DMG  a shady poacher(#3979) type=1 40->39/100 amt=1 attacker=None(None)
+10:03:17 [DEBUG]   ENC+ "a shady poacher"(#3979) +1dmg NO_ATTACKER total=1
+10:03:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=81
+10:03:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:17 [DEBUG] CHATCOMBAT text="a wild bear companion bites a shady poacher for 18 points of damage."
+10:03:17 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +18dmg by a wild bear companion(#3898) text_total=354
+10:03:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=50
+10:03:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:17 [DEBUG] CHATCOMBAT text="Your spiritual connection is severed.D"
+10:03:17 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=18 action=SKIP_NPC
+10:03:17 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=354 dur=11.3s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:17 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=49 dps=4.4 abilities=[Melee=49]
+10:03:17 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=18 action=SKIP_NPC
+10:03:17 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=354 dur=11.6s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:17 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=49 dps=4.2 abilities=[Melee=49]
+10:03:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:17 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:17 [DEBUG] DMG  a shady poacher(#3979) type=1 39->36/100 amt=3 attacker=None(None)
+10:03:17 [DEBUG]   ENC+ "a shady poacher"(#3979) +3dmg NO_ATTACKER total=4
+10:03:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=88
+10:03:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:17 [DEBUG] CHATCOMBAT text="Rainbow's Blazing Embers hits a shady poacher for 60 points of Fire Damage.J"
+10:03:17 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +60dmg by Rainbow(#3887) text_total=414
+10:03:17 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:17 [DEBUG]   PARSED type=UpdateMana eid=2951 target=None
+10:03:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:17 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:03:17 [DEBUG] HEAL YOU(#3846) 1009->1010/1254 delta=+1 last_attacker=None(None)
+10:03:17 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:17 [DEBUG]   PARSED type=UpdateMana eid=3846 target=None
+10:03:17 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:17 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:03:18 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:18 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:18 [DEBUG] DMG  a shady poacher(#3979) type=1 36->34/100 amt=2 attacker=None(None)
+10:03:18 [DEBUG]   ENC+ "a shady poacher"(#3979) +2dmg NO_ATTACKER total=6
+10:03:18 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=88
+10:03:18 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:18 [DEBUG] CHATCOMBAT text="Rainbow's Locust Swarm hits a shady poacher for 45 points of Poison Damage.J"
+10:03:18 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +45dmg by Rainbow(#3887) text_total=459
+10:03:18 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=18 action=SKIP_NPC
+10:03:18 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=459 dur=12.3s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:18 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=0 dealt=105 dps=8.6 abilities=[Blazing Embers=60, Locust Swarm=45]
+10:03:18 [DEBUG]   OVERVIEW_ROW #2 "YOU" type=player cls= lvl=None dealt=49 dps=4.0 abilities=[Melee=49]
+10:03:18 [DEBUG] MSG_UNKNOWN_NEW 0x0018 dir=IN len=10 body=2f 0f 00 00 05 00 6a 75 6d 70
+10:03:18 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+10:03:18 [DEBUG]   PARSED type=UpdateEndurance eid=3887 target=None
+10:03:19 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=18 action=SKIP_NPC
+10:03:19 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=459 dur=13.3s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:19 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=0 dealt=105 dps=7.9 abilities=[Blazing Embers=60, Locust Swarm=45]
+10:03:19 [DEBUG]   OVERVIEW_ROW #2 "YOU" type=player cls= lvl=None dealt=49 dps=3.7 abilities=[Melee=49]
+10:03:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:19 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:03:19 [DEBUG] HP_INIT a wild bear companion(#3898) HP:70/100 (no previous HP, no delta)
+10:03:19 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+10:03:19 [DEBUG]   PARSED type=SpawnEntity eid=2682 target=None
+10:03:19 [DEBUG] SPAWN #2682 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+10:03:19 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+10:03:19 [DEBUG]   PARSED type=CastAbility eid=None target=3979
+10:03:19 [DEBUG] CASTABILITY_OUT gem=2 target=#3979
+10:03:19 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+10:03:19 [DEBUG]   PARSED type=CastAbility eid=None target=3979
+10:03:19 [DEBUG] CASTABILITY_OUT gem=3 target=#3979
+10:03:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:19 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:19 [DEBUG] DMG  a shady poacher(#3979) type=1 34->33/100 amt=1 attacker=None(None)
+10:03:19 [DEBUG]   ENC+ "a shady poacher"(#3979) +1dmg NO_ATTACKER total=7
+10:03:19 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=81
+10:03:19 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:19 [DEBUG] CHATCOMBAT text="a wild bear companion bites a shady poacher for 14 points of damage."
+10:03:19 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +14dmg by a wild bear companion(#3898) text_total=473
+10:03:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:19 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:19 [DEBUG] DMG  a shady poacher(#3979) type=1 33->32/100 amt=1 attacker=None(None)
+10:03:19 [DEBUG]   ENC+ "a shady poacher"(#3979) +1dmg NO_ATTACKER total=8
+10:03:19 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=81
+10:03:19 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:19 [DEBUG] CHATCOMBAT text="a wild bear companion bites a shady poacher for 20 points of damage."
+10:03:19 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +20dmg by a wild bear companion(#3898) text_total=493
+10:03:19 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=58
+10:03:19 [DEBUG]   PARSED type=EndCasting eid=3846 target=3979
+10:03:19 [DEBUG] ENDCAST caster=#3846 target=#3979 text="You kick a shady poacher.#"
+10:03:19 [DEBUG]   -> DMG_LOCAL_MELEE caster=#3846 -> victim=a shady poacher(#3979)
+10:03:19 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+10:03:19 [DEBUG]   PARSED type=UpdateEndurance eid=3887 target=None
+10:03:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:19 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:19 [DEBUG] DMG  a shady poacher(#3979) type=1 32->31/100 amt=1 attacker=YOU(3846)
+10:03:19 [DEBUG]   ENC+ "a shady poacher"(#3979) +1dmg by YOU(3846) total=9
+10:03:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:19 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:19 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:19 [DEBUG] DMG  a shady poacher(#3979) type=1 31->28/100 amt=3 attacker=YOU(3846)
+10:03:19 [DEBUG]   ENC+ "a shady poacher"(#3979) +3dmg by YOU(3846) total=12
+10:03:19 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=116
+10:03:19 [DEBUG]   PARSED type=EndCasting eid=3846 target=3979
+10:03:19 [DEBUG] ENDCAST caster=#3846 target=#3979 text="Your Restorative Smite hits a shady poacher for 65 points of damage.#"
+10:03:19 [DEBUG]   -> DMG_LOCAL_SPELL caster=#3846 -> victim=a shady poacher(#3979)
+10:03:19 [DEBUG]   TEXT_DMG "a shady poacher"(#3979) +65dmg by YOU(#3846) text_total=558
+10:03:19 [DEBUG] MSG_UNKNOWN_NEW 0x001C dir=IN len=5 body=06 0f 00 00 01
+10:03:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:19 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:19 [DEBUG] DMG  a shady poacher(#3979) type=1 28->25/100 amt=3 attacker=YOU(3846)
+10:03:19 [DEBUG]   ENC+ "a shady poacher"(#3979) +3dmg by YOU(3846) total=15
+10:03:19 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=84
+10:03:19 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:19 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=63
+10:03:19 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:19 [DEBUG] CHATCOMBAT text="You slash a shady poacher for 65 points of damage."
+10:03:19 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +65dmg by YOU(#3846) text_total=623
+10:03:19 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=58
+10:03:19 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:19 [DEBUG] CHATCOMBAT text="You feel spiritually connected to the divine.@"
+10:03:19 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=38
+10:03:19 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:03:19 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:03:20 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=52 action=SKIP_NPC
+10:03:20 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=623 dur=14.3s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:20 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=179 dps=12.5 abilities=[Melee=114, Restorative Smite=65]
+10:03:20 [DEBUG]   OVERVIEW_ROW #2 "Rainbow" type=player cls=dru% lvl=0 dealt=105 dps=7.4 abilities=[Blazing Embers=60, Locust Swarm=45]
+10:03:21 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:21 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:21 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=52 action=SKIP_NPC
+10:03:21 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=623 dur=15.3s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:21 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=179 dps=11.7 abilities=[Melee=114, Restorative Smite=65]
+10:03:21 [DEBUG]   OVERVIEW_ROW #2 "Rainbow" type=player cls=dru% lvl=0 dealt=105 dps=6.9 abilities=[Blazing Embers=60, Locust Swarm=45]
+10:03:22 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:22 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:22 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=81
+10:03:22 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:22 [DEBUG] CHATCOMBAT text="a wild bear companion bites a shady poacher for 12 points of damage."
+10:03:22 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +12dmg by a wild bear companion(#3898) text_total=635
+10:03:22 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:22 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:22 [DEBUG] DMG  a shady poacher(#3979) type=1 25->24/100 amt=1 attacker=YOU(3846)
+10:03:22 [DEBUG]   ENC+ "a shady poacher"(#3979) +1dmg by YOU(3846) total=16
+10:03:22 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=81
+10:03:22 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:22 [DEBUG] CHATCOMBAT text="a wild bear companion bites a shady poacher for 20 points of damage."
+10:03:22 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +20dmg by a wild bear companion(#3898) text_total=655
+10:03:22 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=84 action=SKIP_NPC
+10:03:22 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=655 dur=16.3s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:22 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=179 dps=11.0 abilities=[Melee=114, Restorative Smite=65]
+10:03:22 [DEBUG]   OVERVIEW_ROW #2 "Rainbow" type=player cls=dru% lvl=0 dealt=105 dps=6.4 abilities=[Blazing Embers=60, Locust Swarm=45]
+10:03:23 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=84 action=SKIP_NPC
+10:03:23 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=655 dur=17.3s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:23 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=179 dps=10.3 abilities=[Melee=114, Restorative Smite=65]
+10:03:23 [DEBUG]   OVERVIEW_ROW #2 "Rainbow" type=player cls=dru% lvl=0 dealt=105 dps=6.1 abilities=[Blazing Embers=60, Locust Swarm=45]
+10:03:23 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:23 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:23 [DEBUG] DMG  a shady poacher(#3979) type=1 24->20/100 amt=4 attacker=YOU(3846)
+10:03:23 [DEBUG]   ENC+ "a shady poacher"(#3979) +4dmg by YOU(3846) total=20
+10:03:23 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=88
+10:03:23 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:23 [DEBUG] CHATCOMBAT text="Rainbow's Blazing Embers hits a shady poacher for 60 points of Fire Damage.J"
+10:03:23 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +60dmg by Rainbow(#3887) text_total=715
+10:03:23 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:23 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:03:23 [DEBUG] HEAL YOU(#3846) 1010->1011/1254 delta=+1 last_attacker=None(None)
+10:03:23 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:23 [DEBUG]   PARSED type=UpdateMana eid=3846 target=None
+10:03:23 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:23 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:03:23 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+10:03:23 [DEBUG]   PARSED type=UpdateEndurance eid=3887 target=None
+10:03:24 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:24 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:24 [DEBUG] DMG  a shady poacher(#3979) type=1 20->18/100 amt=2 attacker=YOU(3846)
+10:03:24 [DEBUG]   ENC+ "a shady poacher"(#3979) +2dmg by YOU(3846) total=22
+10:03:24 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=88
+10:03:24 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:24 [DEBUG] CHATCOMBAT text="Rainbow's Locust Swarm hits a shady poacher for 45 points of Poison Damage.J"
+10:03:24 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +45dmg by Rainbow(#3887) text_total=760
+10:03:24 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=84 action=SKIP_NPC
+10:03:24 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=760 dur=18.3s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:24 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=0 dealt=210 dps=11.5 abilities=[Blazing Embers=120, Locust Swarm=90]
+10:03:24 [DEBUG]   OVERVIEW_ROW #2 "YOU" type=player cls= lvl=None dealt=179 dps=9.8 abilities=[Melee=114, Restorative Smite=65]
+10:03:24 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:03:24 [DEBUG]   PARSED type=SpawnEntity eid=3933 target=None
+10:03:24 [DEBUG] SPAWN #3933 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:03:24 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:24 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:24 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=80
+10:03:24 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:24 [DEBUG] CHATCOMBAT text="a wild bear companion bites a shady poacher for 3 points of damage."
+10:03:24 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +3dmg by a wild bear companion(#3898) text_total=763
+10:03:25 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:25 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:25 [DEBUG] DMG  a shady poacher(#3979) type=1 18->16/100 amt=2 attacker=YOU(3846)
+10:03:25 [DEBUG]   ENC+ "a shady poacher"(#3979) +2dmg by YOU(3846) total=24
+10:03:25 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=84
+10:03:25 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:25 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=63
+10:03:25 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:25 [DEBUG] CHATCOMBAT text="You slash a shady poacher for 42 points of damage."
+10:03:25 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +42dmg by YOU(#3846) text_total=805
+10:03:25 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=58
+10:03:25 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:25 [DEBUG] CHATCOMBAT text="You feel spiritually connected to the divine.@"
+10:03:25 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=38
+10:03:25 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:03:25 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:03:25 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type0': 3, 'type1': 24} names=26
+10:03:25 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=87 action=SKIP_NPC
+10:03:25 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=805 dur=19.3s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:25 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=221 dps=11.4 abilities=[Melee=156, Restorative Smite=65]
+10:03:25 [DEBUG]   OVERVIEW_ROW #2 "Rainbow" type=player cls=dru% lvl=0 dealt=210 dps=10.9 abilities=[Blazing Embers=120, Locust Swarm=90]
+10:03:25 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:25 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:03:25 [DEBUG] HEAL a wild bear companion(#3898) 70->71/100 delta=+1 last_attacker=None(None)
+10:03:26 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=87 action=SKIP_NPC
+10:03:26 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=805 dur=20.4s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:26 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=221 dps=10.9 abilities=[Melee=156, Restorative Smite=65]
+10:03:26 [DEBUG]   OVERVIEW_ROW #2 "Rainbow" type=player cls=dru% lvl=0 dealt=210 dps=10.3 abilities=[Blazing Embers=120, Locust Swarm=90]
+10:03:27 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:27 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:27 [DEBUG] DMG  a shady poacher(#3979) type=1 16->15/100 amt=1 attacker=YOU(3846)
+10:03:27 [DEBUG]   ENC+ "a shady poacher"(#3979) +1dmg by YOU(3846) total=25
+10:03:27 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=81
+10:03:27 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:27 [DEBUG] CHATCOMBAT text="a wild bear companion bites a shady poacher for 11 points of damage."
+10:03:27 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +11dmg by a wild bear companion(#3898) text_total=816
+10:03:27 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:27 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:27 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=98 action=SKIP_NPC
+10:03:27 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=816 dur=21.4s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:27 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=221 dps=10.3 abilities=[Melee=156, Restorative Smite=65]
+10:03:27 [DEBUG]   OVERVIEW_ROW #2 "Rainbow" type=player cls=dru% lvl=0 dealt=210 dps=9.8 abilities=[Blazing Embers=120, Locust Swarm=90]
+10:03:28 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=98 action=SKIP_NPC
+10:03:28 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=816 dur=22.4s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:28 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=221 dps=9.9 abilities=[Melee=156, Restorative Smite=65]
+10:03:28 [DEBUG]   OVERVIEW_ROW #2 "Rainbow" type=player cls=dru% lvl=0 dealt=210 dps=9.4 abilities=[Blazing Embers=120, Locust Swarm=90]
+10:03:29 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+10:03:29 [DEBUG]   PARSED type=SpawnEntity eid=2682 target=None
+10:03:29 [DEBUG] SPAWN #2682 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+10:03:29 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=98 action=SKIP_NPC
+10:03:29 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=816 dur=23.4s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:29 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=221 dps=9.4 abilities=[Melee=156, Restorative Smite=65]
+10:03:29 [DEBUG]   OVERVIEW_ROW #2 "Rainbow" type=player cls=dru% lvl=0 dealt=210 dps=9.0 abilities=[Blazing Embers=120, Locust Swarm=90]
+10:03:29 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:29 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:29 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=80
+10:03:29 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:29 [DEBUG] CHATCOMBAT text="a wild bear companion bites a shady poacher for 6 points of damage."
+10:03:29 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +6dmg by a wild bear companion(#3898) text_total=822
+10:03:29 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:29 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:29 [DEBUG] DMG  a shady poacher(#3979) type=1 15->14/100 amt=1 attacker=YOU(3846)
+10:03:29 [DEBUG]   ENC+ "a shady poacher"(#3979) +1dmg by YOU(3846) total=26
+10:03:29 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=81
+10:03:29 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:29 [DEBUG] CHATCOMBAT text="a wild bear companion bites a shady poacher for 22 points of damage."
+10:03:29 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +22dmg by a wild bear companion(#3898) text_total=844
+10:03:29 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:29 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:29 [DEBUG] DMG  a shady poacher(#3979) type=1 14->11/100 amt=3 attacker=YOU(3846)
+10:03:29 [DEBUG]   ENC+ "a shady poacher"(#3979) +3dmg by YOU(3846) total=29
+10:03:29 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=88
+10:03:29 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:29 [DEBUG] CHATCOMBAT text="Rainbow's Blazing Embers hits a shady poacher for 60 points of Fire Damage.J"
+10:03:29 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +60dmg by Rainbow(#3887) text_total=904
+10:03:30 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:30 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:30 [DEBUG] DMG  a shady poacher(#3979) type=1 11->8/100 amt=3 attacker=YOU(3846)
+10:03:30 [DEBUG]   ENC+ "a shady poacher"(#3979) +3dmg by YOU(3846) total=32
+10:03:30 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=88
+10:03:30 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:30 [DEBUG] CHATCOMBAT text="Rainbow's Locust Swarm hits a shady poacher for 45 points of Poison Damage.J"
+10:03:30 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +45dmg by Rainbow(#3887) text_total=949
+10:03:30 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=84
+10:03:30 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:30 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:30 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:03:30 [DEBUG] HEAL YOU(#3846) 1011->1012/1254 delta=+1 last_attacker=None(None)
+10:03:30 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:30 [DEBUG]   PARSED type=UpdateMana eid=3846 target=None
+10:03:30 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:30 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:03:30 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+10:03:30 [DEBUG]   PARSED type=UpdateEndurance eid=3887 target=None
+10:03:30 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=56
+10:03:30 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:30 [DEBUG] CHATCOMBAT text="You try to slash a shady poacher, but miss!"
+10:03:30 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=58
+10:03:30 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:30 [DEBUG] CHATCOMBAT text="You feel spiritually connected to the divine.@"
+10:03:30 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=38
+10:03:30 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:03:30 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:03:30 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=126 action=SKIP_NPC
+10:03:30 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=949 dur=24.4s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:30 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=0 dealt=315 dps=12.9 abilities=[Blazing Embers=180, Locust Swarm=135]
+10:03:30 [DEBUG]   OVERVIEW_ROW #2 "YOU" type=player cls= lvl=None dealt=221 dps=9.1 abilities=[Melee=156, Restorative Smite=65]
+10:03:30 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+10:03:30 [DEBUG]   PARSED type=SpawnEntity eid=2730 target=None
+10:03:30 [DEBUG] SPAWN #2730 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+10:03:31 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=126 action=SKIP_NPC
+10:03:31 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=949 dur=25.4s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:31 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=0 dealt=315 dps=12.4 abilities=[Blazing Embers=180, Locust Swarm=135]
+10:03:31 [DEBUG]   OVERVIEW_ROW #2 "YOU" type=player cls= lvl=None dealt=221 dps=8.7 abilities=[Melee=156, Restorative Smite=65]
+10:03:31 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:31 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:03:31 [DEBUG] HEAL a wild bear companion(#3898) 71->72/100 delta=+1 last_attacker=None(None)
+10:03:31 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+10:03:31 [DEBUG]   PARSED type=CastAbility eid=None target=3979
+10:03:31 [DEBUG] CASTABILITY_OUT gem=2 target=#3979
+10:03:31 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=58
+10:03:31 [DEBUG]   PARSED type=EndCasting eid=3846 target=3979
+10:03:31 [DEBUG] ENDCAST caster=#3846 target=#3979 text="You kick a shady poacher.#"
+10:03:31 [DEBUG]   -> DMG_LOCAL_MELEE caster=#3846 -> victim=a shady poacher(#3979)
+10:03:32 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=126 action=SKIP_NPC
+10:03:32 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=949 dur=26.4s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:32 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=0 dealt=315 dps=11.9 abilities=[Blazing Embers=180, Locust Swarm=135]
+10:03:32 [DEBUG]   OVERVIEW_ROW #2 "YOU" type=player cls= lvl=None dealt=221 dps=8.4 abilities=[Melee=156, Restorative Smite=65]
+10:03:32 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:32 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:32 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=79
+10:03:32 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:32 [DEBUG] CHATCOMBAT text="a wild bear companion bites a shady poacher for 1 point of damage."
+10:03:32 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +1dmg by a wild bear companion(#3898) text_total=950
+10:03:32 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:32 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:32 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=81
+10:03:32 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:32 [DEBUG] CHATCOMBAT text="a wild bear companion bites a shady poacher for 10 points of damage."
+10:03:32 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +10dmg by a wild bear companion(#3898) text_total=960
+10:03:33 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=40
+10:03:33 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:33 [DEBUG] CHATCOMBAT text="Your divine strength wanes.D"
+10:03:33 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:03:33 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:03:33 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=137 action=SKIP_NPC
+10:03:33 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=960 dur=27.4s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:33 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=0 dealt=315 dps=11.5 abilities=[Blazing Embers=180, Locust Swarm=135]
+10:03:33 [DEBUG]   OVERVIEW_ROW #2 "YOU" type=player cls= lvl=None dealt=221 dps=8.1 abilities=[Melee=156, Restorative Smite=65]
+10:03:33 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:33 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:34 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=137 action=SKIP_NPC
+10:03:34 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=960 dur=28.4s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:34 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=0 dealt=315 dps=11.1 abilities=[Blazing Embers=180, Locust Swarm=135]
+10:03:34 [DEBUG]   OVERVIEW_ROW #2 "YOU" type=player cls= lvl=None dealt=221 dps=7.8 abilities=[Melee=156, Restorative Smite=65]
+10:03:34 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:34 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:34 [DEBUG] DMG  a shady poacher(#3979) type=1 8->7/100 amt=1 attacker=YOU(3846)
+10:03:34 [DEBUG]   ENC+ "a shady poacher"(#3979) +1dmg by YOU(3846) total=33
+10:03:34 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=81
+10:03:34 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:34 [DEBUG] CHATCOMBAT text="a wild bear companion bites a shady poacher for 18 points of damage."
+10:03:34 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +18dmg by a wild bear companion(#3898) text_total=978
+10:03:34 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:34 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:34 [DEBUG] DMG  a shady poacher(#3979) type=1 7->6/100 amt=1 attacker=YOU(3846)
+10:03:34 [DEBUG]   ENC+ "a shady poacher"(#3979) +1dmg by YOU(3846) total=34
+10:03:34 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=63
+10:03:34 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:34 [DEBUG] CHATCOMBAT text="You slash a shady poacher for 25 points of damage."
+10:03:34 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +25dmg by YOU(#3846) text_total=1003
+10:03:35 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type0': 3, 'type1': 25} names=27
+10:03:35 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=155 action=SKIP_NPC
+10:03:35 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=1003 dur=29.5s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:35 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=0 dealt=315 dps=10.7 abilities=[Blazing Embers=180, Locust Swarm=135]
+10:03:35 [DEBUG]   OVERVIEW_ROW #2 "YOU" type=player cls= lvl=None dealt=246 dps=8.4 abilities=[Melee=181, Restorative Smite=65]
+10:03:35 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:35 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:35 [DEBUG] DMG  a shady poacher(#3979) type=1 6->3/100 amt=3 attacker=YOU(3846)
+10:03:35 [DEBUG]   ENC+ "a shady poacher"(#3979) +3dmg by YOU(3846) total=37
+10:03:35 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=88
+10:03:35 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:35 [DEBUG] CHATCOMBAT text="Rainbow's Blazing Embers hits a shady poacher for 60 points of Fire Damage.J"
+10:03:35 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +60dmg by Rainbow(#3887) text_total=1063
+10:03:36 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:36 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:36 [DEBUG] DMG  a shady poacher(#3979) type=1 3->0/100 amt=3 attacker=YOU(3846)
+10:03:36 [DEBUG]   ENC+ "a shady poacher"(#3979) +3dmg by YOU(3846) total=40
+10:03:36 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=88
+10:03:36 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:36 [DEBUG] CHATCOMBAT text="Rainbow's Locust Swarm hits a shady poacher for 45 points of Poison Damage.J"
+10:03:36 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +45dmg by Rainbow(#3887) text_total=1108
+10:03:36 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+10:03:36 [DEBUG]   PARSED type=SpawnEntity eid=2730 target=None
+10:03:36 [DEBUG] SPAWN #2730 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+10:03:36 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:36 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:03:36 [DEBUG] HEAL YOU(#3846) 1012->1013/1254 delta=+1 last_attacker=None(None)
+10:03:36 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:36 [DEBUG]   PARSED type=UpdateMana eid=3846 target=None
+10:03:36 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:36 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:03:36 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=155 action=SKIP_NPC
+10:03:36 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=1108 dur=30.5s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:36 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=0 dealt=420 dps=13.8 abilities=[Blazing Embers=240, Locust Swarm=180]
+10:03:36 [DEBUG]   OVERVIEW_ROW #2 "YOU" type=player cls= lvl=None dealt=246 dps=8.1 abilities=[Melee=181, Restorative Smite=65]
+10:03:36 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+10:03:36 [DEBUG]   PARSED type=CastAbility eid=None target=3979
+10:03:36 [DEBUG] CASTABILITY_OUT gem=4 target=#3979
+10:03:36 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=137
+10:03:36 [DEBUG]   PARSED type=BeginCasting eid=3846 target=3846
+10:03:36 [DEBUG] ATTRIB BeginCasting caster=YOU(#3846) -> target=YOU(#3846) ability="Supplication II"
+10:03:37 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=155 action=SKIP_NPC
+10:03:37 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=1108 dur=31.5s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:37 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=0 dealt=420 dps=13.3 abilities=[Blazing Embers=240, Locust Swarm=180]
+10:03:37 [DEBUG]   OVERVIEW_ROW #2 "YOU" type=player cls= lvl=None dealt=246 dps=7.8 abilities=[Melee=181, Restorative Smite=65]
+10:03:37 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:37 [DEBUG]   PARSED type=UpdateMana eid=3846 target=None
+10:03:37 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=327
+10:03:37 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:37 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:37 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:03:37 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=55
+10:03:37 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:37 [DEBUG] CHATCOMBAT text="You cry out in prayer for divine strength.@"
+10:03:37 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=58
+10:03:37 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:03:37 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:03:38 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=155 action=SKIP_NPC
+10:03:38 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=1108 dur=32.5s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:38 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=0 dealt=420 dps=12.9 abilities=[Blazing Embers=240, Locust Swarm=180]
+10:03:38 [DEBUG]   OVERVIEW_ROW #2 "YOU" type=player cls= lvl=None dealt=246 dps=7.6 abilities=[Melee=181, Restorative Smite=65]
+10:03:39 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=155 action=SKIP_NPC
+10:03:39 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=1108 dur=33.5s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:39 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=0 dealt=420 dps=12.5 abilities=[Blazing Embers=240, Locust Swarm=180]
+10:03:39 [DEBUG]   OVERVIEW_ROW #2 "YOU" type=player cls= lvl=None dealt=246 dps=7.3 abilities=[Melee=181, Restorative Smite=65]
+10:03:39 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:39 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:39 [DEBUG] HEAL a shady poacher(#3979) 0->1/100 delta=+1 last_attacker=YOU(3846)
+10:03:39 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:39 [DEBUG]   PARSED type=UpdateHealth eid=3979 target=None
+10:03:39 [DEBUG] DMG  a shady poacher(#3979) type=1 1->0/100 amt=1 attacker=YOU(3846)
+10:03:39 [DEBUG]   ENC+ "a shady poacher"(#3979) +1dmg by YOU(3846) total=41
+10:03:39 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=84
+10:03:39 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:03:39 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=63
+10:03:39 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:39 [DEBUG] CHATCOMBAT text="You slash a shady poacher for 46 points of damage."
+10:03:39 [DEBUG]   CHATCOMBAT_DMG "a shady poacher"(#3979) +46dmg by YOU(#3846) text_total=1154
+10:03:39 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=58
+10:03:39 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:39 [DEBUG] CHATCOMBAT text="You feel spiritually connected to the divine.@"
+10:03:39 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=38
+10:03:39 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:03:39 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:03:39 [DEBUG] MSG_IN 0x0013 Die dir=IN body_len=10
+10:03:39 [DEBUG]   PARSED type=Die eid=3979 target=None
+10:03:39 [DEBUG] DIE #3979 "a shady poacher" hp_dmg=41 text_dmg=1154 best=1154 players=[3846, 3898, 3887]
+10:03:39 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=71
+10:03:39 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:39 [DEBUG] CHATCOMBAT text="Your faction standing with Poachers of Calafrey got worse.["
+10:03:39 [DEBUG] MSG_UNKNOWN_NEW 0xAC4B dir=IN len=25 body=06 0f 00 00 12 00 63 61 6c 61 66 72 65 79 5f 70 6f 61 63 68 65 72 73 46 f6
+10:03:39 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=70
+10:03:39 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:39 [DEBUG] CHATCOMBAT text="Your faction standing with Village of Penshaw got better.["
+10:03:39 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=39
+10:03:39 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:39 [DEBUG] CHATCOMBAT text="You gain party experience!W"
+10:03:39 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:03:39 [DEBUG]   PARSED type=RemoveBuffIcon eid=3979 target=None
+10:03:39 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:03:39 [DEBUG]   PARSED type=RemoveBuffIcon eid=3979 target=None
+10:03:39 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:03:39 [DEBUG]   PARSED type=RemoveBuffIcon eid=3979 target=None
+10:03:39 [DEBUG] MSG_IN 0x0024 UpdateExperience dir=IN body_len=8
+10:03:39 [DEBUG]   PARSED type=UpdateExperience eid=3846 target=None
+10:03:39 [DEBUG] XP_BASELINE #3846 total=7,417 (first event, no delta)
+10:03:39 [DEBUG] MSG_IN 0x0012 Autoattack dir=OUT body_len=1
+10:03:39 [DEBUG]   PARSED type=Autoattack eid=None target=None
+10:03:39 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=OUT body_len=4
+10:03:39 [DEBUG]   PARSED type=ChangeTarget eid=None target=0
+10:03:39 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+10:03:39 [DEBUG]   PARSED type=CastAbility eid=None target=0
+10:03:39 [DEBUG] CASTABILITY_OUT gem=3 target=#0
+10:03:40 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=51
+10:03:40 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:40 [DEBUG] CHATCOMBAT text="You need a target to use that ability."
+10:03:40 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+10:03:40 [DEBUG]   PARSED type=CastAbility eid=None target=0
+10:03:40 [DEBUG] CASTABILITY_OUT gem=3 target=#0
+10:03:40 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+10:03:40 [DEBUG]   PARSED type=CastAbility eid=None target=0
+10:03:40 [DEBUG] CASTABILITY_OUT gem=3 target=#0
+10:03:40 [DEBUG]   OVERVIEW_FILTER enc="a shady poacher" attacker="a wild bear companion"(#3898) entity_type=1 pet_state=False dealt=155 action=SKIP_NPC
+10:03:40 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=1154 dur=33.7s entries=2 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={3846: 0, 3887: 0, 628453988: 0, 3933: 1, 3953: 1, 3936: 1, 3959: 1, 3955: 1, 3092: 1, 3967: 1, 2920: 1, 3979: 1, 3192: 1, 2838: 1, 2839: 1, 2840: 1, 2951: 1, 2938: 1, 2947: 1, 2959: 1}
+10:03:40 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=0 dealt=420 dps=12.5 abilities=[Blazing Embers=240, Locust Swarm=180]
+10:03:40 [DEBUG]   OVERVIEW_ROW #2 "YOU" type=player cls= lvl=None dealt=292 dps=8.7 abilities=[Melee=227, Restorative Smite=65]
+10:03:40 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=51
+10:03:40 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:40 [DEBUG] CHATCOMBAT text="You need a target to use that ability."
+10:03:40 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=51
+10:03:40 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:40 [DEBUG] CHATCOMBAT text="You need a target to use that ability."
+10:03:40 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+10:03:40 [DEBUG]   PARSED type=CastAbility eid=None target=0
+10:03:40 [DEBUG] CASTABILITY_OUT gem=3 target=#0
+10:03:40 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=51
+10:03:40 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:40 [DEBUG] CHATCOMBAT text="You need a target to use that ability."
+10:03:42 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:03:42 [DEBUG]   PARSED type=RemoveBuffIcon eid=3898 target=None
+10:03:42 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:42 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:03:42 [DEBUG] HEAL YOU(#3846) 1013->1014/1254 delta=+1 last_attacker=YOU(3846)
+10:03:42 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:42 [DEBUG]   PARSED type=UpdateMana eid=3846 target=None
+10:03:42 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:42 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:03:43 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:43 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:03:43 [DEBUG] HEAL a wild bear companion(#3898) 72->73/100 delta=+1 last_attacker=None(None)
+10:03:44 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:03:44 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:03:44 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+10:03:44 [DEBUG]   PARSED type=UpdateEndurance eid=3887 target=None
+10:03:44 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:03:44 [DEBUG]   PARSED type=SpawnEntity eid=2714 target=None
+10:03:44 [DEBUG] SPAWN #2714 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:03:44 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:03:44 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:03:45 [DEBUG] MSG_UNKNOWN_NEW 0x002E dir=IN len=36 body=06 0f 00 00 00 00 00 00 00 00 00 00 42 00 00 00 ef 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+10:03:45 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=178
+10:03:45 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:45 [DEBUG] CHATCOMBAT text="Rainbow loots 3 silver, and 94 copper coins from a shady poacher's corpse, and y"
+10:03:45 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type0': 3, 'type1': 26} names=28
+10:03:46 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=98
+10:03:46 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:03:46 [DEBUG] CHATCOMBAT text="--Rainbow loots [item|leather_scraps|Leather Scraps] from a shady poacher's corp"
+10:03:46 [DEBUG] LOOT_CHAT item=Leather Scraps hid=leather_scraps npc=a shady poacher looter=Rainbow
+10:03:48 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:48 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:03:48 [DEBUG] HEAL YOU(#3846) 1014->1015/1254 delta=+1 last_attacker=YOU(3846)
+10:03:48 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:48 [DEBUG]   PARSED type=UpdateMana eid=3846 target=None
+10:03:48 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:48 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:03:48 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+10:03:48 [DEBUG]   PARSED type=UpdateEndurance eid=3887 target=None
+10:03:49 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:03:49 [DEBUG]   PARSED type=RemoveBuffIcon eid=3887 target=None
+10:03:49 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:49 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:03:49 [DEBUG] HEAL a wild bear companion(#3898) 73->74/100 delta=+1 last_attacker=None(None)
+10:03:51 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:03:51 [DEBUG]   PARSED type=SpawnEntity eid=2600 target=None
+10:03:51 [DEBUG] SPAWN #2600 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:03:51 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:03:51 [DEBUG]   PARSED type=SpawnEntity eid=3746 target=None
+10:03:51 [DEBUG] SPAWN #3746 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:03:51 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=204
+10:03:51 [DEBUG]   PARSED type=SpawnEntity eid=3959 target=None
+10:03:51 [DEBUG] SPAWN #3959 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:03:51 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:03:51 [DEBUG]   PARSED type=SpawnEntity eid=3933 target=None
+10:03:51 [DEBUG] SPAWN #3933 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:03:51 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:03:51 [DEBUG]   PARSED type=SpawnEntity eid=3866 target=None
+10:03:51 [DEBUG] SPAWN #3866 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:03:51 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=207
+10:03:51 [DEBUG]   PARSED type=SpawnEntity eid=3955 target=None
+10:03:51 [DEBUG] SPAWN #3955 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+10:03:51 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=207
+10:03:51 [DEBUG]   PARSED type=SpawnEntity eid=3969 target=None
+10:03:51 [DEBUG] SPAWN #3969 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+10:03:51 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=736
+10:03:51 [DEBUG]   PARSED type=SpawnEntity eid=3967 target=None
+10:03:51 [DEBUG] SPAWN #3967 type=1 "a shady poacher" HP:None/None class=None lvl=None
+10:03:51 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=861
+10:03:51 [DEBUG]   PARSED type=SpawnEntity eid=3192 target=None
+10:03:51 [DEBUG] SPAWN #3192 type=1 "a scouting poacher" HP:1000/1000 class=hum lvl=0
+10:03:52 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:03:52 [DEBUG]   PARSED type=RemoveBuffIcon eid=3898 target=None
+10:03:54 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:54 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:03:54 [DEBUG] HEAL YOU(#3846) 1015->1016/1254 delta=+1 last_attacker=YOU(3846)
+10:03:54 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:54 [DEBUG]   PARSED type=UpdateMana eid=3846 target=None
+10:03:54 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:03:54 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:03:55 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type0': 3, 'type1': 29} names=31
+10:03:55 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:03:55 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:03:55 [DEBUG] HEAL a wild bear companion(#3898) 74->75/100 delta=+1 last_attacker=None(None)
+10:04:00 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:00 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:04:00 [DEBUG] HEAL YOU(#3846) 1016->1017/1254 delta=+1 last_attacker=YOU(3846)
+10:04:00 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:04:00 [DEBUG]   PARSED type=UpdateMana eid=3846 target=None
+10:04:00 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:04:00 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:04:01 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:04:01 [DEBUG]   PARSED type=SpawnEntity eid=3866 target=None
+10:04:01 [DEBUG] SPAWN #3866 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:04:01 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:01 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:04:01 [DEBUG] HEAL a wild bear companion(#3898) 75->76/100 delta=+1 last_attacker=None(None)
+10:04:03 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:04:03 [DEBUG]   PARSED type=SpawnEntity eid=3948 target=None
+10:04:03 [DEBUG] SPAWN #3948 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:04:05 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type0': 3, 'type1': 29} names=31
+10:04:06 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:06 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:04:06 [DEBUG] HEAL YOU(#3846) 1017->1018/1254 delta=+1 last_attacker=YOU(3846)
+10:04:06 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:04:06 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:04:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+10:04:07 [DEBUG]   PARSED type=SpawnEntity eid=3931 target=None
+10:04:07 [DEBUG] SPAWN #3931 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+10:04:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+10:04:07 [DEBUG]   PARSED type=SpawnEntity eid=3944 target=None
+10:04:07 [DEBUG] SPAWN #3944 type=1 "Spawn of Goreloch" HP:1000/1000 class=wlf lvl=0
+10:04:07 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:07 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:04:07 [DEBUG] HEAL a wild bear companion(#3898) 76->77/100 delta=+1 last_attacker=None(None)
+10:04:09 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:04:09 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:04:09 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=50
+10:04:09 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:04:09 [DEBUG] CHATCOMBAT text="Your spiritual connection is severed.D"
+10:04:12 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:12 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:04:12 [DEBUG] HEAL YOU(#3846) 1018->1019/1254 delta=+1 last_attacker=YOU(3846)
+10:04:12 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:04:12 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:04:14 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:14 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:04:14 [DEBUG] HEAL a wild bear companion(#3898) 77->78/100 delta=+1 last_attacker=None(None)
+10:04:15 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type0': 3, 'type1': 31} names=33
+10:04:17 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+10:04:17 [DEBUG]   PARSED type=DespawnEntity eid=3967 target=None
+10:04:17 [DEBUG] DESPAWN #3967
+10:04:18 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:18 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:04:18 [DEBUG] HEAL YOU(#3846) 1019->1020/1254 delta=+1 last_attacker=YOU(3846)
+10:04:18 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:04:18 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:04:20 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:20 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:04:20 [DEBUG] HEAL a wild bear companion(#3898) 78->79/100 delta=+1 last_attacker=None(None)
+10:04:22 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+10:04:22 [DEBUG]   PARSED type=SpawnEntity eid=2730 target=None
+10:04:22 [DEBUG] SPAWN #2730 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+10:04:24 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:24 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:04:24 [DEBUG] HEAL YOU(#3846) 1020->1021/1254 delta=+1 last_attacker=YOU(3846)
+10:04:24 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:04:24 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:04:25 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:04:25 [DEBUG]   PARSED type=SpawnEntity eid=2714 target=None
+10:04:25 [DEBUG] SPAWN #2714 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:04:25 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+10:04:25 [DEBUG]   PARSED type=SpawnEntity eid=2720 target=None
+10:04:25 [DEBUG] SPAWN #2720 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+10:04:25 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type0': 3, 'type1': 32} names=34
+10:04:26 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:26 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:04:26 [DEBUG] HEAL a wild bear companion(#3898) 79->80/100 delta=+1 last_attacker=None(None)
+10:04:27 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:04:27 [DEBUG]   PARSED type=SpawnEntity eid=3948 target=None
+10:04:27 [DEBUG] SPAWN #3948 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:04:27 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=204
+10:04:27 [DEBUG]   PARSED type=SpawnEntity eid=3911 target=None
+10:04:27 [DEBUG] SPAWN #3911 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:04:27 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:04:27 [DEBUG]   PARSED type=SpawnEntity eid=3866 target=None
+10:04:27 [DEBUG] SPAWN #3866 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:04:27 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+10:04:27 [DEBUG]   PARSED type=SpawnEntity eid=3931 target=None
+10:04:27 [DEBUG] SPAWN #3931 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+10:04:27 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+10:04:27 [DEBUG]   PARSED type=SpawnEntity eid=3944 target=None
+10:04:27 [DEBUG] SPAWN #3944 type=1 "Spawn of Goreloch" HP:1000/1000 class=wlf lvl=0
+10:04:27 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=207
+10:04:27 [DEBUG]   PARSED type=SpawnEntity eid=3969 target=None
+10:04:27 [DEBUG] SPAWN #3969 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+10:04:27 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+10:04:27 [DEBUG]   PARSED type=SpawnEntity eid=3955 target=None
+10:04:27 [DEBUG] SPAWN #3955 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+10:04:27 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=676
+10:04:27 [DEBUG]   PARSED type=SpawnEntity eid=3336 target=None
+10:04:27 [DEBUG] SPAWN #3336 type=1 "a rough poacher" HP:1000/1000 class=hum lvl=0
+10:04:29 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:04:29 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:04:29 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:04:29 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:04:30 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=OUT body_len=4
+10:04:30 [DEBUG]   PARSED type=ChangeTarget eid=None target=3887
+10:04:30 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=676
+10:04:30 [DEBUG]   PARSED type=SpawnEntity eid=3336 target=None
+10:04:30 [DEBUG] SPAWN #3336 type=1 "a rough poacher" HP:1000/1000 class=hum lvl=0
+10:04:30 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:30 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:04:30 [DEBUG] HEAL YOU(#3846) 1021->1022/1254 delta=+1 last_attacker=YOU(3846)
+10:04:30 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:04:30 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:04:31 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+10:04:31 [DEBUG]   PARSED type=DespawnEntity eid=3892 target=None
+10:04:31 [DEBUG] DESPAWN #3892
+10:04:32 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:32 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:04:34 [DEBUG] MSG_UNKNOWN_NEW 0x0143 dir=OUT len=4 body=00 00 00 00
+10:04:34 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=42
+10:04:34 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:04:34 [DEBUG] CHATCOMBAT text="You lower your weapon shield.D"
+10:04:34 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:04:34 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:04:35 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:04:35 [DEBUG]   PARSED type=SpawnEntity eid=2631 target=None
+10:04:35 [DEBUG] SPAWN #2631 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:04:35 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type0': 3, 'type1': 35} names=37
+10:04:36 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:36 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:04:36 [DEBUG] HEAL YOU(#3846) 1022->1023/1254 delta=+1 last_attacker=YOU(3846)
+10:04:36 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:04:36 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:04:36 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+10:04:36 [DEBUG]   PARSED type=DespawnEntity eid=2650 target=None
+10:04:36 [DEBUG] DESPAWN #2650
+10:04:37 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=40
+10:04:37 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:04:37 [DEBUG] CHATCOMBAT text="Your divine strength wanes.D"
+10:04:37 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:04:37 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:04:38 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:38 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:04:38 [DEBUG] HEAL a wild bear companion(#3898) 80->81/100 delta=+1 last_attacker=None(None)
+10:04:38 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:04:38 [DEBUG]   PARSED type=RemoveBuffIcon eid=3887 target=None
+10:04:38 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:04:38 [DEBUG]   PARSED type=RemoveBuffIcon eid=3898 target=None
+10:04:38 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:04:38 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:04:38 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:04:38 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:04:38 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:04:41 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+10:04:41 [DEBUG]   PARSED type=SpawnEntity eid=3969 target=None
+10:04:41 [DEBUG] SPAWN #3969 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+10:04:42 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:42 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:04:42 [DEBUG] HEAL YOU(#3846) 1023->1024/1254 delta=+1 last_attacker=YOU(3846)
+10:04:42 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:04:42 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:04:44 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:44 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:04:44 [DEBUG] HEAL a wild bear companion(#3898) 81->82/100 delta=+1 last_attacker=None(None)
+10:04:44 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=137
+10:04:44 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:04:44 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=50
+10:04:44 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:04:44 [DEBUG] CHATCOMBAT text="You shield yourself with your weapon.@"
+10:04:44 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=33
+10:04:44 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:04:44 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:04:45 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+10:04:45 [DEBUG]   PARSED type=DespawnEntity eid=3964 target=None
+10:04:45 [DEBUG] DESPAWN #3964
+10:04:45 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type0': 3, 'type1': 35} names=37
+10:04:47 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+10:04:47 [DEBUG]   PARSED type=SpawnEntity eid=3969 target=None
+10:04:47 [DEBUG] SPAWN #3969 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+10:04:48 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:48 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:04:48 [DEBUG] HEAL YOU(#3846) 1024->1025/1254 delta=+1 last_attacker=YOU(3846)
+10:04:48 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:04:48 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:04:50 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:04:50 [DEBUG]   PARSED type=SpawnEntity eid=2600 target=None
+10:04:50 [DEBUG] SPAWN #2600 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:04:50 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:50 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:04:50 [DEBUG] HEAL a wild bear companion(#3898) 82->83/100 delta=+1 last_attacker=None(None)
+10:04:52 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:04:52 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:04:52 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:04:52 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:04:52 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:04:52 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:04:52 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:04:52 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:04:52 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:04:52 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:04:52 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:04:52 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:04:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:04:54 [DEBUG]   PARSED type=SpawnEntity eid=3911 target=None
+10:04:54 [DEBUG] SPAWN #3911 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:04:54 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:54 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:04:54 [DEBUG] HEAL YOU(#3846) 1025->1026/1254 delta=+1 last_attacker=YOU(3846)
+10:04:54 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:04:54 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:04:55 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type0': 3, 'type1': 35} names=37
+10:04:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:04:56 [DEBUG]   PARSED type=SpawnEntity eid=3746 target=None
+10:04:56 [DEBUG] SPAWN #3746 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:04:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=204
+10:04:56 [DEBUG]   PARSED type=SpawnEntity eid=3948 target=None
+10:04:56 [DEBUG] SPAWN #3948 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:04:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:04:56 [DEBUG]   PARSED type=SpawnEntity eid=3866 target=None
+10:04:56 [DEBUG] SPAWN #3866 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:04:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+10:04:56 [DEBUG]   PARSED type=SpawnEntity eid=3955 target=None
+10:04:56 [DEBUG] SPAWN #3955 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+10:04:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=676
+10:04:56 [DEBUG]   PARSED type=SpawnEntity eid=3336 target=None
+10:04:56 [DEBUG] SPAWN #3336 type=1 "a rough poacher" HP:1000/1000 class=hum lvl=0
+10:04:56 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:04:56 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:04:56 [DEBUG] HEAL a wild bear companion(#3898) 83->84/100 delta=+1 last_attacker=None(None)
+10:04:57 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:04:57 [DEBUG]   PARSED type=RemoveBuffIcon eid=3887 target=None
+10:04:57 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:04:57 [DEBUG]   PARSED type=RemoveBuffIcon eid=3898 target=None
+10:04:57 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:04:57 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:04:57 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:04:57 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:04:57 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:04:58 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:04:58 [DEBUG]   PARSED type=SpawnEntity eid=3746 target=None
+10:04:58 [DEBUG] SPAWN #3746 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:04:58 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:04:58 [DEBUG]   PARSED type=SpawnEntity eid=3866 target=None
+10:04:58 [DEBUG] SPAWN #3866 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:04:58 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+10:04:58 [DEBUG]   PARSED type=SpawnEntity eid=3955 target=None
+10:04:58 [DEBUG] SPAWN #3955 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+10:04:58 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=676
+10:04:58 [DEBUG]   PARSED type=SpawnEntity eid=3336 target=None
+10:04:58 [DEBUG] SPAWN #3336 type=1 "a rough poacher" HP:1000/1000 class=hum lvl=0
+10:04:58 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=736
+10:04:58 [DEBUG]   PARSED type=SpawnEntity eid=3331 target=None
+10:04:58 [DEBUG] SPAWN #3331 type=1 "a rough poacher" HP:1000/1000 class=hum lvl=0
+10:04:59 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:04:59 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:04:59 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:04:59 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:04:59 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:04:59 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:04:59 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:04:59 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:04:59 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:04:59 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:04:59 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:04:59 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:05:01 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:05:01 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:05:01 [DEBUG] HEAL YOU(#3846) 1026->1027/1254 delta=+1 last_attacker=YOU(3846)
+10:05:01 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:05:01 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:05:01 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:01 [DEBUG]   PARSED type=RemoveBuffIcon eid=3887 target=None
+10:05:01 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:01 [DEBUG]   PARSED type=RemoveBuffIcon eid=3898 target=None
+10:05:01 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:01 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:05:01 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:05:01 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:01 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:05:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:05:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:02 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:05:02 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:05:02 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:05:02 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:05:02 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:05:02 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:05:02 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:02 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:05:02 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:02 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:05:02 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:02 [DEBUG]   PARSED type=RemoveBuffIcon eid=3887 target=None
+10:05:02 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:02 [DEBUG]   PARSED type=RemoveBuffIcon eid=3898 target=None
+10:05:02 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:02 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:05:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:05:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:02 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:05:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=53
+10:05:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:02 [DEBUG] CHATCOMBAT text="This ability is not available right now."
+10:05:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:05:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:02 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:05:02 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:05:02 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:05:02 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:05:02 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:05:02 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:05:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:05:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:02 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:05:02 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:02 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:05:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:05:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:02 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:05:02 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:05:02 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:05:02 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:05:02 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:05:02 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:05:02 [DEBUG] HEAL a wild bear companion(#3898) 84->85/100 delta=+1 last_attacker=None(None)
+10:05:02 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:05:02 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:05:03 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:03 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:05:03 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:03 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:05:03 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:03 [DEBUG]   PARSED type=RemoveBuffIcon eid=3887 target=None
+10:05:03 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:03 [DEBUG]   PARSED type=RemoveBuffIcon eid=3898 target=None
+10:05:03 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:03 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:05:03 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:05:03 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:03 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:05:03 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:05:03 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:03 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:05:03 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:05:03 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:05:03 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:05:03 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:05:03 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:05:03 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:03 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:05:03 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:03 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:05:03 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:03 [DEBUG]   PARSED type=RemoveBuffIcon eid=3887 target=None
+10:05:03 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:03 [DEBUG]   PARSED type=RemoveBuffIcon eid=3898 target=None
+10:05:03 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:03 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:05:03 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:05:03 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:03 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:05:03 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:05:03 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:03 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:05:03 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:05:03 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:05:03 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:05:03 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:05:03 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:05:03 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:05:03 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:03 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:05:03 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:03 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:05:04 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:05:04 [DEBUG]   PARSED type=SpawnEntity eid=3746 target=None
+10:05:04 [DEBUG] SPAWN #3746 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:05:04 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=736
+10:05:04 [DEBUG]   PARSED type=SpawnEntity eid=3331 target=None
+10:05:04 [DEBUG] SPAWN #3331 type=1 "a rough poacher" HP:1000/1000 class=hum lvl=0
+10:05:04 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:05:04 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:04 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:05:04 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:05:04 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:05:04 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:05:04 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:05:04 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:05:04 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:05:04 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:04 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:05:04 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:04 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:05:04 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:04 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:05:04 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:04 [DEBUG]   PARSED type=RemoveBuffIcon eid=3887 target=None
+10:05:04 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:04 [DEBUG]   PARSED type=RemoveBuffIcon eid=3898 target=None
+10:05:04 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:04 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:05:04 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:05:04 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:04 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:05:04 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:05:04 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:05:04 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:05:04 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:05:04 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:05:04 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:04 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:05:04 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:04 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:05:04 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:05:04 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:04 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:05:04 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:04 [DEBUG]   PARSED type=RemoveBuffIcon eid=3887 target=None
+10:05:04 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:04 [DEBUG]   PARSED type=RemoveBuffIcon eid=3898 target=None
+10:05:04 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:04 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:05:04 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:05:04 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:04 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:05:04 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:05:04 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:05:04 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:05:04 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:05:04 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:05:04 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:04 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:05:04 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:04 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:05:04 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:04 [DEBUG]   PARSED type=RemoveBuffIcon eid=3887 target=None
+10:05:04 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:04 [DEBUG]   PARSED type=RemoveBuffIcon eid=3898 target=None
+10:05:04 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:04 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:05:04 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:05:04 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:04 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:05:05 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:05:05 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:05:05 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:05:05 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:05 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:05:05 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:05:05 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:05:05 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:05:05 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:05 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:05:05 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:05:05 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:05 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:05:05 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:05:05 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:05:05 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:05:05 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:05 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:05:05 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:05:05 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:05:05 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:05:05 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:05 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:05:05 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:05:05 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:05 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:05:05 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+10:05:05 [DEBUG]   PARSED type=SpawnEntity eid=2732 target=None
+10:05:05 [DEBUG] SPAWN #2732 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+10:05:05 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:05:05 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:05 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:05:05 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:05:05 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:05:05 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:05:05 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:05:05 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:05:05 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:05 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:05:05 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:05 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:05:05 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type0': 3, 'type1': 37} names=39
+10:05:05 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:05:05 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:05 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:05:05 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:05 [DEBUG]   PARSED type=RemoveBuffIcon eid=3887 target=None
+10:05:05 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:05 [DEBUG]   PARSED type=RemoveBuffIcon eid=3898 target=None
+10:05:05 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:05 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:05:06 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:05:06 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:06 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:05:06 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:05:06 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:05:06 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:05:06 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:05:06 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:05:06 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:06 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:05:06 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:06 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:05:06 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:06 [DEBUG]   PARSED type=RemoveBuffIcon eid=3887 target=None
+10:05:06 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:06 [DEBUG]   PARSED type=RemoveBuffIcon eid=3898 target=None
+10:05:06 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:06 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:05:06 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:05:06 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:06 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:05:06 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:05:06 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:06 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:05:06 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:05:06 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:05:06 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:05:06 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:05:06 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:05:06 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:06 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:05:06 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:06 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:05:06 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:06 [DEBUG]   PARSED type=RemoveBuffIcon eid=3887 target=None
+10:05:06 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:06 [DEBUG]   PARSED type=RemoveBuffIcon eid=3898 target=None
+10:05:06 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:06 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:05:06 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:05:06 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:06 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:05:06 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:05:06 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:05:06 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:05:06 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:06 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:05:06 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:05:06 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:05:06 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:05:07 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:05:07 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:05:07 [DEBUG] HEAL YOU(#3846) 1027->1028/1254 delta=+1 last_attacker=YOU(3846)
+10:05:07 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:05:07 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:05:07 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:07 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:05:07 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:07 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:05:07 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:07 [DEBUG]   PARSED type=RemoveBuffIcon eid=3887 target=None
+10:05:07 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:07 [DEBUG]   PARSED type=RemoveBuffIcon eid=3898 target=None
+10:05:07 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:07 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:05:07 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:05:07 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:07 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:05:07 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:05:07 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:07 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:05:07 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:05:07 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:05:07 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:05:07 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:05:07 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:05:07 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:07 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:05:07 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:07 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:05:07 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:05:07 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:07 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:05:07 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:07 [DEBUG]   PARSED type=RemoveBuffIcon eid=3887 target=None
+10:05:07 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:07 [DEBUG]   PARSED type=RemoveBuffIcon eid=3898 target=None
+10:05:07 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:07 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:05:07 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:05:07 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:07 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:05:07 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:05:07 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:05:07 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:05:07 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:05:07 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:05:07 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:05:07 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:07 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:05:07 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:07 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:05:07 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:05:07 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:07 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:05:07 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:05:07 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:05:07 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:05:07 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:05:07 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:05:08 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:08 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:05:08 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:08 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:05:08 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:08 [DEBUG]   PARSED type=RemoveBuffIcon eid=3887 target=None
+10:05:08 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:08 [DEBUG]   PARSED type=RemoveBuffIcon eid=3898 target=None
+10:05:08 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+10:05:08 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+10:05:08 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+10:05:08 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:08 [DEBUG] CHATCOMBAT text="The pious aura fades.D"
+10:05:08 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:05:08 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:05:08 [DEBUG] HEAL a wild bear companion(#3898) 85->86/100 delta=+1 last_attacker=None(None)
+10:05:09 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+10:05:09 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+10:05:09 [DEBUG] CHATCOMBAT text="You are enveloped in a pious aura.@"
+10:05:09 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+10:05:09 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+10:05:09 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+10:05:09 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+10:05:09 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+10:05:09 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:09 [DEBUG]   PARSED type=AddBuffIcon eid=3887 target=None
+10:05:09 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+10:05:09 [DEBUG]   PARSED type=AddBuffIcon eid=3898 target=None
+10:05:09 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:05:09 [DEBUG]   PARSED type=SpawnEntity eid=3746 target=None
+10:05:09 [DEBUG] SPAWN #3746 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:05:10 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+10:05:10 [DEBUG]   PARSED type=SpawnEntity eid=2682 target=None
+10:05:10 [DEBUG] SPAWN #2682 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+10:05:13 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:05:13 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+10:05:13 [DEBUG] HEAL YOU(#3846) 1028->1029/1254 delta=+1 last_attacker=YOU(3846)
+10:05:13 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+10:05:13 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+10:05:14 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+10:05:14 [DEBUG]   PARSED type=SpawnEntity eid=3746 target=None
+10:05:14 [DEBUG] SPAWN #3746 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:05:15 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+10:05:15 [DEBUG]   PARSED type=UpdateHealth eid=3898 target=None
+10:05:15 [DEBUG] HEAL a wild bear companion(#3898) 86->87/100 delta=+1 last_attacker=None(None)
+10:05:15 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=207
+10:05:15 [DEBUG]   PARSED type=SpawnEntity eid=3763 target=None
+10:05:15 [DEBUG] SPAWN #3763 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+10:05:15 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=204
+10:05:15 [DEBUG]   PARSED type=SpawnEntity eid=3847 target=None
+10:05:15 [DEBUG] SPAWN #3847 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:05:15 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=204
+10:05:15 [DEBUG]   PARSED type=SpawnEntity eid=3385 target=None
+10:05:15 [DEBUG] SPAWN #3385 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+10:05:15 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type0': 3, 'type1': 40} names=42

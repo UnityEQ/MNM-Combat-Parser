@@ -11,6 +11,8 @@ Usage:
     python parser/parser.py
 """
 
+APP_VERSION = "V1.0"
+
 import csv
 import ctypes
 import json
@@ -545,7 +547,8 @@ def parse_lnl_frame(payload):
 MESSAGE_IDS = {
     0x0011: "ChangeTarget", 0x0012: "Autoattack", 0x0013: "Die",
     0x0014: "Consider", 0x0020: "SpawnEntity", 0x0021: "DespawnEntity",
-    0x0022: "UpdateHealth", 0x0023: "UpdateMana", 0x0025: "UpdateLevel",
+    0x0022: "UpdateHealth", 0x0023: "UpdateMana", 0x0024: "UpdateExperience",
+    0x0025: "UpdateLevel",
     0x0027: "UpdateHealthMana",
     0x0029: "UpdateStunState", 0x002A: "UpdateHostileState",
     0x002F: "UpdateState",
@@ -629,6 +632,10 @@ def _r_i32(data, off):
 def _r_u16(data, off):
     if off + 2 > len(data): return None, off
     return struct.unpack_from("<H", data, off)[0], off + 2
+
+def _r_u8(data, off):
+    if off + 1 > len(data): return None, off
+    return data[off], off + 1
 
 def _r_bool(data, off):
     if off + 1 > len(data): return None, off
@@ -921,17 +928,16 @@ def parse_combat_event(msg_id, body, direction):
     elif msg_id == 0x0380:  # ClientPartyUpdate — has class/level for party members
         event["type"] = "ClientPartyUpdate"
         try:
-            member_count, off = _r_u16(body, off)
+            member_count, off = _r_u32(body, off)       # u32 member count
             members = []
             if member_count is not None and member_count < 50:
                 for _ in range(member_count):
-                    m_id, off = _r_u32(body, off)      # uint id (entity id)
-                    m_cid, off = _r_u32(body, off)      # uint characterId
-                    m_name, off = _r_str(body, off)      # string name
-                    m_class, off = _r_str(body, off)     # string classHID
-                    m_level, off = _r_i32(body, off)     # int level
-                    m_zone, off = _r_str(body, off)      # string zoneHID
-                    m_disc, off = _r_bool(body, off)     # bool disconnected
+                    m_id, off = _r_u32(body, off)       # u32 entity_id
+                    m_cid, off = _r_u32(body, off)      # u32 unknown (secondary id)
+                    m_name, off = _r_str(body, off)     # LNL string name
+                    m_class, off = _r_str(body, off)    # LNL string class_hid
+                    m_level, off = _r_u8(body, off)     # u8 level
+                    m_zone, off = _r_str(body, off)     # LNL string zone_hid
                     members.append({
                         "id": m_id, "name": m_name,
                         "class_hid": m_class, "level": m_level,
@@ -1230,7 +1236,10 @@ class EntityTracker:
 
         # Experience tracking
         self._xp_current = {}     # eid -> last known total XP
-        self._xp_events = []      # list of {timestamp, eid, name, xp_total, xp_gained}
+        self._xp_events = []      # list of {timestamp, eid, name, xp_total, xp_gained, pct}
+        self._xp_level_start = {} # eid -> XP total when current level began
+        self._xp_level_needed = {}# eid -> XP required for current level (learned from level-ups)
+        self._xp_player_level = {}# eid -> last known level (to detect level-ups)
 
     def _backfill_player_info(self, eid, cls=None, level=None):
         """Update class/level on existing encounter player records for this eid."""
@@ -1579,8 +1588,6 @@ class EntityTracker:
                         continue
                     if m_name:
                         self.names[m_eid] = m_name
-                        if m_eid == self._local_player_eid and not self.player_name:
-                            self._mark_local_player(m_eid)
                     self.entity_types[m_eid] = 0  # party members are players
                     if m_class:
                         self.classes[m_eid] = m_class
@@ -1588,6 +1595,18 @@ class EntityTracker:
                         self.levels[m_eid] = m_level
                     if m_class or m_level is not None:
                         self._backfill_player_info(m_eid, cls=m_class, level=m_level)
+                    # Local player detection from party data
+                    if m_eid == self._local_player_eid:
+                        # Already know this is us — refresh name/class/level
+                        self._mark_local_player(m_eid)
+                    elif (self._local_player_eid is None
+                          and m_name
+                          and self.player_name
+                          and self.player_name != "YOU"
+                          and m_name == self.player_name):
+                        # Name matches our auto-detected player_name — this is us
+                        _plog.info(f"PARTY_LOCAL_DETECT name match \"{m_name}\" → eid=#{m_eid}")
+                        self._mark_local_player(m_eid)
                     _plog.debug(f"PARTY_MEMBER #{m_eid} \"{m_name}\" class={m_class} lvl={m_level}")
             return None
 
@@ -1656,7 +1675,19 @@ class EntityTracker:
                 if class_hid:
                     self.classes[eid] = class_hid
                 if level is not None:
+                    old_level = self._xp_player_level.get(eid)
                     self.levels[eid] = level
+                    self._xp_player_level[eid] = level
+                    # Level-up detected: learn XP-per-level from the transition
+                    cur_xp = self._xp_current.get(eid)
+                    if old_level is not None and level > old_level and cur_xp is not None:
+                        start = self._xp_level_start.get(eid)
+                        if start is not None:
+                            self._xp_level_needed[eid] = cur_xp - start
+                            _plog.debug(f"XP_LEVEL_LEARNED #{eid} level {old_level}->{level} needed={cur_xp - start:,}")
+                    # New level starts at current XP
+                    if cur_xp is not None:
+                        self._xp_level_start[eid] = cur_xp
                 self._backfill_player_info(eid, cls=class_hid, level=level)
                 _plog.debug(f"LEVEL_UPDATE #{eid} class={class_hid} level={level}")
                 return None
@@ -1664,8 +1695,25 @@ class EntityTracker:
             if etype == "UpdateExperience":
                 xp_total = event.get("experience", 0)
                 prev = self._xp_current.get(eid)
-                xp_gained = (xp_total - prev) if prev is not None else 0
                 self._xp_current[eid] = xp_total
+                # Seed level start on first XP event if not set
+                if eid not in self._xp_level_start:
+                    self._xp_level_start[eid] = 0  # XP value IS progress into level
+                # First event — just record baseline, don't log as a gain
+                if prev is None:
+                    _plog.debug(f"XP_BASELINE #{eid} total={xp_total:,} (first event, no delta)")
+                    return None
+                leveled_up = False
+                if xp_total < prev:
+                    # XP dropped — level-up detected (XP is per-level, resets)
+                    self._xp_level_needed[eid] = prev
+                    self._xp_level_start[eid] = 0
+                    leveled_up = True
+                    _plog.debug(f"XP_LEVELUP_DETECTED #{eid} old_cap={prev:,} new_xp={xp_total:,}")
+                xp_gained = xp_total - prev if not leveled_up else xp_total
+                # Compute percentage of level if we know XP-per-level
+                level_needed = self._xp_level_needed.get(eid)
+                pct = (xp_gained / level_needed * 100) if (level_needed and xp_gained > 0) else None
                 name = self.names.get(eid, f"Entity#{eid}")
                 xp_ev = {
                     "timestamp": time.time(),
@@ -1673,6 +1721,8 @@ class EntityTracker:
                     "name": name,
                     "xp_total": xp_total,
                     "xp_gained": xp_gained,
+                    "pct": pct,
+                    "leveled_up": leveled_up,
                 }
                 # Try to tag with the most recent encounter NPC that just died
                 last_kill = None
@@ -1683,7 +1733,7 @@ class EntityTracker:
                 if last_kill and (time.time() - last_kill.end_time) < 5.0:
                     xp_ev["npc_name"] = last_kill.npc_name
                 self._xp_events.append(xp_ev)
-                _plog.debug(f"XP_UPDATE #{eid} \"{name}\" total={xp_total:,} gained=+{xp_gained:,}")
+                _plog.debug(f"XP_UPDATE #{eid} \"{name}\" total={xp_total:,} gained=+{xp_gained:,} pct={pct} lvlup={leveled_up}")
                 return None
 
             if etype == "UpdateState":
@@ -3102,7 +3152,7 @@ class CombatApp(tk.Tk):
 
     def __init__(self):
         super().__init__()
-        self.title("ZekParser")
+        self.title(f"ZekParser {APP_VERSION}")
         self.geometry("425x300")
         self.configure(bg='black')
         self.minsize(350, 220)
@@ -3133,7 +3183,7 @@ class CombatApp(tk.Tk):
         pn = self._backend.player_name
         sn = self._backend.server_name
         if pn or sn:
-            title = "ZekParser"
+            title = f"ZekParser {APP_VERSION}"
             if pn:
                 title += f" \u2014 {pn}"
             if sn:
@@ -3241,29 +3291,18 @@ class CombatApp(tk.Tk):
         self._left_combo.pack(side=tk.LEFT, padx=4, pady=2)
         self._left_combo.bind('<<ComboboxSelected>>', self._on_left_view_change)
 
-        # Right side buttons
         self._pause_var = tk.BooleanVar(value=False)
-        self._pause_chk = tk.Checkbutton(
-            header_left, text="Pause", variable=self._pause_var,
-            bg=COLORS['bg'], fg=COLORS['fg'], selectcolor=COLORS['surface'],
-            activebackground=COLORS['bg'], activeforeground=COLORS['fg'],
-            font=('Segoe UI', 9), command=self._on_pause_toggle,
-        )
-        self._pause_chk.pack(side=tk.RIGHT, padx=4)
-
         self._chatlog_var = tk.BooleanVar(value=False)
-        self._chatlog_chk = tk.Checkbutton(
-            header_left, text="Text Log", variable=self._chatlog_var,
-            bg=COLORS['bg'], fg=COLORS['fg'], selectcolor=COLORS['surface'],
-            activebackground=COLORS['bg'], activeforeground=COLORS['fg'],
-            font=('Segoe UI', 9), command=self._toggle_chat_log,
-        )
-        self._chatlog_chk.pack(side=tk.RIGHT, padx=4)
 
         self._export_left_btn = ttk.Button(
             header_left, text="Export", style='Dark.TButton',
             command=self._export_left)
         self._export_left_btn.pack(side=tk.RIGHT, padx=4)
+
+        self._copy_left_btn = ttk.Button(
+            header_left, text="Copy", style='Dark.TButton',
+            command=self._copy_left)
+        self._copy_left_btn.pack(side=tk.RIGHT, padx=4)
 
         self._item_back_btn = ttk.Button(
             header_left, text="< Back", style='Dark.TButton',
@@ -3480,6 +3519,27 @@ class CombatApp(tk.Tk):
     # ------------------------------------------------------------------
     # Unified export — left panel
     # ------------------------------------------------------------------
+
+    def _copy_left(self):
+        """Copy text from the current left view's text widget to clipboard."""
+        v = self._left_view
+        if v == "feed":
+            widget = self._feed
+        elif v in ("items", "item_detail"):
+            widget = self._item_view
+        elif v == "triggers":
+            widget = self._trigger_view
+        elif v == "experience":
+            widget = self._xp_view
+        else:
+            return
+        text = widget.get("1.0", tk.END).rstrip()
+        if not text:
+            return
+        self.clipboard_clear()
+        self.clipboard_append(text)
+        self._copy_left_btn.configure(text="Copied!")
+        self.after(1500, lambda: self._copy_left_btn.configure(text="Copy"))
 
     def _export_left(self):
         """Route export to the correct method for the current left view."""
@@ -4102,25 +4162,14 @@ class CombatApp(tk.Tk):
         """Build fixed-width label for one overview player row (paste-friendly)."""
         pct = (pt['dealt'] / grand_total_dmg * 100) if grand_total_dmg > 0 else 0
         avg_dps = pt['dealt'] / pt['active_dur'] if pt['active_dur'] > 0 else 0
-        # Build class/level tag
-        p_parts = []
-        etype = pt.get('entity_type')
-        if etype is not None and etype != 0:
-            p_parts.append("PET")
-        if pt['cls']:
-            p_parts.append(_class_label(pt['cls'], abbreviate=True))
-        if pt['level'] is not None and pt['level'] > 0:
-            p_parts.append(str(pt['level']))
-        tag_str = ' '.join(p_parts)
         is_expanded = pname in self._overview_expanded
         arrow = "\u25BC" if is_expanded else "\u25B6"
-        # Fixed columns: arrow+rank(5) name(14) tag(10) damage(9) pct(8) dps(10)
-        col_name = pname[:14].ljust(14)
-        col_tag = tag_str[:10].ljust(10)
+        # Fixed columns: arrow+rank(5) name(14) damage(9) pct(8) dps(10)
+        col_name = pname[:16].ljust(16)
         col_dmg = f"{pt['dealt']:,}".rjust(9)
         col_pct = f"({pct:.1f}%)".rjust(8)
         col_dps = f"{avg_dps:,.1f}".rjust(8)
-        return f"{arrow} #{rank:<2} {col_name} {col_tag} {col_dmg} {col_pct} {col_dps} dps"
+        return f"{arrow} #{rank:<2} {col_name} {col_dmg} {col_pct} {col_dps} dps"
 
     @staticmethod
     def _build_overview_ability_line(ab_name, ab_dmg, ab_pct):
@@ -4158,7 +4207,7 @@ class CombatApp(tk.Tk):
         # If structure matches, do in-place text updates only (no flicker)
         new_structure = tuple(
             (pname, pname in self._overview_expanded,
-             tuple(sorted(pt['abilities'].keys())) if pname in self._overview_expanded else ())
+             tuple(sorted(pt['abilities'].items())) if pname in self._overview_expanded else ())
             for pname, pt in sorted_pt
         )
         old_structure = getattr(self, '_overview_structure', None)
@@ -4214,7 +4263,7 @@ class CombatApp(tk.Tk):
         self._meter.insert(tk.END, "\u2500" * _box_w + "\n", 'header_line')
         # Column header
         self._meter.insert(tk.END,
-            f"  {'#':<3} {'Name':<14} {'Class':<10} {'Damage':>9} {'Pct':>8} {'DPS':>8}\n", 'rank')
+            f"  {'#':<3} {'Name':<16} {'Damage':>9} {'Pct':>8} {'DPS':>8}\n", 'rank')
 
         # Top players sorted by damage — plain text with click tags
         for rank, (pname, pt) in enumerate(sorted_pt, 1):
@@ -4264,7 +4313,7 @@ class CombatApp(tk.Tk):
         lines.append(f" Session  x{grand_enc_count} enc  {dur_m}m {dur_s}s"
                      f"  |  Total: {grand_total_dmg:,}  DPS: {grand_dps:,.1f}")
         lines.append("\u2500" * _box_w)
-        lines.append(f"  {'#':<3} {'Name':<14} {'Class':<10} {'Damage':>9} {'Pct':>8} {'DPS':>8}")
+        lines.append(f"  {'#':<3} {'Name':<16} {'Damage':>9} {'Pct':>8} {'DPS':>8}")
 
         for rank, (pname, pt) in enumerate(sorted_pt, 1):
             label = self._build_overview_label(rank, pname, pt, grand_total_dmg)
@@ -4864,7 +4913,7 @@ class CombatApp(tk.Tk):
             if sn:
                 tag += f" | {sn}"
             self._player_label.configure(text=tag)
-            title = f"ZekParser \u2014 {tracker_name}"
+            title = f"ZekParser {APP_VERSION} \u2014 {tracker_name}"
             if sn:
                 title += f" [{sn}]"
             self.title(title)
@@ -5493,7 +5542,10 @@ class CombatApp(tk.Tk):
         if not xp_events:
             self._xp_view.insert(tk.END, "\n  No experience data yet.\n\n", 'help_text')
             self._xp_view.insert(tk.END, "  XP gains will appear here as\n", 'help_text')
-            self._xp_view.insert(tk.END, "  you defeat enemies.\n", 'help_text')
+            self._xp_view.insert(tk.END, "  you defeat enemies.\n\n", 'help_text')
+            self._xp_view.insert(tk.END, "  Note: XP tracking requires two\n", 'help_text')
+            self._xp_view.insert(tk.END, "  kills to start — the first kill\n", 'help_text')
+            self._xp_view.insert(tk.END, "  sets your baseline XP.\n", 'help_text')
             self._xp_view.configure(state=tk.DISABLED)
             return
 
@@ -5501,6 +5553,7 @@ class CombatApp(tk.Tk):
         total_gained = sum(e["xp_gained"] for e in xp_events if e["xp_gained"] > 0)
         num_gains = sum(1 for e in xp_events if e["xp_gained"] > 0)
         latest_total = xp_events[-1]["xp_total"] if xp_events else 0
+        latest_eid = xp_events[-1]["eid"] if xp_events else None
 
         # Session duration from first to last XP event
         if len(xp_events) >= 2:
@@ -5516,10 +5569,21 @@ class CombatApp(tk.Tk):
         self._xp_view.insert(tk.END, " Experience Tracker\n", 'header')
         self._xp_view.insert(tk.END, " " + "\u2500" * 36 + "\n", 'sep')
 
-        self._xp_view.insert(tk.END, "  Total XP:  ", 'summary_label')
-        self._xp_view.insert(tk.END, f"{latest_total:,}\n", 'summary_value')
+        # Level progress — XP value is progress into current level
+        if latest_eid is not None:
+            level = tracker.levels.get(latest_eid)
+            level_needed = tracker._xp_level_needed.get(latest_eid)
+            if level is not None:
+                self._xp_view.insert(tk.END, "  Level:     ", 'summary_label')
+                self._xp_view.insert(tk.END, f"{level}", 'summary_value')
+                if level_needed:
+                    level_pct = latest_total / level_needed * 100
+                    self._xp_view.insert(tk.END, f"  ({latest_total:,} / {level_needed:,}  {level_pct:.1f}%)", 'xp_total')
+                else:
+                    self._xp_view.insert(tk.END, f"  ({latest_total:,} XP into level)", 'xp_total')
+                self._xp_view.insert(tk.END, "\n")
 
-        self._xp_view.insert(tk.END, "  Gained:    ", 'summary_label')
+        self._xp_view.insert(tk.END, "  Total:     ", 'summary_label')
         self._xp_view.insert(tk.END, f"+{total_gained:,}", 'summary_value')
         self._xp_view.insert(tk.END, f"  ({num_gains} kills)\n", 'xp_total')
 
@@ -5533,20 +5597,22 @@ class CombatApp(tk.Tk):
         for ev in reversed(xp_events):
             ts = time.strftime("%H:%M:%S", time.localtime(ev["timestamp"]))
             gained = ev["xp_gained"]
-            name = ev["name"]
             npc = ev.get("npc_name", "")
+            pct = ev.get("pct")
 
-            if gained > 0:
-                self._xp_view.insert(tk.END, f"  {ts}  ", 'xp_total')
+            self._xp_view.insert(tk.END, f"  {ts}  ", 'xp_total')
+            if ev.get("leveled_up"):
+                self._xp_view.insert(tk.END, "LEVEL UP!", 'header')
+                if gained > 0:
+                    self._xp_view.insert(tk.END, f"  +{gained:,} XP", 'xp_gain')
+            elif gained > 0:
                 self._xp_view.insert(tk.END, f"+{gained:,} XP", 'xp_gain')
-                if npc:
-                    self._xp_view.insert(tk.END, f"  \u2190 ", 'xp_total')
-                    self._xp_view.insert(tk.END, f"{npc}", 'npc_name')
-                self._xp_view.insert(tk.END, "\n")
-            else:
-                # First event (no delta yet) — just show current total
-                self._xp_view.insert(tk.END, f"  {ts}  ", 'xp_total')
-                self._xp_view.insert(tk.END, f"Session start: {ev['xp_total']:,} XP\n", 'xp_total')
+                if pct is not None:
+                    self._xp_view.insert(tk.END, f" ({pct:.2f}%)", 'xp_total')
+            if npc:
+                self._xp_view.insert(tk.END, f"  \u2190 ", 'xp_total')
+                self._xp_view.insert(tk.END, f"{npc}", 'npc_name')
+            self._xp_view.insert(tk.END, "\n")
 
         self._xp_view.configure(state=tk.DISABLED)
 
@@ -5603,7 +5669,7 @@ def _show_error(title, msg):
 def main():
     if not is_admin():
         _show_error("ZekParser", "This tool requires Administrator privileges.\n\n"
-                     "Right-click ZekParser.exe and select 'Run as administrator'.")
+                     "Right-click ZekParser and select 'Run as administrator'.")
         sys.exit(1)
 
     try:

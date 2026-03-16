@@ -1,0 +1,9 @@
+09:04:50 [DEBUG] MSG_UNKNOWN_NEW 0x0210 dir=IN len=27 body=dc 08 00 00 3d 68 21 00 00 af d7 8d c3 ea a6 f1 42 73 54 bb 44 4c 5d 29 3e a0 59
+09:04:50 [DEBUG] MSG_UNKNOWN_NEW 0x0220 dir=OUT len=4 body=fe 09 00 00
+09:04:50 [DEBUG] MSG_UNKNOWN_NEW 0x0010 dir=OUT len=43 body=00 00 00 00 00 00 00 00 00 00 00 00 6f 41 88 44 07 a2 17 43 73 1f ba 44 86 fc 1c 43 00 00 00 00
+09:04:51 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+09:04:51 [DEBUG]   PARSED type=UpdateMana eid=3887 target=None
+09:04:51 [DEBUG] OVERVIEW_RENDER enc=0 total_dmg=0 dur=0.0s entries=0 local_eid=None player_name="" pet_states={} entity_types_sample={}
+09:04:51 [DEBUG] MSG_UNKNOWN_NEW 0x001E dir=IN len=8 body=ea 42 88 06 00 00 00 00
+09:04:51 [DEBUG] MSG_UNKNOWN_NEW 0x001F dir=OUT len=8 body=ea 42 88 06 00 00 00 00
+09:04:51 [DEBUG] MSG_UNKNOWN_NEW 0x0221 dir=OUT len=12 body=02 00 00 00 85 0a 00 00 98 0b 00 00

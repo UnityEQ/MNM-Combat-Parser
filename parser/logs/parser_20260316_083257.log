@@ -1,0 +1,726 @@
+08:32:57 [DEBUG] MSG_UNKNOWN_NEW 0x0210 dir=IN len=41 body=e3 09 00 00 31 d3 20 00 01 ae 5a 33 c3 0e a4 e7 42 77 71 ab 44 b3 50 29 3e a0 59 5d 12 33 c3 66
+08:32:57 [DEBUG] MSG_UNKNOWN_NEW 0x0010 dir=OUT len=43 body=00 00 00 00 00 00 00 00 00 00 00 00 1a dd 90 c3 df aa f1 42 d9 88 bf 44 68 e6 4f 43 00 00 00 00
+08:32:58 [DEBUG] MSG_UNKNOWN_NEW 0x0220 dir=OUT len=4 body=28 0a 00 00
+08:32:58 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:32:58 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+08:32:58 [DEBUG] HP_INIT #3846(#3846) HP:1173/1254 (no previous HP, no delta)
+08:32:58 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=57
+08:32:58 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+08:32:58 [DEBUG] CHATCOMBAT text="You try to attack, but you are too far away."
+08:32:58 [DEBUG] OVERVIEW_RENDER enc=0 total_dmg=0 dur=0.0s entries=0 local_eid=None player_name="" pet_states={} entity_types_sample={}
+08:32:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:32:59 [DEBUG]   PARSED type=UpdateHealth eid=2704 target=None
+08:32:59 [DEBUG] HP_INIT #2704(#2704) HP:10/100 (no previous HP, no delta)
+08:33:00 [DEBUG] MSG_UNKNOWN_NEW 0x001E dir=IN len=8 body=c7 19 6b 06 00 00 00 00
+08:33:00 [DEBUG] MSG_UNKNOWN_NEW 0x001F dir=OUT len=8 body=c7 19 6b 06 00 00 00 00
+08:33:00 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=57
+08:33:00 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+08:33:00 [DEBUG] CHATCOMBAT text="You try to attack, but you are too far away."
+08:33:00 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=349
+08:33:00 [DEBUG]   PARSED type=SpawnEntity eid=2998 target=None
+08:33:00 [DEBUG] SPAWN #2998 type=1 "a hill giant" HP:1000/1000 class=sgn lvl=0
+08:33:01 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:33:01 [DEBUG]   PARSED type=UpdateHealth eid=2704 target=None
+08:33:01 [DEBUG] DMG  #2704(#2704) type=None 10->8/100 amt=2 attacker=None(None)
+08:33:01 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #2704 amt=2
+08:33:01 [DEBUG] MSG_UNKNOWN_NEW 0x644B dir=IN len=23 body=06 0f 00 00 34 06 00 73 6c 61 73 68 90 0a 00 00 2a 05 00 6f 75 63 68
+08:33:01 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=62
+08:33:01 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+08:33:01 [DEBUG] CHATCOMBAT text="You slash a grizzly bear for 11 points of damage."
+08:33:01 [DEBUG]   CHATCOMBAT_DMG "a grizzly bear"(#2704) +11dmg by "None"(unresolved) text_total=11
+08:33:03 [DEBUG] MSG_UNKNOWN_NEW 0x0059 dir=IN len=31 body=01 0e 00 72 65 73 74 6f 72 65 5f 73 6d 69 74 65 01 0c 00 70 61 6c 5f 73 70 65 63 69 61 6c 00
+08:33:04 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+08:33:04 [DEBUG]   PARSED type=CastAbility eid=None target=2704
+08:33:04 [DEBUG] CASTABILITY_OUT gem=2 target=#2704
+08:33:04 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+08:33:04 [DEBUG]   PARSED type=CastAbility eid=None target=2704
+08:33:04 [DEBUG] CASTABILITY_OUT gem=3 target=#2704
+08:33:04 [DEBUG] MSG_UNKNOWN_NEW 0x0058 dir=IN len=40 body=01 00 00 00 05 00 6b 69 63 6b 10 27 00 00 00 00 00 00 01 00 00 00 05 00 6b 69 63 6b 10 27 00 00
+08:33:04 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=57
+08:33:04 [DEBUG]   PARSED type=EndCasting eid=3846 target=2704
+08:33:04 [DEBUG] ENDCAST caster=#3846 target=#2704 text="You kick a grizzly bear.#"
+08:33:04 [DEBUG]   LOCAL_PLAYER eid=#3846 fallback name="YOU"
+08:33:04 [DEBUG]   LOCAL_PLAYER eid=#3846 name="YOU"
+08:33:04 [DEBUG]   FLUSH_PENDING "a grizzly bear"(#2704) +11dmg by YOU(#3846)
+08:33:04 [INFO ]   LOCAL_MERGE merged '_local' sentinel entries into eid=#3846
+08:33:04 [DEBUG]   -> DMG_LOCAL_MELEE caster=#3846 -> victim=a grizzly bear(#2704)
+08:33:04 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=41
+08:33:04 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+08:33:04 [DEBUG] CHATCOMBAT text="Target has nothing to purge."
+08:33:04 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=115
+08:33:04 [DEBUG]   PARSED type=EndCasting eid=3846 target=2704
+08:33:04 [DEBUG] ENDCAST caster=#3846 target=#2704 text="Your Restorative Smite hits a grizzly bear for 50 points of damage.#"
+08:33:04 [DEBUG]   -> DMG_LOCAL_SPELL caster=#3846 -> victim=a grizzly bear(#2704)
+08:33:04 [DEBUG]   TEXT_DMG "a grizzly bear"(#2704) +50dmg by YOU(#3846) text_total=61
+08:33:04 [DEBUG] MSG_UNKNOWN_NEW 0x001C dir=IN len=5 body=06 0f 00 00 01
+08:33:04 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:33:04 [DEBUG]   PARSED type=UpdateHealth eid=2704 target=None
+08:33:04 [DEBUG] DMG  a grizzly bear(#2704) type=None 8->7/100 amt=1 attacker=YOU(3846)
+08:33:04 [DEBUG]   ENC+ "a grizzly bear"(#2704) type=None +1dmg by YOU(3846) total=1
+08:33:04 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:33:04 [DEBUG]   PARSED type=UpdateHealth eid=2704 target=None
+08:33:04 [DEBUG] DMG  a grizzly bear(#2704) type=None 7->6/100 amt=1 attacker=YOU(3846)
+08:33:04 [DEBUG]   ENC+ "a grizzly bear"(#2704) type=None +1dmg by YOU(3846) total=2
+08:33:04 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:33:04 [DEBUG]   PARSED type=UpdateHealth eid=2704 target=None
+08:33:04 [DEBUG] DMG  a grizzly bear(#2704) type=None 6->2/100 amt=4 attacker=YOU(3846)
+08:33:04 [DEBUG]   ENC+ "a grizzly bear"(#2704) type=None +4dmg by YOU(3846) total=6
+08:33:04 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=60
+08:33:04 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+08:33:04 [DEBUG] CHATCOMBAT text="Your Restorative Smite heals you for 21 Health."
+08:33:04 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=38
+08:33:04 [DEBUG]   PARSED type=EndCasting eid=3846 target=3846
+08:33:04 [DEBUG] ENDCAST caster=#3846 target=#3846 text=""
+08:33:04 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:33:04 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+08:33:04 [DEBUG] HEAL YOU(#3846) 1173->1194/1254 delta=+21 last_attacker=None(None)
+08:33:04 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:33:04 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+08:33:04 [DEBUG] HEAL YOU(#3846) 1194->1202/1254 delta=+8 last_attacker=None(None)
+08:33:04 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=61 dur=3.7s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0}
+08:33:04 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=61 dps=16.3 abilities=[Restorative Smite=50, Melee=11]
+08:33:05 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:33:05 [DEBUG]   PARSED type=UpdateHealth eid=2704 target=None
+08:33:05 [DEBUG] HEAL a grizzly bear(#2704) 2->3/100 delta=+1 last_attacker=YOU(3846)
+08:33:05 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=61 dur=4.8s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0}
+08:33:05 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=61 dps=12.8 abilities=[Restorative Smite=50, Melee=11]
+08:33:05 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:33:05 [DEBUG]   PARSED type=UpdateHealth eid=2704 target=None
+08:33:05 [DEBUG] DMG  a grizzly bear(#2704) type=None 3->0/100 amt=3 attacker=YOU(3846)
+08:33:05 [DEBUG]   ENC+ "a grizzly bear"(#2704) type=None +3dmg by YOU(3846) total=9
+08:33:05 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=62
+08:33:05 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+08:33:05 [DEBUG] CHATCOMBAT text="You slash a grizzly bear for 49 points of damage."
+08:33:05 [DEBUG]   CHATCOMBAT_DMG "a grizzly bear"(#2704) +49dmg by YOU(#3846) text_total=110
+08:33:05 [DEBUG] MSG_IN 0x0013 Die dir=IN body_len=10
+08:33:05 [DEBUG]   PARSED type=Die eid=2704 target=None
+08:33:05 [DEBUG] DIE #2704 "a grizzly bear" hp_dmg=9 text_dmg=110 best=110 players=[3846]
+08:33:05 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=39
+08:33:05 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+08:33:05 [DEBUG] CHATCOMBAT text="You gain party experience!W"
+08:33:05 [DEBUG] MSG_UNKNOWN_NEW 0x1011 dir=IN len=8 body=90 0a 00 00 00 00 00 00
+08:33:05 [DEBUG] MSG_IN 0x0024 Unknown_0x0024 dir=IN body_len=8
+08:33:05 [DEBUG]   PARSED type=UpdateExperience eid=3846 target=None
+08:33:05 [DEBUG] XP_UPDATE #3846 "YOU" total=5,973 gained=+0 pct=None
+08:33:05 [DEBUG] MSG_IN 0x0012 Autoattack dir=OUT body_len=1
+08:33:05 [DEBUG]   PARSED type=Autoattack eid=None target=None
+08:33:05 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=OUT body_len=4
+08:33:05 [DEBUG]   PARSED type=ChangeTarget eid=None target=0
+08:33:06 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=110 dur=4.9s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0}
+08:33:06 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=110 dps=22.4 abilities=[Melee=60, Restorative Smite=50]
+08:33:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+08:33:07 [DEBUG]   PARSED type=SpawnEntity eid=2732 target=None
+08:33:07 [DEBUG] SPAWN #2732 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+08:33:07 [DEBUG] MSG_UNKNOWN_NEW 0x0005 dir=IN len=23 body=8c 04 f2 04 10 00 00 00 03 00 00 00 60 02 00 00 01 00 00 00 02 02 02
+08:33:07 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 2, 'type0': 1} names=4
+08:33:08 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:33:08 [DEBUG]   PARSED type=SpawnEntity eid=2616 target=None
+08:33:08 [DEBUG] SPAWN #2616 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:33:10 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:33:10 [DEBUG]   PARSED type=SpawnEntity eid=2724 target=None
+08:33:10 [DEBUG] SPAWN #2724 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:33:10 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:33:10 [DEBUG]   PARSED type=SpawnEntity eid=2734 target=None
+08:33:10 [DEBUG] SPAWN #2734 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:33:10 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:33:10 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+08:33:10 [DEBUG] HEAL YOU(#3846) 1202->1210/1254 delta=+8 last_attacker=None(None)
+08:33:11 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:33:11 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+08:33:16 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:33:16 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+08:33:16 [DEBUG] HEAL YOU(#3846) 1210->1218/1254 delta=+8 last_attacker=None(None)
+08:33:17 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 5, 'type0': 1} names=7
+08:33:22 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:33:22 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+08:33:22 [DEBUG] HEAL YOU(#3846) 1218->1226/1254 delta=+8 last_attacker=None(None)
+08:33:23 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+08:33:23 [DEBUG]   PARSED type=SpawnEntity eid=2267 target=None
+08:33:23 [DEBUG] SPAWN #2267 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+08:33:23 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+08:33:23 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+08:33:23 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=50
+08:33:23 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+08:33:23 [DEBUG] CHATCOMBAT text="Your spiritual connection is severed.D"
+08:33:25 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:33:25 [DEBUG]   PARSED type=SpawnEntity eid=2682 target=None
+08:33:25 [DEBUG] SPAWN #2682 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:33:27 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+08:33:27 [DEBUG]   PARSED type=SpawnEntity eid=2730 target=None
+08:33:27 [DEBUG] SPAWN #2730 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+08:33:28 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 8, 'type0': 1} names=10
+08:33:28 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:33:28 [DEBUG]   PARSED type=SpawnEntity eid=2447 target=None
+08:33:28 [DEBUG] SPAWN #2447 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:33:28 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:33:28 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+08:33:28 [DEBUG] HEAL YOU(#3846) 1226->1234/1254 delta=+8 last_attacker=None(None)
+08:33:34 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+08:33:34 [DEBUG]   PARSED type=SpawnEntity eid=2693 target=None
+08:33:34 [DEBUG] SPAWN #2693 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+08:33:34 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:33:34 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+08:33:34 [DEBUG] HEAL YOU(#3846) 1234->1242/1254 delta=+8 last_attacker=None(None)
+08:33:35 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=349
+08:33:35 [DEBUG]   PARSED type=SpawnEntity eid=2998 target=None
+08:33:36 [DEBUG] SPAWN #2998 type=1 "a hill giant" HP:1000/1000 class=sgn lvl=0
+08:33:38 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 10, 'type0': 1} names=12
+08:33:41 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:33:41 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+08:33:41 [DEBUG] HEAL YOU(#3846) 1242->1250/1254 delta=+8 last_attacker=None(None)
+08:33:42 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+08:33:42 [DEBUG]   PARSED type=DespawnEntity eid=3752 target=None
+08:33:42 [DEBUG] DESPAWN #3752
+08:33:44 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+08:33:44 [DEBUG]   PARSED type=SpawnEntity eid=2559 target=None
+08:33:44 [DEBUG] SPAWN #2559 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+08:33:45 [DEBUG] MSG_UNKNOWN_NEW 0x0228 dir=IN len=9 body=06 0f 00 00 15 39 00 00 00
+08:33:45 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=40
+08:33:45 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+08:33:45 [DEBUG] CHATCOMBAT text="Your divine strength wanes.D"
+08:33:45 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+08:33:45 [DEBUG]   PARSED type=RemoveBuffIcon eid=3846 target=None
+08:33:46 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:33:46 [DEBUG]   PARSED type=SpawnEntity eid=2724 target=None
+08:33:46 [DEBUG] SPAWN #2724 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:33:47 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:33:47 [DEBUG]   PARSED type=UpdateHealth eid=3846 target=None
+08:33:47 [DEBUG] HEAL YOU(#3846) 1250->1254/1254 delta=+4 last_attacker=None(None)
+08:33:48 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 11, 'type0': 1} names=13
+08:33:50 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:33:50 [DEBUG]   PARSED type=SpawnEntity eid=2494 target=None
+08:33:50 [DEBUG] SPAWN #2494 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=207
+08:33:54 [DEBUG]   PARSED type=SpawnEntity eid=2693 target=None
+08:33:54 [DEBUG] SPAWN #2693 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+08:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+08:33:56 [DEBUG]   PARSED type=SpawnEntity eid=2732 target=None
+08:33:56 [DEBUG] SPAWN #2732 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+08:33:58 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 12, 'type0': 1} names=14
+08:34:00 [DEBUG] MSG_UNKNOWN_NEW 0x0015 dir=OUT len=5 body=06 0f 00 00 01
+08:34:04 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:34:04 [DEBUG]   PARSED type=SpawnEntity eid=2616 target=None
+08:34:04 [DEBUG] SPAWN #2616 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:34:04 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:34:04 [DEBUG]   PARSED type=SpawnEntity eid=2682 target=None
+08:34:04 [DEBUG] SPAWN #2682 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:34:08 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 12, 'type0': 1} names=14
+08:34:14 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:34:14 [DEBUG]   PARSED type=SpawnEntity eid=2447 target=None
+08:34:14 [DEBUG] SPAWN #2447 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:34:15 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:34:15 [DEBUG]   PARSED type=SpawnEntity eid=2734 target=None
+08:34:15 [DEBUG] SPAWN #2734 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:34:17 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=110 dur=4.9s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0, 2732: 1, 2616: 1, 2724: 1, 2734: 1, 2267: 1, 2682: 1, 2730: 1, 2447: 1, 2693: 1, 2559: 1, 2494: 1}
+08:34:17 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=110 dps=22.4 abilities=[Melee=60, Restorative Smite=50]
+08:34:18 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 12, 'type0': 1} names=14
+08:34:18 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=110 dur=4.9s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0, 2732: 1, 2616: 1, 2724: 1, 2734: 1, 2267: 1, 2682: 1, 2730: 1, 2447: 1, 2693: 1, 2559: 1, 2494: 1}
+08:34:18 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=110 dps=22.4 abilities=[Melee=60, Restorative Smite=50]
+08:34:18 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:34:18 [DEBUG]   PARSED type=SpawnEntity eid=2724 target=None
+08:34:18 [DEBUG] SPAWN #2724 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:34:19 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=110 dur=4.9s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0, 2732: 1, 2616: 1, 2724: 1, 2734: 1, 2267: 1, 2682: 1, 2730: 1, 2447: 1, 2693: 1, 2559: 1, 2494: 1}
+08:34:19 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=110 dps=22.4 abilities=[Melee=60, Restorative Smite=50]
+08:34:19 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=110 dur=4.9s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0, 2732: 1, 2616: 1, 2724: 1, 2734: 1, 2267: 1, 2682: 1, 2730: 1, 2447: 1, 2693: 1, 2559: 1, 2494: 1}
+08:34:19 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=110 dps=22.4 abilities=[Melee=60, Restorative Smite=50]
+08:34:20 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=110 dur=4.9s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0, 2732: 1, 2616: 1, 2724: 1, 2734: 1, 2267: 1, 2682: 1, 2730: 1, 2447: 1, 2693: 1, 2559: 1, 2494: 1}
+08:34:20 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=110 dps=22.4 abilities=[Melee=60, Restorative Smite=50]
+08:34:21 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=110 dur=4.9s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0, 2732: 1, 2616: 1, 2724: 1, 2734: 1, 2267: 1, 2682: 1, 2730: 1, 2447: 1, 2693: 1, 2559: 1, 2494: 1}
+08:34:21 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=110 dps=22.4 abilities=[Melee=60, Restorative Smite=50]
+08:34:21 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=110 dur=4.9s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0, 2732: 1, 2616: 1, 2724: 1, 2734: 1, 2267: 1, 2682: 1, 2730: 1, 2447: 1, 2693: 1, 2559: 1, 2494: 1}
+08:34:21 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=110 dps=22.4 abilities=[Melee=60, Restorative Smite=50]
+08:34:22 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=110 dur=4.9s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0, 2732: 1, 2616: 1, 2724: 1, 2734: 1, 2267: 1, 2682: 1, 2730: 1, 2447: 1, 2693: 1, 2559: 1, 2494: 1}
+08:34:22 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=110 dps=22.4 abilities=[Melee=60, Restorative Smite=50]
+08:34:22 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=110 dur=4.9s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0, 2732: 1, 2616: 1, 2724: 1, 2734: 1, 2267: 1, 2682: 1, 2730: 1, 2447: 1, 2693: 1, 2559: 1, 2494: 1}
+08:34:22 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=110 dps=22.4 abilities=[Melee=60, Restorative Smite=50]
+08:34:23 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=110 dur=4.9s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0, 2732: 1, 2616: 1, 2724: 1, 2734: 1, 2267: 1, 2682: 1, 2730: 1, 2447: 1, 2693: 1, 2559: 1, 2494: 1}
+08:34:23 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=110 dps=22.4 abilities=[Melee=60, Restorative Smite=50]
+08:34:23 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=110 dur=4.9s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0, 2732: 1, 2616: 1, 2724: 1, 2734: 1, 2267: 1, 2682: 1, 2730: 1, 2447: 1, 2693: 1, 2559: 1, 2494: 1}
+08:34:23 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=110 dps=22.4 abilities=[Melee=60, Restorative Smite=50]
+08:34:24 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+08:34:24 [DEBUG]   PARSED type=SpawnEntity eid=2267 target=None
+08:34:24 [DEBUG] SPAWN #2267 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+08:34:26 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+08:34:26 [DEBUG]   PARSED type=DespawnEntity eid=3743 target=None
+08:34:26 [DEBUG] DESPAWN #3743
+08:34:28 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 12, 'type0': 1} names=14
+08:34:30 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:34:30 [DEBUG]   PARSED type=SpawnEntity eid=2616 target=None
+08:34:30 [DEBUG] SPAWN #2616 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:34:32 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+08:34:32 [DEBUG]   PARSED type=SpawnEntity eid=2732 target=None
+08:34:32 [DEBUG] SPAWN #2732 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+08:34:35 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+08:34:35 [DEBUG]   PARSED type=SpawnEntity eid=2559 target=None
+08:34:35 [DEBUG] SPAWN #2559 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+08:34:36 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:34:36 [DEBUG]   PARSED type=SpawnEntity eid=2447 target=None
+08:34:36 [DEBUG] SPAWN #2447 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:34:38 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 12, 'type0': 1} names=14
+08:34:41 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=110 dur=4.9s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0, 2732: 1, 2616: 1, 2724: 1, 2734: 1, 2267: 1, 2682: 1, 2730: 1, 2447: 1, 2693: 1, 2559: 1, 2494: 1}
+08:34:41 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=110 dps=22.4 abilities=[Melee=60, Restorative Smite=50]
+08:34:41 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=110 dur=4.9s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0, 2732: 1, 2616: 1, 2724: 1, 2734: 1, 2267: 1, 2682: 1, 2730: 1, 2447: 1, 2693: 1, 2559: 1, 2494: 1}
+08:34:41 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=110 dps=22.4 abilities=[Melee=60, Restorative Smite=50]
+08:34:43 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=110 dur=4.9s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0, 2732: 1, 2616: 1, 2724: 1, 2734: 1, 2267: 1, 2682: 1, 2730: 1, 2447: 1, 2693: 1, 2559: 1, 2494: 1}
+08:34:43 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=110 dps=22.4 abilities=[Melee=60, Restorative Smite=50]
+08:34:43 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=110 dur=4.9s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0, 2732: 1, 2616: 1, 2724: 1, 2734: 1, 2267: 1, 2682: 1, 2730: 1, 2447: 1, 2693: 1, 2559: 1, 2494: 1}
+08:34:43 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=110 dps=22.4 abilities=[Melee=60, Restorative Smite=50]
+08:34:45 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:34:45 [DEBUG]   PARSED type=SpawnEntity eid=2494 target=None
+08:34:45 [DEBUG] SPAWN #2494 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:34:47 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:34:47 [DEBUG]   PARSED type=SpawnEntity eid=2734 target=None
+08:34:47 [DEBUG] SPAWN #2734 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:34:48 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 12, 'type0': 1} names=14
+08:34:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:34:54 [DEBUG]   PARSED type=SpawnEntity eid=2968 target=None
+08:34:54 [DEBUG] SPAWN #2968 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:34:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:34:57 [DEBUG]   PARSED type=SpawnEntity eid=2600 target=None
+08:34:57 [DEBUG] SPAWN #2600 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:34:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+08:34:57 [DEBUG]   PARSED type=SpawnEntity eid=2730 target=None
+08:34:57 [DEBUG] SPAWN #2730 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+08:34:58 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=62
+08:34:58 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+08:34:58 [DEBUG] CHATCOMBAT text="Jorm tells the guild, "mornin folks, 20 monk lfg""
+08:34:58 [DEBUG] GUI_STATE view=grand_overview encounters=1 entity_types={'type1': 14, 'type0': 1} names=16
+08:35:04 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=110 dur=4.9s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0, 2732: 1, 2616: 1, 2724: 1, 2734: 1, 2267: 1, 2682: 1, 2730: 1, 2447: 1, 2693: 1, 2559: 1, 2494: 1, 2968: 1, 2600: 1}
+08:35:04 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=110 dps=22.4 abilities=[Melee=60, Restorative Smite=50]
+08:35:04 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=110 dur=4.9s entries=1 local_eid=3846 player_name="YOU" pet_states={} entity_types_sample={2998: 1, 3846: 0, 2732: 1, 2616: 1, 2724: 1, 2734: 1, 2267: 1, 2682: 1, 2730: 1, 2447: 1, 2693: 1, 2559: 1, 2494: 1, 2968: 1, 2600: 1}
+08:35:04 [DEBUG]   OVERVIEW_ROW #1 "YOU" type=player cls= lvl=None dealt=110 dps=22.4 abilities=[Melee=60, Restorative Smite=50]
+08:35:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:35:07 [DEBUG]   PARSED type=SpawnEntity eid=2447 target=None
+08:35:07 [DEBUG] SPAWN #2447 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:35:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:35:07 [DEBUG]   PARSED type=SpawnEntity eid=2724 target=None
+08:35:07 [DEBUG] SPAWN #2724 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:35:08 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:35:08 [DEBUG]   PARSED type=SpawnEntity eid=2724 target=None
+08:35:08 [DEBUG] SPAWN #2724 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:35:08 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 14, 'type0': 1} names=16
+08:35:17 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:35:17 [DEBUG]   PARSED type=SpawnEntity eid=2447 target=None
+08:35:17 [DEBUG] SPAWN #2447 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:35:18 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 14, 'type0': 1} names=16
+08:35:22 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+08:35:22 [DEBUG]   PARSED type=SpawnEntity eid=2559 target=None
+08:35:22 [DEBUG] SPAWN #2559 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+08:35:23 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:35:23 [DEBUG]   PARSED type=SpawnEntity eid=2724 target=None
+08:35:23 [DEBUG] SPAWN #2724 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:35:27 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=151
+08:35:27 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+08:35:27 [DEBUG] CHATCOMBAT text="Rainbow tells the party, "<link="item|kpb_cave_poacher_feet_reward"><color=green"
+08:35:28 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 14, 'type0': 1} names=16
+08:35:31 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:35:31 [DEBUG]   PARSED type=SpawnEntity eid=2682 target=None
+08:35:31 [DEBUG] SPAWN #2682 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:35:38 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 14, 'type0': 1} names=16
+08:35:43 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:35:43 [DEBUG]   PARSED type=SpawnEntity eid=2616 target=None
+08:35:43 [DEBUG] SPAWN #2616 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:35:48 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+08:35:48 [DEBUG]   PARSED type=DespawnEntity eid=3772 target=None
+08:35:48 [DEBUG] DESPAWN #3772
+08:35:48 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 14, 'type0': 1} names=16
+08:35:59 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 14, 'type0': 1} names=16
+08:36:09 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 14, 'type0': 1} names=16
+08:36:11 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+08:36:11 [DEBUG]   PARSED type=SpawnEntity eid=2559 target=None
+08:36:11 [DEBUG] SPAWN #2559 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+08:36:19 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 14, 'type0': 1} names=16
+08:36:24 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=349
+08:36:24 [DEBUG]   PARSED type=SpawnEntity eid=2998 target=None
+08:36:24 [DEBUG] SPAWN #2998 type=1 "a hill giant" HP:1000/1000 class=sgn lvl=0
+08:36:24 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:36:24 [DEBUG]   PARSED type=SpawnEntity eid=2232 target=None
+08:36:24 [DEBUG] SPAWN #2232 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:36:24 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:36:24 [DEBUG]   PARSED type=SpawnEntity eid=2177 target=None
+08:36:24 [DEBUG] SPAWN #2177 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:36:24 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:36:24 [DEBUG]   PARSED type=SpawnEntity eid=2616 target=None
+08:36:24 [DEBUG] SPAWN #2616 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:36:24 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:36:24 [DEBUG]   PARSED type=SpawnEntity eid=2086 target=None
+08:36:24 [DEBUG] SPAWN #2086 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:36:24 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:36:24 [DEBUG]   PARSED type=SpawnEntity eid=2099 target=None
+08:36:24 [DEBUG] SPAWN #2099 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:36:24 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=168
+08:36:24 [DEBUG]   PARSED type=SpawnEntity eid=2211 target=None
+08:36:24 [DEBUG] SPAWN #2211 type=4 "Nomad's Grace" HP:None/None class=None lvl=None
+08:36:24 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=162
+08:36:24 [DEBUG]   PARSED type=SpawnEntity eid=2219 target=None
+08:36:24 [DEBUG] SPAWN #2219 type=4 "Ethtongue" HP:None/None class=None lvl=None
+08:36:24 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:36:24 [DEBUG]   PARSED type=SpawnEntity eid=2600 target=None
+08:36:24 [DEBUG] SPAWN #2600 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:36:24 [DEBUG] MSG_UNKNOWN_NEW 0x0045 dir=OUT len=3 body=00 00 00
+08:36:24 [DEBUG] MSG_UNKNOWN_NEW 0x0046 dir=IN len=241 body=01 00 03 00 00 00 e7 03 00 00 a0 0e 00 00 0d 00 46 69 72 73 74 65 64 69 74 69 6f 6e 0a 00 43 68
+08:36:29 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 14, 'type0': 1, 'type4': 6} names=22
+08:36:33 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=349
+08:36:33 [DEBUG]   PARSED type=SpawnEntity eid=2998 target=None
+08:36:33 [DEBUG] SPAWN #2998 type=1 "a hill giant" HP:1000/1000 class=sgn lvl=0
+08:36:33 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:36:33 [DEBUG]   PARSED type=SpawnEntity eid=2232 target=None
+08:36:33 [DEBUG] SPAWN #2232 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:36:33 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:36:33 [DEBUG]   PARSED type=SpawnEntity eid=2177 target=None
+08:36:33 [DEBUG] SPAWN #2177 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:36:33 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:36:33 [DEBUG]   PARSED type=SpawnEntity eid=2616 target=None
+08:36:33 [DEBUG] SPAWN #2616 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:36:33 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:36:33 [DEBUG]   PARSED type=SpawnEntity eid=2086 target=None
+08:36:33 [DEBUG] SPAWN #2086 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:36:33 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:36:33 [DEBUG]   PARSED type=SpawnEntity eid=2099 target=None
+08:36:33 [DEBUG] SPAWN #2099 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:36:33 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:36:33 [DEBUG]   PARSED type=SpawnEntity eid=2600 target=None
+08:36:33 [DEBUG] SPAWN #2600 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:36:33 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:36:33 [DEBUG]   PARSED type=SpawnEntity eid=2630 target=None
+08:36:33 [DEBUG] SPAWN #2630 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:36:33 [DEBUG] MSG_UNKNOWN_NEW 0x0016 dir=OUT len=24 body=bd f6 7c 04 9a 3b da 24 00 00 00 00 00 00 20 41 00 00 00 00 00 00 00 00
+08:36:33 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+08:36:33 [DEBUG]   PARSED type=UpdateEndurance eid=3846 target=None
+08:36:37 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:36:37 [DEBUG]   PARSED type=SpawnEntity eid=2092 target=None
+08:36:37 [DEBUG] SPAWN #2092 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:36:37 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=207
+08:36:37 [DEBUG]   PARSED type=SpawnEntity eid=2730 target=None
+08:36:37 [DEBUG] SPAWN #2730 type=1 "a grizzly bear" HP:1000/1000 class=bbr lvl=0
+08:36:37 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=162
+08:36:37 [DEBUG]   PARSED type=SpawnEntity eid=2159 target=None
+08:36:37 [DEBUG] SPAWN #2159 type=4 "Ethtongue" HP:None/None class=None lvl=None
+08:36:37 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:36:37 [DEBUG]   PARSED type=SpawnEntity eid=2202 target=None
+08:36:37 [DEBUG] SPAWN #2202 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:36:37 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=349
+08:36:37 [DEBUG]   PARSED type=SpawnEntity eid=2998 target=None
+08:36:37 [DEBUG] SPAWN #2998 type=1 "a hill giant" HP:1000/1000 class=sgn lvl=0
+08:36:37 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:36:37 [DEBUG]   PARSED type=SpawnEntity eid=2232 target=None
+08:36:37 [DEBUG] SPAWN #2232 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:36:37 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:36:37 [DEBUG]   PARSED type=SpawnEntity eid=2177 target=None
+08:36:37 [DEBUG] SPAWN #2177 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:36:37 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:36:37 [DEBUG]   PARSED type=SpawnEntity eid=2616 target=None
+08:36:37 [DEBUG] SPAWN #2616 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:36:37 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:36:37 [DEBUG]   PARSED type=SpawnEntity eid=2086 target=None
+08:36:37 [DEBUG] SPAWN #2086 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:36:37 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:36:37 [DEBUG]   PARSED type=SpawnEntity eid=2099 target=None
+08:36:37 [DEBUG] SPAWN #2099 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:36:37 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+08:36:37 [DEBUG]   PARSED type=UpdateEndurance eid=3846 target=None
+08:36:37 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:36:37 [DEBUG]   PARSED type=SpawnEntity eid=2616 target=None
+08:36:37 [DEBUG] SPAWN #2616 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:36:37 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:36:37 [DEBUG]   PARSED type=SpawnEntity eid=2630 target=None
+08:36:37 [DEBUG] SPAWN #2630 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:36:39 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=349
+08:36:39 [DEBUG]   PARSED type=SpawnEntity eid=2998 target=None
+08:36:39 [DEBUG] SPAWN #2998 type=1 "a hill giant" HP:1000/1000 class=sgn lvl=0
+08:36:39 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:36:39 [DEBUG]   PARSED type=SpawnEntity eid=2232 target=None
+08:36:39 [DEBUG] SPAWN #2232 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:36:39 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:36:39 [DEBUG]   PARSED type=SpawnEntity eid=2177 target=None
+08:36:39 [DEBUG] SPAWN #2177 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:36:39 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:36:39 [DEBUG]   PARSED type=SpawnEntity eid=2616 target=None
+08:36:39 [DEBUG] SPAWN #2616 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:36:39 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:36:39 [DEBUG]   PARSED type=SpawnEntity eid=2086 target=None
+08:36:39 [DEBUG] SPAWN #2086 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:36:39 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:36:39 [DEBUG]   PARSED type=SpawnEntity eid=2099 target=None
+08:36:39 [DEBUG] SPAWN #2099 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:36:39 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:36:39 [DEBUG]   PARSED type=SpawnEntity eid=2630 target=None
+08:36:39 [DEBUG] SPAWN #2630 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:36:39 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=204
+08:36:39 [DEBUG]   PARSED type=SpawnEntity eid=2600 target=None
+08:36:39 [DEBUG] SPAWN #2600 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:36:39 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 15, 'type0': 1, 'type4': 9} names=26
+08:36:48 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=349
+08:36:48 [DEBUG]   PARSED type=SpawnEntity eid=3761 target=None
+08:36:48 [DEBUG] SPAWN #3761 type=1 "a hill giant" HP:1000/1000 class=sgn lvl=0
+08:36:49 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 16, 'type0': 1, 'type4': 9} names=27
+08:36:59 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 16, 'type0': 1, 'type4': 9} names=27
+08:37:00 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+08:37:00 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:00 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+08:37:00 [DEBUG]   PARSED type=UpdateMana eid=3852 target=None
+08:37:01 [DEBUG] MSG_UNKNOWN_NEW 0x0099 dir=IN len=24 body=0c 0f 00 00 01 00 00 00 0d 0f 00 00 01 00 00 00 05 00 01 00 00 00 23 00
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=116
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3853 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=135
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3853 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=118
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3853 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=114
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3853 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=116
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3853 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=135
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3853 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=118
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3853 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=114
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3853 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=116
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3853 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=135
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3853 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=118
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3853 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=114
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3853 target=None
+08:37:01 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:37:01 [DEBUG]   PARSED type=UpdateHealth eid=3853 target=None
+08:37:01 [DEBUG] HP_INIT #3853(#3853) HP:96/100 (no previous HP, no delta)
+08:37:01 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:37:01 [DEBUG]   PARSED type=UpdateHealth eid=3853 target=None
+08:37:01 [DEBUG] HEAL #3853(#3853) 96->99/100 delta=+3 last_attacker=None(None)
+08:37:01 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=215
+08:37:01 [DEBUG]   PARSED type=SpawnEntity eid=3853 target=None
+08:37:01 [DEBUG] SPAWN #3853 type=1 "a wild bear companion" HP:1000/1000 class=ber lvl=0
+08:37:01 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=215
+08:37:01 [DEBUG]   PARSED type=SpawnEntity eid=3853 target=None
+08:37:01 [DEBUG] SPAWN #3853 type=1 "a wild bear companion" HP:1000/1000 class=ber lvl=0
+08:37:01 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=215
+08:37:01 [DEBUG]   PARSED type=SpawnEntity eid=3853 target=None
+08:37:01 [DEBUG] SPAWN #3853 type=1 "a wild bear companion" HP:1000/1000 class=ber lvl=0
+08:37:01 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=349
+08:37:01 [DEBUG]   PARSED type=SpawnEntity eid=2998 target=None
+08:37:01 [DEBUG] SPAWN #2998 type=1 "a hill giant" HP:1000/1000 class=sgn lvl=0
+08:37:01 [DEBUG] MSG_IN 0x0380 ClientPartyUpdate dir=IN body_len=78
+08:37:01 [DEBUG]   PARSED type=ClientPartyUpdate eid=None target=None
+08:37:01 [DEBUG] PARTY_MEMBER #252444672 "" class=Rainbow lvl=1970430976
+08:37:01 [DEBUG] PARTY_MEMBER #1668481033 "None" class=None lvl=100689007
+08:37:01 [DEBUG] MSG_UNKNOWN_NEW 0x5432 dir=IN len=4 body=00 00 00 00
+08:37:01 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=1384
+08:37:01 [DEBUG]   PARSED type=SpawnEntity eid=3852 target=None
+08:37:01 [DEBUG] SPAWN #3852 type=0 "Rainbow" HP:9472/239104 class=dru lvl=None
+08:37:01 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=1384
+08:37:01 [DEBUG]   PARSED type=SpawnEntity eid=3852 target=None
+08:37:01 [DEBUG] SPAWN #3852 type=0 "Rainbow" HP:9472/239104 class=dru lvl=None
+08:37:01 [DEBUG] MSG_UNKNOWN_NEW 0x0004 dir=IN len=56 body=00 04 00 61 67 6e 00 00 00 00 00 00 00 00 00 99 0b 27 d5 77 de 08 00 00 3a 20 8b eb da 08 00 00
+08:37:01 [DEBUG] MSG_IN 0x0025 UpdateLevel dir=IN body_len=13
+08:37:01 [DEBUG]   PARSED type=UpdateLevel eid=3852 target=None
+08:37:01 [DEBUG] LEVEL_UPDATE #3852 class=dru% level=None
+08:37:01 [DEBUG] MSG_IN 0x0025 UpdateLevel dir=IN body_len=13
+08:37:01 [DEBUG]   PARSED type=UpdateLevel eid=3852 target=None
+08:37:01 [DEBUG] LEVEL_UPDATE #3852 class=dru% level=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=108
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=121
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=135
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=134
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=145
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=116
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=118
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=134
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=108
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=121
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=135
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=134
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=145
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=116
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=118
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=134
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=108
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=121
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=135
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=134
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=145
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=116
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=118
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=134
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+08:37:01 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:04 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=349
+08:37:04 [DEBUG]   PARSED type=SpawnEntity eid=3761 target=None
+08:37:04 [DEBUG] SPAWN #3761 type=1 "a hill giant" HP:1000/1000 class=sgn lvl=0
+08:37:07 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+08:37:07 [DEBUG]   PARSED type=UpdateMana eid=3852 target=None
+08:37:07 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+08:37:07 [DEBUG]   PARSED type=UpdateHealth eid=3853 target=None
+08:37:07 [DEBUG] HP_INIT a wild bear companion(#3853) HP:100/100 (no previous HP, no delta)
+08:37:09 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 17, 'type0': 4, 'type4': 9} names=29
+08:37:12 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:37:12 [DEBUG]   PARSED type=SpawnEntity eid=2616 target=None
+08:37:12 [DEBUG] SPAWN #2616 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:37:13 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+08:37:13 [DEBUG]   PARSED type=RemoveBuffIcon eid=3852 target=None
+08:37:13 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+08:37:13 [DEBUG]   PARSED type=UpdateMana eid=3852 target=None
+08:37:15 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=OUT body_len=4
+08:37:15 [DEBUG]   PARSED type=ChangeTarget eid=None target=3852
+08:37:19 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+08:37:19 [DEBUG]   PARSED type=UpdateMana eid=3852 target=None
+08:37:19 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 17, 'type0': 4, 'type4': 9} names=29
+08:37:20 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=349
+08:37:20 [DEBUG]   PARSED type=SpawnEntity eid=3761 target=None
+08:37:20 [DEBUG] SPAWN #3761 type=1 "a hill giant" HP:1000/1000 class=sgn lvl=0
+08:37:21 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=349
+08:37:21 [DEBUG]   PARSED type=SpawnEntity eid=3761 target=None
+08:37:21 [DEBUG] SPAWN #3761 type=1 "a hill giant" HP:1000/1000 class=sgn lvl=0
+08:37:21 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=162
+08:37:21 [DEBUG]   PARSED type=SpawnEntity eid=2159 target=None
+08:37:21 [DEBUG] SPAWN #2159 type=4 "Ethtongue" HP:None/None class=None lvl=None
+08:37:21 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:37:21 [DEBUG]   PARSED type=SpawnEntity eid=2202 target=None
+08:37:21 [DEBUG] SPAWN #2202 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:37:25 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+08:37:25 [DEBUG]   PARSED type=UpdateMana eid=3852 target=None
+08:37:27 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=162
+08:37:27 [DEBUG]   PARSED type=SpawnEntity eid=2159 target=None
+08:37:27 [DEBUG] SPAWN #2159 type=4 "Ethtongue" HP:None/None class=None lvl=None
+08:37:27 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:37:27 [DEBUG]   PARSED type=SpawnEntity eid=2202 target=None
+08:37:27 [DEBUG] SPAWN #2202 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:37:28 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:37:28 [DEBUG]   PARSED type=SpawnEntity eid=2630 target=None
+08:37:28 [DEBUG] SPAWN #2630 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:37:29 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 17, 'type0': 4, 'type4': 9} names=29
+08:37:31 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+08:37:31 [DEBUG]   PARSED type=UpdateMana eid=3852 target=None
+08:37:33 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+08:37:33 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:33 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=158
+08:37:33 [DEBUG]   PARSED type=SpawnEntity eid=2202 target=None
+08:37:33 [DEBUG] SPAWN #2202 type=4 "Sylvine" HP:None/None class=None lvl=None
+08:37:33 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=85
+08:37:33 [DEBUG]   PARSED type=AddBuffIcon eid=3853 target=None
+08:37:37 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+08:37:37 [DEBUG]   PARSED type=UpdateMana eid=3852 target=None
+08:37:38 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+08:37:38 [DEBUG]   PARSED type=DespawnEntity eid=3838 target=None
+08:37:38 [DEBUG] DESPAWN #3838
+08:37:39 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 17, 'type0': 4, 'type4': 9} names=29
+08:37:42 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=146
+08:37:42 [DEBUG]   PARSED type=BeginCasting eid=3852 target=3846
+08:37:42 [DEBUG] ATTRIB BeginCasting caster=Rainbow(#3852) -> target=YOU(#3846) ability="Speed of the Wild"
+08:37:43 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+08:37:43 [DEBUG]   PARSED type=UpdateMana eid=3852 target=None
+08:37:46 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+08:37:46 [DEBUG]   PARSED type=UpdateMana eid=3852 target=None
+08:37:46 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=134
+08:37:46 [DEBUG]   PARSED type=AddBuffIcon eid=3846 target=None
+08:37:46 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=55
+08:37:46 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+08:37:46 [DEBUG] CHATCOMBAT text="You feel the speed of the wild within you.@"
+08:37:46 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=58
+08:37:46 [DEBUG]   PARSED type=EndCasting eid=3852 target=3846
+08:37:46 [DEBUG] ENDCAST caster=#3852 target=#3846 text=""
+08:37:49 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=146
+08:37:49 [DEBUG]   PARSED type=BeginCasting eid=3852 target=3852
+08:37:49 [DEBUG] ATTRIB BeginCasting caster=Rainbow(#3852) -> target=Rainbow(#3852) ability="Speed of the Wild"
+08:37:49 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+08:37:49 [DEBUG]   PARSED type=UpdateMana eid=3852 target=None
+08:37:49 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 17, 'type0': 4, 'type4': 9} names=29
+08:37:50 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:37:50 [DEBUG]   PARSED type=SpawnEntity eid=2600 target=None
+08:37:50 [DEBUG] SPAWN #2600 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:37:50 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:37:50 [DEBUG]   PARSED type=SpawnEntity eid=2600 target=None
+08:37:50 [DEBUG] SPAWN #2600 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:37:53 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+08:37:53 [DEBUG]   PARSED type=UpdateMana eid=3852 target=None
+08:37:53 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=58
+08:37:53 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+08:37:53 [DEBUG] CHATCOMBAT text="Rainbow is imbued with the speed of the wild.A"
+08:37:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=134
+08:37:53 [DEBUG]   PARSED type=AddBuffIcon eid=3852 target=None
+08:37:53 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=58
+08:37:53 [DEBUG]   PARSED type=EndCasting eid=3852 target=3852
+08:37:53 [DEBUG] ENDCAST caster=#3852 target=#3852 text=""
+08:37:54 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+08:37:54 [DEBUG]   PARSED type=DespawnEntity eid=3821 target=None
+08:37:54 [DEBUG] DESPAWN #3821
+08:37:55 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+08:37:55 [DEBUG]   PARSED type=UpdateMana eid=3852 target=None
+08:37:55 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=146
+08:37:55 [DEBUG]   PARSED type=BeginCasting eid=3852 target=3853
+08:37:55 [DEBUG] ATTRIB BeginCasting caster=Rainbow(#3852) -> target=a wild bear companion(#3853) ability="Speed of the Wild"
+08:37:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:37:57 [DEBUG]   PARSED type=SpawnEntity eid=2968 target=None
+08:37:57 [DEBUG] SPAWN #2968 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:37:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=258
+08:37:57 [DEBUG]   PARSED type=SpawnEntity eid=2968 target=None
+08:37:57 [DEBUG] SPAWN #2968 type=1 "an emerald grass viper" HP:1000/1000 class=snk lvl=0
+08:37:59 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+08:37:59 [DEBUG]   PARSED type=UpdateMana eid=3852 target=None
+08:37:59 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=72
+08:37:59 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+08:37:59 [DEBUG] CHATCOMBAT text="a wild bear companion is imbued with the speed of the wild.A"
+08:37:59 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=147
+08:37:59 [DEBUG]   PARSED type=AddBuffIcon eid=3853 target=None
+08:37:59 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=58
+08:37:59 [DEBUG]   PARSED type=EndCasting eid=3852 target=3853
+08:37:59 [DEBUG] ENDCAST caster=#3852 target=#3853 text=""
+08:37:59 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 17, 'type0': 4, 'type4': 9} names=29
+08:38:01 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+08:38:01 [DEBUG]   PARSED type=UpdateMana eid=3852 target=None
+08:38:03 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:38:03 [DEBUG]   PARSED type=SpawnEntity eid=2494 target=None
+08:38:03 [DEBUG] SPAWN #2494 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:38:03 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+08:38:03 [DEBUG]   PARSED type=SpawnEntity eid=2494 target=None
+08:38:03 [DEBUG] SPAWN #2494 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+08:38:05 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=349
+08:38:05 [DEBUG]   PARSED type=SpawnEntity eid=2468 target=None
+08:38:05 [DEBUG] SPAWN #2468 type=1 "a hill giant" HP:1000/1000 class=sgn lvl=0
+08:38:05 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=349
+08:38:05 [DEBUG]   PARSED type=SpawnEntity eid=2468 target=None
+08:38:05 [DEBUG] SPAWN #2468 type=1 "a hill giant" HP:1000/1000 class=sgn lvl=0
+08:38:07 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+08:38:07 [DEBUG]   PARSED type=UpdateMana eid=3852 target=None
+08:38:08 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=349
+08:38:08 [DEBUG]   PARSED type=SpawnEntity eid=2468 target=None
+08:38:08 [DEBUG] SPAWN #2468 type=1 "a hill giant" HP:1000/1000 class=sgn lvl=0
+08:38:08 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=349
+08:38:08 [DEBUG]   PARSED type=SpawnEntity eid=2468 target=None
+08:38:08 [DEBUG] SPAWN #2468 type=1 "a hill giant" HP:1000/1000 class=sgn lvl=0
+08:38:09 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 18, 'type0': 4, 'type4': 9} names=30
+08:38:13 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+08:38:13 [DEBUG]   PARSED type=UpdateMana eid=3852 target=None
+08:38:16 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=108
+08:38:16 [DEBUG]   PARSED type=BeginCasting eid=3852 target=3846
+08:38:16 [DEBUG] ATTRIB BeginCasting caster=Rainbow(#3852) -> target=YOU(#3846) ability="Wolf Pack"
