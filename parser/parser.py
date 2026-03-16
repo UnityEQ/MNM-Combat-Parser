@@ -1267,6 +1267,38 @@ class EntityTracker:
                             p['last'] = ts
                             _plog.debug(f"  FLUSH_PENDING \"{enc.npc_name}\"(#{tgt_eid}) +{dmg}dmg by {atk_name}(#{eid})")
                 self._pending_local_dmg.clear()
+            # Merge "_local" sentinel from last_attacker, damage_dealt,
+            # and encounter player entries into the real eid.
+            for k, v in list(self.last_attacker.items()):
+                if v == "_local":
+                    self.last_attacker[k] = eid
+            if "_local" in self.damage_dealt:
+                self.damage_dealt[eid] = self.damage_dealt.get(eid, 0) + self.damage_dealt.pop("_local")
+            if "_local" in self.first_dealt:
+                old_first = self.first_dealt.pop("_local")
+                if eid not in self.first_dealt or old_first < self.first_dealt[eid]:
+                    self.first_dealt[eid] = old_first
+            if "_local" in self.last_dealt:
+                old_last = self.last_dealt.pop("_local")
+                if eid not in self.last_dealt or old_last > self.last_dealt[eid]:
+                    self.last_dealt[eid] = old_last
+            for enc in self.encounters:
+                if "_local" in enc.players:
+                    old_p = enc.players.pop("_local")
+                    name = self.player_name or self.names.get(eid, f"Entity#{eid}")
+                    real_p = enc.get_or_create_player(eid, name, self.classes.get(eid, ""), self.levels.get(eid))
+                    real_p['dealt'] += old_p['dealt']
+                    real_p['text_dealt'] += old_p['text_dealt']
+                    real_p['received'] += old_p['received']
+                    for ab, dmg in old_p.get('abilities', {}).items():
+                        real_p['abilities'][ab] = real_p['abilities'].get(ab, 0) + dmg
+                    if old_p['first'] is not None:
+                        if real_p['first'] is None or old_p['first'] < real_p['first']:
+                            real_p['first'] = old_p['first']
+                    if old_p['last'] is not None:
+                        if real_p['last'] is None or old_p['last'] > real_p['last']:
+                            real_p['last'] = old_p['last']
+            _plog.info(f"  LOCAL_MERGE merged '_local' sentinel entries into eid=#{eid}")
 
     def _resolve_target_eid(self, target_id, target_name):
         """Resolve the actual NPC entity_id for encounter tracking.
@@ -1776,8 +1808,11 @@ class EntityTracker:
             elif etype == "Autoattack":
                 active = event.get("active", False)
                 direction = event.get("direction", "IN")
-                _plog.debug(f"AUTOATTACK active={active} dir={direction}")
+                _plog.debug(f"AUTOATTACK active={active} dir={direction} eid=#{eid}")
                 if direction == "OUT":
+                    # Outbound Autoattack entity_id is the local player
+                    if eid and eid > 0:
+                        self._mark_local_player(eid)
                     if active:
                         self._autoattack_on.add("_local")
                     else:
@@ -1787,12 +1822,16 @@ class EntityTracker:
                 target_id = event.get("target_id")
                 direction = event.get("direction", "IN")
                 tgt_name = self.names.get(target_id, f"#{target_id}") if target_id else "None"
-                _plog.debug(f"CHANGETARGET target={tgt_name}(#{target_id}) dir={direction} autoattack_on={'_local' in self._autoattack_on}")
+                _plog.debug(f"CHANGETARGET target={tgt_name}(#{target_id}) dir={direction} eid=#{eid} autoattack_on={'_local' in self._autoattack_on}")
                 if direction == "OUT" and target_id is not None:
+                    # Outbound ChangeTarget entity_id is the local player
+                    if eid and eid > 0:
+                        self._mark_local_player(eid)
                     self.autoattack_target["_local"] = target_id
-                    # If autoattack is on, set melee attribution
+                    # If autoattack is on, set melee attribution with real eid
                     if "_local" in self._autoattack_on:
-                        self.last_attacker[target_id] = "_local"
+                        atk = self._local_player_eid if self._local_player_eid is not None else "_local"
+                        self.last_attacker[target_id] = atk
                         self.last_attack_type[target_id] = "melee"
                         self.last_ability_name.pop(target_id, None)
 
@@ -1856,6 +1895,8 @@ class EntityTracker:
                         self.last_dmg[eid] = now
                         # Credit damage dealt to the attacker
                         atk_eid = self.last_attacker.get(eid)
+                        if atk_eid == "_local":
+                            atk_eid = self._local_player_eid
                         atk_name_str = self.names.get(atk_eid, f"#{atk_eid}") if atk_eid is not None else "None"
                         if atk_eid is not None:
                             self.damage_dealt[atk_eid] = self.damage_dealt.get(atk_eid, 0) + amt
