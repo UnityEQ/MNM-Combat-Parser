@@ -1,5 +1,5 @@
 """
-MNM Combat Parser — Standalone live combat log viewer.
+ZekParser — Standalone live combat log viewer.
 
 Self-contained GUI that captures network traffic from mnm.exe, decrypts it,
 parses game messages, and displays combat events in real-time.
@@ -44,24 +44,29 @@ except ImportError:
 
 
 # ===================================================================
-# Debug logging — disabled (uncomment to write to parser/logs/)
+# Debug logging — enabled for dev, disabled in frozen exe builds
 # ===================================================================
 
 def _setup_parser_log():
     logger = logging.getLogger("parser_debug")
     logger.handlers.clear()
-    log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
-    os.makedirs(log_dir, exist_ok=True)
-    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-    log_file = os.path.join(log_dir, f"parser_{ts}.log")
-    fh = RotatingFileHandler(log_file, maxBytes=10 * 1024 * 1024, backupCount=3,
-                             encoding='utf-8')
-    fh.setLevel(logging.DEBUG)
-    fh.setFormatter(logging.Formatter("%(asctime)s [%(levelname)-5s] %(message)s",
-                                       datefmt="%H:%M:%S"))
-    logger.addHandler(fh)
-    logger.setLevel(logging.DEBUG)
-    logger.info(f"Parser debug log started — {log_file}")
+    if getattr(sys, 'frozen', False):
+        # --- Frozen exe: no debug logging ---
+        logger.addHandler(logging.NullHandler())
+        logger.setLevel(logging.CRITICAL)
+    else:
+        # --- Dev mode: full file logging for damage attribution debugging ---
+        log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
+        os.makedirs(log_dir, exist_ok=True)
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        log_file = os.path.join(log_dir, f"parser_{ts}.log")
+        fh = RotatingFileHandler(log_file, maxBytes=10 * 1024 * 1024, backupCount=3,
+                                 encoding='utf-8')
+        fh.setLevel(logging.DEBUG)
+        fh.setFormatter(logging.Formatter("%(asctime)s [%(levelname)-5s] %(message)s",
+                                           datefmt="%H:%M:%S"))
+        logger.addHandler(fh)
+        logger.setLevel(logging.DEBUG)
     return logger
 
 _plog = _setup_parser_log()
@@ -2937,7 +2942,7 @@ class CombatApp(tk.Tk):
 
     def __init__(self):
         super().__init__()
-        self.title("MNM Combat Parser")
+        self.title("ZekParser")
         self.geometry("1000x350")
         self.configure(bg='black')
         self.minsize(700, 250)
@@ -2968,7 +2973,7 @@ class CombatApp(tk.Tk):
         pn = self._backend.player_name
         sn = self._backend.server_name
         if pn or sn:
-            title = "MNM Combat Parser"
+            title = "ZekParser"
             if pn:
                 title += f" \u2014 {pn}"
             if sn:
@@ -3808,13 +3813,6 @@ class CombatApp(tk.Tk):
             self._meter.insert(tk.END, f"{grand_dps:,.1f}\n", 'dmg')
             self._meter.insert(tk.END, "\u2500" * _box_w + "\n", 'header_line')
 
-            # DEBUG: dump class/level data to log
-            _plog.info(f"TOTALS_DEBUG tracker.classes={dict(tracker.classes)}")
-            _plog.info(f"TOTALS_DEBUG tracker.levels={dict(tracker.levels)}")
-            for _enc in encounters:
-                for _peid, _p in _enc.players.items():
-                    _plog.info(f"TOTALS_DEBUG enc={_enc.npc_name} player eid={_peid} name={_p['name']} cls={_p['cls']!r} lvl={_p['level']!r} tracker_cls={tracker.classes.get(_peid)!r} tracker_lvl={tracker.levels.get(_peid)!r}")
-
             # Per-player breakdown with abilities in boxes
             sorted_pt = sorted(player_totals.items(), key=lambda x: x[1]['dealt'], reverse=True)
             for pname, pt in sorted_pt:
@@ -4202,7 +4200,7 @@ class CombatApp(tk.Tk):
             if sn:
                 tag += f" | {sn}"
             self._player_label.configure(text=tag)
-            title = f"MNM Combat Parser \u2014 {tracker_name}"
+            title = f"ZekParser \u2014 {tracker_name}"
             if sn:
                 title += f" [{sn}]"
             self.title(title)
@@ -4225,9 +4223,10 @@ class CombatApp(tk.Tk):
             self._main_frame.columnconfigure(2, weight=1, uniform='')
             self._toggle_left_btn.configure(text="\u25B6")
             self._left_visible = False
-            # Shrink window to roughly half width
+            # Shrink window to roughly half width, anchored to right edge
             new_w = max(400, w // 2)
-            self.geometry(f"{new_w}x{h}+{x}+{y}")
+            new_x = x + (w - new_w)
+            self.geometry(f"{new_w}x{h}+{new_x}+{y}")
             self.minsize(400, 250)
         else:
             self._left_frame.grid()
@@ -4236,10 +4235,13 @@ class CombatApp(tk.Tk):
             self._main_frame.columnconfigure(2, weight=1, uniform='half')
             self._toggle_left_btn.configure(text="\u25C0")
             self._left_visible = True
-            # Restore saved geometry
+            # Restore saved geometry (right-edge anchored)
             if hasattr(self, '_saved_geometry') and self._saved_geometry:
                 w, h, x, y = self._saved_geometry
-                self.geometry(f"{w}x{h}+{x}+{y}")
+                cur_w = self.winfo_width()
+                cur_x = self.winfo_x()
+                new_x = cur_x + cur_w - w
+                self.geometry(f"{w}x{h}+{new_x}+{y}")
                 self._saved_geometry = None
             self.minsize(700, 250)
 

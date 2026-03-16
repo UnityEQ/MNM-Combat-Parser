@@ -25,7 +25,8 @@
       "Bash(php:*)",
       "Bash(grep:*)",
       "Bash(sort:*)",
-      "Bash(del:*)"
+      "Bash(del:*)",
+      "Bash(pyinstaller:*)"
     ]
   }
 }
