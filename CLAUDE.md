@@ -23,6 +23,9 @@ pip install pycryptodome
 # Syntax check after changes
 python -c "import core.combat; import core.npc_database; import core.parser"
 python -c "import parser.parser"
+
+# Build single-file exe (output: dist/ZekParser.exe)
+pyinstaller --onefile --noconsole --name ZekParser --uac-admin --version-file version_info.py --collect-all pycryptodome "parser/parser.py"
 ```
 
 No test framework exists. Verify changes with `python -c` imports and live capture.
@@ -30,7 +33,7 @@ No test framework exists. Verify changes with `python -c` imports and live captu
 ## Two Entry Points
 
 1. **`mnm.py`** — Headless CLI tool. Captures packets, decrypts, logs combat events to console + rotating log files in `logs/`. Records NPC spawns to `data/npc_database.csv`.
-2. **`parser/parser.py`** — Standalone tkinter GUI. Fully self-contained (zero imports from `core/`). Duplicates the entire capture→decrypt→parse pipeline inline. Shows real-time combat feed + damage meter with DPS tracking. Debug logs go to `parser/logs/`.
+2. **`parser/parser.py`** — Standalone tkinter GUI named **ZekParser**. Fully self-contained (zero imports from `core/`). Duplicates the entire capture→decrypt→parse pipeline inline. Shows real-time combat feed + damage meter with DPS tracking. Debug logs go to `parser/logs/`.
 
 Both require Windows Administrator privileges for raw socket capture (`SIO_RCVALL`).
 
@@ -131,7 +134,23 @@ ChatCombat messages have no entity IDs. Resolution strategy:
 
 1. **Temporal correlation** (`_last_hp_eid`): The target's `UpdateHealth` always arrives right before its `ChatCombat` message. The tracker records the most recent UpdateHealth entity ID and uses it if the name matches (or entity has no name yet) within 2 seconds. This correctly disambiguates when multiple NPCs share the same name.
 2. **Name lookup fallback** (`_resolve_target_eid`): Iterates `self.names` looking for a matching name. Prefers alive entities (encounter not dead) over dead ones.
-3. **Local player**: Uses `_local_player_eid` (set from "Your..."/"You..." EndCasting patterns). If unknown, still tracks encounter damage but skips per-player attribution.
+3. **Local player**: Uses `_local_player_eid` (detected from outbound Autoattack/ChangeTarget `entity_id`, or "Your..."/"You..." EndCasting text). If unknown, ChatCombat "You..." damage queues in `_pending_local_dmg` until detection fires.
+
+### Local Player Detection and the `"_local"` Sentinel
+
+Before the local player's entity ID is known, autoattack/target tracking uses the string `"_local"` as a placeholder in `_autoattack_on`, `autoattack_target`, and `last_attacker`. Three detection paths set `_local_player_eid`:
+
+1. **Autoattack OUT** / **ChangeTarget OUT**: Outbound packets carry the local player's `entity_id` — `_mark_local_player(eid)` is called immediately. This is the primary detection path and works for pure melee players.
+2. **EndCasting text**: "Your Ability hits..." / "You slash..." patterns call `_mark_local_player(eid)`.
+3. **Heal text**: "heals you" EndCasting calls `_mark_local_player(target_id)`.
+
+When `_mark_local_player` fires, it retroactively merges all `"_local"` sentinel entries:
+- Replaces `"_local"` → real eid in `last_attacker` dict
+- Merges `damage_dealt`, `first_dealt`, `last_dealt` from key `"_local"` into the real eid
+- Merges `"_local"` encounter player entries (dealt, text_dealt, received, abilities) into real eid entries
+- Flushes `_pending_local_dmg` queue
+
+In UpdateHealth processing, any remaining `"_local"` in `last_attacker` is resolved to `_local_player_eid` as a safety net.
 
 ## Encounter System (parser/parser.py)
 
@@ -192,6 +211,20 @@ Each phase (identity, HID, stats, position, booleans, model, appearance) has ind
 
 **Standalone parser note**: `parser/parser.py` has its own SpawnEntity parser with the same phased approach. Spawn HP from `_find_stats()` is unreliable (often misaligned, producing garbage like 3072/49920) — the standalone parser does NOT use spawn HP as the damage baseline. Instead, the first `UpdateHealth` message sets the real HP baseline.
 
+## Build & Distribution (ZekParser.exe)
+
+PyInstaller single-file build with `--noconsole` (no console window), `--uac-admin` (proper UAC elevation prompt), and `version_info.py` (embeds product metadata to reduce AV false positives). The exe is unsigned — tell users to add a Defender exclusion for `ZekParser.exe` or its folder.
+
+### Debug Logging
+
+`_setup_parser_log()` checks `getattr(sys, 'frozen', False)`:
+- **`python parser/parser.py`** (dev): Full DEBUG logging to `parser/logs/parser_<timestamp>.log` (10MB rotating, 3 backups). All `_plog.debug(...)` calls active — covers damage attribution, encounter creation, entity resolution, ChatCombat parsing.
+- **Frozen exe**: `NullHandler` + `CRITICAL` level — zero logging overhead.
+
+### Crash Handling
+
+The exe uses `--noconsole` so `print()`/`input()` do nothing. Crashes show a native Windows `MessageBoxW` with the traceback, and write `crash.log` next to the exe (via `_crash_log_dir()` which uses `os.path.dirname(sys.executable)` for frozen builds, not `__file__` which points to the PyInstaller temp dir). The admin check also uses a message box instead of printing.
+
 ## Important Gotchas
 
 - CRC32c is at the **back** of the packet, not front
@@ -207,7 +240,8 @@ Each phase (identity, HID, stats, position, booleans, model, appearance) has ind
 - Melee auto-attack damage text ("You slash X for N damage") is in **ChatMessage (0x0040) channel 1**, NOT EndCasting (0x0056). Each melee hit sends 3 messages: `UpdateHealth` + `ChatMessage` + `0x644B` (animation). The 0x644B has both entity IDs and the verb but NOT the damage number — the damage value only exists in the ChatMessage English text
 - ChatCombat messages have **no entity IDs** — target must be resolved by temporal correlation with the preceding `UpdateHealth`, not by name lookup (multiple NPCs share names)
 - EndCasting text for non-combat actions ("Rainbow pulls you through a shimmering portal") will match broad verb patterns — use the `_MELEE_VERBS` whitelist, not `\w+`
-- `config.json` `player_name` should be empty string `""` — the parser auto-detects it from "Your..."/"You..." combat text patterns
+- `config.json` `player_name` should be empty string `""` — the parser auto-detects it from outbound Autoattack/ChangeTarget packets and "Your..."/"You..." combat text patterns
+- Never use `"_local"` string as a real entity ID — it's a sentinel placeholder for the local player before detection. Always resolve via `_local_player_eid` at consumption points and merge in `_mark_local_player`
 
 ## Networking Assessment: Combat Packets (Suggestions for Game Dev Team)
 

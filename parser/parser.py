@@ -4858,10 +4858,25 @@ def is_admin():
         return False
 
 
+def _crash_log_dir():
+    """Return the directory next to the exe (frozen) or next to this .py file."""
+    if getattr(sys, 'frozen', False):
+        return os.path.dirname(sys.executable)
+    return os.path.dirname(os.path.abspath(__file__))
+
+
+def _show_error(title, msg):
+    """Show error via message box (works without console)."""
+    try:
+        ctypes.windll.user32.MessageBoxW(0, msg, title, 0x10)  # MB_ICONERROR
+    except Exception:
+        print(f"{title}: {msg}")
+
+
 def main():
     if not is_admin():
-        print("ERROR: This tool requires Administrator privileges.")
-        print("Right-click and 'Run as administrator', or use an elevated shell.")
+        _show_error("ZekParser", "This tool requires Administrator privileges.\n\n"
+                     "Right-click ZekParser.exe and select 'Run as administrator'.")
         sys.exit(1)
 
     try:
@@ -4869,12 +4884,15 @@ def main():
         app.mainloop()
     except Exception:
         import traceback
-        traceback.print_exc()
-        crash_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "crash.log")
-        with open(crash_path, "w") as f:
-            traceback.print_exc(file=f)
-        print(f"\nCrash log written to {crash_path}")
-        input("Press Enter to exit...")
+        tb = traceback.format_exc()
+        crash_path = os.path.join(_crash_log_dir(), "crash.log")
+        try:
+            with open(crash_path, "w", encoding="utf-8") as f:
+                f.write(f"ZekParser crash — {datetime.now().isoformat()}\n\n{tb}")
+        except Exception:
+            crash_path = "(failed to write)"
+        _show_error("ZekParser — Crash",
+                     f"An unexpected error occurred.\n\n{tb[:600]}\n\nFull log: {crash_path}")
 
 
 if __name__ == '__main__':
@@ -4882,5 +4900,11 @@ if __name__ == '__main__':
         main()
     except Exception:
         import traceback
-        traceback.print_exc()
-        input("Press Enter to exit...")
+        tb = traceback.format_exc()
+        crash_path = os.path.join(_crash_log_dir(), "crash.log")
+        try:
+            with open(crash_path, "w", encoding="utf-8") as f:
+                f.write(f"ZekParser crash — {datetime.now().isoformat()}\n\n{tb}")
+        except Exception:
+            pass
+        _show_error("ZekParser — Crash", f"Fatal error:\n\n{tb[:600]}")
