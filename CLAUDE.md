@@ -33,7 +33,7 @@ No test framework exists. Verify changes with `python -c` imports and live captu
 ## Two Entry Points
 
 1. **`mnm.py`** — Headless CLI tool. Captures packets, decrypts, logs combat events to console + rotating log files in `logs/`. Records NPC spawns to `data/npc_database.csv`.
-2. **`parser/parser.py`** — Standalone tkinter GUI named **ZekParser** (window title: `"ZekParser {APP_VERSION}"`). Fully self-contained (zero imports from `core/`). Duplicates the entire capture→decrypt→parse pipeline inline. Shows real-time combat feed + damage meter with DPS tracking. Debug logs go to `parser/logs/`. `APP_VERSION` constant (e.g. `"V1.1"`) at top of file — bump for each exe release. Keep in sync with `version_info.py` (`filevers`/`prodvers`/`FileVersion`/`ProductVersion`).
+2. **`parser/parser.py`** — Standalone tkinter GUI named **ZekParser** (window title: `"ZekParser {APP_VERSION}"`). Fully self-contained (zero imports from `core/`). Duplicates the entire capture→decrypt→parse pipeline inline. Shows real-time combat feed + damage meter with DPS tracking. Debug logs go to `parser/logs/`. `APP_VERSION` constant (e.g. `"V1.4"`) at top of file — bump for each exe release. Keep in sync with `version_info.py` (`filevers`/`prodvers`/`FileVersion`/`ProductVersion`).
 
 Both require Windows Administrator privileges for raw socket capture (`SIO_RCVALL`).
 
@@ -261,7 +261,7 @@ Items are also queued to the API client when `api_enabled` is true.
 - **State**: `_xp_current` (eid → last XP), `_xp_events` (list of gain records), `_xp_level_start` (eid → XP at level start), `_xp_level_needed` (eid → XP cap for level), `_xp_player_level` (eid → level)
 - **First event baseline**: First `UpdateExperience` in a session silently records the XP value and returns `None` — no event shown. Second kill onwards computes proper deltas.
 - **Level-up detection**: When `new_xp < prev_xp`, the player leveled up. The old value becomes the level cap (`_xp_level_needed`). XP percentage is computed from this.
-- **NPC correlation**: Server sends `UpdateExperience` BEFORE `Die`, so the NPC isn't marked dead yet when XP fires. Primary correlation uses `_last_hp_eid` (the NPC that just took the killing blow via UpdateHealth → HP=0) within 3 seconds. Fallback searches for the most recently dead encounter within 5 seconds.
+- **NPC correlation (shifted by one)**: The XP delta computed at kill N is from kill N-1 (off-by-one in server timing). Each UpdateExperience resolves the current NPC via `_last_hp_eid` / dead encounter fallback but saves it in `_xp_pending_npc` for the NEXT event. The baseline event (first kill) saves its NPC; the second kill's delta is attributed to the baseline's NPC; and so on. This ensures the XP gain is always tagged to the mob that actually produced it.
 - **Display**: Summary shows total gained + kill count + XP/hour. Event rows show timestamp, `+N XP`, percentage if known, and mob name.
 
 ## Trigger System (parser/parser.py)
@@ -326,11 +326,11 @@ The exe uses `--noconsole` so `print()`/`input()` do nothing. Crashes show a nat
 
 ## Homepage (zekparser-homepage/)
 
-Marketing/download site for `https://zekparser.com/`. Catppuccin Mocha dark theme. Google Tag Manager (`GTM-TJK722NR`) on all pages.
+Marketing/download site for `https://zekparser.com/`. Catppuccin Mocha dark theme. Google Tag Manager (`GTM-TJK722NR`) on all pages. Copyright: Joinkle (joinkle.com).
 
-- **`index.html`** — Main landing page. Hero, screenshot grid (6 images in `screenshots/`), feature cards, how-it-works steps, download CTA pointing to `/ZekParser.exe`. Nav links to SaltyVision.
-- **`saltyvision.html`** — "Coming Soon" page for SaltyVision, a crowdsourced item/XP/combat database. Explains the three planned databases (Items, Experience, Combat) and the opt-in API data pipeline from ZekParser sessions. Uses `body class="sv-page"` for page-specific CSS overrides.
-- **`style.css`** — Shared styles for both pages. SaltyVision-specific styles prefixed with `.sv-` and scoped under `.sv-page`.
+- **`index.html`** — Main landing page. Hero with version badge, screenshot grid (6 images in `screenshots/`), feature cards, how-it-works steps, download CTA. Nav: 3-column grid (logo left, nav buttons centered, Cash App/Venmo donate buttons right). Schema.org JSON-LD (SoftwareApplication, FAQPage, BreadcrumbList). Version displayed in hero-meta, CTA, and schema — **must be kept in sync** with `APP_VERSION` and `version_info.py` when bumping.
+- **`saltyvision.html`** — "Coming Soon" page for SaltyVision, a crowdsourced item/XP/combat database. Explains the three planned databases (Items, Experience, Combat) and the API data pipeline from ZekParser sessions. Uses `body class="sv-page"` for page-specific CSS overrides. Same nav/donate layout as index.
+- **`style.css`** — Shared styles for both pages. SaltyVision-specific styles prefixed with `.sv-` and scoped under `.sv-page`. Nav links styled as pill buttons with `.nav-active` purple fill for current page. `.btn-donate` orange (Catppuccin peach).
 - **`screenshots/`** — 6 named PNGs: `overview-feed-expanded.png`, `encounters-multiple-kills.png`, `grand-overview-npc-stats.png`, `item-detail-drop-history.png`, `triggers-pattern-setup.png`, `encounters-active-dead.png`. Plus one placeholder for Experience Tracker.
 
 ## Important Gotchas

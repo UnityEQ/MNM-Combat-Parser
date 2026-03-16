@@ -12,32 +12,123 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Primary Meta -->
-    <title>SaltyVision — Crowdsourced Item, XP &amp; Combat Database</title>
-    <meta name="description" content="SaltyVision is a crowdsourced game database powered by ZekParser. Browse items, loot tables, NPC combat stats, and experience data contributed by real players.">
-    <meta name="keywords" content="SaltyVision, item database, loot table, NPC database, experience tracker, combat stats, crowdsourced, ZekParser, Monsters and Memories">
+    <title>SaltyVision — Crowdsourced MMO Item Database, Loot Tables, XP &amp; NPC Combat Stats</title>
+    <meta name="description" content="SaltyVision is a crowdsourced MMO database powered by ZekParser. Search items with full stats and drop rates, NPC loot tables, experience yields by level, and combat profiles — all built automatically from real player sessions.">
+    <meta name="keywords" content="SaltyVision, MMO item database, loot table database, NPC drop rates, experience database, XP per mob, combat stats database, crowdsourced game data, ZekParser database, Monsters and Memories items, MMO loot tracker, NPC health pools, grind spot finder, XP per hour calculator">
     <meta name="author" content="Joinkle">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="https://zekparser.com/saltyvision">
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph / Facebook / Discord -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://zekparser.com/saltyvision">
-    <meta property="og:title" content="SaltyVision — Crowdsourced Item, XP &amp; Combat Database">
-    <meta property="og:description" content="A crowdsourced game database powered by ZekParser. Items, loot tables, NPC stats, and XP data contributed by real players.">
+    <meta property="og:title" content="SaltyVision — Crowdsourced MMO Item, XP &amp; Combat Database">
+    <meta property="og:description" content="Search items, loot tables, NPC combat stats, drop rates, and XP yields — all crowdsourced from real MMO sessions via ZekParser. No manual data entry, just play and contribute.">
     <meta property="og:site_name" content="ZekParser">
     <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://zekparser.com/screenshots/item-detail-drop-history.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="SaltyVision item detail view showing loot stats, drop sources, and drop history">
 
-    <!-- Twitter -->
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://zekparser.com/saltyvision">
-    <meta name="twitter:title" content="SaltyVision — Crowdsourced Item, XP &amp; Combat Database">
-    <meta name="twitter:description" content="A crowdsourced game database powered by ZekParser. Items, loot tables, NPC stats, and XP data contributed by real players.">
+    <meta name="twitter:title" content="SaltyVision — Crowdsourced MMO Item, XP &amp; Combat Database">
+    <meta name="twitter:description" content="Search items, loot tables, NPC combat stats, drop rates, and XP yields — all crowdsourced from real MMO sessions via ZekParser.">
+    <meta name="twitter:image" content="https://zekparser.com/screenshots/item-detail-drop-history.png">
+    <meta name="twitter:image:alt" content="SaltyVision item detail view showing loot stats, drop sources, and drop history">
 
     <!-- Theme -->
     <meta name="theme-color" content="#0a0a0a">
     <meta name="color-scheme" content="dark">
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Schema.org: WebPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "SaltyVision — Crowdsourced MMO Database",
+        "description": "A crowdsourced MMO database of items, loot tables, NPC combat stats, and experience data. Powered by ZekParser — all data contributed automatically from real player sessions.",
+        "url": "https://zekparser.com/saltyvision",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "ZekParser",
+            "url": "https://zekparser.com/"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Joinkle",
+            "url": "https://joinkle.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "ZekParser",
+                "item": "https://zekparser.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "SaltyVision",
+                "item": "https://zekparser.com/saltyvision"
+            }
+        ]
+    }
+    </script>
+
+    <!-- Schema.org: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is SaltyVision?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "SaltyVision is a crowdsourced MMO database powered by ZekParser. It aggregates item stats, loot drop rates, NPC combat profiles, and experience data from real player sessions into a searchable public database. No manual data entry required — just play with ZekParser running."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does SaltyVision get its data?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Every ZekParser user automatically contributes anonymized game data during their play sessions. Combat events, item drops, NPC encounters, and XP gains are sent to SaltyVision servers and aggregated. Drop rates improve as more kills are recorded, and NPC profiles are built from hundreds of real encounters."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What data does SaltyVision collect about me?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "SaltyVision collects game data only — item stats, NPC encounters, XP events, and loot drops. No personal information, no IP logging, and no account credentials are collected."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What databases does SaltyVision include?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "SaltyVision includes three databases: an Item Database with full stats, effects, drop sources and aggregated drop rates; an Experience Database with XP yields per NPC by player level and XP/hour comparisons; and a Combat Database with NPC health pools, damage output, abilities, and average kill times."
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 <body class="sv-page">
     <!-- Google Tag Manager (noscript) -->
@@ -47,11 +138,11 @@
 
     <!-- Nav -->
     <header class="site-nav">
-        <a href="index.html" class="nav-logo">ZekParser</a>
+        <a href="/" class="nav-logo">ZekParser</a>
         <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
         <nav class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="saltyvision.html" class="nav-active">SaltyVision</a>
+            <a href="/">Home</a>
+            <a href="/saltyvision" class="nav-active">SaltyVision</a>
             <div class="nav-donate-mobile">
                 <a href="https://cash.app/$thepdxdude" target="_blank" rel="noopener" class="btn-donate">Cash App</a>
                 <a href="https://venmo.com/u/Saltycrackers" target="_blank" rel="noopener" class="btn-donate">Venmo</a>
@@ -169,7 +260,7 @@
         <div class="cta-box">
             <h2>Help Build the Database</h2>
             <p>Download ZekParser and start contributing data just by playing. Every session makes SaltyVision more complete.</p>
-            <a href="index.html" class="btn-primary">
+            <a href="/" class="btn-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                 Get ZekParser
             </a>
@@ -179,8 +270,8 @@
     <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-links">
-            <a href="index.html">ZekParser</a>
-            <a href="saltyvision.html">SaltyVision</a>
+            <a href="/">ZekParser</a>
+            <a href="/saltyvision">SaltyVision</a>
         </div>
         <p>&copy; 2026 <a href="https://joinkle.com" target="_blank" rel="noopener">Joinkle</a></p>
     </footer>

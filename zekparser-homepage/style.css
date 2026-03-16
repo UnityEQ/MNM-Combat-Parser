@@ -85,11 +85,18 @@ a:hover {
 
 .nav-links a {
     color: var(--ctp-subtext0);
-    font-size: 0.9rem;
-    transition: color 0.2s;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.3rem 0.85rem;
+    border-radius: 5px;
+    border: 1px solid var(--ctp-surface1);
+    background: var(--ctp-surface0);
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 .nav-links a:hover {
     color: var(--ctp-text);
+    background: var(--ctp-surface1);
+    border-color: var(--ctp-surface2);
     text-decoration: none;
 }
 
@@ -762,8 +769,15 @@ a:hover {
 .sv-icon-combat { color: var(--ctp-red); }
 
 .nav-active {
-    color: var(--ctp-peach) !important;
+    color: var(--ctp-crust) !important;
+    background: var(--ctp-mauve) !important;
+    border-color: var(--ctp-mauve) !important;
     font-weight: 600;
+}
+.nav-active:hover {
+    background: var(--ctp-lavender) !important;
+    border-color: var(--ctp-lavender) !important;
+    color: var(--ctp-crust) !important;
 }
 
 .nav-logo {

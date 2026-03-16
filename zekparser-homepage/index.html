@@ -12,32 +12,165 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Primary Meta -->
-    <title>ZekParser — Real-Time Combat Log Parser &amp; DPS Meter</title>
-    <meta name="description" content="Free real-time DPS meter and combat log parser for Windows. Track damage, encounters, loot drops, and export session data. No install required.">
-    <meta name="keywords" content="ZekParser, DPS meter, combat log parser, damage parser, real-time DPS, combat tracker, loot tracker, encounter logger">
+    <title>ZekParser — Free Real-Time MMO Combat Log Parser &amp; DPS Meter for Windows</title>
+    <meta name="description" content="ZekParser is a free, portable MMO combat log parser and real-time DPS meter for Windows. Track damage per second, encounter breakdowns, loot drops, item stats, experience gains, and text triggers — all live as you play. No install required.">
+    <meta name="keywords" content="ZekParser, MMO DPS meter, combat log parser, real-time damage parser, MMO combat tracker, loot tracker, encounter logger, item drop tracker, experience tracker, DPS overlay, Monsters and Memories parser, MMO damage meter, raid parser, group DPS tracker">
     <meta name="author" content="Joinkle">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="https://zekparser.com/">
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph / Facebook / Discord -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://zekparser.com/">
-    <meta property="og:title" content="ZekParser — Real-Time Combat Log Parser &amp; DPS Meter">
-    <meta property="og:description" content="Free real-time DPS meter and combat log parser for Windows. Track damage, encounters, loot drops, and export session data.">
+    <meta property="og:title" content="ZekParser — Free Real-Time MMO Combat Parser &amp; DPS Meter">
+    <meta property="og:description" content="Track DPS, encounters, loot drops, item stats, and XP gains live as you play. Free portable Windows app — no install, no game modification. Built for MMO players who want real combat data.">
     <meta property="og:site_name" content="ZekParser">
     <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://zekparser.com/screenshots/overview-feed-expanded.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="ZekParser showing live combat feed with real-time DPS rankings and player damage breakdowns">
 
-    <!-- Twitter -->
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://zekparser.com/">
-    <meta name="twitter:title" content="ZekParser — Real-Time Combat Log Parser &amp; DPS Meter">
-    <meta name="twitter:description" content="Free real-time DPS meter and combat log parser for Windows. Track damage, encounters, loot drops, and export session data.">
+    <meta name="twitter:title" content="ZekParser — Free Real-Time MMO Combat Parser &amp; DPS Meter">
+    <meta name="twitter:description" content="Track DPS, encounters, loot drops, item stats, and XP gains live as you play. Free portable Windows app — no install, no game modification.">
+    <meta name="twitter:image" content="https://zekparser.com/screenshots/overview-feed-expanded.png">
+    <meta name="twitter:image:alt" content="ZekParser showing live combat feed with real-time DPS rankings and player damage breakdowns">
 
     <!-- Theme -->
     <meta name="theme-color" content="#0a0a0a">
     <meta name="color-scheme" content="dark">
+    <meta name="application-name" content="ZekParser">
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Schema.org: SoftwareApplication -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "ZekParser",
+        "description": "Free real-time MMO combat log parser and DPS meter for Windows. Track damage, encounters, loot drops, item stats, experience gains, and text triggers live as you play.",
+        "url": "https://zekparser.com/",
+        "downloadUrl": "https://zekparser.com/ZekParser.exe",
+        "softwareVersion": "1.4.0",
+        "operatingSystem": "Windows 10, Windows 11",
+        "applicationCategory": "GameApplication",
+        "applicationSubCategory": "Combat Log Parser",
+        "fileSize": "15MB",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "Joinkle",
+            "url": "https://joinkle.com"
+        },
+        "screenshot": [
+            "https://zekparser.com/screenshots/overview-feed-expanded.png",
+            "https://zekparser.com/screenshots/encounters-multiple-kills.png",
+            "https://zekparser.com/screenshots/grand-overview-npc-stats.png",
+            "https://zekparser.com/screenshots/item-detail-drop-history.png",
+            "https://zekparser.com/screenshots/triggers-pattern-setup.png"
+        ],
+        "featureList": [
+            "Real-time DPS tracking",
+            "Per-encounter damage breakdowns",
+            "Session overview with player rankings",
+            "Loot drop tracking with item stats",
+            "Experience gain tracking with XP/hour",
+            "Text triggers with audio alerts",
+            "One-click copy to Discord",
+            "Non-invasive network packet reading"
+        ]
+    }
+    </script>
+
+    <!-- Schema.org: WebSite with SearchAction potential -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ZekParser",
+        "url": "https://zekparser.com/",
+        "description": "Real-time MMO combat log parser and DPS meter with crowdsourced item, XP, and combat databases.",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Joinkle",
+            "url": "https://joinkle.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://zekparser.com/"
+            }
+        ]
+    }
+    </script>
+
+    <!-- Schema.org: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is ZekParser?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "ZekParser is a free, portable real-time combat log parser and DPS meter for MMO games on Windows. It reads network traffic passively to track damage per second, encounter breakdowns, loot drops, item stats, experience gains, and custom text triggers — all live as you play."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does ZekParser work?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "ZekParser reads network packets from your game's connection in real time. It auto-detects the game process and your player name. No game files are modified — it passively captures combat data from network traffic, which requires running as Administrator on Windows 10 or 11."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is ZekParser safe to use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. ZekParser is non-invasive — it only reads network traffic passively. There is no code injection, no memory writing, and no file modification. The game does not know it is running."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does ZekParser require installation?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. ZekParser is a single portable .exe file (~15 MB). Just download it, right-click, and run as Administrator. No installer, no dependencies, no setup."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What can ZekParser track?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "ZekParser tracks real-time DPS, per-encounter damage breakdowns with player rankings, a session-wide overview leaderboard, loot drops with full item stats and drop sources, experience gains with XP/hour calculation, and custom text triggers with audio alerts."
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -47,10 +180,10 @@
 
     <!-- Nav -->
     <header class="site-nav">
-        <a href="index.html" class="nav-logo">ZekParser</a>
+        <a href="/" class="nav-logo">ZekParser</a>
         <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
         <nav class="nav-links">
-            <a href="saltyvision.html">SaltyVision</a>
+            <a href="/saltyvision">SaltyVision</a>
             <div class="nav-donate-mobile">
                 <a href="https://cash.app/$thepdxdude" target="_blank" rel="noopener" class="btn-donate">Cash App</a>
                 <a href="https://venmo.com/u/Saltycrackers" target="_blank" rel="noopener" class="btn-donate">Venmo</a>
@@ -73,7 +206,7 @@
                 Download ZekParser
             </a>
         </div>
-        <p class="hero-meta">v1.1.0 &bull; Windows 10/11 &bull; Requires Administrator</p>
+        <p class="hero-meta">v1.4.0 &bull; Windows 10/11 &bull; Requires Administrator</p>
     </section>
 
     <!-- Screenshots -->
@@ -247,7 +380,7 @@
             <p>Download ZekParser and start tracking your combat stats in real time.</p>
             <a href="/ZekParser.exe" class="btn-primary" id="download-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Download ZekParser v1.1.0
+                Download ZekParser v1.4.0
             </a>
             <p class="hero-meta" style="margin-top: 1rem;">Single .exe &bull; No install &bull; ~15 MB</p>
         </div>
@@ -256,8 +389,8 @@
     <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-links">
-            <a href="saltyvision.html">SaltyVision</a>
-            <a href="saltyvision.html#databases">Item Database</a>
+            <a href="/saltyvision">SaltyVision</a>
+            <a href="/saltyvision#databases">Item Database</a>
         </div>
         <p>&copy; 2026 <a href="https://joinkle.com" target="_blank" rel="noopener">Joinkle</a></p>
     </footer>

@@ -1,0 +1,1509 @@
+16:02:33 [DEBUG] MSG_UNKNOWN_NEW 0x0210 dir=IN len=41 body=31 3a 00 00 f1 03 29 00 01 a2 27 f3 43 95 17 d3 42 c7 26 02 c4 d5 d8 29 3e a0 59 38 b3 f2 43 3c
+16:02:33 [DEBUG] MSG_UNKNOWN_NEW 0x0221 dir=OUT len=16 body=03 00 00 00 2b 38 00 00 38 38 00 00 dd 39 00 00
+16:02:33 [DEBUG] MSG_UNKNOWN_NEW 0x0010 dir=OUT len=43 body=00 00 00 00 00 00 00 00 00 00 00 00 a3 c4 3d 44 0d c9 ef 42 dd 83 05 c4 3e 93 8e 43 00 00 00 00
+16:02:33 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:33 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:33 [DEBUG] HP_INIT #15052(#15052) HP:72/100 (no previous HP, no delta)
+16:02:33 [DEBUG] MSG_UNKNOWN_NEW 0x0220 dir=OUT len=4 body=d6 22 00 00
+16:02:34 [DEBUG] OVERVIEW_RENDER enc=0 total_dmg=0 dur=0.0s entries=0 local_eid=None player_name="" pet_states={} entity_types_sample={}
+16:02:34 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=227
+16:02:34 [DEBUG]   PARSED type=SpawnEntity eid=11556 target=None
+16:02:34 [DEBUG] SPAWN #11556 type=1 "an elder black bear" HP:1000/1000 class=bbr lvl=0
+16:02:34 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:34 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:02:34 [DEBUG] HP_INIT #15013(#15013) HP:1202/1254 (no previous HP, no delta)
+16:02:34 [DEBUG] MSG_UNKNOWN_NEW 0x0018 dir=IN len=10 body=41 3a 00 00 05 00 6a 75 6d 70
+16:02:34 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:02:34 [DEBUG]   PARSED type=UpdateEndurance eid=14913 target=None
+16:02:35 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:02:35 [DEBUG]   PARSED type=SpawnEntity eid=13169 target=None
+16:02:35 [DEBUG] SPAWN #13169 type=1 "a shadow wolf" HP:1000/1000 class=wlf lvl=0
+16:02:35 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=1384
+16:02:35 [DEBUG]   PARSED type=SpawnEntity eid=14913 target=None
+16:02:35 [DEBUG] SPAWN #14913 type=0 "Mfjl" HP:5888/144128 class=dru lvl=None
+16:02:35 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+16:02:35 [DEBUG]   PARSED type=SpawnEntity eid=14685 target=None
+16:02:35 [DEBUG] SPAWN #14685 type=1 "a wasp drone" HP:1000/1000 class=was lvl=0
+16:02:35 [DEBUG] MSG_UNKNOWN_NEW 0x6565 dir=IN len=350 body=6e ff 00 ff 00 ff 00 ff 00 01 00 05 0f 00 43 6c 61 73 73 50 6c 61 74 65 46 54 52 41 0e 00 42 72
+16:02:35 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=125
+16:02:35 [DEBUG]   PARSED type=AddBuffIcon eid=14913 target=None
+16:02:35 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+16:02:35 [DEBUG]   PARSED type=AddBuffIcon eid=14913 target=None
+16:02:35 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:02:35 [DEBUG]   PARSED type=AddBuffIcon eid=14913 target=None
+16:02:35 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=119
+16:02:35 [DEBUG]   PARSED type=AddBuffIcon eid=14913 target=None
+16:02:35 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=147
+16:02:35 [DEBUG]   PARSED type=AddBuffIcon eid=14913 target=None
+16:02:35 [DEBUG] MSG_UNKNOWN_NEW 0x0015 dir=IN len=5 body=41 3a 00 00 01
+16:02:36 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:36 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:36 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:36 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:36 [DEBUG] DMG  #15052(#15052) type=None 72->69/100 amt=3 attacker=None(None)
+16:02:36 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15052 amt=3
+16:02:36 [DEBUG] MSG_UNKNOWN_NEW 0x001E dir=IN len=8 body=a4 4a 07 08 00 00 00 00
+16:02:36 [DEBUG] MSG_UNKNOWN_NEW 0x001F dir=OUT len=8 body=a4 4a 07 08 00 00 00 00
+16:02:37 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:37 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:02:37 [DEBUG] HP_INIT #14911(#14911) HP:780/1046 (no previous HP, no delta)
+16:02:37 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:02:37 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:02:37 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:37 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:02:37 [DEBUG] HP_INIT Mfjl(#14913) HP:566/602 (no previous HP, no delta)
+16:02:37 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:02:37 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:02:37 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:02:37 [DEBUG]   PARSED type=UpdateEndurance eid=14913 target=None
+16:02:37 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:37 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:02:37 [DEBUG] HEAL #14911(#14911) 780->856/1046 delta=+76 last_attacker=None(None)
+16:02:37 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:02:37 [DEBUG]   PARSED type=RemoveBuffIcon eid=14911 target=None
+16:02:37 [DEBUG] MSG_UNKNOWN_NEW 0x0005 dir=IN len=23 body=b8 58 0c 01 10 00 00 00 03 00 00 00 60 02 00 00 01 00 00 00 02 02 02
+16:02:38 [DEBUG] MSG_UNKNOWN_NEW 0x1011 dir=IN len=8 body=cc 3a 00 00 00 00 00 00
+16:02:38 [DEBUG] MSG_IN 0x0013 Die dir=IN body_len=10
+16:02:38 [DEBUG]   PARSED type=Die eid=14911 target=None
+16:02:38 [DEBUG] DIE #14911 "#14911" no_encounter
+16:02:38 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=102
+16:02:38 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:02:38 [DEBUG] MSG_UNKNOWN_NEW 0x001C dir=IN len=5 body=3f 3a 00 00 00
+16:02:38 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:38 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:38 [DEBUG] HEAL #15052(#15052) 69->70/100 delta=+1 last_attacker=None(None)
+16:02:38 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:02:38 [DEBUG]   PARSED type=UpdateMana eid=15052 target=None
+16:02:38 [DEBUG] MSG_IN 0x0013 Die dir=IN body_len=10
+16:02:38 [DEBUG]   PARSED type=Die eid=14911 target=None
+16:02:38 [DEBUG] DIE #14911 "#14911" no_encounter
+16:02:38 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:02:38 [DEBUG]   PARSED type=RemoveBuffIcon eid=14911 target=None
+16:02:38 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=225
+16:02:38 [DEBUG]   PARSED type=SpawnEntity eid=14392 target=None
+16:02:38 [DEBUG] SPAWN #14392 type=1 "a forest drakeling" HP:1000/1000 class=dke lvl=0
+16:02:39 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:39 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:02:39 [DEBUG] DMG  Mfjl(#14913) type=0 566->514/602 amt=52 attacker=None(None)
+16:02:39 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+16:02:39 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:39 [DEBUG]   PARSED type=UpdateHealth eid=15056 target=None
+16:02:39 [DEBUG] HP_INIT #15056(#15056) HP:722/756 (no previous HP, no delta)
+16:02:39 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=533
+16:02:39 [DEBUG]   PARSED type=SpawnEntity eid=15052 target=None
+16:02:39 [DEBUG] SPAWN #15052 type=1 "a waning spirit" HP:700/1000 class=wsp lvl=0
+16:02:39 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=225
+16:02:39 [DEBUG]   PARSED type=SpawnEntity eid=15063 target=None
+16:02:39 [DEBUG] SPAWN #15063 type=1 "a forest drakeling" HP:1000/1000 class=dke lvl=0
+16:02:39 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:39 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:39 [DEBUG] HP_INIT a waning spirit(#15052) HP:66/100 (no previous HP, no delta)
+16:02:39 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+16:02:39 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:02:39 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=147
+16:02:39 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:02:39 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=137
+16:02:39 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:02:39 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=125
+16:02:39 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:02:39 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=168
+16:02:39 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:02:39 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:02:39 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:02:39 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=133
+16:02:39 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:02:39 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=90
+16:02:39 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:02:39 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=233
+16:02:39 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:02:39 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=90
+16:02:39 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:02:39 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:02:39 [DEBUG]   PARSED type=RemoveBuffIcon eid=14911 target=None
+16:02:39 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=1384
+16:02:39 [DEBUG]   PARSED type=SpawnEntity eid=14911 target=None
+16:02:39 [DEBUG] SPAWN #14911 type=0 "Candyman" HP:7680/219136 class=mnk lvl=None
+16:02:39 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=122
+16:02:39 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:02:39 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:39 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:39 [DEBUG] DMG  a waning spirit(#15052) type=1 66->65/100 amt=1 attacker=None(None)
+16:02:39 [DEBUG]   ENC+ "a waning spirit"(#15052) +1dmg NO_ATTACKER total=1
+16:02:39 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:39 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:39 [DEBUG] DMG  a waning spirit(#15052) type=1 65->62/100 amt=3 attacker=None(None)
+16:02:39 [DEBUG]   ENC+ "a waning spirit"(#15052) +3dmg NO_ATTACKER total=4
+16:02:39 [DEBUG] MSG_UNKNOWN_NEW 0x0100 dir=IN len=196 body=00 07 00 00 00 05 00 48 61 69 72 00 00 00 00 00 05 00 46 61 63 65 04 00 00 00 00 05 00 45 79 65
+16:02:39 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:39 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:39 [DEBUG] DMG  a waning spirit(#15052) type=1 62->60/100 amt=2 attacker=None(None)
+16:02:39 [DEBUG]   ENC+ "a waning spirit"(#15052) +2dmg NO_ATTACKER total=6
+16:02:39 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:39 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:02:39 [DEBUG] HP_INIT Candyman(#14911) HP:906/1046 (no previous HP, no delta)
+16:02:39 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:39 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:39 [DEBUG] DMG  a waning spirit(#15052) type=1 60->59/100 amt=1 attacker=None(None)
+16:02:39 [DEBUG]   ENC+ "a waning spirit"(#15052) +1dmg NO_ATTACKER total=7
+16:02:40 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:02:40 [DEBUG]   PARSED type=SpawnEntity eid=8806 target=None
+16:02:40 [DEBUG] SPAWN #8806 type=1 "a wasp scout" HP:1000/1000 class=was lvl=0
+16:02:40 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:40 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:02:40 [DEBUG] HEAL #15013(#15013) 1202->1203/1254 delta=+1 last_attacker=None(None)
+16:02:41 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+16:02:41 [DEBUG]   PARSED type=SpawnEntity eid=11054 target=None
+16:02:41 [DEBUG] SPAWN #11054 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+16:02:41 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=35
+16:02:41 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:02:41 [DEBUG] CHATCOMBAT text="You drink Water Flask.Z"
+16:02:41 [DEBUG] MSG_ITEM 0x0260 UpdateItemQuantityAndChargesInInventory dir=IN len=12 body=92 a7 06 00 00 00 00 00 07 00 ff ff
+16:02:41 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=61
+16:02:41 [DEBUG]   PARSED type=AddBuffIcon eid=15013 target=None
+16:02:41 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:02:41 [DEBUG]   PARSED type=RemoveBuffIcon eid=15013 target=None
+16:02:41 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=217
+16:02:41 [DEBUG]   PARSED type=SpawnEntity eid=13525 target=None
+16:02:41 [DEBUG] SPAWN #13525 type=1 "a black serpent" HP:1000/1000 class=snk lvl=0
+16:02:42 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=217
+16:02:42 [DEBUG]   PARSED type=SpawnEntity eid=14360 target=None
+16:02:42 [DEBUG] SPAWN #14360 type=1 "a black serpent" HP:1000/1000 class=snk lvl=0
+16:02:42 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=227
+16:02:42 [DEBUG]   PARSED type=SpawnEntity eid=14731 target=None
+16:02:42 [DEBUG] SPAWN #14731 type=1 "an elder black bear" HP:1000/1000 class=bbr lvl=0
+16:02:42 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:42 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:42 [DEBUG] DMG  a waning spirit(#15052) type=1 59->57/100 amt=2 attacker=None(None)
+16:02:42 [DEBUG]   ENC+ "a waning spirit"(#15052) +2dmg NO_ATTACKER total=9
+16:02:42 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=225
+16:02:42 [DEBUG]   PARSED type=SpawnEntity eid=15063 target=None
+16:02:42 [DEBUG] SPAWN #15063 type=1 "a forest drakeling" HP:1000/1000 class=dke lvl=0
+16:02:42 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:42 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:42 [DEBUG] DMG  a waning spirit(#15052) type=1 57->54/100 amt=3 attacker=None(None)
+16:02:42 [DEBUG]   ENC+ "a waning spirit"(#15052) +3dmg NO_ATTACKER total=12
+16:02:43 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=204
+16:02:43 [DEBUG]   PARSED type=SpawnEntity eid=15064 target=None
+16:02:43 [DEBUG] SPAWN #15064 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+16:02:43 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=204
+16:02:43 [DEBUG]   PARSED type=SpawnEntity eid=15064 target=None
+16:02:43 [DEBUG] SPAWN #15064 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+16:02:43 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=204
+16:02:43 [DEBUG]   PARSED type=SpawnEntity eid=15064 target=None
+16:02:43 [DEBUG] SPAWN #15064 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+16:02:43 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:43 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:02:43 [DEBUG] HEAL Candyman(#14911) 906->912/1046 delta=+6 last_attacker=None(None)
+16:02:43 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:02:43 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:02:43 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:43 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:02:43 [DEBUG] HEAL Mfjl(#14913) 514->515/602 delta=+1 last_attacker=None(None)
+16:02:43 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:02:43 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:02:43 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 12, 'type0': 2} names=14
+16:02:43 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:02:43 [DEBUG]   PARSED type=SpawnEntity eid=8478 target=None
+16:02:43 [DEBUG] SPAWN #8478 type=1 "a wasp scout" HP:1000/1000 class=was lvl=0
+16:02:44 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:44 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:44 [DEBUG] HEAL a waning spirit(#15052) 54->55/100 delta=+1 last_attacker=None(None)
+16:02:44 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:02:44 [DEBUG]   PARSED type=UpdateMana eid=15052 target=None
+16:02:44 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:02:44 [DEBUG]   PARSED type=SpawnEntity eid=10365 target=None
+16:02:44 [DEBUG] SPAWN #10365 type=1 "a shadow wolf" HP:1000/1000 class=wlf lvl=0
+16:02:45 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:45 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:45 [DEBUG] DMG  a waning spirit(#15052) type=1 55->54/100 amt=1 attacker=None(None)
+16:02:45 [DEBUG]   ENC+ "a waning spirit"(#15052) +1dmg NO_ATTACKER total=13
+16:02:45 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:45 [DEBUG]   PARSED type=UpdateHealth eid=15056 target=None
+16:02:45 [DEBUG] HEAL #15056(#15056) 722->723/756 delta=+1 last_attacker=None(None)
+16:02:45 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:45 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:45 [DEBUG] DMG  a waning spirit(#15052) type=1 54->51/100 amt=3 attacker=None(None)
+16:02:45 [DEBUG]   ENC+ "a waning spirit"(#15052) +3dmg NO_ATTACKER total=16
+16:02:45 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:02:45 [DEBUG]   PARSED type=SpawnEntity eid=14216 target=None
+16:02:45 [DEBUG] SPAWN #14216 type=1 "a shadow wolf" HP:1000/1000 class=wlf lvl=0
+16:02:45 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:45 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:45 [DEBUG] DMG  a waning spirit(#15052) type=1 51->49/100 amt=2 attacker=None(None)
+16:02:45 [DEBUG]   ENC+ "a waning spirit"(#15052) +2dmg NO_ATTACKER total=18
+16:02:45 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=227
+16:02:45 [DEBUG]   PARSED type=SpawnEntity eid=14397 target=None
+16:02:45 [DEBUG] SPAWN #14397 type=1 "an elder black bear" HP:1000/1000 class=bbr lvl=0
+16:02:45 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+16:02:45 [DEBUG]   PARSED type=SpawnEntity eid=14610 target=None
+16:02:45 [DEBUG] SPAWN #14610 type=1 "a wasp drone" HP:1000/1000 class=was lvl=0
+16:02:45 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=227
+16:02:45 [DEBUG]   PARSED type=SpawnEntity eid=14790 target=None
+16:02:45 [DEBUG] SPAWN #14790 type=1 "an elder black bear" HP:1000/1000 class=bbr lvl=0
+16:02:46 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=80
+16:02:46 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:02:46 [DEBUG] CHATCOMBAT text="Jake tells the guild, "any healers want to rep me at sangrels? 15+""
+16:02:47 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:47 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:02:47 [DEBUG] HEAL #15013(#15013) 1203->1204/1254 delta=+1 last_attacker=None(None)
+16:02:47 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:02:47 [DEBUG]   PARSED type=SpawnEntity eid=8887 target=None
+16:02:47 [DEBUG] SPAWN #8887 type=1 "a wasp scout" HP:1000/1000 class=was lvl=0
+16:02:48 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:48 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:48 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:48 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:48 [DEBUG] DMG  a waning spirit(#15052) type=1 49->46/100 amt=3 attacker=None(None)
+16:02:48 [DEBUG]   ENC+ "a waning spirit"(#15052) +3dmg NO_ATTACKER total=21
+16:02:48 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:48 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:48 [DEBUG] DMG  a waning spirit(#15052) type=1 46->43/100 amt=3 attacker=None(None)
+16:02:48 [DEBUG]   ENC+ "a waning spirit"(#15052) +3dmg NO_ATTACKER total=24
+16:02:48 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+16:02:48 [DEBUG]   PARSED type=SpawnEntity eid=14383 target=None
+16:02:48 [DEBUG] SPAWN #14383 type=1 "a wasp drone" HP:1000/1000 class=was lvl=0
+16:02:49 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=217
+16:02:49 [DEBUG]   PARSED type=SpawnEntity eid=14747 target=None
+16:02:49 [DEBUG] SPAWN #14747 type=1 "a black serpent" HP:1000/1000 class=snk lvl=0
+16:02:49 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:49 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:02:49 [DEBUG] HEAL Candyman(#14911) 912->918/1046 delta=+6 last_attacker=None(None)
+16:02:49 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:49 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:02:49 [DEBUG] HEAL Mfjl(#14913) 515->518/602 delta=+3 last_attacker=None(None)
+16:02:49 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:02:49 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:02:50 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:50 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:50 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:02:50 [DEBUG]   PARSED type=UpdateMana eid=15052 target=None
+16:02:50 [DEBUG] MSG_IN 0x0029 UpdateStunState dir=IN body_len=9
+16:02:50 [DEBUG]   PARSED type=UpdateStunState eid=15052 target=None
+16:02:50 [DEBUG] MSG_UNKNOWN_NEW 0x00A0 dir=IN len=34 body=cc 3a 00 00 13 00 62 75 66 66 5f 53 77 65 65 70 69 6e 67 20 4b 69 63 6b 09 00 53 74 75 6e 42 75
+16:02:50 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:50 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:51 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:51 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:51 [DEBUG] DMG  a waning spirit(#15052) type=1 43->42/100 amt=1 attacker=None(None)
+16:02:51 [DEBUG]   ENC+ "a waning spirit"(#15052) +1dmg NO_ATTACKER total=25
+16:02:51 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:51 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:51 [DEBUG] DMG  a waning spirit(#15052) type=1 42->39/100 amt=3 attacker=None(None)
+16:02:51 [DEBUG]   ENC+ "a waning spirit"(#15052) +3dmg NO_ATTACKER total=28
+16:02:51 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:51 [DEBUG]   PARSED type=UpdateHealth eid=15056 target=None
+16:02:51 [DEBUG] HEAL #15056(#15056) 723->724/756 delta=+1 last_attacker=None(None)
+16:02:52 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=225
+16:02:52 [DEBUG]   PARSED type=SpawnEntity eid=14674 target=None
+16:02:52 [DEBUG] SPAWN #14674 type=1 "a forest drakeling" HP:1000/1000 class=dke lvl=0
+16:02:52 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=225
+16:02:52 [DEBUG]   PARSED type=SpawnEntity eid=14813 target=None
+16:02:52 [DEBUG] SPAWN #14813 type=1 "a forest drakeling" HP:1000/1000 class=dke lvl=0
+16:02:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:53 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:02:53 [DEBUG] HEAL #15013(#15013) 1204->1205/1254 delta=+1 last_attacker=None(None)
+16:02:53 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 23, 'type0': 2} names=25
+16:02:53 [DEBUG] MSG_IN 0x0029 UpdateStunState dir=IN body_len=9
+16:02:53 [DEBUG]   PARSED type=UpdateStunState eid=15052 target=None
+16:02:53 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:02:53 [DEBUG]   PARSED type=RemoveBuffIcon eid=15052 target=None
+16:02:53 [DEBUG] MSG_UNKNOWN_NEW 0x00A1 dir=IN len=24 body=cc 3a 00 00 13 00 62 75 66 66 5f 53 77 65 65 70 69 6e 67 20 4b 69 63 6b
+16:02:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:53 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:53 [DEBUG] DMG  a waning spirit(#15052) type=1 39->38/100 amt=1 attacker=None(None)
+16:02:53 [DEBUG]   ENC+ "a waning spirit"(#15052) +1dmg NO_ATTACKER total=29
+16:02:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:53 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:53 [DEBUG] DMG  a waning spirit(#15052) type=1 38->36/100 amt=2 attacker=None(None)
+16:02:53 [DEBUG]   ENC+ "a waning spirit"(#15052) +2dmg NO_ATTACKER total=31
+16:02:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:53 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:54 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:54 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:54 [DEBUG] DMG  a waning spirit(#15052) type=1 36->33/100 amt=3 attacker=None(None)
+16:02:54 [DEBUG]   ENC+ "a waning spirit"(#15052) +3dmg NO_ATTACKER total=34
+16:02:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:02:54 [DEBUG]   PARSED type=SpawnEntity eid=8478 target=None
+16:02:54 [DEBUG] SPAWN #8478 type=1 "a wasp scout" HP:1000/1000 class=was lvl=0
+16:02:55 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:55 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:02:55 [DEBUG] HEAL Candyman(#14911) 918->924/1046 delta=+6 last_attacker=None(None)
+16:02:55 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:55 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:02:55 [DEBUG] HEAL Mfjl(#14913) 518->521/602 delta=+3 last_attacker=None(None)
+16:02:55 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:02:55 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:02:55 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+16:02:55 [DEBUG]   PARSED type=SpawnEntity eid=14754 target=None
+16:02:55 [DEBUG] SPAWN #14754 type=1 "a wasp drone" HP:1000/1000 class=was lvl=0
+16:02:55 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:55 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:55 [DEBUG] DMG  a waning spirit(#15052) type=1 33->29/100 amt=4 attacker=None(None)
+16:02:55 [DEBUG]   ENC+ "a waning spirit"(#15052) +4dmg NO_ATTACKER total=38
+16:02:55 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:55 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:55 [DEBUG] DMG  a waning spirit(#15052) type=1 29->28/100 amt=1 attacker=None(None)
+16:02:55 [DEBUG]   ENC+ "a waning spirit"(#15052) +1dmg NO_ATTACKER total=39
+16:02:56 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:56 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:56 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:56 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:56 [DEBUG] DMG  a waning spirit(#15052) type=1 28->27/100 amt=1 attacker=None(None)
+16:02:56 [DEBUG]   ENC+ "a waning spirit"(#15052) +1dmg NO_ATTACKER total=40
+16:02:56 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:56 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:57 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:57 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:57 [DEBUG] DMG  a waning spirit(#15052) type=1 27->24/100 amt=3 attacker=None(None)
+16:02:57 [DEBUG]   ENC+ "a waning spirit"(#15052) +3dmg NO_ATTACKER total=43
+16:02:58 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=46
+16:02:58 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+16:02:58 [DEBUG] CHATCOMBAT text="Jake tells the guild, "sorry 16+""
+16:02:58 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=225
+16:02:58 [DEBUG]   PARSED type=SpawnEntity eid=8914 target=None
+16:02:58 [DEBUG] SPAWN #8914 type=1 "a forest drakeling" HP:1000/1000 class=dke lvl=0
+16:02:58 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+16:02:58 [DEBUG]   PARSED type=SpawnEntity eid=11071 target=None
+16:02:58 [DEBUG] SPAWN #11071 type=1 "a wasp worker" HP:1000/1000 class=was lvl=0
+16:02:59 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=227
+16:02:59 [DEBUG]   PARSED type=SpawnEntity eid=13824 target=None
+16:02:59 [DEBUG] SPAWN #13824 type=1 "an elder black bear" HP:1000/1000 class=bbr lvl=0
+16:02:59 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=217
+16:02:59 [DEBUG]   PARSED type=SpawnEntity eid=14374 target=None
+16:02:59 [DEBUG] SPAWN #14374 type=1 "a black serpent" HP:1000/1000 class=snk lvl=0
+16:02:59 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=227
+16:02:59 [DEBUG]   PARSED type=SpawnEntity eid=14731 target=None
+16:02:59 [DEBUG] SPAWN #14731 type=1 "an elder black bear" HP:1000/1000 class=bbr lvl=0
+16:02:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:59 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:02:59 [DEBUG] HEAL #15013(#15013) 1205->1206/1254 delta=+1 last_attacker=None(None)
+16:02:59 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+16:02:59 [DEBUG]   PARSED type=SpawnEntity eid=14754 target=None
+16:02:59 [DEBUG] SPAWN #14754 type=1 "a wasp drone" HP:1000/1000 class=was lvl=0
+16:02:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:59 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:59 [DEBUG] DMG  a waning spirit(#15052) type=1 24->22/100 amt=2 attacker=None(None)
+16:02:59 [DEBUG]   ENC+ "a waning spirit"(#15052) +2dmg NO_ATTACKER total=45
+16:02:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:59 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:59 [DEBUG] DMG  a waning spirit(#15052) type=1 22->20/100 amt=2 attacker=None(None)
+16:02:59 [DEBUG]   ENC+ "a waning spirit"(#15052) +2dmg NO_ATTACKER total=47
+16:02:59 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:02:59 [DEBUG]   PARSED type=RemoveBuffIcon eid=14911 target=None
+16:02:59 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=90
+16:02:59 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:02:59 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:02:59 [DEBUG]   PARSED type=RemoveBuffIcon eid=14911 target=None
+16:02:59 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=122
+16:02:59 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:02:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:59 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:59 [DEBUG] DMG  a waning spirit(#15052) type=1 20->19/100 amt=1 attacker=None(None)
+16:02:59 [DEBUG]   ENC+ "a waning spirit"(#15052) +1dmg NO_ATTACKER total=48
+16:02:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:02:59 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:02:59 [DEBUG] DMG  a waning spirit(#15052) type=1 19->16/100 amt=3 attacker=None(None)
+16:02:59 [DEBUG]   ENC+ "a waning spirit"(#15052) +3dmg NO_ATTACKER total=51
+16:03:01 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:01 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:03:01 [DEBUG] DMG  a waning spirit(#15052) type=1 16->15/100 amt=1 attacker=None(None)
+16:03:01 [DEBUG]   ENC+ "a waning spirit"(#15052) +1dmg NO_ATTACKER total=52
+16:03:01 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:01 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:03:01 [DEBUG] DMG  Candyman(#14911) type=0 924->877/1046 amt=47 attacker=None(None)
+16:03:01 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+16:03:01 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:01 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:03:01 [DEBUG] HEAL Candyman(#14911) 877->883/1046 delta=+6 last_attacker=None(None)
+16:03:01 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:01 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:03:01 [DEBUG] HEAL Mfjl(#14913) 521->524/602 delta=+3 last_attacker=None(None)
+16:03:01 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:03:01 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:03:02 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:02 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:03:02 [DEBUG] DMG  a waning spirit(#15052) type=1 15->11/100 amt=4 attacker=None(None)
+16:03:02 [DEBUG]   ENC+ "a waning spirit"(#15052) +4dmg NO_ATTACKER total=56
+16:03:02 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:03:02 [DEBUG]   PARSED type=SpawnEntity eid=13169 target=None
+16:03:02 [DEBUG] SPAWN #13169 type=1 "a shadow wolf" HP:1000/1000 class=wlf lvl=0
+16:03:02 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:02 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:03:02 [DEBUG] HEAL a waning spirit(#15052) 11->12/100 delta=+1 last_attacker=None(None)
+16:03:02 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=225
+16:03:02 [DEBUG]   PARSED type=SpawnEntity eid=14392 target=None
+16:03:02 [DEBUG] SPAWN #14392 type=1 "a forest drakeling" HP:1000/1000 class=dke lvl=0
+16:03:02 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=208
+16:03:02 [DEBUG]   PARSED type=SpawnEntity eid=14685 target=None
+16:03:02 [DEBUG] SPAWN #14685 type=1 "a wasp drone" HP:1000/1000 class=was lvl=0
+16:03:03 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:03 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:03:03 [DEBUG] DMG  a waning spirit(#15052) type=1 12->8/100 amt=4 attacker=None(None)
+16:03:03 [DEBUG]   ENC+ "a waning spirit"(#15052) +4dmg NO_ATTACKER total=60
+16:03:03 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 28, 'type0': 2} names=30
+16:03:05 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:05 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:03:05 [DEBUG] DMG  a waning spirit(#15052) type=1 8->6/100 amt=2 attacker=None(None)
+16:03:05 [DEBUG]   ENC+ "a waning spirit"(#15052) +2dmg NO_ATTACKER total=62
+16:03:05 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:05 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:03:05 [DEBUG] DMG  a waning spirit(#15052) type=1 6->3/100 amt=3 attacker=None(None)
+16:03:05 [DEBUG]   ENC+ "a waning spirit"(#15052) +3dmg NO_ATTACKER total=65
+16:03:05 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:05 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:03:05 [DEBUG] HEAL #15013(#15013) 1206->1207/1254 delta=+1 last_attacker=None(None)
+16:03:05 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+16:03:05 [DEBUG]   PARSED type=SpawnEntity eid=11070 target=None
+16:03:05 [DEBUG] SPAWN #11070 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+16:03:05 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=225
+16:03:05 [DEBUG]   PARSED type=SpawnEntity eid=12886 target=None
+16:03:05 [DEBUG] SPAWN #12886 type=1 "a forest drakeling" HP:1000/1000 class=dke lvl=0
+16:03:05 [DEBUG] MSG_IN 0x0013 Die dir=IN body_len=10
+16:03:05 [DEBUG]   PARSED type=Die eid=14911 target=None
+16:03:05 [DEBUG] DIE #14911 "Candyman" no_encounter
+16:03:05 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=102
+16:03:05 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:03:06 [DEBUG] MSG_IN 0x0013 Die dir=IN body_len=10
+16:03:06 [DEBUG]   PARSED type=Die eid=14911 target=None
+16:03:06 [DEBUG] DIE #14911 "Candyman" no_encounter
+16:03:06 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:03:06 [DEBUG]   PARSED type=RemoveBuffIcon eid=14911 target=None
+16:03:06 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=225
+16:03:06 [DEBUG]   PARSED type=SpawnEntity eid=14674 target=None
+16:03:06 [DEBUG] SPAWN #14674 type=1 "a forest drakeling" HP:1000/1000 class=dke lvl=0
+16:03:06 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:06 [DEBUG]   PARSED type=UpdateHealth eid=15052 target=None
+16:03:06 [DEBUG] DMG  a waning spirit(#15052) type=1 3->0/100 amt=3 attacker=None(None)
+16:03:06 [DEBUG]   ENC+ "a waning spirit"(#15052) +3dmg NO_ATTACKER total=68
+16:03:06 [DEBUG] MSG_IN 0x0013 Die dir=IN body_len=10
+16:03:06 [DEBUG]   PARSED type=Die eid=15052 target=None
+16:03:06 [DEBUG] DIE #15052 "a waning spirit" hp_dmg=68 text_dmg=0 best=68 players=[]
+16:03:06 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:03:06 [DEBUG]   PARSED type=RemoveBuffIcon eid=15052 target=None
+16:03:06 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:03:06 [DEBUG]   PARSED type=RemoveBuffIcon eid=15052 target=None
+16:03:06 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:03:06 [DEBUG]   PARSED type=RemoveBuffIcon eid=15052 target=None
+16:03:06 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:03:06 [DEBUG]   PARSED type=RemoveBuffIcon eid=15052 target=None
+16:03:07 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:07 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:03:07 [DEBUG] HEAL Candyman(#14911) 883->889/1046 delta=+6 last_attacker=None(None)
+16:03:07 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:07 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:03:07 [DEBUG] HEAL Mfjl(#14913) 524->527/602 delta=+3 last_attacker=None(None)
+16:03:07 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:03:07 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:03:09 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+16:03:09 [DEBUG]   PARSED type=SpawnEntity eid=14610 target=None
+16:03:09 [DEBUG] SPAWN #14610 type=1 "a wasp drone" HP:1000/1000 class=was lvl=0
+16:03:09 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=204
+16:03:09 [DEBUG]   PARSED type=SpawnEntity eid=15071 target=None
+16:03:09 [DEBUG] SPAWN #15071 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+16:03:09 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=204
+16:03:09 [DEBUG]   PARSED type=SpawnEntity eid=15071 target=None
+16:03:09 [DEBUG] SPAWN #15071 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+16:03:09 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=204
+16:03:09 [DEBUG]   PARSED type=SpawnEntity eid=15071 target=None
+16:03:09 [DEBUG] SPAWN #15071 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+16:03:10 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:03:10 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:03:10 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:10 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:10 [DEBUG] HP_INIT #15054(#15054) HP:99/100 (no previous HP, no delta)
+16:03:11 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:11 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:03:11 [DEBUG] HEAL #15013(#15013) 1207->1208/1254 delta=+1 last_attacker=None(None)
+16:03:11 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:03:11 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:03:12 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:03:12 [DEBUG]   PARSED type=RemoveBuffIcon eid=14911 target=None
+16:03:12 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=405
+16:03:12 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:03:12 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:12 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:12 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=227
+16:03:12 [DEBUG]   PARSED type=SpawnEntity eid=14731 target=None
+16:03:12 [DEBUG] SPAWN #14731 type=1 "an elder black bear" HP:1000/1000 class=bbr lvl=0
+16:03:13 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:13 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:03:13 [DEBUG] HEAL Candyman(#14911) 889->895/1046 delta=+6 last_attacker=None(None)
+16:03:13 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:03:13 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:03:13 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:13 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:03:13 [DEBUG] HEAL Mfjl(#14913) 527->530/602 delta=+3 last_attacker=None(None)
+16:03:13 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:03:13 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:03:13 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 31, 'type0': 2} names=33
+16:03:15 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=209
+16:03:15 [DEBUG]   PARSED type=SpawnEntity eid=11068 target=None
+16:03:15 [DEBUG] SPAWN #11068 type=1 "a bight asp" HP:1000/1000 class=snk lvl=0
+16:03:15 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+16:03:15 [DEBUG]   PARSED type=SpawnEntity eid=11070 target=None
+16:03:15 [DEBUG] SPAWN #11070 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+16:03:16 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+16:03:16 [DEBUG]   PARSED type=SpawnEntity eid=14383 target=None
+16:03:16 [DEBUG] SPAWN #14383 type=1 "a wasp drone" HP:1000/1000 class=was lvl=0
+16:03:16 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+16:03:16 [DEBUG]   PARSED type=SpawnEntity eid=14685 target=None
+16:03:16 [DEBUG] SPAWN #14685 type=1 "a wasp drone" HP:1000/1000 class=was lvl=0
+16:03:16 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=227
+16:03:16 [DEBUG]   PARSED type=SpawnEntity eid=14790 target=None
+16:03:16 [DEBUG] SPAWN #14790 type=1 "an elder black bear" HP:1000/1000 class=bbr lvl=0
+16:03:16 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=533
+16:03:16 [DEBUG]   PARSED type=SpawnEntity eid=15059 target=None
+16:03:16 [DEBUG] SPAWN #15059 type=1 "a waning spirit" HP:1000/1000 class=wsp lvl=0
+16:03:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:17 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:03:17 [DEBUG] HEAL #15013(#15013) 1208->1209/1254 delta=+1 last_attacker=None(None)
+16:03:18 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:18 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:18 [DEBUG] DMG  #15054(#15054) type=None 99->97/100 amt=2 attacker=None(None)
+16:03:18 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=2
+16:03:18 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:18 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:18 [DEBUG] DMG  #15054(#15054) type=None 97->96/100 amt=1 attacker=None(None)
+16:03:18 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=1
+16:03:18 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:18 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:03:18 [DEBUG] DMG  Candyman(#14911) type=0 895->871/1046 amt=24 attacker=None(None)
+16:03:18 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+16:03:18 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=909
+16:03:18 [DEBUG]   PARSED type=SpawnEntity eid=8630 target=None
+16:03:18 [DEBUG] SPAWN #8630 type=1 "Guard Ashbriar" HP:1000/1000 class=elf lvl=0
+16:03:18 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:18 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:18 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=206
+16:03:18 [DEBUG]   PARSED type=SpawnEntity eid=10365 target=None
+16:03:18 [DEBUG] SPAWN #10365 type=1 "a shadow wolf" HP:1000/1000 class=wlf lvl=0
+16:03:19 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+16:03:19 [DEBUG]   PARSED type=SpawnEntity eid=11071 target=None
+16:03:19 [DEBUG] SPAWN #11071 type=1 "a wasp worker" HP:1000/1000 class=was lvl=0
+16:03:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:19 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:03:19 [DEBUG] HEAL Candyman(#14911) 871->877/1046 delta=+6 last_attacker=None(None)
+16:03:19 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:03:19 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:03:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:19 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:03:19 [DEBUG] HEAL Mfjl(#14913) 530->533/602 delta=+3 last_attacker=None(None)
+16:03:19 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:03:19 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:03:19 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=217
+16:03:19 [DEBUG]   PARSED type=SpawnEntity eid=14747 target=None
+16:03:19 [DEBUG] SPAWN #14747 type=1 "a black serpent" HP:1000/1000 class=snk lvl=0
+16:03:19 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=227
+16:03:19 [DEBUG]   PARSED type=SpawnEntity eid=14761 target=None
+16:03:19 [DEBUG] SPAWN #14761 type=1 "an elder black bear" HP:1000/1000 class=bbr lvl=0
+16:03:19 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=217
+16:03:19 [DEBUG]   PARSED type=SpawnEntity eid=14786 target=None
+16:03:19 [DEBUG] SPAWN #14786 type=1 "a black serpent" HP:1000/1000 class=snk lvl=0
+16:03:19 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:03:19 [DEBUG]   PARSED type=RemoveBuffIcon eid=14911 target=None
+16:03:19 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=90
+16:03:19 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:03:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:19 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:19 [DEBUG] DMG  #15054(#15054) type=None 96->95/100 amt=1 attacker=None(None)
+16:03:19 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=1
+16:03:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:19 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:19 [DEBUG] DMG  #15054(#15054) type=None 95->93/100 amt=2 attacker=None(None)
+16:03:19 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=2
+16:03:21 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:21 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:21 [DEBUG] DMG  #15054(#15054) type=None 93->89/100 amt=4 attacker=None(None)
+16:03:21 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=4
+16:03:21 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:21 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:21 [DEBUG] DMG  #15054(#15054) type=None 89->88/100 amt=1 attacker=None(None)
+16:03:21 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=1
+16:03:21 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:21 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:21 [DEBUG] DMG  #15054(#15054) type=None 88->86/100 amt=2 attacker=None(None)
+16:03:21 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=2
+16:03:22 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:03:22 [DEBUG]   PARSED type=RemoveBuffIcon eid=14911 target=None
+16:03:22 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=233
+16:03:22 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:03:22 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+16:03:22 [DEBUG]   PARSED type=SpawnEntity eid=11071 target=None
+16:03:22 [DEBUG] SPAWN #11071 type=1 "a wasp worker" HP:1000/1000 class=was lvl=0
+16:03:23 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+16:03:23 [DEBUG]   PARSED type=SpawnEntity eid=13922 target=None
+16:03:23 [DEBUG] SPAWN #13922 type=1 "a wasp drone" HP:1000/1000 class=was lvl=0
+16:03:23 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:03:23 [DEBUG]   PARSED type=SpawnEntity eid=14758 target=None
+16:03:23 [DEBUG] SPAWN #14758 type=1 "a shadow wolf" HP:1000/1000 class=wlf lvl=0
+16:03:23 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=90
+16:03:23 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:03:23 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:03:23 [DEBUG]   PARSED type=RemoveBuffIcon eid=14911 target=None
+16:03:23 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=122
+16:03:23 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:03:23 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:23 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:23 [DEBUG] DMG  #15054(#15054) type=None 86->85/100 amt=1 attacker=None(None)
+16:03:23 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=1
+16:03:23 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:23 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:23 [DEBUG] DMG  #15054(#15054) type=None 85->84/100 amt=1 attacker=None(None)
+16:03:23 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=1
+16:03:23 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:23 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:03:23 [DEBUG] HEAL #15013(#15013) 1209->1210/1254 delta=+1 last_attacker=None(None)
+16:03:23 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:23 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:23 [DEBUG] DMG  #15054(#15054) type=None 84->82/100 amt=2 attacker=None(None)
+16:03:23 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=2
+16:03:23 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 38, 'type0': 2} names=40
+16:03:24 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:24 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:24 [DEBUG] DMG  #15054(#15054) type=None 82->79/100 amt=3 attacker=None(None)
+16:03:24 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=3
+16:03:24 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:24 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:24 [DEBUG] DMG  #15054(#15054) type=None 79->78/100 amt=1 attacker=None(None)
+16:03:24 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=1
+16:03:24 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:24 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:03:24 [DEBUG] DMG  Candyman(#14911) type=0 877->823/1046 amt=54 attacker=None(None)
+16:03:24 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+16:03:24 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:24 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:25 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:25 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:03:25 [DEBUG] HEAL Candyman(#14911) 823->829/1046 delta=+6 last_attacker=None(None)
+16:03:25 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:25 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:03:25 [DEBUG] HEAL Mfjl(#14913) 533->536/602 delta=+3 last_attacker=None(None)
+16:03:25 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:03:25 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:03:26 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:26 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:26 [DEBUG] DMG  #15054(#15054) type=None 78->75/100 amt=3 attacker=None(None)
+16:03:26 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=3
+16:03:26 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:03:26 [DEBUG]   PARSED type=SpawnEntity eid=14216 target=None
+16:03:26 [DEBUG] SPAWN #14216 type=1 "a shadow wolf" HP:1000/1000 class=wlf lvl=0
+16:03:26 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:26 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:26 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:03:26 [DEBUG]   PARSED type=SpawnEntity eid=14660 target=None
+16:03:26 [DEBUG] SPAWN #14660 type=1 "a shadow wolf" HP:1000/1000 class=wlf lvl=0
+16:03:26 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:26 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:26 [DEBUG] DMG  #15054(#15054) type=None 75->72/100 amt=3 attacker=None(None)
+16:03:26 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=3
+16:03:26 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=60
+16:03:26 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:03:26 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:03:26 [DEBUG]   PARSED type=RemoveBuffIcon eid=14911 target=None
+16:03:29 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:03:29 [DEBUG]   PARSED type=SpawnEntity eid=10365 target=None
+16:03:29 [DEBUG] SPAWN #10365 type=1 "a shadow wolf" HP:1000/1000 class=wlf lvl=0
+16:03:29 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:29 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:29 [DEBUG] DMG  #15054(#15054) type=None 72->69/100 amt=3 attacker=None(None)
+16:03:29 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=3
+16:03:29 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:29 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:03:29 [DEBUG] HEAL #15013(#15013) 1210->1211/1254 delta=+1 last_attacker=None(None)
+16:03:29 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:29 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:29 [DEBUG] DMG  #15054(#15054) type=None 69->65/100 amt=4 attacker=None(None)
+16:03:29 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=4
+16:03:29 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=227
+16:03:29 [DEBUG]   PARSED type=SpawnEntity eid=14397 target=None
+16:03:29 [DEBUG] SPAWN #14397 type=1 "an elder black bear" HP:1000/1000 class=bbr lvl=0
+16:03:30 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=225
+16:03:30 [DEBUG]   PARSED type=SpawnEntity eid=14674 target=None
+16:03:30 [DEBUG] SPAWN #14674 type=1 "a forest drakeling" HP:1000/1000 class=dke lvl=0
+16:03:30 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:30 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:30 [DEBUG] HEAL #15054(#15054) 65->66/100 delta=+1 last_attacker=None(None)
+16:03:31 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:31 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:31 [DEBUG] DMG  #15054(#15054) type=None 66->62/100 amt=4 attacker=None(None)
+16:03:31 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=4
+16:03:31 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:31 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:31 [DEBUG] DMG  #15054(#15054) type=None 62->61/100 amt=1 attacker=None(None)
+16:03:31 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=1
+16:03:31 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:31 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:03:31 [DEBUG] HEAL Candyman(#14911) 829->835/1046 delta=+6 last_attacker=None(None)
+16:03:31 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:31 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:03:31 [DEBUG] HEAL Mfjl(#14913) 536->539/602 delta=+3 last_attacker=None(None)
+16:03:31 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:03:31 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:03:32 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:32 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:32 [DEBUG] DMG  #15054(#15054) type=None 61->57/100 amt=4 attacker=None(None)
+16:03:32 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=4
+16:03:32 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:32 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:32 [DEBUG] DMG  #15054(#15054) type=None 57->55/100 amt=2 attacker=None(None)
+16:03:32 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=2
+16:03:33 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 39, 'type0': 2} names=41
+16:03:33 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=533
+16:03:33 [DEBUG]   PARSED type=SpawnEntity eid=15059 target=None
+16:03:33 [DEBUG] SPAWN #15059 type=1 "a waning spirit" HP:1000/1000 class=wsp lvl=0
+16:03:34 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:03:34 [DEBUG]   PARSED type=RemoveBuffIcon eid=8431 target=None
+16:03:35 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:35 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:35 [DEBUG] DMG  #15054(#15054) type=None 55->51/100 amt=4 attacker=None(None)
+16:03:35 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=4
+16:03:35 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:35 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:35 [DEBUG] DMG  #15054(#15054) type=None 51->50/100 amt=1 attacker=None(None)
+16:03:35 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=1
+16:03:35 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:03:35 [DEBUG]   PARSED type=SpawnEntity eid=8478 target=None
+16:03:35 [DEBUG] SPAWN #8478 type=1 "a wasp scout" HP:1000/1000 class=was lvl=0
+16:03:35 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:35 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:35 [DEBUG] DMG  #15054(#15054) type=None 50->46/100 amt=4 attacker=None(None)
+16:03:35 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=4
+16:03:35 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:35 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:03:35 [DEBUG] HEAL #15013(#15013) 1211->1212/1254 delta=+1 last_attacker=None(None)
+16:03:36 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:36 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:36 [DEBUG] DMG  #15054(#15054) type=None 46->45/100 amt=1 attacker=None(None)
+16:03:36 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=1
+16:03:36 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:36 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:03:36 [DEBUG] DMG  Candyman(#14911) type=0 835->813/1046 amt=22 attacker=None(None)
+16:03:36 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+16:03:36 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:36 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:36 [DEBUG] DMG  #15054(#15054) type=None 45->44/100 amt=1 attacker=None(None)
+16:03:36 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=1
+16:03:36 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:36 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:03:36 [DEBUG] DMG  Candyman(#14911) type=0 813->810/1046 amt=3 attacker=None(None)
+16:03:36 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+16:03:36 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:36 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:36 [DEBUG] HEAL #15054(#15054) 44->45/100 delta=+1 last_attacker=None(None)
+16:03:37 [DEBUG] MSG_UNKNOWN_NEW 0xB39D dir=IN len=1364 body=4a d9 a3 e3 67 9b 62 8a ab 91 77 e3 e6 cd 79 43 1f ed cc 42 97 f8 18 c4 8d d3 52 3d a0 59 70 66
+16:03:37 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:03:37 [DEBUG]   PARSED type=UpdateMana eid=8431 target=None
+16:03:37 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:37 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:03:37 [DEBUG] HEAL Candyman(#14911) 810->816/1046 delta=+6 last_attacker=None(None)
+16:03:37 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:37 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:03:37 [DEBUG] HEAL Mfjl(#14913) 539->542/602 delta=+3 last_attacker=None(None)
+16:03:37 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:03:37 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:03:37 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:37 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:37 [DEBUG] DMG  #15054(#15054) type=None 45->41/100 amt=4 attacker=None(None)
+16:03:37 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=4
+16:03:37 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:37 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:37 [DEBUG] DMG  #15054(#15054) type=None 41->38/100 amt=3 attacker=None(None)
+16:03:37 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=3
+16:03:38 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:38 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:38 [DEBUG] DMG  #15054(#15054) type=None 38->35/100 amt=3 attacker=None(None)
+16:03:38 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=3
+16:03:39 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:03:39 [DEBUG]   PARSED type=UpdateMana eid=8431 target=None
+16:03:39 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:39 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:39 [DEBUG] DMG  #15054(#15054) type=None 35->34/100 amt=1 attacker=None(None)
+16:03:39 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=1
+16:03:39 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:39 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:03:39 [DEBUG] DMG  Candyman(#14911) type=0 816->765/1046 amt=51 attacker=None(None)
+16:03:39 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+16:03:39 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:03:39 [DEBUG]   PARSED type=SpawnEntity eid=13520 target=None
+16:03:39 [DEBUG] SPAWN #13520 type=1 "a shadow wolf" HP:1000/1000 class=wlf lvl=0
+16:03:40 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:40 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:40 [DEBUG] DMG  #15054(#15054) type=None 34->31/100 amt=3 attacker=None(None)
+16:03:40 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=3
+16:03:40 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:40 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:40 [DEBUG] DMG  #15054(#15054) type=None 31->29/100 amt=2 attacker=None(None)
+16:03:40 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=2
+16:03:41 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+16:03:41 [DEBUG]   PARSED type=DespawnEntity eid=15034 target=None
+16:03:41 [DEBUG] DESPAWN #15034
+16:03:41 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:41 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:03:41 [DEBUG] HEAL #15013(#15013) 1212->1213/1254 delta=+1 last_attacker=None(None)
+16:03:42 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:03:42 [DEBUG]   PARSED type=SpawnEntity eid=10365 target=None
+16:03:42 [DEBUG] SPAWN #10365 type=1 "a shadow wolf" HP:1000/1000 class=wlf lvl=0
+16:03:42 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:42 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:42 [DEBUG] HEAL #15054(#15054) 29->30/100 delta=+1 last_attacker=None(None)
+16:03:43 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:03:43 [DEBUG]   PARSED type=RemoveBuffIcon eid=8439 target=None
+16:03:43 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:43 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:43 [DEBUG] DMG  #15054(#15054) type=None 30->27/100 amt=3 attacker=None(None)
+16:03:43 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=3
+16:03:43 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:03:43 [DEBUG]   PARSED type=RemoveBuffIcon eid=14911 target=None
+16:03:43 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=90
+16:03:43 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:03:43 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:03:43 [DEBUG]   PARSED type=RemoveBuffIcon eid=14911 target=None
+16:03:43 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=122
+16:03:43 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:03:43 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:43 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:43 [DEBUG] DMG  #15054(#15054) type=None 27->26/100 amt=1 attacker=None(None)
+16:03:43 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=1
+16:03:43 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:43 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:43 [DEBUG] DMG  #15054(#15054) type=None 26->23/100 amt=3 attacker=None(None)
+16:03:43 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=3
+16:03:43 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+16:03:43 [DEBUG]   PARSED type=DespawnEntity eid=15032 target=None
+16:03:43 [DEBUG] DESPAWN #15032
+16:03:43 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+16:03:43 [DEBUG]   PARSED type=SpawnEntity eid=14685 target=None
+16:03:43 [DEBUG] SPAWN #14685 type=1 "a wasp drone" HP:1000/1000 class=was lvl=0
+16:03:43 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:43 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:43 [DEBUG] DMG  #15054(#15054) type=None 23->20/100 amt=3 attacker=None(None)
+16:03:43 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=3
+16:03:43 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:43 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:03:43 [DEBUG] HEAL Candyman(#14911) 765->771/1046 delta=+6 last_attacker=None(None)
+16:03:43 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:43 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:03:43 [DEBUG] HEAL Mfjl(#14913) 542->545/602 delta=+3 last_attacker=None(None)
+16:03:43 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:03:43 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:03:43 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 40, 'type0': 2} names=42
+16:03:43 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+16:03:43 [DEBUG]   PARSED type=DespawnEntity eid=14927 target=None
+16:03:43 [DEBUG] DESPAWN #14927
+16:03:44 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:44 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:44 [DEBUG] DMG  #15054(#15054) type=None 20->17/100 amt=3 attacker=None(None)
+16:03:44 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=3
+16:03:44 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:44 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:44 [DEBUG] DMG  #15054(#15054) type=None 17->13/100 amt=4 attacker=None(None)
+16:03:44 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=4
+16:03:44 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:44 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:44 [DEBUG] DMG  #15054(#15054) type=None 13->12/100 amt=1 attacker=None(None)
+16:03:44 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=1
+16:03:45 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:03:45 [DEBUG]   PARSED type=UpdateMana eid=8431 target=None
+16:03:45 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:45 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:45 [DEBUG] DMG  #15054(#15054) type=None 12->11/100 amt=1 attacker=None(None)
+16:03:45 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=1
+16:03:45 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:45 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:03:45 [DEBUG] DMG  Candyman(#14911) type=0 771->744/1046 amt=27 attacker=None(None)
+16:03:45 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+16:03:45 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:03:45 [DEBUG]   PARSED type=SpawnEntity eid=8806 target=None
+16:03:45 [DEBUG] SPAWN #8806 type=1 "a wasp scout" HP:1000/1000 class=was lvl=0
+16:03:46 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:03:46 [DEBUG]   PARSED type=SpawnEntity eid=9856 target=None
+16:03:46 [DEBUG] SPAWN #9856 type=1 "a wasp scout" HP:1000/1000 class=was lvl=0
+16:03:46 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:46 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:46 [DEBUG] DMG  #15054(#15054) type=None 11->9/100 amt=2 attacker=None(None)
+16:03:46 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=2
+16:03:46 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:46 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:46 [DEBUG] DMG  #15054(#15054) type=None 9->7/100 amt=2 attacker=None(None)
+16:03:46 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=2
+16:03:46 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:03:46 [DEBUG]   PARSED type=UpdateMana eid=8431 target=None
+16:03:46 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=225
+16:03:46 [DEBUG]   PARSED type=SpawnEntity eid=13161 target=None
+16:03:46 [DEBUG] SPAWN #13161 type=1 "a forest drakeling" HP:1000/1000 class=dke lvl=0
+16:03:47 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=217
+16:03:47 [DEBUG]   PARSED type=SpawnEntity eid=14747 target=None
+16:03:47 [DEBUG] SPAWN #14747 type=1 "a black serpent" HP:1000/1000 class=snk lvl=0
+16:03:47 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:47 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:03:47 [DEBUG] HEAL #15013(#15013) 1213->1214/1254 delta=+1 last_attacker=None(None)
+16:03:49 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:49 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:49 [DEBUG] HEAL #15054(#15054) 7->8/100 delta=+1 last_attacker=None(None)
+16:03:49 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:49 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:49 [DEBUG] DMG  #15054(#15054) type=None 8->6/100 amt=2 attacker=None(None)
+16:03:49 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=2
+16:03:49 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:49 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:49 [DEBUG] DMG  #15054(#15054) type=None 6->4/100 amt=2 attacker=None(None)
+16:03:49 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=2
+16:03:49 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=217
+16:03:49 [DEBUG]   PARSED type=SpawnEntity eid=8713 target=None
+16:03:49 [DEBUG] SPAWN #8713 type=1 "a black serpent" HP:1000/1000 class=snk lvl=0
+16:03:49 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:03:49 [DEBUG]   PARSED type=SpawnEntity eid=8887 target=None
+16:03:49 [DEBUG] SPAWN #8887 type=1 "a wasp scout" HP:1000/1000 class=was lvl=0
+16:03:49 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=217
+16:03:49 [DEBUG]   PARSED type=SpawnEntity eid=8994 target=None
+16:03:49 [DEBUG] SPAWN #8994 type=1 "a black serpent" HP:1000/1000 class=snk lvl=0
+16:03:49 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:49 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:49 [DEBUG] DMG  #15054(#15054) type=None 4->3/100 amt=1 attacker=None(None)
+16:03:49 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=1
+16:03:49 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:03:49 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:03:49 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=146
+16:03:49 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:03:49 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:49 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:03:49 [DEBUG] HEAL Candyman(#14911) 744->897/1046 delta=+153 last_attacker=None(None)
+16:03:49 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+16:03:49 [DEBUG]   PARSED type=SpawnEntity eid=10251 target=None
+16:03:49 [DEBUG] SPAWN #10251 type=1 "a wasp worker" HP:1000/1000 class=was lvl=0
+16:03:49 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=195
+16:03:49 [DEBUG]   PARSED type=SpawnEntity eid=11068 target=None
+16:03:49 [DEBUG] SPAWN #11068 type=1 "a bight asp" HP:1000/1000 class=snk lvl=0
+16:03:50 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:50 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:03:50 [DEBUG] HEAL Candyman(#14911) 897->903/1046 delta=+6 last_attacker=None(None)
+16:03:50 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:50 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:03:50 [DEBUG] HEAL Mfjl(#14913) 545->546/602 delta=+1 last_attacker=None(None)
+16:03:50 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:03:50 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:03:50 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:50 [DEBUG]   PARSED type=UpdateHealth eid=15054 target=None
+16:03:50 [DEBUG] DMG  #15054(#15054) type=None 3->0/100 amt=3 attacker=None(None)
+16:03:50 [DEBUG]   ENC_SKIP type=None no_enc=no_enc #15054 amt=3
+16:03:50 [DEBUG] MSG_IN 0x0013 Die dir=IN body_len=10
+16:03:50 [DEBUG]   PARSED type=Die eid=15054 target=None
+16:03:50 [DEBUG] DIE #15054 "#15054" no_encounter
+16:03:50 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:03:50 [DEBUG]   PARSED type=RemoveBuffIcon eid=15054 target=None
+16:03:50 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:03:50 [DEBUG]   PARSED type=RemoveBuffIcon eid=15054 target=None
+16:03:51 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:03:51 [DEBUG]   PARSED type=UpdateMana eid=8431 target=None
+16:03:53 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:03:53 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:03:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:53 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:03:53 [DEBUG] HEAL #15013(#15013) 1214->1215/1254 delta=+1 last_attacker=None(None)
+16:03:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=227
+16:03:54 [DEBUG]   PARSED type=SpawnEntity eid=14790 target=None
+16:03:54 [DEBUG] SPAWN #14790 type=1 "an elder black bear" HP:1000/1000 class=bbr lvl=0
+16:03:54 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 45, 'type0': 2} names=47
+16:03:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=225
+16:03:54 [DEBUG]   PARSED type=SpawnEntity eid=14801 target=None
+16:03:54 [DEBUG] SPAWN #14801 type=1 "a forest drakeling" HP:1000/1000 class=dke lvl=0
+16:03:55 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:03:55 [DEBUG]   PARSED type=UpdateEndurance eid=14913 target=None
+16:03:55 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:55 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:03:55 [DEBUG] HEAL Candyman(#14911) 903->979/1046 delta=+76 last_attacker=None(None)
+16:03:56 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:56 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:03:56 [DEBUG] HEAL Candyman(#14911) 979->985/1046 delta=+6 last_attacker=None(None)
+16:03:56 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:03:56 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:03:56 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:03:56 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:03:56 [DEBUG] HEAL Mfjl(#14913) 546->547/602 delta=+1 last_attacker=None(None)
+16:03:56 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:03:56 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:03:56 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:03:56 [DEBUG]   PARSED type=UpdateEndurance eid=14913 target=None
+16:03:56 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:03:56 [DEBUG]   PARSED type=RemoveBuffIcon eid=14911 target=None
+16:03:56 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=405
+16:03:56 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:03:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:03:56 [DEBUG]   PARSED type=SpawnEntity eid=9856 target=None
+16:03:56 [DEBUG] SPAWN #9856 type=1 "a wasp scout" HP:1000/1000 class=was lvl=0
+16:03:56 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=405
+16:03:56 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:03:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=225
+16:03:56 [DEBUG]   PARSED type=SpawnEntity eid=13161 target=None
+16:03:56 [DEBUG] SPAWN #13161 type=1 "a forest drakeling" HP:1000/1000 class=dke lvl=0
+16:03:57 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:03:57 [DEBUG]   PARSED type=UpdateMana eid=8431 target=None
+16:04:00 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:00 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:04:00 [DEBUG] HEAL #15013(#15013) 1215->1216/1254 delta=+1 last_attacker=None(None)
+16:04:00 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=213
+16:04:00 [DEBUG]   PARSED type=SpawnEntity eid=14397 target=None
+16:04:00 [DEBUG] SPAWN #14397 type=1 "an elder black bear" HP:1000/1000 class=bbr lvl=0
+16:04:00 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=225
+16:04:00 [DEBUG]   PARSED type=SpawnEntity eid=14674 target=None
+16:04:00 [DEBUG] SPAWN #14674 type=1 "a forest drakeling" HP:1000/1000 class=dke lvl=0
+16:04:00 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=227
+16:04:00 [DEBUG]   PARSED type=SpawnEntity eid=14790 target=None
+16:04:00 [DEBUG] SPAWN #14790 type=1 "an elder black bear" HP:1000/1000 class=bbr lvl=0
+16:04:01 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=519
+16:04:01 [DEBUG]   PARSED type=SpawnEntity eid=15073 target=None
+16:04:01 [DEBUG] SPAWN #15073 type=1 "a waning spirit" HP:1000/1000 class=wsp lvl=0
+16:04:01 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=519
+16:04:01 [DEBUG]   PARSED type=SpawnEntity eid=15073 target=None
+16:04:01 [DEBUG] SPAWN #15073 type=1 "a waning spirit" HP:1000/1000 class=wsp lvl=0
+16:04:01 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:01 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:04:01 [DEBUG] HEAL Candyman(#14911) 985->1046/1046 delta=+61 last_attacker=None(None)
+16:04:01 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:04:01 [DEBUG]   PARSED type=RemoveBuffIcon eid=14911 target=None
+16:04:02 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:02 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:04:02 [DEBUG] HEAL Mfjl(#14913) 547->548/602 delta=+1 last_attacker=None(None)
+16:04:02 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:04:02 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:04:03 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=227
+16:04:03 [DEBUG]   PARSED type=SpawnEntity eid=11556 target=None
+16:04:03 [DEBUG] SPAWN #11556 type=1 "an elder black bear" HP:1000/1000 class=bbr lvl=0
+16:04:03 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=227
+16:04:03 [DEBUG]   PARSED type=SpawnEntity eid=13824 target=None
+16:04:03 [DEBUG] SPAWN #13824 type=1 "an elder black bear" HP:1000/1000 class=bbr lvl=0
+16:04:04 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 47, 'type0': 2} names=49
+16:04:04 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+16:04:04 [DEBUG]   PARSED type=SpawnEntity eid=14610 target=None
+16:04:04 [DEBUG] SPAWN #14610 type=1 "a wasp drone" HP:1000/1000 class=was lvl=0
+16:04:04 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:04:04 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:04:04 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=533
+16:04:04 [DEBUG]   PARSED type=SpawnEntity eid=15059 target=None
+16:04:04 [DEBUG] SPAWN #15059 type=1 "a waning spirit" HP:1000/1000 class=wsp lvl=0
+16:04:06 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:06 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:04:06 [DEBUG] HEAL #15013(#15013) 1216->1217/1254 delta=+1 last_attacker=None(None)
+16:04:06 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:06 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:04:06 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=209
+16:04:06 [DEBUG]   PARSED type=SpawnEntity eid=11068 target=None
+16:04:06 [DEBUG] SPAWN #11068 type=1 "a bight asp" HP:1000/1000 class=snk lvl=0
+16:04:06 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:04:06 [DEBUG]   PARSED type=UpdateEndurance eid=14913 target=None
+16:04:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+16:04:07 [DEBUG]   PARSED type=SpawnEntity eid=14221 target=None
+16:04:07 [DEBUG] SPAWN #14221 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+16:04:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+16:04:07 [DEBUG]   PARSED type=SpawnEntity eid=14685 target=None
+16:04:07 [DEBUG] SPAWN #14685 type=1 "a wasp drone" HP:1000/1000 class=was lvl=0
+16:04:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=227
+16:04:07 [DEBUG]   PARSED type=SpawnEntity eid=14761 target=None
+16:04:07 [DEBUG] SPAWN #14761 type=1 "an elder black bear" HP:1000/1000 class=bbr lvl=0
+16:04:07 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:04:07 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:04:08 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:04:08 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:04:08 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:04:08 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:04:08 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:08 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:04:08 [DEBUG] HEAL Mfjl(#14913) 548->549/602 delta=+1 last_attacker=None(None)
+16:04:08 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:04:08 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:04:08 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:04:08 [DEBUG]   PARSED type=UpdateEndurance eid=14913 target=None
+16:04:09 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:04:09 [DEBUG]   PARSED type=SpawnEntity eid=8478 target=None
+16:04:09 [DEBUG] SPAWN #8478 type=1 "a wasp scout" HP:1000/1000 class=was lvl=0
+16:04:09 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:04:09 [DEBUG]   PARSED type=SpawnEntity eid=8998 target=None
+16:04:09 [DEBUG] SPAWN #8998 type=1 "a shadow wolf" HP:1000/1000 class=wlf lvl=0
+16:04:10 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:04:10 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:04:10 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:04:10 [DEBUG]   PARSED type=SpawnEntity eid=8998 target=None
+16:04:10 [DEBUG] SPAWN #8998 type=1 "a shadow wolf" HP:1000/1000 class=wlf lvl=0
+16:04:10 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+16:04:10 [DEBUG]   PARSED type=SpawnEntity eid=14221 target=None
+16:04:10 [DEBUG] SPAWN #14221 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+16:04:10 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=213
+16:04:10 [DEBUG]   PARSED type=SpawnEntity eid=14388 target=None
+16:04:10 [DEBUG] SPAWN #14388 type=1 "an elder black bear" HP:1000/1000 class=bbr lvl=0
+16:04:11 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:04:11 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:04:12 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:12 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:04:12 [DEBUG] HEAL #15013(#15013) 1217->1218/1254 delta=+1 last_attacker=None(None)
+16:04:12 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:04:12 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:04:12 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:04:12 [DEBUG]   PARSED type=UpdateMana eid=15059 target=None
+16:04:13 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:04:13 [DEBUG]   PARSED type=RemoveBuffIcon eid=14911 target=None
+16:04:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+16:04:13 [DEBUG]   PARSED type=SpawnEntity eid=11070 target=None
+16:04:13 [DEBUG] SPAWN #11070 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+16:04:14 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 50, 'type0': 2} names=52
+16:04:14 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:04:14 [DEBUG]   PARSED type=UpdateMana eid=15059 target=None
+16:04:14 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:04:14 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:04:14 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:14 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:04:14 [DEBUG] HEAL Mfjl(#14913) 549->552/602 delta=+3 last_attacker=None(None)
+16:04:14 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:04:14 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:04:14 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=225
+16:04:14 [DEBUG]   PARSED type=SpawnEntity eid=15063 target=None
+16:04:14 [DEBUG] SPAWN #15063 type=1 "a forest drakeling" HP:1000/1000 class=dke lvl=0
+16:04:15 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+16:04:15 [DEBUG]   PARSED type=DespawnEntity eid=14834 target=None
+16:04:15 [DEBUG] DESPAWN #14834
+16:04:16 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=1384
+16:04:16 [DEBUG]   PARSED type=SpawnEntity eid=14911 target=None
+16:04:16 [DEBUG] SPAWN #14911 type=0 "Candyman" HP:7680/267776 class=mnk lvl=None
+16:04:16 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+16:04:16 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:16 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=147
+16:04:16 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:16 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=137
+16:04:16 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:16 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=125
+16:04:16 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:16 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=168
+16:04:16 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:16 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:04:16 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:16 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=133
+16:04:16 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:16 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=405
+16:04:16 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:16 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=533
+16:04:16 [DEBUG]   PARSED type=SpawnEntity eid=8918 target=None
+16:04:16 [DEBUG] SPAWN #8918 type=1 "a waning spirit" HP:1000/1000 class=wsp lvl=0
+16:04:17 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:04:17 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:04:17 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+16:04:17 [DEBUG]   PARSED type=SpawnEntity eid=14754 target=None
+16:04:17 [DEBUG] SPAWN #14754 type=1 "a wasp drone" HP:1000/1000 class=was lvl=0
+16:04:18 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:18 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:04:18 [DEBUG] HEAL #15013(#15013) 1218->1219/1254 delta=+1 last_attacker=None(None)
+16:04:19 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=113
+16:04:19 [DEBUG]   PARSED type=AddBuffIcon eid=15056 target=None
+16:04:19 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=117
+16:04:19 [DEBUG]   PARSED type=AddBuffIcon eid=15056 target=None
+16:04:19 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=123
+16:04:19 [DEBUG]   PARSED type=AddBuffIcon eid=15056 target=None
+16:04:19 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=121
+16:04:19 [DEBUG]   PARSED type=AddBuffIcon eid=15056 target=None
+16:04:19 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+16:04:19 [DEBUG]   PARSED type=AddBuffIcon eid=15056 target=None
+16:04:19 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=126
+16:04:19 [DEBUG]   PARSED type=AddBuffIcon eid=15056 target=None
+16:04:19 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=1077
+16:04:19 [DEBUG]   PARSED type=SpawnEntity eid=15056 target=None
+16:04:19 [DEBUG] SPAWN #15056 type=0 "Steinie" HP:7680/188928 class=dru lvl=None
+16:04:19 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=246
+16:04:19 [DEBUG]   PARSED type=SpawnEntity eid=7718 target=None
+16:04:19 [DEBUG] SPAWN #7718 type=3 "Steinie's Corpse?" HP:None/None class=None lvl=None
+16:04:20 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:04:20 [DEBUG]   PARSED type=UpdateMana eid=15059 target=None
+16:04:20 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:04:20 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:04:20 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:20 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:04:20 [DEBUG] HEAL Mfjl(#14913) 552->555/602 delta=+3 last_attacker=None(None)
+16:04:20 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:04:20 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:04:21 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:04:21 [DEBUG]   PARSED type=SpawnEntity eid=14216 target=None
+16:04:21 [DEBUG] SPAWN #14216 type=1 "a shadow wolf" HP:1000/1000 class=wlf lvl=0
+16:04:21 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:21 [DEBUG]   PARSED type=UpdateHealth eid=15073 target=None
+16:04:21 [DEBUG] HP_INIT a waning spirit(#15073) HP:98/100 (no previous HP, no delta)
+16:04:21 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+16:04:21 [DEBUG]   PARSED type=SpawnEntity eid=14610 target=None
+16:04:21 [DEBUG] SPAWN #14610 type=1 "a wasp drone" HP:1000/1000 class=was lvl=0
+16:04:22 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:22 [DEBUG]   PARSED type=UpdateHealth eid=15056 target=None
+16:04:22 [DEBUG] HP_INIT Steinie(#15056) HP:739/756 (no previous HP, no delta)
+16:04:23 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=1077
+16:04:23 [DEBUG]   PARSED type=SpawnEntity eid=15056 target=None
+16:04:23 [DEBUG] SPAWN #15056 type=0 "Steinie" HP:7680/189184 class=dru lvl=None
+16:04:23 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=113
+16:04:23 [DEBUG]   PARSED type=AddBuffIcon eid=15056 target=None
+16:04:23 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=117
+16:04:23 [DEBUG]   PARSED type=AddBuffIcon eid=15056 target=None
+16:04:23 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=123
+16:04:23 [DEBUG]   PARSED type=AddBuffIcon eid=15056 target=None
+16:04:23 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=121
+16:04:23 [DEBUG]   PARSED type=AddBuffIcon eid=15056 target=None
+16:04:23 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+16:04:23 [DEBUG]   PARSED type=AddBuffIcon eid=15056 target=None
+16:04:23 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=126
+16:04:23 [DEBUG]   PARSED type=AddBuffIcon eid=15056 target=None
+16:04:23 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=217
+16:04:23 [DEBUG]   PARSED type=SpawnEntity eid=8713 target=None
+16:04:23 [DEBUG] SPAWN #8713 type=1 "a black serpent" HP:1000/1000 class=snk lvl=0
+16:04:23 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=246
+16:04:23 [DEBUG]   PARSED type=SpawnEntity eid=7718 target=None
+16:04:23 [DEBUG] SPAWN #7718 type=3 "Steinie's Corpse?" HP:None/None class=None lvl=None
+16:04:24 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:24 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:04:24 [DEBUG] HEAL #15013(#15013) 1219->1220/1254 delta=+1 last_attacker=None(None)
+16:04:24 [DEBUG] GUI_STATE view=overview encounters=1 entity_types={'type1': 51, 'type0': 3, 'type3': 1} names=55
+16:04:24 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+16:04:24 [DEBUG]   PARSED type=SpawnEntity eid=13922 target=None
+16:04:24 [DEBUG] SPAWN #13922 type=1 "a wasp drone" HP:1000/1000 class=was lvl=0
+16:04:24 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=227
+16:04:24 [DEBUG]   PARSED type=SpawnEntity eid=14790 target=None
+16:04:24 [DEBUG] SPAWN #14790 type=1 "an elder black bear" HP:1000/1000 class=bbr lvl=0
+16:04:24 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+16:04:24 [DEBUG]   PARSED type=DespawnEntity eid=15072 target=None
+16:04:24 [DEBUG] DESPAWN #15072
+16:04:25 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:25 [DEBUG]   PARSED type=UpdateHealth eid=15073 target=None
+16:04:25 [DEBUG] HEAL a waning spirit(#15073) 98->99/100 delta=+1 last_attacker=None(None)
+16:04:26 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:04:26 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:04:26 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:26 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:04:26 [DEBUG] HEAL Mfjl(#14913) 555->558/602 delta=+3 last_attacker=None(None)
+16:04:26 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:04:26 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:04:26 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=220
+16:04:26 [DEBUG]   PARSED type=SpawnEntity eid=8887 target=None
+16:04:26 [DEBUG] SPAWN #8887 type=1 "a wasp scout" HP:1000/1000 class=was lvl=0
+16:04:26 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:26 [DEBUG]   PARSED type=UpdateHealth eid=15073 target=None
+16:04:26 [DEBUG] DMG  a waning spirit(#15073) type=1 99->98/100 amt=1 attacker=None(None)
+16:04:26 [DEBUG]   ENC+ "a waning spirit"(#15073) +1dmg NO_ATTACKER total=1
+16:04:26 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=90
+16:04:26 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:26 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:26 [DEBUG]   PARSED type=UpdateHealth eid=15073 target=None
+16:04:26 [DEBUG] DMG  a waning spirit(#15073) type=1 98->96/100 amt=2 attacker=None(None)
+16:04:26 [DEBUG]   ENC+ "a waning spirit"(#15073) +2dmg NO_ATTACKER total=3
+16:04:26 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:26 [DEBUG]   PARSED type=UpdateHealth eid=15073 target=None
+16:04:26 [DEBUG] DMG  a waning spirit(#15073) type=1 96->94/100 amt=2 attacker=None(None)
+16:04:26 [DEBUG]   ENC+ "a waning spirit"(#15073) +2dmg NO_ATTACKER total=5
+16:04:27 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=1077
+16:04:27 [DEBUG]   PARSED type=SpawnEntity eid=15056 target=None
+16:04:27 [DEBUG] SPAWN #15056 type=0 "Steinie" HP:7680/189184 class=dru lvl=None
+16:04:27 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=113
+16:04:27 [DEBUG]   PARSED type=AddBuffIcon eid=15056 target=None
+16:04:27 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=117
+16:04:27 [DEBUG]   PARSED type=AddBuffIcon eid=15056 target=None
+16:04:27 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=123
+16:04:27 [DEBUG]   PARSED type=AddBuffIcon eid=15056 target=None
+16:04:27 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=121
+16:04:27 [DEBUG]   PARSED type=AddBuffIcon eid=15056 target=None
+16:04:27 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+16:04:27 [DEBUG]   PARSED type=AddBuffIcon eid=15056 target=None
+16:04:27 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=126
+16:04:27 [DEBUG]   PARSED type=AddBuffIcon eid=15056 target=None
+16:04:27 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=246
+16:04:27 [DEBUG]   PARSED type=SpawnEntity eid=7718 target=None
+16:04:27 [DEBUG] SPAWN #7718 type=3 "Steinie's Corpse?" HP:None/None class=None lvl=None
+16:04:27 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+16:04:27 [DEBUG]   PARSED type=SpawnEntity eid=14259 target=None
+16:04:27 [DEBUG] SPAWN #14259 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+16:04:28 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:04:28 [DEBUG]   PARSED type=UpdateMana eid=15059 target=None
+16:04:28 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:28 [DEBUG]   PARSED type=UpdateHealth eid=15056 target=None
+16:04:28 [DEBUG] HP_INIT Steinie(#15056) HP:740/756 (no previous HP, no delta)
+16:04:29 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=1384
+16:04:29 [DEBUG]   PARSED type=SpawnEntity eid=14911 target=None
+16:04:29 [DEBUG] SPAWN #14911 type=0 "Candyman" HP:7680/267776 class=mnk lvl=None
+16:04:29 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+16:04:29 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:29 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=147
+16:04:29 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:29 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=137
+16:04:29 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:29 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=125
+16:04:29 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:29 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=168
+16:04:29 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:29 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+16:04:29 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:29 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=133
+16:04:29 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:29 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=405
+16:04:29 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:29 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=90
+16:04:29 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:29 [DEBUG] MSG_UNKNOWN_NEW 0x5432 dir=IN len=4 body=00 00 00 00
+16:04:30 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:30 [DEBUG]   PARSED type=UpdateHealth eid=15073 target=None
+16:04:30 [DEBUG] DMG  a waning spirit(#15073) type=1 94->92/100 amt=2 attacker=None(None)
+16:04:30 [DEBUG]   ENC+ "a waning spirit"(#15073) +2dmg NO_ATTACKER total=7
+16:04:30 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:30 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:04:30 [DEBUG] HEAL #15013(#15013) 1220->1221/1254 delta=+1 last_attacker=None(None)
+16:04:31 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=225
+16:04:31 [DEBUG]   PARSED type=SpawnEntity eid=12886 target=None
+16:04:31 [DEBUG] SPAWN #12886 type=1 "a forest drakeling" HP:1000/1000 class=dke lvl=0
+16:04:31 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=225
+16:04:31 [DEBUG]   PARSED type=SpawnEntity eid=13161 target=None
+16:04:31 [DEBUG] SPAWN #13161 type=1 "a forest drakeling" HP:1000/1000 class=dke lvl=0
+16:04:31 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:31 [DEBUG]   PARSED type=UpdateHealth eid=15073 target=None
+16:04:31 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=225
+16:04:31 [DEBUG]   PARSED type=SpawnEntity eid=14801 target=None
+16:04:31 [DEBUG] SPAWN #14801 type=1 "a forest drakeling" HP:1000/1000 class=dke lvl=0
+16:04:31 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+16:04:31 [DEBUG]   PARSED type=RemoveBuffIcon eid=14911 target=None
+16:04:31 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=519
+16:04:31 [DEBUG]   PARSED type=SpawnEntity eid=15059 target=None
+16:04:31 [DEBUG] SPAWN #15059 type=1 "a waning spirit" HP:1000/1000 class=wsp lvl=0
+16:04:31 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=206
+16:04:31 [DEBUG]   PARSED type=SpawnEntity eid=15076 target=None
+16:04:31 [DEBUG] SPAWN #15076 type=1 "a wasp scout" HP:1000/1000 class=was lvl=0
+16:04:31 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=206
+16:04:31 [DEBUG]   PARSED type=SpawnEntity eid=15076 target=None
+16:04:31 [DEBUG] SPAWN #15076 type=1 "a wasp scout" HP:1000/1000 class=was lvl=0
+16:04:31 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=206
+16:04:31 [DEBUG]   PARSED type=SpawnEntity eid=15076 target=None
+16:04:31 [DEBUG] SPAWN #15076 type=1 "a wasp scout" HP:1000/1000 class=was lvl=0
+16:04:32 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=233
+16:04:32 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:32 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=519
+16:04:32 [DEBUG]   PARSED type=SpawnEntity eid=15073 target=None
+16:04:32 [DEBUG] SPAWN #15073 type=1 "a waning spirit" HP:927/1000 class=wsp lvl=0
+16:04:32 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:04:32 [DEBUG]   PARSED type=UpdateMana eid=15059 target=None
+16:04:32 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:04:32 [DEBUG]   PARSED type=UpdateEndurance eid=14911 target=None
+16:04:32 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:32 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:04:32 [DEBUG] HEAL Mfjl(#14913) 558->561/602 delta=+3 last_attacker=None(None)
+16:04:32 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:04:32 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:04:32 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:32 [DEBUG]   PARSED type=UpdateHealth eid=15073 target=None
+16:04:32 [DEBUG] HP_INIT a waning spirit(#15073) HP:90/100 (no previous HP, no delta)
+16:04:33 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:33 [DEBUG]   PARSED type=UpdateHealth eid=15073 target=None
+16:04:33 [DEBUG] DMG  a waning spirit(#15073) type=1 90->87/100 amt=3 attacker=None(None)
+16:04:33 [DEBUG]   ENC+ "a waning spirit"(#15073) +3dmg NO_ATTACKER total=10
+16:04:33 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:33 [DEBUG]   PARSED type=UpdateHealth eid=15073 target=None
+16:04:33 [DEBUG] DMG  a waning spirit(#15073) type=1 87->85/100 amt=2 attacker=None(None)
+16:04:33 [DEBUG]   ENC+ "a waning spirit"(#15073) +2dmg NO_ATTACKER total=12
+16:04:33 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=519
+16:04:33 [DEBUG]   PARSED type=SpawnEntity eid=8918 target=None
+16:04:33 [DEBUG] SPAWN #8918 type=1 "a waning spirit" HP:1000/1000 class=wsp lvl=0
+16:04:33 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=185
+16:04:33 [DEBUG]   PARSED type=AddBuffIcon eid=14911 target=None
+16:04:34 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=209
+16:04:34 [DEBUG]   PARSED type=SpawnEntity eid=11068 target=None
+16:04:34 [DEBUG] SPAWN #11068 type=1 "a bight asp" HP:1000/1000 class=snk lvl=0
+16:04:34 [DEBUG] GUI_STATE view=overview encounters=2 entity_types={'type1': 53, 'type0': 3, 'type3': 1} names=57
+16:04:34 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+16:04:34 [DEBUG]   PARSED type=SpawnEntity eid=13922 target=None
+16:04:34 [DEBUG] SPAWN #13922 type=1 "a wasp drone" HP:1000/1000 class=was lvl=0
+16:04:34 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:04:34 [DEBUG]   PARSED type=UpdateMana eid=15059 target=None
+16:04:34 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:34 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:04:34 [DEBUG] HP_INIT Candyman(#14911) HP:882/1046 (no previous HP, no delta)
+16:04:34 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:34 [DEBUG]   PARSED type=UpdateHealth eid=15059 target=None
+16:04:34 [DEBUG] HP_INIT a waning spirit(#15059) HP:98/100 (no previous HP, no delta)
+16:04:34 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:34 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:04:34 [DEBUG] DMG  Candyman(#14911) type=0 882->877/1046 amt=5 attacker=None(None)
+16:04:34 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+16:04:34 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:34 [DEBUG]   PARSED type=UpdateHealth eid=8918 target=None
+16:04:34 [DEBUG] HP_INIT a waning spirit(#8918) HP:98/100 (no previous HP, no delta)
+16:04:34 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:34 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:04:34 [DEBUG] DMG  Candyman(#14911) type=0 877->855/1046 amt=22 attacker=None(None)
+16:04:34 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+16:04:35 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:35 [DEBUG]   PARSED type=UpdateHealth eid=15073 target=None
+16:04:35 [DEBUG] DMG  a waning spirit(#15073) type=1 85->81/100 amt=4 attacker=None(None)
+16:04:35 [DEBUG]   ENC+ "a waning spirit"(#15073) +4dmg NO_ATTACKER total=16
+16:04:35 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:35 [DEBUG]   PARSED type=UpdateHealth eid=15073 target=None
+16:04:35 [DEBUG] DMG  a waning spirit(#15073) type=1 81->80/100 amt=1 attacker=None(None)
+16:04:35 [DEBUG]   ENC+ "a waning spirit"(#15073) +1dmg NO_ATTACKER total=17
+16:04:35 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:04:35 [DEBUG]   PARSED type=UpdateEndurance eid=14913 target=None
+16:04:35 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:35 [DEBUG]   PARSED type=UpdateHealth eid=15073 target=None
+16:04:35 [DEBUG] DMG  a waning spirit(#15073) type=1 80->77/100 amt=3 attacker=None(None)
+16:04:35 [DEBUG]   ENC+ "a waning spirit"(#15073) +3dmg NO_ATTACKER total=20
+16:04:36 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:36 [DEBUG]   PARSED type=UpdateHealth eid=15073 target=None
+16:04:36 [DEBUG] DMG  a waning spirit(#15073) type=1 77->74/100 amt=3 attacker=None(None)
+16:04:36 [DEBUG]   ENC+ "a waning spirit"(#15073) +3dmg NO_ATTACKER total=23
+16:04:36 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:36 [DEBUG]   PARSED type=UpdateHealth eid=15013 target=None
+16:04:36 [DEBUG] HEAL #15013(#15013) 1221->1222/1254 delta=+1 last_attacker=None(None)
+16:04:36 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=909
+16:04:36 [DEBUG]   PARSED type=SpawnEntity eid=8630 target=None
+16:04:36 [DEBUG] SPAWN #8630 type=1 "Guard Ashbriar" HP:1000/1000 class=elf lvl=0
+16:04:37 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:37 [DEBUG]   PARSED type=UpdateHealth eid=15073 target=None
+16:04:37 [DEBUG] HEAL a waning spirit(#15073) 74->75/100 delta=+1 last_attacker=None(None)
+16:04:38 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+16:04:38 [DEBUG]   PARSED type=SpawnEntity eid=14241 target=None
+16:04:38 [DEBUG] SPAWN #14241 type=1 "a timber wolf" HP:1000/1000 class=wlf lvl=0
+16:04:38 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=217
+16:04:38 [DEBUG]   PARSED type=SpawnEntity eid=14374 target=None
+16:04:38 [DEBUG] SPAWN #14374 type=1 "a black serpent" HP:1000/1000 class=snk lvl=0
+16:04:38 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:38 [DEBUG]   PARSED type=UpdateHealth eid=15059 target=None
+16:04:38 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:38 [DEBUG]   PARSED type=UpdateHealth eid=15059 target=None
+16:04:38 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:04:38 [DEBUG]   PARSED type=UpdateMana eid=15059 target=None
+16:04:38 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:38 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:04:38 [DEBUG] HEAL Candyman(#14911) 855->861/1046 delta=+6 last_attacker=None(None)
+16:04:38 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:38 [DEBUG]   PARSED type=UpdateHealth eid=14913 target=None
+16:04:38 [DEBUG] HEAL Mfjl(#14913) 561->562/602 delta=+1 last_attacker=None(None)
+16:04:38 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+16:04:38 [DEBUG]   PARSED type=UpdateMana eid=14913 target=None
+16:04:38 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:04:38 [DEBUG]   PARSED type=UpdateEndurance eid=14913 target=None
+16:04:39 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:39 [DEBUG]   PARSED type=UpdateHealth eid=15073 target=None
+16:04:39 [DEBUG] DMG  a waning spirit(#15073) type=1 75->71/100 amt=4 attacker=None(None)
+16:04:39 [DEBUG]   ENC+ "a waning spirit"(#15073) +4dmg NO_ATTACKER total=27
+16:04:39 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:39 [DEBUG]   PARSED type=UpdateHealth eid=15073 target=None
+16:04:39 [DEBUG] DMG  a waning spirit(#15073) type=1 71->70/100 amt=1 attacker=None(None)
+16:04:39 [DEBUG]   ENC+ "a waning spirit"(#15073) +1dmg NO_ATTACKER total=28
+16:04:39 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:39 [DEBUG]   PARSED type=UpdateHealth eid=14911 target=None
+16:04:39 [DEBUG] DMG  Candyman(#14911) type=0 861->839/1046 amt=22 attacker=None(None)
+16:04:39 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+16:04:39 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:39 [DEBUG]   PARSED type=UpdateHealth eid=8918 target=None
+16:04:39 [DEBUG] HEAL a waning spirit(#8918) 98->99/100 delta=+1 last_attacker=None(None)
+16:04:40 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=217
+16:04:40 [DEBUG]   PARSED type=SpawnEntity eid=8713 target=None
+16:04:40 [DEBUG] SPAWN #8713 type=1 "a black serpent" HP:1000/1000 class=snk lvl=0
+16:04:41 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:41 [DEBUG]   PARSED type=UpdateHealth eid=15059 target=None
+16:04:41 [DEBUG] DMG  a waning spirit(#15059) type=1 98->95/100 amt=3 attacker=None(None)
+16:04:41 [DEBUG]   ENC+ "a waning spirit"(#15059) +3dmg NO_ATTACKER total=3
+16:04:41 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:41 [DEBUG]   PARSED type=UpdateHealth eid=15059 target=None
+16:04:41 [DEBUG] DMG  a waning spirit(#15059) type=1 95->92/100 amt=3 attacker=None(None)
+16:04:41 [DEBUG]   ENC+ "a waning spirit"(#15059) +3dmg NO_ATTACKER total=6
+16:04:41 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+16:04:41 [DEBUG]   PARSED type=UpdateEndurance eid=14913 target=None
+16:04:41 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+16:04:41 [DEBUG]   PARSED type=UpdateHealth eid=15059 target=None
+16:04:41 [DEBUG] DMG  a waning spirit(#15059) type=1 92->90/100 amt=2 attacker=None(None)
+16:04:41 [DEBUG]   ENC+ "a waning spirit"(#15059) +2dmg NO_ATTACKER total=8

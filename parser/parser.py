@@ -11,7 +11,7 @@ Usage:
     python parser/parser.py
 """
 
-APP_VERSION = "V1.1"
+APP_VERSION = "V1.4"
 
 import csv
 import ctypes
@@ -1240,6 +1240,7 @@ class EntityTracker:
         self._xp_level_start = {} # eid -> XP total when current level began
         self._xp_level_needed = {}# eid -> XP required for current level (learned from level-ups)
         self._xp_player_level = {}# eid -> last known level (to detect level-ups)
+        self._xp_pending_npc = None  # NPC name saved from previous kill (for next delta)
 
     def _backfill_player_info(self, eid, cls=None, level=None):
         """Update class/level on existing encounter player records for this eid."""
@@ -1699,9 +1700,29 @@ class EntityTracker:
                 # Seed level start on first XP event if not set
                 if eid not in self._xp_level_start:
                     self._xp_level_start[eid] = 0  # XP value IS progress into level
-                # First event — just record baseline, don't log as a gain
+                # Resolve the NPC that just died for this kill.
+                # The XP delta is off-by-one: the delta computed NOW
+                # is from the PREVIOUS kill, so we save this kill's NPC
+                # and attribute the current delta to the PREVIOUS kill's NPC.
+                npc_name_now = None
+                now = time.time()
+                if (self._last_hp_eid is not None
+                        and (now - self._last_hp_time) < 3.0):
+                    hp_enc = self._encounter_map.get(self._last_hp_eid)
+                    if hp_enc and hp_enc.npc_name:
+                        npc_name_now = hp_enc.npc_name
+                if not npc_name_now:
+                    last_kill = None
+                    for enc in self.encounters:
+                        if enc.end_time and enc.npc_name:
+                            if last_kill is None or enc.end_time > last_kill.end_time:
+                                last_kill = enc
+                    if last_kill and (now - last_kill.end_time) < 5.0:
+                        npc_name_now = last_kill.npc_name
+                # First event — record baseline and save NPC for next delta
                 if prev is None:
-                    _plog.debug(f"XP_BASELINE #{eid} total={xp_total:,} (first event, no delta)")
+                    self._xp_pending_npc = npc_name_now
+                    _plog.debug(f"XP_BASELINE #{eid} total={xp_total:,} (first event, no delta) pending_npc=\"{npc_name_now}\"")
                     return None
                 leveled_up = False
                 if xp_total < prev:
@@ -1715,6 +1736,10 @@ class EntityTracker:
                 level_needed = self._xp_level_needed.get(eid)
                 pct = (xp_gained / level_needed * 100) if (level_needed and xp_gained > 0) else None
                 name = self.names.get(eid, f"Entity#{eid}")
+                # Use the NPC from the PREVIOUS kill (saved at prior
+                # UpdateExperience) since the delta is that kill's XP.
+                npc_for_delta = self._xp_pending_npc
+                self._xp_pending_npc = npc_name_now  # save current for next
                 xp_ev = {
                     "timestamp": time.time(),
                     "eid": eid,
@@ -1724,30 +1749,10 @@ class EntityTracker:
                     "pct": pct,
                     "leveled_up": leveled_up,
                 }
-                # Try to tag with the NPC that just died.
-                # Server sends UpdateExperience BEFORE Die, so the NPC
-                # isn't marked dead yet.  Primary: use _last_hp_eid
-                # (the NPC that just took the killing blow).  Fallback:
-                # search for the most recently dead encounter.
-                npc_name = None
-                now = time.time()
-                if (self._last_hp_eid is not None
-                        and (now - self._last_hp_time) < 3.0):
-                    hp_enc = self._encounter_map.get(self._last_hp_eid)
-                    if hp_enc and hp_enc.npc_name:
-                        npc_name = hp_enc.npc_name
-                if not npc_name:
-                    last_kill = None
-                    for enc in self.encounters:
-                        if enc.end_time and enc.npc_name:
-                            if last_kill is None or enc.end_time > last_kill.end_time:
-                                last_kill = enc
-                    if last_kill and (now - last_kill.end_time) < 5.0:
-                        npc_name = last_kill.npc_name
-                if npc_name:
-                    xp_ev["npc_name"] = npc_name
+                if npc_for_delta:
+                    xp_ev["npc_name"] = npc_for_delta
                 self._xp_events.append(xp_ev)
-                _plog.debug(f"XP_UPDATE #{eid} \"{name}\" total={xp_total:,} gained=+{xp_gained:,} pct={pct} lvlup={leveled_up} npc=\"{npc_name}\"")
+                _plog.debug(f"XP_UPDATE #{eid} \"{name}\" total={xp_total:,} gained=+{xp_gained:,} pct={pct} lvlup={leveled_up} npc=\"{npc_for_delta}\" next_npc=\"{npc_name_now}\"")
                 return None
 
             if etype == "UpdateState":
@@ -4072,13 +4077,23 @@ class CombatApp(tk.Tk):
         # Build sets of eids/names that are encounter TARGETS (being fought).
         # If an entity is a target of any encounter AND it's not a confirmed
         # player (entity_type==0), it's an NPC — don't show in overview.
+        # For unknown entities (type=None), only treat as NPC target if the
+        # name looks like an NPC (lowercase start).  Players whose SpawnEntity
+        # wasn't captured have type=None but uppercase names — they can be
+        # encounter targets (from mobs hitting them back) without being NPCs.
         npc_target_eids = set()
         npc_target_names = set()
         for enc in encounters:
             et = tracker.entity_types.get(enc.npc_eid)
-            if et != 0:  # not confirmed player → NPC or unknown
+            if et is not None and et != 0:
+                # Confirmed NPC (entity_type > 0)
                 npc_target_eids.add(enc.npc_eid)
                 if enc.npc_name:
+                    npc_target_names.add(enc.npc_name)
+            elif et is None and enc.npc_name:
+                # Unknown entity — only treat as NPC if name looks like one
+                if EntityTracker._looks_like_npc_name(enc.npc_name):
+                    npc_target_eids.add(enc.npc_eid)
                     npc_target_names.add(enc.npc_name)
 
         for enc in encounters:
@@ -4359,9 +4374,13 @@ class CombatApp(tk.Tk):
         npc_target_names = set()
         for enc in encounters:
             et = tracker.entity_types.get(enc.npc_eid)
-            if et != 0:
+            if et is not None and et != 0:
                 npc_target_eids.add(enc.npc_eid)
                 if enc.npc_name:
+                    npc_target_names.add(enc.npc_name)
+            elif et is None and enc.npc_name:
+                if EntityTracker._looks_like_npc_name(enc.npc_name):
+                    npc_target_eids.add(enc.npc_eid)
                     npc_target_names.add(enc.npc_name)
         for enc in encounters:
             for p_eid, p in enc.players.items():
@@ -4937,23 +4956,21 @@ class CombatApp(tk.Tk):
 
     def _toggle_left_panel(self):
         """Hide or show the entire left panel (feed/items/triggers)."""
+        cur_w = self.winfo_width()
+        cur_h = self.winfo_height()
+        cur_x = self.winfo_x()
+        cur_y = self.winfo_y()
         if self._left_visible:
-            # Save current geometry before collapsing
-            w = self.winfo_width()
-            h = self.winfo_height()
-            x = self.winfo_x()
-            y = self.winfo_y()
-            self._saved_geometry = (w, h, x, y)
+            self._saved_expanded_w = cur_w
             self._left_frame.grid_remove()
             self._divider.grid_remove()
             self._main_frame.columnconfigure(0, weight=0, uniform='')
             self._main_frame.columnconfigure(2, weight=1, uniform='')
             self._toggle_left_btn.configure(text="\u25B6")
             self._left_visible = False
-            # Shrink window to roughly half width, anchored to right edge
-            new_w = max(400, w // 2)
-            new_x = x + (w - new_w)
-            self.geometry(f"{new_w}x{h}+{new_x}+{y}")
+            new_w = max(400, cur_w // 2)
+            new_x = cur_x + (cur_w - new_w)
+            self.geometry(f"{new_w}x{cur_h}+{new_x}+{cur_y}")
             self.minsize(350, 220)
         else:
             self._left_frame.grid()
@@ -4962,25 +4979,11 @@ class CombatApp(tk.Tk):
             self._main_frame.columnconfigure(2, weight=1, uniform='half')
             self._toggle_left_btn.configure(text="\u25C0")
             self._left_visible = True
-            # Restore saved geometry (right-edge anchored)
-            if hasattr(self, '_saved_geometry') and self._saved_geometry:
-                w, h, x, y = self._saved_geometry
-                cur_w = self.winfo_width()
-                cur_x = self.winfo_x()
-                new_x = cur_x + cur_w - w
-                self.geometry(f"{w}x{h}+{new_x}+{y}")
-                self._saved_geometry = None
-            else:
-                # First expand — double width, anchor right edge
-                cur_w = self.winfo_width()
-                cur_h = self.winfo_height()
-                cur_x = self.winfo_x()
-                cur_y = self.winfo_y()
-                new_w = max(850, cur_w * 2)
-                new_x = cur_x + cur_w - new_w
-                if new_x < 0:
-                    new_x = 0
-                self.geometry(f"{new_w}x{cur_h}+{new_x}+{cur_y}")
+            new_w = getattr(self, '_saved_expanded_w', None) or max(850, cur_w * 2)
+            new_x = cur_x + cur_w - new_w
+            if new_x < 0:
+                new_x = 0
+            self.geometry(f"{new_w}x{cur_h}+{new_x}+{cur_y}")
             self.minsize(600, 220)
 
     # --- Left Panel Tab Switching ---

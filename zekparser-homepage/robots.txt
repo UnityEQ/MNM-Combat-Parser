@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /ZekParser.exe
+
+Sitemap: https://zekparser.com/sitemap.xml

@@ -157,7 +157,6 @@ Copy and Export buttons adapt to whichever view is active.
         "protocols": ["UDP", "TCP"],
         "exclude_ports": [80, 443, 53]
     },
-    "api_enabled": false
 }
 ```
 
@@ -166,7 +165,6 @@ Copy and Export buttons adapt to whichever view is active.
 | `player_name` | Leave empty `""` — auto-detected from combat text. Only set manually if auto-detect fails |
 | `server_name` | Display label for the GUI title bar |
 | `interface_ip` | `"auto"` to detect from game connections, or explicit IP like `"10.0.0.5"` |
-| `api_enabled` | Enable remote API submission (HMAC-SHA256 signed batched uploads) |
 
 ## Requirements
 
