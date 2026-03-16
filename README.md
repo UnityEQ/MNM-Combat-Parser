@@ -274,4 +274,4 @@ The most impactful future improvement would be **active-time DPS** (the standard
 
 ## License
 
-Copyright 2026 MNM Network
+Copyright 2026 Joinkle
