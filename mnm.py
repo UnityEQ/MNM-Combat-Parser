@@ -262,7 +262,7 @@ class PacketProcessor:
 
                 # Log game messages with 2-byte IDs, names, and body hex
                 for msg in game_msgs:
-                    body_hex = msg.body.hex(' ') if len(msg.body) <= 64 else msg.body[:64].hex(' ') + '...'
+                    body_hex = msg.body.hex(' ')
                     extra += f" MSG[0x{msg.msg_id:04X}={msg.msg_name} len={len(msg.body)} body={body_hex}]"
 
             # Log decrypted hex preview

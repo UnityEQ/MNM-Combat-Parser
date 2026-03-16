@@ -543,9 +543,11 @@ MESSAGE_IDS = {
     0x0022: "UpdateHealth", 0x0023: "UpdateMana", 0x0025: "UpdateLevel",
     0x0027: "UpdateHealthMana",
     0x0029: "UpdateStunState", 0x002A: "UpdateHostileState",
+    0x002F: "UpdateState",
     0x0050: "CastAbility", 0x0053: "AddBuffIcon", 0x0054: "RemoveBuffIcon",
     0x0055: "BeginCasting", 0x0056: "EndCasting", 0x005C: "ParticleHit",
     0x005D: "CancelBuff", 0x005F: "UpdateClassHID", 0x0146: "ChannelAbility",
+    0x0380: "ClientPartyUpdate",
     0x022F: "UpdateEndurance",
     # Loot/inventory
     0x0060: "InventoryItemPickup", 0x0063: "AddItemToInventory",
@@ -563,8 +565,8 @@ MESSAGE_IDS = {
 
 COMBAT_MSG_IDS = {
     0x0011, 0x0012, 0x0013, 0x0014, 0x0020, 0x0021, 0x0022, 0x0023,
-    0x0025, 0x0027, 0x0029, 0x002A, 0x0040, 0x0050, 0x0053, 0x0054,
-    0x0055, 0x0056, 0x005C, 0x005D, 0x005F, 0x0146, 0x022F,
+    0x0025, 0x0027, 0x0029, 0x002A, 0x002F, 0x0040, 0x0050, 0x0053, 0x0054,
+    0x0055, 0x0056, 0x005C, 0x005D, 0x005F, 0x0146, 0x0380, 0x022F,
 }
 
 LOOT_MSG_IDS = {0x0063, 0x0065, 0x0080}
@@ -805,6 +807,81 @@ def parse_combat_event(msg_id, body, direction):
         event["entity_id"], off = _r_u32(body, off)
         event["hostile"], off = _r_bool(body, off)
 
+    elif msg_id == 0x002F:  # UpdateState — big packet with player class/level
+        event["type"] = "UpdateState"
+        try:
+            event["entity_id"], off = _r_u32(body, off)       # uint id
+            event["entity_state"], off = _r_bool(body, off)    # bool entityState
+            event["current_state"], off = _r_bool(body, off)   # bool currentState
+            event["visibility_state"], off = _r_bool(body, off)# bool visibilityState
+            event["pet_state"], off = _r_bool(body, off)       # bool petState
+            event["hp"], off = _r_i32(body, off)               # int health
+            event["max_hp"], off = _r_i32(body, off)           # int maxHealth
+            event["mana"], off = _r_i32(body, off)             # int mana
+            event["max_mana"], off = _r_i32(body, off)         # int maxMana
+            event["parent_id"], off = _r_u32(body, off)        # uint parentID
+            # Vector3 position (3 floats = 12 bytes)
+            _, off = _r_float(body, off)
+            _, off = _r_float(body, off)
+            _, off = _r_float(body, off)
+            # Vector3 velocity (3 floats = 12 bytes)
+            _, off = _r_float(body, off)
+            _, off = _r_float(body, off)
+            _, off = _r_float(body, off)
+            event["facing"], off = _r_float(body, off)         # float facing
+            event["entity_type"], off = _r_u16(body, off)      # ushort entityType
+            event["name"], off = _r_str(body, off)             # string name
+            event["surname"], off = _r_str(body, off)          # string surname
+            event["guild_name"], off = _r_str(body, off)       # string guildName
+            event["guild_rank"], off = _r_i32(body, off)       # int guildRank (enum)
+            event["class_hid"], off = _r_str(body, off)        # string classHID
+            event["race_hid"], off = _r_str(body, off)         # string raceHID
+            event["sex_hid"], off = _r_str(body, off)          # string sexHID
+            # After sexHID: bool noCollision, ushort skinTone, then 3 arrays
+            # (attachments, textures, features), then more fields, then level.
+            # Try to read through to level by skipping the arrays.
+            _nc, off = _r_bool(body, off)                      # bool noCollision
+            _st, off = _r_u16(body, off)                       # ushort skinTone
+            # Skip AttachmentDefinitionRecord[] — ushort count, then each record
+            _arr_count, off = _r_u16(body, off)
+            if _arr_count is not None and _arr_count < 200:
+                for _ in range(_arr_count):
+                    _, off = _r_str(body, off)   # string attachmentHID
+                    _, off = _r_u16(body, off)   # ushort materialIndex
+                    _, off = _r_u16(body, off)   # ushort colorIndex
+            # Skip TextureDefinitionRecord[] — ushort count, then each record
+            _arr_count, off = _r_u16(body, off)
+            if _arr_count is not None and _arr_count < 200:
+                for _ in range(_arr_count):
+                    _, off = _r_str(body, off)   # string textureHID
+            # Skip ModelFeatureRecord[] — ushort count, then each record
+            _arr_count, off = _r_u16(body, off)
+            if _arr_count is not None and _arr_count < 200:
+                for _ in range(_arr_count):
+                    _, off = _r_str(body, off)   # string featureHID
+                    _, off = _r_float(body, off)  # float value
+            # After arrays: int light(4), Color lightColor(16), string materialOverride,
+            # string modelOverride, 8 bools(8), byte animPresetID(1), bool showRangedWeapon(1),
+            # then int level
+            _light, off = _r_i32(body, off)                    # int light
+            # Color = 4 floats (RGBA)
+            _, off = _r_float(body, off)
+            _, off = _r_float(body, off)
+            _, off = _r_float(body, off)
+            _, off = _r_float(body, off)
+            _, off = _r_str(body, off)                         # string materialOverride
+            _, off = _r_str(body, off)                         # string modelOverride
+            # 8 bools: isAttacking, isSitting, isCorpse, isCorpseMine,
+            #          isHostile, isStealth, isHardcore, isLfg
+            for _ in range(8):
+                _, off = _r_bool(body, off)
+            if off + 1 <= len(body):                           # byte animationPresetID
+                off += 1
+            _, off = _r_bool(body, off)                        # bool showRangedWeapon
+            event["level"], off = _r_i32(body, off)            # int level
+        except Exception:
+            pass  # Partial parse — classHID may still be available
+
     elif msg_id == 0x0025:  # UpdateLevel
         event["type"] = "UpdateLevel"
         event["entity_id"], off = _r_u32(body, off)
@@ -830,6 +907,30 @@ def parse_combat_event(msg_id, body, direction):
     elif msg_id == 0x005D:  # CancelBuff
         event["type"] = "CancelBuff"
         event["entity_id"], off = _r_u32(body, off)
+
+    elif msg_id == 0x0380:  # ClientPartyUpdate — has class/level for party members
+        event["type"] = "ClientPartyUpdate"
+        try:
+            member_count, off = _r_u16(body, off)
+            members = []
+            if member_count is not None and member_count < 50:
+                for _ in range(member_count):
+                    m_id, off = _r_u32(body, off)      # uint id (entity id)
+                    m_cid, off = _r_u32(body, off)      # uint characterId
+                    m_name, off = _r_str(body, off)      # string name
+                    m_class, off = _r_str(body, off)     # string classHID
+                    m_level, off = _r_i32(body, off)     # int level
+                    m_zone, off = _r_str(body, off)      # string zoneHID
+                    m_disc, off = _r_bool(body, off)     # bool disconnected
+                    members.append({
+                        "id": m_id, "name": m_name,
+                        "class_hid": m_class, "level": m_level,
+                    })
+            event["members"] = members
+            event["leader"], off = _r_u32(body, off)
+        except Exception:
+            if "members" not in event:
+                event["members"] = []
 
     else:
         return None
@@ -1360,6 +1461,29 @@ class EntityTracker:
             self._process_chat_combat(event.get("text", ""))
             return None
 
+        # ClientPartyUpdate has no single entity_id — process member list
+        if etype == "ClientPartyUpdate":
+            with self._lock:
+                members = event.get("members", [])
+                for m in members:
+                    m_eid = m.get("id")
+                    m_name = m.get("name")
+                    m_class = m.get("class_hid")
+                    m_level = m.get("level")
+                    if not m_eid:
+                        continue
+                    if m_name:
+                        self.names[m_eid] = m_name
+                    self.entity_types[m_eid] = 0  # party members are players
+                    if m_class:
+                        self.classes[m_eid] = m_class
+                    if m_level is not None:
+                        self.levels[m_eid] = m_level
+                    if m_class or m_level is not None:
+                        self._backfill_player_info(m_eid, cls=m_class, level=m_level)
+                    _plog.debug(f"PARTY_MEMBER #{m_eid} \"{m_name}\" class={m_class} lvl={m_level}")
+            return None
+
         eid = event.get("entity_id")
         if eid is None:
             return None
@@ -1421,6 +1545,25 @@ class EntityTracker:
                     self.levels[eid] = level
                 self._backfill_player_info(eid, cls=class_hid, level=level)
                 _plog.debug(f"LEVEL_UPDATE #{eid} class={class_hid} level={level}")
+                return None
+
+            if etype == "UpdateState":
+                name = event.get("name")
+                class_hid = event.get("class_hid")
+                level = event.get("level")
+                et = event.get("entity_type")
+                if name:
+                    self.names[eid] = name
+                if et is not None:
+                    self.entity_types[eid] = et
+                if class_hid:
+                    self.classes[eid] = class_hid
+                if level is not None:
+                    self.levels[eid] = level
+                if class_hid or level is not None:
+                    self._backfill_player_info(eid, cls=class_hid, level=level)
+                _safe_name = (name or "").encode('ascii', 'replace').decode('ascii')[:60]
+                _plog.debug(f"UPDATE_STATE #{eid} type={et} \"{_safe_name}\" class={class_hid} lvl={level}")
                 return None
 
             if etype == "DespawnEntity":
