@@ -152,6 +152,42 @@ When `_mark_local_player` fires, it retroactively merges all `"_local"` sentinel
 
 In UpdateHealth processing, any remaining `"_local"` in `last_attacker` is resolved to `_local_player_eid` as a safety net.
 
+### `_mark_local_player` Guard
+
+`_mark_local_player(eid)` **rejects** different eids once `_local_player_eid` is set — prevents NPC eids from overwriting the real local player. Only allows re-marking the same eid (for name refresh). The "YOU" fallback name is replaced when a real name becomes available.
+
+### ClientPartyUpdate (0x0380)
+
+Sent when a player does `/reload` in-game. Provides class/level/zone for all party members. Wire format (partially verified — still has parsing issues with string alignment):
+
+```
+[u32 member_count]
+per member: [u32 entity_id] [u32 unknown] [LNL string name] [LNL string class_hid] [u8 level] [LNL string zone_hid]
+[u32 leader_eid]
+```
+
+Handler sets `entity_types[eid] = 0` for all members, populates `classes`/`levels`/`names`, calls `_backfill_player_info()` to retroactively update encounter records. Also attempts local player detection via name matching when `_local_player_eid` is unknown.
+
+## Entity Type System (parser/parser.py)
+
+- `entity_types` dict: `eid → entity_type` (uint16 from SpawnEntity). `0` = player, `> 0` = NPC/pet, `None` = unknown (no SpawnEntity captured).
+- `pet_states` dict: `eid → True` if SpawnEntity had `petState=True` (charmed/summoned pets).
+- `_looks_like_npc_name(name)`: Returns `True` if name starts lowercase (e.g. "a bodyguard") or is "Entity#...". Used as heuristic to filter unknown entities.
+- Party members get `entity_types[eid] = 0` from `ClientPartyUpdate`.
+- Local player gets `entity_types[eid] = 0` from `_mark_local_player()`.
+
+### Overview Filtering
+
+The overview shows players + charmed pets, excluding regular NPCs. Inclusion rules:
+- `entity_type == 0` → always included (player)
+- `pet_states[eid] == True` → included, tagged `[PET]`
+- `entity_type is None` (unknown) → included unless name looks like NPC, is an encounter target, or matches an encounter target name
+- `entity_type > 0` and not pet → excluded (regular NPC)
+
+### Class HID Mapping
+
+`CLASS_HID_NAMES` dict maps 3-letter codes from SpawnEntity/ClientPartyUpdate to class names (e.g. `"dru"→"Druid"`, `"pal"→"Paladin"`, `"war"→"Warrior"`). `_class_label(hid)` returns the full name; unknown codes pass through as-is. `_scan_class_hid(hid_region)` extracts class codes from SpawnEntity HID region via ASCII byte scanning when standard string parsing fails.
+
 ## Encounter System (parser/parser.py)
 
 `EntityTracker` maintains per-entity encounter records via `Encounter` objects keyed by entity ID in `_encounter_map`:
@@ -228,6 +264,26 @@ Items are also queued to the API client when `api_enabled` is true.
 - **NPC correlation**: Each XP event is tagged with the most recently killed NPC (within 5s window from `enc.end_time`).
 - **Display**: Summary shows total gained + kill count + XP/hour. Event rows show timestamp, `+N XP`, percentage if known, and mob name.
 
+## Trigger System (parser/parser.py)
+
+User-defined text pattern alerts stored in `parser/triggers.json` (ships empty `[]`).
+
+- **Matching**: Case-insensitive substring match against every combat text message (EndCasting, ChatCombat, Die, etc.). `_trigger_counts` tracks match counts per pattern.
+- **Sound**: Queued to `_trigger_sound_queue` (thread-safe), drained on GUI thread every 500ms via `winsound.PlaySound(SND_ASYNC)`. 10 built-in Windows system sounds available.
+- **UI**: Pattern entry + sound dropdown + preview button. Shows live match counts per trigger.
+
+## Rendering Optimization (parser/parser.py)
+
+All panel views use **fingerprint-based skip-redraw**: `_meter_build_fingerprint()` builds a hashable tuple of current state. If unchanged from last render, the 1-second refresh cycle skips the view entirely.
+
+Within the overview, a two-tier system prevents flicker:
+1. **Fingerprint** (encounter-level totals) gates whether `_render_overview()` is called at all
+2. **Structure key** (`_overview_structure`) tracks player order + expanded state + ability data. If structure matches, only player summary lines are updated in-place via `tag_ranges()`. Structure mismatch triggers full redraw.
+
+The structure key includes ability `(name, damage)` tuples for expanded players, so real-time damage changes to abilities trigger a full redraw when expanded.
+
+Encounter list uses the same pattern: `_enc_list_structure` tracks button eid sequence, in-place label updates when structure matches.
+
 ## API Client (parser/api_client.py)
 
 `ApiClient` runs a background thread that batches and sends data to a remote API every N seconds (default 15). Imported only by `parser/parser.py`, not `core/`.
@@ -268,6 +324,10 @@ PyInstaller single-file build with `--noconsole` (no console window), `--uac-adm
 
 The exe uses `--noconsole` so `print()`/`input()` do nothing. Crashes show a native Windows `MessageBoxW` with the traceback, and write `crash.log` next to the exe (via `_crash_log_dir()` which uses `os.path.dirname(sys.executable)` for frozen builds, not `__file__` which points to the PyInstaller temp dir). The admin check also uses a message box instead of printing.
 
+## Homepage (zekparser-homepage/)
+
+Marketing/download landing page for `https://zekparser.com/`. Single-page site with hero, screenshot placeholders, feature cards, how-it-works steps, and download CTA pointing to `/ZekParser.exe`. Google Tag Manager for analytics. Catppuccin Mocha dark theme.
+
 ## Important Gotchas
 
 - CRC32c is at the **back** of the packet, not front
@@ -285,4 +345,6 @@ The exe uses `--noconsole` so `print()`/`input()` do nothing. Crashes show a nat
 - EndCasting text for non-combat actions ("Rainbow pulls you through a shimmering portal") will match broad verb patterns — use the `_MELEE_VERBS` whitelist, not `\w+`
 - `config.json` `player_name` should be empty string `""` — the parser auto-detects it from outbound Autoattack/ChangeTarget packets and "Your..."/"You..." combat text patterns
 - Never use `"_local"` string as a real entity ID — it's a sentinel placeholder for the local player before detection. Always resolve via `_local_player_eid` at consumption points and merge in `_mark_local_player`
+- Wire format helpers in parser.py: `_r_u32`, `_r_i32`, `_r_u16`, `_r_u8`, `_r_bool`, `_r_float`, `_r_str` — all return `(value, new_offset)` or `(None, offset)` on bounds failure. `_r_str` auto-strips trailing null bytes from LNL strings
+- ClientPartyUpdate (0x0380) string parsing may have alignment issues — the class_hid field has been observed including the level byte as a trailing character (e.g. "dru%" where 0x25=37=level). The wire format may not use standard LNL null-terminated strings for all fields in this opcode
 
