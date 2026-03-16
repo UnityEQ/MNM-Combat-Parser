@@ -1724,16 +1724,30 @@ class EntityTracker:
                     "pct": pct,
                     "leveled_up": leveled_up,
                 }
-                # Try to tag with the most recent encounter NPC that just died
-                last_kill = None
-                for enc in self.encounters:
-                    if enc.end_time and enc.npc_name:
-                        if last_kill is None or enc.end_time > last_kill.end_time:
-                            last_kill = enc
-                if last_kill and (time.time() - last_kill.end_time) < 5.0:
-                    xp_ev["npc_name"] = last_kill.npc_name
+                # Try to tag with the NPC that just died.
+                # Server sends UpdateExperience BEFORE Die, so the NPC
+                # isn't marked dead yet.  Primary: use _last_hp_eid
+                # (the NPC that just took the killing blow).  Fallback:
+                # search for the most recently dead encounter.
+                npc_name = None
+                now = time.time()
+                if (self._last_hp_eid is not None
+                        and (now - self._last_hp_time) < 3.0):
+                    hp_enc = self._encounter_map.get(self._last_hp_eid)
+                    if hp_enc and hp_enc.npc_name:
+                        npc_name = hp_enc.npc_name
+                if not npc_name:
+                    last_kill = None
+                    for enc in self.encounters:
+                        if enc.end_time and enc.npc_name:
+                            if last_kill is None or enc.end_time > last_kill.end_time:
+                                last_kill = enc
+                    if last_kill and (now - last_kill.end_time) < 5.0:
+                        npc_name = last_kill.npc_name
+                if npc_name:
+                    xp_ev["npc_name"] = npc_name
                 self._xp_events.append(xp_ev)
-                _plog.debug(f"XP_UPDATE #{eid} \"{name}\" total={xp_total:,} gained=+{xp_gained:,} pct={pct} lvlup={leveled_up}")
+                _plog.debug(f"XP_UPDATE #{eid} \"{name}\" total={xp_total:,} gained=+{xp_gained:,} pct={pct} lvlup={leveled_up} npc=\"{npc_name}\"")
                 return None
 
             if etype == "UpdateState":

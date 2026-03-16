@@ -27,7 +27,8 @@
       "Bash(sort:*)",
       "Bash(del:*)",
       "Bash(pyinstaller:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(ren:*)"
     ]
   }
 }
