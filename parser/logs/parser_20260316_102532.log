@@ -2809,3 +2809,16 @@
 10:41:56 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=None dealt=53 dps=0.1 abilities=[none]
 10:41:57 [DEBUG] OVERVIEW_RENDER enc=2 total_dmg=53 dur=853.9s entries=1 local_eid=None player_name="" pet_states={} entity_types_sample={2630: 1, 2733: 1, 2616: 1, 2730: 1, 2670: 1, 2530: 1, 2734: 1, 3953: 1, 2558: 1, 2531: 1, 3911: 1, 2720: 1, 3988: 1, 2493: 1, 3887: 0, 3336: 1, 3117: 1, 2268: 1, 3934: 1, 2920: 1}
 10:41:57 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=None dealt=53 dps=0.1 abilities=[none]
+10:41:58 [DEBUG] OVERVIEW_RENDER enc=2 total_dmg=53 dur=855.9s entries=1 local_eid=None player_name="" pet_states={} entity_types_sample={2630: 1, 2733: 1, 2616: 1, 2730: 1, 2670: 1, 2530: 1, 2734: 1, 3953: 1, 2558: 1, 2531: 1, 3911: 1, 2720: 1, 3988: 1, 2493: 1, 3887: 0, 3336: 1, 3117: 1, 2268: 1, 3934: 1, 2920: 1}
+10:41:58 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=None dealt=53 dps=0.1 abilities=[none]
+10:41:59 [DEBUG] OVERVIEW_RENDER enc=2 total_dmg=53 dur=857.9s entries=1 local_eid=None player_name="" pet_states={} entity_types_sample={2630: 1, 2733: 1, 2616: 1, 2730: 1, 2670: 1, 2530: 1, 2734: 1, 3953: 1, 2558: 1, 2531: 1, 3911: 1, 2720: 1, 3988: 1, 2493: 1, 3887: 0, 3336: 1, 3117: 1, 2268: 1, 3934: 1, 2920: 1}
+10:41:59 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=None dealt=53 dps=0.1 abilities=[none]
+10:42:00 [DEBUG] GUI_STATE view=overview encounters=2 entity_types={'type1': 40, 'type0': 4} names=44
+10:42:00 [DEBUG] OVERVIEW_RENDER enc=2 total_dmg=53 dur=859.9s entries=1 local_eid=None player_name="" pet_states={} entity_types_sample={2630: 1, 2733: 1, 2616: 1, 2730: 1, 2670: 1, 2530: 1, 2734: 1, 3953: 1, 2558: 1, 2531: 1, 3911: 1, 2720: 1, 3988: 1, 2493: 1, 3887: 0, 3336: 1, 3117: 1, 2268: 1, 3934: 1, 2920: 1}
+10:42:00 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=None dealt=53 dps=0.1 abilities=[none]
+10:42:01 [DEBUG] OVERVIEW_RENDER enc=2 total_dmg=53 dur=861.9s entries=1 local_eid=None player_name="" pet_states={} entity_types_sample={2630: 1, 2733: 1, 2616: 1, 2730: 1, 2670: 1, 2530: 1, 2734: 1, 3953: 1, 2558: 1, 2531: 1, 3911: 1, 2720: 1, 3988: 1, 2493: 1, 3887: 0, 3336: 1, 3117: 1, 2268: 1, 3934: 1, 2920: 1}
+10:42:01 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=None dealt=53 dps=0.1 abilities=[none]
+10:42:02 [DEBUG] OVERVIEW_RENDER enc=2 total_dmg=53 dur=863.9s entries=1 local_eid=None player_name="" pet_states={} entity_types_sample={2630: 1, 2733: 1, 2616: 1, 2730: 1, 2670: 1, 2530: 1, 2734: 1, 3953: 1, 2558: 1, 2531: 1, 3911: 1, 2720: 1, 3988: 1, 2493: 1, 3887: 0, 3336: 1, 3117: 1, 2268: 1, 3934: 1, 2920: 1}
+10:42:02 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=None dealt=53 dps=0.1 abilities=[none]
+10:42:03 [DEBUG] OVERVIEW_RENDER enc=2 total_dmg=53 dur=865.9s entries=1 local_eid=None player_name="" pet_states={} entity_types_sample={2630: 1, 2733: 1, 2616: 1, 2730: 1, 2670: 1, 2530: 1, 2734: 1, 3953: 1, 2558: 1, 2531: 1, 3911: 1, 2720: 1, 3988: 1, 2493: 1, 3887: 0, 3336: 1, 3117: 1, 2268: 1, 3934: 1, 2920: 1}
+10:42:03 [DEBUG]   OVERVIEW_ROW #1 "Rainbow" type=player cls=dru% lvl=None dealt=53 dps=0.1 abilities=[none]

@@ -11,7 +11,7 @@ Usage:
     python parser/parser.py
 """
 
-APP_VERSION = "V1.0"
+APP_VERSION = "V1.1"
 
 import csv
 import ctypes
