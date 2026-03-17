@@ -33,7 +33,7 @@ No test framework exists. Verify changes with `python -c` imports and live captu
 ## Two Entry Points
 
 1. **`mnm.py`** — Headless CLI tool. Captures packets, decrypts, logs combat events to console + rotating log files in `logs/`. Records NPC spawns to `data/npc_database.csv`.
-2. **`parser/parser.py`** — Standalone tkinter GUI named **ZekParser** (window title: `"ZekParser {APP_VERSION}"`). Fully self-contained (zero imports from `core/`). Duplicates the entire capture→decrypt→parse pipeline inline. Shows real-time combat feed + damage meter with DPS tracking. Debug logs go to `parser/logs/`. `APP_VERSION` constant (e.g. `"V1.4"`) at top of file — bump for each exe release. Keep in sync with `version_info.py` (`filevers`/`prodvers`/`FileVersion`/`ProductVersion`).
+2. **`parser/parser.py`** — Standalone tkinter GUI named **ZekParser** (window title: `"ZekParser {APP_VERSION}"`). Fully self-contained (zero imports from `core/`). Duplicates the entire capture→decrypt→parse pipeline inline. Shows real-time combat feed + damage meter with DPS tracking. Debug logs go to `parser/logs/`. `APP_VERSION` constant (e.g. `"V1.6"`) at top of file — bump for each exe release. Keep in sync with `version_info.py` (`filevers`/`prodvers`/`FileVersion`/`ProductVersion`).
 
 Both require Windows Administrator privileges for raw socket capture (`SIO_RCVALL`).
 
@@ -173,7 +173,22 @@ per member: [u32 entity_id] [u32 unknown] [LNL string name] [u8 0x00] [3 raw ASC
 
 The class field is NOT a LNL string — it's 3 raw ASCII lowercase bytes (e.g. `70 61 6c` = "pal") preceded by a `0x00` separator byte. The level is a single u8 immediately after. This was previously misread by `_scan_class_hid()` ASCII scanning which would include the level byte in the class string when level >= 32 (0x20 = space, in printable ASCII range).
 
-Handler sets `entity_types[eid] = 0` for all members, populates `classes`/`levels`/`names`, calls `_backfill_player_info()` to retroactively update encounter records. Solo detection: if 1 member and `_local_player_eid` is None, marks that member as local player. Also attempts local player detection via name matching when `_local_player_eid` is unknown.
+**Offline members** (eid=0) use a shorter format with NO zone LNL string: `[u32 eid=0] [u32 cid] [LNL name] [u8 0x00] [3 bytes class=0x000000] [u8 level=0]`. The parser detects this via `eid==0 AND class_bytes==\x00\x00\x00 AND level==0` and skips the zone read to keep offsets aligned.
+
+Handler sets `entity_types[eid] = 0` for all online members, populates `classes`/`levels`/`names`, calls `_backfill_player_info()` to retroactively update encounter records.
+
+**Zone change eid migration**: `_party_eids` dict tracks `name → current_eid`. When ClientPartyUpdate arrives with a known name but different eid (all eids change on zone), the handler clears the old eid's `entity_type` and carries over class/level/zone to the new eid. If the local player's eid changed, it clears `_local_player_eid` and re-marks via `_mark_local_player(new_eid)`.
+
+### /reload Gate System
+
+`_reload_gate` flag (default `True`) blocks ALL event processing in `EntityTracker.process()` except ClientPartyUpdate. This prevents misidentification of the local player from early combat text (e.g. "Poacher Garrus" NPC being set as player name).
+
+When ClientPartyUpdate arrives:
+- **Solo** (1 valid member): auto-detects local player, clears gate immediately
+- **Group** (>1 valid members): stores `_party_members_pending` list, GUI shows player selection buttons ("which one is you?")
+- **No valid members**: gate clears anyway (prevents permanent lockout)
+
+The GUI displays a full-screen overlay ("Type /reload in-game to start") while the gate is active. The overlay is destroyed in `_poll_queue()` when `_reload_gate` becomes False.
 
 ## Entity Type System (parser/parser.py)
 
@@ -185,11 +200,14 @@ Handler sets `entity_types[eid] = 0` for all members, populates `classes`/`level
 
 ### Overview Filtering
 
-The overview shows players + charmed pets, excluding regular NPCs. Inclusion rules:
-- `entity_type == 0` → always included (player)
-- `pet_states[eid] == True` → included, tagged `[PET]`
-- `entity_type is None` (unknown) → included unless name looks like NPC, is an encounter target, or matches an encounter target name
+The overview uses strict type checking — only confirmed players and pets appear. Inclusion rules:
+- `entity_type == 0` → always included (confirmed player)
+- `eid == _local_player_eid` → always included (local player)
+- `entity_type > 0` and `pet_states[eid] == True` → included, tagged `[PET]`
 - `entity_type > 0` and not pet → excluded (regular NPC)
+- `entity_type is None` (unknown) → excluded (not a confirmed player)
+
+This strict filter replaced an earlier heuristic-based system that leaked uppercase-named NPCs (e.g. "Poacher Garrus") into the overview.
 
 ### Class HID Mapping
 
@@ -268,7 +286,7 @@ Items are also queued to the API client when `api_enabled` is true.
 - **State**: `_xp_current` (eid → last XP), `_xp_events` (list of gain records), `_xp_level_start` (eid → XP at level start), `_xp_level_needed` (eid → XP cap for level), `_xp_player_level` (eid → level)
 - **First event baseline**: First `UpdateExperience` in a session silently records the XP value and returns `None` — no event shown. Second kill onwards computes proper deltas.
 - **Level-up detection**: When `new_xp < prev_xp`, the player leveled up. The old value becomes the level cap (`_xp_level_needed`). XP percentage is computed from this.
-- **NPC correlation (shifted by one)**: The XP delta computed at kill N is from kill N-1 (off-by-one in server timing). Each UpdateExperience resolves the current NPC via `_last_hp_eid` / dead encounter fallback but saves it in `_xp_pending_npc` for the NEXT event. The baseline event (first kill) saves its NPC; the second kill's delta is attributed to the baseline's NPC; and so on. This ensures the XP gain is always tagged to the mob that actually produced it.
+- **NPC correlation**: Each UpdateExperience resolves the NPC via `_last_hp_eid` (most recent UpdateHealth entity) or dead encounter fallback. The resolved NPC name is attributed directly to the current XP delta.
 - **Display**: Summary shows total gained + kill count + XP/hour. Event rows show timestamp, `+N XP`, percentage if known, and mob name.
 
 ## Trigger System (parser/parser.py)
@@ -367,7 +385,7 @@ Two PyInstaller `.spec` files exist:
 - TypeInfo RVA `88407256` decimal = `0x544FCD8` hex (previous wrong conversion caused key read failures)
 - Game binds UDP to 0.0.0.0 — connection matching must use port-only fallback
 - Logger must have `logger.setLevel(DEBUG)` set on the logger itself; handler-level filtering alone is insufficient
-- `read_string()` strips trailing null byte since LiteNetLib includes it in the length count
+- `read_string()` strips trailing null byte since LiteNetLib includes it in the length count. `_r_str` in parser.py strips all trailing control bytes `< 0x20` (EOT `0x04` appears in some LNL strings)
 - Console output strips BEL characters (`\x07`) to prevent Windows terminal beeping on decoded packet data
 - Spawn packet HP values from `_find_stats()` scan are frequently wrong (misaligned byte reads produce multiples of 256) — never trust them as damage baselines
 - `parser/parser.py` is intentionally self-contained with duplicated logic from `core/` — do not add imports from `core/`
@@ -376,6 +394,6 @@ Two PyInstaller `.spec` files exist:
 - EndCasting text for non-combat actions ("Rainbow pulls you through a shimmering portal") will match broad verb patterns — use the `_MELEE_VERBS` whitelist, not `\w+`
 - `config.json` `player_name` should be empty string `""` — the parser auto-detects it from outbound Autoattack/ChangeTarget packets and "Your..."/"You..." combat text patterns
 - Never use `"_local"` string as a real entity ID — it's a sentinel placeholder for the local player before detection. Always resolve via `_local_player_eid` at consumption points and merge in `_mark_local_player`
-- Wire format helpers in parser.py: `_r_u32`, `_r_i32`, `_r_u16`, `_r_u8`, `_r_bool`, `_r_float`, `_r_str` — all return `(value, new_offset)` or `(None, offset)` on bounds failure. `_r_str` auto-strips trailing null bytes from LNL strings
+- Wire format helpers in parser.py: `_r_u32`, `_r_i32`, `_r_u16`, `_r_u8`, `_r_bool`, `_r_float`, `_r_str` — all return `(value, new_offset)` or `(None, offset)` on bounds failure. `_r_str` strips all trailing control bytes `< 0x20` (not just `\x00` — LNL strings sometimes terminate with `0x04` EOT)
 - ClientPartyUpdate (0x0380) class_hid field is NOT a LNL string — it's `[u8 0x00] [3 raw ASCII bytes] [u8 level]`. Standard `_r_str` reads the 0x00 + first class byte as a u16 length = huge number and fails. Parser reads the 3 bytes directly and validates as lowercase alpha
 

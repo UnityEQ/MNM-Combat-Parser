@@ -39,7 +39,8 @@ Select and copy data from any view. Formats a clean table you can paste directly
 1. Download `ZekParser.exe` from [zekparser.com](https://zekparser.com/)
 2. Add a Windows Defender exclusion for `ZekParser.exe` or its folder (unsigned exe triggers false positives)
 3. Right-click → **Run as Administrator** (required for network capture)
-4. Launch the game — ZekParser auto-detects the game process, finds the server connection, and starts parsing
+4. Launch the game — ZekParser auto-detects the game process, finds the server connection, and waits for setup
+5. Type `/reload` in-game — this identifies your character. Solo players are detected automatically; in a group, click your name from the list
 
 ### Run from Source
 
@@ -162,7 +163,7 @@ Copy and Export buttons adapt to whichever view is active.
 
 | Field | Description |
 |---|---|
-| `player_name` | Leave empty `""` — auto-detected from combat text. Only set manually if auto-detect fails |
+| `player_name` | Leave empty `""` — auto-detected from `/reload` party data. Only set manually if auto-detect fails |
 | `server_name` | Display label for the GUI title bar |
 | `interface_ip` | `"auto"` to detect from game connections, or explicit IP like `"10.0.0.5"` |
 
@@ -223,7 +224,7 @@ python mnm.py -p other.exe -i 10.0.0.5  # Custom process name and interface IP
 
 ## Known Limitations
 
-- **Player class/level**: Only available from SpawnEntity (at spawn) and ClientPartyUpdate (on `/reload` or party changes). Other players' class/level depends on these packets arriving while the parser is running.
+- **Player class/level**: Primarily sourced from ClientPartyUpdate (on `/reload`). Other players' class/level depends on SpawnEntity or party data arriving while the parser is running.
 - **Encryption key timing**: Keys are read from game memory after login. Packets sent before key acquisition (including initial player state) are lost.
 - **Entity ID reuse**: The game reuses entity IDs for newly spawned NPCs. The parser detects name changes on SpawnEntity to retire old encounters, but edge cases exist.
 - **Melee damage attribution**: Melee auto-attacks arrive as ChatMessage text with no entity IDs. The parser uses temporal correlation with UpdateHealth, which can fail when multiple NPCs take damage simultaneously.
