@@ -1,0 +1,12 @@
+ZekParser crash — 2026-03-16T21:06:15.447103
+
+Traceback (most recent call last):
+  File "E:\MNM-Network\MNM-Combat-Parser\parser\parser.py", line 5928, in main
+    app = CombatApp()
+          ^^^^^^^^^^^
+  File "E:\MNM-Network\MNM-Combat-Parser\parser\parser.py", line 3361, in __init__
+    self._build_ui()
+  File "E:\MNM-Network\MNM-Combat-Parser\parser\parser.py", line 3702, in _build_ui
+    font=("Segoe UI", 14), fg=COLORS['text'], bg=COLORS['bg']
+                              ~~~~~~^^^^^^^^
+KeyError: 'text'

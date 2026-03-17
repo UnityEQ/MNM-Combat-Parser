@@ -451,6 +451,14 @@ COMBAT_MSG_IDS = {
     0x0084: "UpdateSurname",
     0x008E: "UpdateGuildInfo",
     0x0040: "ChatMessage",
+
+    # Items / Inventory
+    0x0060: "InventoryItemPickup",
+    0x0063: "AddItemToInventory",
+    0x0064: "RemoveItemFromCorpse",
+    0x0065: "LootItemFromCorpse",
+    0x007F: "ItemInformationRequest",
+    0x0080: "ItemInformation",
 }
 
 

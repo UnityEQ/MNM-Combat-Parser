@@ -74,7 +74,7 @@ Keys live in `Client.ConnectionInfo` static class: `GameAssembly.dll + 0x544FCD8
 
 ### Game Message Format
 
-After LiteNetLib framing, game messages are: `[msg_id (uint16 LE)] [body]`. 355 known message types in `core/opcodes.py`. Strings on wire use LiteNetLib format: `[uint16 LE length] [UTF-8 bytes]` where length includes a trailing null byte.
+After LiteNetLib framing, game messages are: `[msg_id (uint16 LE)] [body]`. 407 known message types in `core/opcodes.py`. Strings on wire use LiteNetLib format: `[uint16 LE length] [UTF-8 bytes]` where length includes a trailing null byte.
 
 LiteNetLib PacketProperty byte: bits 0-4 = property type (0=Unreliable, 1=Channeled, 12=Merged are data-bearing), bits 5-6 = connection number, bit 7 = fragmented. Merged packets contain nested LNL sub-frames.
 
@@ -84,7 +84,12 @@ LiteNetLib PacketProperty byte: bits 0-4 = property type (0=Unreliable, 1=Channe
 - `LiteNetLibFrame` (`core/parser.py`): Parsed LNL header with property type, sequence, channel
 - `GameMessage` (`core/parser.py`): msg_id + body bytes + msg_name lookup
 - `CombatEvent` (`core/combat.py`): Typed event with source/target IDs, fields dict, raw body
-- `NpcDatabase` (`core/npc_database.py`): Appends SpawnEntity data to `data/npc_database.csv`
+- `NpcDatabase` (`core/npc_database.py`): Appends SpawnEntity data to `data/npc_database.csv`. Deduplicates on `(entity_id, name)` tuple — same eid with different names gets recorded twice (eid reuse by different mobs).
+
+### Supporting Modules
+
+- **`core/logger.py`**: Dual-output logging — colored ANSI console (with Windows support) + rotating file. `PacketAdapter` adds direction tags. Strips BEL characters (`\x07`) from console output.
+- **`core/process.py`**: Process discovery via `CreateToolhelp32Snapshot`. Multi-instance selection prompt, process health checking, wait-for-process polling.
 
 ### Configuration
 
@@ -158,15 +163,17 @@ In UpdateHealth processing, any remaining `"_local"` in `last_attacker` is resol
 
 ### ClientPartyUpdate (0x0380)
 
-Sent when a player does `/reload` in-game. Provides class/level/zone for all party members. Wire format (partially verified — still has parsing issues with string alignment):
+Sent when a player does `/reload` in-game. Provides class/level/zone for all party members. Wire format:
 
 ```
 [u32 member_count]
-per member: [u32 entity_id] [u32 unknown] [LNL string name] [LNL string class_hid] [u8 level] [LNL string zone_hid]
+per member: [u32 entity_id] [u32 unknown] [LNL string name] [u8 0x00] [3 raw ASCII class_hid] [u8 level] [LNL string zone_hid]
 [u32 leader_eid]
 ```
 
-Handler sets `entity_types[eid] = 0` for all members, populates `classes`/`levels`/`names`, calls `_backfill_player_info()` to retroactively update encounter records. Also attempts local player detection via name matching when `_local_player_eid` is unknown.
+The class field is NOT a LNL string — it's 3 raw ASCII lowercase bytes (e.g. `70 61 6c` = "pal") preceded by a `0x00` separator byte. The level is a single u8 immediately after. This was previously misread by `_scan_class_hid()` ASCII scanning which would include the level byte in the class string when level >= 32 (0x20 = space, in printable ASCII range).
+
+Handler sets `entity_types[eid] = 0` for all members, populates `classes`/`levels`/`names`, calls `_backfill_player_info()` to retroactively update encounter records. Solo detection: if 1 member and `_local_player_eid` is None, marks that member as local player. Also attempts local player detection via name matching when `_local_player_eid` is unknown.
 
 ## Entity Type System (parser/parser.py)
 
@@ -333,6 +340,25 @@ Marketing/download site for `https://zekparser.com/`. Catppuccin Mocha dark them
 - **`style.css`** — Shared styles for both pages. SaltyVision-specific styles prefixed with `.sv-` and scoped under `.sv-page`. Nav links styled as pill buttons with `.nav-active` purple fill for current page. `.btn-donate` orange (Catppuccin peach).
 - **`screenshots/`** — 6 named PNGs: `overview-feed-expanded.png`, `encounters-multiple-kills.png`, `grand-overview-npc-stats.png`, `item-detail-drop-history.png`, `triggers-pattern-setup.png`, `encounters-active-dead.png`. Plus one placeholder for Experience Tracker.
 
+## SaltyVision Database Backend (website/)
+
+PHP/MySQL web application that receives data from ZekParser's API client. This is the server side of the `api_url` endpoint.
+
+- **`api/submit.php`**: Receives batched combat events, loot events, items, NPCs from ZekParser sessions. Auth via HMAC-SHA256 (`api/auth.php`).
+- **`sql/schema.sql`**: Tables: `players`, `npcs`, `items`, `combat_events`, `loot_events`.
+- **Views**: `leaderboard.php`, `killfeed.php`, `npcs.php`, `npc_detail.php`, `items.php`, `item_detail.php`.
+
+## Tools
+
+- **`tools/parse_644b.py`**: Offline hex dump analyzer for 0x644B combat animation packets. Parses merged packets, standalone packets, and companion messages (UpdateHealth, ChatMessage, EndCasting) from log files.
+- **`tools/Il2CppDumper-win-v6.7.46.zip`**: IL2CPP reverse engineering tool for finding memory offsets.
+
+## Build Notes
+
+Two PyInstaller `.spec` files exist:
+- **`ZekParser.spec`**: Production build — includes `version='version_info.py'`, `upx=True`. Use this one.
+- **`MNM Combat Parser.spec`**: Legacy — no version file, `upx=False`. Do not use for releases.
+
 ## Important Gotchas
 
 - CRC32c is at the **back** of the packet, not front
@@ -351,5 +377,5 @@ Marketing/download site for `https://zekparser.com/`. Catppuccin Mocha dark them
 - `config.json` `player_name` should be empty string `""` — the parser auto-detects it from outbound Autoattack/ChangeTarget packets and "Your..."/"You..." combat text patterns
 - Never use `"_local"` string as a real entity ID — it's a sentinel placeholder for the local player before detection. Always resolve via `_local_player_eid` at consumption points and merge in `_mark_local_player`
 - Wire format helpers in parser.py: `_r_u32`, `_r_i32`, `_r_u16`, `_r_u8`, `_r_bool`, `_r_float`, `_r_str` — all return `(value, new_offset)` or `(None, offset)` on bounds failure. `_r_str` auto-strips trailing null bytes from LNL strings
-- ClientPartyUpdate (0x0380) string parsing may have alignment issues — the class_hid field has been observed including the level byte as a trailing character (e.g. "dru%" where 0x25=37=level). The wire format may not use standard LNL null-terminated strings for all fields in this opcode
+- ClientPartyUpdate (0x0380) class_hid field is NOT a LNL string — it's `[u8 0x00] [3 raw ASCII bytes] [u8 level]`. Standard `_r_str` reads the 0x00 + first class byte as a u16 length = huge number and fails. Parser reads the 3 bytes directly and validates as lowercase alpha
 

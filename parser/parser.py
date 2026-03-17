@@ -11,7 +11,7 @@ Usage:
     python parser/parser.py
 """
 
-APP_VERSION = "V1.4"
+APP_VERSION = "V1.6"
 
 import csv
 import ctypes
@@ -645,6 +645,18 @@ def _r_float(data, off):
     if off + 4 > len(data): return None, off
     return struct.unpack_from("<f", data, off)[0], off + 4
 
+def _strip_msg_type_byte(text):
+    """Strip the trailing message-type byte the game appends after the period.
+    The game embeds a single byte (e.g. &, >, A, N, E, +, D, @, ', 0, etc.)
+    right after the sentence-ending period.  Instead of maintaining a fragile
+    allowlist, just strip ANY character that follows a period at the end."""
+    if not text:
+        return text
+    text = text.rstrip('\x00 ')
+    if len(text) >= 2 and text[-2] == '.' and text[-1] != '.':
+        text = text[:-1]
+    return text
+
 def _r_str(data, off):
     if off + 2 > len(data): return None, off
     slen = struct.unpack_from("<H", data, off)[0]
@@ -652,7 +664,12 @@ def _r_str(data, off):
     if slen == 0: return "", off
     if off + slen > len(data): return None, off - 2
     raw = data[off:off + slen]
-    s = raw[:-1].decode("utf-8", errors="replace") if raw and raw[-1] == 0 else raw.decode("utf-8", errors="replace")
+    # Strip trailing null and control bytes (0x00-0x1F) then decode;
+    # some wire strings terminate with 0x04 (EOT) instead of 0x00.
+    stripped = raw
+    while stripped and stripped[-1:] < b'\x20':
+        stripped = stripped[:-1]
+    s = stripped.decode("utf-8", errors="replace").rstrip()
     return s, off + slen
 
 
@@ -930,17 +947,51 @@ def parse_combat_event(msg_id, body, direction):
         try:
             member_count, off = _r_u32(body, off)       # u32 member count
             members = []
+            if _plog.isEnabledFor(logging.DEBUG):
+                _plog.debug(f"PARTY_UPDATE member_count={member_count} body_len={len(body)} body_hex={body.hex(' ')}")
             if member_count is not None and member_count < 50:
-                for _ in range(member_count):
+                for mi in range(member_count):
+                    m_start = off
                     m_id, off = _r_u32(body, off)       # u32 entity_id
                     m_cid, off = _r_u32(body, off)      # u32 unknown (secondary id)
                     m_name, off = _r_str(body, off)     # LNL string name
-                    m_class, off = _r_str(body, off)    # LNL string class_hid
-                    m_level, off = _r_u8(body, off)     # u8 level
-                    m_zone, off = _r_str(body, off)     # LNL string zone_hid
+                    # After name: [u8 0x00] [3 raw class bytes] [u8 level] [LNL zone]
+                    # Class is NOT a LNL string — it's 3 raw ASCII bytes preceded
+                    # by a 0x00 separator byte, followed by a u8 level byte.
+                    m_class = None
+                    m_level = None
+                    m_zone = None
+                    if _plog.isEnabledFor(logging.DEBUG):
+                        peek = body[off:off+30].hex(' ') if off + 30 <= len(body) else body[off:].hex(' ')
+                        _plog.debug(f"PARTY_MEMBER_RAW [{mi}] eid=#{m_id} name=\"{m_name}\" "
+                                    f"after_name_off={off} next_bytes={peek}")
+                    if off + 5 <= len(body):
+                        # off+0: separator (0x00), off+1..3: class, off+4: level
+                        cls_bytes = body[off+1:off+4]
+                        try:
+                            cls_str = cls_bytes.decode('ascii')
+                            if cls_str.isalpha() and cls_str.islower():
+                                m_class = cls_str
+                        except (UnicodeDecodeError, ValueError):
+                            pass
+                        lvl_byte = body[off+4]
+                        if 1 <= lvl_byte <= 100:
+                            m_level = lvl_byte
+                        off += 5
+                        # Offline members (eid=0, class=000, level=0) have NO zone string
+                        if m_id == 0 and cls_bytes == b'\x00\x00\x00' and lvl_byte == 0:
+                            if _plog.isEnabledFor(logging.DEBUG):
+                                _plog.debug(f"PARTY_MEMBER_PARSED [{mi}] OFFLINE — no zone")
+                        else:
+                            # Read zone LNL string (only present for online members)
+                            m_zone, off = _r_str(body, off)
+                            if _plog.isEnabledFor(logging.DEBUG):
+                                _plog.debug(f"PARTY_MEMBER_PARSED [{mi}] class={m_class} "
+                                            f"level={m_level} zone={m_zone}")
                     members.append({
                         "id": m_id, "name": m_name,
                         "class_hid": m_class, "level": m_level,
+                        "zone": m_zone,
                     })
             event["members"] = members
             event["leader"], off = _r_u32(body, off)
@@ -1101,25 +1152,40 @@ def parse_loot_event(msg_id, body, direction):
     elif msg_id == 0x0063:  # AddItemToInventory
         event["type"] = "AddItemToInventory"
         try:
-            # ClientItemRecord header
+            # ClientItemRecord format (NOT the same as ItemRecord):
+            # [u32 item_uid] [u32 unknown] [LNL hid+type_byte] [remaining data]
+            # The remaining data uses a different structure than _read_item_record
+            # (contains crafting/skill strings, NOT the standard ItemRecord fields).
+            # We extract the HID here; full item stats come from ItemInformation
+            # (0x0080) when the user inspects the item.
+            event["item_uid"], off = _r_u32(body, off)
+            _skip, off = _r_u32(body, off)  # unknown u32
             event["item_hid"], off = _r_str(body, off)
-            event["item_name"], off = _r_str(body, off)
-            event["slot"], off = _r_u16(body, off)
-            event["quantity"], off = _r_u16(body, off)
-            # Full ItemRecord follows
-            item, off = _read_item_record(body, off)
-            if item:
-                event["item_record"] = item
+            # Strip trailing type byte (0x03/0x05/etc) from HID
+            hid = event.get("item_hid")
+            if hid and len(hid) > 1 and not hid[-1].isalnum() and hid[-1] != '_':
+                event["item_hid"] = hid[:-1]
+            if _plog.isEnabledFor(logging.DEBUG):
+                _plog.debug(f"LOOT_HEADER uid={event.get('item_uid')} "
+                            f"hid=\"{event.get('item_hid')}\" off={off} "
+                            f"remaining={len(body)-off}")
         except Exception:
             pass
         return event
 
     elif msg_id == 0x0080:  # ItemInformation
         event["type"] = "ItemInformation"
+        if _plog.isEnabledFor(logging.DEBUG):
+            _plog.debug(f"ITEM_INFO_RAW len={len(body)} hex={body.hex(' ')}")
         try:
             item, off = _read_item_record(body, off)
             if item:
                 event["item_record"] = item
+                if _plog.isEnabledFor(logging.DEBUG):
+                    _plog.debug(f"ITEM_INFO_PARSED off={off} remaining={len(body)-off} "
+                                f"fields={list(item.keys())}")
+                    if off < len(body):
+                        _plog.debug(f"ITEM_INFO_TAIL hex={body[off:].hex(' ')}")
         except Exception:
             pass
         return event
@@ -1168,7 +1234,10 @@ class Encounter:
             # Update name/class/level if we have better info now
             p = self.players[eid]
             if name and not name.startswith("Entity#"):
-                p['name'] = name
+                # Don't overwrite a good name with "YOU" placeholder
+                cur = p['name']
+                if name != "YOU" or not cur or cur.startswith("Entity#"):
+                    p['name'] = name
             if cls:
                 p['cls'] = cls
             if level is not None:
@@ -1198,11 +1267,13 @@ class EntityTracker:
         self.last_dmg = {}     # eid -> timestamp of last damage event
         self.classes = {}      # eid -> class_hid string (e.g. "elf", "wlf")
         self.levels = {}       # eid -> level int
+        self.zones = {}        # eid -> zone_hid string (e.g. "keepersbight")
         self.entity_types = {} # eid -> entity_type uint16 from SpawnEntity
         self.pet_states = {}   # eid -> True if petState was set in SpawnEntity
         self._lock = threading.Lock()
         self.player_name = ""  # set from config, used to name local player entity
         self._local_player_eid = None  # detected from "Your ..." / "You ..." patterns
+        self._party_eids = {}  # name -> eid, tracks current party member eids for zone change detection
 
         # Damage DEALT tracking (for the damage meter)
         self.damage_dealt = {}   # eid -> total damage dealt by this entity
@@ -1240,7 +1311,10 @@ class EntityTracker:
         self._xp_level_start = {} # eid -> XP total when current level began
         self._xp_level_needed = {}# eid -> XP required for current level (learned from level-ups)
         self._xp_player_level = {}# eid -> last known level (to detect level-ups)
-        self._xp_pending_npc = None  # NPC name saved from previous kill (for next delta)
+
+        # Reload gate: block all parsing until ClientPartyUpdate identifies local player
+        self._reload_gate = True
+        self._party_members_pending = None  # list of (eid, name, class_hid, level) for GUI player selection
 
     def _backfill_player_info(self, eid, cls=None, level=None):
         """Update class/level on existing encounter player records for this eid."""
@@ -1282,19 +1356,22 @@ class EntityTracker:
         # arrive later via SpawnEntity after the eid is first discovered.
         # "YOU" is a fallback that can be overwritten by a real name.
         detected = self.names.get(eid)
-        if ((not self.player_name or self.player_name == "YOU")
-                and detected
+        if (detected
                 and detected.upper() not in ("YOU", "YOUR")
-                and not self._looks_like_npc_name(detected)):
+                and not self._looks_like_npc_name(detected)
+                and detected != self.player_name):
+            old_pn = self.player_name
             self.player_name = detected
-            _plog.info(f"  LOCAL_PLAYER auto-detected name=\"{self.player_name}\" from eid=#{eid}")
+            _plog.info(f"  LOCAL_PLAYER name=\"{self.player_name}\" (was \"{old_pn}\") from eid=#{eid}")
         # Fallback: use "YOU" if no real name found yet
         if not self.player_name:
             self.player_name = "YOU"
             _plog.debug(f"  LOCAL_PLAYER eid=#{eid} fallback name=\"YOU\"")
-        if self.player_name and eid not in self.names:
-            self.names[eid] = self.player_name
-            _plog.debug(f"  LOCAL_PLAYER eid=#{eid} name=\"{self.player_name}\"")
+        if self.player_name:
+            cur_name = self.names.get(eid)
+            if not cur_name or cur_name == "YOU" or cur_name.startswith("Entity#"):
+                self.names[eid] = self.player_name
+                _plog.debug(f"  LOCAL_PLAYER eid=#{eid} name=\"{self.player_name}\"")
         # Update encounter player entries that still have placeholder names
         if self.player_name:
             for enc in self.encounters:
@@ -1421,6 +1498,7 @@ class EntityTracker:
         No entity_id/target_id — resolve everything from text."""
         if not text:
             return
+        text = _strip_msg_type_byte(text)
         _plog.debug(f"CHATCOMBAT text=\"{text[:80]}\"")
 
         # Every damage line contains "for N points of [Type ]damage" — use
@@ -1481,8 +1559,12 @@ class EntityTracker:
             if target_name and target_name.lower() == "you":
                 if self._local_player_eid is None:
                     if self._last_hp_eid is not None and (now - self._last_hp_time) < 2.0:
-                        self._mark_local_player(self._last_hp_eid)
-                        _plog.debug(f"  CHATCOMBAT_LOCAL_DETECT target=\"you\" hp_corr → local_eid=#{self._last_hp_eid}")
+                        hp_type = self.entity_types.get(self._last_hp_eid)
+                        if hp_type is not None and hp_type != 0:
+                            _plog.debug(f"  CHATCOMBAT_LOCAL_REJECT target=\"you\" hp_eid=#{self._last_hp_eid} is NPC (type={hp_type})")
+                        else:
+                            self._mark_local_player(self._last_hp_eid)
+                            _plog.debug(f"  CHATCOMBAT_LOCAL_DETECT target=\"you\" hp_corr → local_eid=#{self._last_hp_eid}")
                 # Target is the local player — not an NPC encounter, skip damage tracking
                 return
 
@@ -1561,6 +1643,10 @@ class EntityTracker:
         """Update tracker. Returns (dmg, heal) deltas or None."""
         etype = event.get("type", "")
 
+        # Reload gate: discard everything except ClientPartyUpdate
+        if self._reload_gate and etype != "ClientPartyUpdate":
+            return None
+
         # ChatCombat has no entity_id — handle separately
         if etype == "ChatCombat":
             self._process_chat_combat(event.get("text", ""))
@@ -1585,30 +1671,71 @@ class EntityTracker:
                     m_name = m.get("name")
                     m_class = m.get("class_hid")
                     m_level = m.get("level")
+                    m_zone = m.get("zone")
                     if not m_eid:
                         continue
+                    # Detect eid change (zone change) — migrate data from old eid
+                    if m_name and m_name in self._party_eids:
+                        old_eid = self._party_eids[m_name]
+                        if old_eid != m_eid:
+                            _plog.info(f"PARTY_EID_MIGRATE \"{m_name}\" old=#{old_eid} → new=#{m_eid}")
+                            # Clear old eid's player type so it doesn't pollute
+                            # if the eid gets reused by an NPC in the new zone
+                            self.entity_types.pop(old_eid, None)
+                            # Carry over class/level/zone to new eid
+                            if old_eid in self.classes and m_eid not in self.classes:
+                                self.classes[m_eid] = self.classes[old_eid]
+                            if old_eid in self.levels and m_eid not in self.levels:
+                                self.levels[m_eid] = self.levels[old_eid]
+                            if old_eid in self.zones and m_eid not in self.zones:
+                                self.zones[m_eid] = self.zones[old_eid]
                     if m_name:
                         self.names[m_eid] = m_name
+                        self._party_eids[m_name] = m_eid
                     self.entity_types[m_eid] = 0  # party members are players
                     if m_class:
                         self.classes[m_eid] = m_class
                     if m_level is not None:
                         self.levels[m_eid] = m_level
+                    if m_zone:
+                        self.zones[m_eid] = m_zone
                     if m_class or m_level is not None:
                         self._backfill_player_info(m_eid, cls=m_class, level=m_level)
                     # Local player detection from party data
                     if m_eid == self._local_player_eid:
                         # Already know this is us — refresh name/class/level
                         self._mark_local_player(m_eid)
-                    elif (self._local_player_eid is None
-                          and m_name
+                    elif (m_name
                           and self.player_name
                           and self.player_name != "YOU"
-                          and m_name == self.player_name):
-                        # Name matches our auto-detected player_name — this is us
+                          and m_name == self.player_name
+                          and m_eid != self._local_player_eid):
+                        # Name matches — either first detection or eid changed (zone change)
+                        if self._local_player_eid is not None:
+                            _plog.info(f"PARTY_EID_CHANGE \"{m_name}\" old=#{self._local_player_eid} → new=#{m_eid}")
+                            self._local_player_eid = None  # allow re-marking with new eid
                         _plog.info(f"PARTY_LOCAL_DETECT name match \"{m_name}\" → eid=#{m_eid}")
                         self._mark_local_player(m_eid)
                     _plog.debug(f"PARTY_MEMBER #{m_eid} \"{m_name}\" class={m_class} lvl={m_level}")
+                # Solo: auto-detect and clear gate immediately
+                # Group: store member list for GUI player selection (gate stays up)
+                valid = [(m.get("id"), m.get("name"), m.get("class_hid"), m.get("level"))
+                         for m in members if m.get("id") and m.get("name")
+                         and not self._looks_like_npc_name(m.get("name", ""))]
+                if self._reload_gate and self._local_player_eid is None:
+                    if len(valid) == 1:
+                        eid0, name0, _, _ = valid[0]
+                        _plog.info(f"PARTY_SOLO_DETECT single member \"{name0}\" → eid=#{eid0}")
+                        self._mark_local_player(eid0)
+                        self._reload_gate = False
+                        _plog.info("RELOAD_GATE cleared — solo player")
+                    elif len(valid) > 1:
+                        self._party_members_pending = valid
+                        _plog.info(f"RELOAD_GATE waiting for player selection ({len(valid)} members)")
+                elif self._reload_gate:
+                    # local player already known (shouldn't happen, but be safe)
+                    self._reload_gate = False
+                    _plog.info(f"RELOAD_GATE cleared — local player already known #{self._local_player_eid}")
             return None
 
         eid = event.get("entity_id")
@@ -1636,11 +1763,21 @@ class EntityTracker:
                 if class_hid:
                     self.classes[eid] = class_hid
                 level = event.get("level")
+                et = event.get("entity_type")
                 if level is not None:
-                    self.levels[eid] = level
+                    # SpawnEntity level uses fallback byte scanning that often
+                    # misreads values.  Don't overwrite a level already set by
+                    # a more reliable source (ClientPartyUpdate / UpdateLevel)
+                    # for confirmed players.
+                    existing_level = self.levels.get(eid)
+                    if existing_level is not None and self.entity_types.get(eid) == 0:
+                        _plog.debug(f"SPAWN_SKIP_LEVEL #{eid} spawn_lvl={level} "
+                                    f"keeping existing={existing_level} (player)")
+                        level = None  # don't use spawn level
+                    else:
+                        self.levels[eid] = level
                 if class_hid or level is not None:
                     self._backfill_player_info(eid, cls=class_hid, level=level)
-                et = event.get("entity_type")
                 if et is not None:
                     self.entity_types[eid] = et
                 if event.get("pet_state"):
@@ -1706,23 +1843,40 @@ class EntityTracker:
                 # and attribute the current delta to the PREVIOUS kill's NPC.
                 npc_name_now = None
                 now = time.time()
+                # Resolve the kill target via HP correlation.
+                # Skip confirmed players (type==0) unless they died (PvP).
+                # Skip unknown entities (type==None) with player-like names
+                # (uppercase first char) — they're likely party members whose
+                # SpawnEntity wasn't captured yet.
                 if (self._last_hp_eid is not None
                         and (now - self._last_hp_time) < 3.0):
                     hp_enc = self._encounter_map.get(self._last_hp_eid)
                     if hp_enc and hp_enc.npc_name:
-                        npc_name_now = hp_enc.npc_name
+                        hp_type = self.entity_types.get(self._last_hp_eid)
+                        if hp_type == 0 and not hp_enc.is_dead:
+                            pass  # living player — skip
+                        elif hp_type is None and not self._looks_like_npc_name(hp_enc.npc_name):
+                            pass  # unknown entity with player name — skip
+                        else:
+                            npc_name_now = hp_enc.npc_name
                 if not npc_name_now:
+                    # Fallback: find the most recently dead encounter
+                    # Same filtering: skip players and unknown player-names
                     last_kill = None
                     for enc in self.encounters:
                         if enc.end_time and enc.npc_name:
+                            enc_type = self.entity_types.get(enc.npc_eid)
+                            if enc_type == 0:
+                                continue  # player encounter — skip for XP
+                            if enc_type is None and not self._looks_like_npc_name(enc.npc_name):
+                                continue  # unknown with player name — skip
                             if last_kill is None or enc.end_time > last_kill.end_time:
                                 last_kill = enc
                     if last_kill and (now - last_kill.end_time) < 5.0:
                         npc_name_now = last_kill.npc_name
-                # First event — record baseline and save NPC for next delta
+                # First event — record baseline (no delta to show yet)
                 if prev is None:
-                    self._xp_pending_npc = npc_name_now
-                    _plog.debug(f"XP_BASELINE #{eid} total={xp_total:,} (first event, no delta) pending_npc=\"{npc_name_now}\"")
+                    _plog.debug(f"XP_BASELINE #{eid} total={xp_total:,} (first event, no delta)")
                     return None
                 leveled_up = False
                 if xp_total < prev:
@@ -1736,10 +1890,8 @@ class EntityTracker:
                 level_needed = self._xp_level_needed.get(eid)
                 pct = (xp_gained / level_needed * 100) if (level_needed and xp_gained > 0) else None
                 name = self.names.get(eid, f"Entity#{eid}")
-                # Use the NPC from the PREVIOUS kill (saved at prior
-                # UpdateExperience) since the delta is that kill's XP.
-                npc_for_delta = self._xp_pending_npc
-                self._xp_pending_npc = npc_name_now  # save current for next
+                npc_for_delta = npc_name_now
+                zone = self.zones.get(eid)
                 xp_ev = {
                     "timestamp": time.time(),
                     "eid": eid,
@@ -1751,6 +1903,8 @@ class EntityTracker:
                 }
                 if npc_for_delta:
                     xp_ev["npc_name"] = npc_for_delta
+                if zone:
+                    xp_ev["zone"] = zone
                 self._xp_events.append(xp_ev)
                 _plog.debug(f"XP_UPDATE #{eid} \"{name}\" total={xp_total:,} gained=+{xp_gained:,} pct={pct} lvlup={leveled_up} npc=\"{npc_for_delta}\" next_npc=\"{npc_name_now}\"")
                 return None
@@ -1782,6 +1936,15 @@ class EntityTracker:
 
             if etype == "Die":
                 dead_name = self.names.get(eid, f"#{eid}")
+                etype_val = self.entity_types.get(eid)
+                # Skip player deaths (feign death, PvP, etc.) — they pollute
+                # the dead-encounter list used for XP NPC attribution.
+                if etype_val == 0:
+                    _plog.debug(f"DIE_PLAYER #{eid} \"{dead_name}\" skipped (player)")
+                    return None
+                if etype_val is None and not self._looks_like_npc_name(dead_name):
+                    _plog.debug(f"DIE_PLAYER #{eid} \"{dead_name}\" skipped (unknown, player-like name)")
+                    return None
                 enc = self._encounter_map.get(eid)
                 if enc and not enc.is_dead:
                     enc.is_dead = True
@@ -1827,7 +1990,7 @@ class EntityTracker:
 
             elif etype == "EndCasting":
                 # Extract caster/target names and set attacker attribution
-                text = event.get("text", "")
+                text = _strip_msg_type_byte(event.get("text", ""))
                 target_id = event.get("target_id")
                 _plog.debug(f"ENDCAST caster=#{eid} target=#{target_id} text=\"{text[:80]}\"")
                 if text:
@@ -1887,7 +2050,7 @@ class EntityTracker:
 
                     # 5. Local player melee NO damage: "You kick Y."
                     if not is_dmg:
-                        m_melee = re.match(rf"^You {_MELEE_VERBS} (.+?)\.?[#&'\"\\x00! ]*$", text)
+                        m_melee = re.match(rf"^You {_MELEE_VERBS} (.+?)\.?$", text)
                         if m_melee:
                             _text_target_name = m_melee.group(1)
                             self._mark_local_player(eid)
@@ -1898,7 +2061,7 @@ class EntityTracker:
 
                     # 6. Third-person melee NO damage: "Lilyth kicks Y."
                     if not is_dmg:
-                        m_3p_melee = re.match(rf"^(\S+) {_MELEE_VERBS}(?:e?s) (.+?)\.?[#&'\"\\x00 ]*$", text)
+                        m_3p_melee = re.match(rf"^(\S+) {_MELEE_VERBS}(?:e?s) (.+?)\.?$", text)
                         if m_3p_melee:
                             _text_target_name = m_3p_melee.group(2)
                             if eid not in self.names:
@@ -2483,7 +2646,7 @@ class CaptureBackend:
                             self._hmac_key = keys.get("hmac_key")
                             self._xor_key = keys.get("xor_key")
                         if old != keys["aes_key"]:
-                            self._status("Live")
+                            self._status("")
                 except Exception:
                     pass
             self._stop.wait(5)
@@ -2605,7 +2768,7 @@ class CaptureBackend:
 
                 # Log item-related messages with body hex for discovery
                 if msg_id in ITEM_MSG_IDS:
-                    body_hex = body[:64].hex(' ') if body else ''
+                    body_hex = body.hex(' ') if body else ''
                     _plog.debug(f"MSG_ITEM 0x{msg_id:04X} {msg_name} dir={direction} len={len(body)} body={body_hex}")
                 elif msg_id in ALL_MSG_IDS:
                     _plog.debug(f"MSG_IN 0x{msg_id:04X} {msg_name} dir={direction} body_len={len(body)}")
@@ -2688,7 +2851,7 @@ class CaptureBackend:
                     if text:
                         self._check_triggers(text)
                         self._check_chat_loot(text)
-                        event["_display"] = text
+                        event["_display"] = _strip_msg_type_byte(text)
                         event["type"] = "EndCasting"  # reuse same feed tag color
                         try:
                             self._event_queue.put_nowait(event)
@@ -2737,8 +2900,20 @@ class CaptureBackend:
 
         elif etype == "AddItemToInventory":
             item_rec = event.get("item_record")
-            item_name = event.get("item_name") or (item_rec or {}).get("name")
             item_hid = event.get("item_hid") or (item_rec or {}).get("hid")
+            # Try to get item name: from record, from existing data, or from HID
+            item_name = event.get("item_name") or (item_rec or {}).get("name")
+            if not item_name and item_hid:
+                # Check if we already have this item from a prior inspect (0x0080)
+                with self._item_lock:
+                    existing = self._items.get(item_hid)
+                if existing:
+                    item_name = existing.get("name")
+                    if not item_rec:
+                        item_rec = existing  # use cached stats for display
+            if not item_name and item_hid:
+                # Derive display name from HID: "beetle_meat" → "Beetle Meat"
+                item_name = item_hid.replace('_', ' ').title()
 
             # Queue item data to API
             if self._api and item_rec and item_rec.get("hid"):
@@ -2806,6 +2981,31 @@ class CaptureBackend:
                     self._items[item_rec["hid"]] = item_rec
                 if self._api:
                     self._api.queue_item(item_rec)
+                if _plog.isEnabledFor(logging.DEBUG):
+                    _plog.debug(
+                        f"ITEM_INFO hid={item_rec.get('hid')} "
+                        f"name={item_rec.get('name')} "
+                        f"type={item_rec.get('item_type')} "
+                        f"slot={item_rec.get('slot_mask')} "
+                        f"lvl={item_rec.get('required_level')} "
+                        f"dmg={item_rec.get('damage')} "
+                        f"delay={item_rec.get('delay')} "
+                        f"ac={item_rec.get('ac')} "
+                        f"str={item_rec.get('strength')} sta={item_rec.get('stamina')} "
+                        f"dex={item_rec.get('dexterity')} agi={item_rec.get('agility')} "
+                        f"int={item_rec.get('intelligence')} wis={item_rec.get('wisdom')} "
+                        f"cha={item_rec.get('charisma')} "
+                        f"hp={item_rec.get('health')} mana={item_rec.get('mana')} "
+                        f"hp_regen={item_rec.get('health_regen')} mana_regen={item_rec.get('mana_regen')} "
+                        f"m_haste={item_rec.get('melee_haste')} r_haste={item_rec.get('ranged_haste')} "
+                        f"s_haste={item_rec.get('spell_haste')} "
+                        f"weight={item_rec.get('weight')} "
+                        f"nodrop={item_rec.get('no_drop')} unique={item_rec.get('is_unique')} "
+                        f"magic={item_rec.get('is_magic')} "
+                        f"stack={item_rec.get('stack_size')} charges={item_rec.get('charges')} "
+                        f"effects={item_rec.get('effects')} "
+                        f"desc={item_rec.get('description')!r}"
+                    )
 
     # Regex for loot text: "[item|hid|Name]" and "from NPC's corpse"
     _LOOT_ITEM_RE = re.compile(
@@ -3076,8 +3276,8 @@ class CaptureBackend:
             text = event.get("text", "")
             if not text:
                 return None
-            # Strip trailing garbage characters the game appends
-            text = text.rstrip("#&'\"0\x00 ")
+            # Strip trailing message-type byte the game appends after the period
+            text = _strip_msg_type_byte(text)
             # Skip non-combat messages (aggro, interrupts) unless they
             # contain damage/heal info — keep those for context
             if not text:
@@ -3526,6 +3726,26 @@ class CombatApp(tk.Tk):
                                         font=('Consolas', 8), anchor=tk.W, padx=6)
         self._bottom_status.pack(fill=tk.X, side=tk.BOTTOM)
 
+        # Reload gate overlay — covers entire window until /reload is received
+        self._reload_overlay_buttons_shown = False
+        self._reload_overlay = tk.Frame(self, bg=COLORS['bg'])
+        self._reload_overlay.place(relx=0, rely=0, relwidth=1, relheight=1)
+        tk.Label(self._reload_overlay, text="Type /reload in-game to start",
+                 font=("Segoe UI", 14), fg=COLORS['fg'], bg=COLORS['bg']
+                 ).place(relx=0.5, rely=0.45, anchor='center')
+        tk.Label(self._reload_overlay, text="This identifies your character",
+                 font=("Segoe UI", 9), fg=COLORS['fg_dim'], bg=COLORS['bg']
+                 ).place(relx=0.5, rely=0.55, anchor='center')
+
+    def _select_local_player(self, eid):
+        """User clicked a player button on the reload overlay — assign as local player."""
+        tracker = self._backend._tracker
+        with tracker._lock:
+            tracker._mark_local_player(eid)
+            tracker._party_members_pending = None
+            tracker._reload_gate = False
+            _plog.info(f"RELOAD_GATE cleared — user selected player #{eid} \"{tracker.names.get(eid, '?')}\"")
+
     # --- Event polling ---
 
     def _on_pause_toggle(self):
@@ -3675,7 +3895,7 @@ class CombatApp(tk.Tk):
                 while True:
                     msg = self._status_queue.get_nowait()
                     self._status_label.configure(text=msg)
-                    if msg == "Live" or msg == "Reconnected":
+                    if msg in ("", "Reconnected"):
                         self._status_dot.configure(fg=COLORS['green'])
                     elif "Waiting" in msg or "exited" in msg or "Connecting" in msg:
                         self._status_dot.configure(fg=COLORS['yellow'])
@@ -3683,6 +3903,36 @@ class CombatApp(tk.Tk):
                         self._status_dot.configure(fg=COLORS['red'])
             except queue.Empty:
                 pass
+
+            # Reload overlay: show player selection or remove when gate clears
+            if self._reload_overlay is not None and hasattr(self._backend, '_tracker'):
+                tracker = self._backend._tracker
+                if not tracker._reload_gate:
+                    # Gate cleared (solo auto-detect or player selected) — remove overlay
+                    self._reload_overlay.destroy()
+                    self._reload_overlay = None
+                elif (tracker._party_members_pending is not None
+                      and not self._reload_overlay_buttons_shown):
+                    # Group detected — replace overlay with player selection buttons
+                    self._reload_overlay_buttons_shown = True
+                    for w in self._reload_overlay.winfo_children():
+                        w.destroy()
+                    tk.Label(self._reload_overlay, text="Which character is yours?",
+                             font=("Segoe UI", 14), fg=COLORS['fg'], bg=COLORS['bg']
+                             ).pack(pady=(60, 15))
+                    for m_eid, m_name, m_cls, m_lvl in tracker._party_members_pending:
+                        label = m_name
+                        if m_cls:
+                            label += f"  -  {_class_label(m_cls)}"
+                        if m_lvl is not None:
+                            label += f"  Lv{m_lvl}"
+                        btn = tk.Button(
+                            self._reload_overlay, text=label,
+                            font=("Segoe UI", 11), fg=COLORS['fg'], bg=COLORS['surface'],
+                            activeforeground=COLORS['fg'], activebackground=COLORS['border'],
+                            bd=0, padx=20, pady=6, cursor="hand2",
+                            command=lambda eid=m_eid: self._select_local_player(eid))
+                        btn.pack(pady=3)
 
             # Process combat events
             batch = 0
@@ -3792,7 +4042,10 @@ class CombatApp(tk.Tk):
                 key = f"type{et}" if et is not None else "unknown"
                 etype_counts[key] = etype_counts.get(key, 0) + 1
             _plog.debug(f"GUI_STATE view={self._meter_view} encounters={enc_count} "
-                        f"entity_types={etype_counts} names={len(tracker.names)}")
+                        f"entity_types={etype_counts} names={len(tracker.names)} "
+                        f"local_eid={tracker._local_player_eid} "
+                        f"player_name=\"{tracker.player_name}\" "
+                        f"classes={dict(tracker.classes)} levels={dict(tracker.levels)}")
 
         scroll_pos = self._meter.yview()[0]
         if self._meter_view == "encounter_detail":
@@ -3941,6 +4194,19 @@ class CombatApp(tk.Tk):
             dealt = _best_dealt(p)
             p_dps = dealt / enc_dur if enc_dur > 0 else 0.0
 
+            # Resolve "YOU" placeholder to real name
+            pname = p['name']
+            if pname == "YOU" or pname.startswith("Entity#"):
+                real_name = tracker.names.get(p_eid)
+                if real_name and real_name != "YOU" and not real_name.startswith("Entity#"):
+                    pname = real_name
+                    p['name'] = real_name
+            if p_eid == tracker._local_player_eid and pname == "YOU":
+                real = tracker.player_name
+                if real and real != "YOU":
+                    pname = real
+                    p['name'] = real
+
             p_cls = tracker.classes.get(p_eid) or p['cls']
             p_lvl = tracker.levels.get(p_eid) if tracker.levels.get(p_eid) is not None else p['level']
             p_tags = []
@@ -3951,7 +4217,7 @@ class CombatApp(tk.Tk):
             p_tag = f" [{' '.join(p_tags)}]" if p_tags else ""
 
             segs.append((f"#{i:<3}", 'rank'))
-            name_display = p['name'][:14].ljust(14)
+            name_display = pname[:14].ljust(14)
             segs.append((f" {name_display}", 'name'))
             if p_tag:
                 segs.append((p_tag, 'class_tag'))
@@ -4074,90 +4340,49 @@ class CombatApp(tk.Tk):
         grand_total_dur = 0.0
         grand_enc_count = 0
 
-        # Build sets of eids/names that are encounter TARGETS (being fought).
-        # If an entity is a target of any encounter AND it's not a confirmed
-        # player (entity_type==0), it's an NPC — don't show in overview.
-        # For unknown entities (type=None), only treat as NPC target if the
-        # name looks like an NPC (lowercase start).  Players whose SpawnEntity
-        # wasn't captured have type=None but uppercase names — they can be
-        # encounter targets (from mobs hitting them back) without being NPCs.
-        npc_target_eids = set()
-        npc_target_names = set()
-        for enc in encounters:
-            et = tracker.entity_types.get(enc.npc_eid)
-            if et is not None and et != 0:
-                # Confirmed NPC (entity_type > 0)
-                npc_target_eids.add(enc.npc_eid)
-                if enc.npc_name:
-                    npc_target_names.add(enc.npc_name)
-            elif et is None and enc.npc_name:
-                # Unknown entity — only treat as NPC if name looks like one
-                if EntityTracker._looks_like_npc_name(enc.npc_name):
-                    npc_target_eids.add(enc.npc_eid)
-                    npc_target_names.add(enc.npc_name)
-
         for enc in encounters:
             grand_total_dmg += enc.best_damage
             grand_total_dur += enc.duration
             grand_enc_count += 1
             for p_eid, p in enc.players.items():
                 pname = p['name']
-                # Resolve bad names from tracker state
+                # Resolve bad/placeholder names from tracker state
                 if (pname.startswith("Entity#")
+                        or pname == "YOU"
                         or EntityTracker._looks_like_npc_name(pname)):
                     real_name = tracker.names.get(p_eid)
-                    if real_name and not real_name.startswith("Entity#"):
+                    if (real_name
+                            and real_name != "YOU"
+                            and not real_name.startswith("Entity#")):
                         pname = real_name
                         p['name'] = real_name
-                # Local player fallback: use "YOU" if name is still bad
+                # Local player fallback: use player_name if name is still bad
                 if p_eid == tracker._local_player_eid:
                     if (pname.startswith("Entity#")
+                            or pname == "YOU"
                             or EntityTracker._looks_like_npc_name(pname)):
-                        pname = tracker.player_name or "YOU"
-                        p['name'] = pname
+                        real = tracker.player_name
+                        if real and real != "YOU":
+                            pname = real
+                            p['name'] = real
                 p_dealt = max(p['text_dealt'], p['dealt'])
                 p_cls = tracker.classes.get(p_eid) or p['cls']
                 p_lvl = tracker.levels.get(p_eid) if tracker.levels.get(p_eid) is not None else p['level']
                 p_etype = tracker.entity_types.get(p_eid)  # 0=player, None=unknown, >0=NPC/pet
-                # Filter: only players (0), unknown (None), and charmed pets
-                # Skip regular NPCs that dealt damage but aren't pets
+                # Filter: only confirmed players (entity_type==0) and charmed pets
+                # The /reload gate ensures all party members are registered as type 0
                 is_pet = False
-                if p_etype is not None and p_etype != 0:
+                if p_etype == 0:
+                    pass  # confirmed player — always show
+                elif p_eid == tracker._local_player_eid:
+                    pass  # local player — always show
+                elif p_etype is not None and p_etype != 0:
                     is_pet = tracker.pet_states.get(p_eid, False)
-                    if _plog.isEnabledFor(logging.DEBUG):
-                        _plog.debug(f"  OVERVIEW_FILTER enc=\"{enc.npc_name}\" "
-                                    f"attacker=\"{pname}\"(#{p_eid}) entity_type={p_etype} "
-                                    f"pet_state={is_pet} dealt={p_dealt} "
-                                    f"action={'KEEP_PET' if is_pet else 'SKIP_NPC'}")
                     if not is_pet:
                         continue  # skip regular NPCs
-                elif p_etype is None:
-                    # Unknown entity_type — use multiple heuristics:
-                    # 1. Name starts lowercase → NPC ("a bodyguard")
-                    # 2. Eid is a target of an encounter → NPC (being fought)
-                    # 3. Name matches an encounter target → NPC (e.g. pet
-                    #    shares name root with the NPC being fought)
-                    skip = False
-                    reason = "KEEP_UNKNOWN"
-                    if EntityTracker._looks_like_npc_name(pname):
-                        skip = True
-                        reason = "SKIP_NPC_NAME"
-                    elif (p_eid in npc_target_eids
-                          and p_eid != tracker._local_player_eid):
-                        skip = True
-                        reason = "SKIP_NPC_TARGET"
-                    elif (pname in npc_target_names
-                          and p_eid != tracker._local_player_eid):
-                        skip = True
-                        reason = "SKIP_NPC_TARGET_NAME"
-                    if _plog.isEnabledFor(logging.DEBUG):
-                        _plog.debug(f"  OVERVIEW_FILTER enc=\"{enc.npc_name}\" "
-                                    f"attacker=\"{pname}\"(#{p_eid}) entity_type=None "
-                                    f"is_enc_target={p_eid in npc_target_eids} "
-                                    f"name_is_target={pname in npc_target_names} "
-                                    f"dealt={p_dealt} action={reason}")
-                    if skip:
-                        continue
+                else:
+                    # Unknown entity_type — not a confirmed player, skip
+                    continue
                 if pname not in player_totals:
                     player_totals[pname] = {
                         'cls': p_cls, 'level': p_lvl,
@@ -4495,6 +4720,17 @@ class CombatApp(tk.Tk):
                 agg['npc_level'] = enc.npc_level
             for p_eid, p in enc.players.items():
                 pname = p['name']
+                # Resolve "YOU" and other placeholder names
+                if (pname == "YOU" or pname.startswith("Entity#")):
+                    real_name = tracker.names.get(p_eid)
+                    if real_name and real_name != "YOU" and not real_name.startswith("Entity#"):
+                        pname = real_name
+                        p['name'] = real_name
+                if p_eid == tracker._local_player_eid and pname == "YOU":
+                    real = tracker.player_name
+                    if real and real != "YOU":
+                        pname = real
+                        p['name'] = real
                 p_dealt = max(p['text_dealt'], p['dealt'])
                 # Use live tracker data for class/level (encounter records may be stale)
                 p_cls = tracker.classes.get(p_eid) or p['cls']
@@ -4939,7 +5175,9 @@ class CombatApp(tk.Tk):
     def _refresh_stats(self):
         # Sync auto-detected player name from tracker
         tracker_name = self._backend._tracker.player_name
-        if tracker_name and tracker_name != self._backend.player_name:
+        if (tracker_name
+                and tracker_name != "YOU"
+                and tracker_name != self._backend.player_name):
             self._backend.player_name = tracker_name
             tag = tracker_name
             sn = self._backend.server_name
@@ -5586,6 +5824,14 @@ class CombatApp(tk.Tk):
         self._xp_view.insert(tk.END, " Experience Tracker\n", 'header')
         self._xp_view.insert(tk.END, " " + "\u2500" * 36 + "\n", 'sep')
 
+        # Class display from ClientPartyUpdate / SpawnEntity
+        if latest_eid is not None:
+            class_hid = tracker.classes.get(latest_eid)
+            if class_hid:
+                self._xp_view.insert(tk.END, "  Class:     ", 'summary_label')
+                self._xp_view.insert(tk.END, f"{_class_label(class_hid)}", 'summary_value')
+                self._xp_view.insert(tk.END, "\n")
+
         # Level progress — XP value is progress into current level
         if latest_eid is not None:
             level = tracker.levels.get(latest_eid)
@@ -5596,9 +5842,15 @@ class CombatApp(tk.Tk):
                 if level_needed:
                     level_pct = latest_total / level_needed * 100
                     self._xp_view.insert(tk.END, f"  ({latest_total:,} / {level_needed:,}  {level_pct:.1f}%)", 'xp_total')
-                else:
-                    self._xp_view.insert(tk.END, f"  ({latest_total:,} XP into level)", 'xp_total')
                 self._xp_view.insert(tk.END, "\n")
+
+        # Zone from ClientPartyUpdate
+        if latest_eid is not None:
+            zone_hid = tracker.zones.get(latest_eid)
+            if zone_hid:
+                zone_label = zone_hid.replace('_', ' ').title()
+                self._xp_view.insert(tk.END, "  Zone:      ", 'summary_label')
+                self._xp_view.insert(tk.END, f"{zone_label}\n", 'summary_value')
 
         self._xp_view.insert(tk.END, "  Total:     ", 'summary_label')
         self._xp_view.insert(tk.END, f"+{total_gained:,}", 'summary_value')
