@@ -11,7 +11,7 @@ Usage:
     python parser/parser.py
 """
 
-APP_VERSION = "V1.6"
+APP_VERSION = "V1.7"
 
 import csv
 import ctypes
@@ -3320,13 +3320,11 @@ CLASS_HID_NAMES = {
     "war": "Warrior", "wiz": "Wizard", "alc": "Alchemist", "smn": "Summoner",
 }
 
-def _class_label(hid, abbreviate=False):
-    """Return class name for a class HID code. abbreviate=True returns uppercase HID."""
+def _class_label(hid):
+    """Return uppercase short class code (e.g. 'pal' → 'PAL')."""
     if not hid:
         return ""
-    if abbreviate:
-        return hid.upper()
-    return CLASS_HID_NAMES.get(hid, hid)
+    return hid.upper()
 
 TRIGGERS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "triggers.json")
 
