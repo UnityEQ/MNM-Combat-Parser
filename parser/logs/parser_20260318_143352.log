@@ -1,0 +1,2112 @@
+14:33:52 [DEBUG] KEYS validated Client.ConnectionInfo at 0x1A362550550
+14:33:52 [DEBUG] MSG_UNKNOWN_NEW 0x0210 dir=IN len=41 body=bd 01 00 00 8e 88 04 00 01 b9 08 21 45 7c c8 42 42 66 f2 05 44 8b d7 52 3d a0 59 3f 05 21 45 56
+14:33:52 [DEBUG] MSG_UNKNOWN_NEW 0x0010 dir=OUT len=43 body=00 00 00 00 00 00 00 00 00 00 00 00 e1 11 19 45 cf e6 f3 41 01 9f bb 43 13 e0 8e 43 20 fe 14 00
+14:33:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:33:53 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:33:53 [DEBUG] OVERVIEW_RENDER enc=0 total_dmg=0 dur=0.0s entries=0 local_eid=None player_name="" pet_states={} entity_types_sample={}
+14:33:53 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+14:33:53 [DEBUG]   PARSED type=UpdateMana eid=3369 target=None
+14:33:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=417
+14:33:53 [DEBUG]   PARSED type=SpawnEntity eid=781 target=None
+14:33:54 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:33:54 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:33:54 [DEBUG] MSG_UNKNOWN_NEW 0x0220 dir=OUT len=4 body=c5 04 00 00
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=159
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=164 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=3176 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=197
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1833 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1197 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1198 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=425
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1199 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=197
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1736 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1200 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=169
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=2725 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1642 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=159
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=260 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=446 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=500
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=479 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=480 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=454
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=481 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=482 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=547
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=452 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=490
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=483 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1286 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=247
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=14 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=153
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=2401 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=153
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=2383 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=153
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=558 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=167
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=557 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=264
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=6 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=571
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=896 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=453
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=897 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=448 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=608
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=449 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=451 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=584
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=478 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=557
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=476 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=477 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=565
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1201 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=447 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=96 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=450 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=536
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=472 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=425
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=473 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=534
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=474 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=475 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=2251 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=168
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1632 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=164
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=465 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1229 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1310 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1317 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=163
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=547 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1237 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=554 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=164
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=3300 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=439
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=567 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=153
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=549 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=153
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1318 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=155 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=160
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=157 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=572 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=573 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=580 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=711 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=762 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=417
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=756 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=307 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1242 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=372
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1892 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=503
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=763 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=503
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=764 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=503
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=765 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1874 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=372
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1884 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1885 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=447
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1873 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=828
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1613 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=372
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1895 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1320 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1082 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1083 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1088 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1092 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1098 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1099 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1100 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1101 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=403 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=483
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=2633 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=240 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=275 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=513
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=777 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=164
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=586 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=166
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=606 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=577
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=399 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=400 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=544
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=401 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=402 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=404 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=591
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=406 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=407 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=463
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=408 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=600
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=410 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=582
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1077 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=578
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1079 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=660
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1080 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=579
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1081 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=545
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1085 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1086 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1089 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=580
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1090 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=580
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1091 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1093 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=3302 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=855 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=346
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=859 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=3295 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=163
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=3296 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=163
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=3306 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=163
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=3278 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=577
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=405 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=718
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=412 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=555
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=892 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=582
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1078 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1106 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1107 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1108 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=717
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=411 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=856 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=912 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=333 target=None
+14:33:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:54 [DEBUG]   PARSED type=SpawnEntity eid=1265 target=None
+14:33:55 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=163
+14:33:55 [DEBUG]   PARSED type=SpawnEntity eid=3361 target=None
+14:33:55 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:55 [DEBUG]   PARSED type=SpawnEntity eid=3367 target=None
+14:33:55 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:55 [DEBUG]   PARSED type=SpawnEntity eid=1333 target=None
+14:33:55 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:33:55 [DEBUG]   PARSED type=SpawnEntity eid=166 target=None
+14:33:55 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:33:55 [DEBUG]   PARSED type=SpawnEntity eid=331 target=None
+14:33:55 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=388
+14:33:55 [DEBUG]   PARSED type=SpawnEntity eid=545 target=None
+14:33:55 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=441
+14:33:55 [DEBUG]   PARSED type=SpawnEntity eid=546 target=None
+14:33:55 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=353
+14:33:55 [DEBUG]   PARSED type=SpawnEntity eid=776 target=None
+14:33:55 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:55 [DEBUG]   PARSED type=SpawnEntity eid=791 target=None
+14:33:55 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:55 [DEBUG]   PARSED type=SpawnEntity eid=792 target=None
+14:33:55 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=367
+14:33:55 [DEBUG]   PARSED type=SpawnEntity eid=1236 target=None
+14:33:55 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=353
+14:33:55 [DEBUG]   PARSED type=SpawnEntity eid=1264 target=None
+14:33:55 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=417
+14:33:55 [DEBUG]   PARSED type=SpawnEntity eid=781 target=None
+14:33:55 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:33:55 [DEBUG]   PARSED type=SpawnEntity eid=299 target=None
+14:33:55 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:55 [DEBUG]   PARSED type=SpawnEntity eid=1278 target=None
+14:33:55 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:55 [DEBUG]   PARSED type=SpawnEntity eid=1437 target=None
+14:33:55 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:33:55 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:33:55 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+14:33:55 [DEBUG]   PARSED type=UpdateMana eid=449 target=None
+14:33:55 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+14:33:55 [DEBUG]   PARSED type=RemoveBuffIcon eid=1482 target=None
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x001E dir=IN len=8 body=0b 63 e1 00 00 00 00 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x001F dir=OUT len=8 body=0b 63 e1 00 00 00 00 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x016F dir=OUT len=0 body=
+14:33:55 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=39
+14:33:55 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x0228 dir=IN len=9 body=29 0d 00 00 12 09 00 00 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x0058 dir=IN len=46 body=01 00 00 00 0b 00 61 75 72 61 5f 70 69 6f 75 73 00 00 00 00 00 00 00 00 01 00 00 00 05 00 61 75
+14:33:55 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=34
+14:33:55 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+14:33:55 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=68
+14:33:55 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+14:33:55 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=47
+14:33:55 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+14:33:55 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+14:33:55 [DEBUG]   PARSED type=EndCasting eid=3369 target=3369
+14:33:55 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+14:33:55 [DEBUG]   PARSED type=RemoveBuffIcon eid=3369 target=None
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x00A1 dir=IN len=28 body=29 0d 00 00 17 00 62 75 66 66 5f 41 75 72 61 20 6f 66 20 74 68 65 20 50 69 6f 75 73
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x008A dir=IN len=15 body=29 0d 00 00 0a 00 44 6f 6f 64 6f 6f 62 75 74
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x00A0 dir=IN len=39 body=29 0d 00 00 17 00 62 75 66 66 5f 41 75 72 61 20 6f 66 20 74 68 65 20 50 69 6f 75 73 0a 00 48 6f
+14:33:55 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+14:33:55 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x0003 dir=IN len=1384 body=21 02 00 00 29 0d 00 00 0a 00 44 6f 6f 64 6f 6f 62 75 74 00 00 04 00 5a 65 6b 03 00 00 00 04 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x6F72 dir=IN len=1384 body=6f 74 04 00 6e 69 6c 00 00 04 00 6e 75 6c 04 00 6e 75 6c 04 00 74 61 72 00 00 00 00 04 00 00 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x2030 dir=IN len=1384 body=28 4c 31 29 20 74 6f 20 32 30 30 20 28 4c 36 30 29 2e 0d 0a 41 64 64 69 74 69 6f 6e 61 6c 6c 79
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x6968 dir=IN len=1384 body=73 20 61 62 69 6c 69 74 79 20 69 73 20 6d 6f 64 65 72 61 74 65 6c 79 20 64 69 66 66 69 63 75 6c
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x6962 dir=IN len=1384 body=6c 69 74 79 20 70 65 72 73 69 73 74 73 20 75 6e 74 69 6c 20 63 61 6e 63 65 6c 65 64 2e 04 00 6e
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x0000 dir=IN len=1384 body=00 40 00 00 40 40 01 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00 00 0b 00 53 74 75 6e 49 6d 70
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x4A41 dir=IN len=1384 body=4f 52 10 00 46 61 73 74 20 4d 65 74 61 62 6f 6c 69 73 6d 45 00 59 6f 75 72 20 45 6e 64 75 72 61
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x6D6C dir=IN len=1384 body=4c 6f 67 73 52 69 63 68 00 00 00 00 00 00 00 00 00 00 00 00 f9 a3 68 46 00 00 00 00 00 00 20 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x0001 dir=IN len=1384 body=00 00 80 3f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 04 00 00 00 03 0d 00 4d 65
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x0400 dir=IN len=1384 body=00 0f 00 52 69 63 68 20 57 6f 6f 64 20 50 69 6c 65 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x3072 dir=IN len=1384 body=32 ff 00 ff 00 ff 00 ff 00 01 00 09 0f 00 43 6c 61 73 73 50 6c 61 74 65 46 54 52 41 0e 00 53 69
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0xFF32 dir=IN len=1384 body=00 ff 00 ff 00 ff 00 01 00 09 0f 00 43 6c 61 73 73 50 6c 61 74 65 46 54 52 41 0e 00 53 69 6c 76
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x6963 dir=IN len=1384 body=6e 64 65 72 20 68 61 72 76 65 73 74 65 72 00 00 00 00 00 00 04 00 66 62 74 02 00 6e 00 00 00 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x525C dir=IN len=1384 body=3d a0 59 00 00 00 00 00 00 00 00 01 00 01 00 00 00 80 3f 00 00 00 00 00 00 00 00 00 00 2d 14 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x776F dir=IN len=1384 body=73 00 00 00 05 00 06 00 4d 6f 75 74 68 00 00 00 00 00 06 00 42 65 61 72 64 01 00 00 05 00 00 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x3130 dir=IN len=1384 body=0f 00 42 72 6f 77 6e 4c 65 61 74 68 65 72 30 32 ff 00 ff 00 ff 00 ff 00 01 00 09 0f 00 43 6c 61
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x4767 dir=IN len=1384 body=72 65 65 6e 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e ff 00 ff 00 ff 00 ff 00 01 00 06 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x5073 dir=IN len=1384 body=6c 61 74 65 46 54 52 41 0e 00 53 69 6c 76 65 72 4d 65 74 61 6c 30 31 0f 00 42 72 6f 77 6e 4c 65
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x03E8 dir=IN len=1384 body=00 00 e8 03 00 00 e8 03 00 00 9e 87 04 00 00 0b b3 0b 45 67 f6 ed 41 0f 65 1d 44 05 56 0a 3d a0
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x42FB dir=IN len=1384 body=00 00 00 00 01 00 20 00 c3 09 00 00 04 00 0c 00 47 68 6f 73 74 20 50 6f 70 70 79 00 00 00 00 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x4C00 dir=IN len=1384 body=45 54 5f 42 72 6f 77 6e 42 61 73 65 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e ff 00 ff 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x616C dir=IN len=1384 body=63 6b 0e 00 46 41 42 5f 43 6c 6f 74 68 47 72 65 79 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x6175 dir=IN len=1384 body=6c 69 74 79 20 51 75 61 72 72 79 20 53 74 6f 6e 65 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x003F dir=IN len=1384 body=00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 04 00 00 00 03 0a 00 43 68 61 69 6e 30 30
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x6564 dir=IN len=1384 body=00 00 00 00 00 00 00 00 00 00 00 00 f9 a3 68 46 00 00 00 00 00 00 20 00 42 02 00 00 01 00 10 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x0B41 dir=IN len=1384 body=00 4c 45 54 5f 53 68 61 64 6f 77 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e 0f 00 44 45 56
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x0100 dir=IN len=1384 body=00 06 08 00 43 6c 6f 61 6b 30 36 0c 00 45 79 65 47 6f 62 42 6c 61 63 6b 00 00 00 00 ff 00 ff 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x7574 dir=IN len=1384 body=72 65 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 2c 47 68 46 00 00 00 00 01
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x0806 dir=IN len=1384 body=00 43 6c 6f 61 6b 30 36 0c 00 45 79 65 47 6f 62 42 6c 61 63 6b 00 00 00 00 ff 00 ff 00 ff 00 ff
+14:33:55 [DEBUG] MSG_ITEM 0x0065 LootItemFromCorpse dir=IN len=1384 body=00 00 00 00 05 00 45 79 65 73 00 00 00 00 00 0e 00 45 78 74 72 61 46 65 61 74 75 72 65 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 04 dc f3 42 00 00 00 00 01 00 20 00 fc 02 00 00 01 00 12 00 61 20 67 6f 62 6c 69 6e 20 6f 76 65 72 73 65 65 72 00 00 00 00 00 00 04 00 67 6f 62 02 00 6d 01 00 00 00 00 00 e8 03 00 00 e8 03 00 00 00 00 00 00 e8 03 00 00 1b 6c 04 00 00 3d 6a 0f 45 bc d9 d5 41 e1 ca 28 44 00 57 52 3d a0 59 00 00 00 00 00 00 00 00 01 00 01 00 00 00 80 3f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 05 00 00 00 03 0a 00 43 68 61 69 6e 30 30 31 41 0d 00 42 6c 61 63 6b 43 6c 6f 74 68 30 31 0d 00 42 6c 61 63 6b 43 6c 6f 74 68 30 31 0c 00 49 72 6f 6e 4d 65 74 61 6c 30 31 ff 00 ff 00 ff 00 ff 00 01 00 08 0a 00 43 68 61 69 6e 30 30 31 41 0d 00 42 6c 61 63 6b 43 6c 6f 74 68 30 31 0c 00 45 79 65 47 6f 62 42 6c 61 63 6b 0c 00 49 72 6f 6e 4d 65 74 61 6c 30 31 ff 00 ff 00 ff 00 ff 00 01 00 06 08 00 43 6c 6f 61 6b 30 34 0d 00 42 6c 61 63 6b 43 6c 6f 74 68 30 31 0c 00 45 79 65 47 6f 62 42 6c 61 63 6b 0c 00 49 72 6f 6e 4d 65 74 61 6c 30 31 ff 00 ff 00 ff 00 ff 00 01 00 02 0a 00 43 68 61 69 6e 30 30 31 41 0d 00 42 6c 61 63 6b 43 6c 6f 74 68 30 31 0c 00 45 79 65 47 6f 62 42 6c 61 63 6b 0c 00 49 72 6f 6e 4d 65 74 61 6c 30 31 ff 00 ff 00 ff 00 ff 00 01 00 07 0a 00 43 68 61 69 6e 30 30 31 41 0d 00 42 6c 61 63 6b 43 6c 6f 74 68 30 31 0c 00 45 79 65 47 6f 62 42 6c 61 63 6b 0c 00 49 72 6f 6e 4d 65 74 61 6c 30 31 ff 00 ff 00 ff 00 ff 00 01 00 03 00 00 00 05 00 46 61 63 65 00 00 00 00 00 05 00 45 79 65 73 00 00 00 00 00 0e 00 45 78 74 72 61 46 65 61 74 75 72 65 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 07 dc f3 42 00 00 00 00 01 00 20 00 fd 02 00 00 01 00 12 00 61 20 67 6f 62 6c 69 6e 20 6f 76 65 72 73 65 65 72 00 00 00 00 00 00 04 00 67 6f 62 02 00 6d 01 00 00 00 00 00 e8 03 00 00 e8 03 00 00 00 00 00 00 e8 03 00 00 1b 6c 04 00 00 00 80 0e 45 94 b5 ea 41 79 3f 28 44 f0 59 52 3d a0 59 00 00 00 00 00 00 00 00 01 00 01 00 00 00 80 3f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 05 00 00 00 03 0a 00 43 68 61 69 6e 30 30 31 41 0d 00 42 6c 61 63 6b 43 6c 6f 74 68 30 31 0d 00 42 6c 61 63 6b 43 6c 6f 74 68 30 31 0c 00 49 72 6f 6e 4d 65 74 61 6c 30 31 ff 00 ff 00 ff 00 ff 00 01 00 08 0a 00 43 68 61 69 6e 30 30 31 41 0d 00 42 6c 61 63 6b 43 6c 6f 74 68 30 31 0c 00 45 79 65 47 6f 62 42 6c 61 63 6b 0c 00 49 72 6f 6e 4d 65 74 61 6c 30 31 ff 00 ff 00 ff 00 ff 00 01 00 06 08 00 43 6c 6f 61 6b 30 34 0d 00 42 6c 61 63 6b 43 6c 6f 74 68 30 31 0c 00 45 79 65 47 6f 62 42 6c 61 63 6b 0c 00 49 72 6f 6e 4d 65 74 61 6c 30 31 ff 00 ff 00 ff 00 ff 00 01 00 02 0a 00 43 68 61 69 6e 30 30 31 41 0d 00 42 6c 61 63 6b 43 6c 6f 74 68 30 31 0c 00 45 79 65 47 6f 62 42 6c 61 63 6b 0c 00 49 72 6f 6e 4d 65 74 61 6c 30 31 ff 00 ff 00 ff 00 ff 00 01 00 07 0a 00 43 68 61 69 6e 30 30 31 41 0d 00 42 6c 61 63 6b 43 6c 6f 74 68 30 31 0c 00 45 79 65 47 6f 62 42 6c 61 63 6b 0c 00 49 72 6f 6e 4d 65 74 61 6c 30 31 ff 00 ff 00 ff 00 ff 00 01 00 03 00 00 00 05 00 46 61 63 65 00 00 00 00 00 05 00 45 79 65 73 00 00 00 00 00 0e 00 45 78 74 72 61 46 65 61 74 75 72 65 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0a dc f3 42 00 00 00 00 01 00 20 00 52 07 00 00 01 00 0f 00 61 20 67 6f 62 6c 69 6e 20 6d 69 6e 65 72 00 00 00 00 00 00 04 00 67 6f 62 02 00 6d 01 00 00 00 00 00 e8 03 00 00 e8 03 00 00 00 00 00 00 e8 03 00 00 93 88 04 00 00 b7 85 0e 45 b9 34 ec 41 54 d3 23 44 00 00 52 3d a0 59 00 00 00 00 00 00 00 00 01 00 01 00 00 00 80 3f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 0a 00 52 69 67 68 74 48 61 6e 64 11 00 54 6f 6f 6c 5f 50 69 63 6b 61 78 65 5f 41 30 30 00 00 00 00 00 00 00 00 00 01 00 00 00 00 07 00 42 61 73 65 30 30 0d 00 4d 45 54 5f 49 72 6f 6e 57 61 72 6d 0e 00 4c 45 54 5f 42 72 6f 77 6e 42 61 73 65 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e ff 00 ff 00 ff 00 ff 00 01 00 01 00 00 00 02 0a 00 43 6c 6f 74 68 30 30 31 41 0c 00 45 79 65 47 6f 62 42 6c 61 63 6b 0c 00 49 72 6f 6e 4d 65 74 61 6c 30 31 0c 00 49 72 6f 6e 4d 65 74 61 6c 30 32 ff 00 ff 00 ff 00 ff 00 01 00 03 00 00 00 05 00 46 61 63 65 00 00 00 00 00 05 00 45 79 65 73 00 00 00 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x0E00 dir=IN len=1384 body=00 45 78 74 72 61 46 65 61 74 75 72 65 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x0030 dir=IN len=1384 body=00 00 00 00 00 00 00 00 01 00 00 00 00 07 00 42 61 73 65 30 30 0f 00 4d 45 54 5f 42 72 6f 6e 7a
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x4365 dir=IN len=1384 body=6c 6f 74 68 30 32 0b 00 44 61 72 6b 49 72 6f 6e 30 31 00 00 ff 00 ff 00 ff 00 ff 00 01 00 02 10
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0xFF00 dir=IN len=1384 body=00 ff 00 01 00 08 0a 00 50 6c 61 74 65 30 30 34 41 0e 00 4f 72 61 6e 67 65 43 6c 6f 74 68 30 32
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x3030 dir=IN len=1384 body=31 41 0f 00 42 72 6f 77 6e 4c 65 61 74 68 65 72 30 32 00 00 00 00 ff 00 ff 00 ff 00 ff 00 01 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x445F dir=IN len=1384 body=65 62 75 67 47 72 65 65 6e ff 00 ff 00 ff 00 ff 00 01 00 09 0f 00 43 6c 61 73 73 50 6c 61 74 65
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x4200 dir=IN len=1384 body=6c 61 63 6b 43 6c 6f 74 68 30 31 0f 00 42 72 6f 77 6e 4c 65 61 74 68 65 72 30 32 ff 00 ff 00 ff
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x6952 dir=IN len=1384 body=67 68 74 48 61 6e 64 11 00 54 6f 6f 6c 5f 50 69 63 6b 61 78 65 5f 41 30 30 00 00 00 00 00 00 00
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x000F dir=IN len=1384 body=42 72 6f 77 6e 4c 65 61 74 68 65 72 30 32 ff 00 ff 00 ff 00 ff 00 01 00 06 00 00 00 05 00 48 61
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x6C69 dir=IN len=1384 body=76 65 72 57 61 72 6d 10 00 4c 45 54 5f 4d 6f 73 73 43 6f 76 65 72 65 64 0f 00 44 45 56 5f 44 65
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x6142 dir=IN len=1384 body=73 65 30 30 10 00 4d 45 54 5f 42 72 6f 6e 7a 65 52 75 73 74 79 11 00 4d 45 54 5f 4d 69 74 68 72
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x4665 dir=IN len=1384 body=54 52 41 0e 00 53 69 6c 76 65 72 4d 65 74 61 6c 30 31 0f 00 42 72 6f 77 6e 4c 65 61 74 68 65 72
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x4400 dir=IN len=1384 body=45 56 5f 44 65 62 75 67 47 72 65 65 6e ff 00 ff 00 ff 00 ff 00 01 00 04 00 00 00 03 0d 00 4d 65
+14:33:55 [DEBUG] MSG_UNKNOWN_NEW 0x0099 dir=IN len=16 body=29 0d 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+14:33:55 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+14:33:55 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:33:55 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:33:55 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:33:55 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+14:33:55 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:33:55 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+14:33:55 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:33:55 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:33:55 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:33:55 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+14:33:55 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:33:56 [DEBUG] MSG_ITEM 0x0068 HandInItems dir=IN len=1384 body=00 00 00 00 06 00 42 65 61 72 64 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 b5 4e b7 44 00 00 00 00 01 00 20 00 3f 04 00 00 01 00 10 00 61 20 74 61 76 65 72 6e 20 70 61 74 72 6f 6e 00 00 00 00 00 00 04 00 68 75 6d 02 00 6d 01 00 00 00 00 00 e8 03 00 00 e8 03 00 00 00 00 00 00 e8 03 00 00 1d 6c 04 00 00 0c 2b 14 45 80 ad a2 3e c8 3c f6 42 d0 5a 52 3d a0 59 00 00 00 00 00 00 00 00 01 00 01 00 00 00 80 3f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 04 00 00 00 03 0d 00 4d 65 72 63 68 61 6e 74 30 30 31 41 0f 00 42 72 6f 77 6e 4c 65 61 74 68 65 72 30 32 00 00 00 00 ff 00 ff 00 ff 00 ff 00 01 00 08 0a 00 50 6c 61 74 65 30 30 34 41 0e 00 4f 72 61 6e 67 65 43 6c 6f 74 68 30 32 0b 00 44 61 72 6b 49 72 6f 6e 30 31 00 00 ff 00 ff 00 ff 00 ff 00 01 00 02 10 00 47 65 6e 65 72 69 63 4c 65 61 74 68 65 72 41 0f 00 4d 45 54 5f 53 69 6c 76 65 72 57 61 72 6d 10 00 4c 45 54 5f 4d 6f 73 73 43 6f 76 65 72 65 64 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e ff 00 ff 00 ff 00 ff 00 01 00 09 0f 00 43 6c 61 73 73 50 6c 61 74 65 46 54 52 41 0e 00 53 69 6c 76 65 72 4d 65 74 61 6c 30 31 0f 00 42 72 6f 77 6e 4c 65 61 74 68 65 72 30 32 0f 00 42 72 6f 77 6e 4c 65 61 74 68 65 72 30 32 ff 00 ff 00 ff 00 ff 00 01 00 06 00 00 00 05 00 48 61 69 72 00 00 00 00 00 05 00 46 61 63 65 01 00 00 00 00 05 00 45 79 65 73 00 00 00 00 00 09 00 45 79 65 62 72 6f 77 73 00 00 00 00 00 06 00 4d 6f 75 74 68 00 00 00 00 00 06 00 42 65 61 72 64 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 db e3 41 44 00 00 00 00 01 00 20 00 99 01 00 00 01 00 0f 00 61 20 72 69 76 65 72 20 70 69 72 61 74 65 00 00 00 00 00 00 04 00 68 75 6d 02 00 6d 03 00 00 00 00 00 e8 03 00 00 e8 03 00 00 00 00 00 00 e8 03 00 00 69 87 04 00 00 de b6 15 45 06 c9 62 3e 4d 22 f5 42 47 5c 52 3d a0 59 00 00 00 00 00 00 00 00 01 00 01 00 00 00 80 3f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 04 00 00 00 03 0d 00 4d 65 72 63 68 61 6e 74 30 30 31 41 0f 00 42 72 6f 77 6e 4c 65 61 74 68 65 72 30 32 00 00 00 00 ff 00 ff 00 ff 00 ff 00 01 00 08 0a 00 50 6c 61 74 65 30 30 34 41 0e 00 4f 72 61 6e 67 65 43 6c 6f 74 68 30 32 0b 00 44 61 72 6b 49 72 6f 6e 30 31 00 00 ff 00 ff 00 ff 00 ff 00 01 00 02 10 00 47 65 6e 65 72 69 63 4c 65 61 74 68 65 72 41 0f 00 4d 45 54 5f 53 69 6c 76 65 72 57 61 72 6d 10 00 4c 45 54 5f 4d 6f 73 73 43 6f 76 65 72 65 64 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e ff 00 ff 00 ff 00 ff 00 01 00 09 0f 00 43 6c 61 73 73 50 6c 61 74 65 46 54 52 41 0e 00 53 69 6c 76 65 72 4d 65 74 61 6c 30 31 0f 00 42 72 6f 77 6e 4c 65 61 74 68 65 72 30 32 0f 00 42 72 6f 77 6e 4c 65 61 74 68 65 72 30 32 ff 00 ff 00 ff 00 ff 00 01 00 06 00 00 00 05 00 48 61 69 72 00 00 00 00 00 05 00 46 61 63 65 01 00 00 00 00 05 00 45 79 65 73 00 00 00 00 00 09 00 45 79 65 62 72 6f 77 73 00 00 00 00 00 06 00 4d 6f 75 74 68 00 00 00 00 00 06 00 42 65 61 72 64 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 dc e3 41 44 00 00 00 00 01 00 20 00 0b 05 00 00 01 00 14 00 61 20 67 69 61 6e 74 20 66 69 72 65 20 62 65 65 74 6c 65 00 00 00 00 00 00 04 00 66 62 74 02 00 6e 00 00 00 00 00 00 e8 03 00 00 e8 03 00 00 00 00 00 00 e8 03 00 00 ce 88 04 00 01 b0 e4 15 45 32 2b f7 40 38 a4 4e 43 2c d2 0a 3d a0 59 ba bf 15 45 c1 33 02 41 d8 9e 50 43 2d d2 00 00 00 00 00 00 00 00 01 00 01 00 00 00 40 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 47 ef 0d 43 00 00 00 00 01 00 20 00 5c 0b 00 00 01 00 0e 00 61 20 72 61 74 74 6c 65 73 6e 61 6b 65 00 00 00 00 00 00 04 00 73 6e 6b 02 00 6e 00 00 00 00 00 00 e8 03 00 00 e8 03 00 00 00 00 00 00 e8 03 00 00 cd 88 04 00 01 42 2c 15 45 ec cc 1a 42 9a 52 cc 43 5e d5 52 3d a0 59 ba 1f 15 45 80 dd 1a 42 e3 59 cc 43 5d d5 00 00 00 00 00 00 00 00 01 00 01 00 00 00 80 3f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 07 00 53 6b 69 6e 30 30 0e 00 57 6f 72 6e 4c 65 61 74 68 65 72 30 31 08 00 41 73 68 69 72 61 43 05 00 63 6f 70 79 ff 00 ff 00 ff 00 ff 00 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 94 1d 1f 46 00 00 00 00 01 00 20 00 b0 00 00 00 04 00 0a 00 57 6f 6f 64 20 50 69 6c 65
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x5445 dir=IN len=1384 body=5f 42 72 6f 6e 7a 65 52 75 73 74 79 0f 00 4c 45 54 5f 4f 72 61 6e 67 65 42 61 73 65 0f 00 44 45
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x00FF dir=IN len=1384 body=ff 00 01 00 05 00 00 00 05 00 48 61 69 72 01 00 00 01 00 05 00 46 61 63 65 00 00 00 00 00 05 00
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x0072 dir=IN len=1384 body=00 00 00 00 00 04 00 67 6f 62 02 00 6d 01 00 00 00 00 00 e8 03 00 00 e8 03 00 00 00 00 00 00 e8
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x654C dir=IN len=1384 body=61 74 68 65 72 30 31 00 00 00 00 ff 00 ff 00 ff 00 ff 00 01 00 05 00 00 00 05 00 48 61 69 72 01
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x4300 dir=IN len=1384 body=68 61 69 6e 30 30 31 41 0d 00 42 6c 61 63 6b 43 6c 6f 74 68 30 31 0c 00 49 72 6f 6e 4d 65 74 61
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0xC634 dir=IN len=1384 body=15 45 9a 56 1d 42 b1 9a 1f 44 b0 56 52 3d a0 59 00 00 00 00 00 00 00 00 01 00 01 00 00 00 80 3f
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x0C36 dir=IN len=1384 body=00 45 79 65 47 6f 62 42 6c 61 63 6b 00 00 00 00 ff 00 ff 00 ff 00 ff 00 01 00 02 0a 00 43 68 61
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x6863 dir=IN len=1384 body=61 6e 74 30 30 31 41 0f 00 42 72 6f 77 6e 4c 65 61 74 68 65 72 30 32 00 00 00 00 ff 00 ff 00 ff
+14:33:56 [DEBUG] MSG_ITEM 0x0065 LootItemFromCorpse dir=IN len=1384 body=00 00 00 00 00 04 00 66 62 74 02 00 6e 00 00 00 00 00 00 e8 03 00 00 e8 03 00 00 00 00 00 00 e8 03 00 00 cc 88 04 00 00 56 f6 16 45 47 51 a4 41 78 d3 80 43 86 54 0a 3d a0 59 00 00 00 00 00 00 00 00 01 00 01 00 00 00 40 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 15 cc 89 43 00 00 00 00 01 00 20 00 94 06 00 00 01 00 0f 00 61 20 67 69 61 6e 74 20 73 70 69 64 65 72 00 00 00 00 00 00 04 00 74 61 72 02 00 6e 00 00 00 00 00 00 e8 03 00 00 e8 03 00 00 00 00 00 00 e8 03 00 00 cd 88 04 00 01 c1 ba 16 45 41 eb 40 42 64 b7 f0 43 21 d2 52 3d a0 59 ba af 16 45 b2 13 41 42 5d 04 f1 43 1d d2 00 00 00 00 00 00 00 00 01 00 01 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 07 00 53 6b 69 6e 30 30 0e 00 4c 45 54 5f 57 6f 72 6e 42 72 6f 77 6e 10 00 46 41 42 5f 43 6c 6f 74 68 59 65 6c 6c 6f 77 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e ff 00 ff 00 ff 00 ff 00 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 bf e7 08 43 00 00 00 00 01 00 20 00 4b 02 00 00 01 00 16 00 61 20 67 6f 62 6c 69 6e 20 63 6c 61 69 6d 20 6a 75 6d 70 65 72 00 00 00 00 00 00 04 00 67 6f 62 02 00 6d 01 00 00 00 00 00 e8 03 00 00 e8 03 00 00 00 00 00 00 e8 03 00 00 f4 87 04 00 00 e4 69 18 45 ec df 7d 41 89 c9 0a 44 d4 5c 52 3d a0 59 00 00 00 00 00 00 00 00 01 00 01 00 33 33 33 3f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 0a 00 52 69 67 68 74 48 61 6e 64 11 00 54 6f 6f 6c 5f 50 69 63 6b 61 78 65 5f 41 30 30 00 00 00 00 00 00 00 00 00 01 00 00 00 00 07 00 42 61 73 65 30 30 0d 00 4d 45 54 5f 49 72 6f 6e 57 61 72 6d 0e 00 4c 45 54 5f 42 72 6f 77 6e 42 61 73 65 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e ff 00 ff 00 ff 00 ff 00 01 00 04 00 00 00 03 10 00 47 65 6e 65 72 69 63 4c 65 61 74 68 65 72 41 0f 00 46 41 42 5f 43 6c 6f 74 68 42 6c 61 63 6b 0e 00 46 41 42 5f 43 6c 6f 74 68 47 72 65 79 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e ff 00 ff 00 ff 00 ff 00 01 00 08 0d 00 4d 65 72 63 68 61 6e 74 30 30 32 41 0b 00 4c 45 54 5f 53 68 61 64 6f 77 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e ff 00 ff 00 ff 00 ff 00 01 00 02 10 00 47 65 6e 65 72 69 63 4c 65 61 74 68 65 72 41 0f 00 46 41 42 5f 43 6c 6f 74 68 42 6c 61 63 6b 0e 00 46 41 42 5f 43 6c 6f 74 68 47 72 65 79 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e ff 00 ff 00 ff 00 ff 00 01 00 07 10 00 57 65 61 74 68 65 72 65 64 43 68 61 69 6e 41 10 00 4d 45 54 5f 42 72 6f 6e 7a 65 52 75 73 74 79 0e 00 4c 45 54 5f 57 6f 72 6e 42 72 6f 77 6e 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e ff 00 ff 00 ff 00 ff 00 01 00 03 00 00 00 05 00 46 61 63 65 00 00 00 00 00 05 00 45 79 65 73 00 00 00 00 00 0e 00 45 78 74 72 61 46 65 61 74 75 72 65 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 45 dd f3 42 00 00 00 00 01 00 20 00 4c 02 00 00 01 00 0f 00 61 20 67 6f 62 6c 69 6e 20 6d 69 6e 65 72 00 00 00 00 00 00 04 00 67 6f 62 02 00 6d 01 00 00 00 00 00 e8 03 00 00 e8 03 00 00 00 00 00 00 e8 03 00 00 c3 87 04 00 00 3a ea 17 45 00 30 7d 41 3d 43 0b 44 a0 51 52 3d a0 59 00 00 00 00 00 00 00 00 01 00 01 00 00 00 80 3f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 0a 00 52 69 67 68 74 48 61 6e 64 11 00 54 6f 6f 6c 5f 50 69 63 6b 61 78 65 5f 41 30 30 00 00 00 00 00 00 00 00 00 01 00 00 00 00 07 00 42 61 73 65 30 30 0d 00 4d 45 54 5f 49 72 6f 6e 57 61 72 6d 0e 00 4c 45 54 5f 42 72 6f 77 6e 42 61 73 65 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e ff 00 ff 00 ff 00 ff 00 01 00 01 00 00 00 02 0a 00 43 6c 6f 74 68 30 30 31 41 0c 00 49 72 6f 6e 4d 65 74 61 6c 30 31 0c 00 45 79 65 47 6f 62 42 6c 61 63 6b 0c 00 45 79 65 47 6f 62 42 6c 61 63 6b ff 00 ff 00 ff 00 ff 00 01 00 03 00 00 00 05 00 46 61 63 65 00 00 00 00 00 05 00 45 79 65 73 00 00 00 00 00 0e 00 45 78 74 72 61 46 65 61 74 75 72 65 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 48 dd f3 42 00 00 00 00 01 00 20 00 d6 0c 00 00 01 00 0f 00 61 20 67 6f 62 6c 69 6e 20 6d 69 6e 65 72 00 00 00 00 00 00 04 00 67 6f 62 02 00 6d 01 00 00 00 00 00 e8 03 00 00 e8 03 00 00 00 00 00 00 e8 03 00 00 ff 87 04 00 00
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x7CD4 dir=IN len=1384 body=16 45 70 25 ee 41 ef fd 08 44 e0 5c 52 3d a0 59 00 00 00 00 00 00 00 00 01 00 01 00 00 00 80 3f
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x525D dir=IN len=1384 body=3d a0 59 00 00 00 00 00 00 00 00 01 00 01 00 00 00 80 3f 00 00 00 00 00 00 00 00 00 00 00 00 00
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x0F77 dir=IN len=1384 body=00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e ff
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x6361 dir=IN len=1384 body=6b 43 6c 6f 74 68 30 31 0c 00 49 72 6f 6e 4d 65 74 61 6c 30 31 ff 00 ff 00 ff 00 ff 00 01 00 08
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x6266 dir=IN len=1384 body=74 02 00 6e 00 00 00 00 00 00 e8 03 00 00 e8 03 00 00 00 00 00 00 e8 03 00 00 73 88 04 00 00 84
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x0042 dir=IN len=1384 body=00 00 00 01 00 20 00 00 03 00 00 01 00 10 00 61 20 67 6f 62 6c 69 6e 20 62 61 6e 64 69 74 00 00
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0xFF6E dir=IN len=1384 body=00 ff 00 ff 00 ff 00 01 00 03 00 00 00 05 00 46 61 63 65 00 00 00 00 00 05 00 45 79 65 73 00 00
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x7247 dir=IN len=1384 body=65 79 0f 00 44 45 56 5f 44 65 62 75 67 47 72 65 65 6e ff 00 ff 00 ff 00 ff 00 01 00 03 00 00 00
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0xA3FB dir=IN len=1384 body=68 46 00 00 00 00 00 00 20 00 0b 08 00 00 01 00 0e 00 61 20 72 61 74 74 6c 65 73 6e 61 6b 65 00
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x0701 dir=IN len=1384 body=00 53 6b 69 6e 30 30 0e 00 4c 45 54 5f 57 6f 72 6e 42 72 6f 77 6e 10 00 46 41 42 5f 43 6c 6f 74
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x646F dir=IN len=1384 body=20 50 69 6c 65 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x05C8 dir=IN len=1384 body=00 00 01 00 13 00 61 20 73 74 75 6d 62 6c 69 6e 67 20 7a 6f 6d 62 69 65 00 00 00 00 00 00 04 00
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x6470 dir=IN len=1384 body=02 00 6e 00 00 00 00 00 00 e8 03 00 00 e8 03 00 00 00 00 00 00 e8 03 00 00 cf 88 04 00 01 58 c4
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x59A0 dir=IN len=1384 body=00 00 00 00 00 00 00 00 00 00 01 01 00 00 80 3f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x6E65 dir=IN len=1384 body=43 6c 6f 74 68 30 32 0f 00 53 4b 4e 5f 48 75 6d 61 6e 48 6f 6e 65 79 00 00 ff 00 ff 00 ff 00 ff
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x0009 dir=IN len=1384 body=4d 45 54 5f 52 75 62 79 10 00 53 4b 4e 5f 53 70 69 64 65 72 57 69 64 6f 77 ff 00 ff 00 ff 00 ff
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x000E dir=IN len=1117 body=61 20 70 61 6c 6d 20 68 75 6e 74 65 72 00 00 00 00 00 00 04 00 73 70 64 02 00 6e 00 00 00 00 00
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x0208 dir=IN len=641 body=10 21 02 00 00 00 00 00 00 08 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 05 00 00
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x0089 dir=IN len=46 body=01 00 00 00 0b 00 61 75 72 61 5f 70 69 6f 75 73 00 00 00 00 00 00 00 00 01 00 00 00 05 00 61 75
+14:33:56 [DEBUG] MSG_IN 0x0380 ClientPartyUpdate dir=IN body_len=138
+14:33:56 [DEBUG] PARTY_UPDATE member_count=5 body_len=138 body_hex=05 00 00 00 00 00 00 00 51 08 00 00 05 00 45 7a 70 6b 00 00 00 00 00 00 00 00 00 00 70 07 00 00 07 00 43 61 65 64 69 73 00 00 00 00 00 00 00 00 00 00 f6 06 00 00 07 00 4b 61 72 61 6e 61 00 00 00 00 00 00 29 0d 00 00 21 02 00 00 0a 00 44 6f 6f 64 6f 6f 62 75 74 04 00 70 61 6c 23 0f 00 73 75 6e 67 72 65 65 74 73 74 72 61 6e 64 00 00 00 00 00 b0 03 00 00 09 00 53 69 6c 69 6b 74 65 6e 00 00 00 00 00 00 00 00 00 00
+14:33:56 [DEBUG] PARTY_MEMBER_RAW [0] eid=#0 name="Ezpk" after_name_off=19 next_bytes=00 00 00 00 00 00 00 00 00 70 07 00 00 07 00 43 61 65 64 69 73 00 00 00 00 00 00 00 00 00
+14:33:56 [DEBUG] PARTY_MEMBER_PARSED [0] OFFLINE — no zone
+14:33:56 [DEBUG] PARTY_MEMBER_RAW [1] eid=#0 name="Caedis" after_name_off=41 next_bytes=00 00 00 00 00 00 00 00 00 f6 06 00 00 07 00 4b 61 72 61 6e 61 00 00 00 00 00 00 29 0d 00
+14:33:56 [DEBUG] PARTY_MEMBER_PARSED [1] OFFLINE — no zone
+14:33:56 [DEBUG] PARTY_MEMBER_RAW [2] eid=#0 name="Karana" after_name_off=63 next_bytes=00 00 00 00 00 29 0d 00 00 21 02 00 00 0a 00 44 6f 6f 64 6f 6f 62 75 74 04 00 70 61 6c 23
+14:33:56 [DEBUG] PARTY_MEMBER_PARSED [2] OFFLINE — no zone
+14:33:56 [DEBUG] PARTY_MEMBER_RAW [3] eid=#3369 name="Doodoobut" after_name_off=88 next_bytes=00 70 61 6c 23 0f 00 73 75 6e 67 72 65 65 74 73 74 72 61 6e 64 00 00 00 00 00 b0 03 00 00
+14:33:56 [DEBUG] PARTY_MEMBER_PARSED [3] class=pal level=35 zone=sungreetstrand
+14:33:56 [DEBUG] PARTY_MEMBER_RAW [4] eid=#0 name="Silikten" after_name_off=129 next_bytes=00 00 00 00 00 00 00 00 00
+14:33:56 [DEBUG] PARTY_MEMBER_PARSED [4] OFFLINE — no zone
+14:33:56 [DEBUG]   PARSED type=ClientPartyUpdate eid=None target=None
+14:33:56 [DEBUG] PARTY_MEMBER #3369 "Doodoobut" class=pal lvl=35
+14:33:56 [INFO ] PARTY_SOLO_DETECT single member "Doodoobut" → eid=#3369
+14:33:56 [INFO ]   LOCAL_PLAYER name="Doodoobut" (was "") from eid=#3369
+14:33:56 [INFO ]   LOCAL_MERGE merged '_local' sentinel entries into eid=#3369
+14:33:56 [INFO ] RELOAD_GATE cleared — solo player
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x0059 dir=IN len=21 body=01 0b 00 61 75 72 61 5f 70 69 6f 75 73 01 05 00 61 75 72 61 00
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=483
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=2633 target=None
+14:33:56 [DEBUG] SPAWN #2633 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:33:56 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x0004 dir=OUT len=0 body=
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=3272 target=None
+14:33:56 [DEBUG] SPAWN #3272 type=1 "a palm weaver" HP:1000/1000 class=spd lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0380 ClientPartyUpdate dir=IN body_len=138
+14:33:56 [DEBUG] PARTY_UPDATE member_count=5 body_len=138 body_hex=05 00 00 00 00 00 00 00 51 08 00 00 05 00 45 7a 70 6b 00 00 00 00 00 00 00 00 00 00 70 07 00 00 07 00 43 61 65 64 69 73 00 00 00 00 00 00 00 00 00 00 f6 06 00 00 07 00 4b 61 72 61 6e 61 00 00 00 00 00 00 29 0d 00 00 21 02 00 00 0a 00 44 6f 6f 64 6f 6f 62 75 74 04 00 70 61 6c 23 0f 00 73 75 6e 67 72 65 65 74 73 74 72 61 6e 64 00 00 00 00 00 b0 03 00 00 09 00 53 69 6c 69 6b 74 65 6e 00 00 00 00 00 00 00 00 00 00
+14:33:56 [DEBUG] PARTY_MEMBER_RAW [0] eid=#0 name="Ezpk" after_name_off=19 next_bytes=00 00 00 00 00 00 00 00 00 70 07 00 00 07 00 43 61 65 64 69 73 00 00 00 00 00 00 00 00 00
+14:33:56 [DEBUG] PARTY_MEMBER_PARSED [0] OFFLINE — no zone
+14:33:56 [DEBUG] PARTY_MEMBER_RAW [1] eid=#0 name="Caedis" after_name_off=41 next_bytes=00 00 00 00 00 00 00 00 00 f6 06 00 00 07 00 4b 61 72 61 6e 61 00 00 00 00 00 00 29 0d 00
+14:33:56 [DEBUG] PARTY_MEMBER_PARSED [1] OFFLINE — no zone
+14:33:56 [DEBUG] PARTY_MEMBER_RAW [2] eid=#0 name="Karana" after_name_off=63 next_bytes=00 00 00 00 00 29 0d 00 00 21 02 00 00 0a 00 44 6f 6f 64 6f 6f 62 75 74 04 00 70 61 6c 23
+14:33:56 [DEBUG] PARTY_MEMBER_PARSED [2] OFFLINE — no zone
+14:33:56 [DEBUG] PARTY_MEMBER_RAW [3] eid=#3369 name="Doodoobut" after_name_off=88 next_bytes=00 70 61 6c 23 0f 00 73 75 6e 67 72 65 65 74 73 74 72 61 6e 64 00 00 00 00 00 b0 03 00 00
+14:33:56 [DEBUG] PARTY_MEMBER_PARSED [3] class=pal level=35 zone=sungreetstrand
+14:33:56 [DEBUG] PARTY_MEMBER_RAW [4] eid=#0 name="Silikten" after_name_off=129 next_bytes=00 00 00 00 00 00 00 00 00
+14:33:56 [DEBUG] PARTY_MEMBER_PARSED [4] OFFLINE — no zone
+14:33:56 [DEBUG]   PARSED type=ClientPartyUpdate eid=None target=None
+14:33:56 [DEBUG] PARTY_MEMBER #3369 "Doodoobut" class=pal lvl=35
+14:33:56 [DEBUG] MSG_UNKNOWN_NEW 0x5432 dir=IN len=4 body=00 00 00 00
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=159
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=164 target=None
+14:33:56 [DEBUG] SPAWN #164 type=4 "Rich Wood Pile" HP:None/None class=None lvl=None
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=3176 target=None
+14:33:56 [DEBUG] SPAWN #3176 type=4 "Wood Pile" HP:None/None class=None lvl=None
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=197
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1833 target=None
+14:33:56 [DEBUG] SPAWN #1833 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1197 target=None
+14:33:56 [DEBUG] SPAWN #1197 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1198 target=None
+14:33:56 [DEBUG] SPAWN #1198 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=425
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1199 target=None
+14:33:56 [DEBUG] SPAWN #1199 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=197
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1736 target=None
+14:33:56 [DEBUG] SPAWN #1736 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1200 target=None
+14:33:56 [DEBUG] SPAWN #1200 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=169
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=2725 target=None
+14:33:56 [DEBUG] SPAWN #2725 type=1 "a giant dunes scarab" HP:1000/1000 class=sca lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1642 target=None
+14:33:56 [DEBUG] SPAWN #1642 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=159
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=260 target=None
+14:33:56 [DEBUG] SPAWN #260 type=4 "Rich Wood Pile" HP:None/None class=None lvl=None
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=446 target=None
+14:33:56 [DEBUG] SPAWN #446 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=500
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=479 target=None
+14:33:56 [DEBUG] SPAWN #479 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=480 target=None
+14:33:56 [DEBUG] SPAWN #480 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=454
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=481 target=None
+14:33:56 [DEBUG] SPAWN #481 type=1 "a bandit" HP:1000/1000 class=ogr lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=482 target=None
+14:33:56 [DEBUG] SPAWN #482 type=1 "a bandit" HP:1000/1000 class=ogr lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=547
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=452 target=None
+14:33:56 [DEBUG] SPAWN #452 type=1 "a bandit" HP:1000/1000 class=ogr lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=490
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=483 target=None
+14:33:56 [DEBUG] SPAWN #483 type=1 "a bandit" HP:1000/1000 class=ogr lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1286 target=None
+14:33:56 [DEBUG] SPAWN #1286 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=247
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=14 target=None
+14:33:56 [DEBUG] SPAWN #14 type=3 "Evolarco's Corpse}" HP:None/None class=None lvl=None
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=153
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=2401 target=None
+14:33:56 [DEBUG] SPAWN #2401 type=1 "a cinder harvester" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=153
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=2383 target=None
+14:33:56 [DEBUG] SPAWN #2383 type=1 "a cinder harvester" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=153
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=558 target=None
+14:33:56 [DEBUG] SPAWN #558 type=1 "a cinder harvester" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=167
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=557 target=None
+14:33:56 [DEBUG] SPAWN #557 type=1 "a cinder harvester" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=264
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=6 target=None
+14:33:56 [DEBUG] SPAWN #6 type=3 "Briar's Corpse?" HP:None/None class=None lvl=None
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=571
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=896 target=None
+14:33:56 [DEBUG] SPAWN #896 type=1 "Tig Pebblebank" HP:1000/1000 class=gnm lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=453
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=897 target=None
+14:33:56 [DEBUG] SPAWN #897 type=1 "Tust Brookturner" HP:1000/1000 class=gnm lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=448 target=None
+14:33:56 [DEBUG] SPAWN #448 type=1 "a bandit" HP:1000/1000 class=ogr lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=608
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=449 target=None
+14:33:56 [DEBUG] SPAWN #449 type=1 "a bandit" HP:1000/1000 class=ogr lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=451 target=None
+14:33:56 [DEBUG] SPAWN #451 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=584
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=478 target=None
+14:33:56 [DEBUG] SPAWN #478 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=557
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=476 target=None
+14:33:56 [DEBUG] SPAWN #476 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=477 target=None
+14:33:56 [DEBUG] SPAWN #477 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=565
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1201 target=None
+14:33:56 [DEBUG] SPAWN #1201 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=447 target=None
+14:33:56 [DEBUG] SPAWN #447 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=96 target=None
+14:33:56 [DEBUG] SPAWN #96 type=4 "Wood Pile" HP:None/None class=None lvl=None
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=450 target=None
+14:33:56 [DEBUG] SPAWN #450 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=536
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=472 target=None
+14:33:56 [DEBUG] SPAWN #472 type=1 "a bandit" HP:1000/1000 class=ogr lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=425
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=473 target=None
+14:33:56 [DEBUG] SPAWN #473 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=534
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=474 target=None
+14:33:56 [DEBUG] SPAWN #474 type=1 "a bandit" HP:1000/1000 class=ogr lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=475 target=None
+14:33:56 [DEBUG] SPAWN #475 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=2251 target=None
+14:33:56 [DEBUG] SPAWN #2251 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=168
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1632 target=None
+14:33:56 [DEBUG] SPAWN #1632 type=1 "a giant fire beetle" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=276
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1678 target=None
+14:33:56 [DEBUG] SPAWN #1678 type=1 "a dunes madman" HP:1000/1000 class=hum lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=164
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=465 target=None
+14:33:56 [DEBUG] SPAWN #465 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1229 target=None
+14:33:56 [DEBUG] SPAWN #1229 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1310 target=None
+14:33:56 [DEBUG] SPAWN #1310 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1317 target=None
+14:33:56 [DEBUG] SPAWN #1317 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=163
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=547 target=None
+14:33:56 [DEBUG] SPAWN #547 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=163
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1237 target=None
+14:33:56 [DEBUG] SPAWN #1237 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=554 target=None
+14:33:56 [DEBUG] SPAWN #554 type=1 "a cinder scout" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=164
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=3300 target=None
+14:33:56 [DEBUG] SPAWN #3300 type=4 "Rich Tin Vein" HP:None/None class=None lvl=None
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=169
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1631 target=None
+14:33:56 [DEBUG] SPAWN #1631 type=1 "a giant dunes scarab" HP:1000/1000 class=sca lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=248
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=16 target=None
+14:33:56 [DEBUG] SPAWN #16 type=3 "Keldorent's Corpse?" HP:None/None class=None lvl=None
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=276 target=None
+14:33:56 [DEBUG] SPAWN #276 type=4 "Tin Vein" HP:None/None class=None lvl=None
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=160
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=2454 target=None
+14:33:56 [DEBUG] SPAWN #2454 type=4 "Quarry Stone" HP:None/None class=None lvl=None
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=568 target=None
+14:33:56 [DEBUG] SPAWN #568 type=1 "a goblin sneak" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=298
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=569 target=None
+14:33:56 [DEBUG] SPAWN #569 type=1 "a goblin sneak" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=3366 target=None
+14:33:56 [DEBUG] SPAWN #3366 type=1 "a cinder scout" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=570 target=None
+14:33:56 [DEBUG] SPAWN #570 type=1 "a goblin sneak" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=221
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=571 target=None
+14:33:56 [DEBUG] SPAWN #571 type=1 "a goblin sneak" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:33:56 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:33:56 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+14:33:56 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:33:56 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:33:56 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:33:56 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=129
+14:33:56 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=151
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=3283 target=None
+14:33:56 [DEBUG] SPAWN #3283 type=1 "a cinder carrier" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=3371 target=None
+14:33:56 [DEBUG] SPAWN #3371 type=1 "a cinder scout" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=439
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=567 target=None
+14:33:56 [DEBUG] SPAWN #567 type=1 "a goblin sneak" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=153
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=549 target=None
+14:33:56 [DEBUG] SPAWN #549 type=1 "a cinder harvester" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=153
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1318 target=None
+14:33:56 [DEBUG] SPAWN #1318 type=1 "a cinder harvester" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=169
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1727 target=None
+14:33:56 [DEBUG] SPAWN #1727 type=1 "a giant dunes scarab" HP:1000/1000 class=sca lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=168
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1618 target=None
+14:33:56 [DEBUG] SPAWN #1618 type=1 "a giant fire beetle" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=197
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1533 target=None
+14:33:56 [DEBUG] SPAWN #1533 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=165
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=2499 target=None
+14:33:56 [DEBUG] SPAWN #2499 type=4 "Ghost Poppy" HP:None/None class=None lvl=None
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=230
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=2191 target=None
+14:33:56 [DEBUG] SPAWN #2191 type=1 "a giant spider" HP:1000/1000 class=tar lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=163
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=633 target=None
+14:33:56 [DEBUG] SPAWN #633 type=1 "a cinder scout" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=634 target=None
+14:33:56 [DEBUG] SPAWN #634 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=172
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=199 target=None
+14:33:56 [DEBUG] SPAWN #199 type=4 "Quality Quarry Stone" HP:None/None class=None lvl=None
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=574 target=None
+14:33:56 [DEBUG] SPAWN #574 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=576 target=None
+14:33:56 [DEBUG] SPAWN #576 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=418
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=714 target=None
+14:33:56 [DEBUG] SPAWN #714 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=715 target=None
+14:33:56 [DEBUG] SPAWN #715 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=716 target=None
+14:33:56 [DEBUG] SPAWN #716 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=735 target=None
+14:33:56 [DEBUG] SPAWN #735 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=152
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=581 target=None
+14:33:56 [DEBUG] SPAWN #581 type=1 "a cinder sentinel" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=575 target=None
+14:33:56 [DEBUG] SPAWN #575 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=634
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=712 target=None
+14:33:56 [DEBUG] SPAWN #712 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=713 target=None
+14:33:56 [DEBUG] SPAWN #713 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=734 target=None
+14:33:56 [DEBUG] SPAWN #734 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=153
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1441 target=None
+14:33:56 [DEBUG] SPAWN #1441 type=1 "a cinder harvester" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=513
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=754 target=None
+14:33:56 [DEBUG] SPAWN #754 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=167
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1241 target=None
+14:33:56 [DEBUG] SPAWN #1241 type=1 "a cinder harvester" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=172
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=2456 target=None
+14:33:56 [DEBUG] SPAWN #2456 type=4 "Quality Quarry Stone" HP:None/None class=None lvl=None
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=167
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1319 target=None
+14:33:56 [DEBUG] SPAWN #1319 type=1 "a cinder harvester" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=153
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1388 target=None
+14:33:56 [DEBUG] SPAWN #1388 type=1 "a cinder harvester" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=585 target=None
+14:33:56 [DEBUG] SPAWN #585 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=372
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=739 target=None
+14:33:56 [DEBUG] SPAWN #739 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=155 target=None
+14:33:56 [DEBUG] SPAWN #155 type=4 "Tin Vein" HP:None/None class=None lvl=None
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=160
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=157 target=None
+14:33:56 [DEBUG] SPAWN #157 type=4 "Quarry Stone" HP:None/None class=None lvl=None
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=572 target=None
+14:33:56 [DEBUG] SPAWN #572 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=573 target=None
+14:33:56 [DEBUG] SPAWN #573 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=580 target=None
+14:33:56 [DEBUG] SPAWN #580 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=711 target=None
+14:33:56 [DEBUG] SPAWN #711 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=762 target=None
+14:33:56 [DEBUG] SPAWN #762 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=756 target=None
+14:33:56 [DEBUG] SPAWN #756 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=635 target=None
+14:33:56 [DEBUG] SPAWN #635 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=636 target=None
+14:33:56 [DEBUG] SPAWN #636 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=464
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=3290 target=None
+14:33:56 [DEBUG] SPAWN #3290 type=1 "Taskmaster Urka" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=63 target=None
+14:33:56 [DEBUG] SPAWN #63 type=4 "Limestone Deposit" HP:None/None class=None lvl=None
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=160
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=231 target=None
+14:33:56 [DEBUG] SPAWN #231 type=4 "Quarry Stone" HP:None/None class=None lvl=None
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=578 target=None
+14:33:56 [DEBUG] SPAWN #578 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=579 target=None
+14:33:56 [DEBUG] SPAWN #579 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=718 target=None
+14:33:56 [DEBUG] SPAWN #718 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=719 target=None
+14:33:56 [DEBUG] SPAWN #719 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=720 target=None
+14:33:56 [DEBUG] SPAWN #720 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=721 target=None
+14:33:56 [DEBUG] SPAWN #721 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=417
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=757 target=None
+14:33:56 [DEBUG] SPAWN #757 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=500
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1946 target=None
+14:33:56 [DEBUG] SPAWN #1946 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=160
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=122 target=None
+14:33:56 [DEBUG] SPAWN #122 type=4 "Quarry Stone" HP:None/None class=None lvl=None
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=153
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=577 target=None
+14:33:56 [DEBUG] SPAWN #577 type=1 "a cinder harvester" HP:1000/1000 class=fbt lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=593
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=755 target=None
+14:33:56 [DEBUG] SPAWN #755 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=435
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1337 target=None
+14:33:56 [DEBUG] SPAWN #1337 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=758 target=None
+14:33:56 [DEBUG] SPAWN #758 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=752 target=None
+14:33:56 [DEBUG] SPAWN #752 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=536
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1259 target=None
+14:33:56 [DEBUG] SPAWN #1259 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=708
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=759 target=None
+14:33:56 [DEBUG] SPAWN #759 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=1394 target=None
+14:33:56 [DEBUG] SPAWN #1394 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=537
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=760 target=None
+14:33:56 [DEBUG] SPAWN #760 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=372
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=2694 target=None
+14:33:56 [DEBUG] SPAWN #2694 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=516
+14:33:56 [DEBUG]   PARSED type=SpawnEntity eid=753 target=None
+14:33:56 [DEBUG] SPAWN #753 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=307 target=None
+14:33:57 [DEBUG] SPAWN #307 type=4 "Limestone Deposit" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=164
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1242 target=None
+14:33:57 [DEBUG] SPAWN #1242 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=372
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1892 target=None
+14:33:57 [DEBUG] SPAWN #1892 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=503
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=763 target=None
+14:33:57 [DEBUG] SPAWN #763 type=1 "a goblin overseer" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=503
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=764 target=None
+14:33:57 [DEBUG] SPAWN #764 type=1 "a goblin overseer" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=503
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=765 target=None
+14:33:57 [DEBUG] SPAWN #765 type=1 "a goblin overseer" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1874 target=None
+14:33:57 [DEBUG] SPAWN #1874 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=372
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1884 target=None
+14:33:57 [DEBUG] SPAWN #1884 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1885 target=None
+14:33:57 [DEBUG] SPAWN #1885 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=447
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1873 target=None
+14:33:57 [DEBUG] SPAWN #1873 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=828
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1613 target=None
+14:33:57 [DEBUG] SPAWN #1613 type=1 "Seeric of Maelsin Thrys" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=372
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1895 target=None
+14:33:57 [DEBUG] SPAWN #1895 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1320 target=None
+14:33:57 [DEBUG] SPAWN #1320 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1082 target=None
+14:33:57 [DEBUG] SPAWN #1082 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1083 target=None
+14:33:57 [DEBUG] SPAWN #1083 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1088 target=None
+14:33:57 [DEBUG] SPAWN #1088 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1092 target=None
+14:33:57 [DEBUG] SPAWN #1092 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1098 target=None
+14:33:57 [DEBUG] SPAWN #1098 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1099 target=None
+14:33:57 [DEBUG] SPAWN #1099 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1100 target=None
+14:33:57 [DEBUG] SPAWN #1100 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1101 target=None
+14:33:57 [DEBUG] SPAWN #1101 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=403 target=None
+14:33:57 [DEBUG] SPAWN #403 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=46 target=None
+14:33:57 [DEBUG] SPAWN #46 type=4 "Wood Pile" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=483
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=2633 target=None
+14:33:57 [DEBUG] SPAWN #2633 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=2636 target=None
+14:33:57 [DEBUG] SPAWN #2636 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=580
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=2662 target=None
+14:33:57 [DEBUG] SPAWN #2662 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3012 target=None
+14:33:57 [DEBUG] SPAWN #3012 type=4 "Wood Pile" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3087 target=None
+14:33:57 [DEBUG] SPAWN #3087 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=230
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3196 target=None
+14:33:57 [DEBUG] SPAWN #3196 type=1 "a giant spider" HP:1000/1000 class=tar lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=372
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=736 target=None
+14:33:57 [DEBUG] SPAWN #736 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=388
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3289 target=None
+14:33:57 [DEBUG] SPAWN #3289 type=1 "Taskmaster Urka" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=434
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=737 target=None
+14:33:57 [DEBUG] SPAWN #737 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=650
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=717 target=None
+14:33:57 [DEBUG] SPAWN #717 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=722 target=None
+14:33:57 [DEBUG] SPAWN #722 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=723 target=None
+14:33:57 [DEBUG] SPAWN #723 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=163
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1328 target=None
+14:33:57 [DEBUG] SPAWN #1328 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1251 target=None
+14:33:57 [DEBUG] SPAWN #1251 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=160
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=216 target=None
+14:33:57 [DEBUG] SPAWN #216 type=4 "Quarry Stone" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=164
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3298 target=None
+14:33:57 [DEBUG] SPAWN #3298 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=733 target=None
+14:33:57 [DEBUG] SPAWN #733 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=434
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=751 target=None
+14:33:57 [DEBUG] SPAWN #751 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=432
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1258 target=None
+14:33:57 [DEBUG] SPAWN #1258 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1336 target=None
+14:33:57 [DEBUG] SPAWN #1336 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=575
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1393 target=None
+14:33:57 [DEBUG] SPAWN #1393 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=240 target=None
+14:33:57 [DEBUG] SPAWN #240 type=4 "Limestone Deposit" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=275 target=None
+14:33:57 [DEBUG] SPAWN #275 type=4 "Limestone Deposit" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=513
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=777 target=None
+14:33:57 [DEBUG] SPAWN #777 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=164
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=586 target=None
+14:33:57 [DEBUG] SPAWN #586 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=166
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=606 target=None
+14:33:57 [DEBUG] SPAWN #606 type=1 "a cinder sentinel" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=577
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=399 target=None
+14:33:57 [DEBUG] SPAWN #399 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=400 target=None
+14:33:57 [DEBUG] SPAWN #400 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=544
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=401 target=None
+14:33:57 [DEBUG] SPAWN #401 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=402 target=None
+14:33:57 [DEBUG] SPAWN #402 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=404 target=None
+14:33:57 [DEBUG] SPAWN #404 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=591
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=406 target=None
+14:33:57 [DEBUG] SPAWN #406 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=407 target=None
+14:33:57 [DEBUG] SPAWN #407 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=463
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=408 target=None
+14:33:57 [DEBUG] SPAWN #408 type=1 "a barmaid" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=600
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=410 target=None
+14:33:57 [DEBUG] SPAWN #410 type=1 "Adah Mukhtar" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=582
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1077 target=None
+14:33:57 [DEBUG] SPAWN #1077 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=578
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1079 target=None
+14:33:57 [DEBUG] SPAWN #1079 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=660
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1080 target=None
+14:33:57 [DEBUG] SPAWN #1080 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=579
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1081 target=None
+14:33:57 [DEBUG] SPAWN #1081 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=545
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1085 target=None
+14:33:57 [DEBUG] SPAWN #1085 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1086 target=None
+14:33:57 [DEBUG] SPAWN #1086 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1089 target=None
+14:33:57 [DEBUG] SPAWN #1089 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=580
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1090 target=None
+14:33:57 [DEBUG] SPAWN #1090 type=1 "a barmaid" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=580
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1091 target=None
+14:33:57 [DEBUG] SPAWN #1091 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1093 target=None
+14:33:57 [DEBUG] SPAWN #1093 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1087 target=None
+14:33:57 [DEBUG] SPAWN #1087 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=409 target=None
+14:33:57 [DEBUG] SPAWN #409 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=168
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1291 target=None
+14:33:57 [DEBUG] SPAWN #1291 type=1 "a giant fire beetle" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=2908 target=None
+14:33:57 [DEBUG] SPAWN #2908 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=176 target=None
+14:33:57 [DEBUG] SPAWN #176 type=4 "Wood Pile" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=183 target=None
+14:33:57 [DEBUG] SPAWN #183 type=4 "Wood Pile" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=347 target=None
+14:33:57 [DEBUG] SPAWN #347 type=4 "Limestone Deposit" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3287 target=None
+14:33:57 [DEBUG] SPAWN #3287 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=388
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3288 target=None
+14:33:57 [DEBUG] SPAWN #3288 type=1 "Taskmaster Urka" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=734
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=744 target=None
+14:33:57 [DEBUG] SPAWN #744 type=1 "Taskmaster Gitch" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=460
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=745 target=None
+14:33:57 [DEBUG] SPAWN #745 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=460
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=584 target=None
+14:33:57 [DEBUG] SPAWN #584 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=598
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=747 target=None
+14:33:57 [DEBUG] SPAWN #747 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=500
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=748 target=None
+14:33:57 [DEBUG] SPAWN #748 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=164
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3305 target=None
+14:33:57 [DEBUG] SPAWN #3305 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=372
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=583 target=None
+14:33:57 [DEBUG] SPAWN #583 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=599 target=None
+14:33:57 [DEBUG] SPAWN #599 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1252 target=None
+14:33:57 [DEBUG] SPAWN #1252 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=163
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1329 target=None
+14:33:57 [DEBUG] SPAWN #1329 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=686
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1335 target=None
+14:33:57 [DEBUG] SPAWN #1335 type=1 "Dizzik" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1391 target=None
+14:33:57 [DEBUG] SPAWN #1391 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3281 target=None
+14:33:57 [DEBUG] SPAWN #3281 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=598 target=None
+14:33:57 [DEBUG] SPAWN #598 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=43 target=None
+14:33:57 [DEBUG] SPAWN #43 type=4 "Limestone Deposit" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=160
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=215 target=None
+14:33:57 [DEBUG] SPAWN #215 type=4 "Quarry Stone" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=179
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=238 target=None
+14:33:57 [DEBUG] SPAWN #238 type=4 "Rich Limestone Deposit" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=297 target=None
+14:33:57 [DEBUG] SPAWN #297 type=4 "Limestone Deposit" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=854 target=None
+14:33:57 [DEBUG] SPAWN #854 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=844 target=None
+14:33:57 [DEBUG] SPAWN #844 type=1 "a goblin spellshooter" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=846 target=None
+14:33:57 [DEBUG] SPAWN #846 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=346
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=847 target=None
+14:33:57 [DEBUG] SPAWN #847 type=1 "a goblin spellshooter" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=848 target=None
+14:33:57 [DEBUG] SPAWN #848 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=853 target=None
+14:33:57 [DEBUG] SPAWN #853 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=843 target=None
+14:33:57 [DEBUG] SPAWN #843 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=911 target=None
+14:33:57 [DEBUG] SPAWN #911 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=514
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=842 target=None
+14:33:57 [DEBUG] SPAWN #842 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=346
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=845 target=None
+14:33:57 [DEBUG] SPAWN #845 type=1 "a goblin spellshooter" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=858 target=None
+14:33:57 [DEBUG] SPAWN #858 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3302 target=None
+14:33:57 [DEBUG] SPAWN #3302 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=855 target=None
+14:33:57 [DEBUG] SPAWN #855 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=346
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=859 target=None
+14:33:57 [DEBUG] SPAWN #859 type=1 "a goblin spellshooter" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3295 target=None
+14:33:57 [DEBUG] SPAWN #3295 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=163
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3296 target=None
+14:33:57 [DEBUG] SPAWN #3296 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=163
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3306 target=None
+14:33:57 [DEBUG] SPAWN #3306 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=163
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3278 target=None
+14:33:57 [DEBUG] SPAWN #3278 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=577
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=405 target=None
+14:33:57 [DEBUG] SPAWN #405 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=718
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=412 target=None
+14:33:57 [DEBUG] SPAWN #412 type=1 "Kalain Mukhtar" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=555
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=892 target=None
+14:33:57 [DEBUG] SPAWN #892 type=1 "a smuggler" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=582
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1078 target=None
+14:33:57 [DEBUG] SPAWN #1078 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1106 target=None
+14:33:57 [DEBUG] SPAWN #1106 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1107 target=None
+14:33:57 [DEBUG] SPAWN #1107 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1108 target=None
+14:33:57 [DEBUG] SPAWN #1108 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=717
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=411 target=None
+14:33:57 [DEBUG] SPAWN #411 type=1 "Juval Mukhtar" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3190 target=None
+14:33:57 [DEBUG] SPAWN #3190 type=4 "Tin Vein" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=243 target=None
+14:33:57 [DEBUG] SPAWN #243 type=4 "Wood Pile" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=280 target=None
+14:33:57 [DEBUG] SPAWN #280 type=4 "Wood Pile" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1094 target=None
+14:33:57 [DEBUG] SPAWN #1094 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=544
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1095 target=None
+14:33:57 [DEBUG] SPAWN #1095 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1109 target=None
+14:33:57 [DEBUG] SPAWN #1109 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:33:57 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=154
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1537 target=None
+14:33:57 [DEBUG] SPAWN #1537 type=1 "a giant fire beetle" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=230
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1684 target=None
+14:33:57 [DEBUG] SPAWN #1684 type=1 "a giant spider" HP:1000/1000 class=tar lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=166
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=2624 target=None
+14:33:57 [DEBUG] SPAWN #2624 type=1 "a cinder sentinel" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=599
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=587 target=None
+14:33:57 [DEBUG] SPAWN #587 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=588 target=None
+14:33:57 [DEBUG] SPAWN #588 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3286 target=None
+14:33:57 [DEBUG] SPAWN #3286 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=770 target=None
+14:33:57 [DEBUG] SPAWN #770 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=467
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=771 target=None
+14:33:57 [DEBUG] SPAWN #771 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3293 target=None
+14:33:57 [DEBUG] SPAWN #3293 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3284 target=None
+14:33:57 [DEBUG] SPAWN #3284 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3276 target=None
+14:33:57 [DEBUG] SPAWN #3276 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=184 target=None
+14:33:57 [DEBUG] SPAWN #184 type=4 "Limestone Deposit" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=589 target=None
+14:33:57 [DEBUG] SPAWN #589 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1253 target=None
+14:33:57 [DEBUG] SPAWN #1253 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3285 target=None
+14:33:57 [DEBUG] SPAWN #3285 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=600 target=None
+14:33:57 [DEBUG] SPAWN #600 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1330 target=None
+14:33:57 [DEBUG] SPAWN #1330 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=45 target=None
+14:33:57 [DEBUG] SPAWN #45 type=4 "Tin Vein" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=376
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=862 target=None
+14:33:57 [DEBUG] SPAWN #862 type=1 "a goblin spellshooter" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=857 target=None
+14:33:57 [DEBUG] SPAWN #857 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=346
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=860 target=None
+14:33:57 [DEBUG] SPAWN #860 type=1 "a goblin spellshooter" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=346
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=861 target=None
+14:33:57 [DEBUG] SPAWN #861 type=1 "a goblin spellshooter" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=503
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=909 target=None
+14:33:57 [DEBUG] SPAWN #909 type=1 "a goblin overseer" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=856 target=None
+14:33:57 [DEBUG] SPAWN #856 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=912 target=None
+14:33:57 [DEBUG] SPAWN #912 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=169
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1983 target=None
+14:33:57 [DEBUG] SPAWN #1983 type=1 "a giant dunes scarab" HP:1000/1000 class=sca lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=169
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1586 target=None
+14:33:57 [DEBUG] SPAWN #1586 type=1 "a giant dunes scarab" HP:1000/1000 class=sca lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=772 target=None
+14:33:57 [DEBUG] SPAWN #772 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=782 target=None
+14:33:57 [DEBUG] SPAWN #782 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=635
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=783 target=None
+14:33:57 [DEBUG] SPAWN #783 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=503
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3291 target=None
+14:33:57 [DEBUG] SPAWN #3291 type=1 "a goblin overseer" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=219
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=766 target=None
+14:33:57 [DEBUG] SPAWN #766 type=1 "a dune spiderling" HP:1000/1000 class=tar lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1331 target=None
+14:33:57 [DEBUG] SPAWN #1331 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=603 target=None
+14:33:57 [DEBUG] SPAWN #603 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=163
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=602 target=None
+14:33:57 [DEBUG] SPAWN #602 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1256 target=None
+14:33:57 [DEBUG] SPAWN #1256 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=163
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1254 target=None
+14:33:57 [DEBUG] SPAWN #1254 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1255 target=None
+14:33:57 [DEBUG] SPAWN #1255 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=163
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=601 target=None
+14:33:57 [DEBUG] SPAWN #601 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=333 target=None
+14:33:57 [DEBUG] SPAWN #333 type=4 "Limestone Deposit" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1265 target=None
+14:33:57 [DEBUG] SPAWN #1265 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=163
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3361 target=None
+14:33:57 [DEBUG] SPAWN #3361 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3367 target=None
+14:33:57 [DEBUG] SPAWN #3367 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1333 target=None
+14:33:57 [DEBUG] SPAWN #1333 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=164
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=112 target=None
+14:33:57 [DEBUG] SPAWN #112 type=4 "Rich Fine Wood Pile" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1465 target=None
+14:33:57 [DEBUG] SPAWN #1465 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1419 target=None
+14:33:57 [DEBUG] SPAWN #1419 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=230
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1929 target=None
+14:33:57 [DEBUG] SPAWN #1929 type=1 "a giant spider" HP:1000/1000 class=tar lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=123 target=None
+14:33:57 [DEBUG] SPAWN #123 type=4 "Limestone Deposit" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=784 target=None
+14:33:57 [DEBUG] SPAWN #784 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=372
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=785 target=None
+14:33:57 [DEBUG] SPAWN #785 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=460
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=787 target=None
+14:33:57 [DEBUG] SPAWN #787 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=478
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=767 target=None
+14:33:57 [DEBUG] SPAWN #767 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=768 target=None
+14:33:57 [DEBUG] SPAWN #768 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=518
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=769 target=None
+14:33:57 [DEBUG] SPAWN #769 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=788 target=None
+14:33:57 [DEBUG] SPAWN #788 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=789 target=None
+14:33:57 [DEBUG] SPAWN #789 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=790 target=None
+14:33:57 [DEBUG] SPAWN #790 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1332 target=None
+14:33:57 [DEBUG] SPAWN #1332 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=786 target=None
+14:33:57 [DEBUG] SPAWN #786 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=166 target=None
+14:33:57 [DEBUG] SPAWN #166 type=4 "Limestone Deposit" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=331 target=None
+14:33:57 [DEBUG] SPAWN #331 type=4 "Limestone Deposit" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=388
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=545 target=None
+14:33:57 [DEBUG] SPAWN #545 type=1 "Taskmaster Urka" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=441
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=546 target=None
+14:33:57 [DEBUG] SPAWN #546 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=353
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=776 target=None
+14:33:57 [DEBUG] SPAWN #776 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=791 target=None
+14:33:57 [DEBUG] SPAWN #791 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=792 target=None
+14:33:57 [DEBUG] SPAWN #792 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=353
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1236 target=None
+14:33:57 [DEBUG] SPAWN #1236 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=353
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1264 target=None
+14:33:57 [DEBUG] SPAWN #1264 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=417
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=781 target=None
+14:33:57 [DEBUG] SPAWN #781 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=164
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=113 target=None
+14:33:57 [DEBUG] SPAWN #113 type=4 "Rich Fine Wood Pile" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=197
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=2059 target=None
+14:33:57 [DEBUG] SPAWN #2059 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=383
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1502 target=None
+14:33:57 [DEBUG] SPAWN #1502 type=1 "a dunes madman" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1564 target=None
+14:33:57 [DEBUG] SPAWN #1564 type=1 "a giant dunes scarab" HP:1000/1000 class=sca lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=299 target=None
+14:33:57 [DEBUG] SPAWN #299 type=4 "Tin Vein" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=197
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1569 target=None
+14:33:57 [DEBUG] SPAWN #1569 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=2480 target=None
+14:33:57 [DEBUG] SPAWN #2480 type=4 "Fine Wood Pile" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=216
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1377 target=None
+14:33:57 [DEBUG] SPAWN #1377 type=1 "a giant spider" HP:1000/1000 class=tar lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=262
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1304 target=None
+14:33:57 [DEBUG] SPAWN #1304 type=1 "a dunes madman" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=445 target=None
+14:33:57 [DEBUG] SPAWN #445 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1431 target=None
+14:33:57 [DEBUG] SPAWN #1431 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1223 target=None
+14:33:57 [DEBUG] SPAWN #1223 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=2478 target=None
+14:33:57 [DEBUG] SPAWN #2478 type=4 "Fine Wood Pile" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=440 target=None
+14:33:57 [DEBUG] SPAWN #440 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=139 target=None
+14:33:57 [DEBUG] SPAWN #139 type=4 "Fine Wood Pile" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3239 target=None
+14:33:57 [DEBUG] SPAWN #3239 type=4 "Tin Vein" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=197
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=466 target=None
+14:33:57 [DEBUG] SPAWN #466 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1529 target=None
+14:33:57 [DEBUG] SPAWN #1529 type=1 "a palm weaver" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1406 target=None
+14:33:57 [DEBUG] SPAWN #1406 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1454 target=None
+14:33:57 [DEBUG] SPAWN #1454 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1494 target=None
+14:33:57 [DEBUG] SPAWN #1494 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1353 target=None
+14:33:57 [DEBUG] SPAWN #1353 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1352 target=None
+14:33:57 [DEBUG] SPAWN #1352 type=1 "a palm weaver" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=25 target=None
+14:33:57 [DEBUG] SPAWN #25 type=4 "Fine Wood Pile" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1277 target=None
+14:33:57 [DEBUG] SPAWN #1277 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1530 target=None
+14:33:57 [DEBUG] SPAWN #1530 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1407 target=None
+14:33:57 [DEBUG] SPAWN #1407 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1573 target=None
+14:33:57 [DEBUG] SPAWN #1573 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] KEYS validated Client.ConnectionInfo at 0x1A362550550
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=164
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=84 target=None
+14:33:57 [DEBUG] SPAWN #84 type=4 "Rich Fine Wood Pile" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=103 target=None
+14:33:57 [DEBUG] SPAWN #103 type=4 "Fine Wood Pile" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=326
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=852 target=None
+14:33:57 [DEBUG] SPAWN #852 type=1 "a druid" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=312
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=851 target=None
+14:33:57 [DEBUG] SPAWN #851 type=1 "a druid" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=221 target=None
+14:33:57 [DEBUG] SPAWN #221 type=4 "Fine Wood Pile" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=29 target=None
+14:33:57 [DEBUG] SPAWN #29 type=4 "Fine Wood Pile" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=167
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1480 target=None
+14:33:57 [DEBUG] SPAWN #1480 type=1 "a stumbling zombie" HP:1000/1000 class=zom lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=230
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1435 target=None
+14:33:57 [DEBUG] SPAWN #1435 type=1 "a giant spider" HP:1000/1000 class=tar lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=2189 target=None
+14:33:57 [DEBUG] SPAWN #2189 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1311 target=None
+14:33:57 [DEBUG] SPAWN #1311 type=1 "a giant dunes scarab" HP:1000/1000 class=sca lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=246 target=None
+14:33:57 [DEBUG] SPAWN #246 type=4 "Fine Wood Pile" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1276 target=None
+14:33:57 [DEBUG] SPAWN #1276 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1351 target=None
+14:33:57 [DEBUG] SPAWN #1351 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1548 target=None
+14:33:57 [DEBUG] SPAWN #1548 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1595 target=None
+14:33:57 [DEBUG] SPAWN #1595 type=1 "a palm weaver" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1482 target=None
+14:33:57 [DEBUG] SPAWN #1482 type=1 "a palm weaver" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1437 target=None
+14:33:57 [DEBUG] SPAWN #1437 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=468 target=None
+14:33:57 [DEBUG] SPAWN #468 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1232 target=None
+14:33:57 [DEBUG] SPAWN #1232 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=173
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=192 target=None
+14:33:57 [DEBUG] SPAWN #192 type=4 "Whispering Sage" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1068 target=None
+14:33:57 [DEBUG] SPAWN #1068 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1408 target=None
+14:33:57 [DEBUG] SPAWN #1408 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1278 target=None
+14:33:57 [DEBUG] SPAWN #1278 type=1 "a palm weaver" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=160
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=135 target=None
+14:33:57 [DEBUG] SPAWN #135 type=4 "Lionleaf" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=579
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=849 target=None
+14:33:57 [DEBUG] SPAWN #849 type=1 "Almina Weepingwind" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=312
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=850 target=None
+14:33:57 [DEBUG] SPAWN #850 type=1 "a druid" HP:1000/1000 class=hum lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=168
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1381 target=None
+14:33:57 [DEBUG] SPAWN #1381 type=1 "a giant fire beetle" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=197
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1230 target=None
+14:33:57 [DEBUG] SPAWN #1230 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=173
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=288 target=None
+14:33:57 [DEBUG] SPAWN #288 type=4 "Whispering Sage" HP:None/None class=None lvl=None
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1453 target=None
+14:33:57 [DEBUG] SPAWN #1453 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1383 target=None
+14:33:57 [DEBUG] SPAWN #1383 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1528 target=None
+14:33:57 [DEBUG] SPAWN #1528 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1493 target=None
+14:33:57 [DEBUG] SPAWN #1493 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1517 target=None
+14:33:57 [DEBUG] SPAWN #1517 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1438 target=None
+14:33:57 [DEBUG] SPAWN #1438 type=1 "a palm weaver" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=469 target=None
+14:33:57 [DEBUG] SPAWN #469 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=3272 target=None
+14:33:57 [DEBUG] SPAWN #3272 type=1 "a palm weaver" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1314 target=None
+14:33:57 [DEBUG] SPAWN #1314 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=1064 target=None
+14:33:57 [DEBUG] SPAWN #1064 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:57 [DEBUG] MSG_UNKNOWN_NEW 0x0006 dir=IN len=0 body=
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=547
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=452 target=None
+14:33:57 [DEBUG] SPAWN #452 type=1 "a bandit" HP:1000/1000 class=ogr lvl=0
+14:33:57 [DEBUG] MSG_UNKNOWN_NEW 0x0015 dir=OUT len=5 body=29 0d 00 00 00
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=167
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=557 target=None
+14:33:57 [DEBUG] SPAWN #557 type=1 "a cinder harvester" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=164
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=586 target=None
+14:33:57 [DEBUG] SPAWN #586 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:33:57 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=166
+14:33:57 [DEBUG]   PARSED type=SpawnEntity eid=606 target=None
+14:33:57 [DEBUG] SPAWN #606 type=1 "a cinder sentinel" HP:1000/1000 class=fbt lvl=0
+14:33:58 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+14:33:58 [DEBUG]   PARSED type=UpdateMana eid=449 target=None
+14:33:58 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:33:58 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:33:58 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+14:33:58 [DEBUG]   PARSED type=DespawnEntity eid=3145 target=None
+14:33:58 [DEBUG] DESPAWN #3145
+14:33:58 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+14:33:58 [DEBUG]   PARSED type=DespawnEntity eid=3180 target=None
+14:33:58 [DEBUG] DESPAWN #3180
+14:33:59 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+14:33:59 [DEBUG]   PARSED type=RemoveBuffIcon eid=1383 target=None
+14:33:59 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:33:59 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:33:59 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+14:33:59 [DEBUG]   PARSED type=SpawnEntity eid=1453 target=None
+14:33:59 [DEBUG] SPAWN #1453 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:33:59 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+14:33:59 [DEBUG]   PARSED type=UpdateMana eid=3369 target=None
+14:34:00 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:34:00 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:34:01 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:34:01 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:34:02 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:34:02 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:34:02 [DEBUG] GUI_STATE view=overview encounters=0 entity_types={'type0': 1, 'type1': 334, 'type4': 53, 'type3': 3} names=391 local_eid=3369 player_name="Doodoobut" classes={3369: 'pal', 2633: 'hum', 3272: 'spd', 1833: 'snk', 1197: 'hum', 1198: 'hum', 1199: 'hum', 1736: 'snk', 1200: 'hum', 2725: 'sca', 1642: 'snk', 446: 'hum', 479: 'hum', 480: 'hum', 481: 'ogr', 482: 'ogr', 452: 'ogr', 483: 'ogr', 1286: 'snk', 2401: 'fbt', 2383: 'fbt', 558: 'fbt', 557: 'fbt', 896: 'gnm', 897: 'gnm', 448: 'ogr', 449: 'ogr', 451: 'hum', 478: 'hum', 476: 'hum', 477: 'hum', 1201: 'hum', 447: 'hum', 450: 'hum', 472: 'ogr', 473: 'hum', 474: 'ogr', 475: 'hum', 2251: 'snk', 1632: 'fbt', 1678: 'hum', 465: 'fbt', 1229: 'fbt', 1310: 'fbt', 1317: 'fbt', 547: 'fbt', 1237: 'fbt', 554: 'fbt', 1631: 'sca', 568: 'gob', 569: 'gob', 3366: 'fbt', 570: 'gob', 571: 'gob', 3283: 'fbt', 3371: 'fbt', 567: 'gob', 549: 'fbt', 1318: 'fbt', 1727: 'sca', 1618: 'fbt', 1533: 'snk', 2191: 'tar', 633: 'fbt', 634: 'fbt', 574: 'fbt', 576: 'fbt', 714: 'gob', 715: 'gob', 716: 'gob', 735: 'gob', 581: 'fbt', 575: 'fbt', 712: 'gob', 713: 'gob', 734: 'gob', 1441: 'fbt', 754: 'gob', 1241: 'fbt', 1319: 'fbt', 1388: 'fbt', 585: 'fbt', 739: 'gob', 572: 'fbt', 573: 'fbt', 580: 'fbt', 711: 'gob', 762: 'gob', 756: 'gob', 635: 'fbt', 636: 'fbt', 3290: 'gob', 578: 'fbt', 579: 'fbt', 718: 'gob', 719: 'gob', 720: 'gob', 721: 'gob', 757: 'gob', 1946: 'gob', 577: 'fbt', 755: 'gob', 1337: 'gob', 758: 'gob', 752: 'gob', 1259: 'gob', 759: 'gob', 1394: 'gob', 760: 'gob', 2694: 'gob', 753: 'gob', 1242: 'fbt', 1892: 'gob', 763: 'gob', 764: 'gob', 765: 'gob', 1874: 'gob', 1884: 'gob', 1885: 'gob', 1873: 'gob', 1613: 'gob', 1895: 'gob', 1320: 'fbt', 1082: 'hum', 1083: 'hum', 1088: 'hum', 1092: 'hum', 1098: 'hum', 1099: 'hum', 1100: 'hum', 1101: 'hum', 403: 'hum', 2636: 'hum', 2662: 'hum', 3087: 'snk', 3196: 'tar', 736: 'gob', 3289: 'gob', 737: 'gob', 717: 'gob', 722: 'gob', 723: 'gob', 1328: 'fbt', 1251: 'fbt', 3298: 'fbt', 733: 'gob', 751: 'gob', 1258: 'gob', 1336: 'gob', 1393: 'gob', 777: 'gob', 586: 'fbt', 606: 'fbt', 399: 'hum', 400: 'hum', 401: 'hum', 402: 'hum', 404: 'hum', 406: 'hum', 407: 'hum', 408: 'hum', 410: 'hum', 1077: 'hum', 1079: 'hum', 1080: 'hum', 1081: 'hum', 1085: 'hum', 1086: 'hum', 1089: 'hum', 1090: 'hum', 1091: 'hum', 1093: 'hum', 1087: 'hum', 409: 'hum', 1291: 'fbt', 2908: 'snk', 3287: 'gob', 3288: 'gob', 744: 'gob', 745: 'gob', 584: 'gob', 747: 'gob', 748: 'gob', 3305: 'fbt', 583: 'gob', 599: 'fbt', 1252: 'fbt', 1329: 'fbt', 1335: 'gob', 1391: 'fbt', 3281: 'fbt', 598: 'fbt', 854: 'gob', 844: 'gob', 846: 'gob', 847: 'gob', 848: 'gob', 853: 'gob', 843: 'gob', 911: 'gob', 842: 'gob', 845: 'gob', 858: 'gob', 3302: 'fbt', 855: 'gob', 859: 'gob', 3295: 'fbt', 3296: 'fbt', 3306: 'fbt', 3278: 'fbt', 405: 'hum', 412: 'hum', 892: 'hum', 1078: 'hum', 1106: 'hum', 1107: 'hum', 1108: 'hum', 411: 'hum', 1094: 'hum', 1095: 'hum', 1109: 'hum', 1537: 'fbt', 1684: 'tar', 2624: 'fbt', 587: 'gob', 588: 'gob', 3286: 'gob', 770: 'gob', 771: 'gob', 3293: 'fbt', 3284: 'gob', 3276: 'fbt', 589: 'gob', 1253: 'fbt', 3285: 'gob', 600: 'fbt', 1330: 'fbt', 862: 'gob', 857: 'gob', 860: 'gob', 861: 'gob', 909: 'gob', 856: 'gob', 912: 'gob', 1983: 'sca', 1586: 'sca', 772: 'gob', 782: 'gob', 783: 'gob', 3291: 'gob', 766: 'tar', 1331: 'fbt', 603: 'fbt', 602: 'fbt', 1256: 'fbt', 1254: 'fbt', 1255: 'fbt', 601: 'fbt', 1265: 'gob', 3361: 'fbt', 3367: 'fbt', 1333: 'fbt', 1465: 'snk', 1419: 'snk', 1929: 'tar', 784: 'gob', 785: 'gob', 787: 'gob', 767: 'gob', 768: 'gob', 769: 'gob', 788: 'gob', 789: 'gob', 790: 'gob', 1332: 'fbt', 786: 'gob', 545: 'gob', 546: 'gob', 776: 'gob', 791: 'gob', 792: 'gob', 1236: 'gob', 1264: 'gob', 781: 'gob', 2059: 'snk', 1502: 'hum', 1564: 'sca', 1569: 'snk', 1377: 'tar', 1304: 'hum', 445: 'snk', 1431: 'snk', 1223: 'snk', 440: 'snk', 466: 'snk', 1529: 'spd', 1406: 'spd', 1454: 'spd', 1494: 'spd', 1353: 'spd', 1352: 'spd', 1277: 'spd', 1530: 'spd', 1407: 'spd', 1573: 'spd', 852: 'hum', 851: 'hum', 1480: 'zom', 1435: 'tar', 2189: 'snk', 1311: 'sca', 1276: 'spd', 1351: 'spd', 1548: 'spd', 1595: 'spd', 1482: 'spd', 1437: 'spd', 468: 'spd', 1232: 'spd', 1068: 'spd', 1408: 'spd', 1278: 'spd', 849: 'hum', 850: 'hum', 1381: 'fbt', 1230: 'snk', 1453: 'spd', 1383: 'spd', 1528: 'spd', 1493: 'spd', 1517: 'spd', 1438: 'spd', 469: 'spd', 1314: 'spd', 1064: 'spd'} levels={3369: 35, 2633: 0, 3272: 0, 1833: 0, 1197: 0, 1198: 0, 1199: 0, 1736: 0, 1200: 0, 2725: 0, 1642: 0, 446: 0, 479: 0, 480: 0, 481: 0, 482: 0, 452: 0, 483: 0, 1286: 0, 2401: 0, 2383: 0, 558: 0, 557: 0, 896: 0, 897: 0, 448: 0, 449: 0, 451: 0, 478: 0, 476: 0, 477: 0, 1201: 0, 447: 0, 450: 0, 472: 0, 473: 0, 474: 0, 475: 0, 2251: 0, 1632: 0, 1678: 0, 465: 0, 1229: 0, 1310: 0, 1317: 0, 547: 0, 1237: 0, 554: 0, 1631: 0, 568: 0, 569: 0, 3366: 0, 570: 0, 571: 0, 3283: 0, 3371: 0, 567: 0, 549: 0, 1318: 0, 1727: 0, 1618: 0, 1533: 0, 2191: 0, 633: 0, 634: 0, 574: 0, 576: 0, 714: 0, 715: 0, 716: 0, 735: 0, 581: 0, 575: 0, 712: 0, 713: 0, 734: 0, 1441: 0, 754: 0, 1241: 0, 1319: 0, 1388: 0, 585: 0, 739: 0, 572: 0, 573: 0, 580: 0, 711: 0, 762: 0, 756: 0, 635: 0, 636: 0, 3290: 0, 578: 0, 579: 0, 718: 0, 719: 0, 720: 0, 721: 0, 757: 0, 1946: 0, 577: 0, 755: 0, 1337: 0, 758: 0, 752: 0, 1259: 0, 759: 0, 1394: 0, 760: 0, 2694: 0, 753: 0, 1242: 0, 1892: 0, 763: 0, 764: 0, 765: 0, 1874: 0, 1884: 0, 1885: 0, 1873: 0, 1613: 0, 1895: 0, 1320: 0, 1082: 0, 1083: 0, 1088: 0, 1092: 0, 1098: 0, 1099: 0, 1100: 0, 1101: 0, 403: 0, 2636: 0, 2662: 0, 3087: 0, 3196: 0, 736: 0, 3289: 0, 737: 0, 717: 0, 722: 0, 723: 0, 1328: 0, 1251: 0, 3298: 0, 733: 0, 751: 0, 1258: 0, 1336: 0, 1393: 0, 777: 0, 586: 0, 606: 0, 399: 0, 400: 0, 401: 0, 402: 0, 404: 0, 406: 0, 407: 0, 408: 0, 410: 0, 1077: 0, 1079: 0, 1080: 0, 1081: 0, 1085: 0, 1086: 0, 1089: 0, 1090: 0, 1091: 0, 1093: 0, 1087: 0, 409: 0, 1291: 0, 2908: 0, 3287: 0, 3288: 0, 744: 0, 745: 0, 584: 0, 747: 0, 748: 0, 3305: 0, 583: 0, 599: 0, 1252: 0, 1329: 0, 1335: 0, 1391: 0, 3281: 0, 598: 0, 854: 0, 844: 0, 846: 0, 847: 0, 848: 0, 853: 0, 843: 0, 911: 0, 842: 0, 845: 0, 858: 0, 3302: 0, 855: 0, 859: 0, 3295: 0, 3296: 0, 3306: 0, 3278: 0, 405: 0, 412: 0, 892: 0, 1078: 0, 1106: 0, 1107: 0, 1108: 0, 411: 0, 1094: 0, 1095: 0, 1109: 0, 1537: 0, 1684: 0, 2624: 0, 587: 0, 588: 0, 3286: 0, 770: 0, 771: 0, 3293: 0, 3284: 0, 3276: 0, 589: 0, 1253: 0, 3285: 0, 600: 0, 1330: 0, 862: 0, 857: 0, 860: 0, 861: 0, 909: 0, 856: 0, 912: 0, 1983: 0, 1586: 0, 772: 0, 782: 0, 783: 0, 3291: 0, 766: 0, 1331: 0, 603: 0, 602: 0, 1256: 0, 1254: 0, 1255: 0, 601: 0, 1265: 0, 3361: 0, 3367: 0, 1333: 0, 1465: 0, 1419: 0, 1929: 0, 784: 0, 785: 0, 787: 0, 767: 0, 768: 0, 769: 0, 788: 0, 789: 0, 790: 0, 1332: 0, 786: 0, 545: 0, 546: 0, 776: 0, 791: 0, 792: 0, 1236: 0, 1264: 0, 781: 0, 2059: 0, 1502: 0, 1564: 0, 1569: 0, 1377: 0, 1304: 0, 445: 0, 1431: 0, 1223: 0, 440: 0, 466: 0, 1529: 0, 1406: 0, 1454: 0, 1494: 0, 1353: 0, 1352: 0, 1277: 0, 1530: 0, 1407: 0, 1573: 0, 852: 0, 851: 0, 1480: 0, 1435: 0, 2189: 0, 1311: 0, 1276: 0, 1351: 0, 1548: 0, 1595: 0, 1482: 0, 1437: 0, 468: 0, 1232: 0, 1068: 0, 1408: 0, 1278: 0, 849: 0, 850: 0, 1381: 0, 1230: 0, 1453: 0, 1383: 0, 1528: 0, 1493: 0, 1517: 0, 1438: 0, 469: 0, 1314: 0, 1064: 0}
+14:34:02 [DEBUG] KEYS validated Client.ConnectionInfo at 0x1A362550550
+14:34:02 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:34:02 [DEBUG]   PARSED type=SpawnEntity eid=778 target=None
+14:34:02 [DEBUG] SPAWN #778 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:34:03 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:34:03 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:34:03 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+14:34:03 [DEBUG]   PARSED type=RemoveBuffIcon eid=2401 target=None
+14:34:04 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:34:04 [DEBUG]   PARSED type=SpawnEntity eid=1314 target=None
+14:34:04 [DEBUG] SPAWN #1314 type=1 "a palm hunter" HP:1000/1000 class=spd lvl=0
+14:34:04 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+14:34:04 [DEBUG]   PARSED type=UpdateMana eid=449 target=None
+14:34:04 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:34:04 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:34:05 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:34:05 [DEBUG]   PARSED type=SpawnEntity eid=2189 target=None
+14:34:05 [DEBUG] SPAWN #2189 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:34:05 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:34:05 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:34:05 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+14:34:05 [DEBUG]   PARSED type=UpdateMana eid=3369 target=None
+14:34:06 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:34:06 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:34:07 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:34:07 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:34:07 [DEBUG] KEYS validated Client.ConnectionInfo at 0x1A362550550
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=296 target=None
+14:34:07 [DEBUG] SPAWN #296 type=4 "Wood Pile" HP:None/None class=None lvl=None
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=197
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1582 target=None
+14:34:07 [DEBUG] SPAWN #1582 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=3246 target=None
+14:34:07 [DEBUG] SPAWN #3246 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1286 target=None
+14:34:07 [DEBUG] SPAWN #1286 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=247
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=15 target=None
+14:34:07 [DEBUG] SPAWN #15 type=3 "Evolarco's Corpse}" HP:None/None class=None lvl=None
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=164
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=286 target=None
+14:34:07 [DEBUG] SPAWN #286 type=4 "Rich Tin Vein" HP:None/None class=None lvl=None
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=159
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=164 target=None
+14:34:07 [DEBUG] SPAWN #164 type=4 "Rich Wood Pile" HP:None/None class=None lvl=None
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=3176 target=None
+14:34:07 [DEBUG] SPAWN #3176 type=4 "Wood Pile" HP:None/None class=None lvl=None
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1833 target=None
+14:34:07 [DEBUG] SPAWN #1833 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1197 target=None
+14:34:07 [DEBUG] SPAWN #1197 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1198 target=None
+14:34:07 [DEBUG] SPAWN #1198 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=425
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1199 target=None
+14:34:07 [DEBUG] SPAWN #1199 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1736 target=None
+14:34:07 [DEBUG] SPAWN #1736 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=470
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1200 target=None
+14:34:07 [DEBUG] SPAWN #1200 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=169
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=2725 target=None
+14:34:07 [DEBUG] SPAWN #2725 type=1 "a giant dunes scarab" HP:1000/1000 class=sca lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=197
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1642 target=None
+14:34:07 [DEBUG] SPAWN #1642 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=159
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=260 target=None
+14:34:07 [DEBUG] SPAWN #260 type=4 "Rich Wood Pile" HP:None/None class=None lvl=None
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=446 target=None
+14:34:07 [DEBUG] SPAWN #446 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=500
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=479 target=None
+14:34:07 [DEBUG] SPAWN #479 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=480 target=None
+14:34:07 [DEBUG] SPAWN #480 type=1 "a bandit" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=454
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=481 target=None
+14:34:07 [DEBUG] SPAWN #481 type=1 "a bandit" HP:1000/1000 class=ogr lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=456
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=482 target=None
+14:34:07 [DEBUG] SPAWN #482 type=1 "a bandit" HP:1000/1000 class=ogr lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=490
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=483 target=None
+14:34:07 [DEBUG] SPAWN #483 type=1 "a bandit" HP:1000/1000 class=ogr lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=2251 target=None
+14:34:07 [DEBUG] SPAWN #2251 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=247
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=14 target=None
+14:34:07 [DEBUG] SPAWN #14 type=3 "Evolarco's Corpse}" HP:None/None class=None lvl=None
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=153
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=2401 target=None
+14:34:07 [DEBUG] SPAWN #2401 type=1 "a cinder harvester" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=167
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=2383 target=None
+14:34:07 [DEBUG] SPAWN #2383 type=1 "a cinder harvester" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=153
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=557 target=None
+14:34:07 [DEBUG] SPAWN #557 type=1 "a cinder harvester" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=153
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=558 target=None
+14:34:07 [DEBUG] SPAWN #558 type=1 "a cinder harvester" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=264
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=6 target=None
+14:34:07 [DEBUG] SPAWN #6 type=3 "Briar's Corpse?" HP:None/None class=None lvl=None
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=571
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=896 target=None
+14:34:07 [DEBUG] SPAWN #896 type=1 "Tig Pebblebank" HP:1000/1000 class=gnm lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=453
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=897 target=None
+14:34:07 [DEBUG] SPAWN #897 type=1 "Tust Brookturner" HP:1000/1000 class=gnm lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=164
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=3300 target=None
+14:34:07 [DEBUG] SPAWN #3300 type=4 "Rich Tin Vein" HP:None/None class=None lvl=None
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=439
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=567 target=None
+14:34:07 [DEBUG] SPAWN #567 type=1 "a goblin sneak" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=167
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=549 target=None
+14:34:07 [DEBUG] SPAWN #549 type=1 "a cinder harvester" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=153
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1318 target=None
+14:34:07 [DEBUG] SPAWN #1318 type=1 "a cinder harvester" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=155 target=None
+14:34:07 [DEBUG] SPAWN #155 type=4 "Tin Vein" HP:None/None class=None lvl=None
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=160
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=157 target=None
+14:34:07 [DEBUG] SPAWN #157 type=4 "Quarry Stone" HP:None/None class=None lvl=None
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=572 target=None
+14:34:07 [DEBUG] SPAWN #572 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=573 target=None
+14:34:07 [DEBUG] SPAWN #573 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=580 target=None
+14:34:07 [DEBUG] SPAWN #580 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=711 target=None
+14:34:07 [DEBUG] SPAWN #711 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=762 target=None
+14:34:07 [DEBUG] SPAWN #762 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=756 target=None
+14:34:07 [DEBUG] SPAWN #756 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=307 target=None
+14:34:07 [DEBUG] SPAWN #307 type=4 "Limestone Deposit" HP:None/None class=None lvl=None
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1242 target=None
+14:34:07 [DEBUG] SPAWN #1242 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=164
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=586 target=None
+14:34:07 [DEBUG] SPAWN #586 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=372
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1892 target=None
+14:34:07 [DEBUG] SPAWN #1892 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=503
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=763 target=None
+14:34:07 [DEBUG] SPAWN #763 type=1 "a goblin overseer" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=503
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=764 target=None
+14:34:07 [DEBUG] SPAWN #764 type=1 "a goblin overseer" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=503
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=765 target=None
+14:34:07 [DEBUG] SPAWN #765 type=1 "a goblin overseer" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1874 target=None
+14:34:07 [DEBUG] SPAWN #1874 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=372
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1884 target=None
+14:34:07 [DEBUG] SPAWN #1884 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=358
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1885 target=None
+14:34:07 [DEBUG] SPAWN #1885 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=447
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1873 target=None
+14:34:07 [DEBUG] SPAWN #1873 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=828
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1613 target=None
+14:34:07 [DEBUG] SPAWN #1613 type=1 "Seeric of Maelsin Thrys" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=372
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1895 target=None
+14:34:07 [DEBUG] SPAWN #1895 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1320 target=None
+14:34:07 [DEBUG] SPAWN #1320 type=1 "a cinder worker" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1082 target=None
+14:34:07 [DEBUG] SPAWN #1082 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1083 target=None
+14:34:07 [DEBUG] SPAWN #1083 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1088 target=None
+14:34:07 [DEBUG] SPAWN #1088 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1092 target=None
+14:34:07 [DEBUG] SPAWN #1092 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1098 target=None
+14:34:07 [DEBUG] SPAWN #1098 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1099 target=None
+14:34:07 [DEBUG] SPAWN #1099 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1100 target=None
+14:34:07 [DEBUG] SPAWN #1100 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1101 target=None
+14:34:07 [DEBUG] SPAWN #1101 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=403 target=None
+14:34:07 [DEBUG] SPAWN #403 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=240 target=None
+14:34:07 [DEBUG] SPAWN #240 type=4 "Limestone Deposit" HP:None/None class=None lvl=None
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=275 target=None
+14:34:07 [DEBUG] SPAWN #275 type=4 "Limestone Deposit" HP:None/None class=None lvl=None
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=513
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=777 target=None
+14:34:07 [DEBUG] SPAWN #777 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=778 target=None
+14:34:07 [DEBUG] SPAWN #778 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=577
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=399 target=None
+14:34:07 [DEBUG] SPAWN #399 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=400 target=None
+14:34:07 [DEBUG] SPAWN #400 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=544
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=401 target=None
+14:34:07 [DEBUG] SPAWN #401 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=402 target=None
+14:34:07 [DEBUG] SPAWN #402 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=404 target=None
+14:34:07 [DEBUG] SPAWN #404 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=591
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=406 target=None
+14:34:07 [DEBUG] SPAWN #406 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=407 target=None
+14:34:07 [DEBUG] SPAWN #407 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=477
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=408 target=None
+14:34:07 [DEBUG] SPAWN #408 type=1 "a barmaid" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=600
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=410 target=None
+14:34:07 [DEBUG] SPAWN #410 type=1 "Adah Mukhtar" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=582
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1077 target=None
+14:34:07 [DEBUG] SPAWN #1077 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=578
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1079 target=None
+14:34:07 [DEBUG] SPAWN #1079 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=660
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1080 target=None
+14:34:07 [DEBUG] SPAWN #1080 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=579
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1081 target=None
+14:34:07 [DEBUG] SPAWN #1081 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=545
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1085 target=None
+14:34:07 [DEBUG] SPAWN #1085 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1086 target=None
+14:34:07 [DEBUG] SPAWN #1086 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1089 target=None
+14:34:07 [DEBUG] SPAWN #1089 type=1 "a tavern patron" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=580
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1090 target=None
+14:34:07 [DEBUG] SPAWN #1090 type=1 "a barmaid" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=580
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1091 target=None
+14:34:07 [DEBUG] SPAWN #1091 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1093 target=None
+14:34:07 [DEBUG] SPAWN #1093 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=3302 target=None
+14:34:07 [DEBUG] SPAWN #3302 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=855 target=None
+14:34:07 [DEBUG] SPAWN #855 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=346
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=859 target=None
+14:34:07 [DEBUG] SPAWN #859 type=1 "a goblin spellshooter" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=3295 target=None
+14:34:07 [DEBUG] SPAWN #3295 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=152
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=606 target=None
+14:34:07 [DEBUG] SPAWN #606 type=1 "a cinder sentinel" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=3306 target=None
+14:34:07 [DEBUG] SPAWN #3306 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=163
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=3278 target=None
+14:34:07 [DEBUG] SPAWN #3278 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=577
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=405 target=None
+14:34:07 [DEBUG] SPAWN #405 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=732
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=412 target=None
+14:34:07 [DEBUG] SPAWN #412 type=1 "Kalain Mukhtar" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=555
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=892 target=None
+14:34:07 [DEBUG] SPAWN #892 type=1 "a smuggler" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=582
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1078 target=None
+14:34:07 [DEBUG] SPAWN #1078 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1106 target=None
+14:34:07 [DEBUG] SPAWN #1106 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1107 target=None
+14:34:07 [DEBUG] SPAWN #1107 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=468
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1108 target=None
+14:34:07 [DEBUG] SPAWN #1108 type=1 "a river pirate" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=717
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=411 target=None
+14:34:07 [DEBUG] SPAWN #411 type=1 "Juval Mukhtar" HP:1000/1000 class=hum lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=856 target=None
+14:34:07 [DEBUG] SPAWN #856 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=912 target=None
+14:34:07 [DEBUG] SPAWN #912 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=333 target=None
+14:34:07 [DEBUG] SPAWN #333 type=4 "Limestone Deposit" HP:None/None class=None lvl=None
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=417
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1265 target=None
+14:34:07 [DEBUG] SPAWN #1265 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=3361 target=None
+14:34:07 [DEBUG] SPAWN #3361 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=3367 target=None
+14:34:07 [DEBUG] SPAWN #3367 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=163
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1333 target=None
+14:34:07 [DEBUG] SPAWN #1333 type=1 "a cinder drone" HP:1000/1000 class=fbt lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=166 target=None
+14:34:07 [DEBUG] SPAWN #166 type=4 "Limestone Deposit" HP:None/None class=None lvl=None
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=170
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=331 target=None
+14:34:07 [DEBUG] SPAWN #331 type=4 "Limestone Deposit" HP:None/None class=None lvl=None
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=388
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=545 target=None
+14:34:07 [DEBUG] SPAWN #545 type=1 "Taskmaster Urka" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=427
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=546 target=None
+14:34:07 [DEBUG] SPAWN #546 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=353
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=776 target=None
+14:34:07 [DEBUG] SPAWN #776 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=791 target=None
+14:34:07 [DEBUG] SPAWN #791 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=523
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=792 target=None
+14:34:07 [DEBUG] SPAWN #792 type=1 "a goblin claim jumper" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=367
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1236 target=None
+14:34:07 [DEBUG] SPAWN #1236 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=353
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1264 target=None
+14:34:07 [DEBUG] SPAWN #1264 type=1 "a goblin miner" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=781 target=None
+14:34:07 [DEBUG] SPAWN #781 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=155
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=299 target=None
+14:34:07 [DEBUG] SPAWN #299 type=4 "Tin Vein" HP:None/None class=None lvl=None
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=211
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=440 target=None
+14:34:07 [DEBUG] SPAWN #440 type=1 "a rattlesnake" HP:1000/1000 class=snk lvl=0
+14:34:07 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:34:07 [DEBUG]   PARSED type=SpawnEntity eid=1278 target=None
+14:34:07 [DEBUG] SPAWN #1278 type=1 "a palm weaver" HP:1000/1000 class=spd lvl=0
+14:34:08 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=417
+14:34:08 [DEBUG]   PARSED type=SpawnEntity eid=1265 target=None
+14:34:08 [DEBUG] SPAWN #1265 type=1 "a goblin bandit" HP:1000/1000 class=gob lvl=0
+14:34:08 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:34:08 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:34:09 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:34:09 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:34:10 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+14:34:10 [DEBUG]   PARSED type=UpdateMana eid=449 target=None
+14:34:10 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:34:10 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:34:10 [DEBUG] MSG_UNKNOWN_NEW 0x0016 dir=OUT len=24 body=0e 5d 64 01 3f 0f 5a 69 00 00 00 00 00 00 20 41 00 00 00 00 00 00 00 00
+14:34:11 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+14:34:11 [DEBUG]   PARSED type=UpdateEndurance eid=3369 target=None
+14:34:11 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:34:11 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:34:12 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+14:34:12 [DEBUG]   PARSED type=UpdateEndurance eid=3369 target=None
+14:34:12 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+14:34:12 [DEBUG]   PARSED type=UpdateMana eid=3369 target=None
+14:34:12 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:34:12 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None
+14:34:12 [DEBUG] KEYS validated Client.ConnectionInfo at 0x1A362550550
+14:34:12 [DEBUG] GUI_STATE view=overview encounters=0 entity_types={'type0': 1, 'type1': 337, 'type4': 55, 'type3': 4} names=397 local_eid=3369 player_name="Doodoobut" classes={3369: 'pal', 2633: 'hum', 3272: 'spd', 1833: 'snk', 1197: 'hum', 1198: 'hum', 1199: 'hum', 1736: 'snk', 1200: 'hum', 2725: 'sca', 1642: 'snk', 446: 'hum', 479: 'hum', 480: 'hum', 481: 'ogr', 482: 'ogr', 452: 'ogr', 483: 'ogr', 1286: 'snk', 2401: 'fbt', 2383: 'fbt', 558: 'fbt', 557: 'fbt', 896: 'gnm', 897: 'gnm', 448: 'ogr', 449: 'ogr', 451: 'hum', 478: 'hum', 476: 'hum', 477: 'hum', 1201: 'hum', 447: 'hum', 450: 'hum', 472: 'ogr', 473: 'hum', 474: 'ogr', 475: 'hum', 2251: 'snk', 1632: 'fbt', 1678: 'hum', 465: 'fbt', 1229: 'fbt', 1310: 'fbt', 1317: 'fbt', 547: 'fbt', 1237: 'fbt', 554: 'fbt', 1631: 'sca', 568: 'gob', 569: 'gob', 3366: 'fbt', 570: 'gob', 571: 'gob', 3283: 'fbt', 3371: 'fbt', 567: 'gob', 549: 'fbt', 1318: 'fbt', 1727: 'sca', 1618: 'fbt', 1533: 'snk', 2191: 'tar', 633: 'fbt', 634: 'fbt', 574: 'fbt', 576: 'fbt', 714: 'gob', 715: 'gob', 716: 'gob', 735: 'gob', 581: 'fbt', 575: 'fbt', 712: 'gob', 713: 'gob', 734: 'gob', 1441: 'fbt', 754: 'gob', 1241: 'fbt', 1319: 'fbt', 1388: 'fbt', 585: 'fbt', 739: 'gob', 572: 'fbt', 573: 'fbt', 580: 'fbt', 711: 'gob', 762: 'gob', 756: 'gob', 635: 'fbt', 636: 'fbt', 3290: 'gob', 578: 'fbt', 579: 'fbt', 718: 'gob', 719: 'gob', 720: 'gob', 721: 'gob', 757: 'gob', 1946: 'gob', 577: 'fbt', 755: 'gob', 1337: 'gob', 758: 'gob', 752: 'gob', 1259: 'gob', 759: 'gob', 1394: 'gob', 760: 'gob', 2694: 'gob', 753: 'gob', 1242: 'fbt', 1892: 'gob', 763: 'gob', 764: 'gob', 765: 'gob', 1874: 'gob', 1884: 'gob', 1885: 'gob', 1873: 'gob', 1613: 'gob', 1895: 'gob', 1320: 'fbt', 1082: 'hum', 1083: 'hum', 1088: 'hum', 1092: 'hum', 1098: 'hum', 1099: 'hum', 1100: 'hum', 1101: 'hum', 403: 'hum', 2636: 'hum', 2662: 'hum', 3087: 'snk', 3196: 'tar', 736: 'gob', 3289: 'gob', 737: 'gob', 717: 'gob', 722: 'gob', 723: 'gob', 1328: 'fbt', 1251: 'fbt', 3298: 'fbt', 733: 'gob', 751: 'gob', 1258: 'gob', 1336: 'gob', 1393: 'gob', 777: 'gob', 586: 'fbt', 606: 'fbt', 399: 'hum', 400: 'hum', 401: 'hum', 402: 'hum', 404: 'hum', 406: 'hum', 407: 'hum', 408: 'hum', 410: 'hum', 1077: 'hum', 1079: 'hum', 1080: 'hum', 1081: 'hum', 1085: 'hum', 1086: 'hum', 1089: 'hum', 1090: 'hum', 1091: 'hum', 1093: 'hum', 1087: 'hum', 409: 'hum', 1291: 'fbt', 2908: 'snk', 3287: 'gob', 3288: 'gob', 744: 'gob', 745: 'gob', 584: 'gob', 747: 'gob', 748: 'gob', 3305: 'fbt', 583: 'gob', 599: 'fbt', 1252: 'fbt', 1329: 'fbt', 1335: 'gob', 1391: 'fbt', 3281: 'fbt', 598: 'fbt', 854: 'gob', 844: 'gob', 846: 'gob', 847: 'gob', 848: 'gob', 853: 'gob', 843: 'gob', 911: 'gob', 842: 'gob', 845: 'gob', 858: 'gob', 3302: 'fbt', 855: 'gob', 859: 'gob', 3295: 'fbt', 3296: 'fbt', 3306: 'fbt', 3278: 'fbt', 405: 'hum', 412: 'hum', 892: 'hum', 1078: 'hum', 1106: 'hum', 1107: 'hum', 1108: 'hum', 411: 'hum', 1094: 'hum', 1095: 'hum', 1109: 'hum', 1537: 'fbt', 1684: 'tar', 2624: 'fbt', 587: 'gob', 588: 'gob', 3286: 'gob', 770: 'gob', 771: 'gob', 3293: 'fbt', 3284: 'gob', 3276: 'fbt', 589: 'gob', 1253: 'fbt', 3285: 'gob', 600: 'fbt', 1330: 'fbt', 862: 'gob', 857: 'gob', 860: 'gob', 861: 'gob', 909: 'gob', 856: 'gob', 912: 'gob', 1983: 'sca', 1586: 'sca', 772: 'gob', 782: 'gob', 783: 'gob', 3291: 'gob', 766: 'tar', 1331: 'fbt', 603: 'fbt', 602: 'fbt', 1256: 'fbt', 1254: 'fbt', 1255: 'fbt', 601: 'fbt', 1265: 'gob', 3361: 'fbt', 3367: 'fbt', 1333: 'fbt', 1465: 'snk', 1419: 'snk', 1929: 'tar', 784: 'gob', 785: 'gob', 787: 'gob', 767: 'gob', 768: 'gob', 769: 'gob', 788: 'gob', 789: 'gob', 790: 'gob', 1332: 'fbt', 786: 'gob', 545: 'gob', 546: 'gob', 776: 'gob', 791: 'gob', 792: 'gob', 1236: 'gob', 1264: 'gob', 781: 'gob', 2059: 'snk', 1502: 'hum', 1564: 'sca', 1569: 'snk', 1377: 'tar', 1304: 'hum', 445: 'snk', 1431: 'snk', 1223: 'snk', 440: 'snk', 466: 'snk', 1529: 'spd', 1406: 'spd', 1454: 'spd', 1494: 'spd', 1353: 'spd', 1352: 'spd', 1277: 'spd', 1530: 'spd', 1407: 'spd', 1573: 'spd', 852: 'hum', 851: 'hum', 1480: 'zom', 1435: 'tar', 2189: 'snk', 1311: 'sca', 1276: 'spd', 1351: 'spd', 1548: 'spd', 1595: 'spd', 1482: 'spd', 1437: 'spd', 468: 'spd', 1232: 'spd', 1068: 'spd', 1408: 'spd', 1278: 'spd', 849: 'hum', 850: 'hum', 1381: 'fbt', 1230: 'snk', 1453: 'spd', 1383: 'spd', 1528: 'spd', 1493: 'spd', 1517: 'spd', 1438: 'spd', 469: 'spd', 1314: 'spd', 1064: 'spd', 778: 'gob', 1582: 'snk', 3246: 'snk'} levels={3369: 35, 2633: 0, 3272: 0, 1833: 0, 1197: 0, 1198: 0, 1199: 0, 1736: 0, 1200: 0, 2725: 0, 1642: 0, 446: 0, 479: 0, 480: 0, 481: 0, 482: 0, 452: 0, 483: 0, 1286: 0, 2401: 0, 2383: 0, 558: 0, 557: 0, 896: 0, 897: 0, 448: 0, 449: 0, 451: 0, 478: 0, 476: 0, 477: 0, 1201: 0, 447: 0, 450: 0, 472: 0, 473: 0, 474: 0, 475: 0, 2251: 0, 1632: 0, 1678: 0, 465: 0, 1229: 0, 1310: 0, 1317: 0, 547: 0, 1237: 0, 554: 0, 1631: 0, 568: 0, 569: 0, 3366: 0, 570: 0, 571: 0, 3283: 0, 3371: 0, 567: 0, 549: 0, 1318: 0, 1727: 0, 1618: 0, 1533: 0, 2191: 0, 633: 0, 634: 0, 574: 0, 576: 0, 714: 0, 715: 0, 716: 0, 735: 0, 581: 0, 575: 0, 712: 0, 713: 0, 734: 0, 1441: 0, 754: 0, 1241: 0, 1319: 0, 1388: 0, 585: 0, 739: 0, 572: 0, 573: 0, 580: 0, 711: 0, 762: 0, 756: 0, 635: 0, 636: 0, 3290: 0, 578: 0, 579: 0, 718: 0, 719: 0, 720: 0, 721: 0, 757: 0, 1946: 0, 577: 0, 755: 0, 1337: 0, 758: 0, 752: 0, 1259: 0, 759: 0, 1394: 0, 760: 0, 2694: 0, 753: 0, 1242: 0, 1892: 0, 763: 0, 764: 0, 765: 0, 1874: 0, 1884: 0, 1885: 0, 1873: 0, 1613: 0, 1895: 0, 1320: 0, 1082: 0, 1083: 0, 1088: 0, 1092: 0, 1098: 0, 1099: 0, 1100: 0, 1101: 0, 403: 0, 2636: 0, 2662: 0, 3087: 0, 3196: 0, 736: 0, 3289: 0, 737: 0, 717: 0, 722: 0, 723: 0, 1328: 0, 1251: 0, 3298: 0, 733: 0, 751: 0, 1258: 0, 1336: 0, 1393: 0, 777: 0, 586: 0, 606: 0, 399: 0, 400: 0, 401: 0, 402: 0, 404: 0, 406: 0, 407: 0, 408: 0, 410: 0, 1077: 0, 1079: 0, 1080: 0, 1081: 0, 1085: 0, 1086: 0, 1089: 0, 1090: 0, 1091: 0, 1093: 0, 1087: 0, 409: 0, 1291: 0, 2908: 0, 3287: 0, 3288: 0, 744: 0, 745: 0, 584: 0, 747: 0, 748: 0, 3305: 0, 583: 0, 599: 0, 1252: 0, 1329: 0, 1335: 0, 1391: 0, 3281: 0, 598: 0, 854: 0, 844: 0, 846: 0, 847: 0, 848: 0, 853: 0, 843: 0, 911: 0, 842: 0, 845: 0, 858: 0, 3302: 0, 855: 0, 859: 0, 3295: 0, 3296: 0, 3306: 0, 3278: 0, 405: 0, 412: 0, 892: 0, 1078: 0, 1106: 0, 1107: 0, 1108: 0, 411: 0, 1094: 0, 1095: 0, 1109: 0, 1537: 0, 1684: 0, 2624: 0, 587: 0, 588: 0, 3286: 0, 770: 0, 771: 0, 3293: 0, 3284: 0, 3276: 0, 589: 0, 1253: 0, 3285: 0, 600: 0, 1330: 0, 862: 0, 857: 0, 860: 0, 861: 0, 909: 0, 856: 0, 912: 0, 1983: 0, 1586: 0, 772: 0, 782: 0, 783: 0, 3291: 0, 766: 0, 1331: 0, 603: 0, 602: 0, 1256: 0, 1254: 0, 1255: 0, 601: 0, 1265: 0, 3361: 0, 3367: 0, 1333: 0, 1465: 0, 1419: 0, 1929: 0, 784: 0, 785: 0, 787: 0, 767: 0, 768: 0, 769: 0, 788: 0, 789: 0, 790: 0, 1332: 0, 786: 0, 545: 0, 546: 0, 776: 0, 791: 0, 792: 0, 1236: 0, 1264: 0, 781: 0, 2059: 0, 1502: 0, 1564: 0, 1569: 0, 1377: 0, 1304: 0, 445: 0, 1431: 0, 1223: 0, 440: 0, 466: 0, 1529: 0, 1406: 0, 1454: 0, 1494: 0, 1353: 0, 1352: 0, 1277: 0, 1530: 0, 1407: 0, 1573: 0, 852: 0, 851: 0, 1480: 0, 1435: 0, 2189: 0, 1311: 0, 1276: 0, 1351: 0, 1548: 0, 1595: 0, 1482: 0, 1437: 0, 468: 0, 1232: 0, 1068: 0, 1408: 0, 1278: 0, 849: 0, 850: 0, 1381: 0, 1230: 0, 1453: 0, 1383: 0, 1528: 0, 1493: 0, 1517: 0, 1438: 0, 469: 0, 1314: 0, 1064: 0, 778: 0, 1582: 0, 3246: 0}
+14:34:13 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=226
+14:34:13 [DEBUG]   PARSED type=SpawnEntity eid=1278 target=None
+14:34:13 [DEBUG] SPAWN #1278 type=1 "a palm weaver" HP:1000/1000 class=spd lvl=0
+14:34:13 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+14:34:13 [DEBUG]   PARSED type=DespawnEntity eid=3357 target=None
+14:34:13 [DEBUG] DESPAWN #3357
+14:34:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+14:34:13 [DEBUG]   PARSED type=AddBuffIcon eid=3369 target=None

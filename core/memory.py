@@ -33,8 +33,9 @@ MAX_MODULE_NAME32 = 255
 # --- IL2CPP Layout Constants (from Il2CppDumper output) ---
 
 # RVA within GameAssembly.dll where Il2CppClass** for Client.ConnectionInfo is stored
-# From script.json: Address 88407256 = 0x544FCD8
-CONNECTIONINFO_TYPEINFO_RVA = 0x544FCD8
+# From script.json: Address 88407256 = 0x544FCD8 (pre-patch)
+# Post-patch (2026-03-18): 0x5466F20 found via memory scan
+CONNECTIONINFO_TYPEINFO_RVA = 0x5466F20
 
 # Il2CppClass_1 is 0xB8 bytes, static_fields is the next member
 IL2CPP_STATIC_FIELDS_OFFSET = 0xB8

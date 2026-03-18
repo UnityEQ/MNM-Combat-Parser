@@ -75,6 +75,8 @@ def parse_args():
     parser.add_argument("--no-wait", action="store_true")
     parser.add_argument("--dump-keys", action="store_true",
                         help="Read encryption keys from game memory and exit")
+    parser.add_argument("--watch", "-w", action="store_true",
+                        help="Print ALL game message opcodes to console")
     return parser.parse_args()
 
 
@@ -268,6 +270,12 @@ class PacketProcessor:
             # Log decrypted hex preview
             pt_preview = " ".join(f"{b:02x}" for b in plaintext[:24])
             extra += f" PT[{pt_preview}]"
+
+            # Log every game message for analysis
+            for msg in game_msgs:
+                body_preview = msg.body[:40].hex(' ') if msg.body else ''
+                log.info(f"MSG {pkt.direction} 0x{msg.msg_id:04X} {msg.msg_name} "
+                         f"len={len(msg.body)} body={body_preview}")
 
             # Process combat events
             for msg in game_msgs:

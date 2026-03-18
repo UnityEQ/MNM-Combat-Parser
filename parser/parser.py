@@ -11,7 +11,7 @@ Usage:
     python parser/parser.py
 """
 
-APP_VERSION = "V1.7"
+APP_VERSION = "V1.9"
 
 import csv
 import ctypes
@@ -266,13 +266,43 @@ def get_game_connections(pid):
 # IL2CPP Memory reader — encryption key extraction
 # ===================================================================
 
-CONNECTIONINFO_TYPEINFO_RVA = 0x544FCD8
+_DEFAULT_TYPEINFO_RVA = 0x5466F20
 IL2CPP_STATIC_FIELDS_OFFSET = 0xB8
 FIELD_AES_KEY = 0x40
 FIELD_HMAC_KEY = 0x38
 FIELD_XOR_KEY = 0x48
 ARRAY_LENGTH_OFFSET = 0x18
 ARRAY_DATA_OFFSET = 0x20
+
+
+def _rva_config_path():
+    """Return path to rva_cache.json next to the exe or .py file."""
+    if getattr(sys, 'frozen', False):
+        return os.path.join(os.path.dirname(sys.executable), "rva_cache.json")
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), "rva_cache.json")
+
+
+def _load_rva():
+    """Load cached RVA from config file, falling back to hardcoded default."""
+    try:
+        with open(_rva_config_path(), "r") as f:
+            data = json.loads(f.read())
+            rva = data.get("typeinfo_rva")
+            if isinstance(rva, int) and rva > 0:
+                return rva
+    except Exception:
+        pass
+    return _DEFAULT_TYPEINFO_RVA
+
+
+def _save_rva(rva):
+    """Save discovered RVA to config file for fast load next time."""
+    try:
+        with open(_rva_config_path(), "w") as f:
+            f.write(json.dumps({"typeinfo_rva": rva}))
+        _plog.info(f"KEYS saved RVA 0x{rva:X} to {_rva_config_path()}")
+    except Exception as e:
+        _plog.info(f"KEYS failed to save RVA: {e}")
 
 
 def _read_mem(handle, address, size):
@@ -322,22 +352,91 @@ def find_module_base(pid, module_name="GameAssembly.dll"):
     return None, 0
 
 
+_cached_class_ptr = None
+_scan_attempted = False
+
+
 def _validate_class_ptr(handle, class_ptr):
-    raw = _read_mem(handle, class_ptr + 0x10, 8)
-    if not raw:
+    """Check if a pointer looks like a valid Client.ConnectionInfo Il2CppClass."""
+    try:
+        name_ptr = _read_ptr(handle, class_ptr + 0x10)
+        if not name_ptr:
+            return False
+        name_raw = _read_mem(handle, name_ptr, 32)
+        if not name_raw:
+            return False
+        class_name = name_raw.split(b'\x00', 1)[0].decode("utf-8", errors="replace")
+        if class_name != "ConnectionInfo":
+            return False
+        # Also check namespace = "Client"
+        ns_ptr = _read_ptr(handle, class_ptr + 0x18)
+        if ns_ptr:
+            ns_raw = _read_mem(handle, ns_ptr, 32)
+            if ns_raw:
+                namespace = ns_raw.split(b'\x00', 1)[0].decode("utf-8", errors="replace")
+                if namespace == "Client":
+                    if _plog.isEnabledFor(logging.DEBUG):
+                        _plog.debug(f"KEYS validated Client.ConnectionInfo at 0x{class_ptr:X}")
+                    return True
+                return False
+        return True  # No namespace readable, but name matched
+    except Exception:
         return False
-    name_ptr = struct.unpack("<Q", raw)[0]
-    if not name_ptr:
-        return False
-    name_raw = _read_mem(handle, name_ptr, 32)
-    if not name_raw:
-        return False
-    class_name = name_raw.split(b'\x00', 1)[0].decode("utf-8", errors="replace")
-    return class_name == "ConnectionInfo"
+
+
+def _scan_for_class(handle, base, mod_size):
+    """Scan GameAssembly.dll data section for Il2CppClass* pointing to ConnectionInfo.
+
+    The class name string lives in IL2CPP metadata (separate memory region, not in
+    the DLL module), so we can't search for the string directly. Instead, we scan
+    the data section for 8-byte aligned heap pointers and validate each one by
+    reading Il2CppClass.name and checking it says "ConnectionInfo" in namespace "Client".
+    """
+    chunk_size = 65536  # 64KB chunks
+
+    # Scan latter half of module (data section) for Il2CppClass* pointers
+    search_start = mod_size // 2
+    candidates_checked = 0
+    chunks_read = 0
+
+    for offset in range(search_start, mod_size, chunk_size):
+        read_size = min(chunk_size, mod_size - offset)
+        if read_size < 8:
+            break
+        try:
+            chunk = _read_mem(handle, base + offset, read_size)
+        except Exception:
+            continue
+        if not chunk:
+            continue
+        chunks_read += 1
+        for i in range(0, read_size - 7, 8):
+            ptr_val = struct.unpack_from("<Q", chunk, i)[0]
+            # Quick filter: valid 64-bit user-space pointer
+            if ptr_val < 0x10000 or ptr_val > 0x7FFFFFFFFFFF:
+                continue
+            # Skip module-internal pointers (Il2CppClass is on the heap)
+            if base <= ptr_val < base + mod_size:
+                continue
+            candidates_checked += 1
+            if candidates_checked > 2000000:
+                _plog.info(f"KEYS_SCAN limit reached after {chunks_read} chunks, "
+                           f"{candidates_checked} candidates")
+                return None, None
+            if _validate_class_ptr(handle, ptr_val):
+                rva = offset + i
+                _plog.info(f"KEYS_SCAN found ConnectionInfo at module+0x{rva:X} "
+                           f"(checked {candidates_checked} candidates)")
+                return ptr_val, rva
+
+    _plog.info(f"KEYS_SCAN complete: {chunks_read} chunks, "
+               f"{candidates_checked} candidates, no match")
+    return None, None
 
 
 def read_encryption_keys(pid):
     """Read AES/HMAC/XOR keys from game memory. Returns dict or None."""
+    global _cached_class_ptr
     base, mod_size = find_module_base(pid)
     if not base:
         return None
@@ -347,11 +446,37 @@ def read_encryption_keys(pid):
         return None
 
     try:
-        # Read TypeInfo RVA -> class pointer
-        if CONNECTIONINFO_TYPEINFO_RVA >= mod_size:
-            return None
-        class_ptr = _read_ptr(handle, base + CONNECTIONINFO_TYPEINFO_RVA)
-        if not class_ptr or not _validate_class_ptr(handle, class_ptr):
+        global _cached_class_ptr, _scan_attempted
+        class_ptr = _cached_class_ptr
+
+        # Method 1: Use in-memory cached class pointer
+        if class_ptr and _validate_class_ptr(handle, class_ptr):
+            pass  # still valid
+        else:
+            class_ptr = None
+
+        # Method 2: Use RVA from config file (or hardcoded default)
+        if not class_ptr:
+            rva = _load_rva()
+            if rva < mod_size:
+                ptr = _read_ptr(handle, base + rva)
+                if ptr and _validate_class_ptr(handle, ptr):
+                    class_ptr = ptr
+                    _cached_class_ptr = ptr
+
+        # Method 3: Scan module for ConnectionInfo class (handles game patches)
+        if not class_ptr and not _scan_attempted:
+            _scan_attempted = True
+            _plog.info("KEYS module base=0x%X size=%.1fMB", base, mod_size / 1048576)
+            _plog.info("KEYS RVA failed — scanning for ConnectionInfo class...")
+            ptr, new_rva = _scan_for_class(handle, base, mod_size)
+            if ptr:
+                class_ptr = ptr
+                _cached_class_ptr = ptr
+                if new_rva:
+                    _save_rva(new_rva)
+
+        if not class_ptr:
             return None
 
         static_fields = _read_ptr(handle, class_ptr + IL2CPP_STATIC_FIELDS_OFFSET)
@@ -671,6 +796,19 @@ def _r_str(data, off):
         stripped = stripped[:-1]
     s = stripped.decode("utf-8", errors="replace").rstrip()
     return s, off + slen
+
+def _r_str_nn(data, off):
+    """Read a LNL-style string where length includes +1 for null but null is NOT on wire."""
+    if off + 2 > len(data): return None, off
+    slen = struct.unpack_from("<H", data, off)[0]
+    off += 2
+    if slen == 0: return "", off
+    actual = slen - 1  # length counts implicit null, subtract it
+    if actual <= 0: return "", off
+    if off + actual > len(data): return None, off - 2
+    raw = data[off:off + actual]
+    s = raw.decode("utf-8", errors="replace").rstrip()
+    return s, off + actual
 
 
 def parse_combat_event(msg_id, body, direction):
@@ -1075,31 +1213,63 @@ def _find_hostile(body, start_off):
 # ===================================================================
 
 def _read_item_record(data, off):
-    """Parse an ItemRecord from the wire. Returns (item_dict, new_offset) or (None, off)."""
+    """Parse an ItemRecord from the wire. Returns (item_dict, new_offset) or (None, off).
+
+    ItemInformation (0x0080) wire format (all strings use _r_str_nn —
+    length counts implicit null but null is NOT on wire):
+
+    [str_nn hid] [str_nn name]
+    [i32 item_type] [i32 class_mask] [i32 race_mask] [i32 slot_mask] [i32 req_level]
+    [11 bools] [u16 stack_size] [u16 charges]
+    [bool craft_flag] [str_nn craft_class]
+    [6 x i32 unknown]
+    [i32 damage] [i32 delay] [i32 ac]
+    [7 x i32 primary stats: str sta dex agi int wis cha]
+    [4 x i32 pools: hp hp_regen mana mana_regen]
+    [3 x i32 haste: melee ranged spell]
+    [7 x i32 resists: fire cold poison disease magic arcane nature]
+    [str_nn material_hid] [float weight] [u16 unknown]
+    [str_nn description]
+    [u16 effect_count] [effect_count x str_nn]
+    """
     item = {}
+    # Phase 1: HID + Name (must succeed)
     try:
-        item["hid"], off = _r_str(data, off)
-        if item["hid"] is None:
+        item["hid"], off = _r_str_nn(data, off)
+        if not item["hid"]:
             return None, off
-        item["name"], off = _r_str(data, off)
-        item["item_type"], off = _r_u16(data, off)
+        item["name"], off = _r_str_nn(data, off)
+    except Exception:
+        return None, off
+
+    # Phase 2: structured fields (best-effort — item is kept even if this fails)
+    try:
+        item["item_type"], off = _r_i32(data, off)
         item["class_mask"], off = _r_i32(data, off)
         item["race_mask"], off = _r_i32(data, off)
         item["slot_mask"], off = _r_i32(data, off)
-        item["required_level"], off = _r_u16(data, off)
+        item["required_level"], off = _r_i32(data, off)
 
-        # Boolean flags
+        # 11 boolean flags (no_drop, is_unique, is_magic, + 8 unknown)
         item["no_drop"], off = _r_bool(data, off)
         item["is_unique"], off = _r_bool(data, off)
         item["is_magic"], off = _r_bool(data, off)
+        for _ in range(8):  # 8 additional unknown bools
+            _, off = _r_bool(data, off)
 
         item["stack_size"], off = _r_u16(data, off)
         item["charges"], off = _r_u16(data, off)
 
-        # Stats
+        # Craft flag + craft class string
+        _, off = _r_bool(data, off)
+        _, off = _r_str_nn(data, off)
+
+        # Damage, delay, AC, then 6 unknown i32 fields
         item["damage"], off = _r_i32(data, off)
         item["delay"], off = _r_i32(data, off)
         item["ac"], off = _r_i32(data, off)
+        for _ in range(6):
+            _, off = _r_i32(data, off)
 
         for stat in ("strength", "stamina", "dexterity", "agility",
                      "intelligence", "wisdom", "charisma"):
@@ -1115,18 +1285,22 @@ def _read_item_record(data, off):
         item["spell_haste"], off = _r_i32(data, off)
 
         for resist in ("resist_fire", "resist_cold", "resist_poison", "resist_disease",
-                       "resist_magic", "resist_arcane", "resist_nature", "resist_holy"):
+                       "resist_magic", "resist_arcane", "resist_nature"):
             item[resist], off = _r_i32(data, off)
 
+        # Material HID string, weight, unknown u16
+        _, off = _r_str_nn(data, off)
         item["weight"], off = _r_float(data, off)
-        item["description"], off = _r_str(data, off)
+        _, off = _r_u16(data, off)
+
+        item["description"], off = _r_str_nn(data, off)
 
         # Effects — read as array of strings (count + strings)
         effect_count, off = _r_u16(data, off)
         effects = []
         if effect_count is not None and 0 < effect_count <= 50:
             for _ in range(effect_count):
-                eff, off = _r_str(data, off)
+                eff, off = _r_str_nn(data, off)
                 if eff is not None:
                     effects.append(eff)
         item["effects"] = effects
@@ -1152,12 +1326,10 @@ def parse_loot_event(msg_id, body, direction):
     elif msg_id == 0x0063:  # AddItemToInventory
         event["type"] = "AddItemToInventory"
         try:
-            # ClientItemRecord format (NOT the same as ItemRecord):
-            # [u32 item_uid] [u32 unknown] [LNL hid+type_byte] [remaining data]
-            # The remaining data uses a different structure than _read_item_record
-            # (contains crafting/skill strings, NOT the standard ItemRecord fields).
-            # We extract the HID here; full item stats come from ItemInformation
-            # (0x0080) when the user inspects the item.
+            # ClientItemRecord format:
+            # [u32 item_uid] [u32 unknown] [LNL hid+type_byte]
+            # [21 bytes fixed prefix] [i32 craft_count] [N x str_nn craft strings]
+            # [embedded ItemRecord using _r_str_nn format]
             event["item_uid"], off = _r_u32(body, off)
             _skip, off = _r_u32(body, off)  # unknown u32
             event["item_hid"], off = _r_str(body, off)
@@ -1169,6 +1341,41 @@ def parse_loot_event(msg_id, body, direction):
                 _plog.debug(f"LOOT_HEADER uid={event.get('item_uid')} "
                             f"hid=\"{event.get('item_hid')}\" off={off} "
                             f"remaining={len(body)-off}")
+            # Parse embedded ItemRecord from the ClientItemRecord body
+            hid_str = event.get("item_hid", "")
+            if hid_str and off + 25 < len(body):
+                try:
+                    # Primary path: skip 21 fixed prefix bytes, read craft
+                    # count, skip craft strings, then parse ItemRecord
+                    rec_off = off + 21
+                    craft_count, rec_off = _r_i32(body, rec_off)
+                    if craft_count is not None and 0 <= craft_count <= 10:
+                        for _ in range(craft_count):
+                            _, rec_off = _r_str_nn(body, rec_off)
+                        item, _ = _read_item_record(body, rec_off)
+                        if item and item.get("hid"):
+                            event["item_record"] = item
+                    # Fallback: scan for embedded HID in _r_str_nn format
+                    if not event.get("item_record"):
+                        hid_bytes = hid_str.encode("utf-8")
+                        nn_prefix = struct.pack("<H", len(hid_bytes) + 1)
+                        idx = body.find(nn_prefix + hid_bytes, off)
+                        if idx >= 0:
+                            item, _ = _read_item_record(body, idx)
+                            if item and item.get("hid"):
+                                event["item_record"] = item
+                    if _plog.isEnabledFor(logging.DEBUG):
+                        ir = event.get("item_record")
+                        if ir:
+                            _plog.debug(
+                                f"LOOT_ITEM_REC hid={ir.get('hid')} "
+                                f"name={ir.get('name')} "
+                                f"fields={list(ir.keys())}")
+                        else:
+                            _plog.debug("LOOT_ITEM_REC parse failed")
+                except Exception as e:
+                    if _plog.isEnabledFor(logging.DEBUG):
+                        _plog.debug(f"LOOT_ITEM_REC_ERR {e}")
         except Exception:
             pass
         return event
@@ -1178,16 +1385,25 @@ def parse_loot_event(msg_id, body, direction):
         if _plog.isEnabledFor(logging.DEBUG):
             _plog.debug(f"ITEM_INFO_RAW len={len(body)} hex={body.hex(' ')}")
         try:
+            # Wire format: [u16 count] [u8 flag] [ItemRecord...]
+            _count, off = _r_u16(body, off)
+            _flag, off = _r_u8(body, off)
+            if _plog.isEnabledFor(logging.DEBUG):
+                _plog.debug(f"ITEM_INFO_PREFIX count={_count} flag={_flag}")
             item, off = _read_item_record(body, off)
-            if item:
+            if item and item.get("hid"):
                 event["item_record"] = item
                 if _plog.isEnabledFor(logging.DEBUG):
                     _plog.debug(f"ITEM_INFO_PARSED off={off} remaining={len(body)-off} "
                                 f"fields={list(item.keys())}")
                     if off < len(body):
                         _plog.debug(f"ITEM_INFO_TAIL hex={body[off:].hex(' ')}")
-        except Exception:
-            pass
+            elif _plog.isEnabledFor(logging.DEBUG):
+                _plog.debug(f"ITEM_INFO_FAIL hid={item.get('hid') if item else None} "
+                            f"name={item.get('name') if item else None} off={off}")
+        except Exception as e:
+            if _plog.isEnabledFor(logging.DEBUG):
+                _plog.debug(f"ITEM_INFO_EXCEPTION {e}")
         return event
 
     return None
@@ -1228,7 +1444,7 @@ class Encounter:
             self.players[eid] = {
                 'name': name, 'cls': cls, 'level': level,
                 'dealt': 0, 'text_dealt': 0, 'received': 0,
-                'first': None, 'last': None, 'abilities': {},
+                'first': None, 'last': None, 'abilities': {}, 'ability_counts': {},
             }
         else:
             # Update name/class/level if we have better info now
@@ -1270,6 +1486,7 @@ class EntityTracker:
         self.zones = {}        # eid -> zone_hid string (e.g. "keepersbight")
         self.entity_types = {} # eid -> entity_type uint16 from SpawnEntity
         self.pet_states = {}   # eid -> True if petState was set in SpawnEntity
+        self._pet_owners = {}  # pet_eid -> owner_eid from UpdateState parent_id
         self._lock = threading.Lock()
         self.player_name = ""  # set from config, used to name local player entity
         self._local_player_eid = None  # detected from "Your ..." / "You ..." patterns
@@ -1314,6 +1531,7 @@ class EntityTracker:
 
         # Reload gate: block all parsing until ClientPartyUpdate identifies local player
         self._reload_gate = True
+        self._reload_gate_time = time.time()  # auto-clear after timeout (ungrouped solo)
         self._party_members_pending = None  # list of (eid, name, class_hid, level) for GUI player selection
 
     def _backfill_player_info(self, eid, cls=None, level=None):
@@ -1395,6 +1613,7 @@ class EntityTracker:
                             p['text_dealt'] += dmg
                             ab = extra[0] if extra else "Melee"
                             p['abilities'][ab] = p['abilities'].get(ab, 0) + dmg
+                            p['ability_counts'][ab] = p['ability_counts'].get(ab, 0) + 1
                             if p['first'] is None:
                                 p['first'] = ts
                             p['last'] = ts
@@ -1425,6 +1644,8 @@ class EntityTracker:
                     real_p['received'] += old_p['received']
                     for ab, dmg in old_p.get('abilities', {}).items():
                         real_p['abilities'][ab] = real_p['abilities'].get(ab, 0) + dmg
+                    for ab, cnt in old_p.get('ability_counts', {}).items():
+                        real_p['ability_counts'][ab] = real_p['ability_counts'].get(ab, 0) + cnt
                     if old_p['first'] is not None:
                         if real_p['first'] is None or old_p['first'] < real_p['first']:
                             real_p['first'] = old_p['first']
@@ -1632,6 +1853,7 @@ class EntityTracker:
                 p['text_dealt'] += text_dmg
                 ability = self._extract_ability_name(text)
                 p['abilities'][ability] = p['abilities'].get(ability, 0) + text_dmg
+                p['ability_counts'][ability] = p['ability_counts'].get(ability, 0) + 1
                 if p['first'] is None:
                     p['first'] = now
                 p['last'] = now
@@ -1644,8 +1866,13 @@ class EntityTracker:
         etype = event.get("type", "")
 
         # Reload gate: discard everything except ClientPartyUpdate
+        # Auto-clear after 15s — game sends nothing when solo ungrouped
         if self._reload_gate and etype != "ClientPartyUpdate":
-            return None
+            if time.time() - self._reload_gate_time > 15.0:
+                self._reload_gate = False
+                _plog.info("RELOAD_GATE auto-cleared — timeout (solo ungrouped)")
+            else:
+                return None
 
         # ChatCombat has no entity_id — handle separately
         if etype == "ChatCombat":
@@ -1732,6 +1959,10 @@ class EntityTracker:
                     elif len(valid) > 1:
                         self._party_members_pending = valid
                         _plog.info(f"RELOAD_GATE waiting for player selection ({len(valid)} members)")
+                    else:
+                        # No valid members (solo, not in a party) — clear gate to prevent lockout
+                        self._reload_gate = False
+                        _plog.info("RELOAD_GATE cleared — no valid party members (solo ungrouped)")
                 elif self._reload_gate:
                     # local player already known (shouldn't happen, but be safe)
                     self._reload_gate = False
@@ -1782,6 +2013,7 @@ class EntityTracker:
                     self.entity_types[eid] = et
                 if event.get("pet_state"):
                     self.pet_states[eid] = True
+                    _plog.debug(f"SPAWN_PET #{eid} \"{name}\" pet_state=True")
                 self.damage.setdefault(eid, 0)
                 self.healing.setdefault(eid, 0)
                 # Retire old encounter only if eid is reused by a DIFFERENT entity.
@@ -1926,8 +2158,15 @@ class EntityTracker:
                     self.levels[eid] = level
                 if class_hid or level is not None:
                     self._backfill_player_info(eid, cls=class_hid, level=level)
+                parent_id = event.get("parent_id")
+                pet_st = event.get("pet_state")
+                if pet_st:
+                    self.pet_states[eid] = True
+                if parent_id and parent_id != 0:
+                    self._pet_owners[eid] = parent_id
+                    _plog.debug(f"PET_OWNER #{eid} \"{name}\" parent=#{parent_id} \"{self.names.get(parent_id, '?')}\" pet_state={pet_st}")
                 _safe_name = (name or "").encode('ascii', 'replace').decode('ascii')[:60]
-                _plog.debug(f"UPDATE_STATE #{eid} type={et} \"{_safe_name}\" class={class_hid} lvl={level}")
+                _plog.debug(f"UPDATE_STATE #{eid} type={et} \"{_safe_name}\" class={class_hid} lvl={level} parent={parent_id} pet={pet_st}")
                 return None
 
             if etype == "DespawnEntity":
@@ -2099,6 +2338,7 @@ class EntityTracker:
                                 p['text_dealt'] += text_dmg
                                 ability = self._extract_ability_name(text)
                                 p['abilities'][ability] = p['abilities'].get(ability, 0) + text_dmg
+                                p['ability_counts'][ability] = p['ability_counts'].get(ability, 0) + 1
                                 if p['first'] is None:
                                     p['first'] = now
                                 p['last'] = now
@@ -2223,6 +2463,7 @@ class EntityTracker:
                                     p['text_dealt'] += txt_dmg
                                     ab = extra[0] if extra else "Melee"
                                     p['abilities'][ab] = p['abilities'].get(ab, 0) + txt_dmg
+                                    p['ability_counts'][ab] = p['ability_counts'].get(ab, 0) + 1
                                     if p['first'] is None:
                                         p['first'] = ts
                                     p['last'] = ts
@@ -2635,10 +2876,14 @@ class CaptureBackend:
 
     def _key_loop(self):
         """Poll encryption keys every 5 seconds."""
+        first_attempt = True
         while not self._stop.is_set():
             if self._pid:
                 try:
+                    if first_attempt and not _cached_class_ptr:
+                        self._status("Scanning keys...")
                     keys = read_encryption_keys(self._pid)
+                    first_attempt = False
                     if keys and keys.get("aes_key"):
                         with self._key_lock:
                             old = self._aes_key
@@ -2904,7 +3149,7 @@ class CaptureBackend:
             # Try to get item name: from record, from existing data, or from HID
             item_name = event.get("item_name") or (item_rec or {}).get("name")
             if not item_name and item_hid:
-                # Check if we already have this item from a prior inspect (0x0080)
+                # Check if we already have this item from a prior ItemInformation (0x0080)
                 with self._item_lock:
                     existing = self._items.get(item_hid)
                 if existing:
@@ -3523,7 +3768,7 @@ class CombatApp(tk.Tk):
 
         self._item_back_btn = ttk.Button(
             header_left, text="< Back", style='Dark.TButton',
-            command=self._on_item_back)
+            command=self._on_detail_back)
         # Hidden by default — shown in item detail view
 
         # Feed text widget + scrollbars (stored for pack/forget toggling)
@@ -3917,7 +4162,26 @@ class CombatApp(tk.Tk):
                         w.destroy()
                     tk.Label(self._reload_overlay, text="Which character is yours?",
                              font=("Segoe UI", 14), fg=COLORS['fg'], bg=COLORS['bg']
-                             ).pack(pady=(60, 15))
+                             ).pack(pady=(10, 8))
+                    # Scrollable container for player buttons (fits 6+ members)
+                    canvas = tk.Canvas(self._reload_overlay, bg=COLORS['bg'],
+                                       highlightthickness=0, bd=0)
+                    scrollbar = tk.Scrollbar(self._reload_overlay, orient=tk.VERTICAL,
+                                             command=canvas.yview)
+                    btn_frame = tk.Frame(canvas, bg=COLORS['bg'])
+                    btn_frame.bind('<Configure>',
+                                   lambda e: canvas.configure(scrollregion=canvas.bbox('all')))
+                    canvas.create_window((0, 0), window=btn_frame, anchor='n')
+                    canvas.configure(yscrollcommand=scrollbar.set)
+                    # Only show scrollbar if needed (many members)
+                    if len(tracker._party_members_pending) > 5:
+                        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+                    canvas.pack(fill=tk.BOTH, expand=True, padx=20)
+                    # Center the button frame in the canvas
+                    canvas.bind('<Configure>',
+                                lambda e: canvas.itemconfigure(
+                                    canvas.find_withtag('all')[0],
+                                    width=e.width) if canvas.find_withtag('all') else None)
                     for m_eid, m_name, m_cls, m_lvl in tracker._party_members_pending:
                         label = m_name
                         if m_cls:
@@ -3925,12 +4189,12 @@ class CombatApp(tk.Tk):
                         if m_lvl is not None:
                             label += f"  Lv{m_lvl}"
                         btn = tk.Button(
-                            self._reload_overlay, text=label,
+                            btn_frame, text=label,
                             font=("Segoe UI", 11), fg=COLORS['fg'], bg=COLORS['surface'],
                             activeforeground=COLORS['fg'], activebackground=COLORS['border'],
                             bd=0, padx=20, pady=6, cursor="hand2",
                             command=lambda eid=m_eid: self._select_local_player(eid))
-                        btn.pack(pady=3)
+                        btn.pack(pady=3, fill=tk.X)
 
             # Process combat events
             batch = 0
@@ -4385,7 +4649,7 @@ class CombatApp(tk.Tk):
                     player_totals[pname] = {
                         'cls': p_cls, 'level': p_lvl,
                         'dealt': 0, 'active_dur': 0.0,
-                        'abilities': {},
+                        'abilities': {}, 'ability_counts': {},
                         'entity_type': p_etype,
                         'is_pet': is_pet,
                     }
@@ -4406,6 +4670,8 @@ class CombatApp(tk.Tk):
                     pt['is_pet'] = True
                 for ab_name, ab_dmg in p.get('abilities', {}).items():
                     pt['abilities'][ab_name] = pt['abilities'].get(ab_name, 0) + ab_dmg
+                for ab_name, ab_cnt in p.get('ability_counts', {}).items():
+                    pt['ability_counts'][ab_name] = pt['ability_counts'].get(ab_name, 0) + ab_cnt
 
         sorted_pt = sorted(player_totals.items(), key=lambda x: x[1]['dealt'], reverse=True)[:20]
         return grand_enc_count, grand_total_dmg, grand_total_dur, sorted_pt
@@ -4424,12 +4690,13 @@ class CombatApp(tk.Tk):
         return f"{arrow} #{rank:<2} {col_name} {col_dmg} {col_pct} {col_dps} dps"
 
     @staticmethod
-    def _build_overview_ability_line(ab_name, ab_dmg, ab_pct):
+    def _build_overview_ability_line(ab_name, ab_dmg, ab_pct, ab_count=0):
         """Build fixed-width ability breakdown line (paste-friendly)."""
-        col_name = ab_name[:18].ljust(18)
+        col_name = ab_name[:16].ljust(16)
+        col_cnt = f"x{ab_count}".rjust(5)
         col_dmg = f"{ab_dmg:,}".rjust(9)
         col_pct = f"({ab_pct:.0f}%)".rjust(5)
-        return f"       {col_name} {col_dmg} {col_pct}"
+        return f"       {col_name}{col_cnt} {col_dmg} {col_pct}"
 
     def _render_overview(self):
         """Render session leaderboard. Returns True if full redraw, False if in-place."""
@@ -4507,7 +4774,7 @@ class CombatApp(tk.Tk):
 
         # Session header
         self._meter.insert(tk.END, "\u2500" * _box_w + "\n", 'header_line')
-        self._meter.insert(tk.END, f" Session  x{grand_enc_count} enc  {dur_m}m {dur_s}s", 'name')
+        self._meter.insert(tk.END, f" Session  {dur_m}m {dur_s}s", 'name')
         self._meter.insert(tk.END, f"  |  Total: ", 'rank')
         self._meter.insert(tk.END, f"{grand_total_dmg:,}", 'dmg')
         self._meter.insert(tk.END, f"  DPS: ", 'rank')
@@ -4539,9 +4806,11 @@ class CombatApp(tk.Tk):
             # Expanded ability breakdown
             if pname in self._overview_expanded and pt['abilities']:
                 sorted_abs = sorted(pt['abilities'].items(), key=lambda x: x[1], reverse=True)
+                ab_counts = pt.get('ability_counts', {})
                 for ab_name, ab_dmg in sorted_abs:
                     ab_pct = (ab_dmg / pt['dealt'] * 100) if pt['dealt'] > 0 else 0
-                    ab_line = self._build_overview_ability_line(ab_name, ab_dmg, ab_pct)
+                    ab_cnt = ab_counts.get(ab_name, 0)
+                    ab_line = self._build_overview_ability_line(ab_name, ab_dmg, ab_pct, ab_cnt)
                     self._meter.insert(tk.END, ab_line + "\n", 'bar')
 
         # Leave NORMAL so text is selectable/copyable (keyboard input blocked by binding)
@@ -4562,7 +4831,7 @@ class CombatApp(tk.Tk):
         _box_w = 58
 
         lines.append("\u2500" * _box_w)
-        lines.append(f" Session  x{grand_enc_count} enc  {dur_m}m {dur_s}s"
+        lines.append(f" Session  {dur_m}m {dur_s}s"
                      f"  |  Total: {grand_total_dmg:,}  DPS: {grand_dps:,.1f}")
         lines.append("\u2500" * _box_w)
         lines.append(f"  {'#':<3} {'Name':<16} {'Damage':>9} {'Pct':>8} {'DPS':>8}")
@@ -4573,9 +4842,11 @@ class CombatApp(tk.Tk):
 
             if pname in self._overview_expanded and pt['abilities']:
                 sorted_abs = sorted(pt['abilities'].items(), key=lambda x: x[1], reverse=True)
+                ab_counts = pt.get('ability_counts', {})
                 for ab_name, ab_dmg in sorted_abs:
                     ab_pct = (ab_dmg / pt['dealt'] * 100) if pt['dealt'] > 0 else 0
-                    lines.append(self._build_overview_ability_line(ab_name, ab_dmg, ab_pct))
+                    ab_cnt = ab_counts.get(ab_name, 0)
+                    lines.append(self._build_overview_ability_line(ab_name, ab_dmg, ab_pct, ab_cnt))
 
         text = "\n".join(lines)
         self.clipboard_clear()
@@ -5251,7 +5522,7 @@ class CombatApp(tk.Tk):
             self._xp_scroll_y.pack_forget()
 
     def _switch_left_tab(self, target):
-        """Switch to target view: 'feed', 'items', or 'triggers'."""
+        """Switch to target view: 'feed', 'items', 'triggers', or 'experience'."""
         if target == self._left_view:
             return
         if target == "items" and self._left_view == "item_detail":
@@ -5307,7 +5578,7 @@ class CombatApp(tk.Tk):
     # --- Item Tracker ---
 
     def _refresh_items(self):
-        """Periodic refresh for item tracker view (1s interval)."""
+        """Periodic refresh for item tracker (1s interval)."""
         if self._left_view in ("items", "item_detail"):
             summary = self._backend.get_item_summary()
             fp = tuple((s["name"], s["count"]) for s in summary)
@@ -5446,18 +5717,43 @@ class CombatApp(tk.Tk):
 
         if rec:
 
-            # Type / Slot / Level
-            meta_parts = []
-            if rec.get("item_type") is not None:
-                meta_parts.append(f"Type: {rec['item_type']}")
-            if rec.get("slot_mask") is not None:
-                meta_parts.append(f"Slot: {rec['slot_mask']}")
-            if rec.get("required_level") is not None and rec["required_level"] > 0:
-                meta_parts.append(f"Required Level: {rec['required_level']}")
-            if meta_parts:
-                self._item_view.insert(tk.END, "  ", 'stat_label')
-                self._item_view.insert(tk.END, "  ".join(meta_parts) + "\n",
+            # AC / Damage
+            if rec.get("ac"):
+                self._item_view.insert(tk.END, "  AC: ", 'stat_label')
+                self._item_view.insert(tk.END, f"{rec['ac']}\n", 'stat_value')
+            if rec.get("damage"):
+                self._item_view.insert(tk.END, "  Damage: ", 'stat_label')
+                delay = rec.get("delay")
+                dtxt = f"{rec['damage']} / {delay} delay" if delay else str(rec['damage'])
+                self._item_view.insert(tk.END, f"{dtxt}\n", 'stat_value')
+
+            # Slot / Type / Level
+            if rec.get("slot_mask") is not None and rec["slot_mask"] != 0:
+                self._item_view.insert(tk.END, "  Slot: ", 'stat_label')
+                self._item_view.insert(tk.END, f"{rec['slot_mask']}\n",
                                        'stat_value')
+            if rec.get("item_type") is not None and rec["item_type"] != 0:
+                self._item_view.insert(tk.END, "  Type: ", 'stat_label')
+                self._item_view.insert(tk.END, f"{rec['item_type']}\n",
+                                       'stat_value')
+            if rec.get("required_level") is not None and rec["required_level"] > 0:
+                self._item_view.insert(tk.END, "  Required Level: ", 'stat_label')
+                self._item_view.insert(tk.END, f"{rec['required_level']}\n",
+                                       'stat_value')
+
+            # Class / Race
+            cm = rec.get("class_mask")
+            if cm is not None and cm != 0:
+                cbits = bin(cm).count('1')
+                clbl = "All Classes" if cbits >= 15 else f"{cbits} Classes"
+                self._item_view.insert(tk.END, "  Class: ", 'stat_label')
+                self._item_view.insert(tk.END, f"{clbl}\n", 'stat_value')
+            rm = rec.get("race_mask")
+            if rm is not None and rm != 0:
+                rbits = bin(rm).count('1')
+                rlbl = "All Races" if rbits >= 12 else f"{rbits} Races"
+                self._item_view.insert(tk.END, "  Race: ", 'stat_label')
+                self._item_view.insert(tk.END, f"{rlbl}\n", 'stat_value')
 
             # Flags
             flags = []
@@ -5470,18 +5766,6 @@ class CombatApp(tk.Tk):
             if flags:
                 self._item_view.insert(tk.END, "  " + "  ".join(flags) + "\n",
                                        'flag')
-
-            self._item_view.insert(tk.END, "\n")
-
-            # Damage / AC
-            if rec.get("damage"):
-                self._item_view.insert(tk.END, "  Damage: ", 'stat_label')
-                delay = rec.get("delay")
-                dtxt = f"{rec['damage']} / {delay} delay" if delay else str(rec['damage'])
-                self._item_view.insert(tk.END, f"{dtxt}\n", 'stat_value')
-            if rec.get("ac"):
-                self._item_view.insert(tk.END, "  AC: ", 'stat_label')
-                self._item_view.insert(tk.END, f"{rec['ac']}\n", 'stat_value')
 
             # Primary stats
             stat_map = [
@@ -5615,6 +5899,10 @@ class CombatApp(tk.Tk):
                 self._item_view.insert(tk.END, f"{line}\n", 'stat_value')
 
         self._item_view.configure(state=tk.DISABLED)
+
+    def _on_detail_back(self):
+        """Handle back button — return to item list."""
+        self._on_item_back()
 
     def _on_item_click(self, name):
         """Handle clicking an item row — switch to detail view."""
