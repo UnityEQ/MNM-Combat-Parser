@@ -70,7 +70,7 @@ Wire format: `[IV(16)] [AES-CBC ciphertext(N×16)] [HMAC(32)?] [CRC32c(4)]`
 
 Decryption order: strip CRC from **back** → strip HMAC if key present → AES-256-CBC decrypt (IV = first 16 bytes) → PKCS7 unpad → XOR if key present. Current server only uses AES (HMAC/XOR keys are empty).
 
-Keys live in `Client.ConnectionInfo` static class: `GameAssembly.dll + 0x544FCD8` → Il2CppClass → static_fields → offsets 0x38/0x40/0x48 for HMAC/AES/XOR byte arrays.
+Keys live in `Client.ConnectionInfo` static class: `GameAssembly.dll + 0x544FCD8` → Il2CppClass → static_fields → offsets 0x38/0x40/0x48 for HMAC/AES/XOR byte arrays. The RVA (0x544FCD8) is cached in `rva_cache.json` next to the exe/script — `_load_rva()` reads it on startup, `_save_rva()` writes newly discovered RVAs from `_scan_for_class()`. If the cached RVA fails (game update), the scanner brute-forces the module and saves the new offset.
 
 ### Game Message Format
 
@@ -193,7 +193,8 @@ The GUI displays a full-screen overlay ("Type /reload in-game to start") while t
 ## Entity Type System (parser/parser.py)
 
 - `entity_types` dict: `eid → entity_type` (uint16 from SpawnEntity). `0` = player, `> 0` = NPC/pet, `None` = unknown (no SpawnEntity captured).
-- `pet_states` dict: `eid → True` if SpawnEntity had `petState=True` (charmed/summoned pets).
+- `pet_states` dict: `eid → True` if SpawnEntity tail marker == 5 (pet/charmed NPC).
+- `_pet_owners` dict: `pet_eid → owner_eid` from SpawnEntity parentID field at `body[len-93]`.
 - `_looks_like_npc_name(name)`: Returns `True` if name starts lowercase (e.g. "a bodyguard") or is "Entity#...". Used as heuristic to filter unknown entities.
 - Party members get `entity_types[eid] = 0` from `ClientPartyUpdate`.
 - Local player gets `entity_types[eid] = 0` from `_mark_local_player()`.
@@ -203,9 +204,13 @@ The GUI displays a full-screen overlay ("Type /reload in-game to start") while t
 The overview uses strict type checking — only confirmed players and pets appear. Inclusion rules:
 - `entity_type == 0` → always included (confirmed player)
 - `eid == _local_player_eid` → always included (local player)
-- `entity_type > 0` and `pet_states[eid] == True` → included, tagged `[PET]`
+- `entity_type > 0` and `pet_states[eid] == True` → included; damage merged into owner's row as `[PET] PetName` ability entry
 - `entity_type > 0` and not pet → excluded (regular NPC)
 - `entity_type is None` (unknown) → excluded (not a confirmed player)
+
+### Pet Detection from SpawnEntity
+
+SpawnEntity body tail marker (last u16) identifies entity type: 0=player/object, 1=regular NPC, 5=pet, large value=player with gear data. When `last_u16 == 5`, the parser reads `parent_id` (owner eid) at `body[len-93]`. Pet damage in the overview is merged into the owner's ability breakdown as a `[PET] PetName` entry. Pets without a known owner (no SpawnEntity captured) still appear as separate `[PET]` rows.
 
 This strict filter replaced an earlier heuristic-based system that leaked uppercase-named NPCs (e.g. "Poacher Garrus") into the overview.
 
@@ -396,4 +401,7 @@ Two PyInstaller `.spec` files exist:
 - Never use `"_local"` string as a real entity ID — it's a sentinel placeholder for the local player before detection. Always resolve via `_local_player_eid` at consumption points and merge in `_mark_local_player`
 - Wire format helpers in parser.py: `_r_u32`, `_r_i32`, `_r_u16`, `_r_u8`, `_r_bool`, `_r_float`, `_r_str` — all return `(value, new_offset)` or `(None, offset)` on bounds failure. `_r_str` strips all trailing control bytes `< 0x20` (not just `\x00` — LNL strings sometimes terminate with `0x04` EOT)
 - ClientPartyUpdate (0x0380) class_hid field is NOT a LNL string — it's `[u8 0x00] [3 raw ASCII bytes] [u8 level]`. Standard `_r_str` reads the 0x00 + first class byte as a u16 length = huge number and fails. Parser reads the 3 bytes directly and validates as lowercase alpha
+- `_r_str_nn` is a no-null string reader for ItemInformation (0x0080) and embedded ItemRecords: length field = strlen+1 (counts implicit null) but **null byte is NOT on wire** — reads `len-1` bytes. Do not confuse with `_r_str`
+- ItemInformation (0x0080) has 7 resist fields (no holy resist), 11 boolean flags (not 3), and uses i32 for type/level fields (not u16). First 3 i32 after craft_class are `[damage][delay][AC]`
+- AddItemToInventory (0x0063) embeds a full ItemRecord — the game does NOT send a separate 0x0080 for items looted via 0x0063. Looted items go to `_items` only (not `_inspected_items`)
 

@@ -28,7 +28,9 @@
       "Bash(del:*)",
       "Bash(pyinstaller:*)",
       "Bash(python3:*)",
-      "Bash(ren:*)"
+      "Bash(ren:*)",
+      "Bash(chcp:*)",
+      "Bash(PYTHONIOENCODING=utf-8 python:*)"
     ]
   }
 }

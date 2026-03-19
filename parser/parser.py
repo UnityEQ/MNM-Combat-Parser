@@ -11,7 +11,7 @@ Usage:
     python parser/parser.py
 """
 
-APP_VERSION = "V1.9"
+APP_VERSION = "V1.12"
 
 import csv
 import ctypes
@@ -948,6 +948,22 @@ def parse_combat_event(msg_id, body, direction):
         # Scan for hostility flag
         event["is_hostile"] = _find_hostile(body, name_end)
 
+        # Pet detection: last u16 == 5 means pet, parentID at body[len-93]
+        if len(body) >= 95:
+            tail_marker, _ = _r_u16(body, len(body) - 2)
+            if tail_marker == 5:
+                event["pet_state"] = True
+                parent_id, _ = _r_u32(body, len(body) - 93)
+                if parent_id and 0 < parent_id < 100000:
+                    event["parent_id"] = parent_id
+                else:
+                    # body[len-93] gave garbage — pass body so handler can
+                    # scan for known player eids at any offset
+                    event["_pet_body"] = bytes(body)
+                    if _plog.isEnabledFor(logging.DEBUG):
+                        _plog.debug(f"PET_BAD_PARENT eid={event.get('entity_id')} "
+                                    f"raw_parent=0x{parent_id:08X} bodylen={len(body)}")
+
     elif msg_id == 0x0021:  # DespawnEntity
         event["type"] = "DespawnEntity"
         event["entity_id"], off = _r_u32(body, off)
@@ -1798,13 +1814,20 @@ class EntityTracker:
                 attacker_eid = None
                 self._pending_local_dmg.append(("_deferred_", text_dmg, now, target_name, self._extract_ability_name(text)))
             else:
-                # Resolve attacker by name
+                # Resolve attacker by name — prefer eid with entity_type==0
+                # (after zone migration, old eids lose their entity_type)
                 attacker_eid = None
                 if attacker_name:
+                    fallback_eid = None
                     for eid_c, name in self.names.items():
                         if name == attacker_name:
-                            attacker_eid = eid_c
-                            break
+                            if self.entity_types.get(eid_c) == 0:
+                                attacker_eid = eid_c
+                                break
+                            if fallback_eid is None:
+                                fallback_eid = eid_c
+                    if attacker_eid is None:
+                        attacker_eid = fallback_eid
 
             # Resolve target NPC — prefer the entity from the most recent
             # UpdateHealth (arrives right before the ChatCombat message).
@@ -1865,9 +1888,11 @@ class EntityTracker:
         """Update tracker. Returns (dmg, heal) deltas or None."""
         etype = event.get("type", "")
 
-        # Reload gate: discard everything except ClientPartyUpdate
+        # Reload gate: discard everything except ClientPartyUpdate and SpawnEntity
+        # SpawnEntity is allowed through to populate entity_types/pet_states/names
+        # (it cannot cause local player misidentification)
         # Auto-clear after 15s — game sends nothing when solo ungrouped
-        if self._reload_gate and etype != "ClientPartyUpdate":
+        if self._reload_gate and etype not in ("ClientPartyUpdate", "SpawnEntity"):
             if time.time() - self._reload_gate_time > 15.0:
                 self._reload_gate = False
                 _plog.info("RELOAD_GATE auto-cleared — timeout (solo ungrouped)")
@@ -2013,7 +2038,26 @@ class EntityTracker:
                     self.entity_types[eid] = et
                 if event.get("pet_state"):
                     self.pet_states[eid] = True
-                    _plog.debug(f"SPAWN_PET #{eid} \"{name}\" pet_state=True")
+                    parent_id = event.get("parent_id")
+                    if not parent_id:
+                        # Fallback 1: scan body for known party member eids
+                        # Use step=1 (not 4) — parent eid may not be 4-byte aligned
+                        # due to variable-length string fields preceding it
+                        pet_body = event.get("_pet_body")
+                        if pet_body:
+                            party_eids = set(self._party_eids.values())
+                            for scan_off in range(0, len(pet_body) - 3):
+                                candidate, _ = _r_u32(pet_body, scan_off)
+                                if candidate and candidate in party_eids:
+                                    parent_id = candidate
+                                    break
+                        # Fallback 2: eid-1 is a confirmed player (zone entry)
+                        if not parent_id and self.entity_types.get(eid - 1) == 0:
+                            parent_id = eid - 1
+                    if parent_id:
+                        self._pet_owners[eid] = parent_id
+                    owner_name = self.names.get(parent_id, "?") if parent_id else "?"
+                    _plog.debug(f"SPAWN_PET #{eid} \"{name}\" owner=#{parent_id} \"{owner_name}\"")
                 self.damage.setdefault(eid, 0)
                 self.healing.setdefault(eid, 0)
                 # Retire old encounter only if eid is reused by a DIFFERENT entity.
@@ -2164,7 +2208,6 @@ class EntityTracker:
                     self.pet_states[eid] = True
                 if parent_id and parent_id != 0:
                     self._pet_owners[eid] = parent_id
-                    _plog.debug(f"PET_OWNER #{eid} \"{name}\" parent=#{parent_id} \"{self.names.get(parent_id, '?')}\" pet_state={pet_st}")
                 _safe_name = (name or "").encode('ascii', 'replace').decode('ascii')[:60]
                 _plog.debug(f"UPDATE_STATE #{eid} type={et} \"{_safe_name}\" class={class_hid} lvl={level} parent={parent_id} pet={pet_st}")
                 return None
@@ -2217,6 +2260,16 @@ class EntityTracker:
                 caster_name = self.names.get(eid, f"#{eid}")
                 target_name = self.names.get(target_id, f"#{target_id}") if target_id else "?"
                 _plog.debug(f"ATTRIB BeginCasting caster={caster_name}(#{eid}) -> target={target_name}(#{target_id}) ability=\"{ability}\"")
+                # Pet owner fallback: if a confirmed player casts on an
+                # unowned pet, assume they are the owner (first writer wins).
+                # The owner typically buffs their pet before the healer does.
+                if (target_id and target_id in self.pet_states
+                        and target_id not in self._pet_owners
+                        and self.entity_types.get(eid) == 0):
+                    self._pet_owners[target_id] = eid
+                    if _plog.isEnabledFor(logging.DEBUG):
+                        _plog.debug(f"PET_OWNER_CAST #{target_id} \"{target_name}\" "
+                                    f"owner=#{eid} \"{caster_name}\" via BeginCasting")
 
             elif etype == "ChannelAbility":
                 target_id = event.get("target_id")
@@ -4642,9 +4695,15 @@ class CombatApp(tk.Tk):
                     is_pet = tracker.pet_states.get(p_eid, False)
                     if not is_pet:
                         continue  # skip regular NPCs
+                    # Only include pet if owner is a confirmed player
+                    pet_owner_eid = tracker._pet_owners.get(p_eid)
+                    if pet_owner_eid is None or tracker.entity_types.get(pet_owner_eid) != 0:
+                        continue  # skip NPC-owned pets
                 else:
-                    # Unknown entity_type — not a confirmed player, skip
-                    continue
+                    # Unknown entity_type — allow if name matches a known party member
+                    # (old eids after zone migration lose entity_type but still carry text_dealt)
+                    if pname not in tracker._party_eids:
+                        continue
                 if pname not in player_totals:
                     player_totals[pname] = {
                         'cls': p_cls, 'level': p_lvl,
@@ -4672,6 +4731,24 @@ class CombatApp(tk.Tk):
                     pt['abilities'][ab_name] = pt['abilities'].get(ab_name, 0) + ab_dmg
                 for ab_name, ab_cnt in p.get('ability_counts', {}).items():
                     pt['ability_counts'][ab_name] = pt['ability_counts'].get(ab_name, 0) + ab_cnt
+
+        # Merge pet damage into owner's row as "[PET] PetName" ability entry
+        pet_names = [pname for pname, pt in player_totals.items() if pt.get('is_pet')]
+        for pet_name in pet_names:
+            pet_pt = player_totals[pet_name]
+            # Find owner name via _pet_owners
+            owner_name = None
+            for pet_eid, owner_eid in tracker._pet_owners.items():
+                if tracker.names.get(pet_eid) == pet_name:
+                    owner_name = tracker.names.get(owner_eid)
+                    break
+            if owner_name and owner_name in player_totals:
+                owner_pt = player_totals[owner_name]
+                owner_pt['dealt'] += pet_pt['dealt']
+                ab_key = f"[PET] {pet_name}"
+                owner_pt['abilities'][ab_key] = owner_pt['abilities'].get(ab_key, 0) + pet_pt['dealt']
+                owner_pt['ability_counts'][ab_key] = owner_pt['ability_counts'].get(ab_key, 0) + sum(pet_pt.get('ability_counts', {}).values())
+                del player_totals[pet_name]
 
         sorted_pt = sorted(player_totals.items(), key=lambda x: x[1]['dealt'], reverse=True)[:20]
         return grand_enc_count, grand_total_dmg, grand_total_dur, sorted_pt
@@ -4883,19 +4960,24 @@ class CombatApp(tk.Tk):
                 p_cls = tracker.classes.get(p_eid) or p['cls']
                 p_lvl = tracker.levels.get(p_eid) if tracker.levels.get(p_eid) is not None else p['level']
                 p_etype = tracker.entity_types.get(p_eid)
-                # Same filter as _build_overview_data: skip regular NPCs
+                # Same filter as _build_overview_data: skip regular NPCs and NPC-owned pets
                 if p_etype is not None and p_etype != 0:
                     if not tracker.pet_states.get(p_eid, False):
                         continue
+                    pet_owner_eid = tracker._pet_owners.get(p_eid)
+                    if pet_owner_eid is None or tracker.entity_types.get(pet_owner_eid) != 0:
+                        continue
                 elif p_etype is None:
-                    if EntityTracker._looks_like_npc_name(pname):
-                        continue
-                    if (p_eid in npc_target_eids
-                            and p_eid != tracker._local_player_eid):
-                        continue
-                    if (pname in npc_target_names
-                            and p_eid != tracker._local_player_eid):
-                        continue
+                    # Allow known party members (old eids after zone migration)
+                    if pname not in tracker._party_eids:
+                        if EntityTracker._looks_like_npc_name(pname):
+                            continue
+                        if (p_eid in npc_target_eids
+                                and p_eid != tracker._local_player_eid):
+                            continue
+                        if (pname in npc_target_names
+                                and p_eid != tracker._local_player_eid):
+                            continue
                 if pname not in player_totals:
                     player_totals[pname] = {
                         'cls': p_cls, 'level': p_lvl,
