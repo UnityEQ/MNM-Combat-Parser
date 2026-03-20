@@ -1,0 +1,16 @@
+[
+  {
+    "type": "text",
+    "pattern": "pizza",
+    "loop": true,
+    "sound": true
+  },
+  {
+    "type": "opcode",
+    "opcode": 32,
+    "field": "name",
+    "pattern": "a fire beetle",
+    "loop": false,
+    "sound": false
+  }
+]

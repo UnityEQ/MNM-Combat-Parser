@@ -1,10 +1,6 @@
 [
   {
-    "pattern": "pizza",
-    "loop": false,
-    "sound": false
-  },
-  {
+    "type": "text",
     "pattern": "pies",
     "loop": true,
     "sound": true

@@ -47,7 +47,7 @@ def _make_beep_wav(freq=1000, duration_ms=300, volume=0.5, sample_rate=22050):
         wf.writeframes(bytes(raw))
     return buf.getvalue()
 
-_BEEP_WAV = _make_beep_wav(freq=1000, duration_ms=300, volume=0.5)
+_BEEP_WAV = _make_beep_wav(freq=1000, duration_ms=300, volume=1.0)
 
 
 # ===================================================================
@@ -695,13 +695,35 @@ def _r_str(data, off):
 
 
 # ===================================================================
-# Game message IDs we care about
+# Game message IDs / opcode names
 # ===================================================================
 
-BOT_MSG_IDS = {
-    0x0040,  # ChatMessage
-    0x0056,  # EndCasting
-    0x0013,  # Die
+OPCODE_NAMES = {
+    # Verified from parser/parser.py MESSAGE_IDS
+    0x0011: "ChangeTarget",
+    0x0012: "Autoattack",
+    0x0013: "Die",
+    0x0020: "SpawnEntity",
+    0x0021: "DespawnEntity",
+    0x0022: "UpdateHealth",
+    0x0023: "UpdateMana",
+    0x0024: "UpdateExperience",
+    0x0025: "UpdateLevel",
+    0x0027: "UpdateHealthMana",
+    0x0040: "ChatMessage",
+    0x0050: "CastAbility",
+    0x0053: "AddBuffIcon",
+    0x0054: "RemoveBuffIcon",
+    0x0055: "BeginCasting",
+    0x0056: "EndCasting",
+    0x005C: "ParticleHit",
+    0x0063: "AddItemToInventory",
+    0x0065: "LootItemFromCorpse",
+    0x007F: "InspectItem",
+    0x0080: "ItemInformation",
+    0x022F: "UpdateEndurance",
+    0x0380: "ClientPartyUpdate",
+    0x644B: "CombatAnimation",
 }
 
 
@@ -710,45 +732,148 @@ BOT_MSG_IDS = {
 # ===================================================================
 
 class MessageHandler:
+    _OPCODE_LOG_MAX = 5000
+
     def __init__(self):
         self._lock = threading.Lock()
-        self._messages = []
+        self._messages = []       # text triggers (chat/combat only)
+        self._opcode_log = []     # rich opcode dicts for browser
+        self._names = {}          # eid -> name from SpawnEntity
+
+    def _name(self, eid):
+        """Resolve eid to name, or None."""
+        return self._names.get(eid) if eid is not None else None
 
     def process(self, msg_id, body):
         off = 0
         text = None
+        fields = {}
+        now = time.time()
+        opcode_name = OPCODE_NAMES.get(msg_id, f"0x{msg_id:04X}")
 
-        if msg_id == 0x0040:  # ChatMessage
+        # --- SpawnEntity: track eid -> name ---
+        if msg_id == 0x0020:  # SpawnEntity
+            eid, off = _r_u32(body, off)
+            etype, off = _r_u16(body, off)
+            name, off = _r_str(body, off)
+            fields["entity_id"] = eid
+            fields["entity_type"] = etype
+            fields["name"] = name
+            if eid is not None and name:
+                self._names[eid] = name
+
+        elif msg_id == 0x0040:  # ChatMessage
             channel, off = _r_u32(body, off)
-            if channel is None or channel != 1:
-                return
-            msg_text, off = _r_str(body, off)
-            if msg_text:
-                text = msg_text
-                _blog.debug("CHAT_COMBAT: %s", text)
+            fields["channel"] = channel
+            if channel is not None and channel == 1:
+                msg_text, off = _r_str(body, off)
+                if msg_text:
+                    text = msg_text
+                    fields["text"] = text
+                    _blog.debug("CHAT_COMBAT: %s", text)
+            else:
+                msg_text, off = _r_str(body, off)
+                if msg_text:
+                    fields["text"] = msg_text
 
         elif msg_id == 0x0056:  # EndCasting
             eid, off = _r_u32(body, off)
             target_id, off = _r_u32(body, off)
             msg_text, off = _r_str(body, off)
+            fields["entity_id"] = eid
+            fields["entity_name"] = self._name(eid)
+            fields["target_id"] = target_id
+            fields["target_name"] = self._name(target_id)
             if msg_text:
                 text = msg_text
+                fields["text"] = text
                 _blog.debug("END_CASTING: %s", text)
 
         elif msg_id == 0x0013:  # Die
             eid, off = _r_u32(body, off)
+            fields["entity_id"] = eid
+            fields["entity_name"] = self._name(eid)
             if eid is not None:
-                text = f"Entity#{eid} has died."
-                _blog.debug("DIE: eid=%d", eid)
+                name = self._name(eid) or f"Entity#{eid}"
+                text = f"{name} has died."
+                _blog.debug("DIE: %s (eid=%d)", name, eid)
 
-        if text:
-            with self._lock:
-                self._messages.append({"text": text, "timestamp": time.time()})
+        elif msg_id == 0x0022:  # UpdateHealth
+            eid, off = _r_u32(body, off)
+            hp, off = _r_i32(body, off)
+            max_hp, off = _r_i32(body, off)
+            fields["entity_id"] = eid
+            fields["entity_name"] = self._name(eid)
+            fields["hp"] = hp
+            fields["max_hp"] = max_hp
+
+        elif msg_id == 0x0027:  # UpdateHealthMana
+            eid, off = _r_u32(body, off)
+            hp, off = _r_i32(body, off)
+            max_hp, off = _r_i32(body, off)
+            mp, off = _r_i32(body, off)
+            max_mp, off = _r_i32(body, off)
+            fields["entity_id"] = eid
+            fields["entity_name"] = self._name(eid)
+            fields["hp"] = hp
+            fields["max_hp"] = max_hp
+            fields["mp"] = mp
+            fields["max_mp"] = max_mp
+
+        elif msg_id == 0x0024:  # UpdateExperience
+            eid, off = _r_u32(body, off)
+            xp, off = _r_u32(body, off)
+            fields["entity_id"] = eid
+            fields["entity_name"] = self._name(eid)
+            fields["experience"] = xp
+
+        elif msg_id == 0x0055:  # BeginCasting
+            eid, off = _r_u32(body, off)
+            target_id, off = _r_u32(body, off)
+            msg_text, off = _r_str(body, off)
+            fields["entity_id"] = eid
+            fields["entity_name"] = self._name(eid)
+            fields["target_id"] = target_id
+            fields["target_name"] = self._name(target_id)
+            if msg_text:
+                fields["text"] = msg_text
+
+        elif msg_id == 0x0021:  # DespawnEntity
+            eid, off = _r_u32(body, off)
+            fields["entity_id"] = eid
+            fields["entity_name"] = self._name(eid)
+
+        # Build hex preview of first 32 bytes for detail view
+        raw_hex = body[:32].hex(' ') if body else ""
+
+        # Strip None-valued fields so they don't clutter the UI
+        fields = {k: v for k, v in fields.items() if v is not None}
+
+        with self._lock:
+            if text:
+                self._messages.append({"text": text, "timestamp": now})
+            entry = {
+                "opcode": msg_id,
+                "opcode_name": opcode_name,
+                "fields": fields,
+                "raw_len": len(body),
+                "raw_hex": raw_hex,
+                "timestamp": now,
+            }
+            self._opcode_log.append(entry)
+            if len(self._opcode_log) > self._OPCODE_LOG_MAX:
+                self._opcode_log = self._opcode_log[-self._OPCODE_LOG_MAX:]
 
     def get_messages(self):
         with self._lock:
             msgs = self._messages[:]
             self._messages.clear()
+        return msgs
+
+    def get_opcode_messages(self):
+        with self._lock:
+            msgs = self._opcode_log[:]
+            self._opcode_log.clear()
         return msgs
 
 
@@ -770,9 +895,23 @@ def _load_triggers():
                 result = []
                 for t in data:
                     if isinstance(t, dict) and "pattern" in t:
-                        result.append({"pattern": t["pattern"],
-                                       "loop": t.get("loop", True),
-                                       "sound": t.get("sound", False)})
+                        ttype = t.get("type", "text")
+                        if ttype == "opcode":
+                            result.append({
+                                "type": "opcode",
+                                "opcode": t.get("opcode", 0),
+                                "field": t.get("field", "text"),
+                                "pattern": t["pattern"],
+                                "loop": t.get("loop", True),
+                                "sound": t.get("sound", False),
+                            })
+                        else:
+                            result.append({
+                                "type": "text",
+                                "pattern": t["pattern"],
+                                "loop": t.get("loop", True),
+                                "sound": t.get("sound", False),
+                            })
                 return result
     except Exception:
         pass
@@ -1028,10 +1167,9 @@ class CaptureBackend:
 
             messages = extract_game_messages(plaintext)
             for msg_id, body in messages:
-                if msg_id in BOT_MSG_IDS:
-                    _msg_count += 1
-                    _blog.debug("MSG 0x%04X len=%d", msg_id, len(body))
-                    self.message_handler.process(msg_id, body)
+                _msg_count += 1
+                _blog.debug("MSG 0x%04X len=%d", msg_id, len(body))
+                self.message_handler.process(msg_id, body)
 
             # Periodic stats
             now = time.time()
@@ -1141,11 +1279,11 @@ def send_attack_keys(keys):
 # ===================================================================
 
 COLORS = {
-    "bg": "#1e1e2e",
-    "bg_dark": "#181825",
-    "bg_light": "#313244",
-    "fg": "#cdd6f4",
-    "fg_dim": "#6c7086",
+    "bg": "#000000",
+    "bg_dark": "#000000",
+    "bg_light": "#1a1a1a",
+    "fg": "#ffffff",
+    "fg_dim": "#aaaaaa",
     "green": "#a6e3a1",
     "red": "#f38ba8",
     "yellow": "#f9e2af",
@@ -1153,17 +1291,20 @@ COLORS = {
     "peach": "#fab387",
     "mauve": "#cba6f7",
     "teal": "#94e2d5",
+    "gold": "#c9a44a",
+    "gold_dim": "#7a6530",
 }
 
 
 class BotApp(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("ChatParser V1.0")
+        self.title("ChatParser V1.1")
         self.configure(bg=COLORS["bg"])
-        self.geometry("460x560")
-        self.minsize(400, 440)
+        self.geometry("460x900")
+        self.minsize(400, 700)
         self.attributes("-topmost", True)
+        self.attributes("-alpha", 0.75)
 
         # Bot state
         self._bot_running = False
@@ -1181,6 +1322,14 @@ class BotApp(tk.Tk):
         # Triggers
         self._triggers = _load_triggers()
 
+        # Opcode browser state
+        self._trigger_tab = "text"      # "text" or "opcode"
+        self._opcode_buffers = {"Chat": [], "Combat": [], "All": []}
+        self._opcode_buf_caps = {"Chat": 2000, "Combat": 2000, "All": 5000}
+        self._opcode_view = "list"      # "list" or "detail"
+        self._opcode_detail_msg = None  # currently viewed message
+        self._opcode_last_filter = None # track filter for rebuild
+
         # Connection status
         self._conn_status = tk.StringVar(value="Starting...")
 
@@ -1195,12 +1344,70 @@ class BotApp(tk.Tk):
         self._conn_status.set(msg)
 
     def _check_triggers(self, text):
-        """Return the first matching trigger dict, or None."""
+        """Return the first matching text trigger dict, or None."""
         text_lower = text.lower()
         for trig in self._triggers:
-            if trig["pattern"].lower() in text_lower:
+            if trig.get("type", "text") != "text":
+                continue
+            pat = trig["pattern"]
+            if pat == "*" or pat.lower() in text_lower:
                 return trig
         return None
+
+    @staticmethod
+    def _is_scrolled_to_bottom(text_widget):
+        """Return True if the text widget is scrolled to (or near) the bottom."""
+        return text_widget.yview()[1] >= 0.95
+
+    def _scrollable_text(self, parent, **text_kwargs):
+        """Create a Text widget with a gold-themed scrollbar.
+
+        Returns (container_frame, text_widget).
+        Caller should pack/grid the container_frame.
+        """
+        container = tk.Frame(parent, bg=COLORS["bg"])
+
+        # Scrollbar (gold trough, dark slider)
+        sb = tk.Scrollbar(container, orient="vertical",
+                          troughcolor=COLORS["bg_dark"],
+                          bg=COLORS["gold_dim"], activebackground=COLORS["gold"],
+                          highlightbackground=COLORS["bg"], highlightcolor=COLORS["bg"],
+                          relief="flat", width=10, bd=0)
+        sb.pack(side="right", fill="y")
+
+        text = tk.Text(container, yscrollcommand=sb.set, **text_kwargs)
+        text.pack(side="left", fill="both", expand=True)
+        sb.config(command=text.yview)
+
+        return container, text
+
+    def _deco_section(self, parent, title=None, expand=False):
+        """Create an art-deco bordered section. Returns the inner content frame."""
+        # Outer gold border frame
+        outer = tk.Frame(parent, bg=COLORS["gold"])
+        pk = {"fill": "both" if expand else "x", "padx": 10, "pady": 4}
+        if expand:
+            pk["expand"] = True
+        outer.pack(**pk)
+
+        # Inner content area (1px gold border via padding)
+        inner = tk.Frame(outer, bg=COLORS["bg"], padx=10, pady=6)
+        inner.pack(fill="both", expand=True, padx=1, pady=1)
+
+        if title:
+            hdr = tk.Frame(inner, bg=COLORS["bg"])
+            hdr.pack(fill="x", pady=(0, 6))
+            tk.Label(hdr, text="\u25C6", bg=COLORS["bg"], fg=COLORS["gold"],
+                     font=("Consolas", 7)).pack(side="left")
+            tk.Label(hdr, text=f" {title} ", bg=COLORS["bg"], fg=COLORS["gold"],
+                     font=("Consolas", 9, "bold")).pack(side="left")
+            tk.Frame(hdr, bg=COLORS["gold"], height=1).pack(
+                side="left", fill="x", expand=True, padx=(4, 4), pady=1)
+            tk.Label(hdr, text="\u25C6", bg=COLORS["bg"], fg=COLORS["gold"],
+                     font=("Consolas", 7)).pack(side="right")
+
+        inner._deco_outer = outer  # stash ref for callers that need it
+        return inner
 
     def _build_ui(self):
         # Status bar
@@ -1211,31 +1418,29 @@ class BotApp(tk.Tk):
                  font=("Consolas", 9)).pack(side="left")
 
         # Title
-        title_frame = tk.Frame(self, bg=COLORS["bg"], pady=6)
+        title_frame = tk.Frame(self, bg=COLORS["bg"], pady=4)
         title_frame.pack(fill="x")
-        tk.Label(title_frame, text="ChatParser", bg=COLORS["bg"],
-                 fg=COLORS["mauve"], font=("Consolas", 16, "bold")).pack()
-        tk.Label(title_frame, text="Chat Monitor + Trigger Bot",
-                 bg=COLORS["bg"], fg=COLORS["fg_dim"],
-                 font=("Consolas", 9)).pack()
+        tk.Label(title_frame, text="\u2500\u2500 ChatParser \u2500\u2500", bg=COLORS["bg"],
+                 fg=COLORS["gold"], font=("Consolas", 16, "bold")).pack()
 
-        # Controls frame
-        ctrl_frame = tk.Frame(self, bg=COLORS["bg"], padx=16, pady=4)
-        ctrl_frame.pack(fill="x")
+        # ══════════════════════════════════════
+        # Section 1: Bot Controls
+        # ══════════════════════════════════════
+        ctrl_sec = self._deco_section(self, title="Bot Controls")
 
         # ON/OFF toggle
         self._toggle_btn = tk.Button(
-            ctrl_frame, text="OFF", width=10,
+            ctrl_sec, text="OFF", width=10,
             bg=COLORS["red"], fg=COLORS["bg_dark"],
             activebackground=COLORS["red"],
             font=("Consolas", 14, "bold"),
             relief="flat", cursor="hand2",
             command=self._toggle_bot)
-        self._toggle_btn.pack(pady=(4, 8))
+        self._toggle_btn.pack(pady=(0, 6))
 
         # Settings grid
-        settings = tk.Frame(ctrl_frame, bg=COLORS["bg"])
-        settings.pack(fill="x", pady=4)
+        settings = tk.Frame(ctrl_sec, bg=COLORS["bg"])
+        settings.pack(fill="x", pady=2)
 
         row = 0
         for label_text, var in [
@@ -1263,24 +1468,57 @@ class BotApp(tk.Tk):
 
         # Bot status line
         self._status_label = tk.Label(
-            ctrl_frame, text="Status: Idle", bg=COLORS["bg"],
+            ctrl_sec, text="Status: Idle", bg=COLORS["bg"],
             fg=COLORS["fg_dim"], font=("Consolas", 10), anchor="w")
-        self._status_label.pack(fill="x", pady=(8, 4))
+        self._status_label.pack(fill="x", pady=(6, 0))
 
-        # Separator
-        tk.Frame(self, bg=COLORS["bg_light"], height=1).pack(fill="x", padx=16)
+        # ══════════════════════════════════════
+        # Section 2: Triggers / Opcode Browser
+        # ══════════════════════════════════════
+        trig_sec = self._deco_section(self, title="Triggers", expand=True)
 
-        # Trigger management
-        trig_frame = tk.Frame(self, bg=COLORS["bg"], padx=16, pady=4)
-        trig_frame.pack(fill="x")
+        # Tab buttons — art deco bordered sub-section
+        tab_border = tk.Frame(trig_sec, bg=COLORS["gold"])
+        tab_border.pack(fill="x", pady=(0, 6))
+        tab_inner = tk.Frame(tab_border, bg=COLORS["bg"], padx=6, pady=4)
+        tab_inner.pack(fill="x", padx=1, pady=1)
 
-        tk.Label(trig_frame, text="Triggers",
-                 bg=COLORS["bg"], fg=COLORS["fg_dim"],
-                 font=("Consolas", 9, "bold"), anchor="w").pack(fill="x")
+        # Decorative left accent
+        tk.Label(tab_inner, text="\u25C0\u2500", bg=COLORS["bg"], fg=COLORS["gold"],
+                 font=("Consolas", 9)).pack(side="left")
+
+        self._tab_text_btn = tk.Button(
+            tab_inner, text="\u25C6 Main", font=("Consolas", 10, "bold"),
+            relief="flat", cursor="hand2", padx=12, pady=3,
+            command=lambda: self._switch_trigger_tab("text"))
+        self._tab_text_btn.pack(side="left", padx=(4, 2))
+
+        # Center divider
+        tk.Label(tab_inner, text="\u2502", bg=COLORS["bg"], fg=COLORS["gold"],
+                 font=("Consolas", 10)).pack(side="left", padx=2)
+
+        self._tab_opcode_btn = tk.Button(
+            tab_inner, text="\u25C6 Opcode Browser", font=("Consolas", 10, "bold"),
+            relief="flat", cursor="hand2", padx=12, pady=3,
+            command=lambda: self._switch_trigger_tab("opcode"))
+        self._tab_opcode_btn.pack(side="left", padx=(2, 4))
+
+        # Decorative right accent
+        tk.Label(tab_inner, text="\u2500\u25B6", bg=COLORS["bg"], fg=COLORS["gold"],
+                 font=("Consolas", 9)).pack(side="right")
+
+        # ---- Text Triggers container ----
+        self._text_trig_frame = tk.Frame(trig_sec, bg=COLORS["bg"])
+        self._text_trig_frame.pack(fill="both", expand=True)
+
+        # Label above input
+        tk.Label(self._text_trig_frame, text="Text Trigger", bg=COLORS["bg"],
+                 fg=COLORS["gold"], font=("Consolas", 9, "bold"),
+                 anchor="w").pack(fill="x", pady=(4, 0))
 
         # Add trigger row
-        add_frame = tk.Frame(trig_frame, bg=COLORS["bg"])
-        add_frame.pack(fill="x", pady=(4, 2))
+        add_frame = tk.Frame(self._text_trig_frame, bg=COLORS["bg"])
+        add_frame.pack(fill="x", pady=(2, 2))
 
         self._trigger_entry = tk.Entry(
             add_frame, bg=COLORS["bg_light"], fg=COLORS["fg"],
@@ -1295,7 +1533,7 @@ class BotApp(tk.Tk):
                   command=self._add_trigger).pack(side="right")
 
         # Trigger table header
-        hdr_frame = tk.Frame(trig_frame, bg=COLORS["bg_dark"])
+        hdr_frame = tk.Frame(self._text_trig_frame, bg=COLORS["bg_dark"])
         hdr_frame.pack(fill="x", pady=(4, 0))
         tk.Label(hdr_frame, text="Pattern", bg=COLORS["bg_dark"],
                  fg=COLORS["fg_dim"], font=("Consolas", 8),
@@ -1310,29 +1548,94 @@ class BotApp(tk.Tk):
                  width=2).pack(side="left", padx=2)
 
         # Trigger table rows container
-        self._trigger_table = tk.Frame(trig_frame, bg=COLORS["bg_dark"])
+        self._trigger_table = tk.Frame(self._text_trig_frame, bg=COLORS["bg_dark"])
         self._trigger_table.pack(fill="x", pady=(0, 4))
-        self._trigger_rows = []  # list of {"frame", "mode_btn", "idx"}
+        self._trigger_rows = []
         for trig in self._triggers:
             self._add_trigger_row(trig)
 
-        # Separator
-        tk.Frame(self, bg=COLORS["bg_light"], height=1).pack(fill="x", padx=16, pady=4)
+        # ---- Opcode Browser container (hidden by default) ----
+        self._opcode_frame = tk.Frame(trig_sec, bg=COLORS["bg"])
+        # Not packed yet — shown when tab switches
 
-        # Combat log
-        log_frame = tk.Frame(self, bg=COLORS["bg"], padx=16, pady=4)
-        log_frame.pack(fill="both", expand=True)
+        # Opcode filter dropdown + search
+        filter_row = tk.Frame(self._opcode_frame, bg=COLORS["bg"])
+        filter_row.pack(fill="x", pady=(4, 4))
+        tk.Label(filter_row, text="Filter:", bg=COLORS["bg"],
+                 fg=COLORS["fg_dim"], font=("Consolas", 9)).pack(side="left", padx=(0, 4))
+        self._opcode_filter_var = tk.StringVar(value="All")
+        self._opcode_filter = ttk.Combobox(
+            filter_row, textvariable=self._opcode_filter_var,
+            values=["Chat", "Combat", "All"], state="readonly", width=10)
+        self._opcode_filter.pack(side="left")
+        self._opcode_filter.bind("<<ComboboxSelected>>", lambda e: self._on_filter_change())
 
-        tk.Label(log_frame, text="Combat Log",
-                 bg=COLORS["bg"], fg=COLORS["fg_dim"],
-                 font=("Consolas", 9, "bold"), anchor="w").pack(fill="x")
+        self._opcode_search_var = tk.StringVar()
+        self._opcode_search = tk.Entry(
+            filter_row, textvariable=self._opcode_search_var,
+            bg=COLORS["bg_light"], fg=COLORS["fg"], insertbackground=COLORS["fg"],
+            font=("Consolas", 9), relief="flat", border=2, width=14)
+        self._opcode_search.pack(side="left", padx=(8, 0))
+        self._opcode_search.insert(0, "")
+        self._opcode_search_var.trace_add("write", lambda *_: self._on_opcode_search())
 
-        self._combat_log = tk.Text(
-            log_frame, bg=COLORS["bg_dark"], fg=COLORS["fg"],
+        # Opcode list (scrollable text widget with clickable rows)
+        self._opcode_list_frame, self._opcode_list = self._scrollable_text(
+            self._opcode_frame,
+            bg=COLORS["bg_dark"], fg=COLORS["fg"],
+            font=("Consolas", 9), wrap="none", relief="flat",
+            border=0, padx=6, pady=4, cursor="hand2",
+            state="disabled", height=14)
+        self._opcode_list_frame.pack(fill="both", expand=True, pady=(0, 4))
+        self._opcode_list.tag_configure("ts", foreground=COLORS["fg_dim"])
+        self._opcode_list.tag_configure("opname", foreground=COLORS["blue"])
+        self._opcode_list.tag_configure("preview", foreground=COLORS["fg"])
+        self._opcode_list.bind("<Button-1>", self._on_opcode_list_click)
+        self._opcode_list_entries = []  # parallel list of opcode msg dicts
+
+        # Opcode detail view (scrollable canvas — hidden until a row is clicked)
+        self._opcode_detail_outer = tk.Frame(self._opcode_frame, bg=COLORS["bg"])
+        # Not packed yet
+        self._opcode_detail_canvas = tk.Canvas(
+            self._opcode_detail_outer, bg=COLORS["bg"], highlightthickness=0)
+        self._opcode_detail_sb = tk.Scrollbar(
+            self._opcode_detail_outer, orient="vertical",
+            command=self._opcode_detail_canvas.yview,
+            troughcolor=COLORS["bg_dark"], bg=COLORS["gold_dim"],
+            activebackground=COLORS["gold"], relief="flat", width=10, bd=0)
+        self._opcode_detail_sb.pack(side="right", fill="y")
+        self._opcode_detail_canvas.pack(side="left", fill="both", expand=True)
+        self._opcode_detail_canvas.configure(yscrollcommand=self._opcode_detail_sb.set)
+        self._opcode_detail_frame = tk.Frame(self._opcode_detail_canvas, bg=COLORS["bg"])
+        self._opcode_detail_window = self._opcode_detail_canvas.create_window(
+            (0, 0), window=self._opcode_detail_frame, anchor="nw")
+        self._opcode_detail_frame.bind("<Configure>",
+            lambda e: self._opcode_detail_canvas.configure(
+                scrollregion=self._opcode_detail_canvas.bbox("all")))
+        self._opcode_detail_canvas.bind("<Configure>",
+            lambda e: self._opcode_detail_canvas.itemconfig(
+                self._opcode_detail_window, width=e.width))
+        # Mousewheel scroll
+        def _on_detail_mousewheel(e):
+            self._opcode_detail_canvas.yview_scroll(int(-1*(e.delta/120)), "units")
+        self._opcode_detail_canvas.bind("<MouseWheel>", _on_detail_mousewheel)
+        self._opcode_detail_frame.bind("<MouseWheel>", _on_detail_mousewheel)
+
+        # Apply initial tab style
+        self._apply_tab_style()
+
+        # ══════════════════════════════════════
+        # Section 3: Combat Log
+        # ══════════════════════════════════════
+        log_sec = self._deco_section(self, title="Run Log", expand=True)
+
+        log_container, self._combat_log = self._scrollable_text(
+            log_sec,
+            bg=COLORS["bg_dark"], fg=COLORS["fg"],
             font=("Consolas", 9), wrap="word", relief="flat",
             border=0, padx=6, pady=4, cursor="arrow",
-            state="disabled", height=10)
-        self._combat_log.pack(fill="both", expand=True, pady=(4, 4))
+            state="disabled", height=6)
+        log_container.pack(fill="both", expand=True, pady=(0, 2))
 
         self._combat_log.tag_configure("normal", foreground=COLORS["fg"])
         self._combat_log.tag_configure("matched", foreground=COLORS["yellow"],
@@ -1345,9 +1648,17 @@ class BotApp(tk.Tk):
         row = tk.Frame(self._trigger_table, bg=COLORS["bg_light"], pady=2)
         row.pack(fill="x", pady=(1, 0))
 
-        # Pattern label
-        tk.Label(row, text=trig["pattern"], bg=COLORS["bg_light"],
-                 fg=COLORS["fg"], font=("Consolas", 9),
+        # Pattern label — opcode triggers show [0xNNNN.field] prefix
+        if trig.get("type") == "opcode":
+            op = trig.get("opcode", 0)
+            field = trig.get("field", "")
+            label_text = f"[0x{op:04X}.{field}] {trig['pattern']}"
+            label_fg = COLORS["fg_dim"]
+        else:
+            label_text = trig["pattern"]
+            label_fg = COLORS["fg"]
+        tk.Label(row, text=label_text, bg=COLORS["bg_light"],
+                 fg=label_fg, font=("Consolas", 9),
                  anchor="w").pack(side="left", fill="x", expand=True, padx=4)
 
         # Loop / Once toggle button
@@ -1397,7 +1708,7 @@ class BotApp(tk.Tk):
             if t["pattern"] == pattern:
                 self._trigger_entry.delete(0, "end")
                 return
-        trig = {"pattern": pattern, "loop": True, "sound": False}
+        trig = {"type": "text", "pattern": pattern, "loop": False, "sound": False}
         self._triggers.append(trig)
         self._add_trigger_row(trig)
         _save_triggers(self._triggers)
@@ -1452,6 +1763,361 @@ class BotApp(tk.Tk):
         _blog.info("TRIGGER_SOUND: %s → %s", trig["pattern"],
                    "on" if trig["sound"] else "off")
 
+    # ----- Tab switching -----
+
+    def _apply_tab_style(self):
+        """Style tab buttons based on current _trigger_tab."""
+        if self._trigger_tab == "text":
+            self._tab_text_btn.configure(bg=COLORS["gold"], fg=COLORS["bg_dark"])
+            self._tab_opcode_btn.configure(bg=COLORS["bg_light"], fg=COLORS["fg_dim"])
+        else:
+            self._tab_text_btn.configure(bg=COLORS["bg_light"], fg=COLORS["fg_dim"])
+            self._tab_opcode_btn.configure(bg=COLORS["gold"], fg=COLORS["bg_dark"])
+
+    def _switch_trigger_tab(self, tab):
+        if tab == self._trigger_tab:
+            return
+        self._trigger_tab = tab
+        self._apply_tab_style()
+        if tab == "text":
+            self._opcode_frame.pack_forget()
+            self._text_trig_frame.pack(fill="both", expand=True)
+        else:
+            self._text_trig_frame.pack_forget()
+            self._opcode_view = "list"
+            self._opcode_detail_outer.pack_forget()
+            self._opcode_list_frame.pack(fill="both", expand=True)
+            self._opcode_frame.pack(fill="both", expand=True)
+            # Full rebuild from buffer when switching to this tab
+            self._render_opcode_list()
+
+    # ----- Opcode Browser -----
+
+    def _opcode_preview(self, msg):
+        """Build a short preview string for an opcode message."""
+        fields = msg.get("fields", {})
+        opcode = msg.get("opcode", 0)
+        if "text" in fields and fields["text"]:
+            txt = fields["text"]
+            return txt[:50] + ("..." if len(txt) > 50 else "")
+        if opcode == 0x0013:
+            eid = fields.get("entity_id")
+            return f"Entity#{eid} has died" if eid is not None else "died"
+        if opcode == 0x0018:
+            eid = fields.get("entity_id")
+            return f"Entity#{eid}" if eid is not None else ""
+        if opcode == 0x0024:
+            eid = fields.get("entity_id")
+            xp = fields.get("experience")
+            parts = []
+            if eid is not None:
+                parts.append(f"eid={eid}")
+            if xp is not None:
+                parts.append(f"xp={xp}")
+            return " ".join(parts) if parts else ""
+        # For any opcode with parsed fields, show them compactly
+        if fields:
+            parts = []
+            for k, v in fields.items():
+                if v is not None:
+                    parts.append(f"{k}={v}")
+            preview = " ".join(parts)
+            return preview[:50] + ("..." if len(preview) > 50 else "")
+        # Fallback: show hex snippet of raw data
+        raw_hex = msg.get("raw_hex", "")
+        if raw_hex:
+            return raw_hex[:35] + ("..." if len(raw_hex) > 35 else "")
+        return f"{msg.get('raw_len', 0)} bytes"
+
+    @staticmethod
+    def _opcode_categories(opcode):
+        """Return list of filter categories this opcode belongs to."""
+        cats = []
+        if opcode == 0x0040:
+            cats.append("Chat")
+        elif opcode in (0x0055, 0x0056, 0x0013):
+            cats.append("Combat")
+        # Only include in All if it has a known plaintext name
+        if opcode in OPCODE_NAMES:
+            cats.append("All")
+        return cats
+
+    def _opcode_matches_search(self, msg, search):
+        """Check if an opcode message matches the search text (case-insensitive)."""
+        if not search:
+            return True
+        s = search.lower()
+        # Check opcode name
+        if s in msg.get("opcode_name", "").lower():
+            return True
+        # Check all field values
+        for v in msg.get("fields", {}).values():
+            if s in str(v).lower():
+                return True
+        return False
+
+    def _render_opcode_list(self):
+        """Full rebuild of opcode list from the active filter's buffer."""
+        self._opcode_list.configure(state="normal")
+        self._opcode_list.delete("1.0", "end")
+        self._opcode_list_entries.clear()
+        filt = self._opcode_filter_var.get()
+        self._opcode_last_filter = filt
+        search = self._opcode_search_var.get().strip()
+
+        for msg in self._opcode_buffers.get(filt, []):
+            if self._opcode_matches_search(msg, search):
+                self._insert_opcode_line(msg)
+
+        self._trim_opcode_list()
+        if self._is_scrolled_to_bottom(self._opcode_list):
+            self._opcode_list.see("end")
+        self._opcode_list.configure(state="disabled")
+
+    def _insert_opcode_line(self, msg):
+        """Insert a single opcode entry line into the text widget."""
+        ts = time.strftime("%H:%M:%S", time.localtime(msg["timestamp"]))
+        opname = msg.get("opcode_name", "???")
+        preview = self._opcode_preview(msg)
+        self._opcode_list.insert("end", f"[{ts}] ", "ts")
+        self._opcode_list.insert("end", opname, "opname")
+        self._opcode_list.insert("end", f" — {preview}\n", "preview")
+        self._opcode_list_entries.append(msg)
+
+    def _trim_opcode_list(self):
+        """Trim opcode list widget to 1000 visible lines."""
+        while len(self._opcode_list_entries) > 1000:
+            self._opcode_list.delete("1.0", "2.0")
+            self._opcode_list_entries.pop(0)
+
+    def _append_opcode_entries(self, new_msgs):
+        """Incrementally append new entries matching active filter + search."""
+        filt = self._opcode_filter_var.get()
+        search = self._opcode_search_var.get().strip()
+        added = False
+        self._opcode_list.configure(state="normal")
+        for msg in new_msgs:
+            if filt in self._opcode_categories(msg.get("opcode", 0)):
+                if self._opcode_matches_search(msg, search):
+                    self._insert_opcode_line(msg)
+                    added = True
+        if added:
+            self._trim_opcode_list()
+            if self._is_scrolled_to_bottom(self._opcode_list):
+                self._opcode_list.see("end")
+        self._opcode_list.configure(state="disabled")
+
+    def _on_opcode_list_click(self, event):
+        """Handle click on opcode list — determine line and show detail."""
+        index = self._opcode_list.index(f"@{event.x},{event.y}")
+        line = int(index.split(".")[0]) - 1  # 0-based
+        if 0 <= line < len(self._opcode_list_entries):
+            self._show_opcode_detail(line)
+
+    def _on_filter_change(self):
+        """Rebuild opcode list when filter dropdown changes."""
+        if self._trigger_tab == "opcode" and self._opcode_view == "list":
+            self._render_opcode_list()
+
+    def _on_opcode_search(self):
+        """Dynamically rebuild opcode list when search text changes."""
+        if self._trigger_tab == "opcode" and self._opcode_view == "list":
+            self._render_opcode_list()
+
+    def _show_opcode_detail(self, idx):
+        """Switch opcode browser to detail view for the clicked message."""
+        if idx < 0 or idx >= len(self._opcode_list_entries):
+            return
+        self._opcode_detail_msg = self._opcode_list_entries[idx]
+        self._opcode_view = "detail"
+
+        # Hide list, show detail
+        self._opcode_list_frame.pack_forget()
+        for w in self._opcode_detail_frame.winfo_children():
+            w.destroy()
+
+        msg = self._opcode_detail_msg
+        opname = msg.get("opcode_name", "???")
+        opcode = msg.get("opcode", 0)
+        ts = time.strftime("%H:%M:%S", time.localtime(msg["timestamp"]))
+
+        # Back button
+        tk.Button(self._opcode_detail_frame, text="< Back", bg=COLORS["bg_light"],
+                  fg=COLORS["fg"], font=("Consolas", 9, "bold"),
+                  relief="flat", cursor="hand2",
+                  command=self._opcode_detail_back).pack(anchor="w", pady=(4, 4))
+
+        # Header
+        tk.Label(self._opcode_detail_frame,
+                 text=f"{opname} (0x{opcode:04X})",
+                 bg=COLORS["bg"], fg=COLORS["blue"],
+                 font=("Consolas", 11, "bold"), anchor="w").pack(fill="x")
+        tk.Frame(self._opcode_detail_frame, bg=COLORS["fg_dim"], height=1).pack(fill="x", pady=(2, 4))
+
+        # Fields
+        fields = msg.get("fields", {})
+        detail_text = tk.Text(
+            self._opcode_detail_frame, bg=COLORS["bg_dark"], fg=COLORS["fg"],
+            font=("Consolas", 9), wrap="word", relief="flat",
+            border=0, padx=6, pady=4, height=6, state="normal")
+        detail_text.pack(fill="both", expand=True, pady=(0, 4))
+
+        detail_text.tag_configure("key", foreground=COLORS["teal"])
+        detail_text.tag_configure("val", foreground=COLORS["fg"])
+
+        for key, val in fields.items():
+            detail_text.insert("end", f"  {key}:  ", "key")
+            val_str = str(val) if val is not None else "None"
+            if len(val_str) > 80:
+                val_str = val_str[:80] + "..."
+            detail_text.insert("end", f"{val_str}\n", "val")
+
+        detail_text.insert("end", f"  raw_len:  ", "key")
+        detail_text.insert("end", f"{msg.get('raw_len', 0)} bytes\n", "val")
+        raw_hex = msg.get("raw_hex", "")
+        if raw_hex:
+            detail_text.tag_configure("hex", foreground=COLORS["peach"])
+            detail_text.insert("end", f"  raw_hex:  ", "key")
+            detail_text.insert("end", f"{raw_hex}\n", "hex")
+        detail_text.insert("end", f"  time:  ", "key")
+        detail_text.insert("end", f"{ts}\n", "val")
+        detail_text.configure(state="disabled")
+
+        # "Add as Trigger" button — only for opcodes with useful fields
+        if fields:
+            self._build_opcode_trigger_form(msg)
+
+        # Bind mousewheel to all children for smooth scrolling
+        def _bind_mw(widget):
+            widget.bind("<MouseWheel>",
+                lambda e: self._opcode_detail_canvas.yview_scroll(
+                    int(-1*(e.delta/120)), "units"))
+            for child in widget.winfo_children():
+                _bind_mw(child)
+        _bind_mw(self._opcode_detail_frame)
+
+        self._opcode_detail_outer.pack(fill="both", expand=True)
+        self._opcode_detail_canvas.yview_moveto(0)
+
+    def _build_opcode_trigger_form(self, msg):
+        """Build inline form to create opcode triggers from the detail view.
+
+        Shows an editable opcode row, then one row per field (excluding
+        raw_hex / raw_len / time) with a pre-filled pattern entry and its
+        own Add button.
+        """
+        _SKIP_FIELDS = {"raw_hex", "raw_len", "time"}
+
+        form = tk.Frame(self._opcode_detail_frame, bg=COLORS["bg_dark"], padx=6, pady=4)
+        form.pack(fill="x", pady=(0, 4))
+
+        tk.Label(form, text="Add as Trigger", bg=COLORS["bg_dark"],
+                 fg=COLORS["yellow"], font=("Consolas", 9, "bold"),
+                 anchor="w").pack(fill="x", pady=(0, 4))
+
+        # --- Editable opcode row ---
+        op_row = tk.Frame(form, bg=COLORS["bg_dark"])
+        op_row.pack(fill="x", pady=(0, 4))
+        tk.Label(op_row, text="Opcode:", bg=COLORS["bg_dark"],
+                 fg=COLORS["fg_dim"], font=("Consolas", 9),
+                 width=10, anchor="w").pack(side="left")
+        opcode_var = tk.StringVar(value=f"0x{msg.get('opcode', 0):04X}")
+        opcode_entry = tk.Entry(op_row, textvariable=opcode_var,
+                                bg=COLORS["bg_light"], fg=COLORS["fg"],
+                                insertbackground=COLORS["fg"],
+                                font=("Consolas", 9), relief="flat",
+                                border=2, width=10)
+        opcode_entry.pack(side="left", padx=(0, 4))
+
+        def _parse_opcode():
+            """Parse the opcode entry as int (supports 0x hex or decimal)."""
+            raw = opcode_var.get().strip()
+            try:
+                return int(raw, 16) if raw.lower().startswith("0x") else int(raw)
+            except ValueError:
+                return msg.get("opcode", 0)
+
+        # --- Separator ---
+        tk.Frame(form, bg=COLORS["fg_dim"], height=1).pack(fill="x", pady=(0, 4))
+
+        # --- One row per field ---
+        fields = msg.get("fields", {})
+        field_names = [k for k in fields if k not in _SKIP_FIELDS and fields[k] is not None]
+        if not field_names:
+            return
+
+        for fname in field_names:
+            fval = str(fields[fname])
+            if len(fval) > 60:
+                fval = fval[:60]
+
+            row = tk.Frame(form, bg=COLORS["bg_dark"])
+            row.pack(fill="x", pady=(0, 3))
+
+            tk.Label(row, text=f"{fname}:", bg=COLORS["bg_dark"],
+                     fg=COLORS["teal"], font=("Consolas", 9),
+                     width=10, anchor="w").pack(side="left")
+
+            entry = tk.Entry(row, bg=COLORS["bg_light"], fg=COLORS["fg"],
+                             insertbackground=COLORS["fg"],
+                             font=("Consolas", 9), relief="flat", border=2)
+            entry.pack(side="left", fill="x", expand=True, padx=(0, 4))
+            entry.insert(0, fval)
+
+            def _add(field=fname, ent=entry):
+                pattern = ent.get().strip()
+                if not pattern:
+                    return
+                opcode = _parse_opcode()
+                trig = {
+                    "type": "opcode",
+                    "opcode": opcode,
+                    "field": field,
+                    "pattern": pattern,
+                    "loop": False,
+                    "sound": False,
+                }
+                self._triggers.append(trig)
+                self._add_trigger_row(trig)
+                _save_triggers(self._triggers)
+                _blog.info("OPCODE_TRIGGER_ADD: 0x%04X.%s = %s",
+                           opcode, field, pattern)
+                self._switch_trigger_tab("text")
+
+            tk.Button(row, text="Add", bg=COLORS["green"],
+                      fg=COLORS["bg_dark"], font=("Consolas", 8, "bold"),
+                      relief="flat", cursor="hand2", width=4,
+                      command=_add).pack(side="right")
+
+    def _opcode_detail_back(self):
+        """Return from detail view to list view."""
+        self._opcode_view = "list"
+        self._opcode_detail_outer.pack_forget()
+        for w in self._opcode_detail_frame.winfo_children():
+            w.destroy()
+        self._opcode_list_frame.pack(fill="both", expand=True)
+        self._render_opcode_list()
+
+    # ----- Opcode trigger matching -----
+
+    def _check_opcode_triggers(self, opcode_msg):
+        """Check opcode log entry against opcode triggers. Returns first match or None."""
+        msg_opcode = opcode_msg.get("opcode", -1)
+        fields = opcode_msg.get("fields", {})
+        for trig in self._triggers:
+            if trig.get("type") != "opcode":
+                continue
+            if trig.get("opcode") != msg_opcode:
+                continue
+            field_name = trig.get("field", "")
+            field_val = fields.get(field_name)
+            if field_val is None:
+                continue
+            pat = trig["pattern"]
+            if pat == "*" or pat.lower() in str(field_val).lower():
+                return trig
+        return None
+
     def _toggle_bot(self):
         if self._bot_running:
             self._stop_bot()
@@ -1484,16 +2150,31 @@ class BotApp(tk.Tk):
         self._bot_status = "Idle"
         self._log("Bot OFF")
 
-    def _log(self, msg):
+    def _play_beep(self):
+        """Play Windows alert sound on the main thread."""
+        def _do_beep():
+            try:
+                winsound.PlaySound("SystemExclamation",
+                                   winsound.SND_ALIAS | winsound.SND_ASYNC)
+            except Exception:
+                pass
+        if threading.current_thread() is threading.main_thread():
+            _do_beep()
+        else:
+            self.after(0, _do_beep)
+
+    def _log(self, msg, tag="normal"):
         ts = time.strftime("%H:%M:%S")
         def _do():
+            at_bottom = self._is_scrolled_to_bottom(self._combat_log)
             self._combat_log.configure(state="normal")
             self._combat_log.insert("end", f"[{ts}] ", "timestamp")
-            self._combat_log.insert("end", f"{msg}\n", "normal")
+            self._combat_log.insert("end", f"{msg}\n", tag)
             lines = int(self._combat_log.index("end-1c").split(".")[0])
-            if lines > 200:
-                self._combat_log.delete("1.0", f"{lines - 200}.0")
-            self._combat_log.see("end")
+            if lines > 1000:
+                self._combat_log.delete("1.0", f"{lines - 1000}.0")
+            if at_bottom:
+                self._combat_log.see("end")
             self._combat_log.configure(state="disabled")
         if threading.current_thread() is threading.main_thread():
             _do()
@@ -1536,15 +2217,12 @@ class BotApp(tk.Tk):
                         self._log(f"Sent keys: {', '.join(keys)} ({loops_done}/{max_loops})")
                     else:
                         self._log(f"Sent keys: {', '.join(keys)}")
-                    # Beep on every loop iteration if sound enabled
-                    if self._bot_sound_enabled:
-                        try:
-                            winsound.PlaySound(_BEEP_WAV,
-                                               winsound.SND_MEMORY | winsound.SND_ASYNC)
-                        except Exception:
-                            pass
                 else:
                     self._log("Game window not found")
+
+            # Beep on every loop iteration if sound enabled
+            if self._bot_sound_enabled:
+                self._play_beep()
 
             if not self._bot_loop_mode:
                 # Once mode — fire keys once then reset
@@ -1570,35 +2248,53 @@ class BotApp(tk.Tk):
         # Update status label
         self._status_label.configure(text=f"Status: {self._bot_status}")
 
-        # Drain messages from handler
+        # Drain text messages from handler (check text triggers)
         messages = self._backend.message_handler.get_messages()
-        if messages:
-            self._combat_log.configure(state="normal")
-            for msg in messages:
-                ts = time.strftime("%H:%M:%S", time.localtime(msg["timestamp"]))
-                text = msg["text"]
-                matched = self._check_triggers(text)
+        for msg in messages:
+            text = msg["text"]
+            matched = self._check_triggers(text)
+            if matched:
+                mode = "loop" if matched["loop"] else "once"
+                _blog.info("TRIGGER_MATCH: %s (mode=%s sound=%s)",
+                           text, mode,
+                           "on" if matched.get("sound") else "off")
+                self._log(f"MATCH [{matched['pattern']}] ({mode}): {text}", "matched")
+                if self._bot_running:
+                    self._bot_triggered = True
+                    self._bot_loop_mode = matched["loop"]
+                    self._bot_sound_enabled = matched.get("sound", False)
+                    self._active_trigger_pattern = matched["pattern"]
 
-                self._combat_log.insert("end", f"[{ts}] ", "timestamp")
-                tag = "matched" if matched else "normal"
-                self._combat_log.insert("end", f"{text}\n", tag)
+        # Drain opcode messages from handler
+        opcode_msgs = self._backend.message_handler.get_opcode_messages()
+        for opc_msg in opcode_msgs:
+            # Append to per-category buffers
+            for cat in self._opcode_categories(opc_msg.get("opcode", 0)):
+                buf = self._opcode_buffers[cat]
+                buf.append(opc_msg)
+                cap = self._opcode_buf_caps[cat]
+                if len(buf) > cap:
+                    del buf[:len(buf) - cap]
 
-                if matched:
-                    _blog.info("TRIGGER_MATCH: %s (mode=%s sound=%s)",
-                               text, "loop" if matched["loop"] else "once",
-                               "on" if matched.get("sound") else "off")
-                    if self._bot_running:
-                        self._bot_triggered = True
-                        self._bot_loop_mode = matched["loop"]
-                        self._bot_sound_enabled = matched.get("sound", False)
-                        self._active_trigger_pattern = matched["pattern"]
+            # Check opcode triggers
+            opc_matched = self._check_opcode_triggers(opc_msg)
+            if opc_matched:
+                mode = "loop" if opc_matched["loop"] else "once"
+                opname = opc_msg.get("opcode_name", f"0x{opc_msg.get('opcode',0):04X}")
+                field = opc_matched.get("field", "")
+                _blog.info("OPCODE_TRIGGER_MATCH: %s.%s (mode=%s sound=%s)",
+                           opname, field, mode,
+                           "on" if opc_matched.get("sound") else "off")
+                self._log(f"MATCH [{opname}.{field}={opc_matched['pattern']}] ({mode})", "matched")
+                if self._bot_running:
+                    self._bot_triggered = True
+                    self._bot_loop_mode = opc_matched["loop"]
+                    self._bot_sound_enabled = opc_matched.get("sound", False)
+                    self._active_trigger_pattern = opc_matched["pattern"]
 
-            # Trim to 200 lines
-            lines = int(self._combat_log.index("end-1c").split(".")[0])
-            if lines > 200:
-                self._combat_log.delete("1.0", f"{lines - 200}.0")
-            self._combat_log.see("end")
-            self._combat_log.configure(state="disabled")
+        # Incrementally append new entries to opcode list (no full redraw)
+        if opcode_msgs and self._trigger_tab == "opcode" and self._opcode_view == "list":
+            self._append_opcode_entries(opcode_msgs)
 
         self.after(200, self._poll_loop)
 

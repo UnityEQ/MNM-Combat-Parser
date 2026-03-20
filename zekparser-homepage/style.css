@@ -1133,7 +1133,7 @@ section + section::before {
     text-align: center;
     font-family: var(--font-elegant);
     color: var(--silver);
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     margin-bottom: 2rem;
     max-width: 700px;
     margin-left: auto;
@@ -1148,7 +1148,7 @@ section + section::before {
 
 .cp-explainer p {
     font-family: var(--font-elegant);
-    font-size: 1.05rem;
+    font-size: 1.25rem;
     color: var(--silver);
     line-height: 1.85;
     margin-bottom: 1rem;
@@ -1258,6 +1258,26 @@ section + section::before {
     font-weight: 700;
     padding: 0.1rem 0.4rem;
     border-radius: 2px;
+}
+
+.cp-page .feature-card p {
+    font-size: 1.05rem;
+}
+
+.cp-page .step-content p {
+    font-size: 1.05rem;
+}
+
+.cp-page .req-item {
+    font-size: 1.02rem;
+}
+
+.cp-page .how-it-works .section-sub {
+    font-size: 1.3rem;
+}
+
+.cp-page .features .section-sub {
+    font-size: 1.3rem;
 }
 
 .cp-page .how-it-works {
