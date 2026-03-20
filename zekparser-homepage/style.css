@@ -1096,3 +1096,196 @@ section + section::before {
         padding: 1.5rem 1.25rem 2rem;
     }
 }
+
+/* ── ChatParser Page ─────────────────────────────── */
+
+.cp-badge {
+    background: transparent;
+    color: var(--gold-light);
+    border-color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+}
+.cp-badge::before,
+.cp-badge::after {
+    color: var(--gold);
+}
+
+.cp-section {
+    padding: 2rem 2rem 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.cp-section h2 {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--cream);
+    letter-spacing: 0.05em;
+}
+
+.cp-section .section-sub {
+    text-align: center;
+    font-family: var(--font-elegant);
+    color: var(--silver);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cp-explainer {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.cp-explainer p {
+    font-family: var(--font-elegant);
+    font-size: 1.05rem;
+    color: var(--silver);
+    line-height: 1.85;
+    margin-bottom: 1rem;
+}
+
+.cp-explainer code {
+    background: var(--black-elevated);
+    color: var(--gold-light);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    font-size: 0.82rem;
+    font-family: 'Consolas', 'Courier New', monospace;
+    border: 1px solid var(--border-gold);
+}
+
+/* Trigger demo table */
+.cp-trigger-demo {
+    max-width: 520px;
+    margin: 2rem auto 0;
+    border: 1px solid var(--border-gold);
+    border-radius: 2px;
+    overflow: hidden;
+    background: var(--black-card);
+}
+
+.cp-trigger-header {
+    display: grid;
+    grid-template-columns: 1fr 60px 50px 36px;
+    gap: 0;
+    padding: 0.6rem 1rem;
+    background: var(--black-elevated);
+    border-bottom: 1px solid var(--border-gold);
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--silver-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.cp-trigger-row {
+    display: grid;
+    grid-template-columns: 1fr 60px 50px 36px;
+    gap: 0;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid rgba(42, 37, 32, 0.5);
+    align-items: center;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: var(--silver-light);
+}
+.cp-trigger-row:last-child {
+    border-bottom: none;
+}
+
+.cp-trigger-col-pattern {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cp-trigger-col-mode,
+.cp-trigger-col-sfx,
+.cp-trigger-col-x {
+    text-align: center;
+}
+
+.cp-mode-loop {
+    display: inline-block;
+    background: #94e2d5;
+    color: var(--black);
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+}
+
+.cp-mode-once {
+    display: inline-block;
+    background: #fab387;
+    color: var(--black);
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+}
+
+.cp-sfx-on {
+    font-size: 0.9rem;
+}
+
+.cp-sfx-off {
+    font-size: 0.9rem;
+    opacity: 0.4;
+}
+
+.cp-x-btn {
+    display: inline-block;
+    background: #f38ba8;
+    color: var(--black);
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+}
+
+.cp-page .how-it-works {
+    max-width: 900px;
+}
+
+.cp-page .cta-box {
+    max-width: 640px;
+}
+
+.cp-page .req-item code {
+    background: var(--black-elevated);
+    color: var(--gold-light);
+    padding: 0.15rem 0.4rem;
+    border-radius: 2px;
+    font-size: 0.8rem;
+    font-family: 'Consolas', 'Courier New', monospace;
+    border: 1px solid var(--border-gold);
+}
+
+@media (max-width: 700px) {
+    .cp-section h2 {
+        font-size: 1.5rem;
+    }
+    .cp-section {
+        padding: 1.5rem 1.25rem 2rem;
+    }
+    .cp-trigger-demo {
+        max-width: 100%;
+    }
+}

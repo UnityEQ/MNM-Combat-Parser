@@ -1173,7 +1173,7 @@ class BotApp(tk.Tk):
         self._bot_loop_mode = True   # True=loop keys, False=once
         self._bot_sound_enabled = False  # whether active trigger has sound
         self._active_trigger_pattern = None  # pattern of currently active trigger
-        self._bot_attack_keys = tk.StringVar(value="1,0")
+        self._bot_attack_keys = tk.StringVar(value="4,2,5,3")
         self._bot_loop_delay = tk.StringVar(value="5000")
         self._bot_loop_count = tk.StringVar(value="3")
         self._bot_status = "Idle"
@@ -1251,6 +1251,12 @@ class BotApp(tk.Tk):
                          font=("Consolas", 10), width=20, relief="flat",
                          border=2)
             e.grid(row=row, column=1, sticky="ew", pady=2)
+            if label_text == "Attack Keys":
+                row += 1
+                tk.Label(settings, text="assist,pet attack,instant,nuke",
+                         bg=COLORS["bg"], fg=COLORS["fg_dim"],
+                         font=("Consolas", 7), anchor="w").grid(
+                    row=row, column=1, sticky="w", pady=(0, 2))
             row += 1
 
         settings.columnconfigure(1, weight=1)
@@ -1512,7 +1518,7 @@ class BotApp(tk.Tk):
                 keys_str = self._bot_attack_keys.get()
                 keys = [k.strip() for k in keys_str.split(",") if k.strip()]
             except tk.TclError:
-                keys = ["1", "0"]
+                keys = ["4", "2", "5", "3"]
             try:
                 delay_ms = int(self._bot_loop_delay.get())
             except (ValueError, tk.TclError):

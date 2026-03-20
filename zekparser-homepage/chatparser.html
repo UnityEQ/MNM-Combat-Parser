@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TJK722NR');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta -->
+    <title>ChatParser V1.0 — Real-Time Chat Parser for Monsters &amp; Memories</title>
+    <meta name="description" content="ChatParser is a free, portable chat parser for Monsters & Memories. Monitor combat text in real time with user-defined text triggers, audio alerts, and configurable key sequences. Single exe, no install required.">
+    <meta name="keywords" content="ChatParser, chat parser, Monsters and Memories, combat text monitor, text triggers, real-time chat, MMO chat parser, game chat monitor, combat log reader">
+    <meta name="author" content="Joinkle">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://zekparser.com/chatparser">
+
+    <!-- Open Graph / Facebook / Discord -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zekparser.com/chatparser">
+    <meta property="og:title" content="ChatParser V1.0 — Real-Time Chat Parser for Monsters &amp; Memories">
+    <meta property="og:description" content="Monitor combat text in real time with user-defined text triggers, audio alerts, and configurable key sequences. Free portable Windows app.">
+    <meta property="og:site_name" content="ZekParser">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://zekparser.com/chatparser">
+    <meta name="twitter:title" content="ChatParser V1.0 — Real-Time Chat Parser for Monsters &amp; Memories">
+    <meta name="twitter:description" content="Monitor combat text in real time with user-defined text triggers, audio alerts, and configurable key sequences. Free portable Windows app.">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="color-scheme" content="dark">
+    <meta name="application-name" content="ChatParser">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Schema.org: SoftwareApplication -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "ChatParser",
+        "description": "Free real-time chat parser for Monsters & Memories. Monitor combat text with user-defined triggers, audio alerts, and configurable key sequences.",
+        "url": "https://zekparser.com/chatparser",
+        "downloadUrl": "https://zekparser.com/ChatParser.exe",
+        "softwareVersion": "1.0.0",
+        "operatingSystem": "Windows 10, Windows 11",
+        "applicationCategory": "GameApplication",
+        "applicationSubCategory": "Chat Parser",
+        "fileSize": "21MB",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "Joinkle",
+            "url": "https://joinkle.com"
+        },
+        "featureList": [
+            "Real-time combat text monitoring",
+            "User-defined text triggers with pattern matching",
+            "Per-trigger audio alerts",
+            "Configurable key sequences",
+            "Loop and once-fire trigger modes",
+            "Adjustable loop count and delay",
+            "Always-on-top compact window",
+            "Non-invasive network packet reading"
+        ]
+    }
+    </script>
+
+    <!-- Schema.org: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "ZekParser",
+                "item": "https://zekparser.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "ChatParser",
+                "item": "https://zekparser.com/chatparser"
+            }
+        ]
+    }
+    </script>
+
+    <!-- Schema.org: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is ChatParser?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "ChatParser is a free, portable real-time chat parser for Monsters & Memories on Windows. It reads network traffic passively to display combat text as it happens, with support for user-defined text triggers, audio alerts, and configurable key sequences."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does ChatParser work?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "ChatParser captures and decrypts game network packets in real time, extracting combat text messages (melee hits, spell casts, deaths) and displaying them in a scrolling log. You can define text patterns that trigger audio alerts and key sequences when matched."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is ChatParser safe to use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. ChatParser is non-invasive — it only reads network traffic passively. There is no code injection, no memory writing, and no file modification. The game does not know it is running."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does ChatParser require installation?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. ChatParser is a single portable .exe file (~21 MB). Just download it, right-click, and run as Administrator. No installer, no dependencies, no setup."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the difference between ChatParser and ZekParser?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "ZekParser is a full combat log parser and DPS meter with encounter tracking, item databases, experience tracking, and session overviews. ChatParser is a lightweight companion focused specifically on real-time chat monitoring with text triggers and key sequences. They use the same packet capture technology but serve different purposes."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body class="cp-page">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJK722NR"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Nav -->
+    <header class="site-nav">
+        <a href="/" class="nav-logo" id="nav-logo">ZekParser</a>
+        <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
+        <nav class="nav-links">
+            <a href="/" class="nav-link-home" id="nav-home">Home</a>
+            <a href="/chatparser" class="nav-active nav-link-chatparser" id="nav-chatparser">ChatParser</a>
+            <div class="nav-donate-mobile">
+                <a href="https://cash.app/$thepdxdude" target="_blank" rel="noopener" class="btn-donate btn-donate-cashapp-mobile" id="nav-cashapp-mobile">Cash App</a>
+                <a href="https://venmo.com/u/Saltycrackers" target="_blank" rel="noopener" class="btn-donate btn-donate-venmo-mobile" id="nav-venmo-mobile">Venmo</a>
+            </div>
+        </nav>
+        <div class="nav-donate">
+            <a href="https://cash.app/$thepdxdude" target="_blank" rel="noopener" class="btn-donate btn-donate-cashapp" id="nav-cashapp">Cash App</a>
+            <a href="https://venmo.com/u/Saltycrackers" target="_blank" rel="noopener" class="btn-donate btn-donate-venmo" id="nav-venmo">Venmo</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge cp-badge">V1.0</div>
+        <h1>Chat<span>Parser</span></h1>
+        <p>A lightweight real-time chat parser for Monsters &amp; Memories. Monitor combat text as it happens, define text triggers with audio alerts, and configure key sequences &mdash; all from a compact always-on-top window.</p>
+        <div class="hero-buttons">
+            <a href="/ChatParser.exe" class="btn-primary btn-download-hero" id="hero-download">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download ChatParser
+            </a>
+        </div>
+        <p class="hero-meta">Single .exe &bull; No install &bull; ~21 MB</p>
+    </section>
+
+    <!-- What It Does -->
+    <section class="cp-section" id="about">
+        <h2>What It Does</h2>
+        <p class="section-sub">ChatParser captures game network packets and displays combat text in real time.</p>
+        <div class="cp-explainer">
+            <p>ChatParser reads the same encrypted network traffic as ZekParser, but focuses on one thing: showing you combat text the moment it happens. Melee hits, spell casts, deaths &mdash; every combat message is captured, decrypted, and displayed in a scrolling log with timestamps.</p>
+            <p>On top of the live feed, you can define text triggers that match against every incoming message. When a pattern matches, ChatParser can play an audio alert and send configurable key sequences to the game window. Each trigger can be set to fire once or loop at a set interval.</p>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <h2>Features</h2>
+        <p class="section-sub">Everything packed into a single compact window.</p>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <h3>Live Combat Text</h3>
+                <p>Every combat message displayed in real time with timestamps. Melee attacks, spell hits, and death messages are captured directly from network packets as they arrive.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </div>
+                <h3>Text Triggers</h3>
+                <p>Define text patterns that match against every incoming combat message. Case-insensitive substring matching &mdash; if the pattern appears anywhere in the message, it fires. Matched lines are highlighted in the log.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                </div>
+                <h3>Audio Alerts</h3>
+                <p>Toggle a sound alert on any trigger. When that trigger matches, ChatParser plays a beep on every loop iteration so you never miss an event &mdash; even if you're tabbed out.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><command/><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                </div>
+                <h3>Loop &amp; Once Modes</h3>
+                <p>Each trigger can be set to Loop or Once. Loop mode repeats the key sequence at your configured delay until turned off. Once mode fires a single time per trigger match. Click the mode button mid-loop to reset.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01"/><path d="M10 8h.01"/><path d="M14 8h.01"/></svg>
+                </div>
+                <h3>Configurable Keys</h3>
+                <p>Set which keys to send when a trigger fires. Define them as a comma-separated list (e.g. <code>4,2,5,3</code> for assist, pet attack, instant, nuke). Adjust the loop delay in milliseconds and set a max loop count (0 for infinite, or a specific number).</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3>Non-Invasive</h3>
+                <p>Same technology as ZekParser &mdash; reads network traffic passively. No injection, no memory writing, no file modification. The game doesn't know it's running.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trigger Table -->
+    <section class="cp-section" id="triggers">
+        <h2>Trigger Management</h2>
+        <p class="section-sub">Organized trigger table with per-trigger controls.</p>
+        <div class="cp-explainer">
+            <p>Each trigger you add appears as a row in a table with its own controls. The <strong>Pattern</strong> column shows the text being matched. The <strong>Mode</strong> button toggles between Loop (repeating) and Once (single fire). The <strong>SFX</strong> button toggles the audio alert for that trigger. The red <strong>X</strong> removes it. Triggers persist between sessions in a local <code>triggers.json</code> file.</p>
+        </div>
+        <div class="cp-trigger-demo">
+            <div class="cp-trigger-header">
+                <span class="cp-trigger-col-pattern">Pattern</span>
+                <span class="cp-trigger-col-mode">Mode</span>
+                <span class="cp-trigger-col-sfx">SFX</span>
+                <span class="cp-trigger-col-x"></span>
+            </div>
+            <div class="cp-trigger-row">
+                <span class="cp-trigger-col-pattern">slashes you</span>
+                <span class="cp-trigger-col-mode"><span class="cp-mode-loop">Loop</span></span>
+                <span class="cp-trigger-col-sfx"><span class="cp-sfx-on">&#x1F50A;</span></span>
+                <span class="cp-trigger-col-x"><span class="cp-x-btn">X</span></span>
+            </div>
+            <div class="cp-trigger-row">
+                <span class="cp-trigger-col-pattern">has been slain</span>
+                <span class="cp-trigger-col-mode"><span class="cp-mode-once">Once</span></span>
+                <span class="cp-trigger-col-sfx"><span class="cp-sfx-off">&#x1F507;</span></span>
+                <span class="cp-trigger-col-x"><span class="cp-x-btn">X</span></span>
+            </div>
+            <div class="cp-trigger-row">
+                <span class="cp-trigger-col-pattern">hits YOU</span>
+                <span class="cp-trigger-col-mode"><span class="cp-mode-loop">Loop</span></span>
+                <span class="cp-trigger-col-sfx"><span class="cp-sfx-on">&#x1F50A;</span></span>
+                <span class="cp-trigger-col-x"><span class="cp-x-btn">X</span></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <h2>How It Works</h2>
+        <p class="section-sub">Same capture technology as ZekParser, focused on chat.</p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <h3>Download &amp; Run</h3>
+                    <p>Grab <code>ChatParser.exe</code> from the download link. No install needed &mdash; it's a single portable file. Right-click and run as Administrator (required for network capture).</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <h3>Add Your Triggers</h3>
+                    <p>Type a text pattern into the trigger input and click Add. Set each trigger to Loop or Once mode, toggle the audio alert, and configure your attack keys and loop delay in the settings area.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <h3>Toggle ON &amp; Play</h3>
+                    <p>Click the ON button, then play the game. ChatParser auto-detects the game process, captures combat text in real time, and fires your triggers when patterns match. The combat log scrolls live with matched lines highlighted.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Settings -->
+    <section class="cp-section" id="settings">
+        <h2>Settings</h2>
+        <p class="section-sub">Configure keys, timing, and loop behavior.</p>
+        <div class="req-list" style="max-width: 750px; margin: 0 auto;">
+            <div class="req-item">
+                <span class="check">&#9881;</span>
+                <strong>Attack Keys</strong> &mdash; comma-separated list of keys to send (default <code>4,2,5,3</code> &mdash; assist, pet attack, instant, nuke)
+            </div>
+            <div class="req-item">
+                <span class="check">&#9881;</span>
+                <strong>Loop Delay</strong> &mdash; milliseconds between each loop iteration (default 5000)
+            </div>
+            <div class="req-item">
+                <span class="check">&#9881;</span>
+                <strong>Loop Count</strong> &mdash; max loops per trigger (0 = infinite, default 3)
+            </div>
+            <div class="req-item">
+                <span class="check">&#9881;</span>
+                <strong>ON / OFF</strong> &mdash; master toggle for the parser
+            </div>
+        </div>
+    </section>
+
+    <!-- Requirements -->
+    <section class="requirements">
+        <h2>Requirements</h2>
+        <div class="req-list">
+            <div class="req-item">
+                <span class="check">&#10003;</span>
+                Windows 10 or 11
+            </div>
+            <div class="req-item">
+                <span class="check">&#10003;</span>
+                Run as Administrator
+            </div>
+            <div class="req-item">
+                <span class="check">&#10003;</span>
+                Game running on same machine
+            </div>
+            <div class="req-item">
+                <span class="check">&#10003;</span>
+                No dependencies to install
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="download">
+        <div class="cta-box">
+            <h2>Ready to parse?</h2>
+            <p>Download ChatParser and start monitoring combat text in real time.</p>
+            <a href="/ChatParser.exe" class="btn-primary btn-download-cta" id="cta-download">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download ChatParser V1.0
+            </a>
+            <p class="hero-meta" style="margin-top: 1rem;">Single .exe &bull; No install &bull; ~21 MB</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a href="/" class="footer-link-zekparser" id="footer-zekparser">ZekParser</a>
+            <a href="/chatparser" class="footer-link-chatparser" id="footer-chatparser">ChatParser</a>
+        </div>
+        <p>&copy; 2026 <a href="https://joinkle.com" target="_blank" rel="noopener" class="footer-link-joinkle" id="footer-joinkle">Joinkle</a></p>
+    </footer>
+
+    <!-- Mobile nav toggle (close on link click) -->
+    <script>
+    document.querySelectorAll('.nav-links a').forEach(function(a) {
+        a.addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.remove('open');
+        });
+    });
+    </script>
+</body>
+</html>
