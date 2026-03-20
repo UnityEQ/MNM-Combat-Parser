@@ -30,7 +30,9 @@
       "Bash(python3:*)",
       "Bash(ren:*)",
       "Bash(chcp:*)",
-      "Bash(PYTHONIOENCODING=utf-8 python:*)"
+      "Bash(PYTHONIOENCODING=utf-8 python:*)",
+      "Bash(cmd.exe /c \"rename E:\\\\MNM-Network\\\\MNM-Combat-Parser\\\\darksalty chatparser\")",
+      "Bash(cmd.exe:*)"
     ]
   }
 }

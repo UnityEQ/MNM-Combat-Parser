@@ -4,8 +4,8 @@
 # http://msdn.microsoft.com/en-us/library/ms646997.aspx
 VSVersionInfo(
   ffi=FixedFileInfo(
-    filevers=(1, 12, 0, 0),
-    prodvers=(1, 12, 0, 0),
+    filevers=(1, 14, 0, 0),
+    prodvers=(1, 14, 0, 0),
     mask=0x3f,
     flags=0x0,
     OS=0x40004,
@@ -21,11 +21,11 @@ VSVersionInfo(
           [
             StringStruct(u'CompanyName', u'MNM Network'),
             StringStruct(u'FileDescription', u'ZekParser — Live Combat Log Viewer'),
-            StringStruct(u'FileVersion', u'1.12.0.0'),
+            StringStruct(u'FileVersion', u'1.14.0.0'),
             StringStruct(u'InternalName', u'ZekParser'),
             StringStruct(u'OriginalFilename', u'ZekParser.exe'),
             StringStruct(u'ProductName', u'ZekParser'),
-            StringStruct(u'ProductVersion', u'1.12.0.0'),
+            StringStruct(u'ProductVersion', u'1.14.0.0'),
           ]
         )
       ]

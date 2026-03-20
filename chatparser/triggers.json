@@ -1,0 +1,12 @@
+[
+  {
+    "pattern": "pizza",
+    "loop": false,
+    "sound": false
+  },
+  {
+    "pattern": "pies",
+    "loop": true,
+    "sound": true
+  }
+]

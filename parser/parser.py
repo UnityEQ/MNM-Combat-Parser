@@ -11,7 +11,7 @@ Usage:
     python parser/parser.py
 """
 
-APP_VERSION = "V1.12"
+APP_VERSION = "V1.14"
 
 import csv
 import ctypes
@@ -1550,6 +1550,14 @@ class EntityTracker:
         self._reload_gate_time = time.time()  # auto-clear after timeout (ungrouped solo)
         self._party_members_pending = None  # list of (eid, name, class_hid, level) for GUI player selection
 
+    @staticmethod
+    def _clean_cls(raw):
+        """Strip non-alpha characters from class HID strings."""
+        if not raw:
+            return raw
+        cleaned = ''.join(c for c in raw if c.isalpha())
+        return cleaned.lower() if cleaned else None
+
     def _backfill_player_info(self, eid, cls=None, level=None):
         """Update class/level on existing encounter player records for this eid."""
         for enc in self.encounters:
@@ -1716,19 +1724,109 @@ class EntityTracker:
     @staticmethod
     def _extract_ability_name(text):
         """Extract ability or melee verb from combat text for ability breakdown."""
+        is_crit = text.rstrip("& \r\n").endswith("(Critical)")
         # Spell: "X's AbilityName hits Y for N..." or "Your AbilityName hits Y for N..."
         m = re.match(r"^(?:.+?'s|Your) (.+?) hits .+? for \d+", text)
         if m:
-            return m.group(1)
+            ab = m.group(1)
+            return f"{ab} (Critical)" if is_crit else ab
         # Local melee: "You verb ..."
         m = re.match(r"^You (\w+)", text)
         if m:
-            return "Melee"
+            return "Melee (Critical)" if is_crit else "Melee"
         # 3P melee: "Name verbs ..."
         m = re.match(r"^\S+ (\w+?)(?:e?s) ", text)
         if m:
-            return "Melee"
+            return "Melee (Critical)" if is_crit else "Melee"
         return "Auto-attack"
+
+    def _process_chat_miss(self, text):
+        """Track miss/dodge/parry/resist from ChatCombat text (0 damage)."""
+        attacker_name = None
+        target_name = None
+        is_local = False
+
+        # Spell resist: "X tries to cast Spell on Y, but is resisted!"
+        # Must check BEFORE melee miss to prevent "cast SpellName on Target"
+        # from being captured as a melee target name.
+        m = re.match(r"^(.+?) tries to cast .+? on (.+?), but is resisted", text)
+        if m:
+            attacker_name = m.group(1)
+            target_name = m.group(2)
+
+        # Local melee miss: "You try to verb X, but miss/X dodges/X parries"
+        if not m:
+            m = re.match(r"^You try to \w+ (.+?)(?:\s+with .+?)?, but ", text)
+            if m:
+                target_name = m.group(1)
+                is_local = True
+
+        # 3P melee miss: "Name tries to verb X [with offhand/bow], but ..."
+        if not m:
+            m = re.match(r"^(.+?) tries to \w+ (.+?)(?:\s+with .+?)?, but ", text)
+            if m:
+                attacker_name = m.group(1)
+                target_name = m.group(2)
+
+        if not m:
+            return
+
+        # Skip if target is the local player (we track attacker→NPC misses)
+        if target_name and target_name.upper() in ("YOU", "YOUR"):
+            return
+
+        # "Your pet X tries to..." or "Your crusader tries to..." → local
+        if attacker_name and attacker_name.startswith("Your "):
+            is_local = True
+            attacker_name = None
+
+        with self._lock:
+            if is_local:
+                attacker_eid = self._local_player_eid
+            else:
+                attacker_eid = None
+                if attacker_name:
+                    fallback_eid = None
+                    for eid_c, name in self.names.items():
+                        if name == attacker_name:
+                            if self.entity_types.get(eid_c) == 0:
+                                attacker_eid = eid_c
+                                break
+                            if fallback_eid is None:
+                                fallback_eid = eid_c
+                    if attacker_eid is None:
+                        attacker_eid = fallback_eid
+
+            if attacker_eid is None:
+                return
+
+            # Resolve target by finding an alive encounter with matching name.
+            # _resolve_target_eid may return an NPC without an encounter
+            # (multiple NPCs share names), so search encounters directly.
+            enc = None
+            target_eid = None
+            for e_eid, e in self._encounter_map.items():
+                if e.npc_name == target_name and not e.is_dead:
+                    enc = e
+                    target_eid = e_eid
+                    break
+            # Fallback to dead encounter if no alive one
+            if enc is None:
+                for e_eid, e in self._encounter_map.items():
+                    if e.npc_name == target_name:
+                        enc = e
+                        target_eid = e_eid
+                        break
+            if enc is None:
+                return
+
+            atk_name = self.names.get(attacker_eid, f"Entity#{attacker_eid}")
+            atk_cls = self.classes.get(attacker_eid, "")
+            atk_lvl = self.levels.get(attacker_eid)
+            p = enc.get_or_create_player(attacker_eid, atk_name, atk_cls, atk_lvl)
+            p['abilities']["Miss"] = p['abilities'].get("Miss", 0)
+            p['ability_counts']["Miss"] = p['ability_counts'].get("Miss", 0) + 1
+            _plog.debug(f"  CHATCOMBAT_MISS \"{enc.npc_name}\"(#{target_eid}) miss by {atk_name}(#{attacker_eid})")
 
     def _process_chat_combat(self, text):
         """Process a ChatMessage combat text (channel 1 damage lines).
@@ -1742,6 +1840,8 @@ class EntityTracker:
         # that as the universal damage indicator instead of matching verbs.
         m_num = re.search(r'for (\d+) points? of ', text)
         if not m_num:
+            # No damage — check for miss/dodge/parry/resist
+            self._process_chat_miss(text)
             return
         text_dmg = int(m_num.group(1))
 
@@ -1945,6 +2045,7 @@ class EntityTracker:
                         self.names[m_eid] = m_name
                         self._party_eids[m_name] = m_eid
                     self.entity_types[m_eid] = 0  # party members are players
+                    m_class = self._clean_cls(m_class)
                     if m_class:
                         self.classes[m_eid] = m_class
                     if m_level is not None:
@@ -2015,7 +2116,7 @@ class EntityTracker:
                 # Let the first UpdateHealth set the real baseline instead.
                 # Clear any stale HP so re-spawns don't carry old baselines.
                 self.hp.pop(eid, None)
-                class_hid = event.get("class_hid")
+                class_hid = self._clean_cls(event.get("class_hid"))
                 if class_hid:
                     self.classes[eid] = class_hid
                 level = event.get("level")
@@ -2076,7 +2177,7 @@ class EntityTracker:
                 return None
 
             if etype == "UpdateClassHID":
-                class_hid = event.get("class_hid")
+                class_hid = self._clean_cls(event.get("class_hid"))
                 if class_hid:
                     self.classes[eid] = class_hid
                     self._backfill_player_info(eid, cls=class_hid)
@@ -2084,7 +2185,7 @@ class EntityTracker:
                 return None
 
             if etype == "UpdateLevel":
-                class_hid = event.get("class_hid")
+                class_hid = self._clean_cls(event.get("class_hid"))
                 level = event.get("level")
                 if class_hid:
                     self.classes[eid] = class_hid
@@ -2187,7 +2288,7 @@ class EntityTracker:
 
             if etype == "UpdateState":
                 name = event.get("name")
-                class_hid = event.get("class_hid")
+                class_hid = self._clean_cls(event.get("class_hid"))
                 level = event.get("level")
                 et = event.get("entity_type")
                 if name:
@@ -2435,7 +2536,28 @@ class EntityTracker:
                                     _plog.debug(f"  -> HEAL_CLEAR cleared attacker for #{target_id} (was healer #{eid})")
                             event["_is_heal"] = True
                         else:
-                            _plog.debug(f"  -> NO_MATCH (not dmg or heal pattern)")
+                            # Check for "ability misses" pattern
+                            # "X's ability misses." / "Your ability misses!"
+                            is_miss = "ability misses" in text
+                            if is_miss and target_id is not None:
+                                resolved_eid = self._resolve_target_eid(target_id, None)
+                                if resolved_eid is not None:
+                                    enc = self._encounter_map.get(resolved_eid)
+                                    if enc is not None:
+                                        now = time.time()
+                                        atk_name = self.names.get(eid, f"Entity#{eid}")
+                                        atk_cls = self.classes.get(eid, "")
+                                        atk_lvl = self.levels.get(eid)
+                                        p = enc.get_or_create_player(eid, atk_name, atk_cls, atk_lvl)
+                                        p['abilities']["Miss"] = p['abilities'].get("Miss", 0)
+                                        p['ability_counts']["Miss"] = p['ability_counts'].get("Miss", 0) + 1
+                                        _plog.debug(f"  -> ENDCAST_MISS \"{enc.npc_name}\"(#{resolved_eid}) miss by {atk_name}(#{eid})")
+                                    else:
+                                        _plog.debug(f"  -> ENDCAST_MISS_NOENC target=#{resolved_eid} (no encounter)")
+                                else:
+                                    _plog.debug(f"  -> ENDCAST_MISS_UNRESOLVED target=#{target_id}")
+                            elif not is_miss:
+                                _plog.debug(f"  -> NO_MATCH (not dmg, heal, or miss pattern)")
 
             elif etype == "ParticleHit":
                 # ParticleHit: target_id takes the hit
@@ -3434,6 +3556,11 @@ class CaptureBackend:
         with self._item_lock:
             return [d for d in self._item_drops if d["name"] == name]
 
+    def get_all_item_drops(self):
+        """Return all drop events (for CSV export)."""
+        with self._item_lock:
+            return list(self._item_drops)
+
     def reset_items(self):
         """Clear all tracked items and drops."""
         with self._item_lock:
@@ -3963,7 +4090,7 @@ class CombatApp(tk.Tk):
         self._meter_view_var = tk.StringVar(value="Overview")
         self._meter_combo = ttk.Combobox(
             header_right, textvariable=self._meter_view_var,
-            values=["Overview", "Encounters", "Grand Overview"],
+            values=["Overview", "Encounters", "Tanking"],
             state='readonly', style='Dark.TCombobox', width=14,
             font=('Segoe UI', 9))
         self._meter_combo.pack(side=tk.LEFT, padx=4, pady=2)
@@ -4085,6 +4212,8 @@ class CombatApp(tk.Tk):
             self._export_items_csv()
         elif v == "triggers":
             self._export_triggers_csv()
+        elif v == "experience":
+            self._export_experience_csv()
 
     def _export_feed_csv(self):
         if not self._combat_log:
@@ -4108,8 +4237,8 @@ class CombatApp(tk.Tk):
             self._status_label.configure(text=f"Export failed: {e}")
 
     def _export_items_csv(self):
-        summary = self._backend.get_item_summary()
-        if not summary:
+        drops = self._backend.get_all_item_drops()
+        if not drops:
             return
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
         path = filedialog.asksaveasfilename(
@@ -4123,41 +4252,11 @@ class CombatApp(tk.Tk):
         try:
             with open(path, "w", newline="", encoding="utf-8") as f:
                 w = csv.writer(f)
-                w.writerow(["item_name", "hid", "count", "looter", "looter_count",
-                            "npc_source", "npc_count"])
-                for item in summary:
-                    name = item["name"]
-                    hid = item["hid"]
-                    count = item["count"]
-                    drops = self._backend.get_item_drops_for(name)
-                    # Aggregate looters
-                    looters = {}
-                    npcs = {}
-                    for d in drops:
-                        who = d.get("looter")
-                        if who:
-                            looters[who] = looters.get(who, 0) + d.get("quantity", 1)
-                        npc = d.get("npc_name")
-                        if npc:
-                            npcs[npc] = npcs.get(npc, 0) + d.get("quantity", 1)
-                    # First row: item summary
-                    first_looter = max(looters, key=looters.get) if looters else ""
-                    first_looter_cnt = looters.get(first_looter, 0) if first_looter else 0
-                    first_npc = max(npcs, key=npcs.get) if npcs else ""
-                    first_npc_cnt = npcs.get(first_npc, 0) if first_npc else 0
-                    w.writerow([name, hid, count, first_looter, first_looter_cnt,
-                                first_npc, first_npc_cnt])
-                    # Sub-rows for remaining looters
-                    for who in sorted(looters, key=looters.get, reverse=True):
-                        if who == first_looter:
-                            continue
-                        w.writerow(["", "", "", who, looters[who], "", ""])
-                    # Sub-rows for remaining NPCs
-                    for npc in sorted(npcs, key=npcs.get, reverse=True):
-                        if npc == first_npc:
-                            continue
-                        w.writerow(["", "", "", "", "", npc, npcs[npc]])
-            self._status_label.configure(text=f"Exported {len(summary)} items to {os.path.basename(path)}")
+                w.writerow(["datetime", "looter_name", "NPC_looted_from", "Name_of_item"])
+                for d in sorted(drops, key=lambda x: x.get("timestamp", 0)):
+                    dt = datetime.fromtimestamp(d["timestamp"]).strftime("%Y-%m-%d %H:%M:%S") if d.get("timestamp") else ""
+                    w.writerow([dt, d.get("looter", ""), d.get("npc_name", ""), d.get("name", "")])
+            self._status_label.configure(text=f"Exported {len(drops)} items to {os.path.basename(path)}")
         except Exception as e:
             self._status_label.configure(text=f"Export failed: {e}")
 
@@ -4181,6 +4280,66 @@ class CombatApp(tk.Tk):
                 for pattern, sound_label, count in snapshot:
                     w.writerow([pattern, sound_label, count])
             self._status_label.configure(text=f"Exported {len(snapshot)} triggers to {os.path.basename(path)}")
+        except Exception as e:
+            self._status_label.configure(text=f"Export failed: {e}")
+
+    def _export_experience_csv(self):
+        tracker = self._backend._tracker
+        xp_events = list(tracker._xp_events)
+        if not xp_events:
+            return
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        path = filedialog.asksaveasfilename(
+            defaultextension=".csv",
+            filetypes=[("CSV files", "*.csv"), ("All files", "*.*")],
+            initialfile=f"experience_{ts}.csv",
+            title="Export Experience",
+        )
+        if not path:
+            return
+        try:
+            # Build group snapshot from party data
+            party = tracker._party_eids  # name -> eid
+            group_levels = []
+            group_classes = []
+            for m_name, m_eid in sorted(party.items()):
+                lvl = tracker.levels.get(m_eid)
+                cls = tracker.classes.get(m_eid, "")
+                group_levels.append(str(lvl) if lvl is not None else "?")
+                group_classes.append(_class_label(cls) if cls else "?")
+            if not group_levels:
+                group_levels = ["?"]
+                group_classes = ["?"]
+            levels_str = "|".join(group_levels)
+            classes_str = "|".join(group_classes)
+
+            with open(path, "w", newline="", encoding="utf-8") as f:
+                w = csv.writer(f)
+                w.writerow(["datetime", "player_level", "group_levels", "zone",
+                            "xp_per_hour", "total_xp_gained", "kill_count",
+                            "group_classes", "xp_amount", "npc_killed"])
+                running_total = 0
+                kill_count = 0
+                for i, ev in enumerate(xp_events):
+                    gained = ev["xp_gained"]
+                    if gained > 0:
+                        running_total += gained
+                        kill_count += 1
+                    # XP/hr from session start to this event
+                    elapsed = ev["timestamp"] - xp_events[0]["timestamp"]
+                    xph = running_total / (elapsed / 3600) if elapsed > 0 else 0
+                    # Player level
+                    eid = ev.get("eid")
+                    lvl = tracker.levels.get(eid) if eid else None
+                    # Zone
+                    zone = ev.get("zone", "")
+                    zone_label = zone.replace('_', ' ').title() if zone else ""
+                    dt = datetime.fromtimestamp(ev["timestamp"]).strftime("%Y-%m-%d %H:%M:%S")
+                    npc = ev.get("npc_name", "")
+                    w.writerow([dt, lvl or "", levels_str, zone_label,
+                                round(xph), running_total, kill_count,
+                                classes_str, gained, npc])
+            self._status_label.configure(text=f"Exported {len(xp_events)} XP events to {os.path.basename(path)}")
         except Exception as e:
             self._status_label.configure(text=f"Export failed: {e}")
 
@@ -4504,7 +4663,51 @@ class CombatApp(tk.Tk):
 
         enc_dur = enc.duration
         tracker = self._backend.tracker
-        players = sorted(enc.players.items(), key=lambda x: _best_dealt(x[1]), reverse=True)
+
+        # Build merged player dict: fold pet entries into owner,
+        # prefixing each pet ability with "[PET] PetName: "
+        merged = {}  # eid -> dict copy
+        pet_eids = set()
+        for p_eid, p in enc.players.items():
+            is_pet = tracker.pet_states.get(p_eid, False)
+            if is_pet:
+                pet_eids.add(p_eid)
+            merged[p_eid] = {
+                'name': p['name'], 'cls': p['cls'], 'level': p['level'],
+                'dealt': p['dealt'], 'text_dealt': p['text_dealt'],
+                'received': p['received'],
+                'abilities': dict(p.get('abilities', {})),
+                'ability_counts': dict(p.get('ability_counts', {})),
+            }
+
+        for pet_eid in list(pet_eids):
+            owner_eid = tracker._pet_owners.get(pet_eid)
+            if not owner_eid:
+                continue
+            # Create owner entry if they didn't deal direct damage in this encounter
+            if owner_eid not in merged:
+                owner_name = tracker.names.get(owner_eid, f"Entity#{owner_eid}")
+                merged[owner_eid] = {
+                    'name': owner_name,
+                    'cls': tracker.classes.get(owner_eid, ''),
+                    'level': tracker.levels.get(owner_eid),
+                    'dealt': 0, 'text_dealt': 0, 'received': 0,
+                    'abilities': {}, 'ability_counts': {},
+                }
+            pet_p = merged[pet_eid]
+            owner_p = merged[owner_eid]
+            # Merge pet abilities under owner with [P] prefix
+            for ab_name, ab_dmg in pet_p['abilities'].items():
+                key = f"[P]{ab_name}"
+                owner_p['abilities'][key] = owner_p['abilities'].get(key, 0) + ab_dmg
+            for ab_name, ab_cnt in pet_p['ability_counts'].items():
+                key = f"[P]{ab_name}"
+                owner_p['ability_counts'][key] = owner_p['ability_counts'].get(key, 0) + ab_cnt
+            owner_p['dealt'] += pet_p['dealt']
+            owner_p['text_dealt'] += pet_p['text_dealt']
+            del merged[pet_eid]
+
+        players = sorted(merged.items(), key=lambda x: _best_dealt(x[1]), reverse=True)
         for i, (p_eid, p) in enumerate(players, 1):
             dealt = _best_dealt(p)
             p_dps = dealt / enc_dur if enc_dur > 0 else 0.0
@@ -4537,12 +4740,14 @@ class CombatApp(tk.Tk):
             if p_tag:
                 segs.append((p_tag, 'class_tag'))
             segs.append(('\n', None))
-            segs.append(("    ", 'rank'))
-            segs.append((f"Dealt: {dealt:,}", 'dmg'))
-            segs.append((f" ({p_dps:,.1f} dps)", 'heal'))
-            if p['received'] > 0:
-                segs.append((f"  Recv: {p['received']:,}", 'duration'))
-            segs.append(('\n', None))
+            # Ability breakdown (same format as overview)
+            abilities = sorted(p.get('abilities', {}).items(), key=lambda x: x[1], reverse=True)
+            ab_counts = p.get('ability_counts', {})
+            for ab_name, ab_dmg in abilities:
+                ab_pct = (ab_dmg / dealt * 100) if dealt > 0 else 0
+                ab_cnt = ab_counts.get(ab_name, 0)
+                ab_line = self._build_overview_ability_line(ab_name, ab_dmg, ab_pct, ab_cnt)
+                segs.append((ab_line + "\n", 'bar'))
 
         if not players:
             segs.append(("  No player damage recorded\n", 'rank'))
@@ -4608,7 +4813,7 @@ class CombatApp(tk.Tk):
         view_map = {
             "Overview": "overview",
             "Encounters": "encounters",
-            "Grand Overview": "grand_overview",
+            "Tanking": "grand_overview",
         }
         new_view = view_map.get(label, "overview")
         self._meter_view = new_view
@@ -4745,9 +4950,13 @@ class CombatApp(tk.Tk):
             if owner_name and owner_name in player_totals:
                 owner_pt = player_totals[owner_name]
                 owner_pt['dealt'] += pet_pt['dealt']
-                ab_key = f"[PET] {pet_name}"
-                owner_pt['abilities'][ab_key] = owner_pt['abilities'].get(ab_key, 0) + pet_pt['dealt']
-                owner_pt['ability_counts'][ab_key] = owner_pt['ability_counts'].get(ab_key, 0) + sum(pet_pt.get('ability_counts', {}).values())
+                # Merge each pet ability individually with [PET] prefix
+                for ab_name, ab_dmg in pet_pt.get('abilities', {}).items():
+                    key = f"[P]{ab_name}"
+                    owner_pt['abilities'][key] = owner_pt['abilities'].get(key, 0) + ab_dmg
+                for ab_name, ab_cnt in pet_pt.get('ability_counts', {}).items():
+                    key = f"[P]{ab_name}"
+                    owner_pt['ability_counts'][key] = owner_pt['ability_counts'].get(key, 0) + ab_cnt
                 del player_totals[pet_name]
 
         sorted_pt = sorted(player_totals.items(), key=lambda x: x[1]['dealt'], reverse=True)[:20]
@@ -5123,67 +5332,8 @@ class CombatApp(tk.Tk):
         self._meter.configure(state=tk.NORMAL)
         self._meter.delete('1.0', tk.END)
 
-        # === GRAND TOTAL SECTION ===
         _box_w = 38
         if grand_enc_count > 0:
-            grand_dps = grand_total_dmg / grand_total_dur if grand_total_dur > 0 else 0
-            dur_m = int(grand_total_dur) // 60
-            dur_s = int(grand_total_dur) % 60
-
-            self._meter.insert(tk.END, "\u2500" * _box_w + "\n", 'header_line')
-            self._meter.insert(tk.END, " Grand Total", 'name')
-            self._meter.insert(tk.END, f"  x{grand_enc_count}", 'rank')
-            self._meter.insert(tk.END, f"  {dur_m}m {dur_s}s\n", 'duration')
-            self._meter.insert(tk.END, " Damage: ", 'rank')
-            self._meter.insert(tk.END, f"{grand_total_dmg:,}", 'dmg')
-            self._meter.insert(tk.END, "  DPS: ", 'rank')
-            self._meter.insert(tk.END, f"{grand_dps:,.1f}\n", 'dmg')
-            self._meter.insert(tk.END, "\u2500" * _box_w + "\n", 'header_line')
-
-            # Per-player breakdown with abilities in boxes
-            sorted_pt = sorted(player_totals.items(), key=lambda x: x[1]['dealt'], reverse=True)
-            for pname, pt in sorted_pt:
-                p_tags = []
-                if pt['cls']:
-                    p_tags.append(_class_label(pt['cls']))
-                if pt['level'] is not None and pt['level'] > 0:
-                    p_tags.append(f"L{pt['level']}")
-                p_tag = f" [{' '.join(p_tags)}]" if p_tags else ""
-                pct = (pt['dealt'] / grand_total_dmg * 100) if grand_total_dmg > 0 else 0
-                avg_dps = pt['dealt'] / pt['active_dur'] if pt['active_dur'] > 0 else 0
-
-                # Box top
-                self._meter.insert(tk.END, " \u250C" + "\u2500" * (_box_w - 2) + "\u2510\n", 'header_line')
-                # Player name line
-                self._meter.insert(tk.END, " \u2502 ", 'header_line')
-                self._meter.insert(tk.END, f"{pname[:16]}", 'name')
-                if p_tag:
-                    self._meter.insert(tk.END, p_tag, 'class_tag')
-                self._meter.insert(tk.END, '\n')
-                # Damage + DPS line
-                self._meter.insert(tk.END, " \u2502 ", 'header_line')
-                self._meter.insert(tk.END, f"{pt['dealt']:,}", 'dmg')
-                self._meter.insert(tk.END, f" ({pct:.1f}%)", 'rank')
-                self._meter.insert(tk.END, "  DPS: ", 'rank')
-                self._meter.insert(tk.END, f"{avg_dps:,.1f}", 'heal')
-                if pt['received'] > 0:
-                    self._meter.insert(tk.END, f"  recv {pt['received']:,}", 'duration')
-                self._meter.insert(tk.END, '\n')
-
-                # Ability breakdown
-                if pt['abilities']:
-                    sorted_abs = sorted(pt['abilities'].items(), key=lambda x: x[1], reverse=True)
-                    for ab_name, ab_dmg in sorted_abs:
-                        ab_pct = (ab_dmg / pt['dealt'] * 100) if pt['dealt'] > 0 else 0
-                        self._meter.insert(tk.END, " \u2502   ", 'header_line')
-                        self._meter.insert(tk.END, f"{ab_name[:16]}", 'bar')
-                        self._meter.insert(tk.END, f"  {ab_dmg:,}", 'dmg')
-                        self._meter.insert(tk.END, f" ({ab_pct:.0f}%)\n", 'rank')
-
-                # Box bottom
-                self._meter.insert(tk.END, " \u2514" + "\u2500" * (_box_w - 2) + "\u2518\n", 'header_line')
-
-            self._meter.insert(tk.END, '\n')
             self._meter.insert(tk.END, "\u2500" * _box_w + "\n", 'header_line')
             self._meter.insert(tk.END, " Tanking\n", 'name')
             self._meter.insert(tk.END, "\u2500" * _box_w + "\n", 'header_line')
@@ -5287,13 +5437,27 @@ class CombatApp(tk.Tk):
         if not path:
             return
         try:
+            # Build group classes string (abc sorted shortnames)
+            tracker = self._backend.tracker
+            party = tracker._party_eids
+            group_classes = sorted(set(
+                tracker.classes.get(eid, "") for eid in party.values()
+                if tracker.classes.get(eid)
+            ))
+            group_cls_str = "|".join(group_classes) if group_classes else ""
+
+            # Zone from local player
+            local_eid = tracker._local_player_eid
+            zone = tracker.zones.get(local_eid, "") if local_eid else ""
+
             with open(path, "w", newline="", encoding="utf-8") as f:
                 w = csv.writer(f)
-                w.writerow(["npc_name", "npc_class", "npc_level", "status",
+                w.writerow(["npc_name", "npc_class", "zone", "status",
                             "total_damage", "duration_s", "dps",
+                            "group_classes",
                             "player_name", "player_class", "player_level",
                             "player_dealt", "player_dps", "player_received",
-                            "ability", "ability_damage"])
+                            "ability", "ability_damage", "ability_count"])
                 for enc in encounters:
                     if enc.npc_eid in self._hidden_encounters:
                         continue
@@ -5309,31 +5473,36 @@ class CombatApp(tk.Tk):
                             p_dps = round(dealt / enc.duration, 1) if enc.duration > 0 else 0
                             abilities = sorted(p.get('abilities', {}).items(),
                                                key=lambda x: x[1], reverse=True)
+                            ab_counts = p.get('ability_counts', {})
                             if abilities:
                                 for ab_name, ab_dmg in abilities:
                                     w.writerow([
                                         enc.npc_name, enc.npc_class or "",
-                                        enc.npc_level or "", status,
+                                        zone, status,
                                         enc.best_damage, dur, dps,
+                                        group_cls_str,
                                         p['name'], p['cls'] or "",
                                         p['level'] or "", dealt, p_dps,
                                         p['received'], ab_name, ab_dmg,
+                                        ab_counts.get(ab_name, 0),
                                     ])
                             else:
                                 w.writerow([
                                     enc.npc_name, enc.npc_class or "",
-                                    enc.npc_level or "", status,
+                                    zone, status,
                                     enc.best_damage, dur, dps,
+                                    group_cls_str,
                                     p['name'], p['cls'] or "",
                                     p['level'] or "", dealt, p_dps,
-                                    p['received'], "", "",
+                                    p['received'], "", "", "",
                                 ])
                     else:
                         w.writerow([
                             enc.npc_name, enc.npc_class or "",
-                            enc.npc_level or "", status,
+                            zone, status,
                             enc.best_damage, dur, dps,
-                            "", "", "", 0, 0, 0, "", "",
+                            group_cls_str,
+                            "", "", "", 0, 0, 0, "", "", "",
                         ])
             self._status_label.configure(
                 text=f"Exported {len(encounters)} encounters to {os.path.basename(path)}")
@@ -5357,13 +5526,27 @@ class CombatApp(tk.Tk):
         if not path:
             return
         try:
+            # Build group classes string (abc sorted shortnames)
+            tracker = self._backend.tracker
+            party = tracker._party_eids
+            group_classes = sorted(set(
+                tracker.classes.get(eid, "") for eid in party.values()
+                if tracker.classes.get(eid)
+            ))
+            group_cls_str = "|".join(group_classes) if group_classes else ""
+
+            # Zone from local player
+            local_eid = tracker._local_player_eid
+            zone = tracker.zones.get(local_eid, "") if local_eid else ""
+
             with open(path, "w", newline="", encoding="utf-8") as f:
                 w = csv.writer(f)
-                w.writerow(["npc_name", "npc_class", "npc_level", "status",
+                w.writerow(["npc_name", "npc_class", "zone", "status",
                             "total_damage", "duration_s", "dps",
+                            "group_classes",
                             "player_name", "player_class", "player_level",
                             "player_dealt", "player_dps", "player_received",
-                            "ability", "ability_damage"])
+                            "ability", "ability_damage", "ability_count"])
                 status = "DEAD" if enc.is_dead else "LIVE"
                 dur = round(enc.duration, 1)
                 dps = round(enc.dps, 1)
@@ -5376,31 +5559,36 @@ class CombatApp(tk.Tk):
                         p_dps = round(dealt / enc.duration, 1) if enc.duration > 0 else 0
                         abilities = sorted(p.get('abilities', {}).items(),
                                            key=lambda x: x[1], reverse=True)
+                        ab_counts = p.get('ability_counts', {})
                         if abilities:
                             for ab_name, ab_dmg in abilities:
                                 w.writerow([
                                     enc.npc_name, enc.npc_class or "",
-                                    enc.npc_level or "", status,
+                                    zone, status,
                                     enc.best_damage, dur, dps,
+                                    group_cls_str,
                                     p['name'], p['cls'] or "",
                                     p['level'] or "", dealt, p_dps,
                                     p['received'], ab_name, ab_dmg,
+                                    ab_counts.get(ab_name, 0),
                                 ])
                         else:
                             w.writerow([
                                 enc.npc_name, enc.npc_class or "",
-                                enc.npc_level or "", status,
+                                zone, status,
                                 enc.best_damage, dur, dps,
+                                group_cls_str,
                                 p['name'], p['cls'] or "",
                                 p['level'] or "", dealt, p_dps,
-                                p['received'], "", "",
+                                p['received'], "", "", "",
                             ])
                 else:
                     w.writerow([
                         enc.npc_name, enc.npc_class or "",
-                        enc.npc_level or "", status,
+                        zone, status,
                         enc.best_damage, dur, dps,
-                        "", "", "", 0, 0, 0, "", "",
+                        group_cls_str,
+                        "", "", "", 0, 0, 0, "", "", "",
                     ])
             self._status_label.configure(
                 text=f"Exported {enc.npc_name} detail to {os.path.basename(path)}")
@@ -5408,118 +5596,84 @@ class CombatApp(tk.Tk):
             self._status_label.configure(text=f"Export failed: {e}")
 
     def _export_totals_csv(self):
-        """Export encounter totals with NPC aggregation, player breakdown, and abilities."""
+        """Export tanking data — damage received by players from each NPC type."""
         tracker = self._backend.tracker
         encounters = tracker.get_encounters(top_n=999)
         if not encounters:
             return
 
-        # Aggregate by NPC name + grand player abilities
+        # Aggregate: npc_name -> {npc_class, npc_level, count, players: {name -> {cls, level, received, count}}}
         npc_agg = {}
-        player_totals = {}
         for enc in encounters:
             key = enc.npc_name
             if key not in npc_agg:
                 npc_agg[key] = {
-                    'count': 0, 'total_dmg': 0, 'total_dur': 0.0,
                     'npc_class': enc.npc_class, 'npc_level': enc.npc_level,
-                    'players': {},
+                    'count': 0, 'players': {},
                 }
             agg = npc_agg[key]
             agg['count'] += 1
-            agg['total_dmg'] += enc.best_damage
-            agg['total_dur'] += enc.duration
             if enc.npc_class and not agg['npc_class']:
                 agg['npc_class'] = enc.npc_class
             if enc.npc_level is not None and agg['npc_level'] is None:
                 agg['npc_level'] = enc.npc_level
             for p_eid, p in enc.players.items():
+                if p['received'] <= 0:
+                    continue
                 pname = p['name']
-                p_dealt = max(p['text_dealt'], p['dealt'])
                 p_cls = tracker.classes.get(p_eid) or p['cls']
                 p_lvl = tracker.levels.get(p_eid) if tracker.levels.get(p_eid) is not None else p['level']
                 if pname not in agg['players']:
                     agg['players'][pname] = {
                         'cls': p_cls, 'level': p_lvl,
-                        'dealt': 0, 'received': 0, 'count': 0,
+                        'received': 0, 'count': 0,
                     }
                 pa = agg['players'][pname]
-                pa['dealt'] += p_dealt
                 pa['received'] += p['received']
                 pa['count'] += 1
                 if p_cls and not pa['cls']:
                     pa['cls'] = p_cls
                 if p_lvl is not None and pa['level'] is None:
                     pa['level'] = p_lvl
-                # Grand player totals + abilities
-                if pname not in player_totals:
-                    player_totals[pname] = {
-                        'cls': p_cls, 'level': p_lvl,
-                        'dealt': 0, 'abilities': {},
-                    }
-                pt = player_totals[pname]
-                pt['dealt'] += p_dealt
-                if p_cls and not pt['cls']:
-                    pt['cls'] = p_cls
-                if p_lvl is not None and pt['level'] is None:
-                    pt['level'] = p_lvl
-                for ab_name, ab_dmg in p.get('abilities', {}).items():
-                    pt['abilities'][ab_name] = pt['abilities'].get(ab_name, 0) + ab_dmg
 
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
         path = filedialog.asksaveasfilename(
             defaultextension=".csv",
             filetypes=[("CSV files", "*.csv"), ("All files", "*.*")],
-            initialfile=f"encounter_totals_{ts}.csv",
-            title="Export Encounter Totals",
+            initialfile=f"tanking_{ts}.csv",
+            title="Export Tanking",
         )
         if not path:
             return
 
         try:
+            # Build group classes string
+            party = tracker._party_eids
+            group_classes = sorted(set(
+                tracker.classes.get(eid, "") for eid in party.values()
+                if tracker.classes.get(eid)
+            ))
+            group_cls_str = "|".join(group_classes) if group_classes else ""
+
             with open(path, "w", newline="", encoding="utf-8") as f:
                 w = csv.writer(f)
-                # Grand totals section
-                w.writerow(["section", "name", "class", "level",
-                            "encounters", "total_damage", "avg_damage",
-                            "total_duration", "ability", "ability_damage"])
-                grand_dmg = sum(a['total_dmg'] for a in npc_agg.values())
-                grand_dur = sum(a['total_dur'] for a in npc_agg.values())
-                grand_cnt = sum(a['count'] for a in npc_agg.values())
-                w.writerow(["GRAND_TOTAL", "", "", "", grand_cnt,
-                            grand_dmg, round(grand_dmg / grand_cnt) if grand_cnt else 0,
-                            round(grand_dur, 1), "", ""])
-                # Grand player breakdown with abilities
-                for pname in sorted(player_totals, key=lambda n: player_totals[n]['dealt'], reverse=True):
-                    pt = player_totals[pname]
-                    abilities = sorted(pt['abilities'].items(), key=lambda x: x[1], reverse=True)
-                    if abilities:
-                        for ab_name, ab_dmg in abilities:
-                            w.writerow(["PLAYER_TOTAL", pname, pt['cls'] or "",
-                                        pt['level'] or "", "", pt['dealt'], "",
-                                        "", ab_name, ab_dmg])
-                    else:
-                        w.writerow(["PLAYER_TOTAL", pname, pt['cls'] or "",
-                                    pt['level'] or "", "", pt['dealt'], "",
-                                    "", "", ""])
-                # Per-NPC section with player sub-rows
-                for npc_name, agg in sorted(npc_agg.items(), key=lambda x: x[1]['total_dmg'], reverse=True):
-                    avg_dmg = agg['total_dmg'] / agg['count'] if agg['count'] > 0 else 0
-                    sorted_players = sorted(agg['players'].items(), key=lambda x: x[1]['dealt'], reverse=True)
-                    if sorted_players:
-                        for pname, pa in sorted_players:
-                            avg_dealt = pa['dealt'] / pa['count'] if pa['count'] > 0 else 0
-                            w.writerow(["BY_NPC", npc_name, agg['npc_class'] or "",
-                                        agg['npc_level'] or "", agg['count'],
-                                        agg['total_dmg'], round(avg_dmg),
-                                        round(agg['total_dur'], 1),
-                                        pname, pa['dealt']])
-                    else:
-                        w.writerow(["BY_NPC", npc_name, agg['npc_class'] or "",
-                                    agg['npc_level'] or "", agg['count'],
-                                    agg['total_dmg'], round(avg_dmg),
-                                    round(agg['total_dur'], 1), "", ""])
-            self._status_label.configure(text=f"Exported totals to {os.path.basename(path)}")
+                w.writerow(["player_name", "player_class", "player_level",
+                            "npc_name", "npc_class", "npc_level",
+                            "damage_received", "encounter_count",
+                            "group_classes"])
+                # Flat rows: one per player-NPC pair, sorted by total received desc
+                rows = []
+                for npc_name, agg in npc_agg.items():
+                    for pname, pa in agg['players'].items():
+                        rows.append((pname, pa['cls'] or "", pa['level'] or "",
+                                     npc_name, agg['npc_class'] or "",
+                                     agg['npc_level'] or "",
+                                     pa['received'], pa['count'],
+                                     group_cls_str))
+                rows.sort(key=lambda r: r[6], reverse=True)
+                for row in rows:
+                    w.writerow(row)
+            self._status_label.configure(text=f"Exported tanking to {os.path.basename(path)}")
         except Exception as e:
             self._status_label.configure(text=f"Export failed: {e}")
 
@@ -6227,6 +6381,10 @@ class CombatApp(tk.Tk):
         if xp_per_hr > 0:
             self._xp_view.insert(tk.END, "  XP/hour:   ", 'summary_label')
             self._xp_view.insert(tk.END, f"{xp_per_hr:,.0f}\n", 'summary_value')
+
+        group_size = max(len(tracker._party_eids), 1)
+        self._xp_view.insert(tk.END, "  Group Size:", 'summary_label')
+        self._xp_view.insert(tk.END, f" {group_size}\n", 'summary_value')
 
         self._xp_view.insert(tk.END, " " + "\u2500" * 36 + "\n\n", 'sep')
 
