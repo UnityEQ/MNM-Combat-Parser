@@ -1,8 +1,65 @@
 [
   {
-    "type": "text",
-    "pattern": "pies",
-    "loop": true,
-    "sound": true
+    "pattern": "sit down now",
+    "mode": "loop",
+    "sound_name": "NONE",
+    "key_pairs": [
+      {
+        "key": "x",
+        "wait": "1"
+      }
+    ],
+    "loop_delay": "5000",
+    "loop_count": "3",
+    "auto_target": false,
+    "type": "text"
+  },
+  {
+    "pattern": "make pet now",
+    "mode": "loop",
+    "sound_name": "NONE",
+    "key_pairs": [
+      {
+        "key": "/cast 9",
+        "wait": "1"
+      }
+    ],
+    "loop_delay": "5000",
+    "loop_count": "3",
+    "auto_target": false,
+    "type": "text"
+  },
+  {
+    "pattern": "Elemental Fire",
+    "mode": "once",
+    "sound_name": "NONE",
+    "key_pairs": [
+      {
+        "key": "4",
+        "wait": "0"
+      },
+      {
+        "key": "2",
+        "wait": "0"
+      },
+      {
+        "key": "5",
+        "wait": "1"
+      },
+      {
+        "key": "3",
+        "wait": "5"
+      },
+      {
+        "key": "x",
+        "wait": "0"
+      }
+    ],
+    "loop_delay": "5000",
+    "loop_count": "3",
+    "auto_target": false,
+    "type": "opcode",
+    "opcode": 86,
+    "field": "text"
   }
 ]

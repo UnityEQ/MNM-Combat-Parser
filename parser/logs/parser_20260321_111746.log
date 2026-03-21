@@ -1,0 +1,21 @@
+11:17:47 [DEBUG] KEYS validated Client.ConnectionInfo at 0x1EC22550520
+11:17:47 [DEBUG] MSG_UNKNOWN_NEW 0x0210 dir=IN len=41 body=bf 01 00 00 9d 05 01 00 01 7c bc d6 42 ef 50 b3 be 68 09 ef c3 51 57 52 3d a0 59 d8 92 df 42 00
+11:17:47 [DEBUG] MSG_UNKNOWN_NEW 0x0010 dir=OUT len=43 body=00 00 00 00 00 00 00 00 00 00 00 00 22 4a 91 42 dc c9 26 41 81 47 c0 c3 c7 63 db 41 00 00 00 00
+11:17:47 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=76
+11:17:47 [DEBUG]   PARSED type=AddBuffIcon eid=962 target=None
+11:17:48 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+11:17:48 [DEBUG]   PARSED type=AddBuffIcon eid=1088 target=None
+11:17:48 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+11:17:48 [DEBUG]   PARSED type=UpdateHealth eid=302 target=None
+11:17:48 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+11:17:48 [DEBUG]   PARSED type=UpdateMana eid=1088 target=None
+11:17:48 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+11:17:48 [DEBUG]   PARSED type=UpdateHealth eid=1110 target=None
+11:17:48 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=117
+11:17:48 [DEBUG]   PARSED type=BeginCasting eid=302 target=969
+11:17:48 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+11:17:48 [DEBUG]   PARSED type=UpdateHealth eid=1110 target=None
+11:17:48 [DEBUG] OVERVIEW_RENDER enc=0 total_dmg=0 dur=0.0s entries=0 local_eid=None player_name="" pet_states={} entity_types_sample={}
+11:17:48 [DEBUG] MSG_UNKNOWN_NEW 0x0015 dir=IN len=5 body=40 04 00 00 00
+11:17:48 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+11:17:48 [DEBUG]   PARSED type=UpdateHealth eid=1082 target=None

@@ -18,6 +18,7 @@ import logging
 import logging.handlers
 import os
 import queue
+import random
 import socket
 import struct
 import sys
@@ -739,6 +740,10 @@ class MessageHandler:
         self._messages = []       # text triggers (chat/combat only)
         self._opcode_log = []     # rich opcode dicts for browser
         self._names = {}          # eid -> name from SpawnEntity
+        self._npc_names = {}      # name -> set of eids (entity_type != 0)
+        self._pc_names = {}       # name -> set of eids (entity_type == 0)
+        self._disc_version = 0    # bumped on each new NPC or PC name
+        self._fizzle_event = threading.Event()  # set when "fizzle" detected
 
     def _name(self, eid):
         """Resolve eid to name, or None."""
@@ -761,20 +766,31 @@ class MessageHandler:
             fields["name"] = name
             if eid is not None and name:
                 self._names[eid] = name
+                if etype is not None:
+                    if etype != 0:
+                        # Track unique NPC names
+                        if name not in self._npc_names:
+                            self._npc_names[name] = set()
+                            self._disc_version += 1
+                        self._npc_names[name].add(eid)
+                    else:
+                        # Track unique PC names (entity_type == 0)
+                        if name not in self._pc_names:
+                            self._pc_names[name] = set()
+                            self._disc_version += 1
+                        self._pc_names[name].add(eid)
 
         elif msg_id == 0x0040:  # ChatMessage
             channel, off = _r_u32(body, off)
             fields["channel"] = channel
-            if channel is not None and channel == 1:
-                msg_text, off = _r_str(body, off)
-                if msg_text:
-                    text = msg_text
-                    fields["text"] = text
+            msg_text, off = _r_str(body, off)
+            if msg_text:
+                text = msg_text
+                fields["text"] = text
+                if channel == 1:
                     _blog.debug("CHAT_COMBAT: %s", text)
-            else:
-                msg_text, off = _r_str(body, off)
-                if msg_text:
-                    fields["text"] = msg_text
+                else:
+                    _blog.debug("CHAT_CH%s: %s", channel, text)
 
         elif msg_id == 0x0056:  # EndCasting
             eid, off = _r_u32(body, off)
@@ -788,6 +804,8 @@ class MessageHandler:
                 text = msg_text
                 fields["text"] = text
                 _blog.debug("END_CASTING: %s", text)
+                if "fizzle" in text.lower():
+                    self._fizzle_event.set()
 
         elif msg_id == 0x0013:  # Die
             eid, off = _r_u32(body, off)
@@ -851,7 +869,12 @@ class MessageHandler:
 
         with self._lock:
             if text:
-                self._messages.append({"text": text, "timestamp": now})
+                tmsg = {"text": text, "timestamp": now}
+                # Carry entity_name for auto-target (from EndCasting/Die/etc.)
+                ename = fields.get("entity_name")
+                if ename:
+                    tmsg["entity_name"] = ename
+                self._messages.append(tmsg)
             entry = {
                 "opcode": msg_id,
                 "opcode_name": opcode_name,
@@ -876,6 +899,21 @@ class MessageHandler:
             self._opcode_log.clear()
         return msgs
 
+    def get_discovery(self):
+        """Return sorted NPC names, sorted PC names, and version counter."""
+        with self._lock:
+            return (sorted(self._npc_names.keys()),
+                    sorted(self._pc_names.keys()),
+                    self._disc_version)
+
+    def check_fizzle(self):
+        """Check and clear the fizzle flag. Returns True if a fizzle was detected."""
+        if self._fizzle_event.is_set():
+            self._fizzle_event.clear()
+            return True
+        return False
+
+
 
 # ===================================================================
 # Trigger system — persistent pattern matching
@@ -887,7 +925,49 @@ def _triggers_path():
     return os.path.join(os.path.dirname(os.path.abspath(__file__)), "triggers.json")
 
 
+def _bot_config_path():
+    if getattr(sys, 'frozen', False):
+        return os.path.join(os.path.dirname(sys.executable), "bot_config.json")
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), "bot_config.json")
+
+
+def _load_bot_config():
+    try:
+        with open(_bot_config_path(), "r") as f:
+            data = json.loads(f.read())
+            if isinstance(data, dict):
+                return data
+    except Exception:
+        pass
+    return {}
+
+
+def _save_bot_config(config):
+    try:
+        with open(_bot_config_path(), "w") as f:
+            f.write(json.dumps(config, indent=2))
+    except Exception:
+        pass
+
+
+def _migrate_trigger_mode(t):
+    """Migrate old loop/sound bools to mode/sound_name fields."""
+    if "mode" in t:
+        return t.get("mode", "loop"), t.get("sound_name", "NONE")
+    # Legacy: loop=True → "loop", loop=False → "once"; sound=True → keep mode but set sound
+    if t.get("sound", False) and not t.get("loop", True):
+        return "sound", "SystemExclamation"
+    if t.get("loop", True):
+        return "loop", "NONE"
+    return "once", "NONE"
+
+
 def _load_triggers():
+    # Read bot_config.json for default key_pairs/loop_delay/loop_count
+    _bcfg = _load_bot_config()
+    _def_kp = _bcfg.get("key_pairs", [{"key": "4", "wait": "1"}])
+    _def_ld = str(_bcfg.get("loop_delay", "5000"))
+    _def_lc = str(_bcfg.get("loop_count", "3"))
     try:
         with open(_triggers_path(), "r") as f:
             data = json.loads(f.read())
@@ -895,27 +975,37 @@ def _load_triggers():
                 result = []
                 for t in data:
                     if isinstance(t, dict) and "pattern" in t:
+                        mode, sound_name = _migrate_trigger_mode(t)
                         ttype = t.get("type", "text")
+                        base = {
+                            "pattern": t["pattern"],
+                            "mode": mode,
+                            "sound_name": sound_name,
+                            "key_pairs": t.get("key_pairs", list(_def_kp)),
+                            "loop_delay": str(t.get("loop_delay", _def_ld)),
+                            "loop_count": str(t.get("loop_count", _def_lc)),
+                            "auto_target": bool(t.get("auto_target", False)),
+                        }
                         if ttype == "opcode":
-                            result.append({
-                                "type": "opcode",
-                                "opcode": t.get("opcode", 0),
-                                "field": t.get("field", "text"),
-                                "pattern": t["pattern"],
-                                "loop": t.get("loop", True),
-                                "sound": t.get("sound", False),
-                            })
+                            base["type"] = "opcode"
+                            base["opcode"] = t.get("opcode", 0)
+                            base["field"] = t.get("field", "text")
                         else:
-                            result.append({
-                                "type": "text",
-                                "pattern": t["pattern"],
-                                "loop": t.get("loop", True),
-                                "sound": t.get("sound", False),
-                            })
+                            base["type"] = "text"
+                        result.append(base)
                 return result
     except Exception:
         pass
-    return []
+    return [{
+        "pattern": "you gain party experience",
+        "mode": "once",
+        "sound_name": "NONE",
+        "key_pairs": [{"key": "x", "wait": "1"}],
+        "loop_delay": "5000",
+        "loop_count": "3",
+        "type": "text",
+        "auto_target": False,
+    }]
 
 
 def _save_triggers(triggers):
@@ -1244,6 +1334,16 @@ def _send_string(text):
         time.sleep(0.01)
 
 
+def _send_slash_command(cmd):
+    """Send a slash command to the game chat: [Enter]cmd[Enter]."""
+    _send_vk(VK_RETURN)
+    time.sleep(0.05)
+    _send_string(cmd)
+    time.sleep(0.05)
+    _send_vk(VK_RETURN)
+    time.sleep(0.15)
+
+
 def _force_foreground(hwnd):
     """Force a window to foreground using AttachThreadInput trick."""
     cur_thread = kernel32.GetCurrentThreadId()
@@ -1257,20 +1357,86 @@ def _force_foreground(hwnd):
         user32.AttachThreadInput(cur_thread, fg_thread, False)
 
 
-def send_attack_keys(keys):
+def send_attack_keys(key_pairs, target_name=None, fizzle_check=None, fizzle_log=None):
     """Send a sequence of attack keys to the game window. Returns True on success.
-    keys: list of single-character strings, e.g. ["4", "2"]
+    key_pairs: list of (key_str, wait_secs) tuples, e.g. [("4", 1.0), ("/cast 1", 1.0)]
+    Keys starting with '/' are sent as slash commands: [Enter]cmd[Enter].
+    target_name: if set, sends /target <name> before the key sequence.
+    fizzle_check: callable returning True if a fizzle was detected (checks & clears).
+    fizzle_log: callable(str) for logging fizzle re-casts.
     """
     hwnd = _find_game_window()
     if not hwnd:
         return False
     _force_foreground(hwnd)
-    time.sleep(0.1)
+    time.sleep(0.15)
     if user32.GetForegroundWindow() != hwnd:
-        return False
-    for key in keys:
-        _send_char(key)
-        time.sleep(0.2)
+        # Retry once
+        _force_foreground(hwnd)
+        time.sleep(0.15)
+        if user32.GetForegroundWindow() != hwnd:
+            return False
+
+    # Auto-target: send /target <name> before keys
+    if target_name:
+        _send_slash_command(f"/target {target_name}")
+        time.sleep(0.3)
+
+    # Clear any stale fizzle flag before starting
+    if fizzle_check:
+        fizzle_check()
+
+    for i, (key, wait) in enumerate(key_pairs):
+        # Re-verify game is still focused before each key
+        if user32.GetForegroundWindow() != hwnd:
+            _force_foreground(hwnd)
+            time.sleep(0.1)
+            if user32.GetForegroundWindow() != hwnd:
+                return False
+
+        def _send_key():
+            if key.startswith("/"):
+                _send_slash_command(key)
+            else:
+                _send_char(key)
+
+        _send_key()
+
+        # Wait period — poll for fizzles and re-send if detected
+        if i < len(key_pairs) - 1:
+            jitter = wait * random.uniform(0, 0.5)
+            deadline = time.time() + wait + jitter
+            fizzle_retries = 0
+            while time.time() < deadline:
+                time.sleep(0.1)
+                if fizzle_check and fizzle_retries < 3 and fizzle_check():
+                    fizzle_retries += 1
+                    if fizzle_log:
+                        fizzle_log(f"Fizzle! Re-sending: {key} (retry {fizzle_retries}/3)")
+                    # Re-focus and re-send
+                    if user32.GetForegroundWindow() != hwnd:
+                        _force_foreground(hwnd)
+                        time.sleep(0.1)
+                    _send_key()
+                    # Push back deadline — full wait restarts
+                    jitter = wait * random.uniform(0, 0.5)
+                    deadline = time.time() + wait + jitter
+        else:
+            # Last key — still check for fizzle briefly
+            if fizzle_check:
+                fizzle_retries = 0
+                end = time.time() + min(wait, 2.0)
+                while time.time() < end and fizzle_retries < 3:
+                    time.sleep(0.1)
+                    if fizzle_check():
+                        fizzle_retries += 1
+                        if fizzle_log:
+                            fizzle_log(f"Fizzle! Re-sending: {key} (retry {fizzle_retries}/3)")
+                        if user32.GetForegroundWindow() != hwnd:
+                            _force_foreground(hwnd)
+                            time.sleep(0.1)
+                        _send_key()
+                        end = time.time() + min(wait, 2.0)
     return True
 
 
@@ -1295,14 +1461,58 @@ COLORS = {
     "gold_dim": "#7a6530",
 }
 
+# Windows system sounds available via winsound.PlaySound(alias, SND_ALIAS)
+WINDOWS_SOUNDS = [
+    "NONE",
+    # Classic system sounds
+    "SystemExclamation",
+    "SystemHand",
+    "SystemAsterisk",
+    "SystemNotification",
+    ".Default",
+    # Notification sounds
+    "Notification.Default",
+    "Notification.IM",
+    "Notification.Mail",
+    "Notification.Reminder",
+    # Looping alarms
+    "Notification.Looping.Alarm",
+    "Notification.Looping.Alarm2",
+    "Notification.Looping.Alarm3",
+    "Notification.Looping.Alarm4",
+    "Notification.Looping.Alarm5",
+    "Notification.Looping.Alarm6",
+    "Notification.Looping.Alarm7",
+    "Notification.Looping.Alarm8",
+    "Notification.Looping.Alarm9",
+    "Notification.Looping.Alarm10",
+    # Looping ringtones
+    "Notification.Looping.Call",
+    "Notification.Looping.Call2",
+    "Notification.Looping.Call3",
+    "Notification.Looping.Call4",
+    "Notification.Looping.Call5",
+    "Notification.Looping.Call6",
+    "Notification.Looping.Call7",
+    "Notification.Looping.Call8",
+    "Notification.Looping.Call9",
+    "Notification.Looping.Call10",
+    # Device / misc
+    "DeviceConnect",
+    "DeviceDisconnect",
+    "DeviceFail",
+    "CriticalBatteryAlarm",
+    "WindowsUAC",
+]
+
 
 class BotApp(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("ChatParser V1.1")
+        self.title("ChatParser V2.0")
         self.configure(bg=COLORS["bg"])
-        self.geometry("460x900")
-        self.minsize(400, 700)
+        self.geometry("620x900")
+        self.minsize(550, 700)
         self.attributes("-topmost", True)
         self.attributes("-alpha", 0.75)
 
@@ -1311,12 +1521,13 @@ class BotApp(tk.Tk):
         self._bot_thread = None
         self._bot_stop = threading.Event()
         self._bot_triggered = False
-        self._bot_loop_mode = True   # True=loop keys, False=once
-        self._bot_sound_enabled = False  # whether active trigger has sound
+        self._bot_mode = "loop"      # "loop", "once", or "sound"
+        self._bot_sound_name = "NONE"  # which Windows sound to play
         self._active_trigger_pattern = None  # pattern of currently active trigger
-        self._bot_attack_keys = tk.StringVar(value="4,2,5,3")
-        self._bot_loop_delay = tk.StringVar(value="5000")
-        self._bot_loop_count = tk.StringVar(value="3")
+        self._active_trigger_idx = None      # index of currently active trigger
+        self._active_trigger_target = None   # speaker name for auto-target
+        self._trigger_last_fired = {}        # idx -> timestamp of last fire
+        self._pending_triggers = []          # queue of (mode, sound, pattern, idx, target_name) waiting to fire
         self._bot_status = "Idle"
 
         # Triggers
@@ -1343,15 +1554,69 @@ class BotApp(tk.Tk):
     def _on_status(self, msg):
         self._conn_status.set(msg)
 
+    def _trigger_cooldown(self, trig):
+        """Compute cooldown in seconds for a trigger = sum of key wait times + 1s buffer."""
+        total = 0
+        for kp in trig.get("key_pairs", []):
+            try:
+                total += max(float(kp.get("wait", "1")), 0)
+            except ValueError:
+                total += 1.0
+        return total + 1.0
+
+    def _trigger_on_cooldown(self, idx):
+        """Return True if trigger idx is still on cooldown from its last fire."""
+        last = self._trigger_last_fired.get(idx)
+        if last is None:
+            return False
+        trig = self._triggers[idx] if idx < len(self._triggers) else {}
+        cd = self._trigger_cooldown(trig)
+        return (time.time() - last) < cd
+
     def _check_triggers(self, text):
-        """Return the first matching text trigger dict, or None."""
+        """Return (trigger_dict, index) for first matching text trigger, or (None, None)."""
         text_lower = text.lower()
-        for trig in self._triggers:
+        for i, trig in enumerate(self._triggers):
             if trig.get("type", "text") != "text":
                 continue
             pat = trig["pattern"]
             if pat == "*" or pat.lower() in text_lower:
-                return trig
+                if not self._trigger_on_cooldown(i):
+                    return trig, i
+        return None, None
+
+    @staticmethod
+    def _extract_speaker_name(text):
+        """Extract the source entity name from combat/chat text for auto-targeting.
+        Returns the name string, or None if not found / local player."""
+        if not text:
+            return None
+        # Local player — no need to target self
+        if text.startswith("Your ") or text.startswith("You "):
+            return None
+        # Chat patterns: "Zanthis tells the party,", "Zanthis says,", etc.
+        _chat_verbs = (
+            " tells ", " says,", " says ", " shouts,", " shouts ",
+            " auctions,", " auctions ",
+        )
+        for v in _chat_verbs:
+            idx = text.find(v)
+            if idx > 0:
+                return text[:idx]
+        # Possessive: "Bannin's Life Draw hits..."
+        pos = text.find("'s ")
+        if pos > 0:
+            return text[:pos]
+        # Third-person melee verbs: "Bannin slashes a goblin..."
+        _target_verbs = (
+            " slashes ", " hits ", " kicks ", " punches ", " bashes ",
+            " crushes ", " bites ", " stabs ", " pierces ", " strikes ",
+            " claws ", " gores ", " mauls ", " rends ", " smashes ",
+        )
+        for v in _target_verbs:
+            idx = text.find(v)
+            if idx > 0:
+                return text[:idx]
         return None
 
     @staticmethod
@@ -1367,10 +1632,10 @@ class BotApp(tk.Tk):
         """
         container = tk.Frame(parent, bg=COLORS["bg"])
 
-        # Scrollbar (gold trough, dark slider)
+        # Scrollbar (dark trough, black slider)
         sb = tk.Scrollbar(container, orient="vertical",
                           troughcolor=COLORS["bg_dark"],
-                          bg=COLORS["gold_dim"], activebackground=COLORS["gold"],
+                          bg=COLORS["bg"], activebackground=COLORS["bg_light"],
                           highlightbackground=COLORS["bg"], highlightcolor=COLORS["bg"],
                           relief="flat", width=10, bd=0)
         sb.pack(side="right", fill="y")
@@ -1422,11 +1687,23 @@ class BotApp(tk.Tk):
         title_frame.pack(fill="x")
         tk.Label(title_frame, text="\u2500\u2500 ChatParser \u2500\u2500", bg=COLORS["bg"],
                  fg=COLORS["gold"], font=("Consolas", 16, "bold")).pack()
+        # Opacity toggle (sun icon) — top-right corner
+        self._opaque = False  # starts at 75%
+        _opacity_border = tk.Frame(title_frame, bg=COLORS["gold_dim"],
+                                    bd=0, padx=1, pady=1)
+        _opacity_border.place(relx=1.0, x=-8, y=4, anchor="ne")
+        self._opacity_border = _opacity_border
+        self._opacity_btn = tk.Label(
+            _opacity_border, text="\u2600", bg=COLORS["bg"],
+            fg=COLORS["gold_dim"], font=("Segoe UI Emoji", 12),
+            cursor="hand2", bd=0, padx=4, pady=1)
+        self._opacity_btn.pack()
+        self._opacity_btn.bind("<Button-1>", self._toggle_opacity)
 
         # ══════════════════════════════════════
         # Section 1: Bot Controls
         # ══════════════════════════════════════
-        ctrl_sec = self._deco_section(self, title="Bot Controls")
+        ctrl_sec = self._deco_section(self, title="Master Control")
 
         # ON/OFF toggle
         self._toggle_btn = tk.Button(
@@ -1438,34 +1715,6 @@ class BotApp(tk.Tk):
             command=self._toggle_bot)
         self._toggle_btn.pack(pady=(0, 6))
 
-        # Settings grid
-        settings = tk.Frame(ctrl_sec, bg=COLORS["bg"])
-        settings.pack(fill="x", pady=2)
-
-        row = 0
-        for label_text, var in [
-            ("Attack Keys", self._bot_attack_keys),
-            ("Loop Delay ms", self._bot_loop_delay),
-            ("Loop Count", self._bot_loop_count),
-        ]:
-            tk.Label(settings, text=label_text, bg=COLORS["bg"],
-                     fg=COLORS["fg_dim"], font=("Consolas", 9),
-                     anchor="w").grid(row=row, column=0, sticky="w", padx=(0, 8), pady=2)
-            e = tk.Entry(settings, textvariable=var, bg=COLORS["bg_light"],
-                         fg=COLORS["fg"], insertbackground=COLORS["fg"],
-                         font=("Consolas", 10), width=20, relief="flat",
-                         border=2)
-            e.grid(row=row, column=1, sticky="ew", pady=2)
-            if label_text == "Attack Keys":
-                row += 1
-                tk.Label(settings, text="assist,pet attack,instant,nuke",
-                         bg=COLORS["bg"], fg=COLORS["fg_dim"],
-                         font=("Consolas", 7), anchor="w").grid(
-                    row=row, column=1, sticky="w", pady=(0, 2))
-            row += 1
-
-        settings.columnconfigure(1, weight=1)
-
         # Bot status line
         self._status_label = tk.Label(
             ctrl_sec, text="Status: Idle", bg=COLORS["bg"],
@@ -1476,6 +1725,9 @@ class BotApp(tk.Tk):
         # Section 2: Triggers / Opcode Browser
         # ══════════════════════════════════════
         trig_sec = self._deco_section(self, title="Triggers", expand=True)
+        # Fixed height — content scrolls instead of pushing layout
+        trig_sec._deco_outer.configure(height=320)
+        trig_sec._deco_outer.pack_propagate(False)
 
         # Tab buttons — art deco bordered sub-section
         tab_border = tk.Frame(trig_sec, bg=COLORS["gold"])
@@ -1501,7 +1753,17 @@ class BotApp(tk.Tk):
             tab_inner, text="\u25C6 Opcode Browser", font=("Consolas", 10, "bold"),
             relief="flat", cursor="hand2", padx=12, pady=3,
             command=lambda: self._switch_trigger_tab("opcode"))
-        self._tab_opcode_btn.pack(side="left", padx=(2, 4))
+        self._tab_opcode_btn.pack(side="left", padx=(2, 2))
+
+        # Center divider 2
+        tk.Label(tab_inner, text="\u2502", bg=COLORS["bg"], fg=COLORS["gold"],
+                 font=("Consolas", 10)).pack(side="left", padx=2)
+
+        self._tab_discovery_btn = tk.Button(
+            tab_inner, text="\u25C6 Discovery", font=("Consolas", 10, "bold"),
+            relief="flat", cursor="hand2", padx=12, pady=3,
+            command=lambda: self._switch_trigger_tab("discovery"))
+        self._tab_discovery_btn.pack(side="left", padx=(2, 4))
 
         # Decorative right accent
         tk.Label(tab_inner, text="\u2500\u25B6", bg=COLORS["bg"], fg=COLORS["gold"],
@@ -1532,7 +1794,7 @@ class BotApp(tk.Tk):
                   relief="flat", cursor="hand2", width=6,
                   command=self._add_trigger).pack(side="right")
 
-        # Trigger table header
+        # Trigger table header — widths match trigger row widgets
         hdr_frame = tk.Frame(self._text_trig_frame, bg=COLORS["bg_dark"])
         hdr_frame.pack(fill="x", pady=(4, 0))
         tk.Label(hdr_frame, text="Pattern", bg=COLORS["bg_dark"],
@@ -1540,16 +1802,49 @@ class BotApp(tk.Tk):
                  anchor="w").pack(side="left", fill="x", expand=True, padx=4)
         tk.Label(hdr_frame, text="Mode", bg=COLORS["bg_dark"],
                  fg=COLORS["fg_dim"], font=("Consolas", 8),
-                 width=6).pack(side="left", padx=2)
+                 anchor="center", width=9).pack(side="left", padx=2)
         tk.Label(hdr_frame, text="SFX", bg=COLORS["bg_dark"],
                  fg=COLORS["fg_dim"], font=("Consolas", 8),
-                 width=3).pack(side="left", padx=2)
+                 anchor="center", width=14).pack(side="left", padx=2)
         tk.Label(hdr_frame, text="", bg=COLORS["bg_dark"],
-                 width=2).pack(side="left", padx=2)
+                 width=2).pack(side="left", padx=(2, 4))
 
-        # Trigger table rows container
-        self._trigger_table = tk.Frame(self._text_trig_frame, bg=COLORS["bg_dark"])
-        self._trigger_table.pack(fill="x", pady=(0, 4))
+        # Scrollable trigger table area
+        trig_scroll_frame = tk.Frame(self._text_trig_frame, bg=COLORS["bg_dark"])
+        trig_scroll_frame.pack(fill="both", expand=True, pady=(0, 4))
+
+        self._trig_canvas = tk.Canvas(
+            trig_scroll_frame, bg=COLORS["bg_dark"], highlightthickness=0)
+        trig_sb = tk.Scrollbar(
+            trig_scroll_frame, orient="vertical",
+            command=self._trig_canvas.yview,
+            troughcolor=COLORS["bg_dark"], bg=COLORS["bg"],
+            activebackground=COLORS["bg_light"], relief="flat", width=10, bd=0)
+        trig_sb.pack(side="right", fill="y")
+        self._trig_canvas.pack(side="left", fill="both", expand=True)
+        self._trig_canvas.configure(yscrollcommand=trig_sb.set)
+
+        self._trigger_table = tk.Frame(self._trig_canvas, bg=COLORS["bg_dark"])
+        self._trig_canvas_window = self._trig_canvas.create_window(
+            (0, 0), window=self._trigger_table, anchor="nw")
+        self._trigger_table.bind("<Configure>",
+            lambda _e: self._trig_canvas.configure(
+                scrollregion=self._trig_canvas.bbox("all")))
+        self._trig_canvas.bind("<Configure>",
+            lambda e: self._trig_canvas.itemconfig(
+                self._trig_canvas_window, width=e.width))
+
+        # Mousewheel scroll for trigger table
+        def _on_trig_mousewheel(e):
+            self._trig_canvas.yview_scroll(int(-1*(e.delta/120)), "units")
+        self._trig_canvas.bind("<MouseWheel>", _on_trig_mousewheel)
+        self._trigger_table.bind("<MouseWheel>", _on_trig_mousewheel)
+        def _bind_trig_mw(widget):
+            widget.bind("<MouseWheel>", _on_trig_mousewheel)
+            for child in widget.winfo_children():
+                _bind_trig_mw(child)
+        self._bind_trig_mw = _bind_trig_mw
+
         self._trigger_rows = []
         for trig in self._triggers:
             self._add_trigger_row(trig)
@@ -1601,8 +1896,8 @@ class BotApp(tk.Tk):
         self._opcode_detail_sb = tk.Scrollbar(
             self._opcode_detail_outer, orient="vertical",
             command=self._opcode_detail_canvas.yview,
-            troughcolor=COLORS["bg_dark"], bg=COLORS["gold_dim"],
-            activebackground=COLORS["gold"], relief="flat", width=10, bd=0)
+            troughcolor=COLORS["bg_dark"], bg=COLORS["bg"],
+            activebackground=COLORS["bg_light"], relief="flat", width=10, bd=0)
         self._opcode_detail_sb.pack(side="right", fill="y")
         self._opcode_detail_canvas.pack(side="left", fill="both", expand=True)
         self._opcode_detail_canvas.configure(yscrollcommand=self._opcode_detail_sb.set)
@@ -1620,6 +1915,61 @@ class BotApp(tk.Tk):
             self._opcode_detail_canvas.yview_scroll(int(-1*(e.delta/120)), "units")
         self._opcode_detail_canvas.bind("<MouseWheel>", _on_detail_mousewheel)
         self._opcode_detail_frame.bind("<MouseWheel>", _on_detail_mousewheel)
+
+        # ---- Discovery container (hidden by default) ----
+        self._discovery_frame = tk.Frame(trig_sec, bg=COLORS["bg"])
+        # Not packed yet — shown when tab switches
+
+        # Header row with buttons
+        disc_hdr = tk.Frame(self._discovery_frame, bg=COLORS["bg"])
+        disc_hdr.pack(fill="x", pady=(4, 2))
+        self._disc_count_lbl = tk.Label(
+            disc_hdr, text="NPCs: 0  |  PCs: 0", bg=COLORS["bg"],
+            fg=COLORS["gold"], font=("Consolas", 9, "bold"), anchor="w")
+        self._disc_count_lbl.pack(side="left")
+        tk.Button(disc_hdr, text="Reset", bg=COLORS["red"],
+                  fg=COLORS["bg_dark"], font=("Consolas", 9, "bold"),
+                  relief="flat", cursor="hand2", width=6,
+                  command=self._reset_discovery).pack(side="right", padx=(4, 0))
+        tk.Button(disc_hdr, text="Copy", bg=COLORS["blue"],
+                  fg=COLORS["bg_dark"], font=("Consolas", 9, "bold"),
+                  relief="flat", cursor="hand2", width=6,
+                  command=self._copy_discovery).pack(side="right")
+
+        # Two-column layout: NPCs left, PCs right
+        disc_cols = tk.Frame(self._discovery_frame, bg=COLORS["bg"])
+        disc_cols.pack(fill="both", expand=True, pady=(0, 4))
+        disc_cols.rowconfigure(0, weight=1)
+        disc_cols.columnconfigure(0, weight=1)
+        disc_cols.columnconfigure(1, weight=1)
+
+        # NPC column
+        npc_col = tk.Frame(disc_cols, bg=COLORS["bg"])
+        npc_col.grid(row=0, column=0, sticky="nsew", padx=(0, 2))
+        tk.Label(npc_col, text="NPCs", bg=COLORS["bg_dark"],
+                 fg=COLORS["gold"], font=("Consolas", 9, "bold")).pack(fill="x")
+        npc_list_frame, self._disc_npc_list = self._scrollable_text(
+            npc_col, bg=COLORS["bg_dark"], fg=COLORS["fg"],
+            font=("Consolas", 9), wrap="none", relief="flat",
+            border=0, padx=6, pady=4, cursor="arrow",
+            state="disabled", height=12)
+        npc_list_frame.pack(fill="both", expand=True)
+        self._disc_npc_list.tag_configure("npc", foreground=COLORS["fg"])
+
+        # PC column
+        pc_col = tk.Frame(disc_cols, bg=COLORS["bg"])
+        pc_col.grid(row=0, column=1, sticky="nsew", padx=(2, 0))
+        tk.Label(pc_col, text="Players", bg=COLORS["bg_dark"],
+                 fg=COLORS["gold"], font=("Consolas", 9, "bold")).pack(fill="x")
+        pc_list_frame, self._disc_pc_list = self._scrollable_text(
+            pc_col, bg=COLORS["bg_dark"], fg=COLORS["fg"],
+            font=("Consolas", 9), wrap="none", relief="flat",
+            border=0, padx=6, pady=4, cursor="arrow",
+            state="disabled", height=12)
+        pc_list_frame.pack(fill="both", expand=True)
+        self._disc_pc_list.tag_configure("pc", foreground=COLORS["fg"])
+
+        self._disc_version_ui = -1  # track when to re-render
 
         # Apply initial tab style
         self._apply_tab_style()
@@ -1643,44 +1993,61 @@ class BotApp(tk.Tk):
         self._combat_log.tag_configure("timestamp", foreground=COLORS["fg_dim"])
 
     def _add_trigger_row(self, trig):
-        """Build one trigger row: [pattern] [Loop/Once] [sound] [X]."""
+        """Build one trigger row: [▶ pattern] [Loop/Once] [sound] [X] + hidden detail panel."""
         idx = len(self._trigger_rows)
-        row = tk.Frame(self._trigger_table, bg=COLORS["bg_light"], pady=2)
-        row.pack(fill="x", pady=(1, 0))
 
-        # Pattern label — opcode triggers show [0xNNNN.field] prefix
+        # Outer container holds header row + detail frame
+        outer = tk.Frame(self._trigger_table, bg=COLORS["bg_light"])
+        outer.pack(fill="x", pady=(1, 0))
+
+        row = tk.Frame(outer, bg=COLORS["bg_light"], pady=2)
+        row.pack(fill="x")
+
+        # Arrow + Pattern label — clickable to expand
         if trig.get("type") == "opcode":
             op = trig.get("opcode", 0)
             field = trig.get("field", "")
-            label_text = f"[0x{op:04X}.{field}] {trig['pattern']}"
+            pat_text = f"[0x{op:04X}.{field}] {trig['pattern']}"
             label_fg = COLORS["fg_dim"]
         else:
-            label_text = trig["pattern"]
+            pat_text = trig["pattern"]
             label_fg = COLORS["fg"]
-        tk.Label(row, text=label_text, bg=COLORS["bg_light"],
-                 fg=label_fg, font=("Consolas", 9),
-                 anchor="w").pack(side="left", fill="x", expand=True, padx=4)
+        arrow_lbl = tk.Label(row, text="\u25B6", bg=COLORS["bg_light"],
+                             fg=COLORS["gold_dim"], font=("Consolas", 8),
+                             cursor="hand2")
+        arrow_lbl.pack(side="left", padx=(4, 0))
+        pat_lbl = tk.Label(row, text=pat_text, bg=COLORS["bg_light"],
+                           fg=label_fg, font=("Consolas", 9),
+                           anchor="w", cursor="hand2")
+        pat_lbl.pack(side="left", fill="x", expand=True, padx=(2, 4))
+        arrow_lbl.bind("<Button-1>", lambda _e, i=idx: self._toggle_trigger_expand(i))
+        pat_lbl.bind("<Button-1>", lambda _e, i=idx: self._toggle_trigger_expand(i))
 
-        # Loop / Once toggle button
-        is_loop = trig.get("loop", True)
+        # Mode cycle button (Loop → Once → Sound → Loop)
+        mode = trig.get("mode", "loop")
+        mode_labels = {"loop": "Loop", "once": "Once", "sound": "Sound Only"}
+        mode_colors = {"loop": COLORS["teal"], "once": COLORS["peach"], "sound": COLORS["yellow"]}
         mode_btn = tk.Button(
-            row, text="Loop" if is_loop else "Once",
-            bg=COLORS["teal"] if is_loop else COLORS["peach"],
+            row, text=mode_labels.get(mode, "Loop"),
+            bg=mode_colors.get(mode, COLORS["teal"]),
             fg=COLORS["bg_dark"], font=("Consolas", 8, "bold"),
-            relief="flat", cursor="hand2", width=5,
-            command=lambda i=idx: self._toggle_trigger_mode(i))
+            relief="flat", cursor="hand2", width=9,
+            command=lambda i=idx: self._cycle_trigger_mode(i))
         mode_btn.pack(side="left", padx=2)
 
-        # Sound toggle button (speaker icon)
-        has_sound = trig.get("sound", False)
-        sound_btn = tk.Button(
-            row, text="\U0001F50A" if has_sound else "\U0001F507",
-            bg=COLORS["yellow"] if has_sound else COLORS["bg_dark"],
-            fg=COLORS["bg_dark"] if has_sound else COLORS["fg_dim"],
-            font=("Segoe UI Emoji", 8), relief="flat",
-            cursor="hand2", width=3,
-            command=lambda i=idx: self._toggle_trigger_sound(i))
-        sound_btn.pack(side="left", padx=2)
+        # Sound dropdown
+        sound_var = tk.StringVar(value=trig.get("sound_name", "NONE"))
+        sound_menu = tk.OptionMenu(row, sound_var, *WINDOWS_SOUNDS,
+                                   command=lambda _val, i=idx, sv=sound_var: self._set_trigger_sound(i, sv))
+        _sfx_active = trig.get("sound_name", "NONE") != "NONE"
+        sound_menu.configure(
+            bg=COLORS["mauve"] if _sfx_active else COLORS["bg_dark"],
+            fg=COLORS["bg_dark"] if _sfx_active else COLORS["fg_dim"],
+            font=("Consolas", 7), relief="flat",
+            highlightthickness=0, width=12, cursor="hand2")
+        sound_menu["menu"].configure(bg=COLORS["bg_light"], fg=COLORS["fg"],
+                                     font=("Consolas", 8))
+        sound_menu.pack(side="left", padx=2)
 
         # Red X remove button
         tk.Button(row, text="X",
@@ -1689,7 +2056,263 @@ class BotApp(tk.Tk):
                   relief="flat", cursor="hand2", width=2,
                   command=lambda i=idx: self._remove_trigger(i)).pack(side="left", padx=(2, 4))
 
-        self._trigger_rows.append({"frame": row, "mode_btn": mode_btn, "sound_btn": sound_btn})
+        # Detail frame — hidden until expanded
+        detail_frame = tk.Frame(outer, bg=COLORS["bg_dark"])
+
+        self._trigger_rows.append({
+            "frame": outer, "mode_btn": mode_btn,
+            "sound_var": sound_var, "sound_menu": sound_menu,
+            "arrow_lbl": arrow_lbl, "pat_lbl": pat_lbl,
+            "detail_frame": detail_frame,
+            "expanded": False, "built": False,
+            "key_pair_entries": [], "delay_entry": None, "count_entry": None,
+            "key_rows_frame": None,
+        })
+        # Bind mousewheel so scrolling works over trigger rows
+        if hasattr(self, "_bind_trig_mw"):
+            self._bind_trig_mw(outer)
+
+    def _toggle_trigger_expand(self, idx):
+        """Toggle expand/collapse of trigger detail panel."""
+        if idx < 0 or idx >= len(self._trigger_rows):
+            return
+        # Sound Only mode — never expand
+        if self._triggers[idx].get("mode", "loop") == "sound":
+            return
+        info = self._trigger_rows[idx]
+        if info["expanded"]:
+            info["detail_frame"].pack_forget()
+            info["arrow_lbl"].configure(text="\u25B6")
+            info["expanded"] = False
+        else:
+            if not info["built"]:
+                self._build_trigger_detail(info, self._triggers[idx], idx)
+                info["built"] = True
+            info["detail_frame"].pack(fill="x", padx=(12, 4), pady=(0, 4))
+            info["arrow_lbl"].configure(text="\u25BC")
+            info["expanded"] = True
+
+    def _build_trigger_detail(self, info, trig, idx):
+        """Build the inline key sequence / delay / count settings inside detail_frame."""
+        df = info["detail_frame"]
+
+        # Keys/settings container — hidden when mode is "sound"
+        keys_container = tk.Frame(df, bg=COLORS["bg_dark"])
+        info["keys_container"] = keys_container
+
+        # Auto-target checkbox — above keys
+        at_row = tk.Frame(keys_container, bg=COLORS["bg_dark"])
+        at_row.pack(fill="x", padx=4, pady=(4, 2))
+        at_var = tk.BooleanVar(value=trig.get("auto_target", False))
+        at_cb = tk.Checkbutton(
+            at_row, text="Auto /target speaker",
+            variable=at_var, bg=COLORS["bg_dark"], fg=COLORS["teal"],
+            selectcolor=COLORS["bg_light"], activebackground=COLORS["bg_dark"],
+            activeforeground=COLORS["teal"], font=("Consolas", 8),
+            command=lambda i=idx, v=at_var: self._toggle_auto_target(i, v))
+        at_cb.pack(side="left")
+        info["auto_target_var"] = at_var
+
+        # Header row
+        hdr = tk.Frame(keys_container, bg=COLORS["bg_dark"])
+        hdr.pack(fill="x", pady=(4, 0), padx=4)
+        tk.Label(hdr, text="Key or /cmd", bg=COLORS["bg_dark"], fg=COLORS["gold_dim"],
+                 font=("Consolas", 8), width=10, anchor="w").pack(side="left", padx=(0, 4))
+        tk.Label(hdr, text="Wait(s)", bg=COLORS["bg_dark"], fg=COLORS["gold_dim"],
+                 font=("Consolas", 8), width=7, anchor="w").pack(side="left", padx=(0, 4))
+        tk.Label(hdr, text="(+jitter)", bg=COLORS["bg_dark"], fg=COLORS["gold_dim"],
+                 font=("Consolas", 7), anchor="w").pack(side="left")
+
+        # Key pair rows container
+        key_rows_frame = tk.Frame(keys_container, bg=COLORS["bg_dark"])
+        key_rows_frame.pack(fill="x", padx=4)
+        info["key_rows_frame"] = key_rows_frame
+        self._trig_rebuild_key_rows(idx)
+
+        # Add key pair row
+        add_row = tk.Frame(keys_container, bg=COLORS["bg_dark"])
+        add_row.pack(fill="x", padx=4, pady=(2, 0))
+        add_key_e = tk.Entry(add_row, bg=COLORS["bg_light"], fg=COLORS["fg"],
+                             insertbackground=COLORS["fg"],
+                             font=("Consolas", 10), width=10, relief="flat", border=2)
+        add_key_e.pack(side="left", padx=(0, 4))
+        add_wait_e = tk.Entry(add_row, bg=COLORS["bg_light"], fg=COLORS["fg"],
+                              insertbackground=COLORS["fg"],
+                              font=("Consolas", 10), width=5, relief="flat", border=2)
+        add_wait_e.insert(0, "1")
+        add_wait_e.pack(side="left", padx=(0, 4))
+        tk.Button(add_row, text="Add", bg=COLORS["green"], fg=COLORS["bg_dark"],
+                  font=("Consolas", 8, "bold"), relief="flat", cursor="hand2",
+                  width=3, command=lambda i=idx, ke=add_key_e, we=add_wait_e: self._trig_add_key_pair(i, ke, we)
+                  ).pack(side="left")
+
+        # Loop Delay row
+        delay_row = tk.Frame(keys_container, bg=COLORS["bg_dark"])
+        delay_row.pack(fill="x", padx=4, pady=(4, 0))
+        tk.Label(delay_row, text="Loop Delay ms", bg=COLORS["bg_dark"],
+                 fg=COLORS["fg_dim"], font=("Consolas", 8)).pack(side="left", padx=(0, 2))
+        delay_e = tk.Entry(delay_row, bg=COLORS["bg_light"], fg=COLORS["fg"],
+                           insertbackground=COLORS["fg"],
+                           font=("Consolas", 10), width=6, relief="flat", border=2)
+        delay_e.insert(0, trig.get("loop_delay", "5000"))
+        delay_e.pack(side="left")
+        delay_e.bind("<FocusOut>", lambda _e, i=idx: self._sync_trigger_settings(i))
+
+        # Loop Count row
+        count_row = tk.Frame(keys_container, bg=COLORS["bg_dark"])
+        count_row.pack(fill="x", padx=4, pady=(2, 4))
+        tk.Label(count_row, text="Loops", bg=COLORS["bg_dark"],
+                 fg=COLORS["fg_dim"], font=("Consolas", 8)).pack(side="left", padx=(0, 2))
+        count_e = tk.Entry(count_row, bg=COLORS["bg_light"], fg=COLORS["fg"],
+                           insertbackground=COLORS["fg"],
+                           font=("Consolas", 10), width=4, relief="flat", border=2)
+        count_e.insert(0, trig.get("loop_count", "3"))
+        count_e.pack(side="left")
+        count_e.bind("<FocusOut>", lambda _e, i=idx: self._sync_trigger_settings(i))
+
+        info["delay_entry"] = delay_e
+        info["count_entry"] = count_e
+
+        # Pattern edit row — at the bottom, unobtrusive
+        pat_row = tk.Frame(keys_container, bg=COLORS["bg_dark"])
+        pat_row.pack(fill="x", padx=4, pady=(4, 4))
+        tk.Label(pat_row, text="Pattern", bg=COLORS["bg_dark"],
+                 fg=COLORS["fg_dim"], font=("Consolas", 8)).pack(side="left", padx=(0, 2))
+        pat_e = tk.Entry(pat_row, bg=COLORS["bg_light"], fg=COLORS["fg"],
+                         insertbackground=COLORS["fg"],
+                         font=("Consolas", 10), relief="flat", border=2)
+        pat_e.insert(0, trig.get("pattern", ""))
+        pat_e.pack(side="left", fill="x", expand=True)
+        pat_e.bind("<KeyRelease>", lambda _e, i=idx: self._sync_trigger_pattern(i))
+        pat_e.bind("<FocusOut>", lambda _e, i=idx: self._sync_trigger_pattern(i))
+        info["pattern_entry"] = pat_e
+
+        # Show container only if mode is not "sound"
+        if trig.get("mode", "loop") != "sound":
+            keys_container.pack(fill="x")
+
+        # Bind mousewheel on new detail children
+        if hasattr(self, "_bind_trig_mw"):
+            self._bind_trig_mw(df)
+
+    def _trig_rebuild_key_rows(self, idx):
+        """Rebuild key pair entry rows for trigger idx from its trigger dict."""
+        info = self._trigger_rows[idx]
+        krf = info["key_rows_frame"]
+        for child in krf.winfo_children():
+            child.destroy()
+        info["key_pair_entries"] = []
+        trig = self._triggers[idx]
+        for pidx, pair in enumerate(trig.get("key_pairs", [])):
+            row = tk.Frame(krf, bg=COLORS["bg_dark"])
+            row.pack(fill="x", pady=1)
+            ke = tk.Entry(row, bg=COLORS["bg_light"], fg=COLORS["fg"],
+                          insertbackground=COLORS["fg"],
+                          font=("Consolas", 10), width=10, relief="flat", border=2)
+            ke.insert(0, pair.get("key", ""))
+            ke.pack(side="left", padx=(0, 4))
+            we = tk.Entry(row, bg=COLORS["bg_light"], fg=COLORS["fg"],
+                          insertbackground=COLORS["fg"],
+                          font=("Consolas", 10), width=5, relief="flat", border=2)
+            _wv = pair.get("wait", "1")
+            try:
+                _wf = float(_wv)
+                _wv = str(int(_wf)) if _wf == int(_wf) else _wv
+            except ValueError:
+                pass
+            we.insert(0, _wv)
+            we.pack(side="left", padx=(0, 4))
+            ke.bind("<FocusOut>", lambda _e, i=idx, p=pidx: self._sync_trig_key_pair(i, p))
+            we.bind("<FocusOut>", lambda _e, i=idx, p=pidx: self._sync_trig_key_pair(i, p))
+            tk.Button(row, text="X", bg=COLORS["red"], fg=COLORS["bg_dark"],
+                      font=("Consolas", 8, "bold"), relief="flat", cursor="hand2",
+                      width=2,
+                      command=lambda i=idx, p=pidx: self._trig_remove_key_pair(i, p)
+                      ).pack(side="left")
+            info["key_pair_entries"].append((ke, we))
+        # Rebind mousewheel on rebuilt rows
+        if hasattr(self, "_bind_trig_mw"):
+            self._bind_trig_mw(krf)
+
+    def _sync_trig_key_pair(self, idx, pair_idx):
+        """Sync an edited key pair entry back to trigger dict and save."""
+        if idx >= len(self._triggers) or idx >= len(self._trigger_rows):
+            return
+        info = self._trigger_rows[idx]
+        entries = info["key_pair_entries"]
+        if pair_idx >= len(entries):
+            return
+        ke, we = entries[pair_idx]
+        trig = self._triggers[idx]
+        kps = trig.get("key_pairs", [])
+        if pair_idx < len(kps):
+            kps[pair_idx]["key"] = ke.get().strip()
+            kps[pair_idx]["wait"] = we.get().strip()
+            _save_triggers(self._triggers)
+
+    def _trig_add_key_pair(self, idx, key_entry, wait_entry):
+        """Add a new key pair to trigger idx."""
+        key = key_entry.get().strip()
+        if not key:
+            return
+        wait = wait_entry.get().strip() or "1"
+        trig = self._triggers[idx]
+        if "key_pairs" not in trig:
+            trig["key_pairs"] = []
+        trig["key_pairs"].append({"key": key, "wait": wait})
+        _save_triggers(self._triggers)
+        key_entry.delete(0, "end")
+        self._trig_rebuild_key_rows(idx)
+
+    def _trig_remove_key_pair(self, idx, pair_idx):
+        """Remove a key pair from trigger idx."""
+        trig = self._triggers[idx]
+        kps = trig.get("key_pairs", [])
+        if 0 <= pair_idx < len(kps):
+            kps.pop(pair_idx)
+            _save_triggers(self._triggers)
+            self._trig_rebuild_key_rows(idx)
+
+    def _toggle_auto_target(self, idx, var):
+        """Toggle auto_target for trigger idx and save."""
+        if idx < 0 or idx >= len(self._triggers):
+            return
+        self._triggers[idx]["auto_target"] = var.get()
+        _save_triggers(self._triggers)
+
+    def _sync_trigger_settings(self, idx):
+        """Sync delay/count entries back to trigger dict and save."""
+        if idx >= len(self._triggers) or idx >= len(self._trigger_rows):
+            return
+        info = self._trigger_rows[idx]
+        trig = self._triggers[idx]
+        if info["delay_entry"]:
+            trig["loop_delay"] = info["delay_entry"].get().strip()
+        if info["count_entry"]:
+            trig["loop_count"] = info["count_entry"].get().strip()
+        _save_triggers(self._triggers)
+
+    def _sync_trigger_pattern(self, idx):
+        """Sync pattern entry back to trigger dict, update header label, and save."""
+        if idx >= len(self._triggers) or idx >= len(self._trigger_rows):
+            return
+        info = self._trigger_rows[idx]
+        pat_e = info.get("pattern_entry")
+        if not pat_e:
+            return
+        new_pat = pat_e.get().strip()
+        if not new_pat:
+            return
+        trig = self._triggers[idx]
+        trig["pattern"] = new_pat
+        # Update the collapsed header label
+        if trig.get("type") == "opcode":
+            op = trig.get("opcode", 0)
+            field = trig.get("field", "")
+            info["pat_lbl"].configure(text=f"[0x{op:04X}.{field}] {new_pat}")
+        else:
+            info["pat_lbl"].configure(text=new_pat)
+        _save_triggers(self._triggers)
 
     def _rebuild_trigger_table(self):
         """Destroy all rows and rebuild from self._triggers."""
@@ -1708,7 +2331,13 @@ class BotApp(tk.Tk):
             if t["pattern"] == pattern:
                 self._trigger_entry.delete(0, "end")
                 return
-        trig = {"type": "text", "pattern": pattern, "loop": False, "sound": False}
+        trig = {
+            "type": "text", "pattern": pattern, "mode": "sound", "sound_name": "NONE",
+            "key_pairs": [{"key": "1", "wait": "1"}],
+            "loop_delay": "5000",
+            "loop_count": "3",
+            "auto_target": False,
+        }
         self._triggers.append(trig)
         self._add_trigger_row(trig)
         _save_triggers(self._triggers)
@@ -1724,72 +2353,99 @@ class BotApp(tk.Tk):
         _blog.info("TRIGGER_REMOVE: %s", pattern)
         self._rebuild_trigger_table()
 
-    def _toggle_trigger_mode(self, idx):
+    def _cycle_trigger_mode(self, idx):
         if idx < 0 or idx >= len(self._triggers):
             return
         trig = self._triggers[idx]
-        trig["loop"] = not trig["loop"]
+        cycle = {"loop": "once", "once": "sound", "sound": "loop"}
+        new_mode = cycle.get(trig.get("mode", "loop"), "loop")
+        trig["mode"] = new_mode
         _save_triggers(self._triggers)
         # Update button in-place
+        mode_labels = {"loop": "Loop", "once": "Once", "sound": "Sound Only"}
+        mode_colors = {"loop": COLORS["teal"], "once": COLORS["peach"], "sound": COLORS["yellow"]}
         btn = self._trigger_rows[idx]["mode_btn"]
-        if trig["loop"]:
-            btn.configure(text="Loop", bg=COLORS["teal"])
+        btn.configure(text=mode_labels.get(new_mode, "Loop"), bg=mode_colors.get(new_mode, COLORS["teal"]))
+        # Sound mode — collapse the entire detail panel and hide keys container
+        info = self._trigger_rows[idx]
+        if new_mode == "sound":
+            if info["expanded"]:
+                info["detail_frame"].pack_forget()
+                info["arrow_lbl"].configure(text="\u25B6")
+                info["expanded"] = False
+            kc = info.get("keys_container")
+            if kc:
+                kc.pack_forget()
         else:
-            btn.configure(text="Once", bg=COLORS["peach"])
-        # Reset active loop if this trigger is currently running
+            kc = info.get("keys_container")
+            if kc:
+                kc.pack(fill="x")
+        # Reset active trigger if this one is currently running
         if (self._bot_triggered and
-                self._active_trigger_pattern == trig["pattern"]):
+                self._active_trigger_idx == idx):
             self._bot_triggered = False
-            self._bot_sound_enabled = False
+            self._bot_mode = "loop"
+            self._bot_sound_name = "NONE"
             self._active_trigger_pattern = None
+            self._active_trigger_idx = None
+            self._active_trigger_target = None
             self._bot_status = "Waiting for trigger..."
-            self._log(f"Loop reset: {trig['pattern']}")
-        _blog.info("TRIGGER_MODE: %s → %s", trig["pattern"],
-                   "loop" if trig["loop"] else "once")
+            self._log(f"Trigger reset: {trig['pattern']}")
+        _blog.info("TRIGGER_MODE: %s → %s", trig["pattern"], new_mode)
 
-    def _toggle_trigger_sound(self, idx):
+    def _set_trigger_sound(self, idx, sound_var):
         if idx < 0 or idx >= len(self._triggers):
             return
         trig = self._triggers[idx]
-        trig["sound"] = not trig["sound"]
+        name = sound_var.get()
+        trig["sound_name"] = name
         _save_triggers(self._triggers)
-        btn = self._trigger_rows[idx]["sound_btn"]
-        if trig["sound"]:
-            btn.configure(text="\U0001F50A", bg=COLORS["yellow"],
-                          fg=COLORS["bg_dark"])
+        # Update dropdown color
+        menu = self._trigger_rows[idx]["sound_menu"]
+        if name != "NONE":
+            menu.configure(bg=COLORS["mauve"], fg=COLORS["bg_dark"])
+            self._play_sound(name)
         else:
-            btn.configure(text="\U0001F507", bg=COLORS["bg_dark"],
-                          fg=COLORS["fg_dim"])
-        _blog.info("TRIGGER_SOUND: %s → %s", trig["pattern"],
-                   "on" if trig["sound"] else "off")
+            menu.configure(bg=COLORS["bg_dark"], fg=COLORS["fg_dim"])
+        _blog.info("TRIGGER_SOUND: %s → %s", trig["pattern"], name)
 
     # ----- Tab switching -----
 
     def _apply_tab_style(self):
         """Style tab buttons based on current _trigger_tab."""
-        if self._trigger_tab == "text":
-            self._tab_text_btn.configure(bg=COLORS["gold"], fg=COLORS["bg_dark"])
-            self._tab_opcode_btn.configure(bg=COLORS["bg_light"], fg=COLORS["fg_dim"])
-        else:
-            self._tab_text_btn.configure(bg=COLORS["bg_light"], fg=COLORS["fg_dim"])
-            self._tab_opcode_btn.configure(bg=COLORS["gold"], fg=COLORS["bg_dark"])
+        active = {"bg": COLORS["gold"], "fg": COLORS["bg_dark"]}
+        inactive = {"bg": COLORS["bg_light"], "fg": COLORS["fg_dim"]}
+        self._tab_text_btn.configure(**(active if self._trigger_tab == "text" else inactive))
+        self._tab_opcode_btn.configure(**(active if self._trigger_tab == "opcode" else inactive))
+        self._tab_discovery_btn.configure(**(active if self._trigger_tab == "discovery" else inactive))
 
     def _switch_trigger_tab(self, tab):
         if tab == self._trigger_tab:
             return
         self._trigger_tab = tab
         self._apply_tab_style()
+        # Hide all tab frames
+        self._text_trig_frame.pack_forget()
+        self._opcode_frame.pack_forget()
+        self._discovery_frame.pack_forget()
         if tab == "text":
-            self._opcode_frame.pack_forget()
             self._text_trig_frame.pack(fill="both", expand=True)
-        else:
-            self._text_trig_frame.pack_forget()
+            # Scroll trigger table to bottom
+            self._trig_canvas.update_idletasks()
+            self._trig_canvas.yview_moveto(1.0)
+        elif tab == "opcode":
             self._opcode_view = "list"
             self._opcode_detail_outer.pack_forget()
             self._opcode_list_frame.pack(fill="both", expand=True)
             self._opcode_frame.pack(fill="both", expand=True)
             # Full rebuild from buffer when switching to this tab
             self._render_opcode_list()
+            self._opcode_list.see("end")
+        elif tab == "discovery":
+            self._discovery_frame.pack(fill="both", expand=True)
+            self._render_discovery()
+            self._disc_npc_list.see("end")
+            self._disc_pc_list.see("end")
 
     # ----- Opcode Browser -----
 
@@ -1799,7 +2455,7 @@ class BotApp(tk.Tk):
         opcode = msg.get("opcode", 0)
         if "text" in fields and fields["text"]:
             txt = fields["text"]
-            return txt[:50] + ("..." if len(txt) > 50 else "")
+            return txt[:80] + ("..." if len(txt) > 80 else "")
         if opcode == 0x0013:
             eid = fields.get("entity_id")
             return f"Entity#{eid} has died" if eid is not None else "died"
@@ -1822,7 +2478,7 @@ class BotApp(tk.Tk):
                 if v is not None:
                     parts.append(f"{k}={v}")
             preview = " ".join(parts)
-            return preview[:50] + ("..." if len(preview) > 50 else "")
+            return preview[:80] + ("..." if len(preview) > 80 else "")
         # Fallback: show hex snippet of raw data
         raw_hex = msg.get("raw_hex", "")
         if raw_hex:
@@ -2074,8 +2730,11 @@ class BotApp(tk.Tk):
                     "opcode": opcode,
                     "field": field,
                     "pattern": pattern,
-                    "loop": False,
-                    "sound": False,
+                    "mode": "sound",
+                    "sound_name": "NONE",
+                    "key_pairs": [{"key": "1", "wait": "1"}],
+                    "loop_delay": "5000",
+                    "loop_count": "3",
                 }
                 self._triggers.append(trig)
                 self._add_trigger_row(trig)
@@ -2098,13 +2757,56 @@ class BotApp(tk.Tk):
         self._opcode_list_frame.pack(fill="both", expand=True)
         self._render_opcode_list()
 
+    # ----- Discovery tab -----
+
+    def _render_discovery(self):
+        """Rebuild the discovery lists if data has changed."""
+        npcs, pcs, version = self._backend.message_handler.get_discovery()
+        if version == self._disc_version_ui:
+            return
+        self._disc_version_ui = version
+        self._disc_count_lbl.configure(text=f"NPCs: {len(npcs)}  |  PCs: {len(pcs)}")
+        self._disc_npc_list.configure(state="normal")
+        self._disc_npc_list.delete("1.0", "end")
+        for name in npcs:
+            self._disc_npc_list.insert("end", name + "\n", "npc")
+        self._disc_npc_list.configure(state="disabled")
+        self._disc_pc_list.configure(state="normal")
+        self._disc_pc_list.delete("1.0", "end")
+        for name in pcs:
+            self._disc_pc_list.insert("end", name + "\n", "pc")
+        self._disc_pc_list.configure(state="disabled")
+
+    def _copy_discovery(self):
+        """Copy all NPC and PC names to clipboard."""
+        npcs, pcs, _ = self._backend.message_handler.get_discovery()
+        lines = []
+        if npcs:
+            lines.append("=== NPCs ===")
+            lines.extend(npcs)
+        if pcs:
+            lines.append("=== Players ===")
+            lines.extend(pcs)
+        if lines:
+            self.clipboard_clear()
+            self.clipboard_append("\n".join(lines))
+
+    def _reset_discovery(self):
+        """Clear the NPC and PC name lists."""
+        handler = self._backend.message_handler
+        with handler._lock:
+            handler._npc_names.clear()
+            handler._pc_names.clear()
+            handler._disc_version += 1
+        self._render_discovery()
+
     # ----- Opcode trigger matching -----
 
     def _check_opcode_triggers(self, opcode_msg):
-        """Check opcode log entry against opcode triggers. Returns first match or None."""
+        """Check opcode log entry against opcode triggers. Returns (trigger, index) or (None, None)."""
         msg_opcode = opcode_msg.get("opcode", -1)
         fields = opcode_msg.get("fields", {})
-        for trig in self._triggers:
+        for i, trig in enumerate(self._triggers):
             if trig.get("type") != "opcode":
                 continue
             if trig.get("opcode") != msg_opcode:
@@ -2115,8 +2817,22 @@ class BotApp(tk.Tk):
                 continue
             pat = trig["pattern"]
             if pat == "*" or pat.lower() in str(field_val).lower():
-                return trig
-        return None
+                if not self._trigger_on_cooldown(i):
+                    return trig, i
+        return None, None
+
+    # ── Opacity / Bot toggle ─────────────────────────────────────
+
+    def _toggle_opacity(self, _event=None):
+        self._opaque = not self._opaque
+        if self._opaque:
+            self.attributes("-alpha", 1.0)
+            self._opacity_btn.configure(fg=COLORS["gold"])
+            self._opacity_border.configure(bg=COLORS["gold"])
+        else:
+            self.attributes("-alpha", 0.75)
+            self._opacity_btn.configure(fg=COLORS["gold_dim"])
+            self._opacity_border.configure(bg=COLORS["gold_dim"])
 
     def _toggle_bot(self):
         if self._bot_running:
@@ -2129,8 +2845,12 @@ class BotApp(tk.Tk):
             return
         self._bot_running = True
         self._bot_triggered = False
-        self._bot_sound_enabled = False
+        self._bot_mode = "loop"
+        self._bot_sound_name = "NONE"
         self._active_trigger_pattern = None
+        self._active_trigger_idx = None
+        self._active_trigger_target = None
+        self._pending_triggers.clear()
         self._bot_stop.clear()
         self._toggle_btn.configure(text="ON", bg=COLORS["green"])
         self._bot_status = "Waiting for trigger..."
@@ -2144,24 +2864,30 @@ class BotApp(tk.Tk):
         self._bot_running = False
         self._bot_stop.set()
         self._bot_triggered = False
-        self._bot_sound_enabled = False
+        self._bot_mode = "loop"
+        self._bot_sound_name = "NONE"
         self._active_trigger_pattern = None
+        self._active_trigger_idx = None
+        self._active_trigger_target = None
+        self._pending_triggers.clear()
         self._toggle_btn.configure(text="OFF", bg=COLORS["red"])
         self._bot_status = "Idle"
         self._log("Bot OFF")
 
-    def _play_beep(self):
-        """Play Windows alert sound on the main thread."""
-        def _do_beep():
+    def _play_sound(self, sound_name="SystemExclamation"):
+        """Play a Windows system sound on the main thread."""
+        if not sound_name or sound_name == "NONE":
+            return
+        def _do():
             try:
-                winsound.PlaySound("SystemExclamation",
+                winsound.PlaySound(sound_name,
                                    winsound.SND_ALIAS | winsound.SND_ASYNC)
             except Exception:
                 pass
         if threading.current_thread() is threading.main_thread():
-            _do_beep()
+            _do()
         else:
-            self.after(0, _do_beep)
+            self.after(0, _do)
 
     def _log(self, msg, tag="normal"):
         ts = time.strftime("%H:%M:%S")
@@ -2181,11 +2907,98 @@ class BotApp(tk.Tk):
         else:
             self.after(0, _do)
 
+    def _get_trigger_settings(self, idx):
+        """Read key_pairs, loop_delay, loop_count for trigger idx.
+        Prefers live entry widgets if expanded, falls back to trigger dict."""
+        trig = self._triggers[idx] if 0 <= idx < len(self._triggers) else {}
+        info = self._trigger_rows[idx] if 0 <= idx < len(self._trigger_rows) else {}
+
+        # Key pairs — from entry widgets if expanded & built, else from dict
+        pairs = []
+        if info and info.get("expanded") and info.get("key_pair_entries"):
+            try:
+                for ke, we in info["key_pair_entries"]:
+                    k = ke.get().strip()
+                    try:
+                        w = max(float(we.get()), 0)
+                    except (ValueError, tk.TclError):
+                        w = 1.0
+                    if k:
+                        pairs.append((k, w))
+            except tk.TclError:
+                pairs = []
+        if not pairs:
+            for kp in trig.get("key_pairs", []):
+                k = kp.get("key", "").strip()
+                try:
+                    w = max(float(kp.get("wait", "1")), 0)
+                except ValueError:
+                    w = 1.0
+                if k:
+                    pairs.append((k, w))
+
+        # Delay
+        delay_ms = 5000
+        if info and info.get("expanded") and info.get("delay_entry"):
+            try:
+                delay_ms = int(info["delay_entry"].get())
+            except (ValueError, tk.TclError):
+                pass
+        else:
+            try:
+                delay_ms = int(trig.get("loop_delay", "5000"))
+            except ValueError:
+                pass
+
+        # Count
+        max_loops = 0
+        if info and info.get("expanded") and info.get("count_entry"):
+            try:
+                max_loops = int(info["count_entry"].get())
+            except (ValueError, tk.TclError):
+                pass
+        else:
+            try:
+                max_loops = int(trig.get("loop_count", "3"))
+            except ValueError:
+                pass
+
+        # Auto-target — from live checkbox if expanded, else from dict
+        auto_target = trig.get("auto_target", False)
+        if info and info.get("expanded") and info.get("auto_target_var"):
+            try:
+                auto_target = info["auto_target_var"].get()
+            except tk.TclError:
+                pass
+
+        return pairs, delay_ms, max_loops, auto_target
+
+    def _activate_next_pending(self):
+        """Pop the next pending trigger (if any) and activate it.
+        Returns True if a pending trigger was activated."""
+        while self._pending_triggers:
+            mode, sound_name, pattern, idx, target_name = self._pending_triggers.pop(0)
+            # Skip if on cooldown
+            if self._trigger_on_cooldown(idx):
+                continue
+            self._bot_triggered = True
+            self._bot_mode = mode
+            self._bot_sound_name = sound_name
+            self._active_trigger_pattern = pattern
+            self._active_trigger_idx = idx
+            self._active_trigger_target = target_name
+            return True
+        return False
+
     def _bot_loop(self):
-        """Bot thread — when triggered + ON, send attack keys (loop or once)."""
+        """Bot thread — when triggered + ON, send attack keys or play sound."""
         loops_done = 0
         while not self._bot_stop.is_set():
             if not self._bot_triggered:
+                # Check pending queue before sleeping
+                if self._activate_next_pending():
+                    loops_done = 0
+                    continue
                 loops_done = 0
                 self._bot_stop.wait(0.2)
                 continue
@@ -2195,43 +3008,57 @@ class BotApp(tk.Tk):
                 self._bot_stop.wait(1)
                 continue
 
-            try:
-                keys_str = self._bot_attack_keys.get()
-                keys = [k.strip() for k in keys_str.split(",") if k.strip()]
-            except tk.TclError:
-                keys = ["4", "2", "5", "3"]
-            try:
-                delay_ms = int(self._bot_loop_delay.get())
-            except (ValueError, tk.TclError):
-                delay_ms = 5000
-            try:
-                max_loops = int(self._bot_loop_count.get())
-            except (ValueError, tk.TclError):
-                max_loops = 0
+            mode = self._bot_mode
+            sound_name = self._bot_sound_name
+            tidx = self._active_trigger_idx
+
+            # Sound-only mode — play sound and reset, no keys sent
+            if mode == "sound":
+                self._bot_status = "Sound alert"
+                self._play_sound(sound_name)
+                self._bot_triggered = False
+                self._bot_status = "Waiting for trigger..."
+                continue
+
+            # Once / Loop modes — read per-trigger settings
+            if tidx is not None:
+                pairs, delay_ms, max_loops, _at = self._get_trigger_settings(tidx)
+            else:
+                pairs, delay_ms, max_loops, _at = [], 5000, 0, False
+
+            # Auto-target: use speaker name captured at match time (first iteration only)
+            target_name = self._active_trigger_target if loops_done == 0 else None
 
             self._bot_status = "Attacking..."
-            if keys:
-                if send_attack_keys(keys):
+            if pairs:
+                keys_display = ", ".join(k for k, _ in pairs)
+                if target_name:
+                    self._log(f"Targeting: {target_name}")
+                fcheck = self._backend.message_handler.check_fizzle
+                if send_attack_keys(pairs, target_name=target_name,
+                                    fizzle_check=fcheck, fizzle_log=self._log):
                     loops_done += 1
+                    # Stamp cooldown so this trigger doesn't re-fire immediately
+                    if tidx is not None:
+                        self._trigger_last_fired[tidx] = time.time()
                     if max_loops > 0:
-                        self._log(f"Sent keys: {', '.join(keys)} ({loops_done}/{max_loops})")
+                        self._log(f"Sent keys: {keys_display} ({loops_done}/{max_loops})")
                     else:
-                        self._log(f"Sent keys: {', '.join(keys)}")
+                        self._log(f"Sent keys: {keys_display}")
                 else:
                     self._log("Game window not found")
 
-            # Beep on every loop iteration if sound enabled
-            if self._bot_sound_enabled:
-                self._play_beep()
+            # Play sound on each iteration if one is set
+            if sound_name and sound_name != "NONE":
+                self._play_sound(sound_name)
 
-            if not self._bot_loop_mode:
-                # Once mode — fire keys once then reset
+            if mode == "once":
                 self._bot_triggered = False
                 loops_done = 0
                 self._bot_status = "Waiting for trigger..."
                 continue
 
-            # Check loop count limit (0 = infinite)
+            # Loop mode — check loop count limit (0 = infinite)
             if max_loops > 0 and loops_done >= max_loops:
                 self._log(f"Loop count reached ({max_loops})")
                 self._bot_triggered = False
@@ -2252,18 +3079,27 @@ class BotApp(tk.Tk):
         messages = self._backend.message_handler.get_messages()
         for msg in messages:
             text = msg["text"]
-            matched = self._check_triggers(text)
+            matched, midx = self._check_triggers(text)
             if matched:
-                mode = "loop" if matched["loop"] else "once"
+                mode = matched.get("mode", "loop")
+                sound_name = matched.get("sound_name", "NONE")
                 _blog.info("TRIGGER_MATCH: %s (mode=%s sound=%s)",
-                           text, mode,
-                           "on" if matched.get("sound") else "off")
+                           text, mode, sound_name)
                 self._log(f"MATCH [{matched['pattern']}] ({mode}): {text}", "matched")
+                # Extract speaker name for auto-target
+                speaker = None
+                if matched.get("auto_target"):
+                    speaker = msg.get("entity_name") or self._extract_speaker_name(text)
+                    if speaker:
+                        self._log(f"Auto-target speaker: {speaker}")
+                    else:
+                        self._log("Auto-target: no speaker name found in text")
                 if self._bot_running:
-                    self._bot_triggered = True
-                    self._bot_loop_mode = matched["loop"]
-                    self._bot_sound_enabled = matched.get("sound", False)
-                    self._active_trigger_pattern = matched["pattern"]
+                    if len(self._pending_triggers) < 10:
+                        self._pending_triggers.append(
+                            (mode, sound_name, matched["pattern"], midx, speaker))
+                else:
+                    self._log("Bot is OFF — turn ON to act on triggers")
 
         # Drain opcode messages from handler
         opcode_msgs = self._backend.message_handler.get_opcode_messages()
@@ -2277,24 +3113,31 @@ class BotApp(tk.Tk):
                     del buf[:len(buf) - cap]
 
             # Check opcode triggers
-            opc_matched = self._check_opcode_triggers(opc_msg)
+            opc_matched, oidx = self._check_opcode_triggers(opc_msg)
             if opc_matched:
-                mode = "loop" if opc_matched["loop"] else "once"
+                mode = opc_matched.get("mode", "loop")
+                sound_name = opc_matched.get("sound_name", "NONE")
                 opname = opc_msg.get("opcode_name", f"0x{opc_msg.get('opcode',0):04X}")
                 field = opc_matched.get("field", "")
                 _blog.info("OPCODE_TRIGGER_MATCH: %s.%s (mode=%s sound=%s)",
-                           opname, field, mode,
-                           "on" if opc_matched.get("sound") else "off")
+                           opname, field, mode, sound_name)
                 self._log(f"MATCH [{opname}.{field}={opc_matched['pattern']}] ({mode})", "matched")
-                if self._bot_running:
-                    self._bot_triggered = True
-                    self._bot_loop_mode = opc_matched["loop"]
-                    self._bot_sound_enabled = opc_matched.get("sound", False)
-                    self._active_trigger_pattern = opc_matched["pattern"]
+                # Extract entity name for auto-target from opcode fields
+                opc_speaker = None
+                if opc_matched.get("auto_target"):
+                    opc_fields = opc_msg.get("fields", {})
+                    opc_speaker = opc_fields.get("entity_name")
+                if self._bot_running and len(self._pending_triggers) < 10:
+                    self._pending_triggers.append(
+                        (mode, sound_name, opc_matched["pattern"], oidx, opc_speaker))
 
         # Incrementally append new entries to opcode list (no full redraw)
         if opcode_msgs and self._trigger_tab == "opcode" and self._opcode_view == "list":
             self._append_opcode_entries(opcode_msgs)
+
+        # Refresh discovery tab if active
+        if self._trigger_tab == "discovery":
+            self._render_discovery()
 
         self.after(200, self._poll_loop)
 

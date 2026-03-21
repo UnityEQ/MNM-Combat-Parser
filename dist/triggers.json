@@ -1,0 +1,34 @@
+[
+  {
+    "type": "opcode",
+    "opcode": 86,
+    "field": "text",
+    "pattern": "Elemental Fire",
+    "mode": "once",
+    "sound_name": "NONE",
+    "key_pairs": [
+      {
+        "key": "4",
+        "wait": "0"
+      },
+      {
+        "key": "2",
+        "wait": "0"
+      },
+      {
+        "key": "5",
+        "wait": "1.0"
+      },
+      {
+        "key": "3",
+        "wait": "5"
+      },
+      {
+        "key": "x",
+        "wait": "0"
+      }
+    ],
+    "loop_delay": "5000",
+    "loop_count": "3"
+  }
+]

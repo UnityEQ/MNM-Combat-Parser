@@ -1,0 +1,2221 @@
+20:09:47 [INFO ] KEYS module base=0x7FF901F00000 size=94.8MB
+20:09:47 [INFO ] KEYS RVA failed — scanning for ConnectionInfo class...
+20:09:48 [DEBUG] OVERVIEW_RENDER enc=0 total_dmg=0 dur=0.0s entries=0 local_eid=None player_name="" pet_states={} entity_types_sample={}
+20:09:52 [DEBUG] KEYS validated Client.ConnectionInfo at 0x17422550520
+20:09:52 [INFO ] KEYS_SCAN found ConnectionInfo at module+0x5466EF8 (checked 612047 candidates)
+20:09:52 [INFO ] KEYS saved RVA 0x5466EF8 to E:\MNM-Network\MNM-Combat-Parser\parser\rva_cache.json
+20:09:52 [DEBUG] MSG_UNKNOWN_NEW 0x0004 dir=OUT len=0 body=
+20:09:52 [DEBUG] MSG_UNKNOWN_NEW 0x0010 dir=OUT len=43 body=00 00 00 00 00 00 00 00 00 00 00 00 f5 66 32 44 9d 05 74 42 f6 35 86 c4 fd e4 4a 43 00 00 00 00
+20:09:52 [DEBUG] MSG_UNKNOWN_NEW 0x0210 dir=IN len=27 body=48 00 00 00 24 23 0a 00 00 ec 56 87 c1 00 00 40 c0 6e 3e 48 c5 3b 5d 00 46 a0 59
+20:09:52 [DEBUG] MSG_UNKNOWN_NEW 0x0015 dir=OUT len=5 body=52 37 00 00 01
+20:09:52 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:52 [DEBUG]   PARSED type=UpdateHealth eid=14338 target=None
+20:09:53 [DEBUG] MSG_IN 0x0380 ClientPartyUpdate dir=IN body_len=190
+20:09:53 [DEBUG] PARTY_UPDATE member_count=5 body_len=190 body_hex=05 00 00 00 d6 32 00 00 2a 0d 00 00 07 00 57 6f 6e 74 6f 6e 04 00 6d 6e 6b 0a 0c 00 6e 69 67 68 74 68 61 72 62 6f 72 00 b6 33 00 00 bd 0b 00 00 04 00 4d 61 6c 04 00 63 6c 72 09 0c 00 6e 69 67 68 74 68 61 72 62 6f 72 00 96 32 00 00 f8 0c 00 00 0b 00 53 6b 65 6c 65 62 6f 6e 65 73 04 00 6e 65 63 0a 0c 00 6e 69 67 68 74 68 61 72 62 6f 72 00 f4 34 00 00 43 0a 00 00 07 00 4c 69 6c 79 74 68 04 00 73 68 64 0d 0c 00 6e 69 67 68 74 68 61 72 62 6f 72 00 52 37 00 00 f2 0c 00 00 08 00 44 6f 6f 70 69 65 73 04 00 65 6c 65 08 0c 00 6e 69 67 68 74 68 61 72 62 6f 72 00 d6 32 00 00
+20:09:53 [DEBUG] PARTY_MEMBER_RAW [0] eid=#13014 name="Wonton" after_name_off=21 next_bytes=00 6d 6e 6b 0a 0c 00 6e 69 67 68 74 68 61 72 62 6f 72 00 b6 33 00 00 bd 0b 00 00 04 00 4d
+20:09:53 [DEBUG] PARTY_MEMBER_PARSED [0] class=mnk level=10 zone=nightharbor
+20:09:53 [DEBUG] PARTY_MEMBER_RAW [1] eid=#13238 name="Mal" after_name_off=54 next_bytes=00 63 6c 72 09 0c 00 6e 69 67 68 74 68 61 72 62 6f 72 00 96 32 00 00 f8 0c 00 00 0b 00 53
+20:09:53 [DEBUG] PARTY_MEMBER_PARSED [1] class=clr level=9 zone=nightharbor
+20:09:53 [DEBUG] PARTY_MEMBER_RAW [2] eid=#12950 name="Skelebones" after_name_off=94 next_bytes=00 6e 65 63 0a 0c 00 6e 69 67 68 74 68 61 72 62 6f 72 00 f4 34 00 00 43 0a 00 00 07 00 4c
+20:09:53 [DEBUG] PARTY_MEMBER_PARSED [2] class=nec level=10 zone=nightharbor
+20:09:53 [DEBUG] PARTY_MEMBER_RAW [3] eid=#13556 name="Lilyth" after_name_off=130 next_bytes=00 73 68 64 0d 0c 00 6e 69 67 68 74 68 61 72 62 6f 72 00 52 37 00 00 f2 0c 00 00 08 00 44
+20:09:53 [DEBUG] PARTY_MEMBER_PARSED [3] class=shd level=13 zone=nightharbor
+20:09:53 [DEBUG] PARTY_MEMBER_RAW [4] eid=#14162 name="Doopies" after_name_off=167 next_bytes=00 65 6c 65 08 0c 00 6e 69 67 68 74 68 61 72 62 6f 72 00 d6 32 00 00
+20:09:53 [DEBUG] PARTY_MEMBER_PARSED [4] class=ele level=8 zone=nightharbor
+20:09:53 [DEBUG]   PARSED type=ClientPartyUpdate eid=None target=None
+20:09:53 [DEBUG] PARTY_MEMBER #13014 "Wonton" class=mnk lvl=10
+20:09:53 [DEBUG] PARTY_MEMBER #13238 "Mal" class=clr lvl=9
+20:09:53 [DEBUG] PARTY_MEMBER #12950 "Skelebones" class=nec lvl=10
+20:09:53 [DEBUG] PARTY_MEMBER #13556 "Lilyth" class=shd lvl=13
+20:09:53 [DEBUG] PARTY_MEMBER #14162 "Doopies" class=ele lvl=8
+20:09:53 [INFO ] RELOAD_GATE waiting for player selection (5 members)
+20:09:53 [DEBUG] MSG_UNKNOWN_NEW 0x5432 dir=IN len=4 body=00 00 00 00
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=76
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13665 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=92
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13665 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=134
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13238 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13238 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=131
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13238 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=137
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13238 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13238 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=92
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13238 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=68
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13238 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=319
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13238 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=76
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13238 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=147
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=12950 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=131
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=12950 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=12950 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=12950 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=92
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=12950 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=68
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=12950 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=76
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=12950 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=92
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13695 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=76
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13695 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=137
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13556 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=100
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13556 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13556 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=197
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13556 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13556 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=68
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13556 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=76
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13556 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=121
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13014 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=118
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13014 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=116
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13014 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13014 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=405
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13014 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=137
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13014 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13014 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=68
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13014 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=92
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13014 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=76
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13014 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=90
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=13014 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=98
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=14223 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=92
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=14223 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:09:53 [DEBUG] MSG_UNKNOWN_NEW 0x0099 dir=IN len=24 body=52 37 00 00 01 00 00 00 8f 37 00 00 01 00 00 00 05 00 01 00 00 00 08 00
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=58
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=92
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=68
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=76
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:09:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:53 [DEBUG]   PARSED type=UpdateHealth eid=14223 target=None
+20:09:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:53 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:09:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:53 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:09:53 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:09:53 [DEBUG]   PARSED type=UpdateMana eid=13556 target=None
+20:09:53 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:09:53 [DEBUG]   PARSED type=UpdateMana eid=14162 target=None
+20:09:53 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+20:09:53 [DEBUG]   PARSED type=UpdateEndurance eid=14162 target=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=271 target=None
+20:09:53 [DEBUG] SPAWN #271 type=5 "" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=266
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=755 target=None
+20:09:53 [DEBUG] SPAWN #755 type=3 "Sephier's Corpse?" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=194
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14416 target=None
+20:09:53 [DEBUG] SPAWN #14416 type=1 "a diseased bat" HP:1000/1000 class=bat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=194
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14437 target=None
+20:09:53 [DEBUG] SPAWN #14437 type=1 "a diseased bat" HP:1000/1000 class=bat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=151
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=272 target=None
+20:09:53 [DEBUG] SPAWN #272 type=5 "" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=203
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=13768 target=None
+20:09:53 [DEBUG] SPAWN #13768 type=1 "a catacombs rat" HP:1000/1000 class=rat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=152
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14224 target=None
+20:09:53 [DEBUG] SPAWN #14224 type=1 "a hardened scarab" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=13771 target=None
+20:09:53 [DEBUG] SPAWN #13771 type=1 "a dusty scarab" HP:1000/1000 class=sca lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=194
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14403 target=None
+20:09:53 [DEBUG] SPAWN #14403 type=1 "a diseased bat" HP:1000/1000 class=bat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=194
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=13769 target=None
+20:09:53 [DEBUG] SPAWN #13769 type=1 "a diseased bat" HP:1000/1000 class=bat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=203
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=13770 target=None
+20:09:53 [DEBUG] SPAWN #13770 type=1 "a catacombs rat" HP:1000/1000 class=rat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14399 target=None
+20:09:53 [DEBUG] SPAWN #14399 type=1 "a dusty scarab" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=152
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14273 target=None
+20:09:53 [DEBUG] SPAWN #14273 type=1 "a hardened scarab" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=218
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14252 target=None
+20:09:53 [DEBUG] SPAWN #14252 type=1 "a pristine beetle" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14235 target=None
+20:09:53 [DEBUG] SPAWN #14235 type=1 "a dusty scarab" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=151
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14417 target=None
+20:09:53 [DEBUG] SPAWN #14417 type=1 "a cracked beetle" HP:1000/1000 class=sca lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=146
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=412 target=None
+20:09:53 [DEBUG] SPAWN #412 type=5 "" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=146
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=413 target=None
+20:09:53 [DEBUG] SPAWN #413 type=5 "" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=146
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=487 target=None
+20:09:53 [DEBUG] SPAWN #487 type=5 "" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=145
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=488 target=None
+20:09:53 [DEBUG] SPAWN #488 type=5 "" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=150
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=13672 target=None
+20:09:53 [DEBUG] SPAWN #13672 type=6 "Campfire" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=209
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14333 target=None
+20:09:53 [DEBUG] SPAWN #14333 type=1 "a rotting skeleton" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14128 target=None
+20:09:53 [DEBUG] SPAWN #14128 type=1 "a young crypt scarab" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=322
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14209 target=None
+20:09:53 [DEBUG] SPAWN #14209 type=1 "a rotting skeleton" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14259 target=None
+20:09:53 [DEBUG] SPAWN #14259 type=1 "a large rat" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=13002 target=None
+20:09:53 [DEBUG] SPAWN #13002 type=1 "a large rat" HP:1000/1000 class=rat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14207 target=None
+20:09:53 [DEBUG] SPAWN #14207 type=1 "a large rat" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14275 target=None
+20:09:53 [DEBUG] SPAWN #14275 type=1 "a large rat" HP:1000/1000 class=rat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=199
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14296 target=None
+20:09:53 [DEBUG] SPAWN #14296 type=1 "a desert bat" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=999
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=1044 target=None
+20:09:53 [DEBUG] SPAWN #1044 type=1 "a necropolis guard" HP:1000/1000 class=hum lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14409 target=None
+20:09:53 [DEBUG] SPAWN #14409 type=1 "a large rat" HP:1000/1000 class=rat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14111 target=None
+20:09:53 [DEBUG] SPAWN #14111 type=1 "a large rat" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14172 target=None
+20:09:53 [DEBUG] SPAWN #14172 type=1 "a large rat" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=209
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14384 target=None
+20:09:53 [DEBUG] SPAWN #14384 type=1 "a rotting skeleton" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=199
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14175 target=None
+20:09:53 [DEBUG] SPAWN #14175 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=4604 target=None
+20:09:53 [DEBUG] SPAWN #4604 type=1 "a large rat" HP:1000/1000 class=rat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=199
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14395 target=None
+20:09:53 [DEBUG] SPAWN #14395 type=1 "a desert bat" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=199
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=9762 target=None
+20:09:53 [DEBUG] SPAWN #9762 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=926
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=1045 target=None
+20:09:53 [DEBUG] SPAWN #1045 type=1 "a necropolis guard" HP:1000/1000 class=hum lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=152
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14332 target=None
+20:09:53 [DEBUG] SPAWN #14332 type=1 "a hardened scarab" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=199
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=10153 target=None
+20:09:53 [DEBUG] SPAWN #10153 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14270 target=None
+20:09:53 [DEBUG] SPAWN #14270 type=1 "a dusty scarab" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=152
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14280 target=None
+20:09:53 [DEBUG] SPAWN #14280 type=1 "a hardened scarab" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=10162 target=None
+20:09:53 [DEBUG] SPAWN #10162 type=1 "a large rat" HP:1000/1000 class=rat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=166
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14163 target=None
+20:09:53 [DEBUG] SPAWN #14163 type=1 "a hardened scarab" HP:1000/1000 class=sca lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14434 target=None
+20:09:53 [DEBUG] SPAWN #14434 type=1 "a dusty scarab" HP:1000/1000 class=sca lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=152
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14339 target=None
+20:09:53 [DEBUG] SPAWN #14339 type=1 "a hardened scarab" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14184 target=None
+20:09:53 [DEBUG] SPAWN #14184 type=1 "a dusty scarab" HP:1000/1000 class=sca lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14106 target=None
+20:09:53 [DEBUG] SPAWN #14106 type=1 "a dusty scarab" HP:1000/1000 class=sca lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14118 target=None
+20:09:53 [DEBUG] SPAWN #14118 type=1 "a dusty scarab" HP:1000/1000 class=sca lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14233 target=None
+20:09:53 [DEBUG] SPAWN #14233 type=1 "a dusty scarab" HP:1000/1000 class=sca lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=152
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14092 target=None
+20:09:53 [DEBUG] SPAWN #14092 type=1 "a hardened scarab" HP:1000/1000 class=sca lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=152
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14107 target=None
+20:09:53 [DEBUG] SPAWN #14107 type=1 "a diseased beetle" HP:1000/1000 class=sca lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14225 target=None
+20:09:53 [DEBUG] SPAWN #14225 type=1 "a dusty scarab" HP:1000/1000 class=sca lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=209
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14319 target=None
+20:09:53 [DEBUG] SPAWN #14319 type=1 "a rotting skeleton" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14345 target=None
+20:09:53 [DEBUG] SPAWN #14345 type=1 "a large rat" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14389 target=None
+20:09:53 [DEBUG] SPAWN #14389 type=1 "a young crypt scarab" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=199
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14149 target=None
+20:09:53 [DEBUG] SPAWN #14149 type=1 "a desert bat" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14329 target=None
+20:09:53 [DEBUG] SPAWN #14329 type=1 "a young crypt scarab" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=209
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14147 target=None
+20:09:53 [DEBUG] SPAWN #14147 type=1 "a rotting skeleton" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14129 target=None
+20:09:53 [DEBUG] SPAWN #14129 type=1 "a large rat" HP:1000/1000 class=rat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14294 target=None
+20:09:53 [DEBUG] SPAWN #14294 type=1 "a large rat" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14198 target=None
+20:09:53 [DEBUG] SPAWN #14198 type=1 "a large rat" HP:1000/1000 class=rat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14432 target=None
+20:09:53 [DEBUG] SPAWN #14432 type=1 "a young crypt scarab" HP:1000/1000 class=btl lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14210 target=None
+20:09:53 [DEBUG] SPAWN #14210 type=1 "a large rat" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14279 target=None
+20:09:53 [DEBUG] SPAWN #14279 type=1 "a young crypt scarab" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14436 target=None
+20:09:53 [DEBUG] SPAWN #14436 type=1 "a large rat" HP:1000/1000 class=rat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=209
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14258 target=None
+20:09:53 [DEBUG] SPAWN #14258 type=1 "a rotting skeleton" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14313 target=None
+20:09:53 [DEBUG] SPAWN #14313 type=1 "a large rat" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=213
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14407 target=None
+20:09:53 [DEBUG] SPAWN #14407 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=131
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14375 target=None
+20:09:53 [DEBUG] SPAWN #14375 type=2 "" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14342 target=None
+20:09:53 [DEBUG] SPAWN #14342 type=1 "a young crypt scarab" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=213
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14379 target=None
+20:09:53 [DEBUG] SPAWN #14379 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14282 target=None
+20:09:53 [DEBUG] SPAWN #14282 type=1 "a large rat" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=199
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14051 target=None
+20:09:53 [DEBUG] SPAWN #14051 type=1 "a desert bat" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=199
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14330 target=None
+20:09:53 [DEBUG] SPAWN #14330 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=1384
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=13238 target=None
+20:09:53 [DEBUG] SPAWN #13238 type=0 "Mal" HP:2304/48896 class=clr lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=403
+20:09:53 [DEBUG] PET_BAD_PARENT eid=13665 raw_parent=0x67756265 bodylen=403
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=13665 target=None
+20:09:53 [DEBUG] SPAWN_PET #13665 "Skelebones" owner=#12950 "Skelebones"
+20:09:53 [DEBUG] SPAWN #13665 type=1 "Skelebones" HP:1000/1000 class=skl lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14328 target=None
+20:09:53 [DEBUG] SPAWN #14328 type=1 "a large rat" HP:1000/1000 class=rat lvl=0
+20:09:53 [DEBUG] MSG_UNKNOWN_NEW 0xFF6E dir=IN len=274 body=00 ff 00 ff 00 ff 00 01 00 09 0e 00 43 72 61 66 74 65 64 50 6c 61 74 65 41 0e 00 4c 45 54 5f 42
+20:09:53 [DEBUG] MSG_IN 0x0025 UpdateLevel dir=IN body_len=13
+20:09:53 [DEBUG]   PARSED type=UpdateLevel eid=13238 target=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=1177
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=12950 target=None
+20:09:53 [DEBUG] SPAWN #12950 type=0 "Skelebones" HP:2560/66560 class=nec lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0025 UpdateLevel dir=IN body_len=13
+20:09:53 [DEBUG]   PARSED type=UpdateLevel eid=12950 target=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=1384
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=13556 target=None
+20:09:53 [DEBUG] SPAWN #13556 type=0 "Lilyth" HP:3328/68096 class=shd lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=1384
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=13014 target=None
+20:09:53 [DEBUG] SPAWN #13014 type=0 "Wonton" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14354 target=None
+20:09:53 [DEBUG] SPAWN #14354 type=1 "a large rat" HP:1000/1000 class=rat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14343 target=None
+20:09:53 [DEBUG] SPAWN #14343 type=1 "a large rat" HP:1000/1000 class=rat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=366
+20:09:53 [DEBUG] PET_BAD_PARENT eid=13695 raw_parent=0x79657247 bodylen=366
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=13695 target=None
+20:09:53 [DEBUG] SPAWN_PET #13695 "Labubu" owner=#13556 "Lilyth"
+20:09:53 [DEBUG] SPAWN #13695 type=1 "Labubu" HP:1000/1000 class=ghl lvl=0
+20:09:53 [DEBUG] MSG_UNKNOWN_NEW 0xFF00 dir=IN len=282 body=00 01 00 09 10 00 47 65 6e 65 72 69 63 4c 65 61 74 68 65 72 41 0e 00 4c 45 54 5f 57 6f 72 6e 42
+20:09:53 [DEBUG] MSG_UNKNOWN_NEW 0x00A0 dir=IN len=43 body=f4 34 00 00 17 00 62 75 66 66 5f 41 75 72 61 20 6f 66 20 56 61 6d 70 69 72 69 73 6d 0e 00 56 61
+20:09:53 [DEBUG] MSG_IN 0x0025 UpdateLevel dir=IN body_len=13
+20:09:53 [DEBUG]   PARSED type=UpdateLevel eid=13556 target=None
+20:09:53 [DEBUG] MSG_UNKNOWN_NEW 0x726F dir=IN len=314 body=6e 42 72 6f 77 6e 0f 00 4d 45 54 5f 42 72 6f 6e 7a 65 42 61 73 65 0f 00 44 45 56 5f 44 65 62 75
+20:09:53 [DEBUG] MSG_IN 0x0025 UpdateLevel dir=IN body_len=13
+20:09:53 [DEBUG]   PARSED type=UpdateLevel eid=13014 target=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=152
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14133 target=None
+20:09:53 [DEBUG] SPAWN #14133 type=1 "a hardened scarab" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14255 target=None
+20:09:53 [DEBUG] SPAWN #14255 type=1 "a dusty scarab" HP:815/1000 class=sca lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=143
+20:09:53 [DEBUG] PET_BAD_PARENT eid=14223 raw_parent=0x229A0000 bodylen=143
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14223 target=None
+20:09:53 [DEBUG] SPAWN_PET #14223 "Thalulyl" owner=#14162 "Doopies"
+20:09:53 [DEBUG] SPAWN #14223 type=1 "Thalulyl" HP:560/1000 class=wel lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=151
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14208 target=None
+20:09:53 [DEBUG] SPAWN #14208 type=1 "a cracked beetle" HP:1000/1000 class=sca lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=151
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14176 target=None
+20:09:53 [DEBUG] SPAWN #14176 type=1 "a cracked beetle" HP:1000/1000 class=sca lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=151
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14283 target=None
+20:09:53 [DEBUG] SPAWN #14283 type=1 "a cracked beetle" HP:524/1000 class=sca lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=149
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14152 target=None
+20:09:53 [DEBUG] SPAWN #14152 type=1 "a dusty scarab" HP:1000/1000 class=sca lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=152
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14193 target=None
+20:09:53 [DEBUG] SPAWN #14193 type=1 "a hardened scarab" HP:1000/1000 class=sca lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=151
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14134 target=None
+20:09:53 [DEBUG] SPAWN #14134 type=1 "a cracked beetle" HP:1000/1000 class=sca lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=213
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14359 target=None
+20:09:53 [DEBUG] SPAWN #14359 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14423 target=None
+20:09:53 [DEBUG] SPAWN #14423 type=1 "a large rat" HP:1000/1000 class=rat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=482
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14338 target=None
+20:09:53 [DEBUG] SPAWN #14338 type=1 "a shadow knight recruit" HP:982/1000 class=hum lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=213
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14433 target=None
+20:09:53 [DEBUG] SPAWN #14433 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=487
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14306 target=None
+20:09:53 [DEBUG] SPAWN #14306 type=1 "a shadow knight recruit" HP:1000/1000 class=hum lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=209
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14094 target=None
+20:09:53 [DEBUG] SPAWN #14094 type=1 "a rotting skeleton" HP:None/None class=None lvl=None
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=392
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=923 target=None
+20:09:53 [DEBUG] SPAWN #923 type=1 "Necromancer Reagents" HP:1000/1000 class=hum lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=469
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=1179 target=None
+20:09:53 [DEBUG] SPAWN #1179 type=1 "Necromancer Spell Merchant" HP:1000/1000 class=hum lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=223
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=13923 target=None
+20:09:53 [DEBUG] SPAWN #13923 type=1 "a rotting skeleton" HP:1000/1000 class=skl lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=236
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14322 target=None
+20:09:53 [DEBUG] SPAWN #14322 type=1 "a young crypt scarab" HP:1000/1000 class=btl lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=199
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=9188 target=None
+20:09:53 [DEBUG] SPAWN #9188 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=13315 target=None
+20:09:53 [DEBUG] SPAWN #13315 type=1 "a young crypt scarab" HP:1000/1000 class=btl lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=14186 target=None
+20:09:53 [DEBUG] SPAWN #14186 type=1 "a large rat" HP:1000/1000 class=rat lvl=0
+20:09:53 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+20:09:53 [DEBUG]   PARSED type=SpawnEntity eid=13272 target=None
+20:09:53 [DEBUG] SPAWN #13272 type=1 "a young crypt scarab" HP:1000/1000 class=btl lvl=0
+20:09:53 [DEBUG] MSG_UNKNOWN_NEW 0x017D dir=IN len=1068 body=03 00 00 00 01 00 12 00 65 6c 65 5f 66 6f 75 6e 74 5f 6f 66 5f 6d 61 6e 61 0e 00 46 6f 75 6e 74
+20:09:53 [DEBUG] MSG_UNKNOWN_NEW 0x0089 dir=IN len=12 body=00 00 00 00 00 00 00 00 00 00 00 00
+20:09:53 [DEBUG] MSG_UNKNOWN_NEW 0x0100 dir=IN len=10 body=05 00 6e 6f 6e 65 00 00 80 3f
+20:09:53 [DEBUG] MSG_UNKNOWN_NEW 0x0006 dir=IN len=0 body=
+20:09:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:53 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:09:53 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=98
+20:09:53 [DEBUG]   PARSED type=EndCasting eid=13665 target=14283
+20:09:53 [DEBUG] MSG_UNKNOWN_NEW 0x1011 dir=IN len=8 body=61 35 00 00 cb 37 00 00
+20:09:53 [DEBUG] MSG_UNKNOWN_NEW 0x001C dir=IN len=5 body=61 35 00 00 00
+20:09:53 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=83
+20:09:53 [DEBUG]   PARSED type=EndCasting eid=13014 target=14283
+20:09:53 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+20:09:53 [DEBUG]   PARSED type=DespawnEntity eid=14051 target=None
+20:09:53 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:09:53 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:09:53 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:09:53 [DEBUG]   PARSED type=UpdateMana eid=13556 target=None
+20:09:53 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=87
+20:09:53 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:09:53 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=57
+20:09:53 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:09:53 [DEBUG] MSG_IN 0x005C ParticleHit dir=IN body_len=21
+20:09:53 [DEBUG]   PARSED type=ParticleHit eid=None target=13556
+20:09:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:53 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:09:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:53 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:09:53 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=53
+20:09:53 [DEBUG]   PARSED type=EndCasting eid=13556 target=14255
+20:09:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:53 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:09:53 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=72
+20:09:53 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:09:53 [DEBUG] MSG_UNKNOWN_NEW 0x644B dir=IN len=23 body=61 35 00 00 34 06 00 70 75 6e 63 68 cb 37 00 00 2a 05 00 6f 75 63 68
+20:09:53 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=86
+20:09:53 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:09:53 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=56
+20:09:53 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:09:53 [DEBUG] MSG_IN 0x005C ParticleHit dir=IN body_len=21
+20:09:53 [DEBUG]   PARSED type=ParticleHit eid=None target=13695
+20:09:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:53 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:09:53 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=53
+20:09:53 [DEBUG]   PARSED type=EndCasting eid=13695 target=14255
+20:09:53 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:53 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:09:53 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=66
+20:09:53 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:09:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=151
+20:09:54 [DEBUG]   PARSED type=SpawnEntity eid=14438 target=None
+20:09:54 [DEBUG] SPAWN #14438 type=1 "a cracked beetle" HP:1000/1000 class=sca lvl=0
+20:09:54 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=151
+20:09:54 [DEBUG]   PARSED type=SpawnEntity eid=14438 target=None
+20:09:54 [DEBUG] SPAWN #14438 type=1 "a cracked beetle" HP:1000/1000 class=sca lvl=0
+20:09:54 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:09:54 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:09:54 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=119
+20:09:54 [DEBUG]   PARSED type=EndCasting eid=13695 target=14255
+20:09:54 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:54 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:09:55 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:09:55 [DEBUG]   PARSED type=UpdateMana eid=13238 target=None
+20:09:55 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=55
+20:09:55 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:09:55 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=141
+20:09:55 [DEBUG]   PARSED type=AddBuffIcon eid=13556 target=None
+20:09:55 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+20:09:55 [DEBUG]   PARSED type=EndCasting eid=13238 target=13556
+20:09:55 [DEBUG] MSG_UNKNOWN_NEW 0x001E dir=IN len=8 body=51 a6 07 02 00 00 00 00
+20:09:55 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=68
+20:09:55 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:09:55 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:09:55 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:09:55 [DEBUG] MSG_UNKNOWN_NEW 0x001F dir=OUT len=8 body=51 a6 07 02 00 00 00 00
+20:09:55 [INFO ]   LOCAL_PLAYER name="Doopies" (was "") from eid=#14162
+20:09:55 [INFO ]   LOCAL_MERGE merged '_local' sentinel entries into eid=#14162
+20:09:55 [INFO ] RELOAD_GATE cleared — user selected player #14162 "Doopies"
+20:09:56 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=124
+20:09:56 [DEBUG]   PARSED type=BeginCasting eid=13556 target=14255
+20:09:56 [DEBUG] ATTRIB BeginCasting caster=Lilyth(#13556) -> target=a dusty scarab(#14255) ability="Life Draw"
+20:09:56 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=213
+20:09:56 [DEBUG]   PARSED type=SpawnEntity eid=14433 target=None
+20:09:56 [DEBUG] SPAWN #14433 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:09:56 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:09:56 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:09:56 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:56 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:09:56 [DEBUG] HP_INIT a dusty scarab(#14255) HP:74/100 (no previous HP, no delta)
+20:09:56 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=66
+20:09:56 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:09:56 [DEBUG] CHATCOMBAT text="Labubu slashes a dusty scarab for 9 points of damage."
+20:09:56 [DEBUG]   CHATCOMBAT_DMG "a dusty scarab"(#14255) +9dmg by Labubu(#13695) text_total=9
+20:09:57 [DEBUG] OVERVIEW_RENDER enc=1 total_dmg=9 dur=0.3s entries=1 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:09:57 [DEBUG]   OVERVIEW_ROW #1 "Labubu" type=pet(1) cls=ghl lvl=0 dealt=9 dps=33.1 abilities=[Melee=9]
+20:09:57 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=OUT body_len=4
+20:09:57 [DEBUG]   PARSED type=ChangeTarget eid=None target=14283
+20:09:57 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:09:57 [DEBUG]   PARSED type=UpdateMana eid=13556 target=None
+20:09:57 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=87
+20:09:57 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:09:57 [DEBUG] CHATCOMBAT text="Lilyth's Life Draw hits a dusty scarab for 12 points of Corruption Damage."
+20:09:57 [DEBUG]   CHATCOMBAT_DMG "a dusty scarab"(#14255) +12dmg by Lilyth(#13556) text_total=21
+20:09:57 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=57
+20:09:57 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:09:57 [DEBUG] CHATCOMBAT text="Lilyth's Life Draw heals them for 12 Health."
+20:09:57 [DEBUG] MSG_IN 0x005C ParticleHit dir=IN body_len=21
+20:09:57 [DEBUG]   PARSED type=ParticleHit eid=None target=13556
+20:09:57 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:57 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:09:57 [DEBUG] DMG  a dusty scarab(#14255) type=1 74->70/100 amt=4 attacker=Lilyth(13556)
+20:09:57 [DEBUG]   ENC+ "a dusty scarab"(#14255) +4dmg by Lilyth(13556) total=4
+20:09:57 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:57 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:09:57 [DEBUG] HP_INIT Lilyth(#13556) HP:291/517 (no previous HP, no delta)
+20:09:57 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=53
+20:09:57 [DEBUG]   PARSED type=EndCasting eid=13556 target=14255
+20:09:57 [DEBUG] ENDCAST caster=#13556 target=#14255 text=""
+20:09:57 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:57 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:09:57 [DEBUG] HP_INIT Wonton(#13014) HP:294/329 (no previous HP, no delta)
+20:09:57 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:57 [DEBUG]   PARSED type=UpdateHealth eid=13238 target=None
+20:09:57 [DEBUG] HP_INIT Mal(#13238) HP:193/251 (no previous HP, no delta)
+20:09:57 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:09:57 [DEBUG]   PARSED type=UpdateMana eid=13238 target=None
+20:09:57 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:57 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:09:57 [DEBUG] HP_INIT a cracked beetle(#14283) HP:48/100 (no previous HP, no delta)
+20:09:57 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:57 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:09:57 [DEBUG] DMG  a cracked beetle(#14283) type=1 48->47/100 amt=1 attacker=None(None)
+20:09:57 [DEBUG]   ENC+ "a cracked beetle"(#14283) +1dmg NO_ATTACKER total=1
+20:09:57 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=93
+20:09:57 [DEBUG]   PARSED type=EndCasting eid=13556 target=14283
+20:09:57 [DEBUG] ENDCAST caster=#13556 target=#14283 text="Lilyth's Slam hits a cracked beetle for 10 points of damage."
+20:09:57 [DEBUG]   -> DMG_HIT attacker=Lilyth(#13556) -> victim=a cracked beetle(#14283)
+20:09:57 [DEBUG]   TEXT_DMG "a cracked beetle"(#14283) +10dmg by Lilyth(#13556) text_total=10
+20:09:57 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:57 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:09:57 [DEBUG] DMG  a cracked beetle(#14283) type=1 47->46/100 amt=1 attacker=Lilyth(13556)
+20:09:57 [DEBUG]   ENC+ "a cracked beetle"(#14283) +1dmg by Lilyth(13556) total=2
+20:09:57 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+20:09:57 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:09:57 [DEBUG] CHATCOMBAT text="Wonton crushes a cracked beetle for 1 point of damage."
+20:09:57 [DEBUG]   CHATCOMBAT_DMG "a cracked beetle"(#14283) +1dmg by Wonton(#13014) text_total=11
+20:09:57 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:09:57 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:09:57 [DEBUG] KEYS validated Client.ConnectionInfo at 0x17422550520
+20:09:57 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=83
+20:09:57 [DEBUG]   PARSED type=EndCasting eid=13556 target=14283
+20:09:57 [DEBUG] ENDCAST caster=#13556 target=#14283 text="a cracked beetle looks angry at Lilyth."
+20:09:57 [DEBUG]   -> NO_MATCH (not dmg, heal, or miss pattern)
+20:09:57 [DEBUG] MSG_UNKNOWN_NEW 0x0019 dir=OUT len=5 body=f4 34 00 00 00
+20:09:58 [DEBUG] GUI_STATE view=overview encounters=2 entity_types={'type0': 5, 'type5': 6, 'type3': 1, 'type1': 96, 'type6': 1, 'type2': 1} names=103 local_eid=14162 player_name="Doopies" classes={13014: 'mnk', 13238: 'clr', 12950: 'nec', 13556: 'shd', 14162: 'ele', 14416: 'bat', 14437: 'bat', 13768: 'rat', 13771: 'sca', 14403: 'bat', 13769: 'bat', 13770: 'rat', 14417: 'sca', 13002: 'rat', 14275: 'rat', 1044: 'hum', 14409: 'rat', 14175: 'bat', 4604: 'rat', 9762: 'bat', 1045: 'hum', 10153: 'bat', 10162: 'rat', 14163: 'sca', 14434: 'sca', 14184: 'sca', 14106: 'sca', 14118: 'sca', 14233: 'sca', 14092: 'sca', 14107: 'sca', 14225: 'sca', 14129: 'rat', 14198: 'rat', 14432: 'btl', 14436: 'rat', 14407: 'bat', 14379: 'bat', 14330: 'bat', 13665: 'skl', 14328: 'rat', 14354: 'rat', 14343: 'rat', 13695: 'ghl', 14255: 'sca', 14223: 'wel', 14208: 'sca', 14176: 'sca', 14283: 'sca', 14152: 'sca', 14193: 'sca', 14134: 'sca', 14359: 'bat', 14423: 'rat', 14338: 'hum', 14433: 'bat', 14306: 'hum', 923: 'hum', 1179: 'hum', 13923: 'skl', 14322: 'btl', 9188: 'bat', 13315: 'btl', 14186: 'rat', 13272: 'btl', 14438: 'sca'} levels={13014: 10, 13238: 9, 12950: 10, 13556: 13, 14162: 8, 14416: 0, 14437: 0, 13768: 0, 13771: 0, 14403: 0, 13769: 0, 13770: 0, 14417: 0, 13002: 0, 14275: 0, 1044: 0, 14409: 0, 14175: 0, 4604: 0, 9762: 0, 1045: 0, 10153: 0, 10162: 0, 14163: 0, 14434: 0, 14184: 0, 14106: 0, 14118: 0, 14233: 0, 14092: 0, 14107: 0, 14225: 0, 14129: 0, 14198: 0, 14432: 0, 14436: 0, 14407: 0, 14379: 0, 14330: 0, 13665: 0, 14328: 0, 14354: 0, 14343: 0, 13695: 0, 14255: 0, 14223: 0, 14208: 0, 14176: 0, 14283: 0, 14152: 0, 14193: 0, 14134: 0, 14359: 0, 14423: 0, 14338: 0, 14433: 0, 14306: 0, 923: 0, 1179: 0, 13923: 0, 14322: 0, 9188: 0, 13315: 0, 14186: 0, 13272: 0, 14438: 0}
+20:09:58 [DEBUG] OVERVIEW_RENDER enc=2 total_dmg=32 dur=1.8s entries=2 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:09:58 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=31 dps=17.5 abilities=[Life Draw=12, Slam=10, [P]Melee=9]
+20:09:58 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=1 dps=2.0 abilities=[Melee=1]
+20:09:58 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:58 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:09:58 [DEBUG] DMG  a cracked beetle(#14283) type=1 46->44/100 amt=2 attacker=Lilyth(13556)
+20:09:58 [DEBUG]   ENC+ "a cracked beetle"(#14283) +2dmg by Lilyth(13556) total=4
+20:09:58 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=87
+20:09:58 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:09:58 [DEBUG] CHATCOMBAT text="Wonton crushes a cracked beetle with their offhand for 8 points of damage."
+20:09:58 [DEBUG]   CHATCOMBAT_DMG "a cracked beetle"(#14283) +8dmg by Wonton(#13014) text_total=19
+20:09:58 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=IN body_len=4
+20:09:58 [DEBUG]   PARSED type=ChangeTarget eid=None target=14283
+20:09:58 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=IN body_len=4
+20:09:58 [DEBUG]   PARSED type=ChangeTarget eid=None target=14283
+20:09:58 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=199
+20:09:58 [DEBUG]   PARSED type=SpawnEntity eid=14441 target=None
+20:09:58 [DEBUG] SPAWN #14441 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:09:58 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=132
+20:09:58 [DEBUG]   PARSED type=BeginCasting eid=13238 target=13556
+20:09:58 [DEBUG] ATTRIB BeginCasting caster=Mal(#13238) -> target=Lilyth(#13556) ability="Impart Blessing"
+20:09:58 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=IN body_len=4
+20:09:58 [DEBUG]   PARSED type=ChangeTarget eid=None target=14283
+20:09:58 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=IN body_len=4
+20:09:58 [DEBUG]   PARSED type=ChangeTarget eid=None target=14283
+20:09:58 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=IN body_len=4
+20:09:58 [DEBUG]   PARSED type=ChangeTarget eid=None target=14283
+20:09:58 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=IN body_len=4
+20:09:58 [DEBUG]   PARSED type=ChangeTarget eid=None target=14283
+20:09:58 [DEBUG] MSG_UNKNOWN_NEW 0x0171 dir=OUT len=4 body=8f 37 00 00
+20:09:58 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:09:58 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:09:58 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=60
+20:09:58 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:09:58 [DEBUG] CHATCOMBAT text="Thalulyl says, "Attacking your target, Master."
+20:09:59 [DEBUG] OVERVIEW_RENDER enc=2 total_dmg=40 dur=3.8s entries=2 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:09:59 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=31 dps=8.2 abilities=[Life Draw=12, Slam=10, [P]Melee=9]
+20:09:59 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=9 dps=6.0 abilities=[Melee=9]
+20:09:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:59 [DEBUG]   PARSED type=UpdateHealth eid=14223 target=None
+20:09:59 [DEBUG] HP_INIT Thalulyl(#14223) HP:57/100 (no previous HP, no delta)
+20:09:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:59 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:09:59 [DEBUG] HEAL a cracked beetle(#14283) 44->45/100 delta=+1 last_attacker=Lilyth(13556)
+20:09:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:59 [DEBUG]   PARSED type=UpdateHealth eid=14338 target=None
+20:09:59 [DEBUG] HP_INIT a shadow knight recruit(#14338) HP:100/100 (no previous HP, no delta)
+20:09:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:59 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:09:59 [DEBUG] HEAL Lilyth(#13556) 291->292/517 delta=+1 last_attacker=Mal(13238)
+20:09:59 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:09:59 [DEBUG]   PARSED type=UpdateMana eid=13556 target=None
+20:09:59 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:09:59 [DEBUG]   PARSED type=UpdateMana eid=14162 target=None
+20:09:59 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+20:09:59 [DEBUG]   PARSED type=UpdateEndurance eid=14162 target=None
+20:09:59 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=60
+20:09:59 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:09:59 [DEBUG] CHATCOMBAT text="Thalulyl says, "Attacking your target, Master."
+20:09:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:59 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:09:59 [DEBUG] DMG  a cracked beetle(#14283) type=1 45->39/100 amt=6 attacker=Lilyth(13556)
+20:09:59 [DEBUG]   ENC+ "a cracked beetle"(#14283) +6dmg by Lilyth(13556) total=10
+20:09:59 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=69
+20:09:59 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:09:59 [DEBUG] CHATCOMBAT text="Lilyth slashes a cracked beetle for 20 points of damage."
+20:09:59 [DEBUG]   CHATCOMBAT_DMG "a cracked beetle"(#14283) +20dmg by Lilyth(#13556) text_total=39
+20:09:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:59 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:09:59 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=71
+20:09:59 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:09:59 [DEBUG] CHATCOMBAT text="Skelebones crushes a cracked beetle for 1 point of damage."
+20:09:59 [DEBUG]   CHATCOMBAT_DMG "a cracked beetle"(#14283) +1dmg by Skelebones(#12950) text_total=40
+20:09:59 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=73
+20:09:59 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:09:59 [DEBUG] CHATCOMBAT text="Your pet Thalulyl tries to hit a cracked beetle, but misses!"
+20:09:59 [DEBUG]   CHATCOMBAT_MISS "a cracked beetle"(#14283) miss by Doopies(#14162)
+20:09:59 [DEBUG] MSG_IN 0x002A UpdateHostileState dir=IN body_len=5
+20:09:59 [DEBUG]   PARSED type=UpdateHostileState eid=14283 target=None
+20:09:59 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:09:59 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:09:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:59 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:09:59 [DEBUG] DMG  a cracked beetle(#14283) type=1 39->35/100 amt=4 attacker=Lilyth(13556)
+20:09:59 [DEBUG]   ENC+ "a cracked beetle"(#14283) +4dmg by Lilyth(13556) total=14
+20:09:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:59 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:09:59 [DEBUG] DMG  a cracked beetle(#14283) type=1 35->34/100 amt=1 attacker=Lilyth(13556)
+20:09:59 [DEBUG]   ENC+ "a cracked beetle"(#14283) +1dmg by Lilyth(13556) total=15
+20:09:59 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=94
+20:09:59 [DEBUG]   PARSED type=EndCasting eid=13014 target=14283
+20:09:59 [DEBUG] ENDCAST caster=#13014 target=#14283 text="Wonton's Round Kick hits a cracked beetle for 18 points of damage."
+20:09:59 [DEBUG]   -> DMG_HIT attacker=Wonton(#13014) -> victim=a cracked beetle(#14283)
+20:09:59 [DEBUG]   TEXT_DMG "a cracked beetle"(#14283) +18dmg by Wonton(#13014) text_total=58
+20:09:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:59 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:09:59 [DEBUG] DMG  a cracked beetle(#14283) type=1 34->29/100 amt=5 attacker=Wonton(13014)
+20:09:59 [DEBUG]   ENC+ "a cracked beetle"(#14283) +5dmg by Wonton(13014) total=20
+20:09:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:59 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:09:59 [DEBUG] DMG  a cracked beetle(#14283) type=1 29->28/100 amt=1 attacker=Wonton(13014)
+20:09:59 [DEBUG]   ENC+ "a cracked beetle"(#14283) +1dmg by Wonton(13014) total=21
+20:09:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:59 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:09:59 [DEBUG] DMG  a cracked beetle(#14283) type=1 28->25/100 amt=3 attacker=Wonton(13014)
+20:09:59 [DEBUG]   ENC+ "a cracked beetle"(#14283) +3dmg by Wonton(13014) total=24
+20:09:59 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=102
+20:09:59 [DEBUG]   PARSED type=EndCasting eid=13556 target=14283
+20:09:59 [DEBUG] ENDCAST caster=#13556 target=#14283 text="Lilyth's Shadow Strike hits a cracked beetle for 29 points of damage."
+20:09:59 [DEBUG]   -> DMG_HIT attacker=Lilyth(#13556) -> victim=a cracked beetle(#14283)
+20:09:59 [DEBUG]   TEXT_DMG "a cracked beetle"(#14283) +29dmg by Lilyth(#13556) text_total=87
+20:09:59 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:09:59 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:09:59 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=66
+20:09:59 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:09:59 [DEBUG] CHATCOMBAT text="Labubu slashes a dusty scarab for 2 points of damage."
+20:09:59 [DEBUG]   CHATCOMBAT_DMG "a dusty scarab"(#14255) +2dmg by Labubu(#13695) text_total=23
+20:10:00 [DEBUG] OVERVIEW_RENDER enc=2 total_dmg=110 dur=5.8s entries=4 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:10:00 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=82 dps=14.2 abilities=[Shadow Strike=29, Melee=20, Life Draw=12]
+20:10:00 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=27 dps=10.8 abilities=[Round Kick=18, Melee=9]
+20:10:00 [DEBUG]   OVERVIEW_ROW #3 "Skelebones" type=player cls=nec lvl=10 dealt=1 dps=0.4 abilities=[Melee=1]
+20:10:00 [DEBUG]   OVERVIEW_ROW #4 "Doopies" type=player cls=ele lvl=8 dealt=0 dps=0.0 abilities=[Miss=0]
+20:10:00 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:00 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:10:00 [DEBUG] DMG  a cracked beetle(#14283) type=1 25->24/100 amt=1 attacker=Lilyth(13556)
+20:10:00 [DEBUG]   ENC+ "a cracked beetle"(#14283) +1dmg by Lilyth(13556) total=25
+20:10:00 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=68
+20:10:00 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:00 [DEBUG] CHATCOMBAT text="Wonton crushes a cracked beetle for 4 points of damage."
+20:10:00 [DEBUG]   CHATCOMBAT_DMG "a cracked beetle"(#14283) +4dmg by Wonton(#13014) text_total=91
+20:10:00 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+20:10:00 [DEBUG]   PARSED type=CastAbility eid=None target=14283
+20:10:00 [DEBUG] CASTABILITY_OUT gem=2 target=#14283
+20:10:00 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:00 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:00 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=107
+20:10:00 [DEBUG]   PARSED type=BeginCasting eid=14162 target=14283
+20:10:00 [INFO ]   CAST_CORRELATE BeginCasting eid=#14162 matched CastAbility target=#14283 → local player
+20:10:00 [DEBUG] ATTRIB BeginCasting caster=Doopies(#14162) -> target=a cracked beetle(#14283) ability="Magmaburst"
+20:10:00 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:00 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:01 [DEBUG] OVERVIEW_RENDER enc=2 total_dmg=114 dur=7.8s entries=4 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:10:01 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=82 dps=10.5 abilities=[Shadow Strike=29, Melee=20, Life Draw=12]
+20:10:01 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=31 dps=8.8 abilities=[Round Kick=18, Melee=13]
+20:10:01 [DEBUG]   OVERVIEW_ROW #3 "Skelebones" type=player cls=nec lvl=10 dealt=1 dps=0.3 abilities=[Melee=1]
+20:10:01 [DEBUG]   OVERVIEW_ROW #4 "Doopies" type=player cls=ele lvl=8 dealt=0 dps=0.0 abilities=[Miss=0]
+20:10:01 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+20:10:01 [DEBUG]   PARSED type=CastAbility eid=None target=14283
+20:10:01 [DEBUG] CASTABILITY_OUT gem=2 target=#14283
+20:10:01 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=124
+20:10:01 [DEBUG]   PARSED type=BeginCasting eid=13556 target=14283
+20:10:01 [DEBUG]   LOCAL_PLAYER_REJECT eid=#13556 (already set to #14162)
+20:10:01 [INFO ]   CAST_CORRELATE BeginCasting eid=#13556 matched CastAbility target=#14283 → local player
+20:10:01 [DEBUG] ATTRIB BeginCasting caster=Lilyth(#13556) -> target=a cracked beetle(#14283) ability="Life Draw"
+20:10:01 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=55
+20:10:01 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:01 [DEBUG] CHATCOMBAT text="You are already casting another ability..."
+20:10:01 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+20:10:01 [DEBUG]   PARSED type=DespawnEntity eid=14301 target=None
+20:10:01 [DEBUG] DESPAWN #14301
+20:10:02 [DEBUG] OVERVIEW_RENDER enc=2 total_dmg=114 dur=9.8s entries=4 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:10:02 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=82 dps=8.3 abilities=[Shadow Strike=29, Melee=20, Life Draw=12]
+20:10:02 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=31 dps=6.9 abilities=[Round Kick=18, Melee=13]
+20:10:02 [DEBUG]   OVERVIEW_ROW #3 "Skelebones" type=player cls=nec lvl=10 dealt=1 dps=0.2 abilities=[Melee=1]
+20:10:02 [DEBUG]   OVERVIEW_ROW #4 "Doopies" type=player cls=ele lvl=8 dealt=0 dps=0.0 abilities=[Miss=0]
+20:10:02 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+20:10:02 [DEBUG]   PARSED type=RemoveBuffIcon eid=12950 target=None
+20:10:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=46
+20:10:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:02 [DEBUG] CHATCOMBAT text="Skelebones's bestial speed fades."
+20:10:02 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:02 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=50
+20:10:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:02 [DEBUG] CHATCOMBAT text="Wonton is filled with celestial fury."
+20:10:02 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=90
+20:10:02 [DEBUG]   PARSED type=AddBuffIcon eid=13014 target=None
+20:10:02 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:02 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:10:02 [DEBUG] DMG  a cracked beetle(#14283) type=1 24->23/100 amt=1 attacker=Lilyth(13556)
+20:10:02 [DEBUG]   ENC+ "a cracked beetle"(#14283) +1dmg by Lilyth(13556) total=26
+20:10:02 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:02 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:10:02 [DEBUG] DMG  a cracked beetle(#14283) type=1 23->20/100 amt=3 attacker=Lilyth(13556)
+20:10:02 [DEBUG]   ENC+ "a cracked beetle"(#14283) +3dmg by Lilyth(13556) total=29
+20:10:02 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=105
+20:10:02 [DEBUG]   PARSED type=EndCasting eid=13014 target=14283
+20:10:02 [DEBUG] ENDCAST caster=#13014 target=#14283 text="Wonton's Celestial Strike hits a cracked beetle for 15 points of damage."
+20:10:02 [DEBUG]   -> DMG_HIT attacker=Wonton(#13014) -> victim=a cracked beetle(#14283)
+20:10:02 [DEBUG]   TEXT_DMG "a cracked beetle"(#14283) +15dmg by Wonton(#13014) text_total=106
+20:10:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=53
+20:10:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:02 [DEBUG] CHATCOMBAT text="a cracked beetle is chilled to the bone."
+20:10:02 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:02 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:10:02 [DEBUG] DMG  a cracked beetle(#14283) type=1 20->15/100 amt=5 attacker=Wonton(13014)
+20:10:02 [DEBUG]   ENC+ "a cracked beetle"(#14283) +5dmg by Wonton(13014) total=34
+20:10:02 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+20:10:02 [DEBUG]   PARSED type=SpawnEntity eid=11592 target=None
+20:10:02 [DEBUG] SPAWN #11592 type=1 "a large rat" HP:1000/1000 class=rat lvl=0
+20:10:02 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=133
+20:10:02 [DEBUG]   PARSED type=EndCasting eid=14223 target=14283
+20:10:02 [DEBUG] ENDCAST caster=#14223 target=#14283 text="Your pet Thalulyl's Bolt of Water hits a cracked beetle for 15 points of Cold Da"
+20:10:02 [DEBUG]   -> DMG_HIT attacker=Your pet Thalulyl(#14223) -> victim=a cracked beetle(#14283)
+20:10:02 [DEBUG]   TEXT_DMG "a cracked beetle"(#14283) +15dmg by Thalulyl(#14223) text_total=121
+20:10:02 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=126
+20:10:02 [DEBUG]   PARSED type=EndCasting eid=13014 target=14283
+20:10:02 [DEBUG] ENDCAST caster=#13014 target=#14283 text="Wonton tries to cast Fists of Flame on a cracked beetle, but is resisted!5"
+20:10:02 [DEBUG]   -> NO_MATCH (not dmg, heal, or miss pattern)
+20:10:02 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:02 [DEBUG]   PARSED type=UpdateMana eid=13238 target=None
+20:10:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=43
+20:10:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:02 [DEBUG] CHATCOMBAT text="Lilyth is imparted a blessing."
+20:10:02 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=136
+20:10:02 [DEBUG]   PARSED type=AddBuffIcon eid=13556 target=None
+20:10:02 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=52
+20:10:02 [DEBUG]   PARSED type=EndCasting eid=13238 target=13556
+20:10:02 [DEBUG] ENDCAST caster=#13238 target=#13556 text=""
+20:10:02 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=209
+20:10:02 [DEBUG]   PARSED type=SpawnEntity eid=14442 target=None
+20:10:02 [DEBUG] SPAWN #14442 type=1 "a rotting skeleton" HP:1000/1000 class=skl lvl=0
+20:10:02 [DEBUG] MSG_UNKNOWN_NEW 0x0220 dir=OUT len=4 body=48 2d 00 00
+20:10:02 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:02 [DEBUG]   PARSED type=UpdateMana eid=13556 target=None
+20:10:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=89
+20:10:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:02 [DEBUG] CHATCOMBAT text="Lilyth's Life Draw hits a cracked beetle for 12 points of Corruption Damage."
+20:10:02 [DEBUG]   CHATCOMBAT_DMG "a cracked beetle"(#14283) +12dmg by Lilyth(#13556) text_total=133
+20:10:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=57
+20:10:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:02 [DEBUG] CHATCOMBAT text="Lilyth's Life Draw heals them for 12 Health."
+20:10:02 [DEBUG] MSG_IN 0x005C ParticleHit dir=IN body_len=21
+20:10:02 [DEBUG]   PARSED type=ParticleHit eid=None target=13556
+20:10:02 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:02 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:10:02 [DEBUG] DMG  a cracked beetle(#14283) type=1 15->12/100 amt=3 attacker=Thalulyl(14223)
+20:10:02 [DEBUG]   ENC+ "a cracked beetle"(#14283) +3dmg by Thalulyl(14223) total=37
+20:10:02 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:02 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:10:02 [DEBUG] HEAL Lilyth(#13556) 292->304/517 delta=+12 last_attacker=Mal(13238)
+20:10:02 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=53
+20:10:02 [DEBUG]   PARSED type=EndCasting eid=13556 target=14283
+20:10:02 [DEBUG] ENDCAST caster=#13556 target=#14283 text=""
+20:10:02 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:02 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:10:02 [DEBUG] DMG  a cracked beetle(#14283) type=1 12->8/100 amt=4 attacker=Thalulyl(14223)
+20:10:02 [DEBUG]   ENC+ "a cracked beetle"(#14283) +4dmg by Thalulyl(14223) total=41
+20:10:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=69
+20:10:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:02 [DEBUG] CHATCOMBAT text="Wonton crushes a cracked beetle for 14 points of damage."
+20:10:02 [DEBUG]   CHATCOMBAT_DMG "a cracked beetle"(#14283) +14dmg by Wonton(#13014) text_total=147
+20:10:02 [DEBUG] KEYS validated Client.ConnectionInfo at 0x17422550520
+20:10:02 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:02 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:10:02 [DEBUG] DMG  a cracked beetle(#14283) type=1 8->6/100 amt=2 attacker=Thalulyl(14223)
+20:10:02 [DEBUG]   ENC+ "a cracked beetle"(#14283) +2dmg by Thalulyl(14223) total=43
+20:10:02 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=236
+20:10:02 [DEBUG]   PARSED type=SpawnEntity eid=13945 target=None
+20:10:02 [DEBUG] SPAWN #13945 type=1 "a young crypt scarab" HP:1000/1000 class=btl lvl=0
+20:10:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=76
+20:10:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:02 [DEBUG] CHATCOMBAT text="Your pet Thalulyl hits a cracked beetle for 5 points of damage."
+20:10:02 [DEBUG]   CHATCOMBAT_DMG "a cracked beetle"(#14283) +5dmg by Doopies(#14162) text_total=152
+20:10:02 [DEBUG] OVERVIEW_RENDER enc=2 total_dmg=175 dur=11.4s entries=4 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:10:02 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=94 dps=8.2 abilities=[Shadow Strike=29, Life Draw=24, Melee=20]
+20:10:02 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=60 dps=11.3 abilities=[Melee=27, Round Kick=18, Celestial Strike=15]
+20:10:02 [DEBUG]   OVERVIEW_ROW #3 "Doopies" type=player cls=ele lvl=8 dealt=20 dps=3.8 abilities=[[P]Bolt of Water=15, pet Thalulyl=5, Miss=0]
+20:10:02 [DEBUG]   OVERVIEW_ROW #4 "Skelebones" type=player cls=nec lvl=10 dealt=1 dps=0.2 abilities=[Melee=1]
+20:10:02 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:02 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:02 [DEBUG] DMG  a dusty scarab(#14255) type=1 70->68/100 amt=2 attacker=Lilyth(13556)
+20:10:02 [DEBUG]   ENC+ "a dusty scarab"(#14255) +2dmg by Lilyth(13556) total=6
+20:10:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=66
+20:10:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:02 [DEBUG] CHATCOMBAT text="Labubu slashes a dusty scarab for 9 points of damage."
+20:10:02 [DEBUG]   CHATCOMBAT_DMG "a dusty scarab"(#14255) +9dmg by Labubu(#13695) text_total=32
+20:10:02 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+20:10:02 [DEBUG]   PARSED type=RemoveBuffIcon eid=13556 target=None
+20:10:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=44
+20:10:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:02 [DEBUG] CHATCOMBAT text="Lilyth's blessed barrier fades."
+20:10:02 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:02 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:10:02 [DEBUG] DMG  Lilyth(#13556) type=0 304->299/517 amt=5 attacker=Mal(13238)
+20:10:02 [DEBUG]   ENC_PVP "Lilyth"(#13556) +5dmg by Mal(13238) total=5
+20:10:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=80
+20:10:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:02 [DEBUG] CHATCOMBAT text="a cracked beetle bites Lilyth for 5 points of damage (17 absorbed)."
+20:10:02 [DEBUG]   CHATCOMBAT_DMG "Lilyth"(#13556) +5dmg by a cracked beetle(#14417) text_total=5
+20:10:02 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:02 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:10:02 [DEBUG] DMG  Lilyth(#13556) type=0 299->288/517 amt=11 attacker=Mal(13238)
+20:10:02 [DEBUG]   ENC_PVP "Lilyth"(#13556) +11dmg by Mal(13238) total=16
+20:10:02 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=80
+20:10:02 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:02 [DEBUG] CHATCOMBAT text="a cracked beetle bites Lilyth for 11 points of damage (1 absorbed)."
+20:10:02 [DEBUG]   CHATCOMBAT_DMG "Lilyth"(#13556) +11dmg by a cracked beetle(#14417) text_total=16
+20:10:03 [DEBUG] OVERVIEW_RENDER enc=3 total_dmg=200 dur=11.9s entries=5 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:10:03 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=103 dps=8.7 abilities=[Shadow Strike=29, Life Draw=24, Melee=20]
+20:10:03 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=60 dps=10.9 abilities=[Melee=27, Round Kick=18, Celestial Strike=15]
+20:10:03 [DEBUG]   OVERVIEW_ROW #3 "Doopies" type=player cls=ele lvl=8 dealt=20 dps=3.6 abilities=[[P]Bolt of Water=15, pet Thalulyl=5, Miss=0]
+20:10:03 [DEBUG]   OVERVIEW_ROW #4 "Mal" type=player cls=clr lvl=9 dealt=16 dps=160.0 abilities=[none]
+20:10:03 [DEBUG]   OVERVIEW_ROW #5 "Skelebones" type=player cls=nec lvl=10 dealt=1 dps=0.2 abilities=[Melee=1]
+20:10:03 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=501
+20:10:03 [DEBUG]   PARSED type=SpawnEntity eid=14306 target=None
+20:10:03 [DEBUG] SPAWN #14306 type=1 "a shadow knight recruit" HP:1000/1000 class=hum lvl=0
+20:10:03 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:03 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:03 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=496
+20:10:03 [DEBUG]   PARSED type=SpawnEntity eid=14338 target=None
+20:10:03 [DEBUG] SPAWN #14338 type=1 "a shadow knight recruit" HP:1000/1000 class=hum lvl=0
+20:10:03 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=213
+20:10:03 [DEBUG]   PARSED type=SpawnEntity eid=14393 target=None
+20:10:03 [DEBUG] SPAWN #14393 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:10:03 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=213
+20:10:03 [DEBUG]   PARSED type=SpawnEntity eid=14407 target=None
+20:10:03 [DEBUG] SPAWN #14407 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:10:03 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:03 [DEBUG]   PARSED type=UpdateMana eid=14162 target=None
+20:10:03 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:03 [DEBUG]   PARSED type=UpdateHealth eid=14283 target=None
+20:10:03 [DEBUG] DMG  a cracked beetle(#14283) type=1 6->0/100 amt=6 attacker=Thalulyl(14223)
+20:10:03 [DEBUG]   ENC+ "a cracked beetle"(#14283) +6dmg by Thalulyl(14223) total=49
+20:10:03 [DEBUG] MSG_UNKNOWN_NEW 0x0058 dir=IN len=65 body=01 00 00 00 0b 00 6d 61 67 6d 61 62 75 72 73 74 00 00 00 00 00 00 00 00 01 00 00 00 0b 00 6d 61
+20:10:03 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=120
+20:10:03 [DEBUG]   PARSED type=EndCasting eid=14162 target=14283
+20:10:03 [DEBUG] ENDCAST caster=#14162 target=#14283 text="Your Magmaburst hits a cracked beetle for 40 points of Fire Damage."
+20:10:03 [DEBUG]   -> DMG_LOCAL_SPELL caster=#14162 -> victim=a cracked beetle(#14283)
+20:10:03 [DEBUG]   TEXT_DMG "a cracked beetle"(#14283) +40dmg by Doopies(#14162) text_total=192
+20:10:03 [DEBUG] MSG_UNKNOWN_NEW 0x002C dir=IN len=13 body=04 00 65 76 6f 2d 00 00 00 00 00 2d 00
+20:10:03 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=56
+20:10:03 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:03 [DEBUG] CHATCOMBAT text="Your skill in Evocation has increased! (45)\"
+20:10:03 [DEBUG] MSG_UNKNOWN_NEW 0x0059 dir=IN len=27 body=01 0b 00 6d 61 67 6d 61 62 75 72 73 74 01 0b 00 6d 61 67 6d 61 62 75 72 73 74 00
+20:10:03 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:03 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:10:03 [DEBUG] HEAL Wonton(#13014) 294->295/329 delta=+1 last_attacker=None(None)
+20:10:03 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:03 [DEBUG]   PARSED type=UpdateHealth eid=13238 target=None
+20:10:03 [DEBUG] HEAL Mal(#13238) 193->194/251 delta=+1 last_attacker=None(None)
+20:10:03 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:03 [DEBUG]   PARSED type=UpdateMana eid=13238 target=None
+20:10:03 [DEBUG] MSG_IN 0x0013 Die dir=IN body_len=10
+20:10:03 [DEBUG]   PARSED type=Die eid=14283 target=None
+20:10:03 [DEBUG] DIE #14283 "a cracked beetle" hp_dmg=49 text_dmg=192 best=192 players=[13556, 13014, 12950, 14162, 14223]
+20:10:03 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=39
+20:10:03 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:03 [DEBUG] CHATCOMBAT text="You gain party experience!W"
+20:10:03 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+20:10:03 [DEBUG]   PARSED type=RemoveBuffIcon eid=14283 target=None
+20:10:03 [DEBUG] MSG_UNKNOWN_NEW 0x00A1 dir=IN len=24 body=cb 37 00 00 13 00 62 75 66 66 5f 42 6f 6c 74 20 6f 66 20 57 61 74 65 72
+20:10:03 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+20:10:03 [DEBUG]   PARSED type=RemoveBuffIcon eid=14283 target=None
+20:10:03 [DEBUG] MSG_IN 0x0024 UpdateExperience dir=IN body_len=8
+20:10:03 [DEBUG]   PARSED type=UpdateExperience eid=14162 target=None
+20:10:03 [DEBUG] XP_BASELINE #14162 total=8,127 (first event, no delta)
+20:10:03 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=OUT body_len=4
+20:10:03 [DEBUG]   PARSED type=ChangeTarget eid=None target=0
+20:10:04 [DEBUG] OVERVIEW_RENDER enc=3 total_dmg=240 dur=14.4s entries=5 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:10:04 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=103 dps=7.7 abilities=[Shadow Strike=29, Life Draw=24, Melee=20]
+20:10:04 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=60 dps=10.0 abilities=[Melee=27, Round Kick=18, Celestial Strike=15]
+20:10:04 [DEBUG]   OVERVIEW_ROW #3 "Doopies" type=player cls=ele lvl=8 dealt=60 dps=10.0 abilities=[Magmaburst=40, [P]Bolt of Water=15, pet Thalulyl=5]
+20:10:04 [DEBUG]   OVERVIEW_ROW #4 "Mal" type=player cls=clr lvl=9 dealt=16 dps=14.9 abilities=[none]
+20:10:04 [DEBUG]   OVERVIEW_ROW #5 "Skelebones" type=player cls=nec lvl=10 dealt=1 dps=0.2 abilities=[Melee=1]
+20:10:04 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:04 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:04 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:04 [DEBUG]   PARSED type=UpdateHealth eid=14129 target=None
+20:10:04 [DEBUG] HP_INIT a large rat(#14129) HP:73/100 (no previous HP, no delta)
+20:10:04 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:04 [DEBUG]   PARSED type=UpdateHealth eid=14306 target=None
+20:10:04 [DEBUG] HP_INIT a shadow knight recruit(#14306) HP:98/100 (no previous HP, no delta)
+20:10:04 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=124
+20:10:04 [DEBUG]   PARSED type=BeginCasting eid=13556 target=14255
+20:10:04 [DEBUG] ATTRIB BeginCasting caster=Lilyth(#13556) -> target=a dusty scarab(#14255) ability="Life Draw"
+20:10:04 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=81
+20:10:04 [DEBUG]   PARSED type=EndCasting eid=13014 target=14255
+20:10:04 [DEBUG] ENDCAST caster=#13014 target=#14255 text="a dusty scarab looks angry at Wonton."
+20:10:04 [DEBUG]   -> NO_MATCH (not dmg, heal, or miss pattern)
+20:10:05 [DEBUG] OVERVIEW_RENDER enc=3 total_dmg=240 dur=16.4s entries=5 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:10:05 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=103 dps=7.2 abilities=[Shadow Strike=29, Life Draw=24, Melee=20]
+20:10:05 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=60 dps=10.0 abilities=[Melee=27, Round Kick=18, Celestial Strike=15]
+20:10:05 [DEBUG]   OVERVIEW_ROW #3 "Doopies" type=player cls=ele lvl=8 dealt=60 dps=10.0 abilities=[Magmaburst=40, [P]Bolt of Water=15, pet Thalulyl=5]
+20:10:05 [DEBUG]   OVERVIEW_ROW #4 "Mal" type=player cls=clr lvl=9 dealt=16 dps=7.7 abilities=[none]
+20:10:05 [DEBUG]   OVERVIEW_ROW #5 "Skelebones" type=player cls=nec lvl=10 dealt=1 dps=0.2 abilities=[Melee=1]
+20:10:05 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:05 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:05 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:05 [DEBUG]   PARSED type=UpdateHealth eid=14223 target=None
+20:10:05 [DEBUG] HEAL Thalulyl(#14223) 57->58/100 delta=+1 last_attacker=None(None)
+20:10:05 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:05 [DEBUG]   PARSED type=UpdateHealth eid=14306 target=None
+20:10:05 [DEBUG] HEAL a shadow knight recruit(#14306) 98->100/100 delta=+2 last_attacker=None(None)
+20:10:05 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:05 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:10:05 [DEBUG] HEAL Lilyth(#13556) 288->289/517 delta=+1 last_attacker=Mal(13238)
+20:10:05 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:05 [DEBUG]   PARSED type=UpdateMana eid=13556 target=None
+20:10:05 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:05 [DEBUG]   PARSED type=UpdateMana eid=14162 target=None
+20:10:05 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+20:10:05 [DEBUG]   PARSED type=UpdateEndurance eid=14162 target=None
+20:10:05 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=52
+20:10:05 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:05 [DEBUG] CHATCOMBAT text="a dusty scarab is rooted to the ground."
+20:10:05 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=48
+20:10:05 [DEBUG]   PARSED type=EndCasting eid=13695 target=14255
+20:10:05 [DEBUG] ENDCAST caster=#13695 target=#14255 text=""
+20:10:06 [DEBUG] OVERVIEW_RENDER enc=3 total_dmg=240 dur=18.4s entries=5 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:10:06 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=103 dps=6.7 abilities=[Shadow Strike=29, Life Draw=24, Melee=20]
+20:10:06 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=60 dps=10.0 abilities=[Melee=27, Round Kick=18, Celestial Strike=15]
+20:10:06 [DEBUG]   OVERVIEW_ROW #3 "Doopies" type=player cls=ele lvl=8 dealt=60 dps=10.0 abilities=[Magmaburst=40, [P]Bolt of Water=15, pet Thalulyl=5]
+20:10:06 [DEBUG]   OVERVIEW_ROW #4 "Mal" type=player cls=clr lvl=9 dealt=16 dps=5.2 abilities=[none]
+20:10:06 [DEBUG]   OVERVIEW_ROW #5 "Skelebones" type=player cls=nec lvl=10 dealt=1 dps=0.2 abilities=[Melee=1]
+20:10:06 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:06 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:06 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:06 [DEBUG]   PARSED type=UpdateMana eid=13556 target=None
+20:10:06 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=87
+20:10:06 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:06 [DEBUG] CHATCOMBAT text="Lilyth's Life Draw hits a dusty scarab for 12 points of Corruption Damage."
+20:10:06 [DEBUG]   CHATCOMBAT_QUEUED target="a dusty scarab"(#13771 no HP) +12dmg (waiting for UpdateHealth)
+20:10:06 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=57
+20:10:06 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:06 [DEBUG] CHATCOMBAT text="Lilyth's Life Draw heals them for 12 Health."
+20:10:06 [DEBUG] MSG_IN 0x005C ParticleHit dir=IN body_len=21
+20:10:06 [DEBUG]   PARSED type=ParticleHit eid=None target=13556
+20:10:06 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:06 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:06 [DEBUG]   CHATCOMBAT_FLUSH "a dusty scarab"(#14255) +12txt_dmg atk=13556 (queued 0.0s ago)
+20:10:06 [DEBUG] DMG  a dusty scarab(#14255) type=1 68->64/100 amt=4 attacker=Lilyth(13556)
+20:10:06 [DEBUG]   ENC+ "a dusty scarab"(#14255) +4dmg by Lilyth(13556) total=10
+20:10:06 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:06 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:10:06 [DEBUG] HEAL Lilyth(#13556) 289->301/517 delta=+12 last_attacker=Mal(13238)
+20:10:06 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=53
+20:10:06 [DEBUG]   PARSED type=EndCasting eid=13556 target=14255
+20:10:06 [DEBUG] ENDCAST caster=#13556 target=#14255 text=""
+20:10:07 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:07 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:07 [DEBUG] HEAL a dusty scarab(#14255) 64->65/100 delta=+1 last_attacker=Lilyth(13556)
+20:10:07 [DEBUG] OVERVIEW_RENDER enc=3 total_dmg=252 dur=20.4s entries=5 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:10:07 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=115 dps=7.0 abilities=[Life Draw=36, Shadow Strike=29, Melee=20]
+20:10:07 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=60 dps=10.0 abilities=[Melee=27, Round Kick=18, Celestial Strike=15]
+20:10:07 [DEBUG]   OVERVIEW_ROW #3 "Doopies" type=player cls=ele lvl=8 dealt=60 dps=10.0 abilities=[Magmaburst=40, [P]Bolt of Water=15, pet Thalulyl=5]
+20:10:07 [DEBUG]   OVERVIEW_ROW #4 "Mal" type=player cls=clr lvl=9 dealt=16 dps=3.9 abilities=[none]
+20:10:07 [DEBUG]   OVERVIEW_ROW #5 "Skelebones" type=player cls=nec lvl=10 dealt=1 dps=0.2 abilities=[Melee=1]
+20:10:07 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:07 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:07 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+20:10:07 [DEBUG]   PARSED type=RemoveBuffIcon eid=13238 target=None
+20:10:07 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=41
+20:10:07 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:07 [DEBUG] CHATCOMBAT text="Mal's divine strength wanes."
+20:10:07 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:07 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:10:07 [DEBUG] DMG  Wonton(#13014) type=0 295->269/329 amt=26 attacker=None(None)
+20:10:07 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+20:10:07 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=65
+20:10:07 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:07 [DEBUG] CHATCOMBAT text="a dusty scarab bites Wonton for 26 points of damage."
+20:10:07 [DEBUG]   CHATCOMBAT_QUEUED target="Wonton"(unresolved) +26dmg (waiting for UpdateHealth)
+20:10:07 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:07 [DEBUG]   PARSED type=UpdateHealth eid=14129 target=None
+20:10:07 [DEBUG] DMG  a large rat(#14129) type=1 73->61/100 amt=12 attacker=None(None)
+20:10:07 [DEBUG]   ENC+ "a large rat"(#14129) +12dmg NO_ATTACKER total=12
+20:10:07 [DEBUG] KEYS validated Client.ConnectionInfo at 0x17422550520
+20:10:07 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:07 [DEBUG]   PARSED type=UpdateHealth eid=14306 target=None
+20:10:07 [DEBUG] DMG  a shadow knight recruit(#14306) type=1 100->98/100 amt=2 attacker=None(None)
+20:10:07 [DEBUG]   ENC+ "a shadow knight recruit"(#14306) +2dmg NO_ATTACKER total=2
+20:10:07 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=OUT body_len=4
+20:10:07 [DEBUG]   PARSED type=ChangeTarget eid=None target=14255
+20:10:08 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+20:10:08 [DEBUG]   PARSED type=DespawnEntity eid=14258 target=None
+20:10:08 [DEBUG] DESPAWN #14258
+20:10:08 [DEBUG] GUI_STATE view=overview encounters=5 entity_types={'type0': 5, 'type5': 6, 'type3': 1, 'type1': 101, 'type6': 1, 'type2': 1} names=108 local_eid=14162 player_name="Doopies" classes={13014: 'mnk', 13238: 'clr', 12950: 'nec', 13556: 'shd', 14162: 'ele', 14416: 'bat', 14437: 'bat', 13768: 'rat', 13771: 'sca', 14403: 'bat', 13769: 'bat', 13770: 'rat', 14417: 'sca', 13002: 'rat', 14275: 'rat', 1044: 'hum', 14409: 'rat', 14175: 'bat', 4604: 'rat', 9762: 'bat', 1045: 'hum', 10153: 'bat', 10162: 'rat', 14163: 'sca', 14434: 'sca', 14184: 'sca', 14106: 'sca', 14118: 'sca', 14233: 'sca', 14092: 'sca', 14107: 'sca', 14225: 'sca', 14129: 'rat', 14198: 'rat', 14432: 'btl', 14436: 'rat', 14407: 'bat', 14379: 'bat', 14330: 'bat', 13665: 'skl', 14328: 'rat', 14354: 'rat', 14343: 'rat', 13695: 'ghl', 14255: 'sca', 14223: 'wel', 14208: 'sca', 14176: 'sca', 14283: 'sca', 14152: 'sca', 14193: 'sca', 14134: 'sca', 14359: 'bat', 14423: 'rat', 14338: 'hum', 14433: 'bat', 14306: 'hum', 923: 'hum', 1179: 'hum', 13923: 'skl', 14322: 'btl', 9188: 'bat', 13315: 'btl', 14186: 'rat', 13272: 'btl', 14438: 'sca', 14441: 'bat', 11592: 'rat', 14442: 'skl', 13945: 'btl', 14393: 'bat'} levels={13014: 10, 13238: 9, 12950: 10, 13556: 13, 14162: 8, 14416: 0, 14437: 0, 13768: 0, 13771: 0, 14403: 0, 13769: 0, 13770: 0, 14417: 0, 13002: 0, 14275: 0, 1044: 0, 14409: 0, 14175: 0, 4604: 0, 9762: 0, 1045: 0, 10153: 0, 10162: 0, 14163: 0, 14434: 0, 14184: 0, 14106: 0, 14118: 0, 14233: 0, 14092: 0, 14107: 0, 14225: 0, 14129: 0, 14198: 0, 14432: 0, 14436: 0, 14407: 0, 14379: 0, 14330: 0, 13665: 0, 14328: 0, 14354: 0, 14343: 0, 13695: 0, 14255: 0, 14223: 0, 14208: 0, 14176: 0, 14283: 0, 14152: 0, 14193: 0, 14134: 0, 14359: 0, 14423: 0, 14338: 0, 14433: 0, 14306: 0, 923: 0, 1179: 0, 13923: 0, 14322: 0, 9188: 0, 13315: 0, 14186: 0, 13272: 0, 14438: 0, 14441: 0, 11592: 0, 14442: 0, 13945: 0, 14393: 0}
+20:10:08 [DEBUG] OVERVIEW_RENDER enc=3 total_dmg=252 dur=22.4s entries=5 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:10:08 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=115 dps=6.6 abilities=[Life Draw=36, Shadow Strike=29, Melee=20]
+20:10:08 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=60 dps=10.0 abilities=[Melee=27, Round Kick=18, Celestial Strike=15]
+20:10:08 [DEBUG]   OVERVIEW_ROW #3 "Doopies" type=player cls=ele lvl=8 dealt=60 dps=10.0 abilities=[Magmaburst=40, [P]Bolt of Water=15, pet Thalulyl=5]
+20:10:08 [DEBUG]   OVERVIEW_ROW #4 "Mal" type=player cls=clr lvl=9 dealt=16 dps=3.1 abilities=[none]
+20:10:08 [DEBUG]   OVERVIEW_ROW #5 "Skelebones" type=player cls=nec lvl=10 dealt=1 dps=0.2 abilities=[Melee=1]
+20:10:08 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=81
+20:10:08 [DEBUG]   PARSED type=EndCasting eid=13556 target=14255
+20:10:08 [DEBUG] ENDCAST caster=#13556 target=#14255 text="a dusty scarab looks angry at Lilyth."
+20:10:08 [DEBUG]   -> NO_MATCH (not dmg, heal, or miss pattern)
+20:10:08 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:08 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:08 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:08 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:10:08 [DEBUG] HEAL Lilyth(#13556) 301->341/517 delta=+40 last_attacker=Mal(13238)
+20:10:08 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=62
+20:10:08 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:08 [DEBUG] CHATCOMBAT text="Mal's Impart Blessing heals Lilyth for 40 Health."
+20:10:08 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+20:10:08 [DEBUG]   PARSED type=RemoveBuffIcon eid=13556 target=None
+20:10:08 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=37
+20:10:08 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:08 [DEBUG] CHATCOMBAT text="Lilyth's blessing fades."
+20:10:08 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=IN body_len=4
+20:10:08 [DEBUG]   PARSED type=ChangeTarget eid=None target=14255
+20:10:08 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=IN body_len=4
+20:10:08 [DEBUG]   PARSED type=ChangeTarget eid=None target=14255
+20:10:08 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:08 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:08 [DEBUG] DMG  a dusty scarab(#14255) type=1 65->63/100 amt=2 attacker=Lilyth(13556)
+20:10:08 [DEBUG]   ENC+ "a dusty scarab"(#14255) +2dmg by Lilyth(13556) total=12
+20:10:08 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:08 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:08 [DEBUG] DMG  a dusty scarab(#14255) type=1 63->62/100 amt=1 attacker=Lilyth(13556)
+20:10:08 [DEBUG]   ENC+ "a dusty scarab"(#14255) +1dmg by Lilyth(13556) total=13
+20:10:08 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=91
+20:10:08 [DEBUG]   PARSED type=EndCasting eid=13556 target=14255
+20:10:08 [DEBUG] ENDCAST caster=#13556 target=#14255 text="Lilyth's Slam hits a dusty scarab for 11 points of damage."
+20:10:08 [DEBUG]   -> DMG_HIT attacker=Lilyth(#13556) -> victim=a dusty scarab(#14255)
+20:10:08 [DEBUG]   TEXT_DMG "a dusty scarab"(#14255) +11dmg by Lilyth(#13556) text_total=55
+20:10:08 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:08 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:08 [DEBUG] DMG  a dusty scarab(#14255) type=1 62->58/100 amt=4 attacker=Lilyth(13556)
+20:10:08 [DEBUG]   ENC+ "a dusty scarab"(#14255) +4dmg by Lilyth(13556) total=17
+20:10:08 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+20:10:08 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:08 [DEBUG] CHATCOMBAT text="Lilyth slashes a dusty scarab for 13 points of damage."
+20:10:08 [DEBUG]   CHATCOMBAT_DMG "a dusty scarab"(#14255) +13dmg by Lilyth(#13556) text_total=68
+20:10:09 [DEBUG] OVERVIEW_RENDER enc=3 total_dmg=276 dur=24.4s entries=5 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:10:09 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=139 dps=7.6 abilities=[Life Draw=36, Melee=33, Shadow Strike=29]
+20:10:09 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=60 dps=10.0 abilities=[Melee=27, Round Kick=18, Celestial Strike=15]
+20:10:09 [DEBUG]   OVERVIEW_ROW #3 "Doopies" type=player cls=ele lvl=8 dealt=60 dps=10.0 abilities=[Magmaburst=40, [P]Bolt of Water=15, pet Thalulyl=5]
+20:10:09 [DEBUG]   OVERVIEW_ROW #4 "Mal" type=player cls=clr lvl=9 dealt=16 dps=2.6 abilities=[none]
+20:10:09 [DEBUG]   OVERVIEW_ROW #5 "Skelebones" type=player cls=nec lvl=10 dealt=1 dps=0.2 abilities=[Melee=1]
+20:10:09 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=60
+20:10:09 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:09 [DEBUG] CHATCOMBAT text="Thalulyl says, "Attacking your target, Master."
+20:10:09 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:09 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:09 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:09 [DEBUG]   PARSED type=UpdateHealth eid=14129 target=None
+20:10:09 [DEBUG] HEAL a large rat(#14129) 61->65/100 delta=+4 last_attacker=None(None)
+20:10:09 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:09 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:10:09 [DEBUG] HEAL Wonton(#13014) 269->270/329 delta=+1 last_attacker=None(None)
+20:10:09 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:09 [DEBUG]   PARSED type=UpdateHealth eid=13238 target=None
+20:10:09 [DEBUG] HEAL Mal(#13238) 194->196/251 delta=+2 last_attacker=None(None)
+20:10:09 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:09 [DEBUG]   PARSED type=UpdateMana eid=13238 target=None
+20:10:09 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:09 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:09 [DEBUG] DMG  a dusty scarab(#14255) type=1 58->54/100 amt=4 attacker=Lilyth(13556)
+20:10:09 [DEBUG]   ENC+ "a dusty scarab"(#14255) +4dmg by Lilyth(13556) total=21
+20:10:09 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+20:10:09 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:09 [DEBUG] CHATCOMBAT text="Wonton crushes a dusty scarab for 13 points of damage."
+20:10:09 [DEBUG]   CHATCOMBAT_DMG "a dusty scarab"(#14255) +13dmg by Wonton(#13014) text_total=81
+20:10:10 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=213
+20:10:10 [DEBUG]   PARSED type=SpawnEntity eid=14359 target=None
+20:10:10 [DEBUG] SPAWN #14359 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:10:10 [DEBUG] OVERVIEW_RENDER enc=3 total_dmg=289 dur=26.5s entries=5 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:10:10 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=139 dps=7.2 abilities=[Life Draw=36, Melee=33, Shadow Strike=29]
+20:10:10 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=73 dps=3.8 abilities=[Melee=40, Round Kick=18, Celestial Strike=15]
+20:10:10 [DEBUG]   OVERVIEW_ROW #3 "Doopies" type=player cls=ele lvl=8 dealt=60 dps=10.0 abilities=[Magmaburst=40, [P]Bolt of Water=15, pet Thalulyl=5]
+20:10:10 [DEBUG]   OVERVIEW_ROW #4 "Mal" type=player cls=clr lvl=9 dealt=16 dps=2.3 abilities=[none]
+20:10:10 [DEBUG]   OVERVIEW_ROW #5 "Skelebones" type=player cls=nec lvl=10 dealt=1 dps=0.2 abilities=[Melee=1]
+20:10:10 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:10 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:10 [DEBUG] DMG  a dusty scarab(#14255) type=1 54->51/100 amt=3 attacker=Lilyth(13556)
+20:10:10 [DEBUG]   ENC+ "a dusty scarab"(#14255) +3dmg by Lilyth(13556) total=24
+20:10:10 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:10 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:10 [DEBUG] DMG  a dusty scarab(#14255) type=1 51->49/100 amt=2 attacker=Lilyth(13556)
+20:10:10 [DEBUG]   ENC+ "a dusty scarab"(#14255) +2dmg by Lilyth(13556) total=26
+20:10:10 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=92
+20:10:10 [DEBUG]   PARSED type=EndCasting eid=13014 target=14255
+20:10:10 [DEBUG] ENDCAST caster=#13014 target=#14255 text="Wonton's Round Kick hits a dusty scarab for 18 points of damage."
+20:10:10 [DEBUG]   -> DMG_HIT attacker=Wonton(#13014) -> victim=a dusty scarab(#14255)
+20:10:10 [DEBUG]   TEXT_DMG "a dusty scarab"(#14255) +18dmg by Wonton(#13014) text_total=99
+20:10:10 [DEBUG] MSG_IN 0x002A UpdateHostileState dir=IN body_len=5
+20:10:10 [DEBUG]   PARSED type=UpdateHostileState eid=14255 target=None
+20:10:10 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=74
+20:10:10 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:10 [DEBUG] CHATCOMBAT text="Your pet Thalulyl hits a dusty scarab for 7 points of damage."
+20:10:10 [DEBUG]   CHATCOMBAT_DMG "a dusty scarab"(#14255) +7dmg by Doopies(#14162) text_total=106
+20:10:10 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:10 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:10 [DEBUG] DMG  a dusty scarab(#14255) type=1 49->47/100 amt=2 attacker=Wonton(13014)
+20:10:10 [DEBUG]   ENC+ "a dusty scarab"(#14255) +2dmg by Wonton(13014) total=28
+20:10:10 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:10 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:10 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:10 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:10:10 [DEBUG] DMG  Lilyth(#13556) type=0 341->325/517 amt=16 attacker=Mal(13238)
+20:10:10 [DEBUG]   ENC_PVP "Lilyth"(#13556) +16dmg by Mal(13238) total=32
+20:10:10 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=78
+20:10:10 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:10 [DEBUG] CHATCOMBAT text="a dusty scarab bites Lilyth for 16 points of damage (1 absorbed)."
+20:10:10 [DEBUG]   CHATCOMBAT_DMG "Lilyth"(#13556) +16dmg by a dusty scarab(#13771) text_total=32
+20:10:10 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:10 [DEBUG]   PARSED type=UpdateHealth eid=14129 target=None
+20:10:10 [DEBUG] DMG  a large rat(#14129) type=1 65->34/100 amt=31 attacker=None(None)
+20:10:10 [DEBUG]   ENC+ "a large rat"(#14129) +31dmg NO_ATTACKER total=43
+20:10:10 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:10 [DEBUG]   PARSED type=UpdateHealth eid=14306 target=None
+20:10:10 [DEBUG] DMG  a shadow knight recruit(#14306) type=1 98->96/100 amt=2 attacker=None(None)
+20:10:10 [DEBUG]   ENC+ "a shadow knight recruit"(#14306) +2dmg NO_ATTACKER total=4
+20:10:10 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=124
+20:10:10 [DEBUG]   PARSED type=BeginCasting eid=13556 target=14255
+20:10:10 [DEBUG] ATTRIB BeginCasting caster=Lilyth(#13556) -> target=a dusty scarab(#14255) ability="Life Draw"
+20:10:11 [DEBUG] OVERVIEW_RENDER enc=3 total_dmg=330 dur=28.5s entries=5 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:10:11 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=139 dps=6.8 abilities=[Life Draw=36, Melee=33, Shadow Strike=29]
+20:10:11 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=91 dps=4.5 abilities=[Melee=40, Round Kick=36, Celestial Strike=15]
+20:10:11 [DEBUG]   OVERVIEW_ROW #3 "Doopies" type=player cls=ele lvl=8 dealt=67 dps=3.3 abilities=[Magmaburst=40, [P]Bolt of Water=15, pet Thalulyl=12]
+20:10:11 [DEBUG]   OVERVIEW_ROW #4 "Mal" type=player cls=clr lvl=9 dealt=32 dps=3.9 abilities=[none]
+20:10:11 [DEBUG]   OVERVIEW_ROW #5 "Skelebones" type=player cls=nec lvl=10 dealt=1 dps=0.2 abilities=[Melee=1]
+20:10:11 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:11 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:11 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:11 [DEBUG]   PARSED type=UpdateHealth eid=14223 target=None
+20:10:11 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:11 [DEBUG]   PARSED type=UpdateHealth eid=14306 target=None
+20:10:11 [DEBUG] HEAL a shadow knight recruit(#14306) 96->98/100 delta=+2 last_attacker=None(None)
+20:10:11 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:11 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:10:11 [DEBUG] HEAL Lilyth(#13556) 325->326/517 delta=+1 last_attacker=Mal(13238)
+20:10:11 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:11 [DEBUG]   PARSED type=UpdateMana eid=13556 target=None
+20:10:11 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:11 [DEBUG]   PARSED type=UpdateMana eid=14162 target=None
+20:10:11 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+20:10:11 [DEBUG]   PARSED type=UpdateEndurance eid=14162 target=None
+20:10:11 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=129
+20:10:11 [DEBUG]   PARSED type=EndCasting eid=14223 target=14255
+20:10:11 [DEBUG] ENDCAST caster=#14223 target=#14255 text="Your pet Thalulyl tries to cast Bolt of Water on a dusty scarab, but is resisted"
+20:10:11 [DEBUG]   -> NO_MATCH (not dmg, heal, or miss pattern)
+20:10:11 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=35
+20:10:11 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:11 [DEBUG] CHATCOMBAT text="You drink Water Flask."
+20:10:11 [DEBUG] MSG_ITEM 0x0260 UpdateItemQuantityAndChargesInInventory dir=IN len=12 body=7d 6c 08 00 00 00 00 00 0d 00 ff ff
+20:10:11 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=61
+20:10:11 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:11 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+20:10:11 [DEBUG]   PARSED type=RemoveBuffIcon eid=14162 target=None
+20:10:11 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=60
+20:10:11 [DEBUG]   PARSED type=EndCasting eid=13014 target=14255
+20:10:11 [DEBUG] ENDCAST caster=#13014 target=#14255 text="Wonton jabs a dusty scarab."
+20:10:11 [DEBUG]   -> DMG_3P_MELEE attacker=Wonton(#13014) -> victim=a dusty scarab(#14255)
+20:10:12 [DEBUG] OVERVIEW_RENDER enc=3 total_dmg=330 dur=30.5s entries=5 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:10:12 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=139 dps=6.5 abilities=[Life Draw=36, Melee=33, Shadow Strike=29]
+20:10:12 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=91 dps=4.3 abilities=[Melee=40, Round Kick=36, Celestial Strike=15]
+20:10:12 [DEBUG]   OVERVIEW_ROW #3 "Doopies" type=player cls=ele lvl=8 dealt=67 dps=3.1 abilities=[Magmaburst=40, [P]Bolt of Water=15, pet Thalulyl=12]
+20:10:12 [DEBUG]   OVERVIEW_ROW #4 "Mal" type=player cls=clr lvl=9 dealt=32 dps=3.5 abilities=[none]
+20:10:12 [DEBUG]   OVERVIEW_ROW #5 "Skelebones" type=player cls=nec lvl=10 dealt=1 dps=0.2 abilities=[Melee=1]
+20:10:12 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:12 [DEBUG]   PARSED type=UpdateMana eid=13556 target=None
+20:10:12 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=87
+20:10:12 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:12 [DEBUG] CHATCOMBAT text="Lilyth's Life Draw hits a dusty scarab for 12 points of Corruption Damage."
+20:10:12 [DEBUG]   CHATCOMBAT_QUEUED target="a dusty scarab"(#13771 no HP) +12dmg (waiting for UpdateHealth)
+20:10:12 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=57
+20:10:12 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:12 [DEBUG] CHATCOMBAT text="Lilyth's Life Draw heals them for 12 Health."
+20:10:12 [DEBUG] MSG_IN 0x005C ParticleHit dir=IN body_len=21
+20:10:12 [DEBUG]   PARSED type=ParticleHit eid=None target=13556
+20:10:12 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:12 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:12 [DEBUG]   CHATCOMBAT_FLUSH "a dusty scarab"(#14255) +12txt_dmg atk=13556 (queued 0.0s ago)
+20:10:12 [DEBUG] DMG  a dusty scarab(#14255) type=1 47->44/100 amt=3 attacker=Wonton(13014)
+20:10:12 [DEBUG]   ENC+ "a dusty scarab"(#14255) +3dmg by Wonton(13014) total=31
+20:10:12 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:12 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:10:12 [DEBUG] HEAL Lilyth(#13556) 326->338/517 delta=+12 last_attacker=Mal(13238)
+20:10:12 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=53
+20:10:12 [DEBUG]   PARSED type=EndCasting eid=13556 target=14255
+20:10:12 [DEBUG] ENDCAST caster=#13556 target=#14255 text=""
+20:10:12 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:12 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:12 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=86
+20:10:12 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:12 [DEBUG] CHATCOMBAT text="Wonton's Vampirism hits a dusty scarab for 5 points of Corruption Damage."
+20:10:12 [DEBUG]   CHATCOMBAT_QUEUED target="a dusty scarab"(#13771 no HP) +5dmg (waiting for UpdateHealth)
+20:10:12 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=56
+20:10:12 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:12 [DEBUG] CHATCOMBAT text="Wonton's Vampirism heals them for 5 Health."
+20:10:12 [DEBUG] MSG_IN 0x005C ParticleHit dir=IN body_len=21
+20:10:12 [DEBUG]   PARSED type=ParticleHit eid=None target=13014
+20:10:12 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:12 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:12 [DEBUG]   CHATCOMBAT_FLUSH "a dusty scarab"(#14255) +5txt_dmg atk=13014 (queued 0.0s ago)
+20:10:12 [DEBUG] DMG  a dusty scarab(#14255) type=1 44->42/100 amt=2 attacker=Wonton(13014)
+20:10:12 [DEBUG]   ENC+ "a dusty scarab"(#14255) +2dmg by Wonton(13014) total=33
+20:10:12 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:12 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:10:12 [DEBUG] HEAL Wonton(#13014) 270->275/329 delta=+5 last_attacker=None(None)
+20:10:12 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=53
+20:10:12 [DEBUG]   PARSED type=EndCasting eid=13014 target=14255
+20:10:12 [DEBUG] ENDCAST caster=#13014 target=#14255 text=""
+20:10:12 [DEBUG] KEYS validated Client.ConnectionInfo at 0x17422550520
+20:10:13 [DEBUG] OVERVIEW_RENDER enc=3 total_dmg=347 dur=32.5s entries=5 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:10:13 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=151 dps=6.7 abilities=[Life Draw=48, Melee=33, Shadow Strike=29]
+20:10:13 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=96 dps=4.3 abilities=[Melee=40, Round Kick=36, Celestial Strike=15]
+20:10:13 [DEBUG]   OVERVIEW_ROW #3 "Doopies" type=player cls=ele lvl=8 dealt=67 dps=3.0 abilities=[Magmaburst=40, [P]Bolt of Water=15, pet Thalulyl=12]
+20:10:13 [DEBUG]   OVERVIEW_ROW #4 "Mal" type=player cls=clr lvl=9 dealt=32 dps=3.2 abilities=[none]
+20:10:13 [DEBUG]   OVERVIEW_ROW #5 "Skelebones" type=player cls=nec lvl=10 dealt=1 dps=0.2 abilities=[Melee=1]
+20:10:13 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:13 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:13 [DEBUG] HEAL a dusty scarab(#14255) 42->43/100 delta=+1 last_attacker=Wonton(13014)
+20:10:13 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=71
+20:10:13 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:13 [DEBUG] CHATCOMBAT text="Your pet Thalulyl tries to hit a dusty scarab, but misses!"
+20:10:13 [DEBUG]   CHATCOMBAT_MISS "a dusty scarab"(#14255) miss by Doopies(#14162)
+20:10:13 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:13 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:13 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=61
+20:10:13 [DEBUG]   PARSED type=EndCasting eid=13556 target=14255
+20:10:13 [DEBUG] ENDCAST caster=#13556 target=#14255 text="Lilyth kicks a dusty scarab."
+20:10:13 [DEBUG]   -> DMG_3P_MELEE attacker=Lilyth(#13556) -> victim=a dusty scarab(#14255)
+20:10:13 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:13 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:10:13 [DEBUG] DMG  Lilyth(#13556) type=0 338->334/517 amt=4 attacker=Mal(13238)
+20:10:13 [DEBUG]   ENC_PVP "Lilyth"(#13556) +4dmg by Mal(13238) total=36
+20:10:13 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=64
+20:10:13 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:13 [DEBUG] CHATCOMBAT text="a dusty scarab bites Lilyth for 4 points of damage."
+20:10:13 [DEBUG]   CHATCOMBAT_DMG "Lilyth"(#13556) +4dmg by a dusty scarab(#13771) text_total=36
+20:10:13 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:13 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:10:13 [DEBUG] DMG  Lilyth(#13556) type=0 334->309/517 amt=25 attacker=Mal(13238)
+20:10:13 [DEBUG]   ENC_PVP "Lilyth"(#13556) +25dmg by Mal(13238) total=61
+20:10:13 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=78
+20:10:13 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:13 [DEBUG] CHATCOMBAT text="a dusty scarab bites Lilyth for 25 points of damage (1 absorbed)."
+20:10:13 [DEBUG]   CHATCOMBAT_DMG "Lilyth"(#13556) +25dmg by a dusty scarab(#13771) text_total=61
+20:10:13 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=85
+20:10:13 [DEBUG]   PARSED type=EndCasting eid=13665 target=14255
+20:10:13 [DEBUG] ENDCAST caster=#13665 target=#14255 text="a dusty scarab looks angry at Skelebones."
+20:10:13 [DEBUG]   -> NO_MATCH (not dmg, heal, or miss pattern)
+20:10:14 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:14 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:14 [DEBUG] DMG  a dusty scarab(#14255) type=1 43->40/100 amt=3 attacker=Lilyth(13556)
+20:10:14 [DEBUG]   ENC+ "a dusty scarab"(#14255) +3dmg by Lilyth(13556) total=36
+20:10:14 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=70
+20:10:14 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:14 [DEBUG] CHATCOMBAT text="Skelebones crushes a dusty scarab for 9 points of damage."
+20:10:14 [DEBUG]   CHATCOMBAT_DMG "a dusty scarab"(#14255) +9dmg by Skelebones(#12950) text_total=132
+20:10:14 [DEBUG] OVERVIEW_RENDER enc=3 total_dmg=385 dur=34.5s entries=5 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:10:14 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=151 dps=6.5 abilities=[Life Draw=48, Melee=33, Shadow Strike=29]
+20:10:14 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=96 dps=4.1 abilities=[Melee=40, Round Kick=36, Celestial Strike=15]
+20:10:14 [DEBUG]   OVERVIEW_ROW #3 "Doopies" type=player cls=ele lvl=8 dealt=67 dps=2.9 abilities=[Magmaburst=40, [P]Bolt of Water=15, pet Thalulyl=12]
+20:10:14 [DEBUG]   OVERVIEW_ROW #4 "Mal" type=player cls=clr lvl=9 dealt=61 dps=5.5 abilities=[none]
+20:10:14 [DEBUG]   OVERVIEW_ROW #5 "Skelebones" type=player cls=nec lvl=10 dealt=10 dps=0.4 abilities=[Melee=10]
+20:10:14 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+20:10:14 [DEBUG]   PARSED type=CastAbility eid=None target=14255
+20:10:14 [DEBUG] CASTABILITY_OUT gem=2 target=#14255
+20:10:14 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:14 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:14 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=107
+20:10:14 [DEBUG]   PARSED type=BeginCasting eid=14162 target=14255
+20:10:14 [INFO ]   CAST_CORRELATE BeginCasting eid=#14162 matched CastAbility target=#14255 → local player
+20:10:14 [DEBUG] ATTRIB BeginCasting caster=Doopies(#14162) -> target=a dusty scarab(#14255) ability="Magmaburst"
+20:10:14 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:14 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:14 [DEBUG] DMG  a dusty scarab(#14255) type=1 40->36/100 amt=4 attacker=Doopies(14162)
+20:10:14 [DEBUG]   ENC+ "a dusty scarab"(#14255) +4dmg by Doopies(14162) total=40
+20:10:14 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+20:10:14 [DEBUG]   PARSED type=RemoveBuffIcon eid=14255 target=None
+20:10:14 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=48
+20:10:14 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:14 [DEBUG] CHATCOMBAT text="a dusty scarab is no longer rooted."
+20:10:14 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+20:10:14 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:14 [DEBUG] CHATCOMBAT text="Wonton crushes a dusty scarab for 13 points of damage."
+20:10:14 [DEBUG]   CHATCOMBAT_DMG "a dusty scarab"(#14255) +13dmg by Wonton(#13014) text_total=145
+20:10:15 [DEBUG] MSG_IN 0x0055 BeginCasting dir=IN body_len=109
+20:10:15 [DEBUG]   PARSED type=BeginCasting eid=13556 target=14255
+20:10:15 [DEBUG] ATTRIB BeginCasting caster=Lilyth(#13556) -> target=a dusty scarab(#14255) ability="Spirit Break"
+20:10:15 [DEBUG] OVERVIEW_RENDER enc=3 total_dmg=398 dur=36.5s entries=5 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:10:15 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=151 dps=6.2 abilities=[Life Draw=48, Melee=33, Shadow Strike=29]
+20:10:15 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=109 dps=4.5 abilities=[Melee=53, Round Kick=36, Celestial Strike=15]
+20:10:15 [DEBUG]   OVERVIEW_ROW #3 "Doopies" type=player cls=ele lvl=8 dealt=67 dps=2.7 abilities=[Magmaburst=40, [P]Bolt of Water=15, pet Thalulyl=12]
+20:10:15 [DEBUG]   OVERVIEW_ROW #4 "Mal" type=player cls=clr lvl=9 dealt=61 dps=5.0 abilities=[none]
+20:10:15 [DEBUG]   OVERVIEW_ROW #5 "Skelebones" type=player cls=nec lvl=10 dealt=10 dps=0.4 abilities=[Melee=10]
+20:10:15 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:15 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:15 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:15 [DEBUG]   PARSED type=UpdateHealth eid=14129 target=None
+20:10:15 [DEBUG] HEAL a large rat(#14129) 34->38/100 delta=+4 last_attacker=None(None)
+20:10:15 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:15 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:10:15 [DEBUG] HEAL Wonton(#13014) 275->276/329 delta=+1 last_attacker=None(None)
+20:10:15 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:15 [DEBUG]   PARSED type=UpdateHealth eid=13238 target=None
+20:10:15 [DEBUG] HEAL Mal(#13238) 196->198/251 delta=+2 last_attacker=None(None)
+20:10:15 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:15 [DEBUG]   PARSED type=UpdateMana eid=13238 target=None
+20:10:16 [DEBUG] OVERVIEW_RENDER enc=3 total_dmg=398 dur=38.6s entries=5 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:10:16 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=151 dps=5.9 abilities=[Life Draw=48, Melee=33, Shadow Strike=29]
+20:10:16 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=109 dps=4.3 abilities=[Melee=53, Round Kick=36, Celestial Strike=15]
+20:10:16 [DEBUG]   OVERVIEW_ROW #3 "Doopies" type=player cls=ele lvl=8 dealt=67 dps=2.6 abilities=[Magmaburst=40, [P]Bolt of Water=15, pet Thalulyl=12]
+20:10:16 [DEBUG]   OVERVIEW_ROW #4 "Mal" type=player cls=clr lvl=9 dealt=61 dps=4.6 abilities=[none]
+20:10:16 [DEBUG]   OVERVIEW_ROW #5 "Skelebones" type=player cls=nec lvl=10 dealt=10 dps=0.4 abilities=[Melee=10]
+20:10:16 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:16 [DEBUG]   PARSED type=UpdateMana eid=13556 target=None
+20:10:16 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=58
+20:10:16 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:16 [DEBUG] CHATCOMBAT text="a dusty scarab's spiritual resistance breaks."
+20:10:16 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=52
+20:10:16 [DEBUG]   PARSED type=EndCasting eid=13556 target=14255
+20:10:16 [DEBUG] ENDCAST caster=#13556 target=#14255 text=""
+20:10:16 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=52
+20:10:16 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:16 [DEBUG] CHATCOMBAT text="a dusty scarab is rooted to the ground."
+20:10:16 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=48
+20:10:16 [DEBUG]   PARSED type=EndCasting eid=13695 target=14255
+20:10:16 [DEBUG] ENDCAST caster=#13695 target=#14255 text=""
+20:10:16 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=223
+20:10:16 [DEBUG]   PARSED type=SpawnEntity eid=13923 target=None
+20:10:16 [DEBUG] SPAWN #13923 type=1 "a rotting skeleton" HP:1000/1000 class=skl lvl=0
+20:10:16 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:16 [DEBUG]   PARSED type=UpdateHealth eid=14423 target=None
+20:10:16 [DEBUG] HP_INIT a large rat(#14423) HP:80/100 (no previous HP, no delta)
+20:10:16 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=213
+20:10:16 [DEBUG]   PARSED type=SpawnEntity eid=13956 target=None
+20:10:16 [DEBUG] SPAWN #13956 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:10:16 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:16 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:16 [DEBUG] DMG  a dusty scarab(#14255) type=1 36->35/100 amt=1 attacker=Lilyth(13556)
+20:10:16 [DEBUG]   ENC+ "a dusty scarab"(#14255) +1dmg by Lilyth(13556) total=41
+20:10:16 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=74
+20:10:16 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:16 [DEBUG] CHATCOMBAT text="Your pet Thalulyl hits a dusty scarab for 6 points of damage."
+20:10:16 [DEBUG]   CHATCOMBAT_DMG "a dusty scarab"(#14255) +6dmg by Doopies(#14162) text_total=151
+20:10:16 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:16 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:16 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:10:16 [DEBUG]   PARSED type=SpawnEntity eid=14423 target=None
+20:10:16 [DEBUG] SPAWN #14423 type=1 "a large rat" HP:807/1000 class=rat lvl=0
+20:10:16 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+20:10:16 [DEBUG]   PARSED type=SpawnEntity eid=14446 target=None
+20:10:16 [DEBUG] SPAWN #14446 type=1 "a young crypt scarab" HP:1000/1000 class=btl lvl=0
+20:10:16 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:16 [DEBUG]   PARSED type=UpdateHealth eid=14306 target=None
+20:10:16 [DEBUG] DMG  a shadow knight recruit(#14306) type=1 98->94/100 amt=4 attacker=None(None)
+20:10:16 [DEBUG]   ENC+ "a shadow knight recruit"(#14306) +4dmg NO_ATTACKER total=8
+20:10:16 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:16 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:10:16 [DEBUG] DMG  Lilyth(#13556) type=0 309->296/517 amt=13 attacker=Mal(13238)
+20:10:16 [DEBUG]   ENC_PVP "Lilyth"(#13556) +13dmg by Mal(13238) total=74
+20:10:16 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=78
+20:10:16 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:16 [DEBUG] CHATCOMBAT text="a dusty scarab bites Lilyth for 13 points of damage (1 absorbed)."
+20:10:16 [DEBUG]   CHATCOMBAT_DMG "Lilyth"(#13556) +13dmg by a dusty scarab(#13771) text_total=74
+20:10:16 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:16 [DEBUG]   PARSED type=UpdateHealth eid=14129 target=None
+20:10:16 [DEBUG] DMG  a large rat(#14129) type=1 38->7/100 amt=31 attacker=None(None)
+20:10:16 [DEBUG]   ENC+ "a large rat"(#14129) +31dmg NO_ATTACKER total=74
+20:10:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:17 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:17 [DEBUG] DMG  a dusty scarab(#14255) type=1 35->34/100 amt=1 attacker=Lilyth(13556)
+20:10:17 [DEBUG]   ENC+ "a dusty scarab"(#14255) +1dmg by Lilyth(13556) total=42
+20:10:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=69
+20:10:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:17 [DEBUG] CHATCOMBAT text="Skelebones crushes a dusty scarab for 1 point of damage."
+20:10:17 [DEBUG]   CHATCOMBAT_DMG "a dusty scarab"(#14255) +1dmg by Skelebones(#12950) text_total=152
+20:10:17 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:17 [DEBUG]   PARSED type=UpdateMana eid=14162 target=None
+20:10:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:17 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:17 [DEBUG] DMG  a dusty scarab(#14255) type=1 34->28/100 amt=6 attacker=Lilyth(13556)
+20:10:17 [DEBUG]   ENC+ "a dusty scarab"(#14255) +6dmg by Lilyth(13556) total=48
+20:10:17 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=118
+20:10:17 [DEBUG]   PARSED type=EndCasting eid=14162 target=14255
+20:10:17 [DEBUG] ENDCAST caster=#14162 target=#14255 text="Your Magmaburst hits a dusty scarab for 22 points of Fire Damage."
+20:10:17 [DEBUG]   -> DMG_LOCAL_SPELL caster=#14162 -> victim=a dusty scarab(#14255)
+20:10:17 [DEBUG]   TEXT_DMG "a dusty scarab"(#14255) +22dmg by Doopies(#14162) text_total=174
+20:10:17 [DEBUG] OVERVIEW_RENDER enc=3 total_dmg=440 dur=40.6s entries=5 local_eid=14162 player_name="Doopies" pet_states={13665: True, 13695: True, 14223: True} entity_types_sample={13014: 0, 13238: 0, 12950: 0, 13556: 0, 14162: 0, 271: 5, 755: 3, 14416: 1, 14437: 1, 272: 5, 13768: 1, 14224: 1, 13771: 1, 14403: 1, 13769: 1, 13770: 1, 14399: 1, 14273: 1, 14252: 1, 14235: 1}
+20:10:17 [DEBUG]   OVERVIEW_ROW #1 "Lilyth" type=player cls=shd lvl=13 dealt=151 dps=5.7 abilities=[Life Draw=48, Melee=33, Shadow Strike=29]
+20:10:17 [DEBUG]   OVERVIEW_ROW #2 "Wonton" type=player cls=mnk lvl=10 dealt=109 dps=4.1 abilities=[Melee=53, Round Kick=36, Celestial Strike=15]
+20:10:17 [DEBUG]   OVERVIEW_ROW #3 "Doopies" type=player cls=ele lvl=8 dealt=95 dps=3.6 abilities=[Magmaburst=62, pet Thalulyl=18, [P]Bolt of Water=15]
+20:10:17 [DEBUG]   OVERVIEW_ROW #4 "Mal" type=player cls=clr lvl=9 dealt=74 dps=5.2 abilities=[none]
+20:10:17 [DEBUG]   OVERVIEW_ROW #5 "Skelebones" type=player cls=nec lvl=10 dealt=11 dps=0.4 abilities=[Melee=11]
+20:10:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:17 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:17 [DEBUG] DMG  a dusty scarab(#14255) type=1 28->27/100 amt=1 attacker=Doopies(14162)
+20:10:17 [DEBUG]   ENC+ "a dusty scarab"(#14255) +1dmg by Doopies(14162) total=49
+20:10:17 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=96
+20:10:17 [DEBUG]   PARSED type=EndCasting eid=13665 target=14255
+20:10:17 [DEBUG] ENDCAST caster=#13665 target=#14255 text="Skelebones's Strike hits a dusty scarab for 4 points of damage."
+20:10:17 [DEBUG]   -> DMG_HIT attacker=Skelebones(#13665) -> victim=a dusty scarab(#14255)
+20:10:17 [DEBUG]   TEXT_DMG "a dusty scarab"(#14255) +4dmg by Skelebones(#13665) text_total=178
+20:10:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:17 [DEBUG]   PARSED type=UpdateHealth eid=14223 target=None
+20:10:17 [DEBUG] HEAL Thalulyl(#14223) 58->59/100 delta=+1 last_attacker=None(None)
+20:10:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:17 [DEBUG]   PARSED type=UpdateHealth eid=14306 target=None
+20:10:17 [DEBUG] HEAL a shadow knight recruit(#14306) 94->96/100 delta=+2 last_attacker=None(None)
+20:10:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:17 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:10:17 [DEBUG] HEAL Lilyth(#13556) 296->297/517 delta=+1 last_attacker=Mal(13238)
+20:10:17 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:17 [DEBUG]   PARSED type=UpdateMana eid=13556 target=None
+20:10:17 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:17 [DEBUG]   PARSED type=UpdateMana eid=14162 target=None
+20:10:17 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:17 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:17 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=81
+20:10:17 [DEBUG]   PARSED type=EndCasting eid=13014 target=14255
+20:10:17 [DEBUG] ENDCAST caster=#13014 target=#14255 text="a dusty scarab looks angry at Wonton."
+20:10:17 [DEBUG]   -> NO_MATCH (not dmg, heal, or miss pattern)
+20:10:17 [DEBUG] KEYS validated Client.ConnectionInfo at 0x17422550520
+20:10:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:17 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:17 [DEBUG]   CHATCOMBAT_EXPIRED "Wonton" +26txt_dmg (stale 10.2s)
+20:10:17 [DEBUG] DMG  a dusty scarab(#14255) type=1 27->20/100 amt=7 attacker=Skelebones(13665)
+20:10:17 [DEBUG]   ENC+ "a dusty scarab"(#14255) +7dmg by Skelebones(13665) total=56
+20:10:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+20:10:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:17 [DEBUG] CHATCOMBAT text="Lilyth slashes a dusty scarab for 25 points of damage."
+20:10:17 [DEBUG]   CHATCOMBAT_DMG "a dusty scarab"(#14255) +25dmg by Lilyth(#13556) text_total=203
+20:10:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:17 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:17 [DEBUG] DMG  a dusty scarab(#14255) type=1 20->18/100 amt=2 attacker=Skelebones(13665)
+20:10:17 [DEBUG]   ENC+ "a dusty scarab"(#14255) +2dmg by Skelebones(13665) total=58
+20:10:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=66
+20:10:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:17 [DEBUG] CHATCOMBAT text="Labubu slashes a dusty scarab for 7 points of damage."
+20:10:17 [DEBUG]   CHATCOMBAT_DMG "a dusty scarab"(#14255) +7dmg by Labubu(#13695) text_total=210
+20:10:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=86
+20:10:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:17 [DEBUG] CHATCOMBAT text="Labubu's Vampirism hits a dusty scarab for 6 points of Corruption Damage."
+20:10:17 [DEBUG]   CHATCOMBAT_DMG "a dusty scarab"(#14255) +6dmg by Labubu(#13695) text_total=216
+20:10:17 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=56
+20:10:17 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:17 [DEBUG] CHATCOMBAT text="Labubu's Vampirism heals them for 6 Health."
+20:10:17 [DEBUG] MSG_IN 0x005C ParticleHit dir=IN body_len=21
+20:10:17 [DEBUG]   PARSED type=ParticleHit eid=None target=13695
+20:10:17 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:17 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:17 [DEBUG] DMG  a dusty scarab(#14255) type=1 18->16/100 amt=2 attacker=Skelebones(13665)
+20:10:17 [DEBUG]   ENC+ "a dusty scarab"(#14255) +2dmg by Skelebones(13665) total=60
+20:10:17 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=53
+20:10:17 [DEBUG]   PARSED type=EndCasting eid=13695 target=14255
+20:10:17 [DEBUG] ENDCAST caster=#13695 target=#14255 text=""
+20:10:18 [DEBUG] GUI_STATE view=overview encounters=5 entity_types={'type0': 5, 'type5': 6, 'type3': 1, 'type1': 103, 'type6': 1, 'type2': 1} names=110 local_eid=14162 player_name="Doopies" classes={13014: 'mnk', 13238: 'clr', 12950: 'nec', 13556: 'shd', 14162: 'ele', 14416: 'bat', 14437: 'bat', 13768: 'rat', 13771: 'sca', 14403: 'bat', 13769: 'bat', 13770: 'rat', 14417: 'sca', 13002: 'rat', 14275: 'rat', 1044: 'hum', 14409: 'rat', 14175: 'bat', 4604: 'rat', 9762: 'bat', 1045: 'hum', 10153: 'bat', 10162: 'rat', 14163: 'sca', 14434: 'sca', 14184: 'sca', 14106: 'sca', 14118: 'sca', 14233: 'sca', 14092: 'sca', 14107: 'sca', 14225: 'sca', 14129: 'rat', 14198: 'rat', 14432: 'btl', 14436: 'rat', 14407: 'bat', 14379: 'bat', 14330: 'bat', 13665: 'skl', 14328: 'rat', 14354: 'rat', 14343: 'rat', 13695: 'ghl', 14255: 'sca', 14223: 'wel', 14208: 'sca', 14176: 'sca', 14283: 'sca', 14152: 'sca', 14193: 'sca', 14134: 'sca', 14359: 'bat', 14423: 'rat', 14338: 'hum', 14433: 'bat', 14306: 'hum', 923: 'hum', 1179: 'hum', 13923: 'skl', 14322: 'btl', 9188: 'bat', 13315: 'btl', 14186: 'rat', 13272: 'btl', 14438: 'sca', 14441: 'bat', 11592: 'rat', 14442: 'skl', 13945: 'btl', 14393: 'bat', 13956: 'bat', 14446: 'btl'} levels={13014: 10, 13238: 9, 12950: 10, 13556: 13, 14162: 8, 14416: 0, 14437: 0, 13768: 0, 13771: 0, 14403: 0, 13769: 0, 13770: 0, 14417: 0, 13002: 0, 14275: 0, 1044: 0, 14409: 0, 14175: 0, 4604: 0, 9762: 0, 1045: 0, 10153: 0, 10162: 0, 14163: 0, 14434: 0, 14184: 0, 14106: 0, 14118: 0, 14233: 0, 14092: 0, 14107: 0, 14225: 0, 14129: 0, 14198: 0, 14432: 0, 14436: 0, 14407: 0, 14379: 0, 14330: 0, 13665: 0, 14328: 0, 14354: 0, 14343: 0, 13695: 0, 14255: 0, 14223: 0, 14208: 0, 14176: 0, 14283: 0, 14152: 0, 14193: 0, 14134: 0, 14359: 0, 14423: 0, 14338: 0, 14433: 0, 14306: 0, 923: 0, 1179: 0, 13923: 0, 14322: 0, 9188: 0, 13315: 0, 14186: 0, 13272: 0, 14438: 0, 14441: 0, 11592: 0, 14442: 0, 13945: 0, 14393: 0, 13956: 0, 14446: 0}
+20:10:18 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:18 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:19 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:19 [DEBUG] HEAL a dusty scarab(#14255) 16->17/100 delta=+1 last_attacker=Skelebones(13665)
+20:10:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:19 [DEBUG]   PARSED type=UpdateHealth eid=14423 target=None
+20:10:19 [DEBUG] HP_INIT a large rat(#14423) HP:53/100 (no previous HP, no delta)
+20:10:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:19 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:19 [DEBUG] DMG  a dusty scarab(#14255) type=1 17->14/100 amt=3 attacker=Skelebones(13665)
+20:10:19 [DEBUG]   ENC+ "a dusty scarab"(#14255) +3dmg by Skelebones(13665) total=63
+20:10:19 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=74
+20:10:19 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:19 [DEBUG] CHATCOMBAT text="Your pet Thalulyl hits a dusty scarab for 9 points of damage."
+20:10:19 [DEBUG]   CHATCOMBAT_DMG "a dusty scarab"(#14255) +9dmg by Doopies(#14162) text_total=225
+20:10:19 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:19 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:19 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=81
+20:10:19 [DEBUG]   PARSED type=EndCasting eid=13556 target=14255
+20:10:19 [DEBUG] ENDCAST caster=#13556 target=#14255 text="a dusty scarab looks angry at Lilyth."
+20:10:19 [DEBUG]   -> NO_MATCH (not dmg, heal, or miss pattern)
+20:10:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:19 [DEBUG]   PARSED type=UpdateHealth eid=14129 target=None
+20:10:19 [DEBUG] DMG  a large rat(#14129) type=1 7->0/100 amt=7 attacker=None(None)
+20:10:19 [DEBUG]   ENC+ "a large rat"(#14129) +7dmg NO_ATTACKER total=81
+20:10:19 [DEBUG] MSG_IN 0x0013 Die dir=IN body_len=10
+20:10:19 [DEBUG]   PARSED type=Die eid=14129 target=None
+20:10:19 [DEBUG] DIE #14129 "a large rat" hp_dmg=81 text_dmg=0 best=81 players=[]
+20:10:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:19 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:19 [DEBUG] DMG  a dusty scarab(#14255) type=1 14->10/100 amt=4 attacker=Skelebones(13665)
+20:10:19 [DEBUG]   ENC+ "a dusty scarab"(#14255) +4dmg by Skelebones(13665) total=67
+20:10:19 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+20:10:19 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:19 [DEBUG] CHATCOMBAT text="Wonton crushes a dusty scarab for 13 points of damage."
+20:10:19 [DEBUG]   CHATCOMBAT_DMG "a dusty scarab"(#14255) +13dmg by Wonton(#13014) text_total=238
+20:10:19 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+20:10:19 [DEBUG]   PARSED type=DespawnEntity eid=14129 target=None
+20:10:19 [DEBUG] DESPAWN #14129
+20:10:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:19 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:19 [DEBUG] DMG  a dusty scarab(#14255) type=1 10->9/100 amt=1 attacker=Skelebones(13665)
+20:10:19 [DEBUG]   ENC+ "a dusty scarab"(#14255) +1dmg by Skelebones(13665) total=68
+20:10:19 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:19 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:19 [DEBUG] DMG  a dusty scarab(#14255) type=1 9->8/100 amt=1 attacker=Skelebones(13665)
+20:10:19 [DEBUG]   ENC+ "a dusty scarab"(#14255) +1dmg by Skelebones(13665) total=69
+20:10:19 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=90
+20:10:19 [DEBUG]   PARSED type=EndCasting eid=13556 target=14255
+20:10:19 [DEBUG] ENDCAST caster=#13556 target=#14255 text="Lilyth's Slam hits a dusty scarab for 6 points of damage."
+20:10:19 [DEBUG]   -> DMG_HIT attacker=Lilyth(#13556) -> victim=a dusty scarab(#14255)
+20:10:19 [DEBUG]   TEXT_DMG "a dusty scarab"(#14255) +6dmg by Lilyth(#13556) text_total=244
+20:10:20 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+20:10:20 [DEBUG]   PARSED type=DespawnEntity eid=14344 target=None
+20:10:20 [DEBUG] DESPAWN #14344
+20:10:20 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=131
+20:10:20 [DEBUG]   PARSED type=EndCasting eid=14223 target=14255
+20:10:20 [DEBUG] ENDCAST caster=#14223 target=#14255 text="Your pet Thalulyl's Bolt of Water hits a dusty scarab for 15 points of Cold Dama"
+20:10:20 [DEBUG]   -> DMG_HIT attacker=Your pet Thalulyl(#14223) -> victim=a dusty scarab(#14255)
+20:10:20 [DEBUG]   TEXT_DMG "a dusty scarab"(#14255) +15dmg by Thalulyl(#14223) text_total=259
+20:10:20 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=51
+20:10:20 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:20 [DEBUG] CHATCOMBAT text="a dusty scarab is chilled to the bone."
+20:10:20 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:20 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:20 [DEBUG] DMG  a dusty scarab(#14255) type=1 8->4/100 amt=4 attacker=Thalulyl(14223)
+20:10:20 [DEBUG]   ENC+ "a dusty scarab"(#14255) +4dmg by Thalulyl(14223) total=73
+20:10:20 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:20 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:20 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:20 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:20 [DEBUG] DMG  a dusty scarab(#14255) type=1 4->0/100 amt=4 attacker=Thalulyl(14223)
+20:10:20 [DEBUG]   ENC+ "a dusty scarab"(#14255) +4dmg by Thalulyl(14223) total=77
+20:10:20 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:20 [DEBUG]   PARSED type=UpdateHealth eid=14255 target=None
+20:10:20 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+20:10:20 [DEBUG]   PARSED type=RemoveBuffIcon eid=14255 target=None
+20:10:20 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=48
+20:10:20 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:20 [DEBUG] CHATCOMBAT text="a dusty scarab is no longer rooted."
+20:10:20 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=92
+20:10:20 [DEBUG]   PARSED type=EndCasting eid=13014 target=14255
+20:10:20 [DEBUG] ENDCAST caster=#13014 target=#14255 text="Wonton's Round Kick hits a dusty scarab for 18 points of damage."
+20:10:20 [DEBUG]   -> DMG_HIT attacker=Wonton(#13014) -> victim=a dusty scarab(#14255)
+20:10:20 [DEBUG]   TEXT_DMG "a dusty scarab"(#14255) +18dmg by Wonton(#13014) text_total=277
+20:10:20 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=28
+20:10:20 [DEBUG]   PARSED type=EndCasting eid=13014 target=13014
+20:10:20 [DEBUG] ENDCAST caster=#13014 target=#13014 text=""
+20:10:20 [DEBUG] MSG_IN 0x0013 Die dir=IN body_len=10
+20:10:20 [DEBUG]   PARSED type=Die eid=14255 target=None
+20:10:20 [DEBUG] DIE #14255 "a dusty scarab" hp_dmg=77 text_dmg=277 best=277 players=[13695, 13556, 13014, 14162, 12950, 13665, 14223]
+20:10:20 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=39
+20:10:20 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:20 [DEBUG] CHATCOMBAT text="You gain party experience!W"
+20:10:20 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+20:10:20 [DEBUG]   PARSED type=RemoveBuffIcon eid=14255 target=None
+20:10:20 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+20:10:20 [DEBUG]   PARSED type=RemoveBuffIcon eid=14255 target=None
+20:10:20 [DEBUG] MSG_IN 0x0024 UpdateExperience dir=IN body_len=8
+20:10:20 [DEBUG]   PARSED type=UpdateExperience eid=14162 target=None
+20:10:20 [DEBUG] XP_UPDATE #14162 "Doopies" total=8,286 gained=+159 pct=None lvlup=False npc="a dusty scarab" next_npc="a dusty scarab"
+20:10:20 [DEBUG] MSG_IN 0x0011 ChangeTarget dir=OUT body_len=4
+20:10:20 [DEBUG]   PARSED type=ChangeTarget eid=None target=0
+20:10:21 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+20:10:21 [DEBUG]   PARSED type=CastAbility eid=None target=0
+20:10:21 [DEBUG] CASTABILITY_OUT gem=2 target=#0
+20:10:21 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:21 [DEBUG]   PARSED type=UpdateHealth eid=14423 target=None
+20:10:21 [DEBUG] HEAL a large rat(#14423) 53->57/100 delta=+4 last_attacker=None(None)
+20:10:21 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=51
+20:10:21 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:21 [DEBUG] CHATCOMBAT text="You need a target to use that ability."
+20:10:21 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:21 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:21 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+20:10:21 [DEBUG]   PARSED type=CastAbility eid=None target=0
+20:10:21 [DEBUG] CASTABILITY_OUT gem=2 target=#0
+20:10:21 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:21 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:10:21 [DEBUG] HEAL Wonton(#13014) 276->277/329 delta=+1 last_attacker=None(None)
+20:10:21 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:21 [DEBUG]   PARSED type=UpdateHealth eid=13238 target=None
+20:10:21 [DEBUG] HEAL Mal(#13238) 198->200/251 delta=+2 last_attacker=None(None)
+20:10:21 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:21 [DEBUG]   PARSED type=UpdateMana eid=13238 target=None
+20:10:21 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=51
+20:10:21 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:21 [DEBUG] CHATCOMBAT text="You need a target to use that ability."
+20:10:22 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+20:10:22 [DEBUG]   PARSED type=CastAbility eid=None target=0
+20:10:22 [DEBUG] CASTABILITY_OUT gem=2 target=#0
+20:10:22 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=51
+20:10:22 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:22 [DEBUG] CHATCOMBAT text="You need a target to use that ability."
+20:10:22 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:22 [DEBUG]   PARSED type=UpdateHealth eid=14423 target=None
+20:10:22 [DEBUG] DMG  a large rat(#14423) type=1 57->34/100 amt=23 attacker=None(None)
+20:10:22 [DEBUG]   ENC+ "a large rat"(#14423) +23dmg NO_ATTACKER total=23
+20:10:22 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+20:10:22 [DEBUG]   PARSED type=CastAbility eid=None target=0
+20:10:22 [DEBUG] CASTABILITY_OUT gem=2 target=#0
+20:10:22 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:22 [DEBUG]   PARSED type=UpdateHealth eid=14338 target=None
+20:10:22 [DEBUG] HP_INIT a shadow knight recruit(#14338) HP:98/100 (no previous HP, no delta)
+20:10:22 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:22 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:22 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=51
+20:10:22 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:22 [DEBUG] CHATCOMBAT text="You need a target to use that ability."
+20:10:22 [DEBUG] MSG_IN 0x0050 CastAbility dir=OUT body_len=6
+20:10:22 [DEBUG]   PARSED type=CastAbility eid=None target=0
+20:10:22 [DEBUG] CASTABILITY_OUT gem=2 target=#0
+20:10:22 [DEBUG] KEYS validated Client.ConnectionInfo at 0x17422550520
+20:10:22 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=51
+20:10:22 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:22 [DEBUG] CHATCOMBAT text="You need a target to use that ability."
+20:10:22 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:22 [DEBUG]   PARSED type=UpdateHealth eid=14433 target=None
+20:10:22 [DEBUG] HP_INIT a desert bat(#14433) HP:84/100 (no previous HP, no delta)
+20:10:23 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+20:10:23 [DEBUG]   PARSED type=SpawnEntity eid=13801 target=None
+20:10:23 [DEBUG] SPAWN #13801 type=1 "a large rat" HP:1000/1000 class=rat lvl=0
+20:10:23 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=213
+20:10:23 [DEBUG]   PARSED type=SpawnEntity eid=14175 target=None
+20:10:23 [DEBUG] SPAWN #14175 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:10:23 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:23 [DEBUG]   PARSED type=UpdateHealth eid=14223 target=None
+20:10:23 [DEBUG] HEAL Thalulyl(#14223) 59->60/100 delta=+1 last_attacker=None(None)
+20:10:23 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:23 [DEBUG]   PARSED type=UpdateHealth eid=14306 target=None
+20:10:23 [DEBUG] HEAL a shadow knight recruit(#14306) 96->98/100 delta=+2 last_attacker=None(None)
+20:10:23 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:23 [DEBUG]   PARSED type=UpdateHealth eid=14338 target=None
+20:10:23 [DEBUG] HEAL a shadow knight recruit(#14338) 98->100/100 delta=+2 last_attacker=None(None)
+20:10:23 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:23 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:10:23 [DEBUG] HEAL Lilyth(#13556) 297->298/517 delta=+1 last_attacker=Mal(13238)
+20:10:23 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:23 [DEBUG]   PARSED type=UpdateMana eid=13556 target=None
+20:10:23 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:23 [DEBUG]   PARSED type=UpdateMana eid=14162 target=None
+20:10:23 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:23 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:24 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:24 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:25 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:25 [DEBUG]   PARSED type=UpdateHealth eid=14423 target=None
+20:10:25 [DEBUG] DMG  a large rat(#14423) type=1 34->3/100 amt=31 attacker=None(None)
+20:10:25 [DEBUG]   ENC+ "a large rat"(#14423) +31dmg NO_ATTACKER total=54
+20:10:25 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:25 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:25 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:25 [DEBUG]   PARSED type=UpdateHealth eid=14433 target=None
+20:10:25 [DEBUG] DMG  a desert bat(#14433) type=1 84->53/100 amt=31 attacker=None(None)
+20:10:25 [DEBUG]   ENC+ "a desert bat"(#14433) +31dmg NO_ATTACKER total=31
+20:10:25 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:25 [DEBUG]   PARSED type=UpdateHealth eid=14306 target=None
+20:10:25 [DEBUG] DMG  a shadow knight recruit(#14306) type=1 98->93/100 amt=5 attacker=None(None)
+20:10:25 [DEBUG]   ENC+ "a shadow knight recruit"(#14306) +5dmg NO_ATTACKER total=13
+20:10:26 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:10:26 [DEBUG]   PARSED type=SpawnEntity eid=14448 target=None
+20:10:26 [DEBUG] SPAWN #14448 type=1 "a large rat" HP:1000/1000 class=rat lvl=0
+20:10:26 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+20:10:26 [DEBUG]   PARSED type=RemoveBuffIcon eid=13014 target=None
+20:10:26 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:26 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:26 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:26 [DEBUG]   PARSED type=UpdateHealth eid=14433 target=None
+20:10:26 [DEBUG] HEAL a desert bat(#14433) 53->57/100 delta=+4 last_attacker=None(None)
+20:10:27 [DEBUG] MSG_UNKNOWN_NEW 0x0018 dir=IN len=10 body=d6 32 00 00 05 00 6a 75 6d 70
+20:10:27 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+20:10:27 [DEBUG]   PARSED type=UpdateEndurance eid=13014 target=None
+20:10:27 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:27 [DEBUG]   PARSED type=UpdateHealth eid=14423 target=None
+20:10:27 [DEBUG] HEAL a large rat(#14423) 3->7/100 delta=+4 last_attacker=None(None)
+20:10:27 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+20:10:27 [DEBUG]   PARSED type=RemoveBuffIcon eid=13014 target=None
+20:10:27 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+20:10:27 [DEBUG]   PARSED type=RemoveBuffIcon eid=13665 target=None
+20:10:27 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:27 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:27 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+20:10:27 [DEBUG]   PARSED type=RemoveBuffIcon eid=13014 target=None
+20:10:27 [DEBUG] KEYS validated Client.ConnectionInfo at 0x17422550520
+20:10:27 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:27 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:10:27 [DEBUG] HEAL Wonton(#13014) 277->278/329 delta=+1 last_attacker=None(None)
+20:10:27 [DEBUG] MSG_IN 0x022F UpdateEndurance dir=IN body_len=12
+20:10:27 [DEBUG]   PARSED type=UpdateEndurance eid=13014 target=None
+20:10:27 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:27 [DEBUG]   PARSED type=UpdateHealth eid=13238 target=None
+20:10:27 [DEBUG] HEAL Mal(#13238) 200->202/251 delta=+2 last_attacker=None(None)
+20:10:27 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:27 [DEBUG]   PARSED type=UpdateMana eid=13238 target=None
+20:10:28 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=222
+20:10:28 [DEBUG]   PARSED type=SpawnEntity eid=14450 target=None
+20:10:28 [DEBUG] SPAWN #14450 type=1 "a young crypt scarab" HP:1000/1000 class=btl lvl=0
+20:10:28 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:28 [DEBUG]   PARSED type=UpdateHealth eid=14423 target=None
+20:10:28 [DEBUG] DMG  a large rat(#14423) type=1 7->0/100 amt=7 attacker=None(None)
+20:10:28 [DEBUG]   ENC+ "a large rat"(#14423) +7dmg NO_ATTACKER total=61
+20:10:28 [DEBUG] MSG_IN 0x0013 Die dir=IN body_len=10
+20:10:28 [DEBUG]   PARSED type=Die eid=14423 target=None
+20:10:28 [DEBUG] DIE #14423 "a large rat" hp_dmg=61 text_dmg=0 best=61 players=[]
+20:10:28 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+20:10:28 [DEBUG]   PARSED type=DespawnEntity eid=14423 target=None
+20:10:28 [DEBUG] DESPAWN #14423
+20:10:28 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:28 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:28 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=213
+20:10:28 [DEBUG]   PARSED type=SpawnEntity eid=9762 target=None
+20:10:28 [DEBUG] SPAWN #9762 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:10:28 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:28 [DEBUG]   PARSED type=UpdateHealth eid=14433 target=None
+20:10:28 [DEBUG] DMG  a desert bat(#14433) type=1 57->30/100 amt=27 attacker=None(None)
+20:10:28 [DEBUG]   ENC+ "a desert bat"(#14433) +27dmg NO_ATTACKER total=58
+20:10:28 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:28 [DEBUG]   PARSED type=UpdateHealth eid=14306 target=None
+20:10:28 [DEBUG] DMG  a shadow knight recruit(#14306) type=1 93->91/100 amt=2 attacker=None(None)
+20:10:28 [DEBUG]   ENC+ "a shadow knight recruit"(#14306) +2dmg NO_ATTACKER total=15
+20:10:29 [DEBUG] MSG_IN 0x0054 RemoveBuffIcon dir=IN body_len=8
+20:10:29 [DEBUG]   PARSED type=RemoveBuffIcon eid=13665 target=None
+20:10:29 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=209
+20:10:29 [DEBUG]   PARSED type=SpawnEntity eid=14451 target=None
+20:10:29 [DEBUG] SPAWN #14451 type=1 "a rotting skeleton" HP:1000/1000 class=skl lvl=0
+20:10:29 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:29 [DEBUG]   PARSED type=UpdateHealth eid=14223 target=None
+20:10:29 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:29 [DEBUG]   PARSED type=UpdateHealth eid=14306 target=None
+20:10:29 [DEBUG] HEAL a shadow knight recruit(#14306) 91->93/100 delta=+2 last_attacker=None(None)
+20:10:29 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:29 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:10:29 [DEBUG] HEAL Lilyth(#13556) 298->300/517 delta=+2 last_attacker=Mal(13238)
+20:10:29 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:29 [DEBUG]   PARSED type=UpdateMana eid=13556 target=None
+20:10:29 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:29 [DEBUG]   PARSED type=UpdateMana eid=14162 target=None
+20:10:29 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:29 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:29 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+20:10:29 [DEBUG]   PARSED type=DespawnEntity eid=13791 target=None
+20:10:29 [DEBUG] DESPAWN #13791
+20:10:29 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:29 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:29 [DEBUG] HP_INIT a cracked beetle(#14438) HP:96/100 (no previous HP, no delta)
+20:10:30 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:30 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:10:30 [DEBUG] DMG  Wonton(#13014) type=0 278->252/329 amt=26 attacker=None(None)
+20:10:30 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+20:10:30 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=213
+20:10:30 [DEBUG]   PARSED type=SpawnEntity eid=14407 target=None
+20:10:30 [DEBUG] SPAWN #14407 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:10:30 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=151
+20:10:30 [DEBUG]   PARSED type=SpawnEntity eid=14452 target=None
+20:10:30 [DEBUG] SPAWN #14452 type=1 "a cracked beetle" HP:1000/1000 class=sca lvl=0
+20:10:30 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=151
+20:10:30 [DEBUG]   PARSED type=SpawnEntity eid=14452 target=None
+20:10:30 [DEBUG] SPAWN #14452 type=1 "a cracked beetle" HP:1000/1000 class=sca lvl=0
+20:10:30 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:30 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:30 [DEBUG] HEAL a cracked beetle(#14438) 96->97/100 delta=+1 last_attacker=None(None)
+20:10:30 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:30 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:31 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:31 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:31 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=90
+20:10:31 [DEBUG]   PARSED type=AddBuffIcon eid=13014 target=None
+20:10:31 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:31 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:31 [DEBUG] DMG  a cracked beetle(#14438) type=1 97->95/100 amt=2 attacker=None(None)
+20:10:31 [DEBUG]   ENC+ "a cracked beetle"(#14438) +2dmg NO_ATTACKER total=2
+20:10:31 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:31 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:31 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=104
+20:10:31 [DEBUG]   PARSED type=EndCasting eid=13014 target=14438
+20:10:31 [DEBUG] ENDCAST caster=#13014 target=#14438 text="Wonton's Celestial Strike hits a cracked beetle for 8 points of damage."
+20:10:31 [DEBUG]   -> DMG_HIT attacker=Wonton(#13014) -> victim=a cracked beetle(#14438)
+20:10:31 [DEBUG]   TEXT_DMG "a cracked beetle"(#14438) +8dmg by Wonton(#13014) text_total=8
+20:10:31 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:31 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:10:31 [DEBUG] HEAL Wonton(#13014) 252->268/329 delta=+16 last_attacker=None(None)
+20:10:31 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=52
+20:10:31 [DEBUG]   PARSED type=EndCasting eid=13014 target=13014
+20:10:31 [DEBUG] ENDCAST caster=#13014 target=#13014 text=""
+20:10:31 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=53
+20:10:31 [DEBUG]   PARSED type=EndCasting eid=13014 target=14438
+20:10:31 [DEBUG] ENDCAST caster=#13014 target=#14438 text=""
+20:10:31 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:31 [DEBUG]   PARSED type=UpdateHealth eid=14433 target=None
+20:10:31 [DEBUG] DMG  a desert bat(#14433) type=1 30->0/100 amt=30 attacker=None(None)
+20:10:31 [DEBUG]   ENC+ "a desert bat"(#14433) +30dmg NO_ATTACKER total=88
+20:10:31 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:31 [DEBUG]   PARSED type=UpdateHealth eid=14306 target=None
+20:10:31 [DEBUG] DMG  a shadow knight recruit(#14306) type=1 93->91/100 amt=2 attacker=None(None)
+20:10:31 [DEBUG]   ENC+ "a shadow knight recruit"(#14306) +2dmg NO_ATTACKER total=17
+20:10:32 [DEBUG] MSG_IN 0x0013 Die dir=IN body_len=10
+20:10:32 [DEBUG]   PARSED type=Die eid=14433 target=None
+20:10:32 [DEBUG] DIE #14433 "a desert bat" hp_dmg=88 text_dmg=0 best=88 players=[]
+20:10:32 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+20:10:32 [DEBUG]   PARSED type=DespawnEntity eid=14433 target=None
+20:10:32 [DEBUG] DESPAWN #14433
+20:10:32 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=199
+20:10:32 [DEBUG]   PARSED type=SpawnEntity eid=14453 target=None
+20:10:32 [DEBUG] SPAWN #14453 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:10:32 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=87
+20:10:32 [DEBUG]   PARSED type=EndCasting eid=13665 target=14438
+20:10:32 [DEBUG] ENDCAST caster=#13665 target=#14438 text="a cracked beetle looks angry at Skelebones."
+20:10:32 [DEBUG]   -> NO_MATCH (not dmg, heal, or miss pattern)
+20:10:32 [DEBUG] KEYS validated Client.ConnectionInfo at 0x17422550520
+20:10:32 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:32 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:33 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:33 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:10:33 [DEBUG] DMG  Wonton(#13014) type=0 268->243/329 amt=25 attacker=None(None)
+20:10:33 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+20:10:33 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=62
+20:10:33 [DEBUG]   PARSED type=EndCasting eid=13014 target=14438
+20:10:33 [DEBUG] ENDCAST caster=#13014 target=#14438 text="Wonton jabs a cracked beetle."
+20:10:33 [DEBUG]   -> DMG_3P_MELEE attacker=Wonton(#13014) -> victim=a cracked beetle(#14438)
+20:10:33 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:33 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:33 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:33 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:33 [DEBUG] DMG  a cracked beetle(#14438) type=1 95->93/100 amt=2 attacker=Wonton(13014)
+20:10:33 [DEBUG]   ENC+ "a cracked beetle"(#14438) +2dmg by Wonton(13014) total=4
+20:10:33 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:33 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:33 [DEBUG] DMG  a cracked beetle(#14438) type=1 93->92/100 amt=1 attacker=Wonton(13014)
+20:10:33 [DEBUG]   ENC+ "a cracked beetle"(#14438) +1dmg by Wonton(13014) total=5
+20:10:33 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=53
+20:10:33 [DEBUG]   PARSED type=EndCasting eid=13665 target=14438
+20:10:33 [DEBUG] ENDCAST caster=#13665 target=#14438 text=""
+20:10:33 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:33 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:10:33 [DEBUG] HEAL Wonton(#13014) 243->244/329 delta=+1 last_attacker=None(None)
+20:10:33 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:33 [DEBUG]   PARSED type=UpdateHealth eid=13238 target=None
+20:10:33 [DEBUG] HEAL Mal(#13238) 202->204/251 delta=+2 last_attacker=None(None)
+20:10:33 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:33 [DEBUG]   PARSED type=UpdateMana eid=13238 target=None
+20:10:34 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:34 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:10:34 [DEBUG] DMG  Wonton(#13014) type=0 244->232/329 amt=12 attacker=None(None)
+20:10:34 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+20:10:34 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+20:10:34 [DEBUG]   PARSED type=DespawnEntity eid=14372 target=None
+20:10:34 [DEBUG] DESPAWN #14372
+20:10:34 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:34 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:35 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:35 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:35 [DEBUG] DMG  a cracked beetle(#14438) type=1 92->91/100 amt=1 attacker=Wonton(13014)
+20:10:35 [DEBUG]   ENC+ "a cracked beetle"(#14438) +1dmg by Wonton(13014) total=6
+20:10:35 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=98
+20:10:35 [DEBUG]   PARSED type=EndCasting eid=13665 target=14438
+20:10:35 [DEBUG] ENDCAST caster=#13665 target=#14438 text="Skelebones's Strike hits a cracked beetle for 4 points of damage."
+20:10:35 [DEBUG]   -> DMG_HIT attacker=Skelebones(#13665) -> victim=a cracked beetle(#14438)
+20:10:35 [DEBUG]   TEXT_DMG "a cracked beetle"(#14438) +4dmg by Skelebones(#13665) text_total=12
+20:10:35 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:35 [DEBUG]   PARSED type=UpdateHealth eid=14223 target=None
+20:10:35 [DEBUG] HEAL Thalulyl(#14223) 60->61/100 delta=+1 last_attacker=None(None)
+20:10:35 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:35 [DEBUG]   PARSED type=UpdateHealth eid=14306 target=None
+20:10:35 [DEBUG] HEAL a shadow knight recruit(#14306) 91->93/100 delta=+2 last_attacker=None(None)
+20:10:35 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:35 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:10:35 [DEBUG] HEAL Lilyth(#13556) 300->302/517 delta=+2 last_attacker=Mal(13238)
+20:10:35 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:35 [DEBUG]   PARSED type=UpdateMana eid=13556 target=None
+20:10:35 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:35 [DEBUG]   PARSED type=UpdateMana eid=14162 target=None
+20:10:35 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:35 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:36 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:36 [DEBUG]   PARSED type=UpdateHealth eid=13665 target=None
+20:10:36 [DEBUG] HP_INIT Skelebones(#13665) HP:89/100 (no previous HP, no delta)
+20:10:36 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:36 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:36 [DEBUG] DMG  a cracked beetle(#14438) type=1 91->87/100 amt=4 attacker=Skelebones(13665)
+20:10:36 [DEBUG]   ENC+ "a cracked beetle"(#14438) +4dmg by Skelebones(13665) total=10
+20:10:36 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:36 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:36 [DEBUG] DMG  a cracked beetle(#14438) type=1 87->86/100 amt=1 attacker=Skelebones(13665)
+20:10:36 [DEBUG]   ENC+ "a cracked beetle"(#14438) +1dmg by Skelebones(13665) total=11
+20:10:36 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=94
+20:10:36 [DEBUG]   PARSED type=EndCasting eid=13014 target=14438
+20:10:36 [DEBUG] ENDCAST caster=#13014 target=#14438 text="Wonton's Round Kick hits a cracked beetle for 18 points of damage."
+20:10:36 [DEBUG]   -> DMG_HIT attacker=Wonton(#13014) -> victim=a cracked beetle(#14438)
+20:10:36 [DEBUG]   TEXT_DMG "a cracked beetle"(#14438) +18dmg by Wonton(#13014) text_total=30
+20:10:36 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=28
+20:10:36 [DEBUG]   PARSED type=EndCasting eid=13014 target=13014
+20:10:36 [DEBUG] ENDCAST caster=#13014 target=#13014 text=""
+20:10:36 [DEBUG] MSG_UNKNOWN_NEW 0x0005 dir=IN len=23 body=b8 9e 55 03 15 00 00 00 03 00 00 00 60 02 00 00 06 00 00 00 02 03 01
+20:10:36 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:36 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:36 [DEBUG] HEAL a cracked beetle(#14438) 86->87/100 delta=+1 last_attacker=Wonton(13014)
+20:10:36 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:36 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:36 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:36 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:36 [DEBUG] DMG  a cracked beetle(#14438) type=1 87->86/100 amt=1 attacker=Wonton(13014)
+20:10:36 [DEBUG]   ENC+ "a cracked beetle"(#14438) +1dmg by Wonton(13014) total=12
+20:10:37 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=236
+20:10:37 [DEBUG]   PARSED type=SpawnEntity eid=14450 target=None
+20:10:37 [DEBUG] SPAWN #14450 type=1 "a young crypt scarab" HP:1000/1000 class=btl lvl=0
+20:10:37 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:37 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:10:37 [DEBUG] DMG  Wonton(#13014) type=0 232->227/329 amt=5 attacker=None(None)
+20:10:37 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+20:10:37 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=83
+20:10:37 [DEBUG]   PARSED type=EndCasting eid=13014 target=14438
+20:10:37 [DEBUG] ENDCAST caster=#13014 target=#14438 text="a cracked beetle looks angry at Wonton."
+20:10:37 [DEBUG]   -> NO_MATCH (not dmg, heal, or miss pattern)
+20:10:37 [DEBUG] KEYS validated Client.ConnectionInfo at 0x17422550520
+20:10:37 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:37 [DEBUG]   PARSED type=UpdateMana eid=13238 target=None
+20:10:37 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=55
+20:10:37 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:37 [DEBUG] CHATCOMBAT text="Lilyth is surrounded by a blessed barrier."
+20:10:37 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=141
+20:10:37 [DEBUG]   PARSED type=AddBuffIcon eid=13556 target=None
+20:10:37 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=51
+20:10:37 [DEBUG]   PARSED type=EndCasting eid=13238 target=13556
+20:10:37 [DEBUG] ENDCAST caster=#13238 target=#13556 text=""
+20:10:37 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:37 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:37 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:37 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:37 [DEBUG] DMG  a cracked beetle(#14438) type=1 86->82/100 amt=4 attacker=Wonton(13014)
+20:10:37 [DEBUG]   ENC+ "a cracked beetle"(#14438) +4dmg by Wonton(13014) total=16
+20:10:38 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:38 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:38 [DEBUG] DMG  a cracked beetle(#14438) type=1 82->81/100 amt=1 attacker=Wonton(13014)
+20:10:38 [DEBUG]   ENC+ "a cracked beetle"(#14438) +1dmg by Wonton(13014) total=17
+20:10:38 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=68
+20:10:38 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:38 [DEBUG] CHATCOMBAT text="Wonton crushes a cracked beetle for 5 points of damage."
+20:10:38 [DEBUG]   CHATCOMBAT_DMG "a cracked beetle"(#14438) +5dmg by Wonton(#13014) text_total=35
+20:10:38 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:38 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:39 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:39 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:10:39 [DEBUG] DMG  Wonton(#13014) type=0 227->201/329 amt=26 attacker=None(None)
+20:10:39 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+20:10:39 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+20:10:39 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:39 [DEBUG] CHATCOMBAT text="a cracked beetle bites Wonton for 26 points of damage."
+20:10:39 [DEBUG]   CHATCOMBAT_QUEUED target="Wonton"(unresolved) +26dmg (waiting for UpdateHealth)
+20:10:39 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=198
+20:10:39 [DEBUG]   PARSED type=SpawnEntity eid=14455 target=None
+20:10:39 [DEBUG] SPAWN #14455 type=1 "a large rat" HP:1000/1000 class=rat lvl=0
+20:10:39 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+20:10:39 [DEBUG]   PARSED type=DespawnEntity eid=14321 target=None
+20:10:39 [DEBUG] DESPAWN #14321
+20:10:39 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:39 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:39 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:39 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:10:39 [DEBUG] HEAL Wonton(#13014) 201->202/329 delta=+1 last_attacker=None(None)
+20:10:39 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:39 [DEBUG]   PARSED type=UpdateHealth eid=13238 target=None
+20:10:39 [DEBUG] HEAL Mal(#13238) 204->205/251 delta=+1 last_attacker=None(None)
+20:10:39 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:39 [DEBUG]   PARSED type=UpdateMana eid=13238 target=None
+20:10:40 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=92
+20:10:40 [DEBUG]   PARSED type=AddBuffIcon eid=13014 target=None
+20:10:40 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:40 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:10:40 [DEBUG] DMG  Wonton(#13014) type=0 202->189/329 amt=13 attacker=None(None)
+20:10:40 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+20:10:40 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+20:10:40 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:40 [DEBUG] CHATCOMBAT text="a cracked beetle bites Wonton for 13 points of damage."
+20:10:40 [DEBUG]   CHATCOMBAT_QUEUED target="Wonton"(unresolved) +13dmg (waiting for UpdateHealth)
+20:10:40 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:40 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:41 [DEBUG] MSG_IN 0x0021 DespawnEntity dir=IN body_len=5
+20:10:41 [DEBUG]   PARSED type=DespawnEntity eid=14094 target=None
+20:10:41 [DEBUG] DESPAWN #14094
+20:10:41 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=92
+20:10:41 [DEBUG]   PARSED type=AddBuffIcon eid=13665 target=None
+20:10:41 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=68
+20:10:41 [DEBUG]   PARSED type=AddBuffIcon eid=13014 target=None
+20:10:41 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:41 [DEBUG]   PARSED type=UpdateHealth eid=13665 target=None
+20:10:41 [DEBUG] HEAL Skelebones(#13665) 89->90/100 delta=+1 last_attacker=None(None)
+20:10:41 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:41 [DEBUG]   PARSED type=UpdateHealth eid=14223 target=None
+20:10:41 [DEBUG] HEAL Thalulyl(#14223) 61->62/100 delta=+1 last_attacker=None(None)
+20:10:41 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:41 [DEBUG]   PARSED type=UpdateHealth eid=14306 target=None
+20:10:41 [DEBUG] HEAL a shadow knight recruit(#14306) 93->94/100 delta=+1 last_attacker=None(None)
+20:10:41 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:41 [DEBUG]   PARSED type=UpdateHealth eid=13556 target=None
+20:10:41 [DEBUG] HEAL Lilyth(#13556) 302->304/517 delta=+2 last_attacker=Mal(13238)
+20:10:41 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:41 [DEBUG]   PARSED type=UpdateMana eid=13556 target=None
+20:10:41 [DEBUG] MSG_IN 0x0023 UpdateMana dir=IN body_len=12
+20:10:41 [DEBUG]   PARSED type=UpdateMana eid=14162 target=None
+20:10:41 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:41 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:42 [DEBUG] KEYS validated Client.ConnectionInfo at 0x17422550520
+20:10:42 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=76
+20:10:42 [DEBUG]   PARSED type=AddBuffIcon eid=13014 target=None
+20:10:42 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:42 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:42 [DEBUG] HEAL a cracked beetle(#14438) 81->82/100 delta=+1 last_attacker=Wonton(13014)
+20:10:42 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:42 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:42 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:42 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:42 [DEBUG] DMG  a cracked beetle(#14438) type=1 82->79/100 amt=3 attacker=Wonton(13014)
+20:10:42 [DEBUG]   ENC+ "a cracked beetle"(#14438) +3dmg by Wonton(13014) total=20
+20:10:42 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=72
+20:10:42 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:42 [DEBUG] CHATCOMBAT text="Skelebones crushes a cracked beetle for 8 points of damage."
+20:10:42 [DEBUG]   CHATCOMBAT_DMG "a cracked beetle"(#14438) +8dmg by Skelebones(#12950) text_total=43
+20:10:43 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:43 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:10:43 [DEBUG] DMG  Wonton(#13014) type=0 189->163/329 amt=26 attacker=None(None)
+20:10:43 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+20:10:43 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=67
+20:10:43 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:43 [DEBUG] CHATCOMBAT text="a cracked beetle bites Wonton for 26 points of damage."
+20:10:43 [DEBUG]   CHATCOMBAT_QUEUED target="Wonton"(unresolved) +26dmg (waiting for UpdateHealth)
+20:10:43 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=50
+20:10:43 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:43 [DEBUG] CHATCOMBAT text="Wonton is filled with celestial fury."
+20:10:43 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=90
+20:10:43 [DEBUG]   PARSED type=AddBuffIcon eid=13014 target=None
+20:10:43 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:43 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:43 [DEBUG] DMG  a cracked beetle(#14438) type=1 79->78/100 amt=1 attacker=Wonton(13014)
+20:10:43 [DEBUG]   ENC+ "a cracked beetle"(#14438) +1dmg by Wonton(13014) total=21
+20:10:43 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:43 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:43 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=104
+20:10:43 [DEBUG]   PARSED type=EndCasting eid=13014 target=14438
+20:10:43 [DEBUG] ENDCAST caster=#13014 target=#14438 text="Wonton's Celestial Strike hits a cracked beetle for 6 points of damage."
+20:10:43 [DEBUG]   -> DMG_HIT attacker=Wonton(#13014) -> victim=a cracked beetle(#14438)
+20:10:43 [DEBUG]   TEXT_DMG "a cracked beetle"(#14438) +6dmg by Wonton(#13014) text_total=49
+20:10:43 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=252
+20:10:43 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:43 [DEBUG] CHATCOMBAT text="Coot auctions, "WTS <link="item|kpb_bandit_ftr_ring"><color=green><b><u>[Sangrel"
+20:10:43 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=58
+20:10:43 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:43 [DEBUG] CHATCOMBAT text="a cracked beetle is burned by fists of flame."
+20:10:43 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=53
+20:10:43 [DEBUG]   PARSED type=EndCasting eid=13014 target=14438
+20:10:43 [DEBUG] ENDCAST caster=#13014 target=#14438 text=""
+20:10:43 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+20:10:43 [DEBUG]   PARSED type=SpawnEntity eid=13939 target=None
+20:10:43 [DEBUG] SPAWN #13939 type=1 "a large rat" HP:1000/1000 class=rat lvl=0
+20:10:43 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:43 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:43 [DEBUG] DMG  a cracked beetle(#14438) type=1 78->76/100 amt=2 attacker=Wonton(13014)
+20:10:43 [DEBUG]   ENC+ "a cracked beetle"(#14438) +2dmg by Wonton(13014) total=23
+20:10:43 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=68
+20:10:43 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:43 [DEBUG] CHATCOMBAT text="Wonton crushes a cracked beetle for 6 points of damage."
+20:10:43 [DEBUG]   CHATCOMBAT_DMG "a cracked beetle"(#14438) +6dmg by Wonton(#13014) text_total=55
+20:10:43 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:43 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:43 [DEBUG] DMG  a cracked beetle(#14438) type=1 76->72/100 amt=4 attacker=Wonton(13014)
+20:10:43 [DEBUG]   ENC+ "a cracked beetle"(#14438) +4dmg by Wonton(13014) total=27
+20:10:43 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=88
+20:10:43 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:43 [DEBUG] CHATCOMBAT text="Wonton's Fists of Flame hits a cracked beetle for 13 points of Fire Damage."
+20:10:43 [DEBUG]   CHATCOMBAT_DMG "a cracked beetle"(#14438) +13dmg by Wonton(#13014) text_total=68
+20:10:43 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:43 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:44 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=213
+20:10:44 [DEBUG]   PARSED type=SpawnEntity eid=14371 target=None
+20:10:44 [DEBUG] SPAWN #14371 type=1 "a desert bat" HP:1000/1000 class=bat lvl=0
+20:10:44 [DEBUG] MSG_IN 0x0020 SpawnEntity dir=IN body_len=212
+20:10:44 [DEBUG]   PARSED type=SpawnEntity eid=14448 target=None
+20:10:44 [DEBUG] SPAWN #14448 type=1 "a large rat" HP:1000/1000 class=rat lvl=0
+20:10:44 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=76
+20:10:44 [DEBUG]   PARSED type=AddBuffIcon eid=13665 target=None
+20:10:44 [DEBUG] MSG_IN 0x0053 AddBuffIcon dir=IN body_len=59
+20:10:44 [DEBUG]   PARSED type=AddBuffIcon eid=14162 target=None
+20:10:45 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:45 [DEBUG]   PARSED type=UpdateHealth eid=13014 target=None
+20:10:45 [DEBUG] DMG  Wonton(#13014) type=0 163->160/329 amt=3 attacker=None(None)
+20:10:45 [DEBUG]   ENC_SKIP target_type=0 (no attacker)
+20:10:45 [DEBUG] MSG_IN 0x0040 Unknown_0x0040 dir=IN body_len=66
+20:10:45 [DEBUG]   PARSED type=ChatCombat eid=None target=None
+20:10:45 [DEBUG] CHATCOMBAT text="a cracked beetle bites Wonton for 3 points of damage."
+20:10:45 [DEBUG]   CHATCOMBAT_QUEUED target="Wonton"(unresolved) +3dmg (waiting for UpdateHealth)
+20:10:45 [DEBUG] MSG_IN 0x0022 UpdateHealth dir=IN body_len=12
+20:10:45 [DEBUG]   PARSED type=UpdateHealth eid=14438 target=None
+20:10:45 [DEBUG] DMG  a cracked beetle(#14438) type=1 72->71/100 amt=1 attacker=Wonton(13014)
+20:10:45 [DEBUG]   ENC+ "a cracked beetle"(#14438) +1dmg by Wonton(13014) total=1
+20:10:45 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=98
+20:10:45 [DEBUG]   PARSED type=EndCasting eid=13665 target=14438
+20:10:45 [DEBUG] ENDCAST caster=#13665 target=#14438 text="Skelebones's Strike hits a cracked beetle for 4 points of damage."
+20:10:45 [DEBUG]   -> DMG_HIT attacker=Skelebones(#13665) -> victim=a cracked beetle(#14438)
+20:10:45 [DEBUG]   TEXT_DMG "a cracked beetle"(#14438) +4dmg by Skelebones(#13665) text_total=4
+20:10:45 [DEBUG] MSG_IN 0x0056 EndCasting dir=IN body_len=83
+20:10:45 [DEBUG]   PARSED type=EndCasting eid=13556 target=14452
+20:10:45 [DEBUG] ENDCAST caster=#13556 target=#14452 text="a cracked beetle looks angry at Lilyth."
+20:10:45 [DEBUG]   -> NO_MATCH (not dmg, heal, or miss pattern)
