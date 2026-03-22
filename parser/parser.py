@@ -11,7 +11,7 @@ Usage:
     python parser/parser.py
 """
 
-APP_VERSION = "V1.14"
+APP_VERSION = "V1.16"
 
 import csv
 import ctypes
@@ -25,9 +25,12 @@ import logging
 import os
 import queue
 import socket
+import ssl
 import struct
+import subprocess
 import sys
 import threading
+import urllib.request
 import time
 import tkinter as tk
 import winsound
@@ -6461,11 +6464,76 @@ def _show_error(title, msg):
         print(f"{title}: {msg}")
 
 
+def _check_for_update():
+    """Auto-update frozen exe by comparing SHA-256 hash with server copy."""
+    if not getattr(sys, 'frozen', False):
+        return
+    new_path = None
+    try:
+        exe_path = sys.executable
+        exe_dir = os.path.dirname(exe_path)
+        old_path = os.path.join(exe_dir, "ZekParser.exe.old")
+        new_path = os.path.join(exe_dir, "ZekParser.exe.new")
+
+        # Cleanup leftover files from previous update
+        if os.path.exists(old_path):
+            try:
+                os.remove(old_path)
+            except Exception:
+                pass
+        if os.path.exists(new_path):
+            try:
+                os.remove(new_path)
+            except Exception:
+                pass
+
+        # SSL context — skip cert verification (PyInstaller bundles lack CA certs)
+        ctx = ssl._create_unverified_context()
+
+        # Download remote exe (custom UA — server 403s default Python-urllib agent)
+        url = "https://zekparser.com/ZekParser.exe"
+        req = urllib.request.Request(url, headers={
+            "User-Agent": "ZekParser AutoUpdater"})
+        with urllib.request.urlopen(req, timeout=30, context=ctx) as resp:
+            remote_data = resp.read()
+
+        if not remote_data:
+            return
+
+        # Hash comparison — detects any change regardless of file size
+        local_hash = hashlib.sha256(open(exe_path, "rb").read()).digest()
+        remote_hash = hashlib.sha256(remote_data).digest()
+        if local_hash == remote_hash:
+            return
+
+        # Write new exe
+        with open(new_path, "wb") as f:
+            f.write(remote_data)
+
+        # Swap: running exe → .old, downloaded → exe name
+        os.rename(exe_path, old_path)
+        os.rename(new_path, os.path.join(exe_dir, "ZekParser.exe"))
+
+        # Restart with new exe
+        subprocess.Popen([os.path.join(exe_dir, "ZekParser.exe")])
+        sys.exit(0)
+
+    except Exception:
+        # Clean up partial download on any failure
+        try:
+            if new_path and os.path.exists(new_path):
+                os.remove(new_path)
+        except Exception:
+            pass
+
+
 def main():
     if not is_admin():
         _show_error("ZekParser", "This tool requires Administrator privileges.\n\n"
                      "Right-click ZekParser and select 'Run as administrator'.")
         sys.exit(1)
+
+    _check_for_update()
 
     try:
         app = CombatApp()

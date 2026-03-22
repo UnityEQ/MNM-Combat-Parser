@@ -17,8 +17,9 @@ python mnm.py --log-level DEBUG         # Verbose console output
 python mnm.py --no-wait                 # Fail immediately if game not running
 python mnm.py -p other.exe -i 10.0.0.5 # Custom process name and interface IP
 
-# Install dependency (only external package)
+# Install dependencies
 pip install pycryptodome
+pip install chime
 
 # Syntax check after changes
 python -c "import core.combat; import core.npc_database; import core.parser"
@@ -37,8 +38,8 @@ No test framework exists. Verify changes with `python -c` imports and live captu
 ## Three Entry Points
 
 1. **`mnm.py`** — Headless CLI tool. Captures packets, decrypts, logs combat events to console + rotating log files in `logs/`. Records NPC spawns to `data/npc_database.csv`.
-2. **`parser/parser.py`** — Standalone tkinter GUI named **ZekParser** (window title: `"ZekParser {APP_VERSION}"`). Fully self-contained (zero imports from `core/`). Duplicates the entire capture→decrypt→parse pipeline inline. Shows real-time combat feed + damage meter with DPS tracking. Debug logs go to `parser/logs/`. `APP_VERSION` constant (e.g. `"V1.6"`) at top of file — bump for each exe release. Keep in sync with `version_info.py` (`filevers`/`prodvers`/`FileVersion`/`ProductVersion`).
-3. **`chatparser/bot.py`** — Standalone tkinter GUI named **ChatParser** (window title: `"ChatParser V{version}"`). Fully self-contained (zero imports from `core/` or `parser/`). Duplicates the capture→decrypt→parse pipeline. Provides text trigger matching with keyboard automation, opcode browser, and entity discovery. Version in window title (e.g. `"ChatParser V2.0"`) — keep in sync with `chatparser/version_info.py` and `zekparser-homepage/chatparser.html`.
+2. **`parser/parser.py`** — Standalone tkinter GUI named **ZekParser** (window title: `"ZekParser {APP_VERSION}"`). Fully self-contained (zero imports from `core/`). Duplicates the entire capture→decrypt→parse pipeline inline. Shows real-time combat feed + damage meter with DPS tracking. Debug logs go to `parser/logs/`. `APP_VERSION` constant (e.g. `"V1.16"`) at top of file — bump for each exe release. Keep in sync with `version_info.py` (`filevers`/`prodvers`/`FileVersion`/`ProductVersion`) and `zekparser-homepage/index.html`.
+3. **`chatparser/bot.py`** — Standalone tkinter GUI named **ChatParser** (window title: `"ChatParser V{version}"`). Fully self-contained (zero imports from `core/` or `parser/`). Duplicates the capture→decrypt→parse pipeline. Provides text trigger matching with keyboard automation, opcode browser, entity discovery with alerts, and chime sound library. Version in window title (e.g. `"ChatParser V2.6"`) — keep in sync with `chatparser/version_info.py` and `zekparser-homepage/chatparser.html`.
 
 All three require Windows Administrator privileges for raw socket capture (`SIO_RCVALL`).
 
@@ -371,12 +372,12 @@ Standalone tkinter GUI for chat trigger matching, keyboard automation, opcode in
 
 ### Trigger System
 
-Triggers are user-defined pattern matchers stored in `chatparser/triggers.json` (ships with one default: `"you gain party experience"`). Each trigger has:
+Triggers are user-defined pattern matchers stored in `chatparser/triggers.json`. The file uses a dict format: `{"triggers": [...], "discovery_alerts": [...]}`. Backward compatible — if file contains a flat list (old format), it's treated as `{"triggers": list, "discovery_alerts": []}`. Each trigger has:
 
 - **Pattern**: Case-insensitive substring match against combat/chat text
 - **Mode**: `"loop"` (repeat key presses), `"once"` (single key press cycle), `"sound"` (audio alert only)
 - **Key pairs**: `[{"key": "4", "wait": "1"}, ...]` — keys to press with wait times in seconds
-- **Sound**: One of ~10 built-in Windows system sounds
+- **Sound**: From `ALERT_SOUNDS` list — chime library sounds (`"chime:theme:type"` format, 7 themes × 4 types = 28 sounds). `_play_sound()` detects the `"chime:"` prefix and calls the chime library; requires `pip install chime`.
 - **Auto-target**: Extract speaker name from matched text for `/target` automation
 - **Cooldown**: Automatic per-trigger cooldown = `sum(key wait times) + 1s buffer`
 
@@ -391,6 +392,8 @@ Live message inspector with filter categories (Chat, Combat, All), search, and p
 ### Discovery Tab
 
 Two-column display tracking unique NPC and PC names from SpawnEntity (0x0020). `entity_type != 0` = NPC, `entity_type == 0` = PC. Copy button exports both lists, Reset clears them. Data tracked via `MessageHandler._npc_names` and `._pc_names` dicts with version counter for efficient UI cache invalidation.
+
+**Discovery Alerts**: Collapsible panel at top of Discovery tab. Users add patterns (case-insensitive substring match) that trigger a chime sound + yellow highlight when matching entity names spawn. Each alert has NPC/PC toggle buttons and a sound dropdown. Alerts stored in `triggers.json` under `"discovery_alerts"` key. `_disc_alerted_names` set prevents repeat alerts within a session (cleared on Reset). Alert rows live in a scrollable canvas capped at 120px.
 
 ### MessageHandler
 
@@ -409,7 +412,15 @@ When bot is ON and a trigger fires, a background thread executes key presses via
 
 ### Build (ChatParser.exe)
 
-Uses `ChatParser.spec` at project root: `pyinstaller --clean ChatParser.spec`. Output: `dist/ChatParser.exe`. The spec references `chatparser/version_info.py` for embedded version metadata, `chatparser/bot.py` as entry point, `--noconsole`, `--uac-admin`, `upx=True`.
+Uses `ChatParser.spec` at project root: `pyinstaller --clean ChatParser.spec`. Output: `dist/ChatParser.exe`. The spec references `chatparser/version_info.py` for embedded version metadata, `chatparser/bot.py` as entry point, `--noconsole`, `--uac-admin`, `upx=True`. The spec also bundles chime's `themes/` WAV directory via explicit datas entry.
+
+### Auto-Updater (both exes)
+
+Both `parser/parser.py` and `chatparser/bot.py` have `_check_for_update()` that runs on startup (frozen exe only). Downloads the exe from `zekparser.com`, compares SHA-256 hashes, and if different: writes `.new` file, renames running exe to `.old`, renames `.new` to exe name, restarts. Key details:
+- Must use a custom `User-Agent` header — server 403s the default `Python-urllib` agent
+- No HEAD requests — server 403s those too
+- SSL uses `_create_unverified_context()` (PyInstaller bundles lack CA certs)
+- All errors silently caught to avoid blocking app startup
 
 ## Homepage (zekparser-homepage/)
 
@@ -464,4 +475,5 @@ Three PyInstaller `.spec` files exist:
 - `_r_str_nn` is a no-null string reader for ItemInformation (0x0080) and embedded ItemRecords: length field = strlen+1 (counts implicit null) but **null byte is NOT on wire** — reads `len-1` bytes. Do not confuse with `_r_str`
 - ItemInformation (0x0080) has 7 resist fields (no holy resist), 11 boolean flags (not 3), and uses i32 for type/level fields (not u16). First 3 i32 after craft_class are `[damage][delay][AC]`
 - AddItemToInventory (0x0063) embeds a full ItemRecord — the game does NOT send a separate 0x0080 for items looted via 0x0063. Looted items go to `_items` only (not `_inspected_items`)
+- Auto-updater HTTP requests MUST set a custom `User-Agent` header — `zekparser.com` returns 403 for the default `Python-urllib/3.x` agent and for HEAD requests
 

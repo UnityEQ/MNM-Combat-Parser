@@ -33,7 +33,9 @@
       "Bash(PYTHONIOENCODING=utf-8 python:*)",
       "Bash(cmd.exe /c \"rename E:\\\\MNM-Network\\\\MNM-Combat-Parser\\\\darksalty chatparser\")",
       "Bash(cmd.exe:*)",
-      "Bash(taskkill:*)"
+      "Bash(taskkill:*)",
+      "Bash(tasklist:*)",
+      "Bash(pip install:*)"
     ]
   }
 }

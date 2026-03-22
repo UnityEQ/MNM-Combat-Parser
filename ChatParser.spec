@@ -6,6 +6,10 @@ binaries = []
 hiddenimports = []
 tmp_ret = collect_all('pycryptodome')
 datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
+import chime as _chime_mod, os as _os
+_chime_themes_dir = _os.path.join(_os.path.dirname(_chime_mod.__file__), 'themes')
+datas += [(_chime_themes_dir, 'themes')]
+hiddenimports += ['chime']
 
 
 a = Analysis(

@@ -1,138 +1,48 @@
-# ZekParser
+# ZekParser & ChatParser
 
-A free, real-time DPS meter and combat log parser for **Monsters & Memories**. ZekParser captures network traffic directly from the game client, decrypts it on the fly, and displays live combat statistics — damage meters, per-encounter breakdowns, item drops, XP tracking, and configurable text triggers with audio alerts.
-
-Single portable `.exe`. No install. No game file modification. Runs alongside the game and reads network data passively.
+Free, real-time tools for **Mammary Monsters**. No install. No game file modification. Runs alongside the game and reads network data passively.
 
 **Download**: [zekparser.com](https://zekparser.com/)
 
-## Features
+---
 
-### Real-Time DPS Meter
-Damage per second calculated live as combat happens. Every hit, spell, and ability is tracked the moment it lands. No log file parsing after the fact.
+## ZekParser
 
-### Session Overview
-Aggregated leaderboard across all encounters. Top players ranked by total damage with expandable per-ability breakdowns. Click any player to see exactly which abilities contributed what.
+A live DPS meter and combat log parser. Captures network traffic directly from the game client, decrypts it on the fly, and displays live combat statistics — damage meters, per-encounter breakdowns, item drops, XP tracking, and configurable text triggers with audio alerts.
 
-### Encounter Logging
-Every fight tracked individually — mob name, total damage dealt, duration, DPS, and per-player contribution. Click into any encounter for the full damage breakdown with class tags and ability lists.
+Single portable `.exe`. Right-click → Run as Administrator.
 
-### Grand Overview
-Combined statistics across your entire session. Per-player boxes with class/level, total damage, DPS, damage received, and full ability breakdowns. Per-NPC aggregation showing kill counts and average damage.
+### Features
 
-### Item Tracker
-All loot drops logged with full item stats, effects, flags (MAGIC/NO DROP/UNIQUE), and which mob dropped them. Tracks drop frequency and timestamps. Never miss a drop.
+- **Real-Time DPS Meter** — Every hit, spell, and ability tracked the moment it lands
+- **Session Overview** — Aggregated leaderboard with expandable per-ability breakdowns
+- **Encounter Logging** — Every fight tracked individually with per-player contribution, class tags, and ability lists
+- **Grand Overview** — Combined session statistics with per-player and per-NPC aggregation
+- **Item Tracker** — All loot drops with full stats, effects, flags, drop frequency, and source mob
+- **Experience Tracking** — XP gains per kill with XP/hour and level-up detection
+- **Text Triggers** — Pattern matching against combat text with audio alerts
+- **Copy & Share** — Clean formatted tables for pasting into Discord
+- **Auto-Update** — Checks for new versions on startup and updates automatically
 
-### Experience Tracking
-XP gains per kill with running totals, XP/hour calculation, and level-up detection. Automatically correlates XP events with the mob you just killed.
-
-### Text Triggers
-User-defined pattern matching against all combat text. Set up alerts for specific events — "tells you", "has been slain", "resisted" — with selectable Windows system sounds. Match counts tracked per pattern.
-
-### Copy & Share
-Select and copy data from any view. Formats a clean table you can paste directly into Discord or chat.
-
-## Getting Started
-
-### Download & Run (Recommended)
+### Getting Started
 
 1. Download `ZekParser.exe` from [zekparser.com](https://zekparser.com/)
 2. Add a Windows Defender exclusion for `ZekParser.exe` or its folder (unsigned exe triggers false positives)
 3. Right-click → **Run as Administrator** (required for network capture)
-4. Launch the game — ZekParser auto-detects the game process, finds the server connection, and waits for setup
+4. Launch the game — ZekParser auto-detects the game process and server connection
 5. Type `/reload` in-game — this identifies your character. Solo players are detected automatically; in a group, click your name from the list
 
-### Run from Source
+### GUI Layout
 
-Requires Python 3.10+ on Windows.
-
-```bash
-pip install pycryptodome
-
-# Run the GUI parser (requires Administrator terminal)
-python parser/parser.py
-```
-
-## How It Works
-
-ZekParser uses Windows raw sockets in promiscuous mode to capture all network traffic on the interface. It filters to packets matching the game's server connection, decrypts them using AES-256-CBC with keys extracted from the game process memory, then parses FishNet/LiteNetLib framing to extract game-level messages.
-
-**The parser never modifies game files, injects code, or writes to game memory.** It is a passive network observer.
-
-### Capture Pipeline
-
-```
-Game (mnm.exe) ──UDP/TCP──► Network
-                               │
-    Raw Socket (SIO_RCVALL) ───┘
-              │
-        IP/UDP header parse ──► filter by game connection (port matching)
-              │
-        AES-256-CBC decrypt (keys read from game memory via ReadProcessMemory)
-              │
-        LiteNetLib frame parse (Unreliable / Channeled / Merged sub-frames)
-              │
-        Game message extract (2-byte LE opcode + body)
-              │
-        Combat event parse ──► EntityTracker ──► GUI display
-```
-
-### Thread Architecture
-
-| Thread | Role |
-|---|---|
-| **Main** | tkinter GUI event loop, `after()` polling for updates |
-| **Capture** | Raw socket recv loop, pushes raw packets to queue |
-| **Connection** | Polls Windows `iphlpapi` every 5s to track game TCP/UDP connections |
-| **KeyWatcher** | Reads AES/HMAC/XOR keys from game memory every 5s |
-| **Processor** | Decrypts packets, parses messages, feeds events to EntityTracker |
-
-### Combat Data Sources
-
-The game uses multiple message types to communicate combat information. No single message contains all the data needed to fully describe a combat event:
-
-| Message | Contains | Missing |
-|---|---|---|
-| **UpdateHealth** (0x0022) | Target entity ID, new HP, max HP | Who caused the damage |
-| **EndCasting** (0x0056) | Caster ID, target ID, English text with damage | Damage as a structured field (must regex parse) |
-| **ChatMessage** (0x0040) | English text with melee damage | Any entity IDs at all |
-| **Combat Animation** (0x644B) | Attacker ID, target ID, verb | Damage number |
-
-Because no single packet contains (attacker, target, damage amount) together, the parser correlates across messages using temporal matching and entity ID tracking.
-
-### Dual Damage Tracking
-
-Every encounter tracks two independent damage values:
-
-- **HP-delta damage** (`total_damage`): Computed from successive UpdateHealth messages. Captures ALL damage sources (spells, melee, DoTs, damage shields, reflected damage) but can be percentage-based for tough NPCs where the server reports HP as 0-100 instead of actual values.
-- **Text-extracted damage** (`text_damage`): Parsed from combat text via regex. Always contains real damage numbers but may miss passive effects that don't generate text.
-
-The UI displays `best_damage = max(text_damage, total_damage)`, handling both normal NPCs (where HP-delta is accurate) and percentage-HP bosses (where only text damage has real numbers).
-
-### DPS Calculation
-
-| Context | Formula | Description |
-|---|---|---|
-| **Encounter DPS** | `best_damage / (die_time - first_damage)` | Total encounter DPS across all players |
-| **Player DPS (encounter)** | `player_best_dealt / encounter_duration` | Player's sustained contribution over the fight |
-| **Player DPS (overview)** | `total_dealt / (last_hit - first_hit)` | Player's personal active DPS window |
-| **Grand DPS** | `sum(all damage) / sum(all durations)` | Session-wide average DPS |
-
-## GUI Layout
-
-### Right Panel (always visible)
-
-Dropdown switches between three views:
+**Right Panel** (always visible) — dropdown switches between:
 
 | View | Description |
 |---|---|
 | **Overview** | Session leaderboard — players ranked by total damage, click to expand ability breakdowns |
-| **Encounters** | Live/dead NPC encounter list. Click for per-player detail with damage bars, class tags, abilities |
-| **Grand Overview** | Aggregated stats — per-player boxes with full ability breakdowns + per-NPC kill aggregation |
+| **Encounters** | Live/dead NPC encounter list. Click for per-player detail with damage bars |
+| **Grand Overview** | Aggregated stats — per-player boxes + per-NPC kill aggregation |
 
-### Left Panel (expandable)
-
-Starts hidden. Click the expand arrow to show. Dropdown switches between:
+**Left Panel** (expandable) — starts hidden, click the expand arrow:
 
 | View | Description |
 |---|---|
@@ -141,31 +51,64 @@ Starts hidden. Click the expand arrow to show. Dropdown switches between:
 | **Triggers** | Pattern matching setup with audio alerts |
 | **Experience** | XP gain tracking per kill with session summary and XP/hour |
 
-Copy and Export buttons adapt to whichever view is active.
+---
 
-## Configuration
+## ChatParser
 
-`config.json` at project root (created with defaults if missing):
+A semi-transparent overlay for chat trigger matching, keyboard automation, opcode inspection, and entity discovery. Always-on-top at 75% opacity — sits over the game without blocking it.
 
-```json
-{
-    "player_name": "",
-    "server_name": "Beta PvP",
-    "process_name": "mnm.exe",
-    "interface_ip": "auto",
-    "log_level": "INFO",
-    "capture_filter": {
-        "protocols": ["UDP", "TCP"],
-        "exclude_ports": [80, 443, 53]
-    },
-}
+Single portable `.exe`. Right-click → Run as Administrator.
+
+**Download**: [zekparser.com/chatparser](https://zekparser.com/chatparser.html)
+
+### Features
+
+- **Text Triggers** — Case-insensitive pattern matching against combat/chat text with configurable key press sequences (loop, once, or sound-only modes)
+- **Keyboard Automation** — When a trigger fires, sends key presses to the game window via `SendInput` with configurable delays and loop counts
+- **Opcode Browser** — Live message inspector with filter categories (Chat, Combat, All), search, per-message detail view with parsed fields + raw hex dump
+- **Discovery Tab** — Tracks unique NPC and PC names from entity spawns. Two-column display with copy/reset
+- **Discovery Alerts** — Set patterns that trigger a chime sound + yellow highlight when matching entities spawn. Collapsible panel with NPC/PC toggle per alert
+- **Chime Sound Library** — 28 sounds across 7 themes (big-sur, chime, mario, material, pokemon, sonic, zelda) × 4 types (success, warning, error, info)
+- **Opcode Triggers** — Match specific field values in specific opcodes (e.g. `0x0020.name = "Poacher"`)
+- **Auto-Target** — Extract speaker name from matched text for `/target` automation
+- **Fizzle Detection** — Detects spell fizzles and auto-retries key presses
+- **Auto-Update** — Checks for new versions on startup and updates automatically
+
+### Getting Started
+
+1. Download `ChatParser.exe` from [zekparser.com/chatparser](https://zekparser.com/chatparser.html)
+2. Add a Windows Defender exclusion
+3. Right-click → **Run as Administrator**
+4. Launch the game — ChatParser auto-connects
+
+### GUI Layout
+
+- **Connection Status** — Shows capture state, game connection, key status
+- **Main Tab** — Text trigger list with pattern entry, mode cycling (Loop/Once/Sound), sound dropdown, expandable key pair configuration
+- **Opcode Tab** — Live message browser with category filters, search, and detail view. Create opcode triggers directly from message details
+- **Discovery Tab** — Alert bar at top (collapsible, scrollable), NPC/PC name columns below. Matching names highlighted in yellow
+
+---
+
+## How It Works
+
+Both tools use Windows raw sockets in promiscuous mode to capture network traffic. They filter packets matching the game's server connection, decrypt using AES-256-CBC with keys extracted from game process memory, then parse FishNet/LiteNetLib framing to extract game messages.
+
+**Neither tool modifies game files, injects code, or writes to game memory.** They are passive network observers.
+
 ```
-
-| Field | Description |
-|---|---|
-| `player_name` | Leave empty `""` — auto-detected from `/reload` party data. Only set manually if auto-detect fails |
-| `server_name` | Display label for the GUI title bar |
-| `interface_ip` | `"auto"` to detect from game connections, or explicit IP like `"10.0.0.5"` |
+Game (mnm.exe) ──UDP/TCP──► Network
+                               │
+    Raw Socket (SIO_RCVALL) ───┘
+              │
+        IP/UDP header parse ──► filter by game connection
+              │
+        AES-256-CBC decrypt (keys read from game memory)
+              │
+        LiteNetLib frame parse
+              │
+        Game message extract ──► Parser/Tracker ──► GUI
+```
 
 ## Requirements
 
@@ -174,102 +117,56 @@ Copy and Export buttons adapt to whichever view is active.
 - **Game running on the same machine**
 - No dependencies to install (standalone exe)
 
-For running from source: Python 3.10+, `pycryptodome`
+### Run from Source
 
-## Project Structure
-
-```
-parser/parser.py        # GUI entry point — fully self-contained, zero imports from core/
-parser/api_client.py    # Optional remote API submission (HMAC-signed batched uploads)
-parser/triggers.json    # Persisted trigger patterns
-mnm.py                  # Headless CLI entry point (console logging + NPC database)
-core/capture.py         # Raw socket capture engine
-core/connections.py     # Game connection monitoring (Windows iphlpapi)
-core/memory.py          # IL2CPP memory reading (ReadProcessMemory)
-core/decrypt.py         # AES-256-CBC + CRC32c + HMAC decrypt pipeline
-core/parser.py          # IP/UDP/TCP + LiteNetLib frame parsing
-core/combat.py          # Game message parsing (SpawnEntity, combat events, party data)
-core/opcodes.py         # 355 known game message IDs
-core/npc_database.py    # NPC spawn data CSV recorder
-config.json             # Runtime configuration
-version_info.py         # Windows exe metadata (PyInstaller --version-file)
-zekparser-homepage/     # Marketing landing page for zekparser.com
-```
-
-### Building the Exe
+Requires Python 3.10+ on Windows.
 
 ```bash
-pip install pyinstaller pycryptodome
+pip install pycryptodome chime
 
+# ZekParser GUI
+python parser/parser.py
+
+# ChatParser GUI
+python chatparser/bot.py
+
+# Headless CLI (console logging + NPC database)
+python mnm.py
+```
+
+## Building
+
+```bash
+pip install pyinstaller pycryptodome chime
+
+# ZekParser (output: dist/ZekParser.exe)
 pyinstaller --onefile --noconsole --name ZekParser \
     --uac-admin --version-file version_info.py \
     --collect-all pycryptodome "parser/parser.py"
 
-# Output: dist/ZekParser.exe
+# ChatParser (output: dist/ChatParser.exe)
+pyinstaller --clean ChatParser.spec
 ```
 
-The exe is unsigned — users should add a Windows Defender exclusion to prevent false positive quarantine.
+Both exes are unsigned — users should add a Windows Defender exclusion to prevent false positive quarantine.
 
-### CLI Tool
+## Configuration
 
-`mnm.py` is a headless CLI alternative for background logging, data collection, and protocol analysis:
+`config.json` at project root (created with defaults if missing):
 
-```bash
-python mnm.py                          # Normal operation
-python mnm.py --dump-keys              # Read encryption keys and exit
-python mnm.py --log-level DEBUG        # Verbose output
-python mnm.py --no-wait                # Fail immediately if game isn't running
-python mnm.py -p other.exe -i 10.0.0.5  # Custom process name and interface IP
-```
+| Field | Description |
+|---|---|
+| `player_name` | Leave empty `""` — auto-detected from `/reload` party data |
+| `server_name` | Display label for the GUI title bar |
+| `interface_ip` | `"auto"` to detect from game connections, or explicit IP |
 
 ## Known Limitations
 
-- **Player class/level**: Primarily sourced from ClientPartyUpdate (on `/reload`). Other players' class/level depends on SpawnEntity or party data arriving while the parser is running.
-- **Encryption key timing**: Keys are read from game memory after login. Packets sent before key acquisition (including initial player state) are lost.
-- **Entity ID reuse**: The game reuses entity IDs for newly spawned NPCs. The parser detects name changes on SpawnEntity to retire old encounters, but edge cases exist.
-- **Melee damage attribution**: Melee auto-attacks arrive as ChatMessage text with no entity IDs. The parser uses temporal correlation with UpdateHealth, which can fail when multiple NPCs take damage simultaneously.
-- **Percentage-HP distortion**: Tough NPCs report percentage-based HP (max_hp=100). The dual-tracking system mitigates this but isn't perfect under packet loss.
-- **Experience tracking**: Requires two kills to start — the first kill sets the XP baseline. XP is per-level progress and resets on level-up.
-
-## DPS Methodology Deep Dive
-
-For those interested in the details of how DPS is calculated and how it compares to other MMO parsers.
-
-### The Attribution Problem
-
-Because no single packet contains (attacker, target, damage amount) together:
-
-1. **BeginCasting** arrives → records `last_attacker[target_eid] = caster_eid`
-2. **UpdateHealth** arrives → computes HP delta, credits to `last_attacker[target_eid]`
-3. **EndCasting/ChatMessage** text → regex extracts real damage number as `text_damage`
-
-This temporal correlation is inherently imperfect. Simultaneous attackers, DoTs, and damage shields can be misattributed.
-
-### What This Captures
-
-- **All damage sources**: HP-delta tracking captures spells, melee, DoTs, damage shields, reflected damage, procs — anything that reduces the target's HP
-- **Real damage numbers**: Text-extracted damage bypasses the percentage-HP problem on tough NPCs
-- **Per-encounter isolation**: Each NPC is tracked separately. Downtime between pulls does not inflate duration
-- **Dual-tracking fallback**: When HP-delta is percentage-based, text damage provides real numbers. When text damage misses passive sources, HP-delta fills the gap
-
-### Limitations
-
-1. **Wall-clock duration**: Duration runs from first damage to death. Idle time within an encounter (kiting, running back) inflates the denominator
-2. **No active-time filtering**: All time between first and last hit counts, even if the player stopped attacking
-3. **Attribution errors**: Since UpdateHealth has no attacker field, damage is credited to whoever most recently cast at the target. Simultaneous attackers can get credit swapped
-4. **Missed damage**: If no BeginCasting/EndCasting was seen for a target before its UpdateHealth arrives, the damage is recorded for the encounter total but not credited to any specific player
-
-### Alternative DPS Methods (Not Yet Implemented)
-
-| Method | What It Measures | Used By |
-|---|---|---|
-| **Active-Time DPS** | Damage / time spent attacking (gaps excluded) | GW2 ArcDPS, FFXIV ACT, WoW Details! |
-| **Rolling Window DPS** | Damage in last N seconds | WoW Details!, EQ2 ACT |
-| **Effective DPS** | Target max HP / kill time | EQ GamParse |
-| **Peak DPS** | Best N-second burst window | WoW Warcraft Logs, FFXIV FFLogs |
-| **rDPS** | Buff-adjusted contribution | GW2 ArcDPS, FFXIV FFLogs |
-
-The most impactful future improvement would be **active-time DPS** (the standard metric in modern MMO parsers) and **rolling window DPS** for real-time monitoring during fights.
+- **Player class/level**: Sourced from ClientPartyUpdate (on `/reload`). Other players' class/level depends on SpawnEntity or party data arriving while the parser is running
+- **Encryption key timing**: Keys are read from game memory after login. Packets sent before key acquisition are lost
+- **Entity ID reuse**: The game reuses entity IDs for newly spawned NPCs. The parser detects name changes to retire old encounters, but edge cases exist
+- **Melee damage attribution**: Melee auto-attacks arrive as text with no entity IDs. Temporal correlation with HP updates can fail when multiple NPCs take damage simultaneously
+- **Experience tracking**: Requires two kills to start — the first kill sets the XP baseline
 
 ## License
 

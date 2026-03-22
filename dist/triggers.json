@@ -1,15 +1,12 @@
 [
   {
-    "type": "opcode",
-    "opcode": 86,
-    "field": "text",
-    "pattern": "Elemental Fire",
+    "pattern": "Feewai pierces",
     "mode": "once",
-    "sound_name": "NONE",
+    "sound_name": "DeviceFail",
     "key_pairs": [
       {
         "key": "4",
-        "wait": "0"
+        "wait": "1"
       },
       {
         "key": "2",
@@ -17,11 +14,11 @@
       },
       {
         "key": "5",
-        "wait": "1.0"
+        "wait": "1"
       },
       {
         "key": "3",
-        "wait": "5"
+        "wait": "4"
       },
       {
         "key": "x",
@@ -29,6 +26,10 @@
       }
     ],
     "loop_delay": "5000",
-    "loop_count": "3"
+    "loop_count": "3",
+    "auto_target": false,
+    "type": "opcode",
+    "opcode": 64,
+    "field": "text"
   }
 ]

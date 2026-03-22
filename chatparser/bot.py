@@ -20,14 +20,22 @@ import os
 import queue
 import random
 import socket
+import ssl
 import struct
+import subprocess
 import sys
 import threading
+import urllib.request
 import time
 import tkinter as tk
 from tkinter import ttk
 import wave
 import winsound
+
+try:
+    import chime as _chime_mod
+except ImportError:
+    _chime_mod = None
 
 
 # ---- Half-volume beep WAV (generated once at import) ---------------
@@ -744,6 +752,11 @@ class MessageHandler:
         self._pc_names = {}       # name -> set of eids (entity_type == 0)
         self._disc_version = 0    # bumped on each new NPC or PC name
         self._fizzle_event = threading.Event()  # set when "fizzle" detected
+        self._local_player_eid = None  # detected from UpdateExperience
+        self._local_mana = 0          # current mana
+        self._local_max_mana = 0      # max mana
+        self._local_hp = 0            # current hp
+        self._local_max_hp = 0        # max hp
 
     def _name(self, eid):
         """Resolve eid to name, or None."""
@@ -824,6 +837,9 @@ class MessageHandler:
             fields["entity_name"] = self._name(eid)
             fields["hp"] = hp
             fields["max_hp"] = max_hp
+            if eid is not None and eid == self._local_player_eid:
+                self._local_hp = hp if hp is not None else 0
+                self._local_max_hp = max_hp if max_hp is not None else 0
 
         elif msg_id == 0x0027:  # UpdateHealthMana
             eid, off = _r_u32(body, off)
@@ -837,6 +853,23 @@ class MessageHandler:
             fields["max_hp"] = max_hp
             fields["mp"] = mp
             fields["max_mp"] = max_mp
+            if eid is not None and eid == self._local_player_eid:
+                self._local_hp = hp if hp is not None else 0
+                self._local_max_hp = max_hp if max_hp is not None else 0
+                self._local_mana = mp if mp is not None else 0
+                self._local_max_mana = max_mp if max_mp is not None else 0
+
+        elif msg_id == 0x0023:  # UpdateMana
+            eid, off = _r_u32(body, off)
+            mp, off = _r_i32(body, off)
+            max_mp, off = _r_i32(body, off)
+            fields["entity_id"] = eid
+            fields["entity_name"] = self._name(eid)
+            fields["mp"] = mp
+            fields["max_mp"] = max_mp
+            if eid is not None and eid == self._local_player_eid:
+                self._local_mana = mp if mp is not None else 0
+                self._local_max_mana = max_mp if max_mp is not None else 0
 
         elif msg_id == 0x0024:  # UpdateExperience
             eid, off = _r_u32(body, off)
@@ -844,6 +877,9 @@ class MessageHandler:
             fields["entity_id"] = eid
             fields["entity_name"] = self._name(eid)
             fields["experience"] = xp
+            # UpdateExperience only fires for the local player
+            if eid is not None and self._local_player_eid is None:
+                self._local_player_eid = eid
 
         elif msg_id == 0x0055:  # BeginCasting
             eid, off = _r_u32(body, off)
@@ -906,6 +942,14 @@ class MessageHandler:
                     sorted(self._pc_names.keys()),
                     self._disc_version)
 
+    def get_local_mana(self):
+        """Return (current_mana, max_mana) for the local player, or (0, 0) if unknown."""
+        return self._local_mana, self._local_max_mana
+
+    def get_local_hp(self):
+        """Return (current_hp, max_hp) for the local player, or (0, 0) if unknown."""
+        return self._local_hp, self._local_max_hp
+
     def check_fizzle(self):
         """Check and clear the fizzle flag. Returns True if a fizzle was detected."""
         if self._fizzle_event.is_set():
@@ -962,40 +1006,57 @@ def _migrate_trigger_mode(t):
     return "once", "NONE"
 
 
-def _load_triggers():
-    # Read bot_config.json for default key_pairs/loop_delay/loop_count
+def _parse_trigger_list(raw_list):
+    """Parse a list of raw trigger dicts into normalized trigger objects."""
     _bcfg = _load_bot_config()
     _def_kp = _bcfg.get("key_pairs", [{"key": "4", "wait": "1"}])
     _def_ld = str(_bcfg.get("loop_delay", "5000"))
     _def_lc = str(_bcfg.get("loop_count", "3"))
+    result = []
+    for t in raw_list:
+        if isinstance(t, dict) and "pattern" in t:
+            mode, sound_name = _migrate_trigger_mode(t)
+            ttype = t.get("type", "text")
+            base = {
+                "pattern": t["pattern"],
+                "mode": mode,
+                "sound_name": sound_name,
+                "key_pairs": t.get("key_pairs", list(_def_kp)),
+                "loop_delay": str(t.get("loop_delay", _def_ld)),
+                "loop_count": str(t.get("loop_count", _def_lc)),
+                "auto_target": bool(t.get("auto_target", False)),
+            }
+            if ttype == "opcode":
+                base["type"] = "opcode"
+                base["opcode"] = t.get("opcode", 0)
+                base["field"] = t.get("field", "text")
+            else:
+                base["type"] = "text"
+            result.append(base)
+    return result
+
+
+def _load_triggers_file():
+    """Load raw triggers.json, return (triggers_list, discovery_alerts_list)."""
     try:
         with open(_triggers_path(), "r") as f:
             data = json.loads(f.read())
             if isinstance(data, list):
-                result = []
-                for t in data:
-                    if isinstance(t, dict) and "pattern" in t:
-                        mode, sound_name = _migrate_trigger_mode(t)
-                        ttype = t.get("type", "text")
-                        base = {
-                            "pattern": t["pattern"],
-                            "mode": mode,
-                            "sound_name": sound_name,
-                            "key_pairs": t.get("key_pairs", list(_def_kp)),
-                            "loop_delay": str(t.get("loop_delay", _def_ld)),
-                            "loop_count": str(t.get("loop_count", _def_lc)),
-                            "auto_target": bool(t.get("auto_target", False)),
-                        }
-                        if ttype == "opcode":
-                            base["type"] = "opcode"
-                            base["opcode"] = t.get("opcode", 0)
-                            base["field"] = t.get("field", "text")
-                        else:
-                            base["type"] = "text"
-                        result.append(base)
-                return result
+                # Old flat-list format — migrate
+                return data, []
+            if isinstance(data, dict):
+                return data.get("triggers", []), data.get("discovery_alerts", [])
     except Exception:
         pass
+    return None, []
+
+
+def _load_triggers():
+    raw, _ = _load_triggers_file()
+    if raw is not None:
+        parsed = _parse_trigger_list(raw)
+        if parsed:
+            return parsed
     return [{
         "pattern": "you gain party experience",
         "mode": "once",
@@ -1008,10 +1069,48 @@ def _load_triggers():
     }]
 
 
-def _save_triggers(triggers):
+def _load_discovery_alerts():
+    _, alerts = _load_triggers_file()
+    result = []
+    for a in alerts:
+        if isinstance(a, dict) and "pattern" in a:
+            result.append({
+                "pattern": a["pattern"],
+                "match_npc": bool(a.get("match_npc", True)),
+                "match_pc": bool(a.get("match_pc", False)),
+                "sound_name": a.get("sound_name", "chime:zelda:warning"),
+            })
+    return result
+
+
+def _save_triggers(triggers, discovery_alerts=None):
     try:
+        # Read existing discovery_alerts if not provided
+        if discovery_alerts is None:
+            _, discovery_alerts = _load_triggers_file()
+            if discovery_alerts is None:
+                discovery_alerts = []
         with open(_triggers_path(), "w") as f:
-            f.write(json.dumps(triggers, indent=2))
+            f.write(json.dumps({
+                "triggers": triggers,
+                "discovery_alerts": discovery_alerts,
+            }, indent=2))
+    except Exception:
+        pass
+
+
+def _save_discovery_alerts(discovery_alerts):
+    try:
+        _, _ = _load_triggers_file()
+        # Re-read triggers to preserve them
+        raw, _ = _load_triggers_file()
+        if raw is None:
+            raw = []
+        with open(_triggers_path(), "w") as f:
+            f.write(json.dumps({
+                "triggers": raw,
+                "discovery_alerts": discovery_alerts,
+            }, indent=2))
     except Exception:
         pass
 
@@ -1461,55 +1560,44 @@ COLORS = {
     "gold_dim": "#7a6530",
 }
 
-# Windows system sounds available via winsound.PlaySound(alias, SND_ALIAS)
-WINDOWS_SOUNDS = [
+# Sound choices — chime library sounds
+ALERT_SOUNDS = [
     "NONE",
-    # Classic system sounds
-    "SystemExclamation",
-    "SystemHand",
-    "SystemAsterisk",
-    "SystemNotification",
-    ".Default",
-    # Notification sounds
-    "Notification.Default",
-    "Notification.IM",
-    "Notification.Mail",
-    "Notification.Reminder",
-    # Looping alarms
-    "Notification.Looping.Alarm",
-    "Notification.Looping.Alarm2",
-    "Notification.Looping.Alarm3",
-    "Notification.Looping.Alarm4",
-    "Notification.Looping.Alarm5",
-    "Notification.Looping.Alarm6",
-    "Notification.Looping.Alarm7",
-    "Notification.Looping.Alarm8",
-    "Notification.Looping.Alarm9",
-    "Notification.Looping.Alarm10",
-    # Looping ringtones
-    "Notification.Looping.Call",
-    "Notification.Looping.Call2",
-    "Notification.Looping.Call3",
-    "Notification.Looping.Call4",
-    "Notification.Looping.Call5",
-    "Notification.Looping.Call6",
-    "Notification.Looping.Call7",
-    "Notification.Looping.Call8",
-    "Notification.Looping.Call9",
-    "Notification.Looping.Call10",
-    # Device / misc
-    "DeviceConnect",
-    "DeviceDisconnect",
-    "DeviceFail",
-    "CriticalBatteryAlarm",
-    "WindowsUAC",
+    "chime:big-sur:success",
+    "chime:big-sur:warning",
+    "chime:big-sur:error",
+    "chime:big-sur:info",
+    "chime:chime:success",
+    "chime:chime:warning",
+    "chime:chime:error",
+    "chime:chime:info",
+    "chime:mario:success",
+    "chime:mario:warning",
+    "chime:mario:error",
+    "chime:mario:info",
+    "chime:material:success",
+    "chime:material:warning",
+    "chime:material:error",
+    "chime:material:info",
+    "chime:pokemon:success",
+    "chime:pokemon:warning",
+    "chime:pokemon:error",
+    "chime:pokemon:info",
+    "chime:sonic:success",
+    "chime:sonic:warning",
+    "chime:sonic:error",
+    "chime:sonic:info",
+    "chime:zelda:success",
+    "chime:zelda:warning",
+    "chime:zelda:error",
+    "chime:zelda:info",
 ]
 
 
 class BotApp(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("ChatParser V2.0")
+        self.title("ChatParser V2.6")
         self.configure(bg=COLORS["bg"])
         self.geometry("620x900")
         self.minsize(550, 700)
@@ -1532,6 +1620,11 @@ class BotApp(tk.Tk):
 
         # Triggers
         self._triggers = _load_triggers()
+
+        # Discovery alerts
+        self._discovery_alerts = _load_discovery_alerts()
+        self._disc_alerted_names = set()
+        self._disc_alert_rows = []
 
         # Opcode browser state
         self._trigger_tab = "text"      # "text" or "opcode"
@@ -1650,18 +1743,18 @@ class BotApp(tk.Tk):
         """Create an art-deco bordered section. Returns the inner content frame."""
         # Outer gold border frame
         outer = tk.Frame(parent, bg=COLORS["gold"])
-        pk = {"fill": "both" if expand else "x", "padx": 10, "pady": 4}
+        pk = {"fill": "both" if expand else "x", "padx": 10, "pady": 3}
         if expand:
             pk["expand"] = True
         outer.pack(**pk)
 
         # Inner content area (1px gold border via padding)
-        inner = tk.Frame(outer, bg=COLORS["bg"], padx=10, pady=6)
+        inner = tk.Frame(outer, bg=COLORS["bg"], padx=8, pady=4)
         inner.pack(fill="both", expand=True, padx=1, pady=1)
 
         if title:
             hdr = tk.Frame(inner, bg=COLORS["bg"])
-            hdr.pack(fill="x", pady=(0, 6))
+            hdr.pack(fill="x", pady=(0, 4))
             tk.Label(hdr, text="\u25C6", bg=COLORS["bg"], fg=COLORS["gold"],
                      font=("Consolas", 7)).pack(side="left")
             tk.Label(hdr, text=f" {title} ", bg=COLORS["bg"], fg=COLORS["gold"],
@@ -1705,21 +1798,29 @@ class BotApp(tk.Tk):
         # ══════════════════════════════════════
         ctrl_sec = self._deco_section(self, title="Master Control")
 
-        # ON/OFF toggle
+        # Top row: ON/OFF toggle + status on same line
+        ctrl_top = tk.Frame(ctrl_sec, bg=COLORS["bg"])
+        ctrl_top.pack(fill="x")
+
         self._toggle_btn = tk.Button(
-            ctrl_sec, text="OFF", width=10,
+            ctrl_top, text="OFF", width=6,
             bg=COLORS["red"], fg=COLORS["bg_dark"],
             activebackground=COLORS["red"],
-            font=("Consolas", 14, "bold"),
+            font=("Consolas", 12, "bold"),
             relief="flat", cursor="hand2",
             command=self._toggle_bot)
-        self._toggle_btn.pack(pady=(0, 6))
+        self._toggle_btn.pack(side="left", padx=(0, 6))
 
-        # Bot status line
         self._status_label = tk.Label(
-            ctrl_sec, text="Status: Idle", bg=COLORS["bg"],
-            fg=COLORS["fg_dim"], font=("Consolas", 10), anchor="w")
-        self._status_label.pack(fill="x", pady=(6, 0))
+            ctrl_top, text="Status: Idle", bg=COLORS["bg"],
+            fg=COLORS["fg_dim"], font=("Consolas", 9), anchor="w")
+        self._status_label.pack(side="left", fill="x", expand=True)
+
+        # HP / Mana display row
+        self._stats_display = tk.Label(
+            ctrl_sec, text="", bg=COLORS["bg"],
+            fg=COLORS["fg_dim"], font=("Consolas", 9), anchor="w")
+        self._stats_display.pack(fill="x", pady=(2, 0))
 
         # ══════════════════════════════════════
         # Section 2: Triggers / Opcode Browser
@@ -1920,6 +2021,56 @@ class BotApp(tk.Tk):
         self._discovery_frame = tk.Frame(trig_sec, bg=COLORS["bg"])
         # Not packed yet — shown when tab switches
 
+        # -- Discovery Alerts panel (collapsible) --
+        disc_alert_sec = tk.Frame(self._discovery_frame, bg=COLORS["bg_dark"])
+        disc_alert_sec.pack(fill="x", pady=(4, 2))
+        self._disc_alert_expanded = True
+        # Header: arrow + "Alerts (N)" + entry + Add
+        disc_alert_hdr = tk.Frame(disc_alert_sec, bg=COLORS["bg_dark"])
+        disc_alert_hdr.pack(fill="x", padx=4, pady=(4, 0))
+        self._disc_alert_arrow = tk.Label(
+            disc_alert_hdr, text="\u25BC", bg=COLORS["bg_dark"],
+            fg=COLORS["gold"], font=("Consolas", 8), cursor="hand2")
+        self._disc_alert_arrow.pack(side="left")
+        self._disc_alert_arrow.bind("<Button-1>", lambda _e: self._toggle_disc_alert_panel())
+        self._disc_alert_count_lbl = tk.Label(
+            disc_alert_hdr, text=f"Alerts ({len(self._discovery_alerts)})",
+            bg=COLORS["bg_dark"], fg=COLORS["gold"],
+            font=("Consolas", 9, "bold"), cursor="hand2")
+        self._disc_alert_count_lbl.pack(side="left", padx=(2, 6))
+        self._disc_alert_count_lbl.bind("<Button-1>", lambda _e: self._toggle_disc_alert_panel())
+        self._disc_alert_entry = tk.Entry(
+            disc_alert_hdr, bg=COLORS["bg_light"], fg=COLORS["fg"],
+            font=("Consolas", 9), insertbackground=COLORS["fg"],
+            relief="flat", width=16)
+        self._disc_alert_entry.pack(side="left", fill="x", expand=True, padx=(0, 4))
+        self._disc_alert_entry.bind("<Return>", lambda _e: self._add_discovery_alert())
+        tk.Button(disc_alert_hdr, text="Add", bg=COLORS["teal"],
+                  fg=COLORS["bg_dark"], font=("Consolas", 8, "bold"),
+                  relief="flat", cursor="hand2", width=4,
+                  command=self._add_discovery_alert).pack(side="left")
+        # Scrollable alert body (canvas + inner frame), max 120px tall
+        self._disc_alert_body = tk.Frame(disc_alert_sec, bg=COLORS["bg_dark"],
+            highlightthickness=1, highlightbackground=COLORS["gold_dim"])
+        self._disc_alert_body.pack(fill="x", padx=4, pady=(2, 4))
+        self._disc_alert_canvas = tk.Canvas(
+            self._disc_alert_body, bg=COLORS["bg_dark"],
+            highlightthickness=1, highlightbackground=COLORS["gold_dim"],
+            height=0)
+        self._disc_alert_canvas.pack(side="left", fill="x", expand=True)
+        self._disc_alert_table = tk.Frame(self._disc_alert_canvas, bg=COLORS["bg_dark"])
+        self._disc_alert_canvas_win = self._disc_alert_canvas.create_window(
+            (0, 0), window=self._disc_alert_table, anchor="nw")
+        self._disc_alert_table.bind("<Configure>", self._on_disc_alert_configure)
+        self._disc_alert_canvas.bind("<Configure>",
+            lambda e: self._disc_alert_canvas.itemconfigure(
+                self._disc_alert_canvas_win, width=e.width))
+        self._disc_alert_canvas.bind("<MouseWheel>",
+            lambda e: self._disc_alert_canvas.yview_scroll(int(-1*(e.delta/120)), "units"))
+        # Build existing alert rows
+        for alert in self._discovery_alerts:
+            self._add_disc_alert_row(alert)
+
         # Header row with buttons
         disc_hdr = tk.Frame(self._discovery_frame, bg=COLORS["bg"])
         disc_hdr.pack(fill="x", pady=(4, 2))
@@ -1955,6 +2106,8 @@ class BotApp(tk.Tk):
             state="disabled", height=12)
         npc_list_frame.pack(fill="both", expand=True)
         self._disc_npc_list.tag_configure("npc", foreground=COLORS["fg"])
+        self._disc_npc_list.tag_configure("alert_npc",
+            foreground=COLORS["yellow"], font=("Consolas", 9, "bold"))
 
         # PC column
         pc_col = tk.Frame(disc_cols, bg=COLORS["bg"])
@@ -1968,6 +2121,8 @@ class BotApp(tk.Tk):
             state="disabled", height=12)
         pc_list_frame.pack(fill="both", expand=True)
         self._disc_pc_list.tag_configure("pc", foreground=COLORS["fg"])
+        self._disc_pc_list.tag_configure("alert_pc",
+            foreground=COLORS["yellow"], font=("Consolas", 9, "bold"))
 
         self._disc_version_ui = -1  # track when to re-render
 
@@ -1977,7 +2132,18 @@ class BotApp(tk.Tk):
         # ══════════════════════════════════════
         # Section 3: Combat Log
         # ══════════════════════════════════════
-        log_sec = self._deco_section(self, title="Run Log", expand=True)
+        log_sec = self._deco_section(self, title="Run Log", expand=False)
+        self._log_sec = log_sec
+        self._log_expanded = False
+
+        # Minimize/expand button in the header row
+        hdr = log_sec.winfo_children()[0]  # first child is the header frame
+        self._log_toggle_btn = tk.Button(
+            hdr, text="\u25B6", bg=COLORS["bg"], fg=COLORS["gold"],
+            font=("Consolas", 8, "bold"), relief="flat", cursor="hand2",
+            bd=0, padx=4,
+            command=self._toggle_run_log)
+        self._log_toggle_btn.pack(side="right")
 
         log_container, self._combat_log = self._scrollable_text(
             log_sec,
@@ -1985,7 +2151,8 @@ class BotApp(tk.Tk):
             font=("Consolas", 9), wrap="word", relief="flat",
             border=0, padx=6, pady=4, cursor="arrow",
             state="disabled", height=6)
-        log_container.pack(fill="both", expand=True, pady=(0, 2))
+        # Start minimized — don't pack the log container
+        self._log_container = log_container
 
         self._combat_log.tag_configure("normal", foreground=COLORS["fg"])
         self._combat_log.tag_configure("matched", foreground=COLORS["yellow"],
@@ -2037,7 +2204,7 @@ class BotApp(tk.Tk):
 
         # Sound dropdown
         sound_var = tk.StringVar(value=trig.get("sound_name", "NONE"))
-        sound_menu = tk.OptionMenu(row, sound_var, *WINDOWS_SOUNDS,
+        sound_menu = tk.OptionMenu(row, sound_var, *ALERT_SOUNDS,
                                    command=lambda _val, i=idx, sv=sound_var: self._set_trigger_sound(i, sv))
         _sfx_active = trig.get("sound_name", "NONE") != "NONE"
         sound_menu.configure(
@@ -2066,7 +2233,7 @@ class BotApp(tk.Tk):
             "detail_frame": detail_frame,
             "expanded": False, "built": False,
             "key_pair_entries": [], "delay_entry": None, "count_entry": None,
-            "key_rows_frame": None,
+            "key_rows_frame": None, "delay_row": None, "count_row": None,
         })
         # Bind mousewheel so scrolling works over trigger rows
         if hasattr(self, "_bind_trig_mw"):
@@ -2075,9 +2242,6 @@ class BotApp(tk.Tk):
     def _toggle_trigger_expand(self, idx):
         """Toggle expand/collapse of trigger detail panel."""
         if idx < 0 or idx >= len(self._trigger_rows):
-            return
-        # Sound Only mode — never expand
-        if self._triggers[idx].get("mode", "loop") == "sound":
             return
         info = self._trigger_rows[idx]
         if info["expanded"]:
@@ -2113,6 +2277,26 @@ class BotApp(tk.Tk):
         at_cb.pack(side="left")
         info["auto_target_var"] = at_var
 
+        # Mana gate row — below auto-target
+        mana_row = tk.Frame(keys_container, bg=COLORS["bg_dark"])
+        mana_row.pack(fill="x", padx=4, pady=(2, 2))
+        mg_var = tk.BooleanVar(value=trig.get("mana_gate", False))
+        mg_cb = tk.Checkbutton(
+            mana_row, text="Skip if mana below",
+            variable=mg_var, bg=COLORS["bg_dark"], fg=COLORS["fg"],
+            selectcolor=COLORS["bg_light"], activebackground=COLORS["bg_dark"],
+            activeforeground=COLORS["fg"], font=("Consolas", 8),
+            command=lambda i=idx, v=mg_var: self._toggle_mana_gate(i, v))
+        mg_cb.pack(side="left")
+        mg_entry = tk.Entry(mana_row, bg=COLORS["bg_light"], fg=COLORS["fg"],
+                            insertbackground=COLORS["fg"],
+                            font=("Consolas", 10), width=6, relief="flat", border=2)
+        mg_entry.insert(0, str(trig.get("mana_threshold", 100)))
+        mg_entry.pack(side="left", padx=(4, 0))
+        mg_entry.bind("<FocusOut>", lambda _e, i=idx: self._sync_mana_threshold(i))
+        info["mana_gate_var"] = mg_var
+        info["mana_gate_entry"] = mg_entry
+
         # Header row
         hdr = tk.Frame(keys_container, bg=COLORS["bg_dark"])
         hdr.pack(fill="x", pady=(4, 0), padx=4)
@@ -2146,9 +2330,8 @@ class BotApp(tk.Tk):
                   width=3, command=lambda i=idx, ke=add_key_e, we=add_wait_e: self._trig_add_key_pair(i, ke, we)
                   ).pack(side="left")
 
-        # Loop Delay row
+        # Loop Delay row — only shown in Loop mode
         delay_row = tk.Frame(keys_container, bg=COLORS["bg_dark"])
-        delay_row.pack(fill="x", padx=4, pady=(4, 0))
         tk.Label(delay_row, text="Loop Delay ms", bg=COLORS["bg_dark"],
                  fg=COLORS["fg_dim"], font=("Consolas", 8)).pack(side="left", padx=(0, 2))
         delay_e = tk.Entry(delay_row, bg=COLORS["bg_light"], fg=COLORS["fg"],
@@ -2158,9 +2341,8 @@ class BotApp(tk.Tk):
         delay_e.pack(side="left")
         delay_e.bind("<FocusOut>", lambda _e, i=idx: self._sync_trigger_settings(i))
 
-        # Loop Count row
+        # Loop Count row — only shown in Loop mode
         count_row = tk.Frame(keys_container, bg=COLORS["bg_dark"])
-        count_row.pack(fill="x", padx=4, pady=(2, 4))
         tk.Label(count_row, text="Loops", bg=COLORS["bg_dark"],
                  fg=COLORS["fg_dim"], font=("Consolas", 8)).pack(side="left", padx=(0, 2))
         count_e = tk.Entry(count_row, bg=COLORS["bg_light"], fg=COLORS["fg"],
@@ -2172,10 +2354,21 @@ class BotApp(tk.Tk):
 
         info["delay_entry"] = delay_e
         info["count_entry"] = count_e
+        info["delay_row"] = delay_row
+        info["count_row"] = count_row
 
-        # Pattern edit row — at the bottom, unobtrusive
-        pat_row = tk.Frame(keys_container, bg=COLORS["bg_dark"])
-        pat_row.pack(fill="x", padx=4, pady=(4, 4))
+        # Show delay/count only in loop mode
+        if trig.get("mode", "loop") == "loop":
+            delay_row.pack(fill="x", padx=4, pady=(4, 0))
+            count_row.pack(fill="x", padx=4, pady=(2, 4))
+
+        # Show keys container only if mode is not "sound"
+        if trig.get("mode", "loop") != "sound":
+            keys_container.pack(fill="x")
+
+        # Pattern edit row — always visible (outside keys_container)
+        pat_row = tk.Frame(df, bg=COLORS["bg_dark"])
+        pat_row.pack(fill="x", padx=4, pady=(4, 2))
         tk.Label(pat_row, text="Pattern", bg=COLORS["bg_dark"],
                  fg=COLORS["fg_dim"], font=("Consolas", 8)).pack(side="left", padx=(0, 2))
         pat_e = tk.Entry(pat_row, bg=COLORS["bg_light"], fg=COLORS["fg"],
@@ -2186,10 +2379,6 @@ class BotApp(tk.Tk):
         pat_e.bind("<KeyRelease>", lambda _e, i=idx: self._sync_trigger_pattern(i))
         pat_e.bind("<FocusOut>", lambda _e, i=idx: self._sync_trigger_pattern(i))
         info["pattern_entry"] = pat_e
-
-        # Show container only if mode is not "sound"
-        if trig.get("mode", "loop") != "sound":
-            keys_container.pack(fill="x")
 
         # Bind mousewheel on new detail children
         if hasattr(self, "_bind_trig_mw"):
@@ -2366,20 +2555,25 @@ class BotApp(tk.Tk):
         mode_colors = {"loop": COLORS["teal"], "once": COLORS["peach"], "sound": COLORS["yellow"]}
         btn = self._trigger_rows[idx]["mode_btn"]
         btn.configure(text=mode_labels.get(new_mode, "Loop"), bg=mode_colors.get(new_mode, COLORS["teal"]))
-        # Sound mode — collapse the entire detail panel and hide keys container
+        # Hide/show keys container based on mode (sound has no keys)
         info = self._trigger_rows[idx]
+        kc = info.get("keys_container")
         if new_mode == "sound":
-            if info["expanded"]:
-                info["detail_frame"].pack_forget()
-                info["arrow_lbl"].configure(text="\u25B6")
-                info["expanded"] = False
-            kc = info.get("keys_container")
             if kc:
                 kc.pack_forget()
         else:
-            kc = info.get("keys_container")
             if kc:
                 kc.pack(fill="x")
+        # Show loop delay/count only in loop mode
+        dr = info.get("delay_row")
+        cr = info.get("count_row")
+        if dr and cr:
+            if new_mode == "loop":
+                dr.pack(fill="x", padx=4, pady=(4, 0))
+                cr.pack(fill="x", padx=4, pady=(2, 4))
+            else:
+                dr.pack_forget()
+                cr.pack_forget()
         # Reset active trigger if this one is currently running
         if (self._bot_triggered and
                 self._active_trigger_idx == idx):
@@ -2766,15 +2960,42 @@ class BotApp(tk.Tk):
             return
         self._disc_version_ui = version
         self._disc_count_lbl.configure(text=f"NPCs: {len(npcs)}  |  PCs: {len(pcs)}")
+        # Check new names against discovery alerts
+        sounds_to_play = []
+        for name in npcs:
+            if name not in self._disc_alerted_names:
+                for alert in self._discovery_alerts:
+                    if not alert.get("match_npc", True):
+                        continue
+                    if alert["pattern"].lower() in name.lower():
+                        self._disc_alerted_names.add(name)
+                        sounds_to_play.append(alert.get("sound_name", "NONE"))
+                        break
+        for name in pcs:
+            if name not in self._disc_alerted_names:
+                for alert in self._discovery_alerts:
+                    if not alert.get("match_pc", False):
+                        continue
+                    if alert["pattern"].lower() in name.lower():
+                        self._disc_alerted_names.add(name)
+                        sounds_to_play.append(alert.get("sound_name", "NONE"))
+                        break
+        # Play first matching sound (avoid spamming)
+        if sounds_to_play:
+            self._play_sound(sounds_to_play[0])
+        # Rebuild NPC list with alert highlighting
         self._disc_npc_list.configure(state="normal")
         self._disc_npc_list.delete("1.0", "end")
         for name in npcs:
-            self._disc_npc_list.insert("end", name + "\n", "npc")
+            tag = "alert_npc" if name in self._disc_alerted_names else "npc"
+            self._disc_npc_list.insert("end", name + "\n", tag)
         self._disc_npc_list.configure(state="disabled")
+        # Rebuild PC list with alert highlighting
         self._disc_pc_list.configure(state="normal")
         self._disc_pc_list.delete("1.0", "end")
         for name in pcs:
-            self._disc_pc_list.insert("end", name + "\n", "pc")
+            tag = "alert_pc" if name in self._disc_alerted_names else "pc"
+            self._disc_pc_list.insert("end", name + "\n", tag)
         self._disc_pc_list.configure(state="disabled")
 
     def _copy_discovery(self):
@@ -2798,6 +3019,171 @@ class BotApp(tk.Tk):
             handler._npc_names.clear()
             handler._pc_names.clear()
             handler._disc_version += 1
+        self._disc_alerted_names.clear()
+        self._render_discovery()
+
+    # ----- Discovery alerts -----
+
+    def _add_discovery_alert(self):
+        """Add a new discovery alert from the entry field."""
+        pattern = self._disc_alert_entry.get().strip()
+        if not pattern:
+            return
+        alert = {
+            "pattern": pattern,
+            "match_npc": True,
+            "match_pc": False,
+            "sound_name": "chime:zelda:warning",
+        }
+        self._discovery_alerts.append(alert)
+        self._add_disc_alert_row(alert)
+        _save_discovery_alerts(self._discovery_alerts)
+        self._update_disc_alert_count()
+        self._disc_alert_entry.delete(0, "end")
+        # Force re-render to apply new alert highlights
+        self._disc_version_ui = -1
+        self._render_discovery()
+
+    def _add_disc_alert_row(self, alert):
+        """Build one compact alert row: [pattern] [NPC] [PC] [sound] [X]."""
+        idx = len(self._disc_alert_rows)
+        row = tk.Frame(self._disc_alert_table, bg=COLORS["bg_light"])
+        row.pack(fill="x", pady=(1, 0))
+        # Bind mousewheel on row and children for scrolling
+        mw_cb = lambda e: self._disc_alert_canvas.yview_scroll(int(-1*(e.delta/120)), "units")
+        row.bind("<MouseWheel>", mw_cb)
+
+        pat_lbl = tk.Label(row, text=alert["pattern"], bg=COLORS["bg_light"],
+                           fg=COLORS["fg"], font=("Consolas", 8),
+                           anchor="w")
+        pat_lbl.pack(side="left", fill="x", expand=True, padx=(4, 2))
+        pat_lbl.bind("<MouseWheel>", mw_cb)
+
+        # NPC toggle
+        npc_on = alert.get("match_npc", True)
+        npc_btn = tk.Button(
+            row, text="NPC", width=3,
+            bg=COLORS["teal"] if npc_on else COLORS["bg_dark"],
+            fg=COLORS["bg_dark"] if npc_on else COLORS["fg_dim"],
+            font=("Consolas", 7, "bold"), relief="flat", cursor="hand2",
+            command=lambda i=idx: self._toggle_disc_alert_npc(i))
+        npc_btn.pack(side="left", padx=1)
+
+        # PC toggle
+        pc_on = alert.get("match_pc", False)
+        pc_btn = tk.Button(
+            row, text="PC", width=2,
+            bg=COLORS["teal"] if pc_on else COLORS["bg_dark"],
+            fg=COLORS["bg_dark"] if pc_on else COLORS["fg_dim"],
+            font=("Consolas", 7, "bold"), relief="flat", cursor="hand2",
+            command=lambda i=idx: self._toggle_disc_alert_pc(i))
+        pc_btn.pack(side="left", padx=1)
+
+        # Sound dropdown
+        sound_var = tk.StringVar(value=alert.get("sound_name", "NONE"))
+        sound_menu = tk.OptionMenu(row, sound_var, *ALERT_SOUNDS,
+                                   command=lambda _val, i=idx, sv=sound_var: self._set_disc_alert_sound(i, sv))
+        _sfx_active = alert.get("sound_name", "NONE") != "NONE"
+        sound_menu.configure(
+            bg=COLORS["mauve"] if _sfx_active else COLORS["bg_dark"],
+            fg=COLORS["bg_dark"] if _sfx_active else COLORS["fg_dim"],
+            font=("Consolas", 7), relief="flat",
+            highlightthickness=0, width=12, cursor="hand2")
+        sound_menu["menu"].configure(bg=COLORS["bg_light"], fg=COLORS["fg"],
+                                     font=("Consolas", 8))
+        sound_menu.pack(side="left", padx=1)
+
+        # Red X delete
+        tk.Button(row, text="X",
+                  bg=COLORS["red"], fg=COLORS["bg_dark"],
+                  font=("Consolas", 7, "bold"),
+                  relief="flat", cursor="hand2", width=2,
+                  command=lambda i=idx: self._remove_disc_alert(i)).pack(side="left", padx=(1, 2))
+
+        self._disc_alert_rows.append({
+            "frame": row, "npc_btn": npc_btn, "pc_btn": pc_btn,
+            "sound_var": sound_var, "sound_menu": sound_menu,
+        })
+
+    def _on_disc_alert_configure(self, _event=None):
+        """Resize the alert canvas scroll region, cap height at 120px."""
+        self._disc_alert_canvas.configure(scrollregion=self._disc_alert_canvas.bbox("all"))
+        content_h = self._disc_alert_table.winfo_reqheight()
+        capped = min(content_h, 120)
+        self._disc_alert_canvas.configure(height=capped)
+        if content_h > 120:
+            self._disc_alert_canvas.configure(yscrollcommand=None)  # scrollbar via mousewheel only
+
+    def _toggle_disc_alert_panel(self):
+        """Collapse / expand the alert rows body."""
+        self._disc_alert_expanded = not self._disc_alert_expanded
+        if self._disc_alert_expanded:
+            self._disc_alert_arrow.configure(text="\u25BC")
+            self._disc_alert_body.pack(fill="x", padx=4, pady=(2, 4))
+        else:
+            self._disc_alert_arrow.configure(text="\u25B6")
+            self._disc_alert_body.pack_forget()
+
+    def _update_disc_alert_count(self):
+        n = len(self._discovery_alerts)
+        self._disc_alert_count_lbl.configure(text=f"Alerts ({n})")
+
+    def _toggle_disc_alert_npc(self, idx):
+        if idx < 0 or idx >= len(self._discovery_alerts):
+            return
+        alert = self._discovery_alerts[idx]
+        alert["match_npc"] = not alert["match_npc"]
+        btn = self._disc_alert_rows[idx]["npc_btn"]
+        if alert["match_npc"]:
+            btn.configure(bg=COLORS["teal"], fg=COLORS["bg_dark"])
+        else:
+            btn.configure(bg=COLORS["bg_dark"], fg=COLORS["fg_dim"])
+        _save_discovery_alerts(self._discovery_alerts)
+        self._disc_version_ui = -1
+        self._render_discovery()
+
+    def _toggle_disc_alert_pc(self, idx):
+        if idx < 0 or idx >= len(self._discovery_alerts):
+            return
+        alert = self._discovery_alerts[idx]
+        alert["match_pc"] = not alert["match_pc"]
+        btn = self._disc_alert_rows[idx]["pc_btn"]
+        if alert["match_pc"]:
+            btn.configure(bg=COLORS["teal"], fg=COLORS["bg_dark"])
+        else:
+            btn.configure(bg=COLORS["bg_dark"], fg=COLORS["fg_dim"])
+        _save_discovery_alerts(self._discovery_alerts)
+        self._disc_version_ui = -1
+        self._render_discovery()
+
+    def _set_disc_alert_sound(self, idx, sound_var):
+        if idx < 0 or idx >= len(self._discovery_alerts):
+            return
+        name = sound_var.get()
+        self._discovery_alerts[idx]["sound_name"] = name
+        _save_discovery_alerts(self._discovery_alerts)
+        menu = self._disc_alert_rows[idx]["sound_menu"]
+        if name != "NONE":
+            menu.configure(bg=COLORS["mauve"], fg=COLORS["bg_dark"])
+            self._play_sound(name)
+        else:
+            menu.configure(bg=COLORS["bg_dark"], fg=COLORS["fg_dim"])
+
+    def _remove_disc_alert(self, idx):
+        if idx < 0 or idx >= len(self._discovery_alerts):
+            return
+        self._discovery_alerts.pop(idx)
+        _save_discovery_alerts(self._discovery_alerts)
+        # Rebuild all alert rows
+        for row_info in self._disc_alert_rows:
+            row_info["frame"].destroy()
+        self._disc_alert_rows.clear()
+        for alert in self._discovery_alerts:
+            self._add_disc_alert_row(alert)
+        self._update_disc_alert_count()
+        # Force re-render to update highlights
+        self._disc_alerted_names.clear()
+        self._disc_version_ui = -1
         self._render_discovery()
 
     # ----- Opcode trigger matching -----
@@ -2833,6 +3219,20 @@ class BotApp(tk.Tk):
             self.attributes("-alpha", 0.75)
             self._opacity_btn.configure(fg=COLORS["gold_dim"])
             self._opacity_border.configure(bg=COLORS["gold_dim"])
+
+    def _toggle_run_log(self):
+        """Toggle the run log panel between expanded and minimized."""
+        if self._log_expanded:
+            self._log_container.pack_forget()
+            self._log_toggle_btn.configure(text="\u25B6")
+            # Collapse outer to stop expanding and shrink to header only
+            self._log_sec._deco_outer.pack_configure(expand=False, fill="x")
+            self._log_expanded = False
+        else:
+            self._log_container.pack(fill="both", expand=True, pady=(0, 2))
+            self._log_toggle_btn.configure(text="\u25BC")
+            self._log_sec._deco_outer.pack_configure(expand=True, fill="both")
+            self._log_expanded = True
 
     def _toggle_bot(self):
         if self._bot_running:
@@ -2875,13 +3275,19 @@ class BotApp(tk.Tk):
         self._log("Bot OFF")
 
     def _play_sound(self, sound_name="SystemExclamation"):
-        """Play a Windows system sound on the main thread."""
+        """Play a system sound or chime sound on the main thread."""
         if not sound_name or sound_name == "NONE":
             return
         def _do():
             try:
-                winsound.PlaySound(sound_name,
-                                   winsound.SND_ALIAS | winsound.SND_ASYNC)
+                if sound_name.startswith("chime:") and _chime_mod:
+                    parts = sound_name.split(":")
+                    if len(parts) == 3:
+                        _chime_mod.theme(parts[1])
+                        getattr(_chime_mod, parts[2], _chime_mod.success)()
+                else:
+                    winsound.PlaySound(sound_name,
+                                       winsound.SND_ALIAS | winsound.SND_ASYNC)
             except Exception:
                 pass
         if threading.current_thread() is threading.main_thread():
@@ -2973,6 +3379,54 @@ class BotApp(tk.Tk):
 
         return pairs, delay_ms, max_loops, auto_target
 
+    def _mana_gate_blocked(self, idx=None):
+        """Return True if trigger idx has mana gate enabled and current mana is below threshold."""
+        if idx is None:
+            return False
+        trig = self._triggers[idx] if 0 <= idx < len(self._triggers) else {}
+        info = self._trigger_rows[idx] if 0 <= idx < len(self._trigger_rows) else {}
+        # Read from live widgets if expanded, else from trigger dict
+        enabled = False
+        threshold = 100
+        if info and info.get("expanded") and info.get("mana_gate_var"):
+            try:
+                enabled = info["mana_gate_var"].get()
+            except tk.TclError:
+                enabled = trig.get("mana_gate", False)
+            try:
+                threshold = int(info["mana_gate_entry"].get())
+            except (ValueError, tk.TclError):
+                threshold = trig.get("mana_threshold", 100)
+        else:
+            enabled = trig.get("mana_gate", False)
+            threshold = trig.get("mana_threshold", 100)
+        if not enabled:
+            return False
+        mp, _ = self._backend.message_handler.get_local_mana()
+        return mp < threshold
+
+    def _toggle_mana_gate(self, idx, var):
+        """Toggle mana_gate for trigger idx and save."""
+        if idx < 0 or idx >= len(self._triggers):
+            return
+        self._triggers[idx]["mana_gate"] = var.get()
+        _save_triggers(self._triggers)
+
+    def _sync_mana_threshold(self, idx):
+        """Sync mana threshold entry back to trigger dict and save."""
+        if idx >= len(self._triggers) or idx >= len(self._trigger_rows):
+            return
+        info = self._trigger_rows[idx]
+        entry = info.get("mana_gate_entry")
+        if not entry:
+            return
+        try:
+            val = int(entry.get())
+        except (ValueError, tk.TclError):
+            return
+        self._triggers[idx]["mana_threshold"] = val
+        _save_triggers(self._triggers)
+
     def _activate_next_pending(self):
         """Pop the next pending trigger (if any) and activate it.
         Returns True if a pending trigger was activated."""
@@ -2980,6 +3434,9 @@ class BotApp(tk.Tk):
             mode, sound_name, pattern, idx, target_name = self._pending_triggers.pop(0)
             # Skip if on cooldown
             if self._trigger_on_cooldown(idx):
+                continue
+            # Mana gate: skip non-sound triggers if low mana
+            if mode != "sound" and self._mana_gate_blocked(idx):
                 continue
             self._bot_triggered = True
             self._bot_mode = mode
@@ -3018,6 +3475,13 @@ class BotApp(tk.Tk):
                 self._play_sound(sound_name)
                 self._bot_triggered = False
                 self._bot_status = "Waiting for trigger..."
+                continue
+
+            # Mana gate: abort if mana dropped below threshold mid-loop
+            if self._mana_gate_blocked(tidx):
+                self._bot_triggered = False
+                self._bot_status = "Low mana — skipped"
+                self._log("Mana gate: below threshold, skipping")
                 continue
 
             # Once / Loop modes — read per-trigger settings
@@ -3074,6 +3538,19 @@ class BotApp(tk.Tk):
         """200ms poll — drain messages, display, check triggers."""
         # Update status label
         self._status_label.configure(text=f"Status: {self._bot_status}")
+
+        # Update HP / Mana display
+        mh = self._backend.message_handler
+        hp, max_hp = mh.get_local_hp()
+        mp, max_mp = mh.get_local_mana()
+        if max_hp > 0 or max_mp > 0:
+            hp_str = f"HP: {hp}/{max_hp}" if max_hp > 0 else "HP: --"
+            mp_str = f"Mana: {mp}/{max_mp}" if max_mp > 0 else "Mana: --"
+            self._stats_display.configure(text=f"{hp_str}  {mp_str}")
+        elif mh._local_player_eid is not None:
+            self._stats_display.configure(text="HP: --  Mana: --")
+        else:
+            self._stats_display.configure(text="")
 
         # Drain text messages from handler (check text triggers)
         messages = self._backend.message_handler.get_messages()
@@ -3158,6 +3635,69 @@ def _is_admin():
         return False
 
 
+def _check_for_update():
+    """Auto-update frozen exe by comparing SHA-256 hash with server copy."""
+    if not getattr(sys, 'frozen', False):
+        return
+    new_path = None
+    try:
+        exe_path = sys.executable
+        exe_dir = os.path.dirname(exe_path)
+        old_path = os.path.join(exe_dir, "ChatParser.exe.old")
+        new_path = os.path.join(exe_dir, "ChatParser.exe.new")
+
+        # Cleanup leftover files from previous update
+        if os.path.exists(old_path):
+            try:
+                os.remove(old_path)
+            except Exception:
+                pass
+        if os.path.exists(new_path):
+            try:
+                os.remove(new_path)
+            except Exception:
+                pass
+
+        # SSL context — skip cert verification (PyInstaller bundles lack CA certs)
+        ctx = ssl._create_unverified_context()
+
+        # Download remote exe (custom UA — server 403s default Python-urllib agent)
+        url = "https://zekparser.com/ChatParser.exe"
+        req = urllib.request.Request(url, headers={
+            "User-Agent": "ChatParser AutoUpdater"})
+        with urllib.request.urlopen(req, timeout=30, context=ctx) as resp:
+            remote_data = resp.read()
+
+        if not remote_data:
+            return
+
+        # Hash comparison — detects any change regardless of file size
+        local_hash = hashlib.sha256(open(exe_path, "rb").read()).digest()
+        remote_hash = hashlib.sha256(remote_data).digest()
+        if local_hash == remote_hash:
+            return
+
+        # Write new exe
+        with open(new_path, "wb") as f:
+            f.write(remote_data)
+
+        # Swap: running exe → .old, downloaded → exe name
+        os.rename(exe_path, old_path)
+        os.rename(new_path, os.path.join(exe_dir, "ChatParser.exe"))
+
+        # Restart with new exe
+        subprocess.Popen([os.path.join(exe_dir, "ChatParser.exe")])
+        sys.exit(0)
+
+    except Exception:
+        # Clean up partial download on any failure
+        try:
+            if new_path and os.path.exists(new_path):
+                os.remove(new_path)
+        except Exception:
+            pass
+
+
 def main():
     if not _is_admin():
         if getattr(sys, 'frozen', False):
@@ -3168,6 +3708,8 @@ def main():
         else:
             print("ERROR: Run as Administrator (raw socket capture requires elevation)")
         sys.exit(1)
+
+    _check_for_update()
 
     app = BotApp()
     app.mainloop()
