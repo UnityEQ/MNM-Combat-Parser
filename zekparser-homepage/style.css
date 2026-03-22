@@ -1097,9 +1097,9 @@ section + section::before {
     }
 }
 
-/* ── ChatParser Page ─────────────────────────────── */
+/* ── DadQuest Page ──────────────────────────────── */
 
-.cp-badge {
+.dq-badge {
     background: transparent;
     color: var(--gold-light);
     border-color: var(--gold);
@@ -1108,18 +1108,18 @@ section + section::before {
     text-transform: uppercase;
     font-size: 0.72rem;
 }
-.cp-badge::before,
-.cp-badge::after {
+.dq-badge::before,
+.dq-badge::after {
     color: var(--gold);
 }
 
-.cp-section {
+.dq-section {
     padding: 2rem 2rem 3rem;
     max-width: 1000px;
     margin: 0 auto;
 }
 
-.cp-section h2 {
+.dq-section h2 {
     text-align: center;
     font-family: var(--font-display);
     font-size: 2rem;
@@ -1129,7 +1129,7 @@ section + section::before {
     letter-spacing: 0.05em;
 }
 
-.cp-section .section-sub {
+.dq-section .section-sub {
     text-align: center;
     font-family: var(--font-elegant);
     color: var(--silver);
@@ -1140,13 +1140,13 @@ section + section::before {
     margin-right: auto;
 }
 
-.cp-explainer {
+.dq-explainer {
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
 }
 
-.cp-explainer p {
+.dq-explainer p {
     font-family: var(--font-elegant);
     font-size: 1.25rem;
     color: var(--silver);
@@ -1154,7 +1154,7 @@ section + section::before {
     margin-bottom: 1rem;
 }
 
-.cp-explainer code {
+.dq-explainer code {
     background: var(--black-elevated);
     color: var(--gold-light);
     padding: 0.2rem 0.5rem;
@@ -1165,7 +1165,7 @@ section + section::before {
 }
 
 /* Trigger demo table */
-.cp-trigger-demo {
+.dq-trigger-demo {
     max-width: 520px;
     margin: 2rem auto 0;
     border: 1px solid var(--border-gold);
@@ -1174,7 +1174,7 @@ section + section::before {
     background: var(--black-card);
 }
 
-.cp-trigger-header {
+.dq-trigger-header {
     display: grid;
     grid-template-columns: 1fr 60px 50px 36px;
     gap: 0;
@@ -1189,7 +1189,7 @@ section + section::before {
     text-transform: uppercase;
 }
 
-.cp-trigger-row {
+.dq-trigger-row {
     display: grid;
     grid-template-columns: 1fr 60px 50px 36px;
     gap: 0;
@@ -1200,23 +1200,23 @@ section + section::before {
     font-size: 0.85rem;
     color: var(--silver-light);
 }
-.cp-trigger-row:last-child {
+.dq-trigger-row:last-child {
     border-bottom: none;
 }
 
-.cp-trigger-col-pattern {
+.dq-trigger-col-pattern {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.cp-trigger-col-mode,
-.cp-trigger-col-sfx,
-.cp-trigger-col-x {
+.dq-trigger-col-mode,
+.dq-trigger-col-sfx,
+.dq-trigger-col-x {
     text-align: center;
 }
 
-.cp-mode-loop {
+.dq-mode-loop {
     display: inline-block;
     background: #94e2d5;
     color: var(--black);
@@ -1228,7 +1228,7 @@ section + section::before {
     letter-spacing: 0.05em;
 }
 
-.cp-mode-once {
+.dq-mode-once {
     display: inline-block;
     background: #fab387;
     color: var(--black);
@@ -1240,16 +1240,16 @@ section + section::before {
     letter-spacing: 0.05em;
 }
 
-.cp-sfx-on {
+.dq-sfx-on {
     font-size: 0.9rem;
 }
 
-.cp-sfx-off {
+.dq-sfx-off {
     font-size: 0.9rem;
     opacity: 0.4;
 }
 
-.cp-x-btn {
+.dq-x-btn {
     display: inline-block;
     background: #f38ba8;
     color: var(--black);
@@ -1260,35 +1260,35 @@ section + section::before {
     border-radius: 2px;
 }
 
-.cp-page .feature-card p {
+.dq-page .feature-card p {
     font-size: 1.05rem;
 }
 
-.cp-page .step-content p {
+.dq-page .step-content p {
     font-size: 1.05rem;
 }
 
-.cp-page .req-item {
+.dq-page .req-item {
     font-size: 1.02rem;
 }
 
-.cp-page .how-it-works .section-sub {
+.dq-page .how-it-works .section-sub {
     font-size: 1.3rem;
 }
 
-.cp-page .features .section-sub {
+.dq-page .features .section-sub {
     font-size: 1.3rem;
 }
 
-.cp-page .how-it-works {
+.dq-page .how-it-works {
     max-width: 900px;
 }
 
-.cp-page .cta-box {
+.dq-page .cta-box {
     max-width: 640px;
 }
 
-.cp-page .req-item code {
+.dq-page .req-item code {
     background: var(--black-elevated);
     color: var(--gold-light);
     padding: 0.15rem 0.4rem;
@@ -1299,13 +1299,13 @@ section + section::before {
 }
 
 @media (max-width: 700px) {
-    .cp-section h2 {
+    .dq-section h2 {
         font-size: 1.5rem;
     }
-    .cp-section {
+    .dq-section {
         padding: 1.5rem 1.25rem 2rem;
     }
-    .cp-trigger-demo {
+    .dq-trigger-demo {
         max-width: 100%;
     }
 }

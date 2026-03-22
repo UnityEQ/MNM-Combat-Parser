@@ -1,0 +1,37 @@
+{
+  "triggers": [
+    {
+      "type": "opcode",
+      "opcode": 64,
+      "field": "text",
+      "pattern": "Wonton crushes",
+      "mode": "once",
+      "sound_name": "NONE",
+      "key_pairs": [
+        {
+          "key": "4",
+          "wait": "1"
+        },
+        {
+          "key": "2",
+          "wait": "0"
+        },
+        {
+          "key": "5",
+          "wait": "1"
+        },
+        {
+          "key": "3",
+          "wait": "4"
+        },
+        {
+          "key": "x",
+          "wait": "1"
+        }
+      ],
+      "loop_delay": "5000",
+      "loop_count": "3"
+    }
+  ],
+  "discovery_alerts": []
+}

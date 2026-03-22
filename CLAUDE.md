@@ -24,13 +24,13 @@ pip install chime
 # Syntax check after changes
 python -c "import core.combat; import core.npc_database; import core.parser"
 python -c "import parser.parser"
-python -c "import chatparser.bot"
+python -c "import dadquest.bot"
 
 # Build ZekParser exe (output: dist/ZekParser.exe)
 pyinstaller --onefile --noconsole --name ZekParser --uac-admin --version-file version_info.py --collect-all pycryptodome "parser/parser.py"
 
-# Build ChatParser exe (output: dist/ChatParser.exe)
-pyinstaller --clean ChatParser.spec
+# Build DadQuest exe (output: dist/DadQuest.exe)
+pyinstaller --clean DadQuest.spec
 ```
 
 No test framework exists. Verify changes with `python -c` imports and live capture.
@@ -39,7 +39,7 @@ No test framework exists. Verify changes with `python -c` imports and live captu
 
 1. **`mnm.py`** — Headless CLI tool. Captures packets, decrypts, logs combat events to console + rotating log files in `logs/`. Records NPC spawns to `data/npc_database.csv`.
 2. **`parser/parser.py`** — Standalone tkinter GUI named **ZekParser** (window title: `"ZekParser {APP_VERSION}"`). Fully self-contained (zero imports from `core/`). Duplicates the entire capture→decrypt→parse pipeline inline. Shows real-time combat feed + damage meter with DPS tracking. Debug logs go to `parser/logs/`. `APP_VERSION` constant (e.g. `"V1.16"`) at top of file — bump for each exe release. Keep in sync with `version_info.py` (`filevers`/`prodvers`/`FileVersion`/`ProductVersion`) and `zekparser-homepage/index.html`.
-3. **`chatparser/bot.py`** — Standalone tkinter GUI named **ChatParser** (window title: `"ChatParser V{version}"`). Fully self-contained (zero imports from `core/` or `parser/`). Duplicates the capture→decrypt→parse pipeline. Provides text trigger matching with keyboard automation, opcode browser, entity discovery with alerts, and chime sound library. Version in window title (e.g. `"ChatParser V2.6"`) — keep in sync with `chatparser/version_info.py` and `zekparser-homepage/chatparser.html`.
+3. **`dadquest/bot.py`** — Standalone tkinter GUI named **DadQuest** (window title: `"DadQuest V{version}"`). Fully self-contained (zero imports from `core/` or `parser/`). Duplicates the capture→decrypt→parse pipeline. Provides text trigger matching with keyboard automation, opcode browser, entity discovery with alerts, and chime sound library. Version in window title (e.g. `"DadQuest V2.6"`) — keep in sync with `dadquest/version_info.py` and `zekparser-homepage/dadquest.html`.
 
 All three require Windows Administrator privileges for raw socket capture (`SIO_RCVALL`).
 
@@ -360,7 +360,7 @@ PyInstaller single-file build with `--noconsole` (no console window), `--uac-adm
 
 The exe uses `--noconsole` so `print()`/`input()` do nothing. Crashes show a native Windows `MessageBoxW` with the traceback, and write `crash.log` next to the exe (via `_crash_log_dir()` which uses `os.path.dirname(sys.executable)` for frozen builds, not `__file__` which points to the PyInstaller temp dir). The admin check also uses a message box instead of printing.
 
-## ChatParser (chatparser/bot.py)
+## DadQuest (dadquest/bot.py)
 
 Standalone tkinter GUI for chat trigger matching, keyboard automation, opcode inspection, and entity discovery. Fully self-contained — zero imports from `core/` or `parser/`. Duplicates the capture→decrypt→parse pipeline inline, same as `parser/parser.py`.
 
@@ -372,7 +372,7 @@ Standalone tkinter GUI for chat trigger matching, keyboard automation, opcode in
 
 ### Trigger System
 
-Triggers are user-defined pattern matchers stored in `chatparser/triggers.json`. The file uses a dict format: `{"triggers": [...], "discovery_alerts": [...]}`. Backward compatible — if file contains a flat list (old format), it's treated as `{"triggers": list, "discovery_alerts": []}`. Each trigger has:
+Triggers are user-defined pattern matchers stored in `dadquest/triggers.json`. The file uses a dict format: `{"triggers": [...], "discovery_alerts": [...]}`. Backward compatible — if file contains a flat list (old format), it's treated as `{"triggers": list, "discovery_alerts": []}`. Each trigger has:
 
 - **Pattern**: Case-insensitive substring match against combat/chat text
 - **Mode**: `"loop"` (repeat key presses), `"once"` (single key press cycle), `"sound"` (audio alert only)
@@ -403,20 +403,20 @@ Parses a subset of opcodes for trigger matching and display: SpawnEntity (0x0020
 
 When bot is ON and a trigger fires, a background thread executes key presses via `SendInput` (Windows API). Key pairs are processed sequentially with configurable waits. Loop mode repeats the full cycle `loop_count` times with `loop_delay` between cycles.
 
-### Version Management (ChatParser)
+### Version Management (DadQuest)
 
-- `chatparser/bot.py` line with `self.title("ChatParser V{version}")` — window title
-- `chatparser/version_info.py` — exe file metadata (`filevers`/`prodvers`/`FileVersion`/`ProductVersion`)
-- `zekparser-homepage/chatparser.html` — download page (`softwareVersion` schema + CTA button)
+- `dadquest/bot.py` line with `self.title("DadQuest V{version}")` — window title
+- `dadquest/version_info.py` — exe file metadata (`filevers`/`prodvers`/`FileVersion`/`ProductVersion`)
+- `zekparser-homepage/dadquest.html` — download page (`softwareVersion` schema + CTA button)
 - **All three must be kept in sync** when bumping versions
 
-### Build (ChatParser.exe)
+### Build (DadQuest.exe)
 
-Uses `ChatParser.spec` at project root: `pyinstaller --clean ChatParser.spec`. Output: `dist/ChatParser.exe`. The spec references `chatparser/version_info.py` for embedded version metadata, `chatparser/bot.py` as entry point, `--noconsole`, `--uac-admin`, `upx=True`. The spec also bundles chime's `themes/` WAV directory via explicit datas entry.
+Uses `DadQuest.spec` at project root: `pyinstaller --clean DadQuest.spec`. Output: `dist/DadQuest.exe`. The spec references `dadquest/version_info.py` for embedded version metadata, `dadquest/bot.py` as entry point, `--noconsole`, `--uac-admin`, `upx=True`. The spec also bundles chime's `themes/` WAV directory via explicit datas entry.
 
 ### Auto-Updater (both exes)
 
-Both `parser/parser.py` and `chatparser/bot.py` have `_check_for_update()` that runs on startup (frozen exe only). Downloads the exe from `zekparser.com`, compares SHA-256 hashes, and if different: writes `.new` file, renames running exe to `.old`, renames `.new` to exe name, restarts. Key details:
+Both `parser/parser.py` and `dadquest/bot.py` have `_check_for_update()` that runs on startup (frozen exe only). Downloads the exe from `zekparser.com`, compares SHA-256 hashes, and if different: writes `.new` file, renames running exe to `.old`, renames `.new` to exe name, restarts. Key details:
 - Must use a custom `User-Agent` header — server 403s the default `Python-urllib` agent
 - No HEAD requests — server 403s those too
 - SSL uses `_create_unverified_context()` (PyInstaller bundles lack CA certs)
@@ -427,7 +427,7 @@ Both `parser/parser.py` and `chatparser/bot.py` have `_check_for_update()` that 
 Marketing/download site for `https://zekparser.com/`. Catppuccin Mocha dark theme. Google Tag Manager (`GTM-TJK722NR`) on all pages. Copyright: Joinkle (joinkle.com).
 
 - **`index.html`** — Main landing page. Hero with version badge, screenshot grid (6 images in `screenshots/`), feature cards, how-it-works steps, download CTA. Nav: 3-column grid (logo left, nav buttons centered, Cash App/Venmo donate buttons right). Schema.org JSON-LD (SoftwareApplication, FAQPage, BreadcrumbList). Version displayed in hero-meta, CTA, and schema — **must be kept in sync** with `APP_VERSION` and `version_info.py` when bumping.
-- **`chatparser.html`** — ChatParser download page. Schema.org JSON-LD with `softwareVersion`. Version in schema + download CTA button — **must be kept in sync** with `chatparser/bot.py` title and `chatparser/version_info.py`.
+- **`dadquest.html`** — DadQuest download page. Schema.org JSON-LD with `softwareVersion`. Version in schema + download CTA button — **must be kept in sync** with `dadquest/bot.py` title and `dadquest/version_info.py`.
 - **`saltyvision.html`** — "Coming Soon" page for SaltyVision, a crowdsourced item/XP/combat database. Explains the three planned databases (Items, Experience, Combat) and the API data pipeline from ZekParser sessions. Uses `body class="sv-page"` for page-specific CSS overrides. Same nav/donate layout as index.
 - **`style.css`** — Shared styles for all pages. SaltyVision-specific styles prefixed with `.sv-` and scoped under `.sv-page`. Nav links styled as pill buttons with `.nav-active` purple fill for current page. `.btn-donate` orange (Catppuccin peach).
 - **`screenshots/`** — 6 named PNGs: `overview-feed-expanded.png`, `encounters-multiple-kills.png`, `grand-overview-npc-stats.png`, `item-detail-drop-history.png`, `triggers-pattern-setup.png`, `encounters-active-dead.png`. Plus one placeholder for Experience Tracker.
@@ -449,7 +449,7 @@ PHP/MySQL web application that receives data from ZekParser's API client. This i
 
 Three PyInstaller `.spec` files exist:
 - **`ZekParser.spec`**: ZekParser production build — includes `version='version_info.py'`, `upx=True`. Use this one for ZekParser.
-- **`ChatParser.spec`**: ChatParser production build — includes `version='chatparser/version_info.py'`, `upx=True`. Use `pyinstaller --clean ChatParser.spec`.
+- **`DadQuest.spec`**: DadQuest production build — includes `version='dadquest/version_info.py'`, `upx=True`. Use `pyinstaller --clean DadQuest.spec`.
 - **`MNM Combat Parser.spec`**: Legacy — no version file, `upx=False`. Do not use for releases.
 
 ## Important Gotchas
@@ -464,7 +464,7 @@ Three PyInstaller `.spec` files exist:
 - Console output strips BEL characters (`\x07`) to prevent Windows terminal beeping on decoded packet data
 - Spawn packet HP values from `_find_stats()` scan are frequently wrong (misaligned byte reads produce multiples of 256) — never trust them as damage baselines
 - `parser/parser.py` is intentionally self-contained with duplicated logic from `core/` — do not add imports from `core/`
-- `chatparser/bot.py` is intentionally self-contained — do not add imports from `core/` or `parser/`
+- `dadquest/bot.py` is intentionally self-contained — do not add imports from `core/` or `parser/`
 - Melee auto-attack damage text ("You slash X for N damage") is in **ChatMessage (0x0040) channel 1**, NOT EndCasting (0x0056). Each melee hit sends 3 messages: `UpdateHealth` + `ChatMessage` + `0x644B` (animation). The 0x644B has both entity IDs and the verb but NOT the damage number — the damage value only exists in the ChatMessage English text
 - ChatCombat messages have **no entity IDs** — target must be resolved by temporal correlation with the preceding `UpdateHealth`, not by name lookup (multiple NPCs share names)
 - EndCasting text for non-combat actions ("Rainbow pulls you through a shimmering portal") will match broad verb patterns — use the `_MELEE_VERBS` whitelist, not `\w+`

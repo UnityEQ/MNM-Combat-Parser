@@ -35,7 +35,9 @@
       "Bash(cmd.exe:*)",
       "Bash(taskkill:*)",
       "Bash(tasklist:*)",
-      "Bash(pip install:*)"
+      "Bash(pip install:*)",
+      "Bash(git mv:*)",
+      "Bash(git rm:*)"
     ]
   }
 }

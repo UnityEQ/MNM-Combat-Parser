@@ -1,4 +1,4 @@
-# ZekParser & ChatParser
+# ZekParser & DadQuest
 
 Free, real-time tools for **Mammary Monsters**. No install. No game file modification. Runs alongside the game and reads network data passively.
 
@@ -53,13 +53,13 @@ Single portable `.exe`. Right-click → Run as Administrator.
 
 ---
 
-## ChatParser
+## DadQuest
 
 A semi-transparent overlay for chat trigger matching, keyboard automation, opcode inspection, and entity discovery. Always-on-top at 75% opacity — sits over the game without blocking it.
 
 Single portable `.exe`. Right-click → Run as Administrator.
 
-**Download**: [zekparser.com/chatparser](https://zekparser.com/chatparser.html)
+**Download**: [zekparser.com/dadquest](https://zekparser.com/dadquest.html)
 
 ### Features
 
@@ -76,10 +76,10 @@ Single portable `.exe`. Right-click → Run as Administrator.
 
 ### Getting Started
 
-1. Download `ChatParser.exe` from [zekparser.com/chatparser](https://zekparser.com/chatparser.html)
+1. Download `DadQuest.exe` from [zekparser.com/dadquest](https://zekparser.com/dadquest.html)
 2. Add a Windows Defender exclusion
 3. Right-click → **Run as Administrator**
-4. Launch the game — ChatParser auto-connects
+4. Launch the game — DadQuest auto-connects
 
 ### GUI Layout
 
@@ -127,8 +127,8 @@ pip install pycryptodome chime
 # ZekParser GUI
 python parser/parser.py
 
-# ChatParser GUI
-python chatparser/bot.py
+# DadQuest GUI
+python dadquest/bot.py
 
 # Headless CLI (console logging + NPC database)
 python mnm.py
@@ -144,8 +144,8 @@ pyinstaller --onefile --noconsole --name ZekParser \
     --uac-admin --version-file version_info.py \
     --collect-all pycryptodome "parser/parser.py"
 
-# ChatParser (output: dist/ChatParser.exe)
-pyinstaller --clean ChatParser.spec
+# DadQuest (output: dist/DadQuest.exe)
+pyinstaller --clean DadQuest.spec
 ```
 
 Both exes are unsigned — users should add a Windows Defender exclusion to prevent false positive quarantine.

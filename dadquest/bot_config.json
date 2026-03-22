@@ -1,0 +1,10 @@
+{
+  "key_pairs": [
+    {
+      "key": "x",
+      "wait": "5"
+    }
+  ],
+  "loop_delay": "5000",
+  "loop_count": "3"
+}
