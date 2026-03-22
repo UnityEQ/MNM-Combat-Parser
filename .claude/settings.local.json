@@ -37,7 +37,8 @@
       "Bash(tasklist:*)",
       "Bash(pip install:*)",
       "Bash(git mv:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(cmd /c \"taskkill /F /IM DadQuest.exe\")"
     ]
   }
 }

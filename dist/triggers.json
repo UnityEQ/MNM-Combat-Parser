@@ -1,7 +1,7 @@
 {
   "triggers": [
     {
-      "pattern": "Wonton crushes",
+      "pattern": "lilyth slashes|Feewai crushes|Feewai piercesi",
       "mode": "once",
       "sound_name": "NONE",
       "key_pairs": [
@@ -14,12 +14,8 @@
           "wait": "0"
         },
         {
-          "key": "5",
-          "wait": "1"
-        },
-        {
           "key": "3",
-          "wait": "4"
+          "wait": "3"
         },
         {
           "key": "x",

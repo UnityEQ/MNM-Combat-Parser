@@ -1597,7 +1597,7 @@ ALERT_SOUNDS = [
 class BotApp(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("DadQuest V2.7")
+        self.title("DadQuest V2.8")
         self.configure(bg=COLORS["bg"])
         self.geometry("620x900")
         self.minsize(550, 700)
@@ -1666,14 +1666,29 @@ class BotApp(tk.Tk):
         cd = self._trigger_cooldown(trig)
         return (time.time() - last) < cd
 
+    @staticmethod
+    def _pattern_matches(pattern, text_lower):
+        """Check if *pattern* matches *text_lower* (already lowered).
+
+        Supports ``|`` as OR separator — e.g. ``"alpha|bravo|charlie"``
+        matches if ANY sub-pattern is a substring of *text_lower*.
+        A lone ``*`` matches everything.
+        """
+        if pattern == "*":
+            return True
+        for sub in pattern.lower().split("|"):
+            sub = sub.strip()
+            if sub and sub in text_lower:
+                return True
+        return False
+
     def _check_triggers(self, text):
         """Return (trigger_dict, index) for first matching text trigger, or (None, None)."""
         text_lower = text.lower()
         for i, trig in enumerate(self._triggers):
             if trig.get("type", "text") != "text":
                 continue
-            pat = trig["pattern"]
-            if pat == "*" or pat.lower() in text_lower:
+            if self._pattern_matches(trig["pattern"], text_lower):
                 if not self._trigger_on_cooldown(i):
                     return trig, i
         return None, None
@@ -2967,7 +2982,7 @@ class BotApp(tk.Tk):
                 for alert in self._discovery_alerts:
                     if not alert.get("match_npc", True):
                         continue
-                    if alert["pattern"].lower() in name.lower():
+                    if self._pattern_matches(alert["pattern"], name.lower()):
                         self._disc_alerted_names.add(name)
                         sounds_to_play.append(alert.get("sound_name", "NONE"))
                         break
@@ -2976,7 +2991,7 @@ class BotApp(tk.Tk):
                 for alert in self._discovery_alerts:
                     if not alert.get("match_pc", False):
                         continue
-                    if alert["pattern"].lower() in name.lower():
+                    if self._pattern_matches(alert["pattern"], name.lower()):
                         self._disc_alerted_names.add(name)
                         sounds_to_play.append(alert.get("sound_name", "NONE"))
                         break
@@ -3201,8 +3216,7 @@ class BotApp(tk.Tk):
             field_val = fields.get(field_name)
             if field_val is None:
                 continue
-            pat = trig["pattern"]
-            if pat == "*" or pat.lower() in str(field_val).lower():
+            if self._pattern_matches(trig["pattern"], str(field_val).lower()):
                 if not self._trigger_on_cooldown(i):
                     return trig, i
         return None, None
